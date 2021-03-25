@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model>
+  <Good>
+    <Joy>+0.3</Joy>
+    <Sadness>-0.3</Sadness>
+    <Surprise>-0.2</Surprise>
+    <Anger>-0.1</Anger>
+  </Good>
+  
+  <Nice>
+    <Surprise>-0.1</Surprise>
+    <Joy>+0.15</Joy>
+    <Sadness>-0.2</Sadness>
+    <Trust>+0.2</Trust>
+    <Anger>-0.05</Anger>
+  </Nice>
+  
+  <Bad>
+    <Joy>-0.3</Joy>
+    <Sadness>+0.3</Sadness>
+    <Surprise>-0.2</Surprise>
+    <Anger>+0.1</Anger>
+    <Fear>+1</Fear>
+  </Bad>
+  
+  <UnexpectedPositive>
+    <Surprise>+1</Surprise>
+    <Joy>+0.4</Joy>
+    <Sadness>-0.3</Sadness>
+    <Anger>-0.2</Anger>
+  </UnexpectedPositive>
+  
+  <UnexpectedNegative>
+    <Surprise>+1</Surprise>
+    <Joy>-0.3</Joy>
+    <Sadness>+0.4</Sadness>
+    <Anger>+0.2</Anger>
+  </UnexpectedNegative>
+  
+
+  <Nasty>
+    <Disgust>+1</Disgust>
+    <Joy>-0.5</Joy>
+    <Sadness>+0.3</Sadness>
+    <Surprise>+0.2</Surprise>
+    <Trust>-0.2</Trust>
+    <Anger>+0.1</Anger>
+  </Nasty>
+  
+</model>

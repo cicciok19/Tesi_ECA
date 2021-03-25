@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+  <tts ecaID="Turi">
+    <StartGame>Ciao Alfio, sono Turi. Benvenuto in questa cazzo di simulazione</StartGame>
+  </tts>
+  
+  
+  <tts ecaID="HospitalPatient">
+
+    <!--Prove di messaggi da far riprodurre-->
+    <StartGame>Ciao Alfio, sono Turi. Benvenuto in questa cazzo di simulazione</StartGame>
+    
+    
+	<salutation emotion="Joy" action="LookAt@MainCamera">Salve dottore, che piacere verderla</salutation>
+	<salutation emotion="Joy" action="LookAt@MainCamera">Buongiorno dottore, felice di vederla</salutation>
+	<salutation emotion="Trust" action="LookAt@MainCamera">Salve dottore, spero mi possa aiutare</salutation>
+	<salutation emotion="Trust" action="LookAt@MainCamera">Finalmente è arrivato, avevo proprio bisogno di vederla</salutation>
+	<salutation emotion="Disgust" action="LookAt@MainCamera">mi scusi ma è l'ultima persona che vorrei vedere adesso</salutation>
+	<salutation emotion="Disgust" action="LookAt@MainCamera">Non ho proprio voglia di parlare con lei</salutation>
+	<salutation emotion="Anger" action="LookAt@MainCamera">Sono molto arrabiato con lei dottore</salutation>
+	<salutation emotion="Anger" action="LookAt@MainCamera">Se ne vada subito, non ho voglia di parlare con lei</salutation>
+	<salutation emotion="Sadness" action="LookAt@MainCamera">Non è proprio un buon giorno oggi dottore</salutation>
+	<salutation emotion="Sadness" action="LookAt@MainCamera">Salve, oggi è stata una giornata orrenda</salutation>
+	<salutation emotion="Fear" action="LookAt@MainCamera">Salve dottore, l'aspettavo con ansia</salutation>
+	<salutation emotion="Fear" action="LookAt@MainCamera">Buongiorno dottore, spero mi porti buone notizie</salutation>
+	<salutation action="LookAt@MainCamera">Buongiorno dottore, felice di vederla</salutation>
+	<salutation action="LookAt@MainCamera">Salve dottore, che piacere verderla</salutation>	
+	
+	<blablaweather emotion="Joy" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Stavo giusto guardando il tempo fuori dalla finestra</blablaweather>
+	<blablaweather emotion="Joy" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Si finalmente, è una bella giornata</blablaweather>
+	<blablaweather emotion="Sadness" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Ero troppo debole e non ho guardato fuori dalla finestra</blablaweather>
+	<blablaweather emotion="Sadness" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Sono troppo triste per preoccuparmi del tempo, dottore</blablaweather>
+	<blablaweather emotion="Anger" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Dottore, non mi sembra il caso di parlare del tempo proprio adesso</blablaweather>
+	<blablaweather action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Ah, non ci avevo fatto caso ora guardo</blablaweather>
+	
+	<blablasport emotion="Joy" action="LookAt@MainCamera;PointAt@LeftDown">Si l'ho vista. Una bellissima partita</blablasport>
+	<blablasport emotion="Joy" action="LookAt@MainCamera;PointAt@LeftDown">certamente è stata fantastica</blablasport>
+	<blablasport emotion="Sadness" action="LookAt@MainCamera;PointAt@LeftDown">Mi interessa poco dello sport, sinceramente</blablasport>
+	<blablasport emotion="Sadness" action="LookAt@MainCamera;PointAt@LeftDown">Sono troppo triste per preoccuparmi dello sport, dottore</blablasport>
+	<blablasport emotion="Anger" action="LookAt@MainCamera;PointAt@LeftDown">Dottore, non mi sembra il caso di parlare di sport proprio adesso</blablasport>
+	<blablasport emotion="Anger" action="LookAt@MainCamera;PointAt@LeftDown">Mi scusi ma non ho nessuna voglia di parlare di sport al momento</blablasport>
+	<blablasport action="LookAt@MainCamera;PointAt@LeftDown">certamente è stata fantastica</blablasport>	
+	
+	<generalhealth emotion="Joy">Oggi abbastanza bene grazie</generalhealth>
+	<generalhealth emotion="Joy">Grazie per l'interessamento, forse un po meglio ripetto a ieri</generalhealth>
+	<generalhealth emotion="Joy">Oggi mi sento proprio bene</generalhealth>
+	<generalhealth emotion="Sadness">Non noto nessun miglioramento</generalhealth>
+	<generalhealth emotion="Sadness">Non so dirle, mi sembra non ci siano miglioramenti</generalhealth>
+	<generalhealth emotion="Anger">Non sto affatto bene dottore. Non vede?</generalhealth>
+	<generalhealth>Non ci sono stati molti cambiamenti rispetto a ieri</generalhealth>
+	<generalhealth>Non noto grandi differenze rispetto a ieri</generalhealth>
+
+  <badnew emotion="Joy" action ="LookAt@Floor">Ah mi dica, spero non sia troppo grave</badnew>
+  <badnew emotion="Sadness" action ="LookAt@Floor">Come delle brutte notizie? avanti mi dica</badnew>
+  <badnew emotion="Anger" action ="LookAt@Floor">Ma come? lei mi aveva assicurato sarebbe andato tutto bene</badnew>
+  <badnew action ="LookAt@Floor">Ma come? avanti mi dica</badnew>
+
+
+  <none>scusi, non ho capito</none>
+	<none>non credo di aver capito, potrebbe ripetere per favore?</none>
+	
+  </tts>
+  
+  <actions>
+    <!--
+	  <action name="Example">
+    <tts weight="High">
+      <Description>messaggio di descrizione dell'azione</Description>
+      <EndTask>Messaggio finale dell'azione</EndTask>
+      <Help>Messaggio di aiuto</Help>
+      <Criteria>
+        <Accuracy badTxt ="Passaggio a lable Bad per accuracy" badLimit="0.4"
+              normalTxt ="Passaggio a lable normal per accuracy" normalLimit ="0.8"
+              goodTxt = "passaggio a lable good per accuracy" goodLimit ="1">
+        </Accuracy>
+        <Staging badTxt ="Passaggio a lable bad per staging" badLimit ="0.5"
+                 normalTxt ="Passaggio a lable normal per staging" normalLimit ="0.2"
+                 goodTxt ="Passaggio a lable good per staging" goodLimit="0.0">
+        </Staging>
+      </Criteria>
+    </tts>
+    </action>
+    -->
+    <action name="ProximityAction">
+      <tts weight="High">
+        <Description>Raggiungi il luogo contrassegnato, gloriosa testa di cazzo</Description>
+        <EndTask>Bravo coglione, sei stato ubbidiente</EndTask>
+        <Help>Guardati intorno idiota</Help>
+        <Criteria>
+          <Accuracy badTxt ="bad" badLimit="0.4"
+                normalTxt ="normal" normalLimit ="0.8"
+                goodTxt = "good" goodLimit ="1">
+          </Accuracy>
+          <Staging badTxt ="Vuoi anche un caffè?" badLimit ="0.5"
+                   normalTxt ="Potresti muoverti per favore" normalLimit ="0.2"
+                   goodTxt ="Minchia sei stato rapido" goodLimit="0.0">
+          </Staging>
+        </Criteria>
+      </tts>
+    </action>
+  </actions>
+</game>

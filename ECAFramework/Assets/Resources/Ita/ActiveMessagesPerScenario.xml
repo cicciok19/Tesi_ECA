@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<activatedMsgs>
+  
+  <gameType name ="Training">
+      <StartGame isActive="YES">  </StartGame>
+      <Description isActive="YES"></Description>
+      <Support isActive ="YES">   </Support>
+  </gameType>
+
+  <gameType name ="Rehearsal">
+      <ExampleMessage1 isActive ="YES">   </ExampleMessage1>
+      <ExampleMessage2 isActive ="NO">      </ExampleMessage2>
+  </gameType>
+
+  <gameType name = "Examination">
+      <ExampleMessage1 isActive ="NO">   </ExampleMessage1>
+      <ExampleMessage2 isActive ="NO">      </ExampleMessage2>
+  </gameType>
+</activatedMsgs>
