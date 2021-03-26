@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: EventDef_sitDown
   m_EditorClassIdentifier: 
   Id: 0
-  EventName: 
+  EventName: SitDown
   EventType: 0
   Priority: -1
   ContactCountToMatch: 1
   ContactCountToWarp: 1
   ExitWithMotion: 1
   MatchPose: 1
-  MatchTrajectory: 1
+  MatchTrajectory: 0
   PostEventTrajectoryMode: 1
   MatchTiming: 0
   TimingWeight: 0
   TimingWarpType: 0
-  MatchPosition: 0
-  PositionWeight: 0
-  MotionWarpType: 0
+  MatchPosition: 1
+  PositionWeight: 1
+  MotionWarpType: 2
   WarpTimeScaling: 0
   ContactCountToTimeScale: 1
   MinWarpTimeScale: 0.9
@@ -35,4 +35,4 @@ MonoBehaviour:
   MatchRotation: 0
   RotationWeight: 0
   RotationWarpType: 0
-  m_targetAnimData: {fileID: 0}
+  m_targetAnimData: {fileID: 11400000, guid: 37a28ebb285e15346adff2c88eb87414, type: 2}

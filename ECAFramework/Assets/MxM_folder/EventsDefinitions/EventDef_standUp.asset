@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316ca862c074e1741bb37ecbefd40148, type: 3}
   m_Name: EventDef_standUp
   m_EditorClassIdentifier: 
-  Id: 0
-  EventName: 
+  Id: 1
+  EventName: StandUp
   EventType: 0
   Priority: -1
   ContactCountToMatch: 1
   ContactCountToWarp: 1
   ExitWithMotion: 1
   MatchPose: 1
-  MatchTrajectory: 1
+  MatchTrajectory: 0
   PostEventTrajectoryMode: 1
   MatchTiming: 0
   TimingWeight: 0
@@ -35,4 +35,4 @@ MonoBehaviour:
   MatchRotation: 0
   RotationWeight: 0
   RotationWarpType: 0
-  m_targetAnimData: {fileID: 0}
+  m_targetAnimData: {fileID: 11400000, guid: 37a28ebb285e15346adff2c88eb87414, type: 2}

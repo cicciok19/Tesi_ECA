@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ECAturi : ECA
+public class ECATuri : ECA
 {
     public override void SetEcaId()
     {

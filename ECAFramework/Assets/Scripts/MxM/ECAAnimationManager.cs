@@ -11,18 +11,23 @@ public class ECAAnimationManager : MonoBehaviour
     private Transform player;
     private NavMeshAgent navAgent;
 
+    private SitEvent eca_sitEvent;
+
     private float acceptanceAngle;
 
     [SerializeField] private Transform destination = null;
+    [SerializeField] private MxMEventDefinition sitDefinition = null;
 
     public bool strafing;
-
+    public Transform sitPoint;
 
     void Start()
     {
         m_animator = GetComponent<MxMAnimator>();
         trajectoryGenerator = GetComponent<MxMTrajectoryGenerator_BasicAI>();
         navAgent = GetComponent<NavMeshAgent>();
+
+        eca_sitEvent = new SitEvent(m_animator, sitPoint, sitDefinition);
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -37,6 +42,10 @@ public class ECAAnimationManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             toggleStrafe();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            eca_sitEvent.SitOrStand();
         }
 
         if (strafing)
