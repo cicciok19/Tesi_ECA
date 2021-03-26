@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 5fc03ae021e2da8438c92992c413b29e, type: 2}
 --- !u!1 &104295575
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p_recordingFrequency: 0
   p_sampleRate: 20
-  p_flattenTrajectory: 0
+  p_flattenTrajectory: 1
   m_maxSpeed: 2
   m_moveResponsiveness: 15
   m_turnResponsiveness: 10
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_debugAnimDataId: 0
   m_recordAnalytics: 0
   m_poseMatchMethod: 1
-  m_rootMotionMode: 1
+  m_rootMotionMode: 2
   m_transitionMethod: 1
   m_pastTrajectoryMode: 0
   m_favourTagMethod: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_nextPoseToleranceTest: 1
   m_nextPoseToleranceDist: 0.5
   m_nextPoseToleranceAngle: 5
-  m_blendOutEarly: 0
+  m_blendOutEarly: 1
   m_angularWarpType: 1
   m_angularWarpMethod: 0
   m_angularErrorWarpRate: 45
@@ -255,7 +255,7 @@ MonoBehaviour:
   p_DIYPlayableGraph: 0
   m_autoCreateAnimatorController: 0
   m_generalFoldout: 0
-  m_animDataFoldout: 0
+  m_animDataFoldout: 1
   m_optionsFoldout: 0
   m_warpingFoldout: 0
   m_debugFoldout: 0
@@ -281,6 +281,42 @@ MonoBehaviour:
   m_onRightFootStepStart:
     m_PersistentCalls:
       m_Calls: []
+--- !u!195 &218186724
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218186721}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 0
+  m_Acceleration: 4
+  avoidancePriority: 50
+  m_AngularSpeed: 0
+  m_StoppingDistance: 1
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &218186725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218186721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd8e4ca4cfa11ad4aa06bc42d8a6d282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination: {fileID: 0}
+  strafing: 0
 --- !u!1 &511791391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,6 +1190,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 3}
       propertyPath: m_Name
       value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3681543e5b0f59742b73073cb379cdc6, type: 3}
       propertyPath: m_LocalPosition.x
