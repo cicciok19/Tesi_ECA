@@ -17,24 +17,25 @@ public class SitEvent : ECAAnimation
     }
 
     //setto la destinazione
-    protected override void actionBegin()
+    public override void actionStart()
     {
-        base.actionBegin();
+        base.actionStart();
         ecaAnimator.GoTo(destination.position, 0.5f);
     }
 
-    protected override void actionFinished()
+    public override void actionFinished()
     {
         base.actionFinished();
+        ecaAnimator.MXM_BeginEventWithContact("SitDown", sitPoint);
         ecaAnimator.MxM_SetTag("Sitting");
     }
 
-    protected override void actionLabelUpdate()
+    public override void actionLabelUpdate()
     {
         base.actionLabelUpdate();
     }
 
-    protected override void actionStateUpdate()
+    public override void actionStateUpdate()
     {
         base.actionStateUpdate();
     }

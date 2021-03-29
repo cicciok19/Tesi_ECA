@@ -93,6 +93,7 @@ public class ECATuri : ECA
         else
             //if was pause -> do not play start message (description of the task)
             e.SmartAction.Start();
+        ECAAnimationManager.allAnimations[EventDefinitions.SitDown].actionStart();
     }
 
     //viene chiamato quando finisco una smart action
@@ -112,6 +113,9 @@ public class ECATuri : ECA
             EmotionManager.updateEmotion(AppraisalVariables.Good, 0.8f);
         else
             EmotionManager.updateEmotion(AppraisalVariables.Good, 0.4f);
+
+        //CHIAMO ANIMAZIONE ECA
+        ECAAnimationManager.allAnimations[EventDefinitions.SitDown].actionFinished();
 
         smartAction.Finished -= OnActionFinished;
     }
@@ -145,6 +149,7 @@ public class ECATuri : ECA
         if (!e.IsLabelSwitched)
             return;
 
+        
         GiveSupport(smartAction);
     }
 
@@ -169,6 +174,8 @@ public class ECATuri : ECA
                 else
                     AccuracyLabelUpdated(smartAction);
 
+                //CHIAMO ANIMAZIONE ECA
+
                 break;
             case Labels.Normal:
                 EmotionManager.updateEmotion(AppraisalVariables.Bad, 0.4f);
@@ -189,9 +196,13 @@ public class ECATuri : ECA
                 if (GivingSupport != null)
                     GivingSupport(isMessageAccepted);
                 */
+
+                //CHIAMO ANIMAZIONE ECA
                 break;
             case Labels.Good:
                 EmotionManager.updateEmotion(AppraisalVariables.Good);
+
+                //CHIAMO ANIMAZIONE ECA
                 break;
         }
     }

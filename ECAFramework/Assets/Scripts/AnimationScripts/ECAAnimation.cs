@@ -11,24 +11,24 @@ public class ECAAnimation : MonoBehaviour
     private string eventID;
 
     //Logica dell'evento in questione
-    protected virtual void actionStateUpdate()
+    public virtual void actionStateUpdate()
     {
-
+        print("ANIMATION STATE UPDATED");
     }
 
-    protected virtual void actionFinished()
+    public virtual void actionFinished()
     {
-
+        print("ANIMATION ACTION FINISHED");
     }
 
-    protected virtual void actionBegin()
+    public virtual void actionStart()
     {
-
+        print("ANIMATION ACTION START");
     }
 
-    protected virtual void actionLabelUpdate()
+    public virtual void actionLabelUpdate()
     {
-
+        print("ANIMATION LABEL UPDATED");
     }
 
     
