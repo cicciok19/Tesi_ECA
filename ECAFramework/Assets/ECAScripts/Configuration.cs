@@ -27,6 +27,13 @@ using UnityEngine.Assertions;
 {
     ProximityAction
 }
+    public enum EventDefinitions
+{
+    SitDown,
+    StandUp,
+    PickUp,
+    PickDown
+}
 /// <summary>
 /// Class used to define the name of the xml files that contain the necessary configurations
 /// </summary>

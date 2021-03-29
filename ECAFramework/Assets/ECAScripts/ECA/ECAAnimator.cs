@@ -13,6 +13,7 @@ using UnityEngine.UI;
 using CrazyMinnow.SALSA;
 using UnityEngine.AI;
 using DG.Tweening;
+using MxM;
 
 // global declaration end
 
@@ -37,7 +38,10 @@ public class ECAAnimator : MonoBehaviour
     public Animator Animator;
     public AudioSource audioSource;
 
+    public MxMAnimator m_animator;
+
     public Dictionary<BodyParts, GameObject> PartsOfTheBody = new Dictionary<BodyParts, GameObject>();
+    public Dictionary<String, MxMEventDefinition> MxM_EventDefinitions = new Dictionary<String, MxMEventDefinition>();
 
     //Settings
     /// <summary>
@@ -102,6 +106,9 @@ public class ECAAnimator : MonoBehaviour
         //GameObject.FindObjectOfType<GuiDebug>().ShowEmotion(Eca.Name, Eca.EmotionManager.ActualEmotion);
     }
 
+    /// <summary>
+    /// Called in ECAGameManager to init all the variables we neew
+    /// </summary>
     public void Init()
     {
         Eca = GetComponent<ECA>();
@@ -113,6 +120,9 @@ public class ECAAnimator : MonoBehaviour
         SetBodyElements();
         SetNavMeshAgent();
         UpdateEmotionAnimation(null, null);
+
+        SetMxMAnimator();
+        SetEventDefinitions();
     }
 
     // TEXT DISPLAY:
@@ -319,4 +329,65 @@ public class ECAAnimator : MonoBehaviour
     }
 
     //BODY GESTURES END
+
+    //MxM METHODS BEGIN
+
+    protected void SetEventDefinitions()
+    {
+        foreach (EventDefinitions eventDef in (EventDefinitions[])Enum.GetValues(typeof(EventDefinitions)))
+        {
+            string s = eventDef.ToString();
+            MxMEventDefinition ed = Resources.Load<MxMEventDefinition>("Assets/MxM_folder/EventsDefinitions/EventDef_" + eventDef);
+            MxM_EventDefinitions.Add(s, ed);
+        }
+    }
+
+    protected void SetMxMAnimator()
+    {
+        m_animator = GetComponent<MxMAnimator>();
+        if (m_animator == null)
+            Utility.LogWarning("No MxM animator foud for ECA: " + Eca.Name);
+    }
+
+    public virtual void MxM_BeginEvent(string id)
+    {
+        m_animator.BeginEvent(id);
+    }
+
+    public virtual void MXM_BeginEventWithContact(string id, Transform contact)
+    {
+        var eventDef = MxM_EventDefinitions[id];
+
+        eventDef.ClearContacts();
+        eventDef.AddEventContact(contact.position, this.transform.rotation.y);
+
+        m_animator.BeginEvent(id);
+    }
+
+    public virtual void MXM_BeginEventWithContactAndTag(string id , Transform contact, string tag)
+    {
+        var eventDef = MxM_EventDefinitions[id];
+
+        eventDef.ClearContacts();
+        eventDef.AddEventContact(contact.position, this.transform.rotation.y);
+
+        m_animator.BeginEvent(id);
+
+        m_animator.ClearRequiredTags();
+        m_animator.AddRequiredTag(tag);
+    }
+
+    public virtual void MXM_BeginEventWithTag(string id, string tag)
+    {
+        m_animator.BeginEvent(id);
+
+        m_animator.ClearRequiredTags();
+        m_animator.AddRequiredTag(tag);
+    }
+
+    public virtual void MxM_SetTag(string tag)
+    {
+        m_animator.ClearRequiredTags();
+        m_animator.AddRequiredTag(tag);
+    }
 }

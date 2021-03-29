@@ -3,60 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using MxM;
 
-public class SitEvent : MonoBehaviour
+public class SitEvent : ECAAnimation
 {
-    private MxMAnimator m_animator;
+    private Transform destination;
     private Transform sitPoint;
-    private bool sit;
-    private bool tagSetted;
+    private ECAAnimator ecaAnimator;
 
-    [SerializeField] private MxMEventDefinition sitEvent;
-    [SerializeField] private MxMEventDefinition standEvent;
-
-    public SitEvent(MxMAnimator anim, Transform sp, MxMEventDefinition se)
+    public SitEvent(ECAAnimator ea, Transform sp, Transform d)
     {
-        m_animator = anim;
+        destination = d;
         sitPoint = sp;
-        sitEvent = se;
+        ecaAnimator = ea;
     }
 
-    private void Start()
+    //setto la destinazione
+    protected override void actionBegin()
     {
-        sit = false;
-        tagSetted = false;
+        base.actionBegin();
+        ecaAnimator.GoTo(destination.position, 0.5f);
     }
 
-    public void SitOrStand()
+    protected override void actionFinished()
     {
-        if (!sit)
-        {
-            sitEvent.ClearContacts();
-            sitEvent.AddEventContact(sitPoint);
-            m_animator.BeginEvent("SitDown");
-            setTag();
-
-            sit = true;
-        }
-        else
-        {
-            standEvent.ClearContacts();
-            m_animator.BeginEvent("StandUp");
-
-            m_animator.ClearRequiredTags();
-
-            sit = false;
-        }
+        base.actionFinished();
+        ecaAnimator.MxM_SetTag("Sitting");
     }
 
-    private void setTag()
+    protected override void actionLabelUpdate()
     {
-        while (!m_animator.IsEventComplete)
-        {
-            print("DENTRO IL WHILE");
-            continue;
-        }
-        print("     USCITO DAL WHILE");
-        m_animator.ClearRequiredTags();
-        m_animator.SetRequiredTag("Sitting");
+        base.actionLabelUpdate();
+    }
+
+    protected override void actionStateUpdate()
+    {
+        base.actionStateUpdate();
     }
 }

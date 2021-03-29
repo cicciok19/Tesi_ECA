@@ -310,13 +310,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218186721}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd8e4ca4cfa11ad4aa06bc42d8a6d282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 0}
+  sitDefinition: {fileID: 11400000, guid: 3da136d8b13ad4c45a977eaa3d9d9d30, type: 2}
   strafing: 0
+  sitPoint: {fileID: 1084330522}
 --- !u!114 &218186726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,6 +335,7 @@ MonoBehaviour:
   ECAText: {fileID: 1267864217}
   Animator: {fileID: 0}
   audioSource: {fileID: 179908986}
+  m_animator: {fileID: 0}
 --- !u!114 &218186727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2cb71df997896b42934dccdf7f4b69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ECAAnimator: {fileID: 511791397}
+  ECAAnimator: {fileID: 218186726}
 --- !u!1 &511791391
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,6 +474,7 @@ MonoBehaviour:
   ECAText: {fileID: 1267864217}
   Animator: {fileID: 0}
   audioSource: {fileID: 179908986}
+  m_animator: {fileID: 0}
 --- !u!1001 &638394731
 PrefabInstance:
   m_ObjectHideFlags: 0

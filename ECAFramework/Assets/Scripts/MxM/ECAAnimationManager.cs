@@ -27,8 +27,6 @@ public class ECAAnimationManager : MonoBehaviour
         trajectoryGenerator = GetComponent<MxMTrajectoryGenerator_BasicAI>();
         navAgent = GetComponent<NavMeshAgent>();
 
-        eca_sitEvent = new SitEvent(m_animator, sitPoint, sitDefinition);
-
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         acceptanceAngle = 0.2f;
@@ -45,7 +43,10 @@ public class ECAAnimationManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            eca_sitEvent.SitOrStand();
+            //eca_sitEvent.SitOrStand();
+            sitDefinition.ClearContacts();
+            sitDefinition.AddEventContact(sitPoint);
+            m_animator.BeginEvent("SitDown");
         }
 
         if (strafing)
