@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProximityNode : SmartActionNode
+public class ProximityNode : SmartActionNode  
 {
     ProximityAction proximityAction;
 

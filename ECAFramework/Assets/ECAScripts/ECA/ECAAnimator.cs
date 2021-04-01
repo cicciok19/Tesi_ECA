@@ -241,6 +241,7 @@ public class ECAAnimator : MonoBehaviour
             StartCoroutine(WaitArrival(target, arrivalDeltaDistance));
         }
     }
+
     public virtual IEnumerator WaitArrival(Vector3 target, float deltaDistance)
     {
         if (deltaDistance > 0)
@@ -305,10 +306,11 @@ public class ECAAnimator : MonoBehaviour
     }
 
     /// <summary>
-    /// Look at target position. If target==null, ECA will look to the player, otherwise the ECA will look to the specified target
+    /// Look at target position. If target==null, ECA will look to the player, otherwise the ECA will look to the specified target.
+    /// If <paramref name="oppositeDirection"/> = true, then i will look at the opposite direction of the target
     /// </summary>
     /// <param name="target"></param>
-    public virtual void LookAt(Transform target = null)
+    public virtual void LookAt(Transform target = null, bool oppositeDirection = false)
     {
         /* if (PartsOfTheBody.ContainsKey(BodyParts.Head))
              PartsOfTheBody[BodyParts.Head].transform.DOLookAt(target.position, 1f);
@@ -319,7 +321,10 @@ public class ECAAnimator : MonoBehaviour
             target = Player.transform;
 
         Vector3 dir = (target.position - this.transform.position).normalized;
-        m_trajectory.StrafeDirection = dir;
+        if(!oppositeDirection)
+            m_trajectory.StrafeDirection = dir;
+        else
+            m_trajectory.StrafeDirection = -dir;
     }
 
     //VISION CAPABILITY END

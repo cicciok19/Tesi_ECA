@@ -58,6 +58,9 @@ public class GameManager : MonoBehaviour
             OnGameStarted(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// Controlla ad ogni update lo stato attuale del nodo in cui mi trovo.
+    /// </summary>
     void Update()
     {
         if (!IsPaused && CurrentNode != null)
@@ -142,4 +145,6 @@ public class GameManager : MonoBehaviour
     }
     public int NumberOfNodes { get; protected set; }
     //public ScenarioType GameType { get; protected set; } = ScenarioType.Training;
+
+    protected virtual void createECAActions() { }
 }
