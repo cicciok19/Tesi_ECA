@@ -29,6 +29,8 @@ public class ECAAnimator : MonoBehaviour
 {
     public event EventHandler AudioEnded;
     public event EventHandler HasArrived;
+    public event EventHandler IsLookingAt;
+    public event EventHandler EventComplete;
 
     public GameObject TextPanel;
     public Text ECAText;
@@ -219,7 +221,6 @@ public class ECAAnimator : MonoBehaviour
     //AUDIO PLAY END:
 
     //MOVEMENTS:
-
     /// <summary>
     /// With NavMeshAgent: send the eca to the specified target until it reaches a distance of <paramref name="arrivalDeltaDistance"/>
     /// Without NavMesh: teleportation is applied
@@ -239,10 +240,15 @@ public class ECAAnimator : MonoBehaviour
         else
         {
             navMeshAgent.SetDestination(target);
-            StartCoroutine(WaitArrival(target, arrivalDeltaDistance+2f));
+            StartCoroutine(WaitArrival(target, arrivalDeltaDistance+0.5f));
         }
     }
-
+    /// <summary>
+    /// Waits until the ECA has arrived to the destination target
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="deltaDistance"></param>
+    /// <returns></returns>
     public virtual IEnumerator WaitArrival(Vector3 target, float deltaDistance)
     {
         if (deltaDistance > 0)
@@ -308,7 +314,6 @@ public class ECAAnimator : MonoBehaviour
         else
             return false;
     }
-
     /// <summary>
     /// Look at target position. If target==null, ECA will look to the player, otherwise the ECA will look to the specified target.
     /// If <paramref name="oppositeDirection"/> = true, then i will look at the opposite direction of the target
@@ -321,14 +326,30 @@ public class ECAAnimator : MonoBehaviour
          else
              Utility.LogWarning("NO HEAD FOUND");*/
 
+        //If the target is not specified, the ECA will look to the player
         if (target == null)
             target = Player.transform;
 
         Vector3 dir = (target.position - this.transform.position).normalized;
-        if(!oppositeDirection)
+
+        MxM_startStrafing();
+        if (!oppositeDirection)
             m_trajectory.StrafeDirection = dir;
         else
             m_trajectory.StrafeDirection = -dir;
+        StartCoroutine(EndLookAt());
+    }
+    /// <summary>
+    /// Waits for the ECA to turn in the given direction of the LookAt method, then trows the event IsLookingAt
+    /// </summary>
+    /// <returns></returns>
+    public virtual IEnumerator EndLookAt()
+    {
+        //DOVREI FARLO CON GLI ANGOLO E NON CON IL TEMPO
+        yield return new WaitForSeconds(2.5f);
+        MxM_stopStrafing();
+        if (IsLookingAt != null)
+            IsLookingAt(this, EventArgs.Empty);
     }
 
     //VISION CAPABILITY END
@@ -432,5 +453,28 @@ public class ECAAnimator : MonoBehaviour
         m_trajectory.TrajectoryMode = ETrajectoryMoveMode.Normal;
         m_animator.AngularErrorWarpMethod = EAngularErrorWarpMethod.CurrentHeading;
         m_animator.AngularErrorWarpRate = 45f;
+    }
+
+    public virtual void MxM_clearRequiredTags()
+    {
+        m_animator.ClearRequiredTags();
+    }
+
+    public virtual void MxM_removeRequiredTag(String tag)
+    {
+        m_animator.RemoveRequiredTag(tag);
+    }
+
+    public virtual void MxM_waitForEventComplete()
+    {
+
+    }
+
+    public IEnumerator WaitEventComplete()
+    {
+        while(!m_animator.IsEventComplete)
+            yield return null;
+        if (EventComplete != null)
+            EventComplete(this, EventArgs.Empty);
     }
 }

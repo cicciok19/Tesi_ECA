@@ -20,8 +20,6 @@ public class ECAAnimationManager : MonoBehaviour
     //UTILIZZO UN DIZIONARIO COME ANIMATION GRAPH
     static public Dictionary<string, ECAAction> allECAActions = new Dictionary<string, ECAAction>();
 
-    private float acceptanceAngle;
-
     void Start()
     {
         ecaAnimator = GameObject.FindGameObjectWithTag("ECA").GetComponent<ECAAnimator>();

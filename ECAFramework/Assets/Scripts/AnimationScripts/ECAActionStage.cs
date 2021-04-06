@@ -32,6 +32,6 @@ public abstract class ECAActionStage
     public virtual void reactToActionStart() { }
     public virtual void reactToStateUpdate() { }
     public virtual void reactToLabelUpdate() { }
-    public virtual void reactToActionFinished() { }
+    public virtual void reactToActionFinished(object sender, EventArgs e) { }
 
 }

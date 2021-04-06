@@ -1,22 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-public class GoToStage : ECAActionStage
+public class StandUpStage : ECAActionStage
 {
-    private Transform Destination;
+    Transform SitPoint;
 
-    public GoToStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform destination) : base(ecaAction, ecaAnimator)
+    public StandUpStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform sitPoint) : base(ecaAction, ecaAnimator)
     {
-        Destination = destination;
+        SitPoint = sitPoint;
+        EcaAction.CompletedAction += reactToActionFinished;
+    }
+
+    private void OnEventComplete(object sender, EventArgs e)
+    {
+        endStage();
     }
 
     public override void startStage()
     {
         base.startStage();
-        EcaAnimator.GoTo(Destination.position, 0.05f);
-        EcaAnimator.HasArrived += OnArrivedECA;
     }
 
     public override void endStage()
@@ -27,6 +31,8 @@ public class GoToStage : ECAActionStage
     public override void reactToActionFinished(object sender, EventArgs e)
     {
         //base.reactToActionFinished();
+        EcaAnimator.MxM_clearRequiredTags();
+        EcaAnimator.MXM_BeginEventWithContact("StandUp", SitPoint);
     }
 
     public override void reactToActionStart()
@@ -44,9 +50,6 @@ public class GoToStage : ECAActionStage
         base.reactToStateUpdate();
     }
 
-    private void OnArrivedECA(object sender, EventArgs e)
-    {
-        endStage();
-    }
+
 
 }

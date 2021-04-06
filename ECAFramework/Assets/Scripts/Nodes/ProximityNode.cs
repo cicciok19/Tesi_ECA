@@ -38,6 +38,7 @@ public class ProximityNode : SmartActionNode
     {
         proximityAction.Entered -= OnTriggerEntered;
         proximityAction.Finish();
+        eca_sitAction.onCompletedAction();
         SetCompleted();
     }
 }

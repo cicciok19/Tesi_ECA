@@ -26,9 +26,9 @@ public class SitStage : ECAActionStage
         base.endStage();
     }
 
-    public override void reactToActionFinished()
+    public override void reactToActionFinished(object sender, EventArgs e)
     {
-        base.reactToActionFinished();
+        //base.reactToActionFinished();
     }
 
     public override void reactToActionStart()

@@ -6,18 +6,17 @@ using System;
 public class TurnStage : ECAActionStage
 {
     private Transform SitPoint;
-    public EventHandler StageFinished;
-
 
     public TurnStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform sitPoint) : base(ecaAction, ecaAnimator)
     {
         SitPoint = sitPoint;
+        EcaAnimator.IsLookingAt += OnTurningFinished;
     }
 
     public override void startStage()
     {
         EcaAnimator.LookAt(SitPoint, true);
-        endStage();
+        //endStage();
     }
 
     public override void endStage()
@@ -25,9 +24,9 @@ public class TurnStage : ECAActionStage
         base.endStage();
     }
 
-    public override void reactToActionFinished()
+    public override void reactToActionFinished(object sender, EventArgs e)
     {
-        base.reactToActionFinished();
+        //base.reactToActionFinished();
     }
 
     public override void reactToActionStart()
@@ -43,5 +42,10 @@ public class TurnStage : ECAActionStage
     public override void reactToStateUpdate()
     {
         base.reactToStateUpdate();
+    }
+
+    public void OnTurningFinished(object sender, EventArgs e)
+    {
+        endStage();
     }
 }

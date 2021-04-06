@@ -5,12 +5,7 @@ using System;
 
 public abstract class ECAAction
 {
-    //questi sono eventi che vengono lanciati dal nodo e sul quale si devono mettere in ascolto gli stage
-    public event EventHandler<EventArgs> SpeakTimeout;
-    public event EventHandler<EventArgs> OnStarted;
-    public event EventHandler<EventArgs> OnCompleted;
-    public event EventHandler<EventArgs> OnTriggered;
-
+    public event EventHandler CompletedAction;
     public ECAActionStage[] allStages;
     public int currentStageIdx;
 
@@ -29,7 +24,6 @@ public abstract class ECAAction
         //sottoscrivere i suoi eventi per poter reagire
         currentStageIdx = 0;
         currentStage.StageFinished += onStageFinished;
-        //startAction();
     }
 
     public ECAActionStage currentStage
@@ -59,12 +53,11 @@ public abstract class ECAAction
     {
         if (currentStage != null)
         {
-
             currentStage.StageFinished += onStageFinished;
             currentStage.startStage();
         }
         else
-            completedAction();
+            onCompletedAction();
     }
 
     public virtual void onStageFinished(object sender, EventArgs e)
@@ -76,5 +69,10 @@ public abstract class ECAAction
 
     public virtual void onStateUpdate() { }
     public virtual void onLabelUpdate() { }
-    public virtual void completedAction() { }
+    public virtual void onCompletedAction()
+    {
+        if (CompletedAction != null)
+            CompletedAction(this, EventArgs.Empty);
+
+    }
 }

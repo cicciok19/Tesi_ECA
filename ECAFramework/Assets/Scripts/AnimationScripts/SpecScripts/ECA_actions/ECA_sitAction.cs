@@ -8,6 +8,8 @@ public class ECA_sitAction : ECAAction
     private Transform Destination;
     private Transform SitPoint;
 
+    public event EventHandler CompletedAction;
+
     public ECA_sitAction(ECAAnimator ecaAnimator, Transform destination, Transform sitPoint) : base(ecaAnimator)
     {
         Destination = destination;
@@ -16,16 +18,17 @@ public class ECA_sitAction : ECAAction
         {
             new GoToStage(this, ecaAnimator, destination),
             new TurnStage(this, ecaAnimator, sitPoint),
-            new SitStage(this, ecaAnimator, sitPoint)
+            new SitStage(this, ecaAnimator, sitPoint),
+            new StandUpStage(this, ecaAnimator, sitPoint)
         };
         SetupAction();
     }
 
     //carico gli stage che mi servono e poi mi iscrivo agli eventi
 
-    public override void completedAction()
+    public override void onCompletedAction()
     {
-        base.completedAction();
+        base.onCompletedAction();
     }
 
     public override void onLabelUpdate()
