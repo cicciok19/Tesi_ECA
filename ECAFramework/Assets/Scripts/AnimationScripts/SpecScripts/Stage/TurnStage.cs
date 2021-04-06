@@ -6,6 +6,8 @@ using System;
 public class TurnStage : ECAActionStage
 {
     private Transform SitPoint;
+    public EventHandler StageFinished;
+
 
     public TurnStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform sitPoint) : base(ecaAction, ecaAnimator)
     {
@@ -15,13 +17,12 @@ public class TurnStage : ECAActionStage
     public override void startStage()
     {
         EcaAnimator.LookAt(SitPoint, true);
+        endStage();
     }
 
     public override void endStage()
     {
         base.endStage();
-        if (StageFinished != null)
-            StageFinished(this, EventArgs.Empty);
     }
 
     public override void reactToActionFinished()

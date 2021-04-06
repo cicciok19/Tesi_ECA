@@ -6,8 +6,6 @@ public class SmartActionCustomArgs : EventArgs {
     public string MessageType;
     public bool AnyTime;
 
-    public ECAAction ActionECA;
-
     public SmartActionCustomArgs(SmartAction smartAction, Action functionToExecute, string messageType, bool anyTime = true)
     {
         SmartAction = smartAction;

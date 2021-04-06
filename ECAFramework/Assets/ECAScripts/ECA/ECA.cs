@@ -320,5 +320,7 @@ public class ECA : MonoBehaviour, IIntentHandler
     public List<string> IntentName
     { get; set; }
 
+    public virtual void createECAActions() { }
+
 
 }

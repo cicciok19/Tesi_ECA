@@ -16,13 +16,11 @@ public class GoToStage : ECAActionStage
     {
         base.startStage();
         EcaAnimator.GoTo(Destination.position, 0.05f);
+        EcaAnimator.HasArrived += OnArrivedECA;
     }
 
     public override void endStage()
     {
-        EcaAnimator.WaitArrival(Destination.position, 0.05f);
-        if (StageFinished != null)
-            StageFinished(this, EventArgs.Empty);
         base.endStage();
     }
 
@@ -45,4 +43,10 @@ public class GoToStage : ECAActionStage
     {
         base.reactToStateUpdate();
     }
+
+    private void OnArrivedECA(object sender, EventArgs e)
+    {
+        endStage();
+    }
+
 }

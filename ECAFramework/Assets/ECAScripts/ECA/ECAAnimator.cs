@@ -28,6 +28,7 @@ public enum BodyParts
 public class ECAAnimator : MonoBehaviour
 {
     public event EventHandler AudioEnded;
+    public event EventHandler HasArrived;
 
     public GameObject TextPanel;
     public Text ECAText;
@@ -238,7 +239,7 @@ public class ECAAnimator : MonoBehaviour
         else
         {
             navMeshAgent.SetDestination(target);
-            StartCoroutine(WaitArrival(target, arrivalDeltaDistance));
+            StartCoroutine(WaitArrival(target, arrivalDeltaDistance+2f));
         }
     }
 
@@ -251,7 +252,7 @@ public class ECAAnimator : MonoBehaviour
         }
         else
             Utility.LogError("delta Distance <= 0");
-    
+
         Arrived();
     }
     /// <summary>
@@ -264,6 +265,9 @@ public class ECAAnimator : MonoBehaviour
             Utility.LogWarning("No navMeshAgent found. Add NamMeshAgent or override this method if you wont to use your policy");
         else
             navMeshAgent.isStopped = true;
+
+        if (HasArrived != null)
+            HasArrived(this, EventArgs.Empty);
     }
     //MOVEMENTS END
 

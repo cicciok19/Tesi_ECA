@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public abstract class ECAAction : MonoBehaviour
+public abstract class ECAAction
 {
     //questi sono eventi che vengono lanciati dal nodo e sul quale si devono mettere in ascolto gli stage
     public event EventHandler<EventArgs> SpeakTimeout;
@@ -16,17 +16,20 @@ public abstract class ECAAction : MonoBehaviour
 
     public ECAAnimator EcaAnimator;
 
+    public SmartActionNode smNode;
+
     public ECAAction(ECAAnimator ecaAnimator)
     {
         EcaAnimator = ecaAnimator;
     }
 
-    private void Start()
+    public virtual void SetupAction()
     {
         //quando specializzo lo script devo avere un riferimento alla smart action attuale e devo
         //sottoscrivere i suoi eventi per poter reagire
         currentStageIdx = 0;
         currentStage.StageFinished += onStageFinished;
+        //startAction();
     }
 
     public ECAActionStage currentStage
@@ -40,6 +43,7 @@ public abstract class ECAAction : MonoBehaviour
         }
     }
 
+
     public virtual void startAction()
     {
         if (allStages != null)
@@ -51,10 +55,11 @@ public abstract class ECAAction : MonoBehaviour
         }
     }
 
-    public void nextStage()
+    public virtual void nextStage()
     {
         if (currentStage != null)
-        { 
+        {
+
             currentStage.StageFinished += onStageFinished;
             currentStage.startStage();
         }
@@ -62,7 +67,7 @@ public abstract class ECAAction : MonoBehaviour
             completedAction();
     }
 
-    public void onStageFinished(object sender, EventArgs e)
+    public virtual void onStageFinished(object sender, EventArgs e)
     {
         currentStage.StageFinished -= onStageFinished;
         currentStageIdx++;

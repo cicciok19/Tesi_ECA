@@ -12,11 +12,6 @@ public class TrainingScenario : ECAGameManager
         AllSmartActions.Add(SmartActions.ProximityAction, ProximityTrigger);
     }
 
-    protected override void createECAActions()
-    {
-        base.createECAActions();
-        //aggiungo le ECA actions
-    }
 
     protected override void DefineGraphNodes()
     {

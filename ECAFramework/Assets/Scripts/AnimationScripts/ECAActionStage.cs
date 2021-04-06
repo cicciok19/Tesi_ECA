@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public abstract class ECAActionStage : MonoBehaviour
+public abstract class ECAActionStage
 {
     protected ECAAction EcaAction;
     protected ECAAnimator EcaAnimator;
 
-    public EventHandler StageFinished;
+    public event EventHandler StageFinished;
 
     public ECAActionStage(ECAAction ecaAction, ECAAnimator ecaAnimator)
     {
         EcaAction = ecaAction;
-        EcaAnimator = EcaAnimator;
+        EcaAnimator = ecaAnimator;
     }
 
     protected ECAActionStage(ECAAction ecaAction)
@@ -22,7 +22,12 @@ public abstract class ECAActionStage : MonoBehaviour
     }
 
     public virtual void startStage() { }
-    public virtual void endStage() { }
+    public virtual void endStage() {
+        if (StageFinished != null)
+        {
+            StageFinished(this, EventArgs.Empty);
+        }
+    }
 
     public virtual void reactToActionStart() { }
     public virtual void reactToStateUpdate() { }

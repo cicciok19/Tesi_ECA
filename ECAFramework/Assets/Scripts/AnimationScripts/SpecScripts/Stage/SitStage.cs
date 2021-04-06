@@ -6,6 +6,7 @@ using System;
 public class SitStage : ECAActionStage
 {
     private Transform SitPoint;
+    public EventHandler StageFinished;
 
     public SitStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform sitPoint) : base(ecaAction, ecaAnimator)
     {
@@ -21,10 +22,8 @@ public class SitStage : ECAActionStage
 
     public override void endStage()
     {
-        base.endStage();
         EcaAnimator.MxM_SetTag("Sitting");
-        if (StageFinished != null)
-            StageFinished(this, EventArgs.Empty);
+        base.endStage();
     }
 
     public override void reactToActionFinished()

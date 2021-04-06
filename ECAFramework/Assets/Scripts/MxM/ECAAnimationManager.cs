@@ -16,31 +16,21 @@ using UnityEngine.AI;
 public class ECAAnimationManager : MonoBehaviour
 {
     public ECAAnimator ecaAnimator;
-    public bool strafing;
-    public bool goingTo;
 
     //UTILIZZO UN DIZIONARIO COME ANIMATION GRAPH
-    static public Dictionary<EventDefinitions, ECAAnimation> allAnimations = new Dictionary<EventDefinitions, ECAAnimation>();
+    static public Dictionary<string, ECAAction> allECAActions = new Dictionary<string, ECAAction>();
 
     private float acceptanceAngle;
 
     void Start()
     {
         ecaAnimator = GameObject.FindGameObjectWithTag("ECA").GetComponent<ECAAnimator>();
-        acceptanceAngle = 0.2f;
 
         createAnimationGraph();
-
-        strafing = true;
-        goingTo = false;
     }
 
     void Update()
     {
-        if (strafing)
-        {
-            ecaAnimator.LookAt();
-        }
         
     }
 
@@ -49,11 +39,12 @@ public class ECAAnimationManager : MonoBehaviour
         //SIT DOWN ANIMATION SETUP
         Transform Destination = GameObject.FindGameObjectWithTag("Destination").transform;
         Transform SitPoint = GameObject.FindGameObjectWithTag("Sit").transform;
-        allAnimations.Add(EventDefinitions.SitDown, new SitEvent(ecaAnimator, SitPoint, Destination));
+        ECA_sitAction sitAction = new ECA_sitAction(ecaAnimator, Destination, SitPoint);
+        allECAActions.Add("SitAction", sitAction);
+
+        Transform objToPick = GameObject.FindGameObjectWithTag("Pickable").transform;
+
     }
 
-    protected void checkGoingTo()
-    {
-    }
 
 }
