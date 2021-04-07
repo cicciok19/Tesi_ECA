@@ -16,22 +16,15 @@ public abstract class ECAActionStage
         EcaAnimator = ecaAnimator;
     }
 
-    protected ECAActionStage(ECAAction ecaAction)
-    {
-        EcaAction = ecaAction;
-    }
-
     public virtual void startStage() { }
+
     public virtual void endStage() {
         if (StageFinished != null)
-        {
             StageFinished(this, EventArgs.Empty);
-        }
     }
 
-    public virtual void reactToActionStart() { }
-    public virtual void reactToStateUpdate() { }
-    public virtual void reactToLabelUpdate() { }
+    public virtual void reactToActionStart(object sender, EventArgs e) { }
+    public virtual void reactToStateUpdate(object sender, EventArgs e) { }
+    public virtual void reactToLabelUpdate(object sender, EventArgs e) { }
     public virtual void reactToActionFinished(object sender, EventArgs e) { }
-
 }

@@ -29,19 +29,19 @@ public class GoToStage : ECAActionStage
         //base.reactToActionFinished();
     }
 
-    public override void reactToActionStart()
+    public override void reactToActionStart(object sender, EventArgs e)
     {
-        base.reactToActionStart();
+        base.reactToActionStart(sender, e);
     }
 
-    public override void reactToLabelUpdate()
+    public override void reactToLabelUpdate(object sender, EventArgs e)
     {
-        base.reactToLabelUpdate();
+        base.reactToLabelUpdate(sender, e);
     }
 
-    public override void reactToStateUpdate()
+    public override void reactToStateUpdate(object sender, EventArgs e)
     {
-        base.reactToStateUpdate();
+        base.reactToStateUpdate(sender, e);
     }
 
     private void OnArrivedECA(object sender, EventArgs e)

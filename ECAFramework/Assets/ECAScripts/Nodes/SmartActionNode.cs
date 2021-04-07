@@ -27,6 +27,8 @@ public class SmartActionNode : GameGraphNode
     {
         if (OnAskingExecutionAfterMessage != null)
             OnAskingExecutionAfterMessage(this, args);
+
+        ECAAnimationManager.NextECAAction();
     }
 
     public virtual SmartAction CurrentSmartAction { get; protected set; }

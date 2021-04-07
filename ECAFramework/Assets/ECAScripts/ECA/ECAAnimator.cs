@@ -31,6 +31,7 @@ public class ECAAnimator : MonoBehaviour
     public event EventHandler HasArrived;
     public event EventHandler IsLookingAt;
     public event EventHandler EventComplete;
+    public event EventHandler EventContact;
 
     public GameObject TextPanel;
     public Text ECAText;
@@ -467,7 +468,12 @@ public class ECAAnimator : MonoBehaviour
 
     public virtual void MxM_waitForEventComplete()
     {
+        StartCoroutine(WaitEventComplete());
+    }
 
+    public virtual void MxM_waitForEventContact()
+    {
+        StartCoroutine(WaitEventContact());
     }
 
     public IEnumerator WaitEventComplete()
@@ -476,5 +482,13 @@ public class ECAAnimator : MonoBehaviour
             yield return null;
         if (EventComplete != null)
             EventComplete(this, EventArgs.Empty);
+    }
+
+    public IEnumerator WaitEventContact()
+    {
+        while (m_animator.CurrentEventState != EEventState.Action)
+            yield return null;
+        if (EventContact != null)
+            EventContact(this, EventArgs.Empty);
     }
 }

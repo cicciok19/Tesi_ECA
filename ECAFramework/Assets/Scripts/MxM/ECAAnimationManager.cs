@@ -18,18 +18,15 @@ public class ECAAnimationManager : MonoBehaviour
     public ECAAnimator ecaAnimator;
 
     //UTILIZZO UN DIZIONARIO COME ANIMATION GRAPH
-    static public Dictionary<string, ECAAction> allECAActions = new Dictionary<string, ECAAction>();
+    static public Dictionary<int, ECAAction> allECAActions = new Dictionary<int, ECAAction>();
+    static public int idx;
 
     void Start()
     {
         ecaAnimator = GameObject.FindGameObjectWithTag("ECA").GetComponent<ECAAnimator>();
 
+        idx = 0;
         createAnimationGraph();
-    }
-
-    void Update()
-    {
-        
     }
 
     protected void createAnimationGraph()
@@ -38,10 +35,20 @@ public class ECAAnimationManager : MonoBehaviour
         Transform Destination = GameObject.FindGameObjectWithTag("Destination").transform;
         Transform SitPoint = GameObject.FindGameObjectWithTag("Sit").transform;
         ECA_sitAction sitAction = new ECA_sitAction(ecaAnimator, Destination, SitPoint);
-        allECAActions.Add("SitAction", sitAction);
+        allECAActions.Add(1, sitAction);
 
+        //PICK UP ANIMATION SETUP
         Transform objToPick = GameObject.FindGameObjectWithTag("Pickable").transform;
+        Transform Destination_2 = GameObject.FindGameObjectWithTag("Destination_2").transform;
+        ECA_pickUpAction pickUpAction = new ECA_pickUpAction(ecaAnimator, Destination_2, objToPick);
+        allECAActions.Add(2, pickUpAction);
 
+    }
+
+    public static void NextECAAction()
+    {
+        idx++;
+        allECAActions[idx].startAction();
     }
 
 

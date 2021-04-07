@@ -8,12 +8,11 @@ public class ECA_sitAction : ECAAction
     private Transform Destination;
     private Transform SitPoint;
 
-    public event EventHandler CompletedAction;
-
     public ECA_sitAction(ECAAnimator ecaAnimator, Transform destination, Transform sitPoint) : base(ecaAnimator)
     {
         Destination = destination;
         SitPoint = sitPoint;
+
         allStages = new ECAActionStage[]
         {
             new GoToStage(this, ecaAnimator, destination),
@@ -21,6 +20,7 @@ public class ECA_sitAction : ECAAction
             new SitStage(this, ecaAnimator, sitPoint),
             new StandUpStage(this, ecaAnimator, sitPoint)
         };
+
         SetupAction();
     }
 

@@ -6,6 +6,7 @@ using System;
 public abstract class ECAAction
 {
     public event EventHandler CompletedAction;
+
     public ECAActionStage[] allStages;
     public int currentStageIdx;
 

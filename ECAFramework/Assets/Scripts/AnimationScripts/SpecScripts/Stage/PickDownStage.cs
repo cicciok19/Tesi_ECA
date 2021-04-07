@@ -3,14 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StandUpStage : ECAActionStage
+public class PickDownStage : ECAActionStage
 {
-    Transform SitPoint;
+    Transform ObjToPick;
+    Transform HandEmpty;
 
-    public StandUpStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform sitPoint) : base(ecaAction, ecaAnimator)
+    public PickDownStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform obj, Transform handEmpty) : base(ecaAction, ecaAnimator)
     {
-        SitPoint = sitPoint;
+        ObjToPick = obj;
+        HandEmpty = handEmpty;
+
         EcaAction.CompletedAction += reactToActionFinished;
+        EcaAnimator.EventContact += onEventContact;
     }
 
     public override void startStage()
@@ -25,8 +29,8 @@ public class StandUpStage : ECAActionStage
 
     public override void reactToActionFinished(object sender, EventArgs e)
     {
-        EcaAnimator.MxM_clearRequiredTags();
-        EcaAnimator.MXM_BeginEventWithContact("StandUp", SitPoint);
+        base.reactToActionFinished(sender, e);
+        EcaAnimator.MxM_BeginEvent("PickDown");
     }
 
     public override void reactToActionStart(object sender, EventArgs e)
@@ -44,6 +48,12 @@ public class StandUpStage : ECAActionStage
         base.reactToStateUpdate(sender, e);
     }
 
+    public void onEventContact(object sender, EventArgs e)
+    {
+        HandEmpty.DetachChildren();
+        ObjToPick.position = new Vector3(ObjToPick.position.x, 0.05f, ObjToPick.position.z);
+        endStage();
+    }
 
 
 }

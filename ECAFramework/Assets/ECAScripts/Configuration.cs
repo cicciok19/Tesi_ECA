@@ -21,11 +21,13 @@ using UnityEngine.Assertions;
 }
 	public enum Nodes
 {
-    ProximityNode
+    ProximityNode,
+    ProximityNode_1
 }
 	public enum SmartActions
 {
-    ProximityAction
+    ProximityAction,
+    ProximityAction_1
 }
     public enum EventDefinitions
 {

@@ -22,7 +22,7 @@ public class ProximityNode : SmartActionNode
         base.StartNode(speak);
 
         //inizializzo l'azione dell'ECA
-        eca_sitAction = (ECA_sitAction)ECAAnimationManager.allECAActions["SitAction"];
+        //eca_sitAction = (ECA_sitAction)ECAAnimationManager.allECAActions["SitAction"];
 
         //se sono in modalità training lancia il messaggio di descrizione del task
         if (IsTrainingMode)
@@ -30,7 +30,6 @@ public class ProximityNode : SmartActionNode
             SmartActionCustomArgs args = new SmartActionCustomArgs(proximityAction, proximityAction.Start, "Description");
             AskExecutionAfterMessage(args);
         }
-        eca_sitAction.startAction();
     }
 
     //questo fa la end dell'azione
@@ -38,7 +37,7 @@ public class ProximityNode : SmartActionNode
     {
         proximityAction.Entered -= OnTriggerEntered;
         proximityAction.Finish();
-        eca_sitAction.onCompletedAction();
+        ECAAnimationManager.allECAActions[ECAAnimationManager.idx].onCompletedAction();
         SetCompleted();
     }
 }
