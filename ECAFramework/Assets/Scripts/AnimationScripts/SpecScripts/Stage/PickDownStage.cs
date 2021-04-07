@@ -31,6 +31,7 @@ public class PickDownStage : ECAActionStage
     {
         base.reactToActionFinished(sender, e);
         EcaAnimator.MxM_BeginEvent("PickDown");
+        EcaAnimator.MxM_waitForEventContact();
     }
 
     public override void reactToActionStart(object sender, EventArgs e)

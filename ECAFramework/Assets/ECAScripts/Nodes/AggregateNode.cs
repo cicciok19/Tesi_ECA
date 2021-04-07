@@ -16,6 +16,7 @@ abstract class AggregateNode : GameGraphNode
     {
       SetChildren(childrenNodes);
     }
+
     public AggregateNode(int id, string readableName, string instructions, bool isTrainingMode)
     :base(id, readableName, isTrainingMode)
     {
@@ -29,10 +30,12 @@ abstract class AggregateNode : GameGraphNode
        for(int i=0;i<childrenNodes.Length;i++)
     	childrenNodes[i].IsChildNode = true;
     }
+
     public GameGraphNode[] GetChildren()
     {
       return childrenNodes;
     }
+
     public GameGraphNode GetChild<T>()
     {
       for(int i=0;i < childrenNodes.Length; i++)

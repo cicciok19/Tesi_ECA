@@ -16,8 +16,15 @@ public abstract class ECAActionStage
         EcaAnimator = ecaAnimator;
     }
 
+    /// <summary>
+    /// In questo metodo devo specificare cosa succede non appena inizializzo lo stage
+    /// </summary>
     public virtual void startStage() { }
 
+    /// <summary>
+    /// Serve per definire cosa succede quando uno stage finisce. Di base genera l'evento StageFinished che segnala
+    /// all'azione che quello stage è terminato e può andare avanti
+    /// </summary>
     public virtual void endStage() {
         if (StageFinished != null)
             StageFinished(this, EventArgs.Empty);

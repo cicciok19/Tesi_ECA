@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TrainingScenario : ECAGameManager
 {
+    
     protected override void CreateActions()
     {
         //dichiarazione di tutte le azioni che mi servono

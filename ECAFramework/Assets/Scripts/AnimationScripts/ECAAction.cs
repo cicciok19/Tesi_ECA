@@ -19,10 +19,11 @@ public abstract class ECAAction
         EcaAnimator = ecaAnimator;
     }
 
+    /// <summary>
+    /// Inizializza l'azione, deve essere chiamato nel costruttore dell'azione. Sottoscrivo gli eventi per il primo stage.
+    /// </summary>
     public virtual void SetupAction()
     {
-        //quando specializzo lo script devo avere un riferimento alla smart action attuale e devo
-        //sottoscrivere i suoi eventi per poter reagire
         currentStageIdx = 0;
         currentStage.StageFinished += onStageFinished;
     }
@@ -38,7 +39,9 @@ public abstract class ECAAction
         }
     }
 
-
+    /// <summary>
+    /// Fa iniziare l'azione inizializzando il primo stage
+    /// </summary>
     public virtual void startAction()
     {
         if (allStages != null)
@@ -50,10 +53,14 @@ public abstract class ECAAction
         }
     }
 
+    /// <summary>
+    /// Chiamato ogni volta che finisce uno stage, serve per iniziare quello successivo. Se era l'ultimo, segnalo il completamento dell'azione
+    /// </summary>
     public virtual void nextStage()
     {
         if (currentStage != null)
         {
+            //iscrivo l'azione all'evento che segnala la fine dello stage
             currentStage.StageFinished += onStageFinished;
             currentStage.startStage();
         }
@@ -61,6 +68,9 @@ public abstract class ECAAction
             onCompletedAction();
     }
 
+    /// <summary>
+    /// Quando uno stage viene completato mi disiscrivo dall'evento, aggiorno il currentStageIdx e inizializzo lo stage successivo
+    /// </summary>
     public virtual void onStageFinished(object sender, EventArgs e)
     {
         currentStage.StageFinished -= onStageFinished;
@@ -68,12 +78,17 @@ public abstract class ECAAction
         nextStage();
     }
 
-    public virtual void onStateUpdate() { }
-    public virtual void onLabelUpdate() { }
+    /// <summary>
+    /// Chiamato quando un'azione viene completata
+    /// </summary>
     public virtual void onCompletedAction()
     {
         if (CompletedAction != null)
             CompletedAction(this, EventArgs.Empty);
 
     }
+
+
+    public virtual void onStateUpdate() { }
+    public virtual void onLabelUpdate() { }
 }

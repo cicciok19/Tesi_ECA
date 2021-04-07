@@ -29,6 +29,10 @@ public class ECAAnimationManager : MonoBehaviour
         createAnimationGraph();
     }
 
+    /// <summary>
+    /// Genera l'animation graph. Devo creare tutte le azioni che deve eseguire l'ECA in maniera sequenziale e corrispondente
+    /// con i nodi del Game Graph (definiti nello script ECAGameManager che ho specializzato)
+    /// </summary>
     protected void createAnimationGraph()
     {
         //SIT DOWN ANIMATION SETUP
@@ -45,6 +49,9 @@ public class ECAAnimationManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Viene chiamato dai vari nodi per andare avanti nell'ECA animation graph e iniziare le azioni successive
+    /// </summary>
     public static void NextECAAction()
     {
         idx++;

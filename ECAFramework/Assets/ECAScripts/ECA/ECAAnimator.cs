@@ -471,17 +471,17 @@ public class ECAAnimator : MonoBehaviour
         StartCoroutine(WaitEventComplete());
     }
 
-    public virtual void MxM_waitForEventContact()
-    {
-        StartCoroutine(WaitEventContact());
-    }
-
     public IEnumerator WaitEventComplete()
     {
-        while(!m_animator.IsEventComplete)
+        while (!m_animator.IsEventComplete)
             yield return null;
         if (EventComplete != null)
             EventComplete(this, EventArgs.Empty);
+    }
+
+    public virtual void MxM_waitForEventContact()
+    {
+        StartCoroutine(WaitEventContact());
     }
 
     public IEnumerator WaitEventContact()

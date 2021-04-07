@@ -10,6 +10,8 @@ public class StandUpStage : ECAActionStage
     public StandUpStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform sitPoint) : base(ecaAction, ecaAnimator)
     {
         SitPoint = sitPoint;
+        //in questo caso l'ECA si deve alzare solo quando l'utente entra nel trigger, quindi startStage()
+        //verrà chiamato solo in quel momento
         EcaAction.CompletedAction += reactToActionFinished;
     }
 
