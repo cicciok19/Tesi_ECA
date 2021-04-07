@@ -33,10 +33,16 @@ public class GameManager : MonoBehaviour
         StartGame();
     }
 
+    /// <summary>
+    /// Creo le smart actions che deve eseguire l'utente per andare avanti nell'applicazione e le aggiungo a AllSmartActions
+    /// </summary>
     protected virtual void CreateActions()
     {
     }
 
+    /// <summary>
+    /// Definisco i nodi che compongono l'applicazione con le smart actions e li aggiungo a AllSimpleNodes
+    /// </summary>
     protected virtual void DefineGraphNodes()
     {
         nodes = new GameGraphNode[]
@@ -45,6 +51,7 @@ public class GameManager : MonoBehaviour
         
         this.NumberOfNodes = nodes.Length;
     }
+
     protected virtual void StartGame()
     {
         Assert.IsTrue(nodes.Length > 0);
@@ -58,6 +65,9 @@ public class GameManager : MonoBehaviour
             OnGameStarted(this, EventArgs.Empty);
     }
 
+    /// <summary>
+    /// Controlla ad ogni update lo stato attuale del nodo in cui mi trovo.
+    /// </summary>
     void Update()
     {
         if (!IsPaused && CurrentNode != null)
@@ -142,4 +152,6 @@ public class GameManager : MonoBehaviour
     }
     public int NumberOfNodes { get; protected set; }
     //public ScenarioType GameType { get; protected set; } = ScenarioType.Training;
+
+    protected virtual void createECAActions() { }
 }

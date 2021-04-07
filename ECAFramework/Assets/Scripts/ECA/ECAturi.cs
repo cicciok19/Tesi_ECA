@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ECAturi : ECA
+public class ECATuri : ECA
 {
     public override void SetEcaId()
     {
@@ -86,19 +86,22 @@ public class ECAturi : ECA
 
     //serve per far iniziare la smart action solo dopo aver fornito un messaggio di descrizione della task
     //questo vale solo in questo caso, perchè si tratta dell'ECA istruttore
+    //viene richiesto dalla smartAction stessa
     private void ExecuteAfterMessage(object sender, SmartActionCustomArgs e)
     {
         if (!e.SmartAction.IsStarted)
             SendMessage(e.SmartAction, e.MessageType, e.FunctionToExecute, e.AnyTime);
+        //ANIMAZIONE ECA
         else
             //if was pause -> do not play start message (description of the task)
             e.SmartAction.Start();
     }
-
-    //viene chiamato quando finisco una smart action
-    // 1. riproduce il messaggio di fine task
-    // 2. aggiorna le emozioni dell'ECA
-    // 3. ripristina il valore dell'evento in modo da segnalare che l'azione è finita e può cominciarne un'altra
+    /// <summary>
+    ///  Viene chiamato quando finisco una smart action:
+    ///1. riproduce il messaggio di fine task
+    ///2. aggiorna le emozioni dell'ECA
+    ///3. ripristina il valore dell'evento in modo da segnalare che l'azione è finita e può cominciarne un'altra
+    /// </summary>
     private void OnActionFinished(object sender, EventArgs e)
     {
         SmartAction smartAction = (SmartAction)sender;
@@ -113,12 +116,18 @@ public class ECAturi : ECA
         else
             EmotionManager.updateEmotion(AppraisalVariables.Good, 0.4f);
 
+        //CHIAMO ANIMAZIONE ECA
+
         smartAction.Finished -= OnActionFinished;
     }
 
-    //chiamato ogni volta che cambia lo stato della smart action in modo da reagire al cambiamento
-    //in questo metodo vado a vedere che label ho raggiunto e basta
-    //il metodo che riproduce il messaggio è GiveSupport
+    /// <summary>
+    /// Chiamato ogni volta che cambia lo stato della smart action in modo da reagire al cambiamento.
+    /// In questo metodo vado a vedere che label ho raggiunto e basta.
+    /// Il metodo che riproduce il messaggio è GiveSupport
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void OnStateUpdated(object sender, SmartActionEventArgs e)
     {
 
@@ -145,11 +154,15 @@ public class ECAturi : ECA
         if (!e.IsLabelSwitched)
             return;
 
+        
         GiveSupport(smartAction);
     }
 
 
-    //valuto la label che ho raggiunto e riproduco il relativo messaggio
+    /// <summary>
+    /// Valuto la label che ho raggiunto e riproduco il relativo messaggio di supporto
+    /// </summary>
+    /// <param name="smartAction"></param>
     private void GiveSupport(SmartAction smartAction)
     {
         //bool isMessageAccepted;
@@ -168,6 +181,8 @@ public class ECAturi : ECA
                 }
                 else
                     AccuracyLabelUpdated(smartAction);
+
+                //CHIAMO ANIMAZIONE ECA
 
                 break;
             case Labels.Normal:
@@ -189,10 +204,20 @@ public class ECAturi : ECA
                 if (GivingSupport != null)
                     GivingSupport(isMessageAccepted);
                 */
+
+                //CHIAMO ANIMAZIONE ECA
+
                 break;
             case Labels.Good:
                 EmotionManager.updateEmotion(AppraisalVariables.Good);
+
+                //CHIAMO ANIMAZIONE ECA
+
                 break;
+
+            //CHIAMO ANIMAZIONE ECA,
+            //una sola volta e passo come argomento la label che ho attualmente
+            //internamente, lo script che gestisce l'animazione dovrà valutare la label e agire di conseguenza
         }
     }
 

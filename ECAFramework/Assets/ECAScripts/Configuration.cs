@@ -21,11 +21,20 @@ using UnityEngine.Assertions;
 }
 	public enum Nodes
 {
-    ProximityNode
+    ProximityNode,
+    ProximityNode_1
 }
 	public enum SmartActions
 {
-    ProximityAction
+    ProximityAction,
+    ProximityAction_1
+}
+    public enum EventDefinitions
+{
+    SitDown,
+    StandUp,
+    PickUp,
+    PickDown
 }
 /// <summary>
 /// Class used to define the name of the xml files that contain the necessary configurations

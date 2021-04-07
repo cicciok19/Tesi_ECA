@@ -66,6 +66,7 @@ class ParallelAndNode : AggregateNode
         foreach (var child in childrenNodes)
             child.StartNode();
     }
+
     public override string ReadableDescription
     {
       get

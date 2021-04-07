@@ -122,8 +122,7 @@ public abstract class GameGraphNode
     }
     public virtual void StartNode(bool speak = true)
     {
-      BaseStartActions();
-    
+      BaseStartActions();    
       //if(IsTrainingMode && showDialogWindow)
       	//RaiseWidget();
     }

@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProximityNode : SmartActionNode
+public class ProximityNode : SmartActionNode  
 {
     ProximityAction proximityAction;
+    ECA_sitAction eca_sitAction;
 
     public ProximityNode(int id, ProximityAction proximitySmartAction, string readableName, bool isTrainingMode) : 
         base(id, readableName, isTrainingMode)
@@ -20,6 +21,9 @@ public class ProximityNode : SmartActionNode
         CurrentSmartAction = this.proximityAction;
         base.StartNode(speak);
 
+        //inizializzo l'azione dell'ECA
+        //eca_sitAction = (ECA_sitAction)ECAAnimationManager.allECAActions["SitAction"];
+
         //se sono in modalità training lancia il messaggio di descrizione del task
         if (IsTrainingMode)
         {
@@ -33,6 +37,7 @@ public class ProximityNode : SmartActionNode
     {
         proximityAction.Entered -= OnTriggerEntered;
         proximityAction.Finish();
+        ECAAnimationManager.allECAActions[ECAAnimationManager.idx].onCompletedAction();
         SetCompleted();
     }
 }

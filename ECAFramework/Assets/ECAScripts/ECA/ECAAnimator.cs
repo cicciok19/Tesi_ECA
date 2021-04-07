@@ -13,6 +13,7 @@ using UnityEngine.UI;
 using CrazyMinnow.SALSA;
 using UnityEngine.AI;
 using DG.Tweening;
+using MxM;
 
 // global declaration end
 
@@ -27,6 +28,10 @@ public enum BodyParts
 public class ECAAnimator : MonoBehaviour
 {
     public event EventHandler AudioEnded;
+    public event EventHandler HasArrived;
+    public event EventHandler IsLookingAt;
+    public event EventHandler EventComplete;
+    public event EventHandler EventContact;
 
     public GameObject TextPanel;
     public Text ECAText;
@@ -37,7 +42,13 @@ public class ECAAnimator : MonoBehaviour
     public Animator Animator;
     public AudioSource audioSource;
 
+    public MxMAnimator m_animator;
+    public MxMTrajectoryGenerator_BasicAI m_trajectory;
+
+    public GameObject Player;
+
     public Dictionary<BodyParts, GameObject> PartsOfTheBody = new Dictionary<BodyParts, GameObject>();
+    public Dictionary<String, MxMEventDefinition> MxM_EventDefinitions = new Dictionary<String, MxMEventDefinition>();
 
     //Settings
     /// <summary>
@@ -102,8 +113,12 @@ public class ECAAnimator : MonoBehaviour
         //GameObject.FindObjectOfType<GuiDebug>().ShowEmotion(Eca.Name, Eca.EmotionManager.ActualEmotion);
     }
 
+    /// <summary>
+    /// Called in ECAGameManager to init all the variables we neew
+    /// </summary>
     public void Init()
     {
+        Player = GameObject.FindGameObjectWithTag("Player");
         Eca = GetComponent<ECA>();
         Eca.EmotionManager.GlobalEmotionUpdated += UpdateEmotionAnimation;
         CreateAudioSource();
@@ -113,6 +128,10 @@ public class ECAAnimator : MonoBehaviour
         SetBodyElements();
         SetNavMeshAgent();
         UpdateEmotionAnimation(null, null);
+
+        //MxM setup
+        SetMxMAnimatorAndTrajectory();
+        SetEventDefinitions();
     }
 
     // TEXT DISPLAY:
@@ -203,7 +222,6 @@ public class ECAAnimator : MonoBehaviour
     //AUDIO PLAY END:
 
     //MOVEMENTS:
-
     /// <summary>
     /// With NavMeshAgent: send the eca to the specified target until it reaches a distance of <paramref name="arrivalDeltaDistance"/>
     /// Without NavMesh: teleportation is applied
@@ -223,9 +241,15 @@ public class ECAAnimator : MonoBehaviour
         else
         {
             navMeshAgent.SetDestination(target);
-            StartCoroutine(WaitArrival(target, arrivalDeltaDistance));
+            StartCoroutine(WaitArrival(target, arrivalDeltaDistance+0.5f));
         }
     }
+    /// <summary>
+    /// Waits until the ECA has arrived to the destination target
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="deltaDistance"></param>
+    /// <returns></returns>
     public virtual IEnumerator WaitArrival(Vector3 target, float deltaDistance)
     {
         if (deltaDistance > 0)
@@ -235,7 +259,7 @@ public class ECAAnimator : MonoBehaviour
         }
         else
             Utility.LogError("delta Distance <= 0");
-    
+
         Arrived();
     }
     /// <summary>
@@ -248,6 +272,9 @@ public class ECAAnimator : MonoBehaviour
             Utility.LogWarning("No navMeshAgent found. Add NamMeshAgent or override this method if you wont to use your policy");
         else
             navMeshAgent.isStopped = true;
+
+        if (HasArrived != null)
+            HasArrived(this, EventArgs.Empty);
     }
     //MOVEMENTS END
 
@@ -288,17 +315,42 @@ public class ECAAnimator : MonoBehaviour
         else
             return false;
     }
-
     /// <summary>
-    /// Look at target position
+    /// Look at target position. If target==null, ECA will look to the player, otherwise the ECA will look to the specified target.
+    /// If <paramref name="oppositeDirection"/> = true, then i will look at the opposite direction of the target
     /// </summary>
     /// <param name="target"></param>
-    public virtual void LookAt(Transform target)
+    public virtual void LookAt(Transform target = null, bool oppositeDirection = false)
     {
-        if (PartsOfTheBody.ContainsKey(BodyParts.Head))
-            PartsOfTheBody[BodyParts.Head].transform.DOLookAt(target.position, 1f);
+        /* if (PartsOfTheBody.ContainsKey(BodyParts.Head))
+             PartsOfTheBody[BodyParts.Head].transform.DOLookAt(target.position, 1f);
+         else
+             Utility.LogWarning("NO HEAD FOUND");*/
+
+        //If the target is not specified, the ECA will look to the player
+        if (target == null)
+            target = Player.transform;
+
+        Vector3 dir = (target.position - this.transform.position).normalized;
+
+        MxM_startStrafing();
+        if (!oppositeDirection)
+            m_trajectory.StrafeDirection = dir;
         else
-            Utility.LogWarning("NO HEAD FOUND");
+            m_trajectory.StrafeDirection = -dir;
+        StartCoroutine(EndLookAt());
+    }
+    /// <summary>
+    /// Waits for the ECA to turn in the given direction of the LookAt method, then trows the event IsLookingAt
+    /// </summary>
+    /// <returns></returns>
+    public virtual IEnumerator EndLookAt()
+    {
+        //DOVREI FARLO CON GLI ANGOLO E NON CON IL TEMPO
+        yield return new WaitForSeconds(2.5f);
+        MxM_stopStrafing();
+        if (IsLookingAt != null)
+            IsLookingAt(this, EventArgs.Empty);
     }
 
     //VISION CAPABILITY END
@@ -319,4 +371,124 @@ public class ECAAnimator : MonoBehaviour
     }
 
     //BODY GESTURES END
+
+    //MxM METHODS BEGIN
+
+    protected void SetEventDefinitions()
+    {
+        foreach (EventDefinitions eventDef in (EventDefinitions[])Enum.GetValues(typeof(EventDefinitions)))
+        {
+            string s = eventDef.ToString();
+            MxMEventDefinition ed = Resources.Load<MxMEventDefinition>("EventsDefinitions/EventDef_" + eventDef);
+            MxM_EventDefinitions.Add(s, ed);
+        }
+    }
+
+    protected void SetMxMAnimatorAndTrajectory()
+    {
+        m_animator = GetComponent<MxMAnimator>();
+        if (m_animator == null)
+            Utility.LogWarning("No MxM animator found for ECA: " + Eca.Name);
+
+        m_trajectory = GetComponent<MxMTrajectoryGenerator_BasicAI>();
+        if (m_animator == null)
+            Utility.LogWarning("No MxM trajectory generator found for ECA: " + Eca.Name);
+    }
+
+    public virtual void MxM_BeginEvent(string id)
+    {
+        var eventDef = MxM_EventDefinitions[id];
+        m_animator.BeginEvent(eventDef);
+    }
+
+    public virtual void MXM_BeginEventWithContact(string id, Transform contact)
+    {
+        var eventDef = MxM_EventDefinitions[id];
+
+        eventDef.ClearContacts();
+        eventDef.AddEventContact(contact.position, this.transform.rotation.y);
+
+        m_animator.BeginEvent(eventDef);
+    }
+
+    public virtual void MXM_BeginEventWithContactAndTag(string id , Transform contact, string tag)
+    {
+        var eventDef = MxM_EventDefinitions[id];
+
+        eventDef.ClearContacts();
+        eventDef.AddEventContact(contact.position, this.transform.rotation.y);
+
+        m_animator.BeginEvent(eventDef);
+
+        m_animator.ClearRequiredTags();
+        m_animator.AddRequiredTag(tag);
+    }
+
+    public virtual void MXM_BeginEventWithTag(string id, string tag)
+    {
+        var eventDef = MxM_EventDefinitions[id];
+        m_animator.BeginEvent(eventDef);
+
+        m_animator.ClearRequiredTags();
+        m_animator.AddRequiredTag(tag);
+    }
+
+    public virtual void MxM_SetTag(string tag)
+    {
+        m_animator.ClearRequiredTags();
+        m_animator.AddRequiredTag(tag);
+    }
+
+    public virtual void MxM_startStrafing()
+    {
+        m_animator.ClearRequiredTags();
+        m_animator.SetRequiredTag("Strafe");
+        m_trajectory.TrajectoryMode = ETrajectoryMoveMode.Strafe;
+        m_animator.AngularErrorWarpMethod = EAngularErrorWarpMethod.TrajectoryHeading;
+        m_animator.AngularErrorWarpRate = 360f;
+    }
+
+    public virtual void MxM_stopStrafing()
+    {
+        m_animator.ClearRequiredTags();
+        m_trajectory.TrajectoryMode = ETrajectoryMoveMode.Normal;
+        m_animator.AngularErrorWarpMethod = EAngularErrorWarpMethod.CurrentHeading;
+        m_animator.AngularErrorWarpRate = 45f;
+    }
+
+    public virtual void MxM_clearRequiredTags()
+    {
+        m_animator.ClearRequiredTags();
+    }
+
+    public virtual void MxM_removeRequiredTag(String tag)
+    {
+        m_animator.RemoveRequiredTag(tag);
+    }
+
+    public virtual void MxM_waitForEventComplete()
+    {
+        StartCoroutine(WaitEventComplete());
+    }
+
+    public IEnumerator WaitEventComplete()
+    {
+        while (!m_animator.IsEventComplete)
+            yield return null;
+        if (EventComplete != null)
+            EventComplete(this, EventArgs.Empty);
+    }
+
+    public virtual void MxM_waitForEventContact()
+    {
+        StartCoroutine(WaitEventContact());
+    }
+
+    public IEnumerator WaitEventContact()
+    {
+        while (m_animator.CurrentEventState != EEventState.Action)
+            yield return null;
+        if (EventContact != null)
+            EventContact(this, EventArgs.Empty);
+    }
 }
