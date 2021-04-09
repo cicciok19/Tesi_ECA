@@ -22,12 +22,28 @@ using UnityEngine.Assertions;
 	public enum Nodes
 {
     ProximityNode,
-    ProximityNode_1
+    ProximityNode_1,
+    ProximityNode_2,
+    ProximityNode_3,
+
+    IntNode_firstPaint,
+    IntNode_secondPaint,
+    IntNode_thirdPaint,
+
+    firstPaintNode,
+    secondPaintNode,
+    thirdPaintNode,
+
+    waitNode
 }
 	public enum SmartActions
 {
     ProximityAction,
-    ProximityAction_1
+    ProximityAction_1,
+
+    firstPaintProximityAction,
+    secondPaintProximityAction,
+    thirdPaintProximityAction
 }
     public enum EventDefinitions
 {

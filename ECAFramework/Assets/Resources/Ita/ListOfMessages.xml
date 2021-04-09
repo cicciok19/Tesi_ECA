@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game>
   <tts ecaID="Turi">
-    <StartGame>Ciao Alfio, sono Turi. Benvenuto in questa cazzo di simulazione</StartGame>
+    <StartGame>Buongiorno e benvenuto in questa simulazione. Scegli il quadro che desideri attenzionare</StartGame>
   </tts>
   
   
@@ -81,22 +81,6 @@
     </tts>
     </action>
     -->
-    <action name="ProximityAction">
-      <tts weight="High">
-        <Description>Raggiungi il luogo contrassegnato, gloriosa testa di cazzo</Description>
-        <EndTask>Bravo coglione, sei stato ubbidiente</EndTask>
-        <Help>Guardati intorno idiota</Help>
-        <Criteria>
-          <Accuracy badTxt ="bad" badLimit="0.4"
-                normalTxt ="normal" normalLimit ="0.8"
-                goodTxt = "good" goodLimit ="1">
-          </Accuracy>
-          <Staging badTxt ="Vuoi anche un caffè?" badLimit ="0.5"
-                   normalTxt ="Potresti muoverti per favore" normalLimit ="0.2"
-                   goodTxt ="Minchia sei stato rapido" goodLimit="0.0">
-          </Staging>
-        </Criteria>
-      </tts>
-    </action>
+
   </actions>
 </game>

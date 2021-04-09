@@ -18,6 +18,7 @@ class ParallelAndNode : AggregateNode
       if(IsRunning)
       {
     	//execute current step on all children
+        //checks all the children's status
     	for(int i = 0; i < childrenNodes.Length; i++)
     	{
     		GameGraphNode currentNode = childrenNodes[i];
@@ -60,6 +61,10 @@ class ParallelAndNode : AggregateNode
     	  }
       }
     }
+    /// <summary>
+    /// Fa la start di tutti i nodi figli
+    /// </summary>
+    /// <param name="speak"></param>
     public override void StartNode(bool speak = true)
     {
         base.StartNode(speak);

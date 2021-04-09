@@ -162,7 +162,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &179908986 stripped
 AudioSource:
@@ -469,7 +469,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &440140748
 GameObject:
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 440140750}
   - component: {fileID: 440140749}
   m_Layer: 0
-  m_Name: TriggerProximity_1
+  m_Name: Second paint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379a6be5ce62dde408aea12102685e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: SecondTrigger
+  ID: SecondPaint
 --- !u!65 &440140750
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -576,7 +576,7 @@ Transform:
   m_LocalScale: {x: 1, y: 3.5597, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &511791391
 GameObject:
@@ -751,7 +751,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c9daf4987fe34914fb68111111165aa5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c9daf4987fe34914fb68111111165aa5,
         type: 3}
@@ -892,7 +892,7 @@ GameObject:
   - component: {fileID: 707881691}
   - component: {fileID: 707881690}
   m_Layer: 0
-  m_Name: TriggerProximity
+  m_Name: First paint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -910,7 +910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379a6be5ce62dde408aea12102685e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: TriggerBase
+  ID: FirstPaint
 --- !u!65 &707881691
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1076,7 +1076,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &798501849
 PrefabInstance:
@@ -1313,7 +1313,7 @@ Transform:
   m_Children:
   - {fileID: 1147086516}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1147086515
 GameObject:
@@ -1718,7 +1718,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1584865853
 GameObject:
