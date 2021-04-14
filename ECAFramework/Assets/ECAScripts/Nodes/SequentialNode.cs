@@ -1,3 +1,4 @@
+using System;
 
 class SequentialNode : AggregateNode
 {
@@ -70,7 +71,13 @@ class SequentialNode : AggregateNode
     {
         base.StartNode(speak);
         currentNodeIdx = 0;
+        CurrentNode.OnCompleted += onChildrenCompleted;
         CurrentNode.StartNode();
         Utility.Log("starting node" + CurrentNode.GetType());
+    }
+
+    public virtual void onChildrenCompleted(object sender, EventArgs e)
+    {
+        StartNextNode();
     }
 }

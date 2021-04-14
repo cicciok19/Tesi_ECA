@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <game>
-  <tts ecaID="Turi">
-    <StartGame>Buongiorno e benvenuto in questa simulazione. Scegli il quadro che desideri attenzionare</StartGame>
+  <tts ecaID="Sophie">
+    <StartGame>Buongiorno e benvenuto in questa simulazione. Scegli il quadro che desìderi attenzionare</StartGame>
+    
+    <Presentation>Ciao Lillo, come va?</Presentation>
+
+    <FirstTrigger>Arrivo subito al primo quadro</FirstTrigger>
+    <paintCorrectArtist_1>Esatto, è un Monet. Era uno dei più importanti pittori impressionisti.</paintCorrectArtist_1>
+    <paintCorrectYear_1>Risposta corretta, bravo</paintCorrectYear_1>
+    <paintNOTCorrectArtist_1>No, hai sbagliato.</paintNOTCorrectArtist_1>
+    <paintNOTCorrectYear_1>Anno sbagliato</paintNOTCorrectYear_1>
+
+    <SecondTrigger>Sto arrivando al secondo quadro</SecondTrigger>
+    <paintCorrectArtist_2>Esatto, è un quadro di Leonardo da Vinci.</paintCorrectArtist_2>
+    <paintCorrectYear_2>Risposta corretta, bravo</paintCorrectYear_2>
+    <paintNOTCorrectArtist_2>No, hai sbagliato.</paintNOTCorrectArtist_2>
+    <paintNOTCorrectYear_2>Anno sbagliato</paintNOTCorrectYear_2>
+
+    <takeObject emotion="Anger">Va bene, ma non mi piacciono gli ordini</takeObject>
+    <takeObject emotion="Joy">Certo, vado subito</takeObject>
+
+    <none>scusi, non ho capito</none>
+    <none>non credo di aver capito, potrebbe ripetere per favore?</none>
+    
   </tts>
   
   
   <tts ecaID="HospitalPatient">
 
     <!--Prove di messaggi da far riprodurre-->
-    <StartGame>Ciao Alfio, sono Turi. Benvenuto in questa cazzo di simulazione</StartGame>
-    
     
 	<salutation emotion="Joy" action="LookAt@MainCamera">Salve dottore, che piacere verderla</salutation>
 	<salutation emotion="Joy" action="LookAt@MainCamera">Buongiorno dottore, felice di vederla</salutation>
@@ -81,6 +100,60 @@
     </tts>
     </action>
     -->
+
+    <action name="firstPaintProximityAction">
+      <tts weight="High">
+        <Description>messaggio di descrizione dell'azione</Description>
+        <EndTask>Arrivo subito al primo quadro</EndTask>
+        <Help>Messaggio di aiuto</Help>
+        <Criteria>
+          <Accuracy badTxt ="" badLimit="0.4"
+                normalTxt ="" normalLimit ="0.8"
+                goodTxt = "" goodLimit ="1">
+          </Accuracy>
+          <Staging badTxt ="" badLimit ="0.5"
+                   normalTxt ="" normalLimit ="0.2"
+                   goodTxt ="" goodLimit="0.0">
+          </Staging>
+        </Criteria>
+      </tts>
+    </action>
+
+    <action name="secondPaintProximityAction">
+      <tts weight="High">
+        <Description></Description>
+        <EndTask>Arrivo subito al secondo quadro</EndTask>
+        <Help></Help>
+        <Criteria>
+          <Accuracy badTxt ="" badLimit="0.4"
+                normalTxt ="" normalLimit ="0.8"
+                goodTxt = "" goodLimit ="1">
+          </Accuracy>
+          <Staging badTxt ="" badLimit ="0.5"
+                   normalTxt ="" normalLimit ="0.2"
+                   goodTxt ="" goodLimit="0.0">
+          </Staging>
+        </Criteria>
+      </tts>
+    </action>
+
+    <action name="secondPaintInteraction">
+      <tts weight="High">
+        <Description>Mi sapresti dire di chi è questo quadro?</Description>
+        <EndTask>Bravo, ottimo lavoro</EndTask>
+        <Help></Help>
+        <Criteria>
+          <Accuracy badTxt ="" badLimit="0.4"
+                normalTxt ="" normalLimit ="0.8"
+                goodTxt = "" goodLimit ="1">
+          </Accuracy>
+          <Staging badTxt ="" badLimit ="0.5"
+                   normalTxt ="" normalLimit ="0.2"
+                   goodTxt ="" goodLimit="0.0">
+          </Staging>
+        </Criteria>
+      </tts>
+    </action>
 
   </actions>
 </game>

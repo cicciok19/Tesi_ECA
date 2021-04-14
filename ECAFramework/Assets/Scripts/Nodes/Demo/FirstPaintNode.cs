@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 class FirstPaintNode : SequentialNode
 {
@@ -14,6 +15,8 @@ class FirstPaintNode : SequentialNode
     public override void StartNode(bool speak = true)
     {
         base.StartNode(speak);
+        UpdateNode();
+        //CurrentNode.OnCompleted += onChildrenCompleted;
     }
 
     //quando viene triggerato l'inizio di questo nodo faccio partire i nodi figli
@@ -21,4 +24,12 @@ class FirstPaintNode : SequentialNode
     {
         base.TriggerNode();
     }
+
+    public void onChildrenCompleted(object sender, EventArgs e)
+    {
+        StartNextNode();
+        if(CurrentNode != null)
+            CurrentNode.OnCompleted += onChildrenCompleted;
+    }
+
 }

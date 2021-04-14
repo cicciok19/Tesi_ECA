@@ -323,6 +323,7 @@ private static IntentManager instance = null;
 
     public void RemoveIntentHandler(string intentName, IIntentHandler handler)
     {
+        Utility.Log("Removing " + intentName + "to IntentManager");
         if (IntentHandlers.ContainsKey(intentName))
         {
             for (int i = 0; i < IntentHandlers[intentName].Count; i++)
@@ -350,6 +351,8 @@ private static IntentManager instance = null;
             AvailableIntents = new Dictionary<string, string>();
         AvailableIntents.Add(intentName);
         */
+        Utility.Log("Adding " + intentName + "to IntentManager");
+
         if (IntentHandlers == null)
             IntentHandlers = new Dictionary<string, List<IIntentHandler>>();
     

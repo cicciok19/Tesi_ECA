@@ -3,11 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ECATuri : ECA
+public class ECASophie : ECA
 {
+    public bool FirstPaintInteraction;
+    public bool SecondPaintInteraction;
+    public bool ThirdPaintInteraction;
+
+    public int idxPaintIntent;
+
+    public event EventHandler CorrectAnswer;
+    public event EventHandler WrongAnswer;
+
+    public List<string> FirstPaintIntentNames = new List<string>
+    {
+        "First Paint Artist",
+        "First Paint Year",
+        "Interruption",
+    };
+    public List<string> SecondPaintIntentNames = new List<string>
+    {
+        "Second Paint Artist",
+        "Second Paint Year",
+        "Interruption"
+    };
+    public List<string> ThirdPaintIntentNames = new List<string>
+    {
+        "Third Paint Artist",
+        "Third Paint Year",
+        "Interruption"
+    };
+
     public override void SetEcaId()
     {
-        ID = Ecas.Turi;
+        ID = Ecas.Sophie;
     }
     // Start is called before the first frame update
     protected  override void Start()
@@ -15,6 +43,14 @@ public class ECATuri : ECA
         base.Start();
         SubscribeToActionsEvents();
         SubscribeToNodesEvents();
+        SubscribeHandlerToIntentManager();
+
+        FirstPaintInteraction = false;
+        SecondPaintInteraction = false;
+        ThirdPaintInteraction = false;
+
+        //usato per capire a che punto sono dell'interazione con l'ECA per ciascun quadro
+        idxPaintIntent = 0;
     }
 
     // Update is called once per frame
@@ -26,17 +62,16 @@ public class ECATuri : ECA
     public override void SubscribeHandlerToIntentManager()
     {
         //definisco gli intent che mi servono per questo ECA
-        IntentName = new List<string> { "None, Presentation,  Help" };
+        IntentName = new List<string> { "Presentation" };
         //aggiungo gli handler per ogni intent definito prima
         IntentManager.Instance.AddIntentHandler(IntentName[0], this);
-        IntentManager.Instance.AddIntentHandler(IntentName[1], this);
-        IntentManager.Instance.AddIntentHandler(IntentName[2], this);
     }
 
     public override void Handle(Intent intent)
     {
         //controllo quali sono gli ECA a cui mi sto rivolgendo
         List<ECA> focusedEcas = ECAManager.Instance.FocusedECA();
+        Utility.Log("Received intent " + intent.IntentName + "::" + intent.Score);
 
         //vedo quali di questi intent è quello giusto
         // - mando il messaggio relativo
@@ -50,7 +85,6 @@ public class ECATuri : ECA
                 EmotionManager.updateEmotion(AppraisalVariables.UnexpectedNegative, 0.5f);
                 break;
             case "Presentation":
-                SendMessage("Presentation");
                 if (focusedEcas.Count == 0 || focusedEcas.Contains(this))
                     SendMessage("Presentation");
                 IntentManager.Instance.RemoveIntentHandler("Presentation", this);
@@ -62,6 +96,10 @@ public class ECATuri : ECA
                 //GiveHelpMessage();
                 break;
         }
+
+        HandlePaintsIntents(intent.IntentName);
+
+
     }
 
     //reagisce agli eventi relativi all'applicazione
@@ -115,8 +153,6 @@ public class ECATuri : ECA
             EmotionManager.updateEmotion(AppraisalVariables.Good, 0.8f);
         else
             EmotionManager.updateEmotion(AppraisalVariables.Good, 0.4f);
-
-        //CHIAMO ANIMAZIONE ECA
 
         smartAction.Finished -= OnActionFinished;
     }
@@ -252,6 +288,106 @@ public class ECATuri : ECA
         /*if (GivingSupport != null)
             GivingSupport(isMessageAccepted);
             */
+    }
+
+    public void SubscriveToRelativePaintIntents(int paintNumber)
+    {
+        switch (paintNumber)
+        {
+            case 1:
+                foreach(string intentName in FirstPaintIntentNames)
+                {
+                    IntentManager.Instance.AddIntentHandler(intentName, this);
+                }
+                FirstPaintInteraction = true;
+                break;
+            case 2:
+                foreach (string intentName in SecondPaintIntentNames)
+                {
+                    IntentManager.Instance.AddIntentHandler(intentName, this);
+                }
+                SecondPaintInteraction = true;
+                break;
+            case 3:
+                foreach (string intentName in ThirdPaintIntentNames)
+                {
+                    IntentManager.Instance.AddIntentHandler(intentName, this);
+                }
+                ThirdPaintInteraction = true;
+                break;
+        }
+    }
+
+    protected void HandlePaintsIntents(string intentName)
+    {
+        if (FirstPaintInteraction)
+        {
+            if (intentName == FirstPaintIntentNames[idxPaintIntent])
+            {
+                switch (intentName)
+                {
+                    case "First Paint Artist":
+                        SendMessage("FirstPaintArtistCorrect");
+                        IntentManager.Instance.RemoveIntentHandler(intentName, this);
+                        break;
+                    case "First Paint Year":
+                        SendMessage("FirstPaintYearCorrect");
+                        IntentManager.Instance.RemoveIntentHandler(intentName, this);
+                        FirstPaintInteraction = false;
+                        break;
+                }
+                idxPaintIntent++;
+            }
+        }
+
+        if (SecondPaintInteraction)
+        {
+            if (intentName == SecondPaintIntentNames[idxPaintIntent])
+            {
+                switch (intentName)
+                {
+                    case "Second Paint Artist":
+                        SendMessage("paintCorrectArtist_2");
+                        IntentManager.Instance.RemoveIntentHandler(intentName, this);
+                        break;
+                    case "Second Paint Year":
+                        SendMessage("paintCorrectYear_2");
+                        IntentManager.Instance.RemoveIntentHandler(intentName, this);
+                        SecondPaintInteraction = false;
+                        break;
+                }
+                if (CorrectAnswer != null)
+                    CorrectAnswer(this, EventArgs.Empty);
+                idxPaintIntent++;
+            }
+            else
+            {
+                if (idxPaintIntent == 0)
+                    SendMessage("paintNOTCorrectArtist_2");
+                else
+                    SendMessage("paintNOTCorrectYear_2");
+            }
+        }
+
+        if (ThirdPaintInteraction)
+        {
+            if (intentName == ThirdPaintIntentNames[idxPaintIntent])
+            {
+                switch (intentName)
+                {
+                    case "Third Paint Artist":
+                        SendMessage("ThirdPaintArtistCorrect");
+                        IntentManager.Instance.RemoveIntentHandler(intentName, this);
+                        break;
+                    case "Third Paint Year":
+                        SendMessage("ThirdPaintYearCorrect");
+                        IntentManager.Instance.RemoveIntentHandler(intentName, this);
+                        ThirdPaintInteraction = false;
+                        break;
+                }
+                idxPaintIntent++;
+            }
+        }
     }
 
 

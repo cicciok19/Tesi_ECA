@@ -7,6 +7,7 @@ public class ECA_sitAction : ECAAction
 {
     private Transform Destination;
     private Transform SitPoint;
+    private SmartAction SmartActionToStandUp;
 
     public ECA_sitAction(ECAAnimator ecaAnimator, Transform destination, Transform sitPoint) : base(ecaAnimator)
     {
@@ -45,5 +46,10 @@ public class ECA_sitAction : ECAAction
     {
         base.startAction();
 
+    }
+
+    public void setEndTriggerAction(SmartAction smartAction)
+    {
+        SmartActionToStandUp = smartAction;
     }
 }

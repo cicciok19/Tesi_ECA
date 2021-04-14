@@ -11,6 +11,7 @@ public class ProximityAction : SmartAction
     public ProximityAction(int smartActionID, string triggerID) : base(smartActionID)
     {
         proximityTriggerID = triggerID;
+        Start();
     }
 
     public override void Start()

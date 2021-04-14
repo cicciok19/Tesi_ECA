@@ -18,7 +18,8 @@ using UnityEngine;
     Elizabeth,
     PhoneOperator,
     HospitalPatient,
-    Turi
+    Turi,
+    Sophie
 }
 
 // global declaration end

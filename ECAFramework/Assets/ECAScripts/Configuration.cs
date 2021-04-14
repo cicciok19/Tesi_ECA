@@ -43,7 +43,11 @@ using UnityEngine.Assertions;
 
     firstPaintProximityAction,
     secondPaintProximityAction,
-    thirdPaintProximityAction
+    thirdPaintProximityAction,
+
+    firstPaintInteraction,
+    secondPaintInteraction,
+    thirdPaintInteraction
 }
     public enum EventDefinitions
 {

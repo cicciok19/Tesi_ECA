@@ -15,7 +15,7 @@ public class ECAGameManager : GameManager
     protected override void Start()
     {
         //CSVManager.Instance.Init();
-        ECAManager.Instance.AvailableEcas[Ecas.Turi].SendMessage("StartGame", StartGame);
+        ECAManager.Instance.AvailableEcas[Ecas.Sophie].SendMessage("StartGame", StartGame);
     }
     protected override void StartGame()
     {
