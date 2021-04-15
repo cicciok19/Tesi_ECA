@@ -311,7 +311,13 @@ public abstract class SmartAction: State
         if (ECAParameters.SmartActionMessages == null)
             return newState;
 
-        TtsInfoContainer thisActionContainer = ECAParameters.SmartActionMessages[id];
+        TtsInfoContainer thisActionContainer = null;
+
+        if (ECAParameters.SmartActionMessages.ContainsKey(id))
+            thisActionContainer = ECAParameters.SmartActionMessages[id];
+        else
+            return Labels.None;
+
 
         switch (criteria)
         {

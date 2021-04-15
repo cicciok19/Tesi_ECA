@@ -45,6 +45,8 @@ public class ECAAnimator : MonoBehaviour
     public MxMAnimator m_animator;
     public MxMTrajectoryGenerator_BasicAI m_trajectory;
 
+    public IKManager IK_manager;
+
     public GameObject Player;
 
     public Dictionary<BodyParts, GameObject> PartsOfTheBody = new Dictionary<BodyParts, GameObject>();
@@ -132,6 +134,8 @@ public class ECAAnimator : MonoBehaviour
         //MxM setup
         SetMxMAnimatorAndTrajectory();
         SetEventDefinitions();
+
+        IK_manager = GetComponent<IKManager>();
     }
 
     // TEXT DISPLAY:
@@ -485,5 +489,16 @@ public class ECAAnimator : MonoBehaviour
             yield return null;
         if (EventContact != null)
             EventContact(this, EventArgs.Empty);
+    }
+
+    //IK MANAGEMENT
+    public void IK_setEffectors(Transform hips, Transform l_foot, Transform r_foot)
+    {
+        IK_manager.SetChairEffectors(hips, l_foot, r_foot);
+    }
+
+    public void IK_setWeight(bool OnOff)
+    {
+        IK_manager.SetChairWeight(OnOff);
     }
 }
