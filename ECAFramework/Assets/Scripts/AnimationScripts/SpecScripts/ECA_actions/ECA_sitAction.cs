@@ -16,10 +16,10 @@ public class ECA_sitAction : ECAAction
 
         allStages = new ECAActionStage[]
         {
-            new GoToStage(this, ecaAnimator, destination),
-            new TurnStage(this, ecaAnimator, sitPoint),
-            new SitStage(this, ecaAnimator, sitPoint),
-            new StandUpStage(this, ecaAnimator, sitPoint)
+            new GoToStage(this, EcaAnimator, Destination),
+            new TurnStage(this, EcaAnimator, SitPoint, true),
+            new SitStage(this, EcaAnimator, SitPoint),
+            new StandUpStage(this, EcaAnimator, SitPoint)
         };
 
         SetupAction();
@@ -51,5 +51,21 @@ public class ECA_sitAction : ECAAction
     public void setEndTriggerAction(SmartAction smartAction)
     {
         SmartActionToStandUp = smartAction;
+    }
+
+    /// <summary>
+    /// Setta il SitPoint della SitAction nella posizione che passo come parametro
+    /// </summary>
+    /// <param name="t"></param>
+    public void setSitPoint(Transform t)
+    {
+        SitPoint = t;
+        allStages = new ECAActionStage[]
+        {
+            new GoToStage(this, EcaAnimator, Destination),
+            new TurnStage(this, EcaAnimator, SitPoint, true),
+            new SitStage(this, EcaAnimator, SitPoint),
+            new StandUpStage(this, EcaAnimator, SitPoint)
+        };
     }
 }

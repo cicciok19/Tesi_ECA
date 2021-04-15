@@ -27,8 +27,8 @@ public class ProximityAction : SmartAction
         if (String.Equals(proximity.ID, this.proximityTriggerID))
         {
             Proximity.OnProximity -= OnEntered;
-            //            BodyProximitySmartAction.Finish();
             proximity.enabled = false;
+            EventArgs ev = new EventArgs();
             proximity.gameObject.SetActive(false);
             if (Entered != null)
                 Entered(this, EventArgs.Empty);

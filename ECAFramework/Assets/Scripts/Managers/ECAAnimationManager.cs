@@ -11,6 +11,7 @@ public enum ECAActions
     SitAction,
     PickUpAction,
     FollowAction,
+    GoToAction
 }
 /// <summary>
 /// Ogni ECAAction sarà definito da una o più azioni/animazioni dell'ECA. 

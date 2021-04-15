@@ -288,6 +288,10 @@ public class ECA : MonoBehaviour, IIntentHandler
         TtsManager.Instance.Speech(speechInfo);
     }
 
+    public virtual void HandleIntentNotRecognized()
+    {
+        
+    }
 
     public Ecas ID
     { get; protected set; }
@@ -319,8 +323,5 @@ public class ECA : MonoBehaviour, IIntentHandler
 
     public List<string> IntentName
     { get; set; }
-
-    public virtual void createECAActions() { }
-
 
 }

@@ -103,9 +103,9 @@
 
     <action name="firstPaintProximityAction">
       <tts weight="High">
-        <Description>messaggio di descrizione dell'azione</Description>
+        <Description></Description>
         <EndTask>Arrivo subito al primo quadro</EndTask>
-        <Help>Messaggio di aiuto</Help>
+        <Help></Help>
         <Criteria>
           <Accuracy badTxt ="" badLimit="0.4"
                 normalTxt ="" normalLimit ="0.8"
@@ -141,6 +141,24 @@
       <tts weight="High">
         <Description>Mi sapresti dire di chi è questo quadro?</Description>
         <EndTask>Bravo, ottimo lavoro</EndTask>
+        <Help></Help>
+        <Criteria>
+          <Accuracy badTxt ="" badLimit="0.4"
+                normalTxt ="" normalLimit ="0.8"
+                goodTxt = "" goodLimit ="1">
+          </Accuracy>
+          <Staging badTxt ="" badLimit ="0.5"
+                   normalTxt ="" normalLimit ="0.2"
+                   goodTxt ="" goodLimit="0.0">
+          </Staging>
+        </Criteria>
+      </tts>
+    </action>
+    
+      <action name="firstPaintInteraction">
+      <tts weight="High">
+        <Description>Bene, chi è l'artista di questo quadro?</Description>
+        <EndTask>Giusto, puoi passare al prossimo quadro</EndTask>
         <Help></Help>
         <Criteria>
           <Accuracy badTxt ="" badLimit="0.4"

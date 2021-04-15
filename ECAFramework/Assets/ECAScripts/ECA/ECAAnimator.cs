@@ -322,11 +322,6 @@ public class ECAAnimator : MonoBehaviour
     /// <param name="target"></param>
     public virtual void LookAt(Transform target = null, bool oppositeDirection = false)
     {
-        /* if (PartsOfTheBody.ContainsKey(BodyParts.Head))
-             PartsOfTheBody[BodyParts.Head].transform.DOLookAt(target.position, 1f);
-         else
-             Utility.LogWarning("NO HEAD FOUND");*/
-
         //If the target is not specified, the ECA will look to the player
         if (target == null)
             target = Player.transform;
@@ -338,16 +333,16 @@ public class ECAAnimator : MonoBehaviour
             m_trajectory.StrafeDirection = dir;
         else
             m_trajectory.StrafeDirection = -dir;
-        StartCoroutine(EndLookAt());
+        StartCoroutine(EndLookAt(dir));
     }
     /// <summary>
     /// Waits for the ECA to turn in the given direction of the LookAt method, then trows the event IsLookingAt
     /// </summary>
     /// <returns></returns>
-    public virtual IEnumerator EndLookAt()
+    public virtual IEnumerator EndLookAt(Vector3 dir)
     {
         //DOVREI FARLO CON GLI ANGOLO E NON CON IL TEMPO
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(0.8f);
         MxM_stopStrafing();
         if (IsLookingAt != null)
             IsLookingAt(this, EventArgs.Empty);

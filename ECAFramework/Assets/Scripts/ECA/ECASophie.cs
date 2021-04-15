@@ -62,9 +62,10 @@ public class ECASophie : ECA
     public override void SubscribeHandlerToIntentManager()
     {
         //definisco gli intent che mi servono per questo ECA
-        IntentName = new List<string> { "Presentation" };
+        IntentName = new List<string> { "Presentation", "None" };
         //aggiungo gli handler per ogni intent definito prima
         IntentManager.Instance.AddIntentHandler(IntentName[0], this);
+        IntentManager.Instance.AddIntentHandler(IntentName[1], this);
     }
 
     public override void Handle(Intent intent)
@@ -390,6 +391,19 @@ public class ECASophie : ECA
         }
     }
 
+    /// <summary>
+    /// Gestisco le risposte errate dell'utente
+    /// </summary>
+    public override void HandleIntentNotRecognized()
+    {
+        if (idxPaintIntent == 0)
+            SendMessage("paintNOTCorrectArtist_1");
+        else if (idxPaintIntent == 1)
+            SendMessage("paintNOTCorrectYear_1");
+
+        if (WrongAnswer != null)
+            WrongAnswer(this, EventArgs.Empty);
+    }
 
 
 }

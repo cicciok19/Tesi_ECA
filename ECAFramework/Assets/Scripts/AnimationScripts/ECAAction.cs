@@ -8,11 +8,8 @@ public abstract class ECAAction
     public event EventHandler CompletedAction;
 
     public ECAActionStage[] allStages;
-    public int currentStageIdx;
-
     public ECAAnimator EcaAnimator;
-
-    public SmartActionNode smNode;
+    public int currentStageIdx;
 
     public ECAAction(ECAAnimator ecaAnimator)
     {
@@ -85,7 +82,6 @@ public abstract class ECAAction
     {
         if (CompletedAction != null)
             CompletedAction(this, EventArgs.Empty);
-
     }
 
 

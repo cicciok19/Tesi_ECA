@@ -38,7 +38,10 @@ public class ProximityNode : SmartActionNode
         proximityAction.Entered -= OnTriggerEntered;
         proximityAction.Finish();
         //ECAAnimationManager.allECAActions[ECAAnimationManager.idx].onCompletedAction();
-        ECAAnimationManager.allECAActions[ECAActions.SitAction].startAction();
+        if (ID == (int)Nodes.ProximityNode_1)
+            ECAAnimationManager.allECAActions[ECAActions.GoToAction].startAction();
+        else
+            ECAAnimationManager.allECAActions[ECAActions.SitAction].startAction();
 
         SetCompleted();
     }

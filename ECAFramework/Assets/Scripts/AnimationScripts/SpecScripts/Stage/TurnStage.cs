@@ -6,16 +6,18 @@ using System;
 public class TurnStage : ECAActionStage
 {
     private Transform SitPoint;
+    private bool OppositeDirection;
 
-    public TurnStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform sitPoint) : base(ecaAction, ecaAnimator)
+    public TurnStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform sitPoint, bool oppDir) : base(ecaAction, ecaAnimator)
     {
         SitPoint = sitPoint;
+        OppositeDirection = oppDir;
         EcaAnimator.IsLookingAt += OnTurningFinished;
     }
 
     public override void startStage()
     {
-        EcaAnimator.LookAt(SitPoint, true);
+        EcaAnimator.LookAt(SitPoint, OppositeDirection);
         //endStage();
     }
 

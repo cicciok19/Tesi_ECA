@@ -11,4 +11,5 @@ public interface IIntentHandler
     void Handle(Intent intent);
     List<string> IntentName { get; set; }
     void SubscribeHandlerToIntentManager();
+    void HandleIntentNotRecognized();
 }

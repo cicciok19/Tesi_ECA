@@ -213,36 +213,39 @@ private static IntentManager instance = null;
                 {
                     intent = result;
                     string recognizedIntentName = intent.topScoringIntent.intent;
-    
+
                     s += " WITH score = " + intent.topScoringIntent.score;
                     Utility.Log(s);
-    
+
                     //Insert result inside Intent and KeyWord class that could be extendend when LUIS will be sobstituted
                     KeyWord[] keyWords = new KeyWord[intent.entities.Count];
                     for (int i = 0; i < intent.entities.Count; i++)
                         keyWords[i] = new KeyWord(intent.entities[i].score, intent.entities[i].type, intent.entities[i].entity);
-    
+
                     Intent recognizedIntent = new Intent(intent.topScoringIntent.intent, intent.topScoringIntent.score, e.Result.Text, keyWords);
-    
+
                     Action callHanlders = () =>
                     {
                         if (IntentHandlers.ContainsKey(recognizedIntentName))
                             for (int i = 0; i < IntentHandlers[recognizedIntentName].Count; i++)
                                 IntentHandlers[recognizedIntentName][i].Handle(recognizedIntent);
-    
+
                         intent = null;
-    
+
                         //StartIntentRecognition.Instance.ShowRecognizedText("");
                     };
                     UnityMainThreadDispatcher.Instance().Enqueue(callHanlders);
-    
+
                     if (RecognizedIntent != null)
                         UnityMainThreadDispatcher.Instance().Enqueue(() => RecognizedIntent(recognizedIntent));
                 }
             }
         }
         else if (NotRecognizedIntent != null)
-                UnityMainThreadDispatcher.Instance().Enqueue(() => NotRecognizedIntent(this, EventArgs.Empty));
+        {
+            UnityMainThreadDispatcher.Instance().Enqueue(() => NotRecognizedIntent(this, EventArgs.Empty));
+            IntentHandlers["None"][0].HandleIntentNotRecognized();
+        }
     
         if (e.Result.Reason == ResultReason.RecognizedSpeech)
         {
