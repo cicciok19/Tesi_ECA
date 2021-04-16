@@ -16,10 +16,10 @@ public class ECA_sitAction : ECAAction
 
         AllStages = new ECAActionStage[]
         {
-            new GoToStage(this, EcaAnimator, Destination),
-            new TurnStage(this, EcaAnimator, SitPoint, true),
-            new SitStage(this, EcaAnimator, SitPoint),
-            new StandUpStage(this, EcaAnimator, SitPoint)
+            new GoToStage(this, (ECAAnimatorDemo)EcaAnimator, Destination),
+            new TurnStage(this, (ECAAnimatorDemo)EcaAnimator, SitPoint, true),
+            new SitStage(this, (ECAAnimatorDemo)EcaAnimator, SitPoint),
+            new StandUpStage(this, (ECAAnimatorDemo)EcaAnimator, SitPoint)
         };
 
         SetupAction();
@@ -43,14 +43,14 @@ public class ECA_sitAction : ECAAction
         Transform hipsEffector = t.GetChild(2);
 
         SitPoint = hipsEffector;
-        EcaAnimator.IK_setEffectors(hipsEffector, l_footEffector, r_footEffector);
+        //(ECAAnimatorDemo)EcaAnimator.IK_setEffectors(hipsEffector, l_footEffector, r_footEffector);
 
         AllStages = new ECAActionStage[]
         {
-            new GoToStage(this, EcaAnimator, Destination),
-            new TurnStage(this, EcaAnimator, SitPoint, true),
-            new SitStage(this, EcaAnimator, SitPoint),
-            new StandUpStage(this, EcaAnimator, SitPoint)
+            new GoToStage(this, (ECAAnimatorDemo)EcaAnimator, Destination),
+            new TurnStage(this, (ECAAnimatorDemo)EcaAnimator, SitPoint, true),
+            new SitStage(this, (ECAAnimatorDemo)EcaAnimator, SitPoint),
+            new StandUpStage(this, (ECAAnimatorDemo)EcaAnimator, SitPoint)
         };
     }
 }

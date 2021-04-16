@@ -15,8 +15,8 @@ public class ECA_goToAction : ECAAction
 
         AllStages = new ECAActionStage[]
         {
-            new GoToStage(this, EcaAnimator, Destination),
-            new TurnStage(this, EcaAnimator, LookAtObejct, false)
+            new GoToStage(this, (ECAAnimatorDemo)EcaAnimator, Destination),
+            new TurnStage(this, (ECAAnimatorDemo)EcaAnimator, LookAtObejct, false)
         };
 
         SetupAction();

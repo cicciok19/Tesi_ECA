@@ -18,9 +18,9 @@ public class ECA_pickUpAction : ECAAction
 
         AllStages = new ECAActionStage[]
         {
-            new GoToStage(this, EcaAnimator, Destination),
-            new PickUpStage(this, EcaAnimator, ObjToPick, HandEmpty),
-            new PickDownStage(this, EcaAnimator, ObjToPick, HandEmpty)
+            new GoToStage(this, (ECAAnimatorDemo)EcaAnimator, Destination),
+            new PickUpStage(this, (ECAAnimatorDemo)EcaAnimator, ObjToPick, HandEmpty),
+            new PickDownStage(this, (ECAAnimatorDemo)EcaAnimator, ObjToPick, HandEmpty)
         };
 
         SetupAction();

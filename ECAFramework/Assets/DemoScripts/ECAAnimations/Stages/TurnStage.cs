@@ -8,7 +8,7 @@ public class TurnStage : ECAActionStage
     private Transform SitPoint;
     private bool OppositeDirection;
 
-    public TurnStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform sitPoint, bool oppDir) : base(ecaAction, ecaAnimator)
+    public TurnStage(ECAAction ecaAction, ECAAnimatorDemo ecaAnimator, Transform sitPoint, bool oppDir) : base(ecaAction, ecaAnimator)
     {
         SitPoint = sitPoint;
         OppositeDirection = oppDir;

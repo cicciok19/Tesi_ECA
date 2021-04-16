@@ -8,7 +8,7 @@ public class PickDownStage : ECAActionStage
     Transform ObjToPick;
     Transform HandEmpty;
 
-    public PickDownStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform obj, Transform handEmpty) : base(ecaAction, ecaAnimator)
+    public PickDownStage(ECAAction ecaAction, ECAAnimatorDemo ecaAnimator, Transform obj, Transform handEmpty) : base(ecaAction, ecaAnimator)
     {
         ObjToPick = obj;
         HandEmpty = handEmpty;

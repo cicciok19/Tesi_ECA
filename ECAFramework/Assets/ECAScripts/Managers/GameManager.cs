@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
 
     public event EventHandler<EventArgs> OnGameCompleted;
     public event EventHandler OnGameStarted;
-
+    /// <summary>
+    /// I nodi principali dai quali è composta la nostra applicazione
+    /// </summary>
     protected GameGraphNode[] nodes = null;
     protected int currentNodeIdx = -1;
     protected DateTime startTime;

@@ -36,21 +36,13 @@ public class ECAAnimator : MonoBehaviour
     public GameObject TextPanel;
     public Text ECAText;
 
-    private ECA Eca;
-    private NavMeshAgent navMeshAgent;
+    protected ECA Eca;
+    protected NavMeshAgent navMeshAgent;
 
     public Animator Animator;
     public AudioSource audioSource;
 
-    public MxMAnimator m_animator;
-    public MxMTrajectoryGenerator_BasicAI m_trajectory;
-
-    public IKManager IK_manager;
-
     public GameObject Player;
-
-    public Dictionary<BodyParts, GameObject> PartsOfTheBody = new Dictionary<BodyParts, GameObject>();
-    public Dictionary<String, MxMEventDefinition> MxM_EventDefinitions = new Dictionary<String, MxMEventDefinition>();
 
     //Settings
     /// <summary>
@@ -90,15 +82,7 @@ public class ECAAnimator : MonoBehaviour
         if (Animator == null)
             Utility.LogWarning("No animator foud for ECA: " + Eca.Name);
     }
-    /// <summary>
-    /// Override this method to define the body parts of the agent. Associate an enum in <see cref="BodyParts"/> with related gameObject
-    /// in oreder to init <see cref="PartsOfTheBody"/>. Usefull for example in order to implement: <see cref="LookAt(Transform)"/>, <see cref="PointAt(Transform)"/>
-    /// </summary>
-    protected virtual void SetBodyElements()
-    {
-        PartsOfTheBody.Add(BodyParts.Head, transform.GetChild(0).gameObject);
-        PartsOfTheBody.Add(BodyParts.ArmL, transform.GetChild(1).gameObject);
-    }
+
     protected virtual void SetNavMeshAgent()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -127,15 +111,8 @@ public class ECAAnimator : MonoBehaviour
         ConfigureAudioSource();
         ActivateTextPanel();
         SetAnimator();
-        SetBodyElements();
         SetNavMeshAgent();
         UpdateEmotionAnimation(null, null);
-
-        //MxM setup
-        SetMxMAnimatorAndTrajectory();
-        SetEventDefinitions();
-
-        IK_manager = GetComponent<IKManager>();
     }
 
     // TEXT DISPLAY:
@@ -326,18 +303,7 @@ public class ECAAnimator : MonoBehaviour
     /// <param name="target"></param>
     public virtual void LookAt(Transform target = null, bool oppositeDirection = false)
     {
-        //If the target is not specified, the ECA will look to the player
-        if (target == null)
-            target = Player.transform;
 
-        Vector3 dir = (target.position - this.transform.position).normalized;
-
-        MxM_startStrafing();
-        if (!oppositeDirection)
-            m_trajectory.StrafeDirection = dir;
-        else
-            m_trajectory.StrafeDirection = -dir;
-        StartCoroutine(EndLookAt(dir));
     }
     /// <summary>
     /// Waits for the ECA to turn in the given direction of the LookAt method, then trows the event IsLookingAt
@@ -345,11 +311,7 @@ public class ECAAnimator : MonoBehaviour
     /// <returns></returns>
     public virtual IEnumerator EndLookAt(Vector3 dir)
     {
-        //DOVREI FARLO CON GLI ANGOLO E NON CON IL TEMPO
-        yield return new WaitForSeconds(0.8f);
-        MxM_stopStrafing();
-        if (IsLookingAt != null)
-            IsLookingAt(this, EventArgs.Empty);
+        yield return new WaitForSeconds(0.1f);
     }
 
     //VISION CAPABILITY END
@@ -363,142 +325,9 @@ public class ECAAnimator : MonoBehaviour
     /// <param name="target"></param>
     public virtual void PointAt(Transform target)
     {
-        if (PartsOfTheBody.ContainsKey(BodyParts.ArmL))
-            PartsOfTheBody[BodyParts.ArmL].transform.LookAt(target);
-        else
-            Utility.LogWarning("NO ARM FOUND");
+
     }
 
     //BODY GESTURES END
 
-    //MxM METHODS BEGIN
-
-    protected void SetEventDefinitions()
-    {
-        foreach (EventDefinitions eventDef in (EventDefinitions[])Enum.GetValues(typeof(EventDefinitions)))
-        {
-            string s = eventDef.ToString();
-            MxMEventDefinition ed = Resources.Load<MxMEventDefinition>("EventsDefinitions/EventDef_" + eventDef);
-            MxM_EventDefinitions.Add(s, ed);
-        }
-    }
-
-    protected void SetMxMAnimatorAndTrajectory()
-    {
-        m_animator = GetComponent<MxMAnimator>();
-        if (m_animator == null)
-            Utility.LogWarning("No MxM animator found for ECA: " + Eca.Name);
-
-        m_trajectory = GetComponent<MxMTrajectoryGenerator_BasicAI>();
-        if (m_animator == null)
-            Utility.LogWarning("No MxM trajectory generator found for ECA: " + Eca.Name);
-    }
-
-    public virtual void MxM_BeginEvent(string id)
-    {
-        var eventDef = MxM_EventDefinitions[id];
-        m_animator.BeginEvent(eventDef);
-    }
-
-    public virtual void MXM_BeginEventWithContact(string id, Transform contact)
-    {
-        var eventDef = MxM_EventDefinitions[id];
-
-        eventDef.ClearContacts();
-        eventDef.AddEventContact(contact.position, this.transform.rotation.y);
-
-        m_animator.BeginEvent(eventDef);
-    }
-
-    public virtual void MXM_BeginEventWithContactAndTag(string id , Transform contact, string tag)
-    {
-        var eventDef = MxM_EventDefinitions[id];
-
-        eventDef.ClearContacts();
-        eventDef.AddEventContact(contact.position, this.transform.rotation.y);
-
-        m_animator.BeginEvent(eventDef);
-
-        m_animator.ClearRequiredTags();
-        m_animator.AddRequiredTag(tag);
-    }
-
-    public virtual void MXM_BeginEventWithTag(string id, string tag)
-    {
-        var eventDef = MxM_EventDefinitions[id];
-        m_animator.BeginEvent(eventDef);
-
-        m_animator.ClearRequiredTags();
-        m_animator.AddRequiredTag(tag);
-    }
-
-    public virtual void MxM_SetTag(string tag)
-    {
-        m_animator.ClearRequiredTags();
-        m_animator.AddRequiredTag(tag);
-    }
-
-    public virtual void MxM_startStrafing()
-    {
-        m_animator.ClearRequiredTags();
-        m_animator.SetRequiredTag("Strafe");
-        m_trajectory.TrajectoryMode = ETrajectoryMoveMode.Strafe;
-        m_animator.AngularErrorWarpMethod = EAngularErrorWarpMethod.TrajectoryHeading;
-        m_animator.AngularErrorWarpRate = 360f;
-    }
-
-    public virtual void MxM_stopStrafing()
-    {
-        m_animator.ClearRequiredTags();
-        m_trajectory.TrajectoryMode = ETrajectoryMoveMode.Normal;
-        m_animator.AngularErrorWarpMethod = EAngularErrorWarpMethod.CurrentHeading;
-        m_animator.AngularErrorWarpRate = 45f;
-    }
-
-    public virtual void MxM_clearRequiredTags()
-    {
-        m_animator.ClearRequiredTags();
-    }
-
-    public virtual void MxM_removeRequiredTag(String tag)
-    {
-        m_animator.RemoveRequiredTag(tag);
-    }
-
-    public virtual void MxM_waitForEventComplete()
-    {
-        StartCoroutine(WaitEventComplete());
-    }
-
-    public IEnumerator WaitEventComplete()
-    {
-        while (!m_animator.IsEventComplete)
-            yield return null;
-        if (EventComplete != null)
-            EventComplete(this, EventArgs.Empty);
-    }
-
-    public virtual void MxM_waitForEventContact()
-    {
-        StartCoroutine(WaitEventContact());
-    }
-
-    public IEnumerator WaitEventContact()
-    {
-        while (m_animator.CurrentEventState != EEventState.Action)
-            yield return null;
-        if (EventContact != null)
-            EventContact(this, EventArgs.Empty);
-    }
-
-    //IK MANAGEMENT
-    public void IK_setEffectors(Transform hips, Transform l_foot, Transform r_foot)
-    {
-        IK_manager.SetChairEffectors(hips, l_foot, r_foot);
-    }
-
-    public void IK_setWeight(bool OnOff)
-    {
-        IK_manager.SetChairWeight(OnOff);
-    }
 }

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class DemoScenario : ECAGameManager
 {
+    /// <summary>
+    /// Tutti i nodi presenti nell'applicazione, compresi i nodi figli dei SequentialNode e degli AggregateNode.
+    /// Serve per far iscrivere l'ECA agli eventi dei vari nodi.
+    /// </summary>
     GameGraphNode[] allGameNodes;
 
     protected override void CreateActions()
@@ -43,15 +47,15 @@ public class DemoScenario : ECAGameManager
         PaintInteractionNode ThirdPaintInteractionNode = new PaintInteractionNode((int)Nodes.IntNode_thirdPaint,
             (PaintInteraction)AllSmartActions[SmartActions.thirdPaintInteraction], "Interaction Node paint#3", true);
 
-        FirstPaintNode firstNode = new FirstPaintNode((int)Nodes.firstPaintNode, "First paint node", "Manage first paint interaction",
+        FirstPaintNode FirstNode = new FirstPaintNode((int)Nodes.firstPaintNode, "First paint node", "Manage first paint interaction",
             new GameGraphNode[] { ProximityNode_1, FirstPaintInteractionNode }, true);
-        SecondPaintNode secondNode = new SecondPaintNode((int)Nodes.secondPaintNode, "Second paint node", "Manage second paint interaction",
+        SecondPaintNode SecondNode = new SecondPaintNode((int)Nodes.secondPaintNode, "Second paint node", "Manage second paint interaction",
             new GameGraphNode[] { ProximityNode_2, SecondPaintInteractionNode }, true);
-        ThirdPaintNode thirdNode = new ThirdPaintNode((int)Nodes.thirdPaintNode, "Third paint node", "Manage third paint interaction",
+        ThirdPaintNode ThirdNode = new ThirdPaintNode((int)Nodes.thirdPaintNode, "Third paint node", "Manage third paint interaction",
             new GameGraphNode[] { ProximityNode_3, ThirdPaintInteractionNode }, true);
 
         WaitNode WaitForUserInteractionNode = new WaitNode((int)Nodes.waitNode, "Wait for interaction node", "Enter some trigger to begin new node",
-            new GameGraphNode[] { firstNode, secondNode, thirdNode }, true);
+            new GameGraphNode[] { FirstNode, SecondNode, ThirdNode }, true);
 
 
         nodes = new GameGraphNode[]
@@ -62,9 +66,9 @@ public class DemoScenario : ECAGameManager
         allGameNodes = new GameGraphNode[]
         {
             WaitForUserInteractionNode,
-            firstNode,
-            secondNode,
-            thirdNode,
+            FirstNode,
+            SecondNode,
+            ThirdNode,
             FirstPaintInteractionNode,
             SecondPaintInteractionNode,
             ThirdPaintInteractionNode,

@@ -7,7 +7,7 @@ public class GoToStage : ECAActionStage
 {
     private Transform Destination;
 
-    public GoToStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform destination) : base(ecaAction, ecaAnimator)
+    public GoToStage(ECAAction ecaAction, ECAAnimatorDemo ecaAnimator, Transform destination) : base(ecaAction, ecaAnimator)
     {
         Destination = destination;
     }

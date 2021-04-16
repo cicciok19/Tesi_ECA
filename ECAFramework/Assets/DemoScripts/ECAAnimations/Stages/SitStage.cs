@@ -8,7 +8,7 @@ public class SitStage : ECAActionStage
     private Transform SitPoint;
     public EventHandler StageFinished;
 
-    public SitStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform sitPoint) : base(ecaAction, ecaAnimator)
+    public SitStage(ECAAction ecaAction, ECAAnimatorDemo ecaAnimator, Transform sitPoint) : base(ecaAction, ecaAnimator)
     {
         SitPoint = sitPoint;
     }
@@ -16,7 +16,7 @@ public class SitStage : ECAActionStage
     public override void StartStage()
     {
         base.StartStage();
-        EcaAnimator.MXM_BeginEventWithContact("SitDown", SitPoint);
+        EcaAnimator.MxM_BeginEvent("SitDown", SitPoint);
         EcaAnimator.IK_setWeight(true);
         EndStage();
     }

@@ -7,7 +7,7 @@ public class StandUpStage : ECAActionStage
 {
     Transform SitPoint;
 
-    public StandUpStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform sitPoint) : base(ecaAction, ecaAnimator)
+    public StandUpStage(ECAAction ecaAction, ECAAnimatorDemo ecaAnimator, Transform sitPoint) : base(ecaAction, ecaAnimator)
     {
         SitPoint = sitPoint;
         //in questo caso l'ECA si deve alzare solo quando l'utente entra nel trigger, quindi startStage()
@@ -28,7 +28,7 @@ public class StandUpStage : ECAActionStage
     public override void ReactToActionFinished(object sender, EventArgs e)
     {
         EcaAnimator.MxM_clearRequiredTags();
-        EcaAnimator.MXM_BeginEventWithContact("StandUp", SitPoint);
+        EcaAnimator.MxM_BeginEvent("StandUp", SitPoint);
         EcaAnimator.IK_setWeight(false);
     }
 }

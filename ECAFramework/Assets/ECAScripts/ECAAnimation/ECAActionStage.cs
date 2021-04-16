@@ -6,11 +6,11 @@ using System;
 public abstract class ECAActionStage
 {
     protected ECAAction EcaAction;
-    protected ECAAnimator EcaAnimator;
+    protected ECAAnimatorDemo EcaAnimator;
 
     public event EventHandler StageFinished;
 
-    public ECAActionStage(ECAAction ecaAction, ECAAnimator ecaAnimator)
+    public ECAActionStage(ECAAction ecaAction, ECAAnimatorDemo ecaAnimator)
     {
         EcaAction = ecaAction;
         EcaAnimator = ecaAnimator;

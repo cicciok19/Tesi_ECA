@@ -8,7 +8,7 @@ public class PickUpStage : ECAActionStage
     Transform ObjToPick;
     Transform HandEmpty;
 
-    public PickUpStage(ECAAction ecaAction, ECAAnimator ecaAnimator, Transform obj, Transform handEmpty) : base(ecaAction, ecaAnimator)
+    public PickUpStage(ECAAction ecaAction, ECAAnimatorDemo ecaAnimator, Transform obj, Transform handEmpty) : base(ecaAction, ecaAnimator)
     {
         ObjToPick = obj;
         HandEmpty = handEmpty;
@@ -24,7 +24,7 @@ public class PickUpStage : ECAActionStage
     public override void StartStage()
     {
         base.StartStage();
-        EcaAnimator.MXM_BeginEventWithContact("PickUp", ObjToPick);
+        EcaAnimator.MxM_BeginEvent("PickUp", ObjToPick);
         EcaAnimator.MxM_waitForEventContact();
     }
 
