@@ -33,28 +33,28 @@ public class DemoScenario : ECAGameManager
     {
         GameObject[] SitPoints = GameObject.FindGameObjectsWithTag("Sit");
 
-        ProximityNode ProximityNode_1 = new ProximityNode((int)Nodes.ProximityNode_1, (ProximityAction)AllSmartActions[SmartActions.firstPaintProximityAction], 
+        ProximityNode ProximityNode_1 = new ProximityNode((ProximityAction)AllSmartActions[SmartActions.firstPaintProximityAction], 
             "Go near paint#1", true);
-        ProximityNode ProximityNode_2 = new ProximityNode((int)Nodes.ProximityNode_2, (ProximityAction)AllSmartActions[SmartActions.secondPaintProximityAction], 
+        ProximityNode ProximityNode_2 = new ProximityNode((ProximityAction)AllSmartActions[SmartActions.secondPaintProximityAction], 
             SitPoints[0].transform,"Go near paint#2", true);
-        ProximityNode ProximityNode_3 = new ProximityNode((int)Nodes.ProximityNode_3, (ProximityAction)AllSmartActions[SmartActions.thirdPaintProximityAction], 
+        ProximityNode ProximityNode_3 = new ProximityNode((ProximityAction)AllSmartActions[SmartActions.thirdPaintProximityAction], 
             "Go near paint#3", true);
 
-        PaintInteractionNode FirstPaintInteractionNode = new PaintInteractionNode((int)Nodes.IntNode_firstPaint, 
-            (PaintInteraction)AllSmartActions[SmartActions.firstPaintInteraction], "Interaction Node paint#1", true);
-        PaintInteractionNode SecondPaintInteractionNode = new PaintInteractionNode((int)Nodes.IntNode_secondPaint,
-            (PaintInteraction)AllSmartActions[SmartActions.secondPaintInteraction], "Interaction Node paint#2", true);
-        PaintInteractionNode ThirdPaintInteractionNode = new PaintInteractionNode((int)Nodes.IntNode_thirdPaint,
-            (PaintInteraction)AllSmartActions[SmartActions.thirdPaintInteraction], "Interaction Node paint#3", true);
+        PaintInteractionNode FirstPaintInteractionNode = new PaintInteractionNode((PaintInteraction)AllSmartActions[SmartActions.firstPaintInteraction], 
+            "Interaction Node paint#1", true);
+        PaintInteractionNode SecondPaintInteractionNode = new PaintInteractionNode((PaintInteraction)AllSmartActions[SmartActions.secondPaintInteraction], 
+            "Interaction Node paint#2", true);
+        PaintInteractionNode ThirdPaintInteractionNode = new PaintInteractionNode((PaintInteraction)AllSmartActions[SmartActions.thirdPaintInteraction], 
+            "Interaction Node paint#3", true);
 
-        FirstPaintNode FirstNode = new FirstPaintNode((int)Nodes.firstPaintNode, "First paint node", "Manage first paint interaction",
+        FirstPaintNode FirstNode = new FirstPaintNode("First paint node", "Manage first paint interaction",
             new GameGraphNode[] { ProximityNode_1, FirstPaintInteractionNode }, true);
-        SecondPaintNode SecondNode = new SecondPaintNode((int)Nodes.secondPaintNode, "Second paint node", "Manage second paint interaction",
+        SecondPaintNode SecondNode = new SecondPaintNode("Second paint node", "Manage second paint interaction",
             new GameGraphNode[] { ProximityNode_2, SecondPaintInteractionNode }, true);
-        ThirdPaintNode ThirdNode = new ThirdPaintNode((int)Nodes.thirdPaintNode, "Third paint node", "Manage third paint interaction",
+        ThirdPaintNode ThirdNode = new ThirdPaintNode("Third paint node", "Manage third paint interaction",
             new GameGraphNode[] { ProximityNode_3, ThirdPaintInteractionNode }, true);
 
-        WaitNode WaitForUserInteractionNode = new WaitNode((int)Nodes.waitNode, "Wait for interaction node", "Enter some trigger to begin new node",
+        WaitNode WaitForUserInteractionNode = new WaitNode("Wait for interaction node", "Enter some trigger to begin new node",
             new GameGraphNode[] { FirstNode, SecondNode, ThirdNode }, true);
 
 

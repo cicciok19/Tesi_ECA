@@ -5,7 +5,7 @@ using System;
 
 class FirstPaintNode : SequentialNode
 {
-    public FirstPaintNode(int id, string readableName, string instructions, GameGraphNode[] childrenNodes, bool isTrainingMode) : base(id, readableName, instructions, childrenNodes, isTrainingMode)
+    public FirstPaintNode(string readableName, string instructions, GameGraphNode[] childrenNodes, bool isTrainingMode) : base(readableName, instructions, childrenNodes, isTrainingMode)
     {
     }
 

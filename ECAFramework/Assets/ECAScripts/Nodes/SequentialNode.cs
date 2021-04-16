@@ -4,9 +4,9 @@ class SequentialNode : AggregateNode
 {
     private int currentNodeIdx=-1;
 
-    public SequentialNode(int id, string readableName, string instructions, GameGraphNode[] childrenNodes, bool isTrainingMode)
+    public SequentialNode(string readableName, string instructions, GameGraphNode[] childrenNodes, bool isTrainingMode)
     :
-    	base(id, readableName, instructions, childrenNodes, isTrainingMode)
+    	base(readableName, instructions, childrenNodes, isTrainingMode)
     {
       
     }

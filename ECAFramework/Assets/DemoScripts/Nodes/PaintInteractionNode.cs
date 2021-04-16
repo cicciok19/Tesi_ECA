@@ -6,7 +6,7 @@ public class PaintInteractionNode : SmartActionNode
 {
     PaintInteraction PaintInteraction;
 
-    public PaintInteractionNode(int id, PaintInteraction action, string readableName, bool isTrainingMode) : base(id, readableName, isTrainingMode)
+    public PaintInteractionNode(PaintInteraction action, string readableName, bool isTrainingMode) : base(readableName, isTrainingMode)
     {
         PaintInteraction = action;
     }

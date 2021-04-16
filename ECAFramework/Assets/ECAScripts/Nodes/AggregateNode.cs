@@ -11,14 +11,14 @@ abstract class AggregateNode : GameGraphNode
     protected GameGraphNode[] childrenNodes;
 
 
-    public AggregateNode(int id, string readableName, string instructions, GameGraphNode[] childrenNodes, bool isTrainingMode)
-    :base(id, readableName, isTrainingMode)
+    public AggregateNode(string readableName, string instructions, GameGraphNode[] childrenNodes, bool isTrainingMode)
+    :base(readableName, isTrainingMode)
     {
       SetChildren(childrenNodes);
     }
 
-    public AggregateNode(int id, string readableName, string instructions, bool isTrainingMode)
-    :base(id, readableName, isTrainingMode)
+    public AggregateNode(string readableName, string instructions, bool isTrainingMode)
+    :base(readableName, isTrainingMode)
     {
     }
 

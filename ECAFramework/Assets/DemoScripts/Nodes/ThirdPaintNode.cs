@@ -4,7 +4,7 @@ using UnityEngine;
 
 class ThirdPaintNode : SequentialNode
 {
-    public ThirdPaintNode(int id, string readableName, string instructions, GameGraphNode[] childrenNodes, bool isTrainingMode) : base(id, readableName, instructions, childrenNodes, isTrainingMode)
+    public ThirdPaintNode(string readableName, string instructions, GameGraphNode[] childrenNodes, bool isTrainingMode) : base(readableName, instructions, childrenNodes, isTrainingMode)
     {
     }
 

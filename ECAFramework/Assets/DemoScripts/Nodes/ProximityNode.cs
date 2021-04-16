@@ -9,15 +9,15 @@ public class ProximityNode : SmartActionNode
     ECA_sitAction EcaSitAction;
     Transform SitPoint = null;
 
-    public ProximityNode(int id, ProximityAction proximitySmartAction, Transform sitPoint, string readableName, bool isTrainingMode) : 
-        base(id, readableName, isTrainingMode)
+    public ProximityNode(ProximityAction proximitySmartAction, Transform sitPoint, string readableName, bool isTrainingMode) : 
+        base(readableName, isTrainingMode)
     {
         ProximityAction = proximitySmartAction;
         SitPoint = sitPoint;
     }
 
-    public ProximityNode(int id, ProximityAction proximitySmartAction, string readableName, bool isTrainingMode) :
-    base(id, readableName, isTrainingMode)
+    public ProximityNode(ProximityAction proximitySmartAction, string readableName, bool isTrainingMode) :
+    base(readableName, isTrainingMode)
     {
         ProximityAction = proximitySmartAction;
 

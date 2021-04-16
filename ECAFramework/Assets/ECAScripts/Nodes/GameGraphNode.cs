@@ -17,6 +17,8 @@ using System.Collections.Generic;
 
 public abstract class GameGraphNode
 {
+    public static int IndexNode = 0;
+
     public event EventHandler<EventArgs> SpeakTimeout;
     public event EventHandler<EventArgs> OnStarted;
     public event EventHandler<EventArgs> OnCompleted;
@@ -30,17 +32,18 @@ public abstract class GameGraphNode
     protected DateTime triggeredTime;
 
 
-    public GameGraphNode(int id, string readableName, bool isTrainingMode)
+    public GameGraphNode(string readableName, bool isTrainingMode)
     {
-      ID = id;
-      ReadableName = readableName;
-      IsTrainingMode = isTrainingMode;  
+        IndexNode++;
+        ID = IndexNode;
+        ReadableName = readableName;
+        IsTrainingMode = isTrainingMode;  
     
-      //init current status
-      CurrentStatus = new NodeStatus() { CompletionStatus = GameNodeCompletionType.Inactive, ErrorType = GameErrorType.Fine, ErrorString = string.Empty };
+        //init current status
+        CurrentStatus = new NodeStatus() { CompletionStatus = GameNodeCompletionType.Inactive, ErrorType = GameErrorType.Fine, ErrorString = string.Empty };
     
-      Utility.Log(string.Format("State {0}:{1} created", id, ReadableName));
-      Awake();   
+        Utility.Log(string.Format("State {0}:{1} created", IndexNode, ReadableName));
+        Awake();   
     }
 
     protected virtual void Awake()

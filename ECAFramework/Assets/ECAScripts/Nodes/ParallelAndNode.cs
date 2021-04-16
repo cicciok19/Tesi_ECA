@@ -6,9 +6,9 @@ class ParallelAndNode : AggregateNode
 {
     protected int completedNodes;
 
-    public ParallelAndNode(int id, string readableName, string instructions, GameGraphNode[] childrenNodes, bool isTrainingMode)
+    public ParallelAndNode(string readableName, string instructions, GameGraphNode[] childrenNodes, bool isTrainingMode)
     :
-    	base(id, readableName, instructions, childrenNodes, isTrainingMode)
+    	base(readableName, instructions, childrenNodes, isTrainingMode)
     {
       completedNodes = 0;
     }

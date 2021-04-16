@@ -20,7 +20,7 @@ public class SmartActionNode : GameGraphNode
 {
     public event EventHandler<SmartActionCustomArgs> OnAskingExecutionAfterMessage;
 
-    public SmartActionNode(int id, string readableName, bool isTrainingMode) : base(id, readableName, isTrainingMode)
+    public SmartActionNode(string readableName, bool isTrainingMode) : base(readableName, isTrainingMode)
     {
     }
     protected virtual void AskExecutionAfterMessage(SmartActionCustomArgs args)
