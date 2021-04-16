@@ -99,8 +99,6 @@ public class ECASophie : ECA
         }
 
         HandlePaintsIntents(intent.IntentName);
-
-
     }
 
     //reagisce agli eventi relativi all'applicazione

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-class FirstPaintNode : SequentialNode
+class PaintSequentialNode : SequentialNode
 {
-    public FirstPaintNode(string readableName, string instructions, GameGraphNode[] childrenNodes, bool isTrainingMode) : base(readableName, instructions, childrenNodes, isTrainingMode)
+    public PaintSequentialNode(string readableName, string instructions, GameGraphNode[] childrenNodes, bool isTrainingMode) : 
+        base(readableName, instructions, childrenNodes, isTrainingMode)
     {
+
     }
 
     //mi iscrivo agli eventi che fanno iniziare i vari nodi figli, questo sarebbe solo il SETUP del nodo

@@ -47,11 +47,11 @@ public class DemoScenario : ECAGameManager
         PaintInteractionNode ThirdPaintInteractionNode = new PaintInteractionNode((PaintInteraction)AllSmartActions[SmartActions.thirdPaintInteraction], 
             "Interaction Node paint#3", true);
 
-        FirstPaintNode FirstNode = new FirstPaintNode("First paint node", "Manage first paint interaction",
+        PaintSequentialNode FirstNode = new PaintSequentialNode("First paint node", "Manage first paint interaction",
             new GameGraphNode[] { ProximityNode_1, FirstPaintInteractionNode }, true);
-        SecondPaintNode SecondNode = new SecondPaintNode("Second paint node", "Manage second paint interaction",
+        PaintSequentialNode SecondNode = new PaintSequentialNode("Second paint node", "Manage second paint interaction",
             new GameGraphNode[] { ProximityNode_2, SecondPaintInteractionNode }, true);
-        ThirdPaintNode ThirdNode = new ThirdPaintNode("Third paint node", "Manage third paint interaction",
+        PaintSequentialNode ThirdNode = new PaintSequentialNode("Third paint node", "Manage third paint interaction",
             new GameGraphNode[] { ProximityNode_3, ThirdPaintInteractionNode }, true);
 
         WaitNode WaitForUserInteractionNode = new WaitNode("Wait for interaction node", "Enter some trigger to begin new node",

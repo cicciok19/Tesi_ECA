@@ -6,7 +6,6 @@ using UnityEngine;
 public class ProximityNode : SmartActionNode  
 {
     ProximityAction ProximityAction;
-    ECA_sitAction EcaSitAction;
     Transform SitPoint = null;
 
     public ProximityNode(ProximityAction proximitySmartAction, Transform sitPoint, string readableName, bool isTrainingMode) : 
@@ -30,9 +29,6 @@ public class ProximityNode : SmartActionNode
         CurrentSmartAction = this.ProximityAction;
         base.StartNode(speak);
 
-        //inizializzo l'azione dell'ECA
-        EcaSitAction = (ECA_sitAction)ECAAnimationManager.allECAActions[ECAActions.SitAction];
-
         //se sono in modalità training lancia il messaggio di descrizione del task
         if (IsTrainingMode)
         {
@@ -41,19 +37,13 @@ public class ProximityNode : SmartActionNode
         }
     }
 
-    //questo fa la end dell'azione
+    //questo fa la end dell'azione e viene chiamato quando l'utente entra nel trigger del relativo quadro
     private void OnTriggerEntered(object sender, EventArgs e)
     {
         ProximityAction.Entered -= OnTriggerEntered;
         ProximityAction.Finish();
-        //ECAAnimationManager.allECAActions[ECAAnimationManager.idx].onCompletedAction();
-        if (SitPoint==null)
-            ECAAnimationManager.allECAActions[ECAActions.GoToAction].StartAction();
-        else
-        {
-            EcaSitAction.SetSitPoint(SitPoint);
-            EcaSitAction.StartAction();
-        }
+
+        //DEVO GESTIRE LE ANIMAZIONI DELL'ECA
 
         SetCompleted();
     }

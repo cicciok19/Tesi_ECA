@@ -33,7 +33,7 @@ public class ECAAnimatorDemo : ECAAnimator
     /// <summary>
     /// Called in ECAGameManager to init all the variables we neew
     /// </summary>
-    public void Init()
+    public override void Init()
     {
         base.Init();
 
@@ -45,41 +45,6 @@ public class ECAAnimatorDemo : ECAAnimator
         IK_manager = GetComponent<IKManager>();
     }
 
-    // TEXT DISPLAY:
-
-    /// <summary>
-    /// Active (-> show) optional text panel used to contain text to speech.
-    /// </summary>
-    public virtual void ActivateTextPanel()
-    {
-        if (TextPanel == null || ECAText == null)
-            Utility.LogWarning("TextPanel or ECAText not setted");
-        else
-            TextPanel.SetActive(false);
-    }
-    /// <summary>
-    /// Show text to speech in ECA related text panel.
-    /// </summary>
-    /// <param name="text">text pronounced by ECA</param>
-    public virtual void ShowText(string text)
-    {
-        if (TextPanel != null && ECAText != null)
-        {
-            TextPanel.SetActive(true);
-            ECAText.text = text;
-        }
-    }
-    /// <summary>
-    /// Hide textPanel and reset text value.
-    /// </summary>
-    public virtual void HideText()
-    {
-        if (TextPanel != null && ECAText != null)
-        {
-            ECAText.text = "";
-            TextPanel.SetActive(false);
-        }
-    }
     
     //TEXT DISPLAY END
 
@@ -92,10 +57,12 @@ public class ECAAnimatorDemo : ECAAnimator
         Vector3 dir = (target.position - this.transform.position).normalized;
 
         MxM_startStrafing();
+
         if (!oppositeDirection)
             m_trajectory.StrafeDirection = dir;
         else
             m_trajectory.StrafeDirection = -dir;
+
         StartCoroutine(EndLookAt(dir));
     }
     /// <summary>
@@ -113,10 +80,12 @@ public class ECAAnimatorDemo : ECAAnimator
 
     //VISION CAPABILITY END
 
+    public override void GoTo(Vector3 target, float arrivalDeltaDistance)
+    {
+        navMeshAgent.SetDestination(target);
+        StartCoroutine(WaitArrival(target, arrivalDeltaDistance + 0.5f));
+    }
 
-    //BODY GESTURES:
-
-    //BODY GESTURES END
 
     //MxM METHODS BEGIN
 
@@ -230,4 +199,6 @@ public class ECAAnimatorDemo : ECAAnimator
     {
         IK_manager.SetChairWeight(OnOff);
     }
+
+
 }

@@ -102,7 +102,7 @@ public class ECAAnimator : MonoBehaviour
     /// <summary>
     /// Called in ECAGameManager to init all the variables we neew
     /// </summary>
-    public void Init()
+    public virtual void Init()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
         Eca = GetComponent<ECA>();
@@ -120,7 +120,7 @@ public class ECAAnimator : MonoBehaviour
     /// <summary>
     /// Active (-> show) optional text panel used to contain text to speech.
     /// </summary>
-    public virtual void ActivateTextPanel()
+    public void ActivateTextPanel()
     {
         if (TextPanel == null || ECAText == null)
             Utility.LogWarning("TextPanel or ECAText not setted");
@@ -131,7 +131,7 @@ public class ECAAnimator : MonoBehaviour
     /// Show text to speech in ECA related text panel.
     /// </summary>
     /// <param name="text">text pronounced by ECA</param>
-    public virtual void ShowText(string text)
+    public void ShowText(string text)
     {
         if (TextPanel != null && ECAText != null)
         {
@@ -142,7 +142,7 @@ public class ECAAnimator : MonoBehaviour
     /// <summary>
     /// Hide textPanel and reset text value.
     /// </summary>
-    public virtual void HideText()
+    public void HideText()
     {
         if (TextPanel != null && ECAText != null)
         {
@@ -161,7 +161,7 @@ public class ECAAnimator : MonoBehaviour
     /// <param name="audioData">audio version of the message</param>
     /// <param name="messageContent">string version of the message</param>
     /// <returns></returns>
-    public virtual IEnumerator Play(float[] audioData, string messageContent, Func<bool> condition = null)
+    public IEnumerator Play(float[] audioData, string messageContent, Func<bool> condition = null)
     {
         //if condition for play audio not satisfied not play audio
         if (condition != null && !condition())
@@ -199,7 +199,7 @@ public class ECAAnimator : MonoBehaviour
         if (AudioEnded != null)
             AudioEnded(this, EventArgs.Empty);
     }
-    
+
     //AUDIO PLAY END:
 
     //MOVEMENTS:
@@ -210,21 +210,8 @@ public class ECAAnimator : MonoBehaviour
     /// </summary>
     /// <param name="target"></param>
     /// <param name="arrivalDeltaDistance"></param>
-    public virtual void GoTo(Vector3 target, float arrivalDeltaDistance)
-    {
-        if (navMeshAgent == null || navMeshAgent.enabled == false)
-        {
-            Utility.LogWarning("No nav mash agent found for ECA: " + Eca.name + ". Teleportation applied.");
-            transform.DOMove(target, 3f);
-            //this.transform.position = new Vector3(target.position.x, transform.position.y, target.position.z);
-            Arrived();
-        }
-        else
-        {
-            navMeshAgent.SetDestination(target);
-            StartCoroutine(WaitArrival(target, arrivalDeltaDistance+0.5f));
-        }
-    }
+    public virtual void GoTo(Vector3 target, float arrivalDeltaDistance) { }
+
     /// <summary>
     /// Waits until the ECA has arrived to the destination target
     /// </summary>
@@ -301,10 +288,8 @@ public class ECAAnimator : MonoBehaviour
     /// If <paramref name="oppositeDirection"/> = true, then i will look at the opposite direction of the target
     /// </summary>
     /// <param name="target"></param>
-    public virtual void LookAt(Transform target = null, bool oppositeDirection = false)
-    {
+    public virtual void LookAt(Transform target = null, bool oppositeDirection = false) { }
 
-    }
     /// <summary>
     /// Waits for the ECA to turn in the given direction of the LookAt method, then trows the event IsLookingAt
     /// </summary>
@@ -323,11 +308,7 @@ public class ECAAnimator : MonoBehaviour
     /// Default <see cref="BodyParts"/> used = ArmL
     /// </summary>
     /// <param name="target"></param>
-    public virtual void PointAt(Transform target)
-    {
-
-    }
-
+    public virtual void PointAt(Transform target) { }
     //BODY GESTURES END
 
 }
