@@ -139,7 +139,6 @@ public class GameManager : MonoBehaviour
     {
         IsPaused = true;
         ECAManager.Instance.SetEndTime();
-        ECAManager.Instance.AvailableEcas[Ecas.Francesca].SendMessage("EndGame");
     }
 
     public GameGraphNode CurrentNode

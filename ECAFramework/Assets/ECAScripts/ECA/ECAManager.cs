@@ -12,12 +12,9 @@ using System.Linq;
 using UnityEngine;
 	public enum Ecas
 {
-    Default,
-    Francesca,
-    Joe,
-    Elizabeth,
-    PhoneOperator,
-    HospitalPatient,
+    Sophie_G,
+    Sophie_R,
+    Sophie_B,
     Turi,
     Sophie
 }

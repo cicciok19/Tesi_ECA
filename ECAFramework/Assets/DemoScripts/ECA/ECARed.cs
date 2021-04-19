@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ECASophie : ECA
+public class ECARed : ECA
 {
     public bool FirstPaintInteraction;
     public bool SecondPaintInteraction;
@@ -35,7 +35,7 @@ public class ECASophie : ECA
 
     public override void SetEcaId()
     {
-        ID = Ecas.Sophie;
+        ID = Ecas.Sophie_R;
     }
     // Start is called before the first frame update
     protected  override void Start()
