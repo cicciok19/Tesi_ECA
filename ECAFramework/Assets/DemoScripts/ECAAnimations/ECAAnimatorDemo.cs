@@ -26,8 +26,6 @@ public class ECAAnimatorDemo : ECAAnimator
     public MxMAnimator m_animator;
     public MxMTrajectoryGenerator_BasicAI m_trajectory;
 
-    public IKManager IK_manager;
-
     public Dictionary<String, MxMEventDefinition> MxM_EventDefinitions = new Dictionary<String, MxMEventDefinition>();
 
     /// <summary>
@@ -41,8 +39,6 @@ public class ECAAnimatorDemo : ECAAnimator
         SetMxMAnimatorAndTrajectory();
         SetEventDefinitions();
 
-        //FinalIK setup
-        IK_manager = GetComponent<IKManager>();
     }
 
     
@@ -56,7 +52,8 @@ public class ECAAnimatorDemo : ECAAnimator
 
         Vector3 dir = (target.position - this.transform.position).normalized;
 
-        MxM_startStrafing();
+        //MxM_startStrafing();
+        m_trajectory.FaceDirectiononIdle = true;
 
         if (!oppositeDirection)
             m_trajectory.StrafeDirection = dir;
@@ -71,9 +68,10 @@ public class ECAAnimatorDemo : ECAAnimator
     /// <returns></returns>
     public virtual IEnumerator EndLookAt(Vector3 dir)
     {
-        //DOVREI FARLO CON GLI ANGOLO E NON CON IL TEMPO
-        yield return new WaitForSeconds(0.8f);
-        MxM_stopStrafing();
+        //DOVREI FARLO CON GLI ANGOLI E NON CON IL TEMPO
+        yield return new WaitForSeconds(1f);
+        //MxM_stopStrafing();
+        m_trajectory.FaceDirectiononIdle = false;
         if (IsLookingAt != null)
             IsLookingAt(this, EventArgs.Empty);
     }
@@ -111,7 +109,12 @@ public class ECAAnimatorDemo : ECAAnimator
     }
 
 
-
+    /// <summary>
+    /// Triggera un evento di MxM (deve essere pre-caricato nelle EventDefinitions)
+    /// </summary>
+    /// <param name="id">Nome dell'evento come definito in MxM</param>
+    /// <param name="contact">Punto di contatto che deve essere raggiunto durante l'evento</param>
+    /// <param name="tag">Tag delle pose che devono essere riprodotte successivamente all'evento</param>
     public virtual void MxM_BeginEvent(string id, Transform contact = null, string tag = null)
     {
         var eventDef = MxM_EventDefinitions[id];
@@ -119,7 +122,7 @@ public class ECAAnimatorDemo : ECAAnimator
         if(contact != null)
         {
             eventDef.ClearContacts();
-            eventDef.AddEventContact(contact.position, this.transform.rotation.y);
+            eventDef.AddEventContact(contact);
         }
 
         if (tag != null)
@@ -188,17 +191,4 @@ public class ECAAnimatorDemo : ECAAnimator
         if (EventContact != null)
             EventContact(this, EventArgs.Empty);
     }
-
-    //IK MANAGEMENT
-    public void IK_setEffectors(Transform hips, Transform l_foot, Transform r_foot)
-    {
-        IK_manager.SetChairEffectors(hips, l_foot, r_foot);
-    }
-
-    public void IK_setWeight(bool OnOff)
-    {
-        IK_manager.SetChairWeight(OnOff);
-    }
-
-
 }

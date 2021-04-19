@@ -17,7 +17,7 @@ public class SitStage : ECAActionStage
     {
         base.StartStage();
         EcaAnimator.MxM_BeginEvent("SitDown", SitPoint);
-        EcaAnimator.IK_setWeight(true);
+        //EcaAnimator.IK_setWeight(true);
         EndStage();
     }
 

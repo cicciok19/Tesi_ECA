@@ -44,6 +44,8 @@ public class ECAAnimator : MonoBehaviour
 
     public GameObject Player;
 
+    protected ECAAction CurrentAction;
+
     //Settings
     /// <summary>
     /// Create an AudioSource in order to speech. If an audio source has already been applied to the object, this is used
@@ -52,7 +54,7 @@ public class ECAAnimator : MonoBehaviour
     {
         if (this.GetComponent<AudioSource>() != null)
         {
-            Utility.LogWarning("GameObject already has an AudioSource assigned");
+            //Utility.LogWarning("GameObject already has an AudioSource assigned");
             audioSource = GetComponent<AudioSource>();
         }
         else
@@ -80,12 +82,14 @@ public class ECAAnimator : MonoBehaviour
     {
         Animator = GetComponent<Animator>();
         if (Animator == null)
-            Utility.LogWarning("No animator foud for ECA: " + Eca.Name);
+            Utility.LogWarning("No animator found for ECA: " + Eca.Name);
     }
 
     protected virtual void SetNavMeshAgent()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        if (navMeshAgent == null)
+            Utility.LogError("No navMesh attached for ECA: " + Eca.Name + ". CREATE ONE");
     }
 
     /// <summary>

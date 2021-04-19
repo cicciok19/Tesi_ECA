@@ -29,6 +29,6 @@ public class StandUpStage : ECAActionStage
     {
         EcaAnimator.MxM_clearRequiredTags();
         EcaAnimator.MxM_BeginEvent("StandUp", SitPoint);
-        EcaAnimator.IK_setWeight(false);
+        //EcaAnimator.IK_setWeight(false);
     }
 }

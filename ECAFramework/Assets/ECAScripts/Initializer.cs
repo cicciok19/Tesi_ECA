@@ -10,8 +10,8 @@ public class Initializer : MonoBehaviour
         Configuration.Instance.Init();
 
         //Set the scenario (SmartActions, Nodes)
-        if (Configuration.Instance.ActualScenario.Equals(ScenarioType.Training))
-            FindObjectOfType<DemoScenario>().Init();
+        /*if (Configuration.Instance.ActualScenario.Equals(ScenarioType.Training))
+            FindObjectOfType<DemoScenario>().Init();*/
 
         //Init all ecas
         ECA[] allEca = FindObjectsOfType<ECA>();
