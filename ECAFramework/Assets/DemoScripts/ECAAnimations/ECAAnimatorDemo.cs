@@ -115,7 +115,7 @@ public class ECAAnimatorDemo : ECAAnimator
     /// <param name="id">Nome dell'evento come definito in MxM</param>
     /// <param name="contact">Punto di contatto che deve essere raggiunto durante l'evento</param>
     /// <param name="tag">Tag delle pose che devono essere riprodotte successivamente all'evento</param>
-    public virtual void MxM_BeginEvent(string id, Transform contact = null, string tag = null)
+    public void MxM_BeginEvent(string id, Transform contact = null, string tag = null)
     {
         var eventDef = MxM_EventDefinitions[id];
 
@@ -133,13 +133,13 @@ public class ECAAnimatorDemo : ECAAnimator
         m_animator.BeginEvent(eventDef);
     }
 
-    public virtual void MxM_SetTag(string tag)
+    public void MxM_SetTag(string tag)
     {
         m_animator.ClearRequiredTags();
         m_animator.AddRequiredTag(tag);
     }
 
-    public virtual void MxM_startStrafing()
+    public void MxM_StartStrafing()
     {
         m_animator.ClearRequiredTags();
         m_animator.SetRequiredTag("Strafe");
@@ -148,7 +148,7 @@ public class ECAAnimatorDemo : ECAAnimator
         m_animator.AngularErrorWarpRate = 360f;
     }
 
-    public virtual void MxM_stopStrafing()
+    public void MxM_StopStrafing()
     {
         m_animator.ClearRequiredTags();
         m_trajectory.TrajectoryMode = ETrajectoryMoveMode.Normal;
@@ -156,17 +156,17 @@ public class ECAAnimatorDemo : ECAAnimator
         m_animator.AngularErrorWarpRate = 45f;
     }
 
-    public virtual void MxM_clearRequiredTags()
+    public void MxM_ClearRequiredTags()
     {
         m_animator.ClearRequiredTags();
     }
 
-    public virtual void MxM_removeRequiredTag(String tag)
+    public void MxM_RemoveRequiredTag(String tag)
     {
         m_animator.RemoveRequiredTag(tag);
     }
 
-    public virtual void MxM_waitForEventComplete()
+    public void MxM_WaitForEventComplete()
     {
         StartCoroutine(WaitEventComplete());
     }
@@ -179,7 +179,7 @@ public class ECAAnimatorDemo : ECAAnimator
             EventComplete(this, EventArgs.Empty);
     }
 
-    public virtual void MxM_waitForEventContact()
+    public void MxM_WaitForEventContact()
     {
         StartCoroutine(WaitEventContact());
     }
@@ -190,5 +190,21 @@ public class ECAAnimatorDemo : ECAAnimator
             yield return null;
         if (EventContact != null)
             EventContact(this, EventArgs.Empty);
+    }
+
+    public void MxM_BlendInController(float weight)
+    {
+        m_animator.BlendInController(weight);
+    }
+
+    /// <summary>
+    /// Set body parts directly to the AvatarMask of the MxM animator
+    /// </summary>
+    /// <param name="bodyPart"></param>
+    /// <param name="active"></param>
+    public void MxM_SetMaskBodyPart(AvatarMaskBodyPart bodyPart, bool active)
+    {
+        m_animator.AnimatorControllerMask.SetHumanoidBodyPartActive(bodyPart, active);
+        m_animator.UpdateAvatarMask();
     }
 }

@@ -248,7 +248,8 @@ MonoBehaviour:
   m_matchBlendTime: 0.3
   m_turnInPlaceThreshold: 45
   m_animationRoot: {fileID: 0}
-  m_animatorControllerMask: {fileID: 0}
+  m_animatorControllerMask: {fileID: 31900000, guid: 6b9b2033bb7e54d409ee790f4461829b,
+    type: 2}
   m_animData:
   - {fileID: 11400000, guid: 37a28ebb285e15346adff2c88eb87414, type: 2}
   m_debugGoal: 1
@@ -288,7 +289,7 @@ MonoBehaviour:
   m_autoCreateAnimatorController: 0
   m_generalFoldout: 1
   m_animDataFoldout: 1
-  m_optionsFoldout: 0
+  m_optionsFoldout: 1
   m_warpingFoldout: 0
   m_debugFoldout: 0
   m_callbackFoldout: 0
@@ -760,22 +761,22 @@ PrefabInstance:
     - target: {fileID: -1812909498023395591, guid: c9daf4987fe34914fb68111111165aa5,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.009429716
+      value: -0.00942954
       objectReference: {fileID: 0}
     - target: {fileID: -1812909498023395591, guid: c9daf4987fe34914fb68111111165aa5,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7651305
+      value: 0.6863876
       objectReference: {fileID: 0}
     - target: {fileID: -1812909498023395591, guid: c9daf4987fe34914fb68111111165aa5,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.010155365
+      value: -0.010155175
       objectReference: {fileID: 0}
     - target: {fileID: -1812909498023395591, guid: c9daf4987fe34914fb68111111165aa5,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6437261
+      value: 0.7271038
       objectReference: {fileID: 0}
     - target: {fileID: -1812909498023395591, guid: c9daf4987fe34914fb68111111165aa5,
         type: 3}
@@ -867,6 +868,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.577
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: c9daf4987fe34914fb68111111165aa5,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b3721b268e380e9419ff8ee3c06b82a9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9daf4987fe34914fb68111111165aa5, type: 3}
 --- !u!4 &638394732 stripped

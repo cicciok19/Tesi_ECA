@@ -31,7 +31,7 @@ public class PickDownStage : ECAActionStage
     {
         base.ReactToActionFinished(sender, e);
         EcaAnimator.MxM_BeginEvent("PickDown");
-        EcaAnimator.MxM_waitForEventContact();
+        EcaAnimator.MxM_WaitForEventContact();
     }
 
     public void OnEventContact(object sender, EventArgs e)

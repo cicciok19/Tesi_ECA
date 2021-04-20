@@ -710,6 +710,11 @@ namespace MxM
 #endif 
         }
 
+        public void UpdateAvatarMask()
+        {
+            m_animationLayerMixer.SetLayerMaskFromAvatarMask(1, m_animatorControllerMask);
+        }
+
         //============================================================================================
         /**
         *  @brief Sets up tha animation playable graph and prepares it for motion matching playback.
