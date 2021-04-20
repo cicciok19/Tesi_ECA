@@ -1,32 +1,53 @@
-﻿using System.Collections;
+/* File GoToStage C# implementation of class GoToStage */
+
+
+
+// global declaration start
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
+// global declaration end
+
 public class GoToStage : ECAActionStage
 {
-    private Transform Destination;
 
-    public GoToStage(ECAAction ecaAction, ECAAnimatorDemo ecaAnimator, Transform destination) : base(ecaAction, ecaAnimator)
+    private Transform destination;
+
+
+    public GoToStage(Transform destination)
+    : base()
     {
-        Destination = destination;
+            this.destination = destination;
     }
+
+
+
+
+    private void OnArrivedECA(object sender, EventArgs e)
+    {
+        EndStage();
+    }
+
+
+
 
     public override void StartStage()
     {
         base.StartStage();
-        EcaAnimator.GoTo(Destination.position, 0.05f);
-        EcaAnimator.HasArrived += OnArrivedECA;
+        animator.GoTo(destination.position, 0.05f);
+        animator.HasArrived += OnArrivedECA;
     }
+
 
     public override void EndStage()
     {
         base.EndStage();
     }
 
-    private void OnArrivedECA(object sender, EventArgs e)
-    {
-        EndStage();
-    }
 
 }

@@ -1,4 +1,20 @@
-:ArrayOb.273{6:Dictionary.4369{16 4:SLSThisIcon.286331409{:String.17{9 10 "156131936"}
+:ArrayOb.273{6:Dictionary.4369{16 6:SLSProtectMember.286331409{:String.17{8 9 "94308968"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{4 5 "ecas"}
+ 3.2 1.88 1.6 10  40 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{4 5 "ecas"}
+#4{5 6 "ECA[]"}
+#4{0 1 ""}
+:OrderedCltn.4369{16 0}
+#5{16 0}
+#4{1 2 "S"}
+@0 #4{4 5 "null"}
+#4{0 1 ""}
+}
+:SLSThisIcon.286331409{#4{9 10 "156131936"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  52 45 0.4 0 0 #4{38 39 "public InitializerDemo : MonoBehaviour"}
@@ -8,7 +24,7 @@
  0  0 #4{22 23 "public InitializerDemo"}
 #4{13 14 "MonoBehaviour"}
 #4{0 13 ""}
-:OrderedCltn.4369{16 0}
+#5{16 0}
 #5{16 0}
 #4{1 2 "S"}
 @0 #4{0 1 ""}
@@ -20,21 +36,15 @@
  1.3 0.88 2 10  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{497 498 "\[\n
+ 1  1 #4{256 498 "\[\n
     //Init configuration (scenario type, language, smartAction messages, xml files name ecc)\n
     Configuration.Instance.Init();\n
 \n
-    //Set the scenario (SmartActions, Nodes)\n
-    /*if (Configuration.Instance.ActualScenario.Equals(ScenarioType.Training))\n
-        FindObjectOfType<DemoScenario>().Init();*/\n
-\n
     //Init all ecas\n
-    ECA[] allEca = FindObjectsOfType<ECA>();\n
-    for (int i = 0; i < allEca.Length; i++)\n
-        allEca[i].Init();\n
+    ecas = FindObjectsOfType<ECA>();\n
+    for (int i = 0; i < ecas.Length; i++)\n
+        ecas[i].Init();\n
 \n
-    //Init logger\n
-    // CSVManager.Instance.Init();\n
 \]"}
 #4{5 6 "Awake"}
 #4{4 5 "void"}
@@ -62,16 +72,30 @@ using UnityEngine;\n
 @0  0 0 1
  0  0 #4{0 1 ""}
 }
-}
-:CLSCSSem.1118481{ 56  51 @3 @29 @37 @0 #5{16 0}
+:JLSExternObject.286331409{#4{8 9 "94080120"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{0 1 ""}
+ 4 1.88 1 1  46 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{0 1 ""}
+#4{7 8 "Visitor"}
+#4{0 1 ""}
 #5{16 0}
-#5{16 1@17 }
+#5{16 0}
+#4{1 2 "S"}
+@0 }
+}
+:CLSCSSem.1118481{ 56  51 @18 @44 @52 @0 #5{16 0}
+#5{16 1@3 }
+#5{16 1@32 }
 #5{16 0}
 #5{16 0}
 #5{16 0}
 #5{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#5{16 0}
+#5{16 1@60 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
@@ -79,7 +103,7 @@ using UnityEngine;\n
 #5{16 0}
  0}
 :Float.17{0 }
-#10{1 }
-#10{0 }
-#10{1 }
+#12{1 }
+#12{0 }
+#12{1 }
 }

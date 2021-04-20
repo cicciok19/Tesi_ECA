@@ -1,29 +1,46 @@
-﻿using System.Collections;
+/* File ECAAction C# implementation of class ECAAction */
+
+
+
+// global declaration start
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
-public abstract class ECAAction
+
+// global declaration end
+
+public class ECAAction
 {
     public event EventHandler CompletedAction;
 
+    public int CurrentStageIdx;
     public ECAActionStage[] AllStages;
     public ECAAnimator EcaAnimator;
-    public int CurrentStageIdx;
 
-    public ECAAction(ECAAnimator ecaAnimator)
+
+    public ECAAction(ECAAnimator ecaAnimator, List<ECAActionStage> stages)
     {
         EcaAnimator = ecaAnimator;
+        foreach(var stage in stages)
+    	stage.Animator = ecaAnimator;
+    
+        AllStages = stages.ToArray();
     }
 
-    /// <summary>
-    /// Inizializza l'azione, deve essere chiamato nel costruttore dell'azione. Sottoscrivo gli eventi per il primo stage.
-    /// </summary>
+
+
+
     public virtual void SetupAction()
     {
         CurrentStageIdx = 0;
         CurrentStage.StageFinished += OnStageFinished;
     }
+
 
     public ECAActionStage CurrentStage
     {
@@ -31,14 +48,12 @@ public abstract class ECAAction
         {
             if (CurrentStageIdx >= 0 && CurrentStageIdx < AllStages.Length)
                 return AllStages[CurrentStageIdx];
-
+    
             return null;
         }
     }
 
-    /// <summary>
-    /// Fa iniziare l'azione inizializzando il primo stage
-    /// </summary>
+
     public virtual void StartAction()
     {
         if (AllStages != null)
@@ -50,9 +65,7 @@ public abstract class ECAAction
         }
     }
 
-    /// <summary>
-    /// Chiamato ogni volta che finisce uno stage, serve per iniziare quello successivo. Se era l'ultimo, segnalo il completamento dell'azione
-    /// </summary>
+
     public virtual void NextStage()
     {
         if (CurrentStage != null)
@@ -65,9 +78,7 @@ public abstract class ECAAction
             OnCompletedAction();
     }
 
-    /// <summary>
-    /// Quando uno stage viene completato mi disiscrivo dall'evento, aggiorno il currentStageIdx e inizializzo lo stage successivo
-    /// </summary>
+
     public virtual void OnStageFinished(object sender, EventArgs e)
     {
         CurrentStage.StageFinished -= OnStageFinished;
@@ -75,9 +86,7 @@ public abstract class ECAAction
         NextStage();
     }
 
-    /// <summary>
-    /// Chiamato quando un'azione viene completata
-    /// </summary>
+
     public virtual void OnCompletedAction()
     {
         if (CompletedAction != null)
@@ -85,6 +94,14 @@ public abstract class ECAAction
     }
 
 
-    public virtual void OnStateUpdate() { }
-    public virtual void OnLabelUpdate() { }
+    public virtual void OnStateUpdate()
+    {
+    }
+
+
+    public virtual void OnLabelUpdate()
+    {
+    }
+
+
 }

@@ -1,29 +1,41 @@
-:ArrayOb.273{6:Dictionary.4369{64 32:SLSPublicMethod.286331408{:String.17{8 9 "85914928"}
+:ArrayOb.273{6:Dictionary.4369{64 33:SLSPublicMethod.286331408{:String.17{8 9 "85914928"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{11 12 "SendMessage"}
  0.3 0.88 4.4 1  9 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{360 819 "\[\n
-    if (!GeneralMessagesCltn.ContainsKey(msgType))\n
-    \[\n
-        Debug.LogError(\"This message does not exist\");\n
-        return;\n
-    \]\n
-    SpeechInfo speechInfo = new SpeechInfo(ECAAnimator, Language, VoiceName, GeneralMessagesCltn[msgType][0].message, functionToBeExecuted, anytime, CheckIfMsgIsActive(msgType));\n
-    TtsManager.Instance.Speech(speechInfo);\n
+ 1  1 #4{894 895 "\[\n
+        bool IsMsgEnabled = false;\n
+    \n
+        TtsInfoContainer container = ECAParameters.SmartActionMessages[smartAction.ID];\n
+    \n
+        if (SufficientLevel((int)container.Weight) && CheckIfMsgIsActive(msgType.ToString()))\n
+            IsMsgEnabled = true;\n
+    \n
+        String txt = \"\";\n
+        if (msgType.Equals(\"Support\"))\n
+        \[\n
+            SmartActionCriteria lastUpdatedCriteria = container.GetCriteriaTTSInfo(smartAction.LastUpdatedCriteria);\n
+            txt = lastUpdatedCriteria.getText(smartAction.GetLabelOfLastSwitchedCriteria());\n
+        \]\n
+        else\n
+            txt = container.SmartActionMsgs[msgType];\n
+    \n
+        SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, txt, functionToBeExecuted, anytime, IsMsgEnabled, conditionJustBeforePlay);\n
+        bool acceptedMessage = TtsManager.Instance.Speech(speechInfo);\n
+        return acceptedMessage;\n
 \]"}
 #4{11 12 "SendMessage"}
-#4{4 5 "void"}
-#4{71 140 "string msgType, Action functionToBeExecuted = null, bool anytime = true"}
+#4{4 5 "bool"}
+#4{139 140 "SmartAction smartAction, string msgType, Action functionToBeExecuted = null, bool anytime = true, Func<bool> conditionJustBeforePlay = null"}
 #4{0 1 ""}
 }
 #3{#4{9 10 "129305752"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{25 26 "HandleIntentNotRecognized"}
- 1.3 0.88 10 1  18 #4{0 1 ""}
+ 1.3 0.879999 10 1  18 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
  1  1 #4{3 5 "\[\n
@@ -54,10 +66,14 @@
  0.299999 0.88 7.2 33  3 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 0  0 #4{2205 2206 "using System;\n
+ 0  0 #4{2211 2212 "using System;\n
 using System.Collections.Generic;\n
 using IntentRecognitionResults;\n
 using UnityEngine;\n
+\n
+\n
+\n
+\n
 \n
 \n
 \n
@@ -110,20 +126,22 @@ public class ECAParameters\n
 \]\n
 \n
 \n
+\n
+\n
 /// <summary>\n
 /// Allows access to all the features and properties of a specific eca. \n
 /// Identified by an ID can be retrieved via <see cref=\"ECAManager\"/> which keeps track of all the eca instanced in the scene.\n
 /// </summary>\n
 "}
 }
-:SLSPublicMember.286331409{#4{8 9 "85581744"}
+:SLSPublicMember.286331409{#4{9 10 "158918344"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{11 12 "ECAAnimator"}
- 1.3 1.88 4.4 1  40 #4{0 1 ""}
+@0  8 2 0.4 0 0 #4{11 12 "ecaAnimator"}
+ 1.3 1.88 4.4 1  39 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{11 12 "ECAAnimator"}
+ 1  0 #4{11 12 "ecaAnimator"}
 #4{11 12 "ECAAnimator"}
 #4{0 1 ""}
 #6{16 0}
@@ -252,6 +270,34 @@ public class ECAParameters\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
+#5{#4{9 10 "104346152"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{0 1 ""}
+ 4 1.88 0 10  45 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{0 1 ""}
+#4{16 17 "EmotionalMessage"}
+#4{0 1 ""}
+#6{16 0}
+#6{16 0}
+#4{1 2 "S"}
+@0 }
+#9{#4{8 9 "85977272"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{4 5 "Name"}
+ 1.3 0.88 1.6 1  14 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{29 30 "\[ get => myParameters.Name; \]"}
+#4{4 5 "Name"}
+#4{6 7 "string"}
+#4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
+}
 :SLSThisIcon.286331409{#4{8 9 "85581024"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -267,34 +313,6 @@ public class ECAParameters\n
 #4{1 2 "S"}
 @0 #4{0 1 ""}
 }
-#9{#4{8 9 "85977272"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{4 5 "Name"}
- 1.3 0.88 1.6 1  14 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{29 30 "\[ get => myParameters.Name; \]"}
-#4{4 5 "Name"}
-#4{6 7 "string"}
-#4{0 1 ""}
-#4{0 1 ""}
-#4{0 1 ""}
-}
-#5{#4{9 10 "104346152"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{0 1 ""}
- 4 1.88 0 10  45 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{0 1 ""}
-#4{16 17 "EmotionalMessage"}
-#4{0 1 ""}
-#6{16 0}
-#6{16 0}
-#4{1 2 "S"}
-@0 }
 :SLSProtectMethod.286331408{#4{8 9 "85662088"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -318,12 +336,34 @@ public class ECAParameters\n
 #4{0 1 ""}
 @0  0 0 1
  1  1 #4{171 370 "\[\n
-    SpeechInfo speechInfo = new SpeechInfo(ECAAnimator, Language, VoiceName, message, functionToBeExecuted, anytime, true);\n
+    SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, message, functionToBeExecuted, anytime, true);\n
     TtsManager.Instance.Speech(speechInfo);\n
 \]"}
 #4{17 18 "SendDirectMessage"}
 #4{4 5 "void"}
 #4{71 72 "string message, Action functionToBeExecuted = null, bool anytime = true"}
+#4{0 1 ""}
+}
+#3{#4{9 10 "129817152"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{11 12 "SendMessage"}
+ 0.3 0.88 4.4 1  10 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{389 390 "\[\n
+        if (!GeneralMessagesCltn.ContainsKey(msgType))\n
+        \[\n
+            Debug.LogError(\"This message does not exist\");\n
+            return;\n
+        \]\n
+        SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, GeneralMessagesCltn[msgType][0].message, functionToBeExecuted, anytime, CheckIfMsgIsActive(msgType));\n
+        TtsManager.Instance.Speech(speechInfo);\n
+\]\n
+"}
+#4{11 12 "SendMessage"}
+#4{4 5 "void"}
+#4{71 72 "string msgType, Action functionToBeExecuted = null, bool anytime = true"}
 #4{0 1 ""}
 }
 #11{#4{9 10 "129304576"}
@@ -334,18 +374,18 @@ public class ECAParameters\n
 #4{0 1 ""}
 @0  0 0 1
  1  1 #4{429 430 "\[\n
-    if (ECAAnimator == null)\n
+    if (ecaAnimator == null)\n
     \[\n
-        ECAAnimator = GetComponent<ECAAnimator>();\n
-        if (ECAAnimator == null)\n
+        ecaAnimator = GetComponent<ECAAnimator>();\n
+        if (ecaAnimator == null)\n
         \[\n
-            ECAAnimator = AddECAAnimator();\n
+            ecaAnimator = AddECAAnimator();\n
             Utility.LogWarning(\"No ECAAnimator directly assigned by editor to the ECA Script \" +\n
                                 \" and no ECAAnimator Component assigned! therefore it was created automatically\");\n
         \]\n
     \]\n
 \n
-    ECAAnimator.Init();\n
+    ecaAnimator.Init();\n
 \]"}
 #4{14 15 "CreateAnimator"}
 #4{12 13 "virtual void"}
@@ -413,7 +453,7 @@ public class ECAParameters\n
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{19 20 "GeneralMessagesCltn"}
- 1.3 0.88 7.6 1  19 #4{0 1 ""}
+ 1.3 0.879999 7.6 1  19 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
  1  1 #4{21 22 "\[ get; private set; \]"}
@@ -568,17 +608,17 @@ public class ECAParameters\n
  0  0 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @151 @40 @389 @0 #6{16 0}
+:CLSCSSem.1118481{ 56  51 @177 @40 @401 @0 #6{16 0}
 #6{16 0}
-#6{16 2@315 @303 }
-#6{16 6@191 @352 @340 @291 @227 @215 }
+#6{16 2@327 @315 }
+#6{16 6@191 @364 @352 @303 @239 @227 }
 #6{16 0}
 #6{16 0}
 #6{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#6{16 2@27 @178 }
-#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @48 @0 @0 @0 }
-#1{40@63 @100 @113 @3 @0 @203 @88 @265 @165 @75 @376 @239 @15 @278 @0 @0 @0 @327 @0 @252 @138 @0 @0 @0 @0 @0 @0 @0 @364 @126 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#6{16 2@27 @151 }
+#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @48 @0 @0 @0 @0 }
+#1{40@63 @100 @113 @3 @215 @203 @88 @277 @164 @75 @388 @251 @15 @290 @0 @0 @0 @339 @0 @264 @138 @0 @0 @0 @0 @0 @0 @0 @376 @126 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #6{16 0}

@@ -157,20 +157,6 @@
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#5{#4{8 9 "86295880"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{14 15 "CompletedNodes"}
- 1.3 0.88 5.6 1  15 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{13 16 "\[ get; set; \]"}
-#4{14 15 "CompletedNodes"}
-#4{3 4 "int"}
-#4{0 1 ""}
-#4{0 1 ""}
-#4{0 1 ""}
-}
 :JLSGlobalDeclare.286331408{#4{8 9 "86130328"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -178,13 +164,15 @@
  0.299999 0.88 7.2 33  3 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 0  0 #4{734 762 "using System;\n
+ 0  0 #4{746 762 "using System;\n
 using System.Collections;\n
 using System.Collections.Generic;\n
 using System.Linq;\n
 using UnityEngine;\n
-\t\tpublic enum Ecas\n
+\n
+public enum Ecas\n
 \[\n
+    Default,\n
     Sophie_G,\n
     Sophie_R,\n
     Sophie_B,\n
@@ -200,6 +188,20 @@ using UnityEngine;\n
 /// Accuracy and Staging are a weighted average of individual smart action values\n
 /// </summary>\n
 "}
+}
+#5{#4{8 9 "86295880"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{14 15 "CompletedNodes"}
+ 1.3 0.88 5.6 1  15 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{13 16 "\[ get; set; \]"}
+#4{14 15 "CompletedNodes"}
+#4{3 4 "int"}
+#4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
 }
 #3{#4{8 9 "86296664"}
 #1{2@0 @0 }
@@ -233,16 +235,6 @@ using UnityEngine;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-:JLSFriendDeclare.286331408{#4{8 9 "86131608"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{17 18 "Class Declaration"}
- 0.299999 0.88 6.8 33  5 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 0  0 #4{97 98 "private static ECAManager instance = null;\n
-private static readonly object padlock = new object();"}
-}
 #3{#4{8 9 "85950688"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -258,6 +250,16 @@ private static readonly object padlock = new object();"}
 #4{4 5 "void"}
 #4{19 20 "float localAccuracy"}
 #4{0 1 ""}
+}
+:JLSFriendDeclare.286331408{#4{8 9 "86131608"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{17 18 "Class Declaration"}
+ 0.299999 0.88 6.8 33  5 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 0  0 #4{97 98 "private static ECAManager instance = null;\n
+private static readonly object padlock = new object();"}
 }
 #3{#4{8 9 "85949904"}
 #1{2@0 @0 }
@@ -289,7 +291,7 @@ private static readonly object padlock = new object();"}
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @40 @129 @162 @0 #7{16 0}
+:CLSCSSem.1118481{ 56  51 @40 @116 @174 @0 #7{16 0}
 #7{16 0}
 #7{16 0}
 #7{16 0}
@@ -299,7 +301,7 @@ private static readonly object padlock = new object();"}
 #1{16@54 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #7{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{30@104 @3 @92 @182 @170 @28 @137 @149 @194 @116 @15 @66 @0 @0 @0 @0 @0 @0 @0 @0 @79 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{30@104 @3 @92 @182 @162 @28 @137 @149 @194 @124 @15 @66 @0 @0 @0 @0 @0 @0 @0 @0 @79 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #7{16 0}

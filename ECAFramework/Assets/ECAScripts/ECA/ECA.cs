@@ -12,6 +12,12 @@ using UnityEngine;
 
 
 
+
+
+
+
+
+
 public class ECAParameters
 {
     //Static Attributes
@@ -58,32 +64,23 @@ public class ECAParameters
     }
 }
 
+
+
+
 /// <summary>
 /// Allows access to all the features and properties of a specific eca. 
 /// Identified by an ID can be retrieved via <see cref="ECAManager"/> which keeps track of all the eca instanced in the scene.
 /// </summary>
 
 
-
 // global declaration end
 
 public class ECA : MonoBehaviour, IIntentHandler
 {
-    /// <summary>
-    /// Key: name of message type (corresponding XML tag name)
-    /// Value: Set of messages related to the emotional state of the ECA (<see cref="EmotionalMessage"/>.
-    /// </summary>
-    public Dictionary<string, List<EmotionalMessage>> EmotionalMessages { get; set; }
+
+    public ECAAnimator ecaAnimator;
 
 
-    public ECAAnimator ECAAnimator;
-
-    /// <summary>
-    /// Given the name of a message (XML tag) check if it is enabled according to the current scenario (e.g. training).
-    /// Default return value = true
-    /// </summary>
-    /// <param name="msgType">message to check if enabled</param>
-    /// <returns></returns>
     private bool CheckIfMsgIsActive(string msgType)
     {
         if (ECAParameters.ActiveMessagesPerScenario == null)
@@ -96,11 +93,7 @@ public class ECA : MonoBehaviour, IIntentHandler
         return ECAParameters.ActiveMessagesPerScenario[Configuration.Instance.ActualScenario][msgType];
     }
 
-    /// <summary>
-    /// Compare the level of presence of the ECA <see cref="ECAParameters.EcaPresence"/> with that of the SmartAction <see cref="TtsInfoContainer.Weight"/>. 
-    /// </summary>
-    /// <param name="weight"></param>
-    /// <returns></returns>
+
     private bool SufficientLevel(int weight)
     {
         if ((int)EcaPresence < weight)
@@ -112,65 +105,20 @@ public class ECA : MonoBehaviour, IIntentHandler
             return true;
     }
 
+
+
+
     protected virtual void Awake()
     {
         Utility.Log("ECA " + name + " awaken");
     }
 
-    /// <summary>
-    /// First of all it calls the method <see cref="SetEcaId"/>. You MUST override it so that the necessary information can be retrieved from the configuration files.
-    /// Set the same ID indicated in the appropriate file.
-    /// After taht it retrieves the necessary parameters from the XML files in order to fill <see cref="ECAParameters"/> and get messages in XML file for TTS.
-    /// It also set the emotion manager and animator.
-    /// finally, it registers the ECA to the IntentHandlers specified by the user
-    /// </summary>
+
     protected virtual void Start()
     {
- 
     }
 
-    public virtual void Init()
-    {
-        SetEcaId();
 
-        IntentName = new List<string>();
-
-        myParameters = XmlParser.GetEcaParameters(ID, Configuration.Instance.XmlDocumentNames.EcaList); //GET parameters of this eca from XML!! BUT, set the ID first (required to select ECA in XML file)
-        GeneralMessagesCltn = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);
-
-        EmotionManager = new ECAEmotionManager(myParameters.EmotionModel);
-        ECAManager.Instance.AvailableEcas.Add(ID, this);
-
-        CreateAnimator();
-
-        SubscribeHandlerToIntentManager();
-
-        Utility.Log("ECA setted");
-    }
-
-    /// <summary>
-    /// If no animator has been associated from the inspector, the method create a new one <see cref="AddECAAnimator"/>
-    /// Finally it call the init method (<see cref="ECAAnimator.Init"/>) of <see cref="ECAAnimator"/> (usually overwritten by the programmer)
-    /// </summary>
-    protected virtual void CreateAnimator()
-    {
-        if (ECAAnimator == null)
-        {
-            ECAAnimator = GetComponent<ECAAnimator>();
-            if (ECAAnimator == null)
-            {
-                ECAAnimator = AddECAAnimator();
-                Utility.LogWarning("No ECAAnimator directly assigned by editor to the ECA Script " +
-                                    " and no ECAAnimator Component assigned! therefore it was created automatically");
-            }
-        }
-
-        ECAAnimator.Init();
-    }
-    /// <summary>
-    /// Record the ECA to a new <see cref="Intent"/>
-    /// </summary>
-    /// <param name="intentName"></param>
     protected void AddIntentHandler(string intentName)
     {
         Utility.Log("ECA " + name + " subscribing to intent " + intentName);
@@ -179,18 +127,6 @@ public class ECA : MonoBehaviour, IIntentHandler
         IntentManager.Instance.AddIntentHandler(intentName, this);
     }
 
-    /// <summary>
-    /// Override thid method in order to handle the recognition of an <see cref="Intent"/> registered by <see cref="AddIntentHandler(string)"/>.
-    /// </summary>
-    /// <param name="intent"></param>
-    public virtual void Handle(Intent intent)
-    {
-    }
-
-    //DELETE???????? (INTEGRATED IN AddIntentHandler???
-    public virtual void SubscribeHandlerToIntentManager()
-    {
-    }
 
     protected List<EmotionalMessage> GetGeneralMessagesFor(string key)
     {
@@ -200,18 +136,32 @@ public class ECA : MonoBehaviour, IIntentHandler
       return null;
     }
 
-    /// <summary>
-    /// Associate a new component (script) of type <see cref="ECAAnimator"/> to this ECA
-    /// </summary>
-    /// <returns></returns>
+
     protected virtual ECAAnimator AddECAAnimator()
     {
       return gameObject.AddComponent<ECAAnimator>();
     }
 
-    /// <summary>
-    /// You have to overwrite this method. Initialize the id with one of the ones in <see cref="Ecas"/>
-    /// </summary>
+
+    protected virtual void CreateAnimator()
+    {
+        if (ecaAnimator == null)
+        {
+            ecaAnimator = GetComponent<ECAAnimator>();
+            if (ecaAnimator == null)
+            {
+                ecaAnimator = AddECAAnimator();
+                Utility.LogWarning("No ECAAnimator directly assigned by editor to the ECA Script " +
+                                    " and no ECAAnimator Component assigned! therefore it was created automatically");
+            }
+        }
+    
+        ecaAnimator.Init();
+    }
+
+
+
+
     public virtual void SetEcaId()
     {
         //ID = Ecas.Default;
@@ -227,71 +177,73 @@ public class ECA : MonoBehaviour, IIntentHandler
     
     }
 
-    /// <summary>
-    /// Ask TtsManager to speech (convert string in audio -> TTS) a message related to SmartAction state.
-    /// </summary>
-    /// <param name="smartAction">action related message</param>
-    /// <param name="msgType">type of message: name of used tag in the XML document</param>
-    /// <param name="functionToBeExecuted">a function to be executed when the audio end</param>
-    /// <param name="anytime">if false and Eca is speaking, the messagte will not be queued (will never be reproduced)</param>
-    /// <param name="conditionJustBeforePlay">a function that return a bool value. It is executed just before play the audio, in order to check if some condition is still true</param>
+
+    public Dictionary<string, List<EmotionalMessage>> EmotionalMessages
+    { get; set; }
+
+
     public bool SendMessage(SmartAction smartAction, string msgType, Action functionToBeExecuted = null, bool anytime = true, Func<bool> conditionJustBeforePlay = null)
     {
-        bool IsMsgEnabled = false;
-    
-        TtsInfoContainer container = ECAParameters.SmartActionMessages[smartAction.ID];
-    
-        if (SufficientLevel((int)container.Weight) && CheckIfMsgIsActive(msgType.ToString()))
-            IsMsgEnabled = true;
-    
-        String txt = "";
-        if (msgType.Equals("Support"))
-        {
-            SmartActionCriteria lastUpdatedCriteria = container.GetCriteriaTTSInfo(smartAction.LastUpdatedCriteria);
-            txt = lastUpdatedCriteria.getText(smartAction.GetLabelOfLastSwitchedCriteria());
-        }
-        else
-            txt = container.SmartActionMsgs[msgType];
-    
-        SpeechInfo speechInfo = new SpeechInfo(ECAAnimator, Language, VoiceName, txt, functionToBeExecuted, anytime, IsMsgEnabled, conditionJustBeforePlay);
-        bool acceptedMessage = TtsManager.Instance.Speech(speechInfo);
-        return acceptedMessage;
+            bool IsMsgEnabled = false;
+        
+            TtsInfoContainer container = ECAParameters.SmartActionMessages[smartAction.ID];
+        
+            if (SufficientLevel((int)container.Weight) && CheckIfMsgIsActive(msgType.ToString()))
+                IsMsgEnabled = true;
+        
+            String txt = "";
+            if (msgType.Equals("Support"))
+            {
+                SmartActionCriteria lastUpdatedCriteria = container.GetCriteriaTTSInfo(smartAction.LastUpdatedCriteria);
+                txt = lastUpdatedCriteria.getText(smartAction.GetLabelOfLastSwitchedCriteria());
+            }
+            else
+                txt = container.SmartActionMsgs[msgType];
+        
+            SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, txt, functionToBeExecuted, anytime, IsMsgEnabled, conditionJustBeforePlay);
+            bool acceptedMessage = TtsManager.Instance.Speech(speechInfo);
+            return acceptedMessage;
     }
 
-    /// <summary>
-    /// Ask TtsManager to speech (convert string in audio -> TTS) a general message (<see cref="EmotionalMessage"/>) without considering emotions
-    /// and taking the first of the list. 
-    /// </summary>
-    /// <param name="msgType"></param>
-    /// <param name="functionToBeExecuted"></param>
-    /// <param name="anytime"></param>
+
     public void SendMessage(string msgType, Action functionToBeExecuted = null, bool anytime = true)
     {
-        if (!GeneralMessagesCltn.ContainsKey(msgType))
-        {
-            Debug.LogError("This message does not exist");
-            return;
-        }
-        SpeechInfo speechInfo = new SpeechInfo(ECAAnimator, Language, VoiceName, GeneralMessagesCltn[msgType][0].message, functionToBeExecuted, anytime, CheckIfMsgIsActive(msgType));
-        TtsManager.Instance.Speech(speechInfo);
+            if (!GeneralMessagesCltn.ContainsKey(msgType))
+            {
+                Debug.LogError("This message does not exist");
+                return;
+            }
+            SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, GeneralMessagesCltn[msgType][0].message, functionToBeExecuted, anytime, CheckIfMsgIsActive(msgType));
+            TtsManager.Instance.Speech(speechInfo);
     }
 
-    /// <summary>
-    /// Ask TtsManager to speech (convert string in audio -> TTS) a message.
-    /// </summary>
-    /// <param name="message">content of message</param>
-    /// <param name="functionToBeExecuted">a function to be executed when the audio end</param>
-    /// <param name="anytime">if false and Eca is speaking, the messagte will not be queued (will never be reproduced)</param>
+
     public void SendDirectMessage(string message, Action functionToBeExecuted = null, bool anytime = true)
     {
-        SpeechInfo speechInfo = new SpeechInfo(ECAAnimator, Language, VoiceName, message, functionToBeExecuted, anytime, true);
+        SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, message, functionToBeExecuted, anytime, true);
         TtsManager.Instance.Speech(speechInfo);
     }
 
-    public virtual void HandleIntentNotRecognized()
+
+    public virtual void Init()
     {
-        
+        SetEcaId();
+    
+        IntentName = new List<string>();
+    
+        myParameters = XmlParser.GetEcaParameters(ID, Configuration.Instance.XmlDocumentNames.EcaList); //GET parameters of this eca from XML!! BUT, set the ID first (required to select ECA in XML file)
+        GeneralMessagesCltn = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);
+    
+        EmotionManager = new ECAEmotionManager(myParameters.EmotionModel);
+        ECAManager.Instance.AvailableEcas.Add(ID, this);
+    
+        CreateAnimator();
+    
+        SubscribeHandlerToIntentManager();
+    
+        Utility.Log("ECA setted");
     }
+
 
     public Ecas ID
     { get; protected set; }
@@ -313,15 +265,35 @@ public class ECA : MonoBehaviour, IIntentHandler
     { get => myParameters.EcaPresence; }
 
 
+    public virtual void HandleIntentNotRecognized()
+    {
+    }
+
+
+    public Dictionary<string, List<EmotionalMessage>> GeneralMessagesCltn
+    { get; private set; }
+
+
     public ECAEmotionManager EmotionManager
     { get; set; }
 
 
     public ECAParameters myParameters
     { get; set; }
-    public Dictionary<string, List<EmotionalMessage>> GeneralMessagesCltn { get; private set; }
+
 
     public List<string> IntentName
     { get; set; }
+
+
+    public virtual void Handle(Intent intent)
+    {
+    }
+
+
+    public virtual void SubscribeHandlerToIntentManager()
+    {
+    }
+
 
 }
