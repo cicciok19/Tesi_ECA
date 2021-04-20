@@ -1,4 +1,51 @@
-:ArrayOb.273{6:Dictionary.4369{32 28:SLSPrivateMethod.286331408{:String.17{8 9 "86279088"}
+:ArrayOb.273{6:Dictionary.4369{32 29:SLSThisIcon.286331409{:String.17{9 10 "103676520"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  52 45 0.4 0 0 #4{20 21 "public IntentManager"}
+ 19.3429 2.2 12.8 4  0 #4{0 1 ""}
+#4{0 1 ""}
+@0  6.06986 4.14313 0
+ 0  0 #4{20 21 "public IntentManager"}
+#4{0 7 ""}
+#4{0 13 ""}
+:OrderedCltn.4369{16 1#4{46 47 "public event EventHandler NotRecognizedIntent;"}
+}
+#5{16 0}
+#4{1 2 "S"}
+@0 #4{0 1 ""}
+}
+:SLSPrivateMember.286331409{#4{8 9 "86018104"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{10 11 "intentreco"}
+ 2 1.88 4 19  26 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{10 11 "intentreco"}
+#4{16 17 "IntentRecognizer"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{0 1 ""}
+#4{0 1 ""}
+}
+:SLSPrivateMethod.286331408{#4{9 10 "104299864"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{9 10 "OnDisable"}
+ 1.3 0.88 3.6 19  11 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{32 33 "\[\n
+    StopIntentRecognition();\n
+\]"}
+#4{9 10 "OnDisable"}
+#4{4 5 "void"}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#7{#4{8 9 "86279088"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{22 23 "CreateIntentRecognizer"}
@@ -68,53 +115,6 @@
 #4{0 1 ""}
 #4{0 1 ""}
 }
-:SLSThisIcon.286331409{#4{9 10 "103676520"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  52 45 0.4 0 0 #4{20 21 "public IntentManager"}
- 19.3429 2.2 12.8 4  0 #4{0 1 ""}
-#4{0 1 ""}
-@0  6.06986 4.14313 0
- 0  0 #4{20 21 "public IntentManager"}
-#4{0 7 ""}
-#4{0 13 ""}
-:OrderedCltn.4369{16 1#4{46 47 "public event EventHandler NotRecognizedIntent;"}
-}
-#6{16 0}
-#4{1 2 "S"}
-@0 #4{0 1 ""}
-}
-#3{#4{9 10 "104299864"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{9 10 "OnDisable"}
- 1.3 0.88 3.6 19  11 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{32 33 "\[\n
-    StopIntentRecognition();\n
-\]"}
-#4{9 10 "OnDisable"}
-#4{4 5 "void"}
-#4{0 1 ""}
-#4{0 1 ""}
-}
-:SLSPrivateMember.286331409{#4{8 9 "86018104"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{10 11 "intentreco"}
- 2 1.88 4 19  26 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{10 11 "intentreco"}
-#4{16 17 "IntentRecognizer"}
-#4{0 1 ""}
-#6{16 0}
-#6{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{0 1 ""}
-}
 :SLSProperty.286331392{#4{9 10 "104292416"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -127,21 +127,6 @@
 #4{40 41 "Dictionary<string, List<IIntentHandler>>"}
 #4{0 1 ""}
 #4{0 1 ""}
-}
-:SLSPublicMember.286331409{#4{8 9 "86017224"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{9 10 "LUISAppId"}
- 1.3 1.88 3.6 1  38 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{9 10 "LUISAppId"}
-#4{6 7 "string"}
-#4{0 1 ""}
-#6{16 0}
-#6{16 0}
-#4{0 2 ""}
-@0 #4{13 14 " string.Empty"}
 #4{0 1 ""}
 }
 :JLSGlobalDeclare.286331408{#4{8 9 "86365704"}
@@ -151,7 +136,7 @@
  0.299999 0.88 7.2 33  3 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 0  0 #4{1485 1486 "//\n
+ 0  0 #4{1520 1521 "//\n
 // Copyright (c) Microsoft. All rights reserved.\n
 // Licensed under the MIT license. See LICENSE.md file in the project root for full license information.\n
 //\n
@@ -169,9 +154,11 @@ using UnityEngine.Android;\n
 #endif\n
 using IntentRecognitionResults;\n
 using TinyJson;\n
+using System.Threading;\n
+\n
 \n
 /// <summary>\n
-/// The IntentRecognition class lets the user dictate voice sentences via speech recognition and\n
+/// The IntentRecognition Singleton class lets the user dictate voice sentences via speech recognition and\n
 /// Natural Language Understanding (NLU). Once captured, the voice is interpreted based\n
 /// on intents and entities returned by the LUIS service.\n
 /// </summary>\n
@@ -199,6 +186,22 @@ using TinyJson;\n
     */\n
 "}
 }
+:SLSPublicMember.286331409{#4{8 9 "86017224"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{9 10 "LUISAppId"}
+ 1.3 1.88 3.6 1  38 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{9 10 "LUISAppId"}
+#4{6 7 "string"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{14 15 "  string.Empty"}
+#4{0 1 ""}
+}
 #8{#4{9 10 "104297512"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -211,6 +214,7 @@ using TinyJson;\n
 #4{6 7 "string"}
 #4{0 1 ""}
 #4{0 1 ""}
+#4{0 1 ""}
 }
 :SLSPublicMethod.286331408{#4{9 10 "104294376"}
 #1{2@0 @0 }
@@ -219,7 +223,8 @@ using TinyJson;\n
  0.3 0.88 7.6 1  9 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{295 296 "\[\n
+ 1  1 #4{359 360 "\[\n
+    Utility.Log(\"Removing \" + intentName + \"to IntentManager\");\n
     if (IntentHandlers.ContainsKey(intentName))\n
     \[\n
         for (int i = 0; i < IntentHandlers[intentName].Count; i++)\n
@@ -244,6 +249,22 @@ using TinyJson;\n
 @0  0 0 1
  0  0 #4{45 46 "private static IntentManager instance = null;"}
 }
+#10{#4{8 9 "86019864"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{10 11 "LUISAppKey"}
+ 1.3 1.88 4 1  36 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{10 11 "LUISAppKey"}
+#4{6 7 "string"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{14 15 "  string.Empty"}
+#4{0 1 ""}
+}
 #8{#4{8 9 "86281832"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -263,38 +284,25 @@ using TinyJson;\n
 #4{20 21 "static IntentManager"}
 #4{0 1 ""}
 #4{0 1 ""}
-}
-#9{#4{8 9 "86019864"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{10 11 "LUISAppKey"}
- 1.3 1.88 4 1  36 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{10 11 "LUISAppKey"}
-#4{6 7 "string"}
-#4{0 1 ""}
-#6{16 0}
-#6{16 0}
-#4{0 2 ""}
-@0 #4{13 14 " string.Empty"}
 #4{0 1 ""}
 }
-#3{#4{9 10 "104296336"}
+#7{#4{9 10 "104296336"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{27 28 "OnCanceledIntentRecognition"}
  1.3 0.88 10.8 10  11 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{388 389 "\[\n
+ 1  1 #4{521 522 "\[\n
     Debug.Log(\"CANCELED: Reason= \" + e.Reason);\n
+    UnityMainThreadDispatcher.Instance().Enqueue(() => IntentRecognitionBehaviour.Instance.RecognizingStopped());\n
 \n
     if (e.Reason == CancellationReason.Error)\n
     \[\n
         Debug.LogError(\"AUTH ERROR, check if valid appID: \" + this.LUISAppId + \" APP key: \" + this.LUISAppKey + \" Region: \" + this.LUISRegion);\n
         Debug.Log(\"CANCELED: ErrorDetails= \" + e.ErrorDetails);\n
         Debug.Log(\"CANCELED: Did you update the subscription info?\");\n
+        OnError();\n
     \]\n
 \]"}
 #4{27 28 "OnCanceledIntentRecognition"}
@@ -306,15 +314,17 @@ using TinyJson;\n
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{16 17 "AddIntentHandler"}
- 0.3 0.880001 6.4 1  17 #4{0 1 ""}
+ 0.3 0.879999 6.4 1  17 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{440 441 "\[\n
+ 1  1 #4{503 504 "\[\n
     /*\n
     if (AvailableIntents == null)\n
         AvailableIntents = new Dictionary<string, string>();\n
     AvailableIntents.Add(intentName);\n
     */\n
+    Utility.Log(\"Adding \" + intentName + \"to IntentManager\");\n
+\n
     if (IntentHandlers == null)\n
         IntentHandlers = new Dictionary<string, List<IIntentHandler>>();\n
 \n
@@ -358,39 +368,53 @@ using TinyJson;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#3{#4{9 10 "104293200"}
+#7{#4{8 9 "96089400"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{13 14 "OnSessionStop"}
- 1.3 0.88 5.2 37  7 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{7 8 "OnError"}
+ 1.3 0.88 2.8 28  11 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{121 122 "\[\n
-    Debug.Log(\"Session event. Event: \" + e.ToString());\n
-    Debug.Log(\"Session Stop detected. Stop the recognition\");\n
+ 1  1 #4{54 55 "\[\n
+    OnDisable();\n
+    Thread.CurrentThread.Abort();\n
 \]"}
-#4{13 14 "OnSessionStop"}
+#4{7 8 "OnError"}
 #4{4 5 "void"}
-#4{33 34 "object sender, SessionEventArgs e"}
+#4{0 1 ""}
 #4{0 1 ""}
 }
-#3{#4{9 10 "104297904"}
+:SLSPrivateConstructor.286331648{#4{8 9 "86019424"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{7 8 "creator"}
+ 0.299999 0.88 2.8 47  15 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{3 5 "\[\n
+\]"}
+#4{13 14 "IntentManager"}
+#4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#7{#4{9 10 "104297904"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{19 20 "OnRecognizingIntent"}
  1.3 0.88 7.6 28  9 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{214 215 "\[\n
+ 1  1 #4{193 215 "\[\n
     if (e.Result.Reason == ResultReason.RecognizingSpeech)\n
-        UnityMainThreadDispatcher.Instance().Enqueue(() => IntentRecognitionBehaviour.Instance.ShowRecognizedText(\"You are saying: \" + e.Result.Text));\n
+        UnityMainThreadDispatcher.Instance().Enqueue(() => IntentRecognitionBehaviour.Instance.ShowRecognizedText(e.Result.Text));\n
 \]"}
 #4{19 20 "OnRecognizingIntent"}
 #4{4 5 "void"}
 #4{43 44 "object sender, IntentRecognitionEventArgs e"}
 #4{0 1 ""}
 }
-#3{#4{8 9 "86278696"}
+#7{#4{8 9 "86278696"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{32 33 "StartContinuousIntentRecognition"}
@@ -425,7 +449,7 @@ using TinyJson;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#9{#4{8 9 "86016784"}
+#10{#4{8 9 "86016784"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{16 17 "RecognizedIntent"}
@@ -435,28 +459,29 @@ using TinyJson;\n
  1  1 #4{16 17 "RecognizedIntent"}
 #4{14 15 "Action<Intent>"}
 #4{0 1 ""}
-#6{16 0}
-#6{16 0}
+#5{16 0}
+#5{16 0}
 #4{0 2 ""}
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
-#3{#4{9 10 "104295552"}
+#7{#4{9 10 "104299080"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{13 14 "OnSpeechStart"}
- 1.3 0.88 5.2 10  9 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{11 12 "OnSpeechEnd"}
+ 1.3 0.88 4.4 19  9 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{71 72 "\[\n
-    Debug.Log(\"SpeechStartDetected received: offset: \" + e.Offset);\n
+ 1  1 #4{108 109 "\[\n
+    Debug.Log(\"SpeechEndDetected received: offset: \" + e.Offset);\n
+    Debug.Log(\"Speech end detected.\");\n
 \]"}
-#4{13 14 "OnSpeechStart"}
+#4{11 12 "OnSpeechEnd"}
 #4{4 5 "void"}
 #4{37 38 "object sender, RecognitionEventArgs e"}
 #4{0 1 ""}
 }
-#7{#4{8 9 "86018544"}
+#6{#4{8 9 "86018544"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{6 7 "intent"}
@@ -466,10 +491,10 @@ using TinyJson;\n
  1  1 #4{6 7 "intent"}
 #4{12 13 "IntentResult"}
 #4{0 1 ""}
-#6{16 0}
-#6{16 0}
+#5{16 0}
+#5{16 0}
 #4{0 2 ""}
-@0 #4{5 6 " null"}
+@0 #4{6 7 "  null"}
 #4{0 1 ""}
 }
 #11{#4{8 9 "86278304"}
@@ -497,14 +522,14 @@ using TinyJson;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#3{#4{9 10 "104298296"}
+#7{#4{9 10 "104298296"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{18 19 "OnRecognizedIntent"}
  1.3 0.88 7.2 37  9 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{2377 2378 "\[\n
+ 1  1 #4{2579 2580 "\[\n
     if (e.Result.Reason == ResultReason.RecognizedIntent)\n
     \[\n
         string s = \"RECOGNIZED: Intent= \" + e.Result.IntentId + \" Text= \" + e.Result.Text;\n
@@ -546,11 +571,15 @@ using TinyJson;\n
         \]\n
     \]\n
     else if (NotRecognizedIntent != null)\n
-            UnityMainThreadDispatcher.Instance().Enqueue(() => NotRecognizedIntent(this, EventArgs.Empty));\n
+    \[\n
+        UnityMainThreadDispatcher.Instance().Enqueue(() => NotRecognizedIntent(this, EventArgs.Empty));\n
+        IntentHandlers[\"None\"][0].HandleIntentNotRecognized();\n
+    \]\n
 \n
     if (e.Result.Reason == ResultReason.RecognizedSpeech)\n
     \[\n
         Debug.Log(\"RECOGNIZED: Text= \" + e.Result.Text);\n
+        UnityMainThreadDispatcher.Instance().Enqueue(() => IntentRecognitionBehaviour.Instance.ShowRecognizedText(e.Result.Text));\n
     \]\n
     else if (e.Result.Reason == ResultReason.NoMatch)\n
     \[\n
@@ -562,23 +591,22 @@ using TinyJson;\n
 #4{43 44 "object sender, IntentRecognitionEventArgs e"}
 #4{0 1 ""}
 }
-#3{#4{9 10 "104299080"}
+#7{#4{9 10 "104295552"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{11 12 "OnSpeechEnd"}
- 1.3 0.88 4.4 19  9 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{13 14 "OnSpeechStart"}
+ 1.3 0.88 5.2 10  9 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{108 109 "\[\n
-    Debug.Log(\"SpeechEndDetected received: offset: \" + e.Offset);\n
-    Debug.Log(\"Speech end detected.\");\n
+ 1  1 #4{71 72 "\[\n
+    Debug.Log(\"SpeechStartDetected received: offset: \" + e.Offset);\n
 \]"}
-#4{11 12 "OnSpeechEnd"}
+#4{13 14 "OnSpeechStart"}
 #4{4 5 "void"}
 #4{37 38 "object sender, RecognitionEventArgs e"}
 #4{0 1 ""}
 }
-#7{#4{8 9 "86016344"}
+#6{#4{8 9 "86016344"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{12 13 "threadLocker"}
@@ -588,27 +616,29 @@ using TinyJson;\n
  1  1 #4{12 13 "threadLocker"}
 #4{13 14 "System.Object"}
 #4{0 1 ""}
-#6{16 0}
-#6{16 0}
+#5{16 0}
+#5{16 0}
 #4{0 2 ""}
-@0 #4{20 21 " new System.Object()"}
+@0 #4{21 22 "  new System.Object()"}
 #4{0 1 ""}
 }
-:SLSPrivateConstructor.286331648{#4{8 9 "86019424"}
+#7{#4{9 10 "104293200"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{7 8 "creator"}
- 0.299999 0.88 2.8 47  15 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{13 14 "OnSessionStop"}
+ 1.3 0.88 5.2 37  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{3 5 "\[\n
+ 1  1 #4{121 122 "\[\n
+    Debug.Log(\"Session event. Event: \" + e.ToString());\n
+    Debug.Log(\"Session Stop detected. Stop the recognition\");\n
 \]"}
-#4{13 14 "IntentManager"}
-#4{0 1 ""}
-#4{0 1 ""}
+#4{13 14 "OnSessionStop"}
+#4{4 5 "void"}
+#4{33 34 "object sender, SessionEventArgs e"}
 #4{0 1 ""}
 }
-#9{#4{8 9 "86018984"}
+#10{#4{8 9 "86018984"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{10 11 "LUISRegion"}
@@ -618,13 +648,13 @@ using TinyJson;\n
  1  1 #4{10 11 "LUISRegion"}
 #4{6 7 "string"}
 #4{0 1 ""}
-#6{16 0}
-#6{16 0}
+#5{16 0}
+#5{16 0}
 #4{0 2 ""}
-@0 #4{13 14 " string.Empty"}
+@0 #4{14 15 "  string.Empty"}
 #4{0 1 ""}
 }
-#3{#4{9 10 "104295160"}
+#7{#4{9 10 "104295160"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{14 15 "OnSessionStart"}
@@ -640,20 +670,20 @@ using TinyJson;\n
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @15 @84 @116 @0 #6{16 3@301 @42 @250 }
-#6{16 0}
-#6{16 10@211 @3 @343 @187 @238 @289 @199 @277 @151 @30 }
-#6{16 0}
-#6{16 0}
-#6{16 0}
-#6{16 0}
-#1{16@316 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#6{16 0}
-#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @328 @0 @136 @0 @69 @0 @223 @0 @0 @0 }
-#1{30@265 @175 @0 @104 @57 @92 @0 @0 @0 @0 @0 @163 @0 @0 @0 @0 @0 @0 @0 @0 @124 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+:CLSCSSem.1118481{ 56  51 @3 @70 @118 @0 #5{16 3@316 @18 @265 }
+#5{16 0}
+#5{16 11@226 @45 @358 @331 @304 @253 @214 @292 @154 @33 @190 }
+#5{16 0}
+#5{16 0}
+#5{16 0}
+#5{16 0}
+#1{16@202 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#5{16 0}
+#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @343 @0 @126 @0 @78 @0 @238 @0 @0 @0 }
+#1{30@280 @178 @0 @106 @57 @93 @0 @0 @0 @0 @0 @166 @0 @0 @0 @0 @0 @0 @0 @0 @141 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
-#6{16 0}
+#5{16 0}
  0}
 :Float.17{0 }
 #15{1 }

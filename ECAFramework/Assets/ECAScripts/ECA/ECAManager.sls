@@ -27,6 +27,7 @@
 #4{5 6 "float"}
 #4{0 1 ""}
 #4{0 1 ""}
+#4{0 1 ""}
 }
 #3{#4{8 9 "85947552"}
 #1{2@0 @0 }
@@ -93,6 +94,7 @@
 #4{21 22 "Dictionary<Ecas, ECA>"}
 #4{0 1 ""}
 #4{0 1 ""}
+#4{0 1 ""}
 }
 #5{#4{8 9 "85950296"}
 #1{2@0 @0 }
@@ -116,6 +118,7 @@
     \]"}
 #4{8 9 "Instance"}
 #4{17 18 "static ECAManager"}
+#4{0 1 ""}
 #4{0 1 ""}
 #4{0 1 ""}
 }
@@ -154,37 +157,6 @@
 #4{0 1 ""}
 #4{0 1 ""}
 }
-:JLSGlobalDeclare.286331408{#4{8 9 "86130328"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{18 19 "Global Declaration"}
- 0.299999 0.88 7.2 33  3 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 0  0 #4{761 762 "using System;\n
-using System.Collections;\n
-using System.Collections.Generic;\n
-using System.Linq;\n
-using UnityEngine;\n
-\tpublic enum Ecas\n
-\[\n
-    Default,\n
-    Francesca,\n
-    Joe,\n
-    Elizabeth,\n
-    PhoneOperator,\n
-    HospitalPatient\n
-\]\n
-/// <summary>\n
-/// Singleton class that contains a list of available ECAs accessible via an ID (defined by the Enum: Ecas).\n
-/// It contains a state that represents the general progress of the FULL procedure,\n
-/// represented by the typical attributes defined in the State class <see cref=\"State\"/>.\n
-/// the percentage of completion is increased each time a node of SmartActionNode types is terminated by a quantity equal to 1 / NodeNumber.\n
-/// Accuracy and Staging are a weighted average of individual smart action values\n
-/// </summary>\n
-\n
-"}
-}
 #5{#4{8 9 "86295880"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -197,6 +169,37 @@ using UnityEngine;\n
 #4{3 4 "int"}
 #4{0 1 ""}
 #4{0 1 ""}
+#4{0 1 ""}
+}
+:JLSGlobalDeclare.286331408{#4{8 9 "86130328"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{18 19 "Global Declaration"}
+ 0.299999 0.88 7.2 33  3 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 0  0 #4{734 762 "using System;\n
+using System.Collections;\n
+using System.Collections.Generic;\n
+using System.Linq;\n
+using UnityEngine;\n
+\t\tpublic enum Ecas\n
+\[\n
+    Sophie_G,\n
+    Sophie_R,\n
+    Sophie_B,\n
+    Turi,\n
+    Sophie\n
+\]\n
+\n
+/// <summary>\n
+/// Singleton class that contains a list of available ECAs accessible via an ID (defined by the Enum: Ecas).\n
+/// It contains a state that represents the general progress of the FULL procedure,\n
+/// represented by the typical attributes defined in the State class <see cref=\"State\"/>.\n
+/// the percentage of completion is increased each time a node of SmartActionNode types is terminated by a quantity equal to 1 / NodeNumber.\n
+/// Accuracy and Staging are a weighted average of individual smart action values\n
+/// </summary>\n
+"}
 }
 #3{#4{8 9 "86296664"}
 #1{2@0 @0 }
@@ -228,6 +231,17 @@ using UnityEngine;\n
 #4{5 6 "State"}
 #4{0 1 ""}
 #4{0 1 ""}
+#4{0 1 ""}
+}
+:JLSFriendDeclare.286331408{#4{8 9 "86131608"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{17 18 "Class Declaration"}
+ 0.299999 0.88 6.8 33  5 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 0  0 #4{97 98 "private static ECAManager instance = null;\n
+private static readonly object padlock = new object();"}
 }
 #3{#4{8 9 "85950688"}
 #1{2@0 @0 }
@@ -244,16 +258,6 @@ using UnityEngine;\n
 #4{4 5 "void"}
 #4{19 20 "float localAccuracy"}
 #4{0 1 ""}
-}
-:JLSFriendDeclare.286331408{#4{8 9 "86131608"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{17 18 "Class Declaration"}
- 0.299999 0.88 6.8 33  5 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 0  0 #4{97 98 "private static ECAManager instance = null;\n
-private static readonly object padlock = new object();"}
 }
 #3{#4{8 9 "85949904"}
 #1{2@0 @0 }
@@ -282,19 +286,20 @@ private static readonly object padlock = new object();"}
 #4{3 4 "int"}
 #4{0 1 ""}
 #4{0 1 ""}
+#4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @39 @113 @169 @0 #7{16 0}
+:CLSCSSem.1118481{ 56  51 @40 @129 @162 @0 #7{16 0}
 #7{16 0}
 #7{16 0}
 #7{16 0}
 #7{16 0}
 #7{16 0}
 #7{16 0}
-#1{16@53 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{16@54 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #7{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{30@101 @3 @89 @177 @157 @27 @133 @145 @189 @121 @15 @65 @0 @0 @0 @0 @0 @0 @0 @0 @77 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{30@104 @3 @92 @182 @170 @28 @137 @149 @194 @116 @15 @66 @0 @0 @0 @0 @0 @0 @0 @0 @79 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #7{16 0}
