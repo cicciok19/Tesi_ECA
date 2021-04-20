@@ -27,7 +27,7 @@ public class StandUpStage : ECAActionStage
 
     public override void ReactToActionFinished(object sender, EventArgs e)
     {
-        EcaAnimator.MxM_clearRequiredTags();
+        EcaAnimator.MxM_ClearRequiredTags();
         EcaAnimator.MxM_BeginEvent("StandUp", SitPoint);
         //EcaAnimator.IK_setWeight(false);
     }

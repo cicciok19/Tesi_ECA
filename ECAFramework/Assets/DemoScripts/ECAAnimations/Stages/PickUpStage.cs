@@ -25,7 +25,7 @@ public class PickUpStage : ECAActionStage
     {
         base.StartStage();
         EcaAnimator.MxM_BeginEvent("PickUp", ObjToPick);
-        EcaAnimator.MxM_waitForEventContact();
+        EcaAnimator.MxM_WaitForEventContact();
     }
 
     public void OnEventContact(object sender, EventArgs e)

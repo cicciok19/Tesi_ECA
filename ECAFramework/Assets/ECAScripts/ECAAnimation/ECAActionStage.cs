@@ -34,4 +34,7 @@ public abstract class ECAActionStage
     public virtual void ReactToStateUpdate(object sender, EventArgs e) { }
     public virtual void ReactToLabelUpdate(object sender, EventArgs e) { }
     public virtual void ReactToActionFinished(object sender, EventArgs e) { }
+
+    protected virtual void ActivateBodyParts() { }
+    protected virtual void DisactivateBodyParts() { }
 }

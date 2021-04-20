@@ -16,7 +16,6 @@ public class IKSetter : MonoBehaviour
     {
         AimIK HeadIK = this.gameObject.AddComponent<AimIK>();
         HeadIK.solver.transform = headBone;
-        HeadIK.solver.axis = HeadIK.solver.transform.position.normalized;
         HeadIK.solver.AddBone(neckBone);
         HeadIK.solver.IKPositionWeight = 0;
         return HeadIK;
@@ -33,8 +32,8 @@ public class IKSetter : MonoBehaviour
     protected AimIK SetIKRightHand(Transform rightHandBone, Transform rightForeArm, Transform rightArm, Transform rightShoulder)
     {
         AimIK RightIK = this.gameObject.AddComponent<AimIK>();
+        RightIK.solver.axis = new Vector3(0, 1, 0);
         RightIK.solver.transform = rightHandBone;
-        RightIK.solver.axis = RightIK.solver.transform.position.normalized;
         RightIK.solver.AddBone(rightShoulder);
         RightIK.solver.AddBone(rightArm);
         RightIK.solver.AddBone(rightForeArm);
@@ -54,8 +53,8 @@ public class IKSetter : MonoBehaviour
     protected AimIK SetIKLeftHand(Transform leftHandBone, Transform leftForeArm, Transform leftArm, Transform leftShoulder)
     {
         AimIK LeftIK = this.gameObject.AddComponent<AimIK>();
+        LeftIK.solver.axis = new Vector3(0, 1, 0);
         LeftIK.solver.transform = leftHandBone;
-        LeftIK.solver.axis = LeftIK.solver.transform.position.normalized;
         LeftIK.solver.AddBone(leftShoulder);
         LeftIK.solver.AddBone(leftArm);
         LeftIK.solver.AddBone(leftForeArm);
@@ -85,7 +84,7 @@ public class IKSetter : MonoBehaviour
     /// <param name="speed">The speed of the animation for setting the target weight. Default = .01f.</param>
     public virtual void SetTargetAimIK(AimIK aimIK, Transform target, float weight = 1f, float speed = .01f)
     {
-        aimIK.solver.IKPosition = target.position;
+        aimIK.solver.target = target;
         if (aimIK.solver.IKPosition != null)
         {
             StartCoroutine(SetWeightAimIK(aimIK, weight, speed));
@@ -124,7 +123,7 @@ public class IKSetter : MonoBehaviour
     /// </summary>
     /// <param name="effector">Access as fullBody.solver.effector</param>
     /// <param name="weight"></param>
-    /// <param name="speed">Default = .01f.</param>
+    /// <param name="speed">Speed of the coroutine. Default = .01f.</param>
     public virtual void SetWeightsFullBodyIK(IKEffector effector, float weight, float speed = .01f)
     {
         if (effector != null)
@@ -139,16 +138,16 @@ public class IKSetter : MonoBehaviour
     /// </summary>
     /// <param name="aimIK">The specified IK to set.</param>
     /// <param name="weight">The weight of the IK, must be from 0 to 1.</param>
-    /// <param name="speed">The speed of the animation for setting the target weight. Default = .01f</param>
+    /// <param name="speed">The speed of the coroutine for setting the target weight. Default = .01f</param>
     public virtual void SetWeightTargetAimIK(AimIK aimIK, float weight, float speed = .01f)
     {
-        if (aimIK.solver.IKPosition != null)
+        if (aimIK.solver.target != null)
             StartCoroutine(SetWeightAimIK(aimIK, weight, speed));
         else
             Debug.Log("The target is null, first set the target.");
     }
 
-    IEnumerator SetWeightAimIK(AimIK aimIK, float speed, float weight)
+    IEnumerator SetWeightAimIK(AimIK aimIK, float weight, float speed)
     {
         float var = aimIK.solver.IKPositionWeight;
 
