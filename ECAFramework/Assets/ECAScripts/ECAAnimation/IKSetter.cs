@@ -111,8 +111,10 @@ public class IKSetter : MonoBehaviour
     /// <returns></returns>
     protected FullBodyBipedIK SetFullBodyIK()
     {
+        //this.gameObject.AddComponent<FullBodyBipedIK>().solver.effectors = new IKEffector[9];
         FullBodyBipedIK BodyIK = this.gameObject.AddComponent<FullBodyBipedIK>();
-        BodyIK.GetIKSolver().Initiate(root);
+        //BodyIK.GetIKSolver().Initiate(root);
+        BodyIK.solver.rootNode = root;
         return BodyIK;
     }
 
@@ -148,15 +150,24 @@ public class IKSetter : MonoBehaviour
     public virtual void SetTargetFullBodyIK(FullBodyBipedIK fullBody, Transform bodyEffector, Transform leftHandEffector = null, Transform rightHandEffector = null,
         Transform leftFootEffector = null, Transform rightFootEffector = null)
     {
+        Debug.Log(fullBody.solver.effectors.Length);
         fullBody.solver.bodyEffector.position = bodyEffector.position;
-        if(leftHandEffector != null)
+        if (leftHandEffector != null)
+        {
             fullBody.solver.leftHandEffector.position = leftHandEffector.position;
+        }
         if (rightHandEffector != null)
+        {
             fullBody.solver.rightHandEffector.position = rightHandEffector.position;
+        }
         if (leftFootEffector != null)
+        {
             fullBody.solver.leftFootEffector.position = leftFootEffector.position;
+        }
         if (rightFootEffector != null)
+        {
             fullBody.solver.rightFootEffector.position = rightFootEffector.position;
+        }
     }
 
     /// <summary>

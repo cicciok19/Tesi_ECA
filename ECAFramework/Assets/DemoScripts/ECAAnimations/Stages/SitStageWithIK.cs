@@ -12,31 +12,33 @@ public class SitStageWithIK : ECAActionStage
     private IKECA ikManager;
     private ECAAnimatorMxM animatorMxM;
 
-    public EventHandler StageFinished;
-
-    public SitStageWithIK(Transform[] empties)
+    public SitStageWithIK(Transform[] empties, IKECA ikManager)
     {
         sitPoint = empties[0];
         rightFootEffector = empties[1];
         leftFootEffector = empties[2];
 
         ///IK MANAGEMENT
-        ///
-        ///IkManager = EcaAnimator.gameObject.GetComponent<IKECA>();
-        /////prova senza handIK
-        /////IkManager.SetTargetFullBodyIK(IkManager.FullBodyBipedIK, SitPoint, null, null, L_FootEffector, R_FootEffector);
-        
-        //////prova con handIK con lo stesso effector dei piedi
-        ///IkManager.SetTargetFullBodyIK(IkManager.FullBodyBipedIK, SitPoint, L_FootEffector, R_FootEffector, L_FootEffector, R_FootEffector);
+        this.ikManager = ikManager;
+        //prova con handIK con lo stesso effector dei piedi
+        //ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, sitPoint, leftFootEffector, rightFootEffector, leftFootEffector, rightFootEffector);
+    }
 
+    public SitStageWithIK(Transform[] empties)
+    {
+        sitPoint = empties[0];
+        rightFootEffector = empties[1];
+        leftFootEffector = empties[2];
     }
 
     public override void StartStage()
     {
+        ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, sitPoint, leftFootEffector, rightFootEffector, leftFootEffector, rightFootEffector);
+
         animatorMxM = (ECAAnimatorMxM)animator;
         base.StartStage();
         animatorMxM.MxM_BeginEvent("SitDown", sitPoint);
-        //IkManager.SetWeightsForSitting();
+        ikManager.SetWeightsForSitting();
         EndStage();
     }
 

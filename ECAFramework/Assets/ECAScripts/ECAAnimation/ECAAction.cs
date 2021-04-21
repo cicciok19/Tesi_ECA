@@ -21,6 +21,7 @@ public class ECAAction
     public int CurrentStageIdx;
     public ECAActionStage[] AllStages;
     public ECAAnimator EcaAnimator;
+    public IKSetter ikManager;
 
 
     public ECAAction(ECA eca, List<ECAActionStage> stages)
@@ -48,6 +49,10 @@ public class ECAAction
         AllStages = stages.ToArray();
     }
 
+    protected virtual void GetIkManager(ECA eca)
+    {
+        ikManager = eca.GetComponent<IKSetter>();
+    }
 
 
 

@@ -20,6 +20,7 @@ public class IKECA : IKSetter
     private Transform leftForeArm;
     private Transform leftArm;
     private Transform leftShoulder;
+    private Transform root;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -36,6 +37,7 @@ public class IKECA : IKSetter
         leftForeArm = GetBone(HumanBodyBones.LeftLowerArm);
         leftArm = GetBone(HumanBodyBones.LeftUpperArm);
         leftShoulder = GetBone(HumanBodyBones.LeftShoulder);
+        root = GetBone(HumanBodyBones.Hips);
 
         //create the IKs
         headIK = SetIKHead(headBone, neckBone);
@@ -52,5 +54,14 @@ public class IKECA : IKSetter
         SetWeightsFullBodyIK(fullBodyBipedIK.solver.leftFootEffector, 0.7f, 0.01f);
         SetWeightsFullBodyIK(fullBodyBipedIK.solver.leftHandEffector, 0.2f, 0.05f);
         SetWeightsFullBodyIK(fullBodyBipedIK.solver.rightHandEffector, 0.2f, 0.05f);
+    }
+
+    public void SetWeightsToStandUp()
+    {
+        SetWeightsFullBodyIK(fullBodyBipedIK.solver.bodyEffector, 0, 0.01f);
+        SetWeightsFullBodyIK(fullBodyBipedIK.solver.rightFootEffector, 0, 0.01f);
+        SetWeightsFullBodyIK(fullBodyBipedIK.solver.leftFootEffector, 0, 0.01f);
+        SetWeightsFullBodyIK(fullBodyBipedIK.solver.leftHandEffector, 0, 0.05f);
+        SetWeightsFullBodyIK(fullBodyBipedIK.solver.rightHandEffector, 0, 0.05f);
     }
 }

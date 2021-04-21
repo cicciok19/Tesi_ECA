@@ -47,5 +47,10 @@ class Painting : MonoBehaviour
 
     }
 
+    public Transform GetLookableObject()
+    {
+        return lookable.transform;
+    }
+
 
 }

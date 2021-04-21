@@ -7,10 +7,17 @@ public class StandUpStage : ECAActionStage
 {
     Transform sitPoint;
     ECAAnimatorMxM animatorMxM;
+    IKECA ikManager;
 
     public StandUpStage(Transform sitPoint)
     {
         this.sitPoint = sitPoint;
+    }
+
+    public StandUpStage(Transform sitPoint, IKECA ikManager)
+    {
+        this.sitPoint = sitPoint;
+        this.ikManager = ikManager;
     }
 
     public override void StartStage()
@@ -20,19 +27,19 @@ public class StandUpStage : ECAActionStage
         base.StartStage();
         animatorMxM.MxM_ClearRequiredTags();
         animatorMxM.MxM_BeginEvent("StandUp", sitPoint);
-        //EcaAnimator.IK_setWeight(false);
+        ikManager.SetWeightsToStandUp();
 
-        EndStage();
+        animatorMxM.EventComplete += OnEventComplete;
+        animatorMxM.MxM_WaitForEventComplete();
     }
 
     public override void EndStage()
     {
-        animatorMxM.MxM_WaitForEventComplete();
         base.EndStage();
     }
 
-    public override void ReactToActionFinished(object sender, EventArgs e)
+    private void OnEventComplete(object sender, EventArgs e)
     {
-
+        EndStage();
     }
 }

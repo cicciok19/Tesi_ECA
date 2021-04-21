@@ -136,31 +136,12 @@ public class ECA : MonoBehaviour, IIntentHandler
       return null;
     }
 
-
-    protected virtual ECAAnimator AddECAAnimator()
-    {
-      return gameObject.AddComponent<ECAAnimator>();
-    }
-
-
     protected virtual void CreateAnimator()
     {
-        if (ecaAnimator == null)
-        {
-            ecaAnimator = GetComponent<ECAAnimator>();
-            if (ecaAnimator == null)
-            {
-                ecaAnimator = AddECAAnimator();
-                Utility.LogWarning("No ECAAnimator directly assigned by editor to the ECA Script " +
-                                    " and no ECAAnimator Component assigned! therefore it was created automatically");
-            }
-        }
-    
-        ecaAnimator.Init();
+        throw new NotImplementedException();
     }
 
-
-
+    protected virtual void CreateIKManager() { }
 
     public virtual void SetEcaId()
     {
@@ -238,6 +219,7 @@ public class ECA : MonoBehaviour, IIntentHandler
         ECAManager.Instance.AvailableEcas.Add(ID, this);
     
         CreateAnimator();
+        ecaAnimator.Init();
     
         SubscribeHandlerToIntentManager();
     

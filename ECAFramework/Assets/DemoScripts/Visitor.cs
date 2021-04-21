@@ -17,18 +17,28 @@ using UnityEngine.Assertions;
 
 class Visitor : ECA
 {
-// class declaration start
-protected static int counter = 0;
-// class declaration end
+    // class declaration start
+    protected static int counter = 0;
+    protected IKECA ikManager;
+
+    private int idxPaint;
+    // class declaration end
 
 
-    protected List<Painting> paintings =      new List<Painting>();
+    protected List<Painting> paintings = new List<Painting>();
 
 
     private void ArrivedAtPainting(object sender, EventArgs e)
     {
         Utility.Log("Visitor " + this.Name + " arrived at destination...");
-        Application.Quit();
+        idxPaint++;
+        if (paintings.Count > idxPaint)
+            GoToPainting(paintings[idxPaint]);
+        else
+        {
+            Utility.Log("END OF APPLICATION");
+            Application.Quit();
+        }
     }
 
 
@@ -42,20 +52,35 @@ protected static int counter = 0;
 
     protected override void Start()
     {
-      base.Start();
-    
-      SelectDestinations();
+        base.Start();
+
+        idxPaint = 0;
+        SelectDestinations();
     }
 
-
-    protected override ECAAnimator AddECAAnimator()
+    public override void Init()
     {
-      // component should be added to GO
-      ECAAnimatorMxM ecaAnimator = GetComponent<ECAAnimatorMxM>();
-      Assert.IsNotNull(ecaAnimator);
-      return ecaAnimator;
+        base.Init();
+
+        CreateIKManager();
     }
 
+
+    protected override void CreateAnimator()
+    {
+        ecaAnimator = GetComponent<ECAAnimatorMxM>();
+        if (ecaAnimator == null)
+            ecaAnimator = gameObject.AddComponent<ECAAnimatorMxM>();
+        Assert.IsNotNull(ecaAnimator);
+    }
+
+    protected override void CreateIKManager()
+    {
+        ikManager = GetComponent<IKECA>();
+        if (ikManager == null)
+            ikManager = gameObject.AddComponent<IKECA>();
+        Assert.IsNotNull(ikManager);
+    }
 
     protected void SelectDestinations()
     {
@@ -73,7 +98,7 @@ protected static int counter = 0;
         paintings = paintings.OrderBy(a => Guid.NewGuid()).ToList();
     
         // just as debug, go to the first painting
-        GoToPainting(paintings[0]);
+        GoToPainting(paintings[idxPaint]);
     }
 
     public override void SetEcaId()
@@ -87,14 +112,13 @@ protected static int counter = 0;
         List<ECAActionStage> stages = new List<ECAActionStage>();
         GoToStage reachPainting = new GoToStage(painting.GetChairDestination());
         TurnStage turn = new TurnStage(painting.GetChairSitPoint(), true);
-        SitStageWithIK sit = new SitStageWithIK(painting.GetChairEmpties());
-        //CI VUOLE IL LOOK AT STAGE
-        WaitStage wait = new WaitStage(6f);
-        StandUpStage standUp = new StandUpStage(painting.GetChairSitPoint());
+        SitStageWithIK sit = new SitStageWithIK(painting.GetChairEmpties(), ikManager);
+        LookAtStage lookAt = new LookAtStage(painting.GetLookableObject(), ikManager);
+        StandUpStage standUp = new StandUpStage(painting.GetChairSitPoint(), ikManager);
         stages.Add(reachPainting);
         stages.Add(turn);
         stages.Add(sit);
-        stages.Add(wait);
+        stages.Add(lookAt);
         stages.Add(standUp);
 
         ECAAction newAction = new ECAAction(this, stages);
