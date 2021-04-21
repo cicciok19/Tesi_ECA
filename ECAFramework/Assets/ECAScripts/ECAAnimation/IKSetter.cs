@@ -7,14 +7,53 @@ using RootMotion.FinalIK;
 //principal class for setting the Final IK
 public class IKSetter : MonoBehaviour
 {
+    protected Animator animator;
+    private Transform root;
+
+    protected virtual void Start()
+    {
+        animator = this.GetComponent<Animator>();
+        root = GetBone(HumanBodyBones.Hips);
+    }
+
+    /// <summary>
+    /// Get the transform of the selected bone.
+    /// </summary>
+    /// <param name="bone">Select the specified bone in enum HumanBodyBones.</param>
+    /// <returns></returns>
+    protected virtual Transform GetBone(HumanBodyBones bone)
+    {
+        if (animator != null)
+        {
+            Avatar avatar = animator.avatar;
+            if (avatar.isValid)
+            {
+                return animator.GetBoneTransform(bone);
+            }
+            else
+            {
+                Debug.LogError("The avatar is not valid because it is not humanoid.");
+                return null;
+            }
+        }
+        else
+        {
+            Debug.LogError("The animator is null, set the animator.");
+            return null;
+        }
+
+
+    }
+
     /// <summary>
     /// creating the HeadIK of the gameObject, it may be specified the bones of the head and the neck
     /// </summary>
     /// <param name="headBone"></param>
     /// <returns></returns>
     protected AimIK SetIKHead(Transform headBone, Transform neckBone)
-    {
+    {       
         AimIK HeadIK = this.gameObject.AddComponent<AimIK>();
+        HeadIK.GetIKSolver().Initiate(root);
         HeadIK.solver.transform = headBone;
         HeadIK.solver.AddBone(neckBone);
         HeadIK.solver.IKPositionWeight = 0;
@@ -32,6 +71,7 @@ public class IKSetter : MonoBehaviour
     protected AimIK SetIKRightHand(Transform rightHandBone, Transform rightForeArm, Transform rightArm, Transform rightShoulder)
     {
         AimIK RightIK = this.gameObject.AddComponent<AimIK>();
+        RightIK.GetIKSolver().Initiate(root);
         RightIK.solver.axis = new Vector3(0, 1, 0);
         RightIK.solver.transform = rightHandBone;
         RightIK.solver.AddBone(rightShoulder);
@@ -53,6 +93,7 @@ public class IKSetter : MonoBehaviour
     protected AimIK SetIKLeftHand(Transform leftHandBone, Transform leftForeArm, Transform leftArm, Transform leftShoulder)
     {
         AimIK LeftIK = this.gameObject.AddComponent<AimIK>();
+        LeftIK.GetIKSolver().Initiate(root);
         LeftIK.solver.axis = new Vector3(0, 1, 0);
         LeftIK.solver.transform = leftHandBone;
         LeftIK.solver.AddBone(leftShoulder);
@@ -68,10 +109,10 @@ public class IKSetter : MonoBehaviour
     /// </summary>
     /// <param name="rootNode"></param>
     /// <returns></returns>
-    protected FullBodyBipedIK SetFullBodyIK(Transform rootNode)
+    protected FullBodyBipedIK SetFullBodyIK()
     {
         FullBodyBipedIK BodyIK = this.gameObject.AddComponent<FullBodyBipedIK>();
-        BodyIK.solver.rootNode = rootNode;
+        BodyIK.GetIKSolver().Initiate(root);
         return BodyIK;
     }
 
