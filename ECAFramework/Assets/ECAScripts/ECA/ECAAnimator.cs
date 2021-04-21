@@ -213,7 +213,10 @@ public class ECAAnimator : MonoBehaviour
     /// </summary>
     /// <param name="target"></param>
     /// <param name="arrivalDeltaDistance"></param>
-    public virtual void GoTo(Vector3 target, float arrivalDeltaDistance) { }
+    public virtual void GoTo(Vector3 target, float arrivalDeltaDistance)
+    {
+        throw new NotImplementedException();
+    }
 
     /// <summary>
     /// Waits until the ECA has arrived to the destination target
