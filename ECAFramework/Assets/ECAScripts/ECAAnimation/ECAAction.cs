@@ -23,11 +23,27 @@ public class ECAAction
     public ECAAnimator EcaAnimator;
 
 
+    public ECAAction(ECA eca, List<ECAActionStage> stages)
+    {
+        EcaAnimator = eca.ecaAnimator;
+        foreach(var stage in stages)
+        {
+    	    stage.Animator = eca.ecaAnimator;
+            stage.StageFinished += OnStageFinished;
+        }
+    
+        AllStages = stages.ToArray();
+    }
+
+
     public ECAAction(ECAAnimator ecaAnimator, List<ECAActionStage> stages)
     {
         EcaAnimator = ecaAnimator;
         foreach(var stage in stages)
-    	stage.Animator = ecaAnimator;
+        {
+            stage.Animator = ecaAnimator;
+            stage.StageFinished += OnStageFinished;
+        }
     
         AllStages = stages.ToArray();
     }
@@ -71,7 +87,7 @@ public class ECAAction
         if (CurrentStage != null)
         {
             //iscrivo l'azione all'evento che segnala la fine dello stage
-            CurrentStage.StageFinished += OnStageFinished;
+            //CurrentStage.StageFinished += OnStageFinished;
             CurrentStage.StartStage();
         }
         else

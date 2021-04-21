@@ -1,4 +1,4 @@
-:ArrayOb.273{6:Dictionary.4369{32 16:JLSGlobalDeclare.286331408{:String.17{8 9 "98375288"}
+:ArrayOb.273{6:Dictionary.4369{32 17:JLSGlobalDeclare.286331408{:String.17{8 9 "98375288"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{18 19 "Global Declaration"}
@@ -15,10 +15,10 @@ using System.Linq;\n
 :SLSThisIcon.286331409{#4{8 9 "98426344"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  52 45 0.4 0 0 #4{16 26 "public ECAAction"}
+@0  52 45 0.4 0 0 #4{16 17 "public ECAAction"}
  20.0743 2.2 10.24 4  0 #4{0 1 ""}
 #4{0 1 ""}
-@0  4.54851 3.74855 0
+@0  5.41785 3.74855 0
  0  0 #4{16 26 "public ECAAction"}
 #4{0 7 ""}
 #4{0 13 ""}
@@ -81,11 +81,11 @@ using System.Linq;\n
  1.3 0.88 3.6 1  15 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{243 244 "\[\n
+ 1  1 #4{245 246 "\[\n
     if (CurrentStage != null)\n
     \[\n
         //iscrivo l'azione all'evento che segnala la fine dello stage\n
-        CurrentStage.StageFinished += OnStageFinished;\n
+        //CurrentStage.StageFinished += OnStageFinished;\n
         CurrentStage.StartStage();\n
     \]\n
     else\n
@@ -156,16 +156,41 @@ using System.Linq;\n
  0.299999 0.88 6.4 47  6 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{133 134 "\[\n
+ 1  1 #4{200 201 "\[\n
     EcaAnimator = ecaAnimator;\n
     foreach(var stage in stages)\n
-\tstage.Animator = ecaAnimator;\n
+    \[\n
+        stage.Animator = ecaAnimator;\n
+        stage.StageFinished += OnStageFinished;\n
+    \]\n
 \n
     AllStages = stages.ToArray();\n
 \]"}
 #4{9 12 "ECAAction"}
 #4{0 1 ""}
 #4{52 53 "ECAAnimator ecaAnimator, List<ECAActionStage> stages"}
+#4{0 1 ""}
+}
+#9{#4{9 10 "119130209"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{16 17 "ECA eca, List<EC"}
+ 0.299999 0.88 6.4 47  5 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{205 206 "\[\n
+    EcaAnimator = eca.ecaAnimator;\n
+    foreach(var stage in stages)\n
+    \[\n
+\t    stage.Animator = eca.ecaAnimator;\n
+        stage.StageFinished += OnStageFinished;\n
+    \]\n
+\n
+    AllStages = stages.ToArray();\n
+\]"}
+#4{9 12 "ECAAction"}
+#4{0 1 ""}
+#4{36 53 "ECA eca, List<ECAActionStage> stages"}
 #4{0 1 ""}
 }
 #7{#4{9 10 "119128888"}
@@ -261,7 +286,7 @@ using System.Linq;\n
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @11 @3 @156 @0 #6{16 0}
+:CLSCSSem.1118481{ 56  51 @11 @3 @168 @0 #6{16 0}
 #6{16 0}
 #6{16 0}
 #6{16 0}
@@ -269,10 +294,10 @@ using System.Linq;\n
 #6{16 0}
 #6{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#6{16 1@176 }
-#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @26 @0 @128 @0 @0 @0 @77 @0 @0 @0 @0 @0 }
-#1{30@41 @0 @0 @0 @0 @0 @0 @143 @92 @65 @164 @104 @53 @189 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{16@0 @116 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#6{16 1@188 }
+#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @26 @0 @140 @0 @0 @0 @77 @0 @0 @0 @0 @0 }
+#1{30@41 @0 @0 @0 @0 @0 @0 @155 @92 @65 @176 @104 @53 @201 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{16@128 @116 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #6{16 0}
  0}

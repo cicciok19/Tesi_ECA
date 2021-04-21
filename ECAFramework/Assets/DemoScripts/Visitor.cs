@@ -6,9 +6,11 @@
 
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using IntentRecognitionResults;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 
 // global declaration end
@@ -20,7 +22,16 @@ protected static int counter = 0;
 // class declaration end
 
 
-    protected List<Painting> paintings =  new List<Painting>();
+    protected List<Painting> paintings =      new List<Painting>();
+
+
+    private void ArrivedAtPainting(object sender, EventArgs e)
+    {
+        Utility.Log("Visitor " + this.Name + " arrived at destination...");
+        Application.Quit();
+    }
+
+
 
 
     protected override void Awake()
@@ -41,7 +52,7 @@ protected static int counter = 0;
     {
       // component should be added to GO
       ECAAnimatorMxM ecaAnimator = GetComponent<ECAAnimatorMxM>();
-      UnityEngine.Assertions.Assert.IsNotNull(ecaAnimator);
+      Assert.IsNotNull(ecaAnimator);
       return ecaAnimator;
     }
 
@@ -50,9 +61,18 @@ protected static int counter = 0;
     {
         Painting[] scenePaintings = FindObjectsOfType<Painting>();
     
-        foreach (var paint in scenePaintings)
-            this.paintings.Add(paint);
+        if(scenePaintings == null)
+        {
+            Utility.LogWarning("Visitor " + this.Name + " could not find any painting to see...");
+            return;
+        }
     
+        paintings = scenePaintings.ToList<Painting>();
+        
+        // shuffle list, tricks from stackoverflow
+        paintings = paintings.OrderBy(a => Guid.NewGuid()).ToList();
+    
+        // just as debug, go to the first painting
         GoToPainting(paintings[0]);
     }
 
@@ -70,9 +90,13 @@ protected static int counter = 0;
         List<ECAActionStage> stages = new List<ECAActionStage>();
         GoToStage reachPainting = new GoToStage(painting.GetChairDestination());
         stages.Add(reachPainting);
-        ECAAction newAction = new ECAAction(ecaAnimator, stages);
+        ECAAction newAction = new ECAAction(this, stages);
+    
+    
+        newAction.CompletedAction += ArrivedAtPainting;
+        Utility.Log("Visitor " + this.Name + " moving to " + painting.name);
+    
         newAction.StartAction();
-
     }
 
 
