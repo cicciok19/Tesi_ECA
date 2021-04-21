@@ -5,41 +5,52 @@ using RootMotion.FinalIK;
 
 public class IKECA : IKSetter
 {
-    public AimIK HeadIK;
-    public AimIK RightHandIK;
-    public AimIK LeftHandIK;
-    public FullBodyBipedIK FullBodyBipedIK;
+    public AimIK headIK;
+    public AimIK rightHandIK;
+    public AimIK leftHandIK;
+    public FullBodyBipedIK fullBodyBipedIK;
 
-    [SerializeField] private Transform HeadBone;
-    [SerializeField] private Transform NeckBone;
-    [SerializeField] private Transform RightHandBone;
-    [SerializeField] private Transform RightForeArm;
-    [SerializeField] private Transform RightArm;
-    [SerializeField] private Transform RightShoulder;
-    [SerializeField] private Transform LeftHandBone;
-    [SerializeField] private Transform LeftForeArm;
-    [SerializeField] private Transform LeftArm;
-    [SerializeField] private Transform LeftShoulder;
-    [SerializeField] private Transform RootNode;
+    private Transform headBone;
+    private Transform neckBone;
+    private Transform rightHandBone;
+    private Transform rightForeArm;
+    private Transform rightArm;
+    private Transform rightShoulder;
+    private Transform leftHandBone;
+    private Transform leftForeArm;
+    private Transform leftArm;
+    private Transform leftShoulder;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
+        headBone = GetBone(HumanBodyBones.Head);
+        neckBone = GetBone(HumanBodyBones.Neck);
+        rightHandBone = GetBone(HumanBodyBones.RightHand);
+        rightForeArm = GetBone(HumanBodyBones.RightLowerArm);
+        rightArm = GetBone(HumanBodyBones.RightUpperArm);
+        rightShoulder = GetBone(HumanBodyBones.RightShoulder);
+        leftHandBone = GetBone(HumanBodyBones.LeftHand);
+        leftForeArm = GetBone(HumanBodyBones.LeftLowerArm);
+        leftArm = GetBone(HumanBodyBones.LeftUpperArm);
+        leftShoulder = GetBone(HumanBodyBones.LeftShoulder);
+
         //create the IKs
-        HeadIK = SetIKHead(HeadBone, NeckBone);
-        RightHandIK = SetIKRightHand(RightHandBone, RightForeArm, RightArm, RightShoulder);
-        LeftHandIK = SetIKLeftHand(LeftHandBone, LeftForeArm, LeftArm, LeftShoulder);
-        FullBodyBipedIK = SetFullBodyIK(RootNode);
+        headIK = SetIKHead(headBone, neckBone);
+        rightHandIK = SetIKRightHand(rightHandBone, rightForeArm, rightArm, rightShoulder);
+        leftHandIK = SetIKLeftHand(leftHandBone, leftForeArm, leftArm, leftShoulder);
+        fullBodyBipedIK = SetFullBodyIK();
     }
 
  
     public void SetWeightsForSitting()
     {
-        SetWeightsFullBodyIK(FullBodyBipedIK.solver.bodyEffector, 0.6f, 0.02f);
-        SetWeightsFullBodyIK(FullBodyBipedIK.solver.rightFootEffector, 0.7f, 0.01f);
-        SetWeightsFullBodyIK(FullBodyBipedIK.solver.leftFootEffector, 0.7f, 0.01f);
-        SetWeightsFullBodyIK(FullBodyBipedIK.solver.leftHandEffector, 0.2f, 0.05f);
-        SetWeightsFullBodyIK(FullBodyBipedIK.solver.rightHandEffector, 0.2f, 0.05f);
-
+        SetWeightsFullBodyIK(fullBodyBipedIK.solver.bodyEffector, 0.6f, 0.02f);
+        SetWeightsFullBodyIK(fullBodyBipedIK.solver.rightFootEffector, 0.7f, 0.01f);
+        SetWeightsFullBodyIK(fullBodyBipedIK.solver.leftFootEffector, 0.7f, 0.01f);
+        SetWeightsFullBodyIK(fullBodyBipedIK.solver.leftHandEffector, 0.2f, 0.05f);
+        SetWeightsFullBodyIK(fullBodyBipedIK.solver.rightHandEffector, 0.2f, 0.05f);
     }
 }
