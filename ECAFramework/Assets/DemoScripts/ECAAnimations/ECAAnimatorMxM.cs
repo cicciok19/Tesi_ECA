@@ -26,7 +26,6 @@ using MxM;
 
 public class ECAAnimatorMxM : ECAAnimator
 {
-    public event EventHandler IsLookingAt;
     public event EventHandler EventComplete;
     public event EventHandler EventContact;
 
@@ -70,7 +69,7 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
-    public virtual void LookAt(Transform target = null, bool oppositeDirection = false)
+    public override void LookAt(Transform target = null, bool turnToSit = false)
     {
         //If the target is not specified, the ECA will look to the player
         if (target == null)
@@ -81,7 +80,7 @@ public class ECAAnimatorMxM : ECAAnimator
         //MxM_startStrafing();
         m_trajectory.FaceDirectiononIdle = true;
     
-        if (!oppositeDirection)
+        if (!turnToSit)
             m_trajectory.StrafeDirection = dir;
         else
             m_trajectory.StrafeDirection = -dir;
@@ -89,15 +88,17 @@ public class ECAAnimatorMxM : ECAAnimator
         StartCoroutine(EndLookAt(dir));
     }
 
-
-    public virtual IEnumerator EndLookAt(Vector3 dir)
+    /// <summary>
+    /// Waits for the ECA to turn in the given direction of the LookAt method, then trows the event IsLookingAt
+    /// </summary>
+    /// <returns></returns>
+    public override IEnumerator EndLookAt(Vector3 dir)
     {
         //DOVREI FARLO CON GLI ANGOLI E NON CON IL TEMPO
         yield return new WaitForSeconds(1f);
         //MxM_stopStrafing();
         m_trajectory.FaceDirectiononIdle = false;
-        if (IsLookingAt != null)
-            IsLookingAt(this, EventArgs.Empty);
+        base.EndLookingAt();
     }
 
 
@@ -107,6 +108,7 @@ public class ECAAnimatorMxM : ECAAnimator
         StartCoroutine(WaitArrival(target, arrivalDeltaDistance + 0.5f));
     }
 
+    //MxM METHODS IMPLEMENTATION START
 
     public virtual void MxM_BeginEvent(string id, Transform contact = null, string tag = null)
     {
@@ -134,7 +136,7 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
-    public virtual void MxM_startStrafing()
+    public virtual void MxM_StartStrafing()
     {
         m_animator.ClearRequiredTags();
         m_animator.SetRequiredTag("Strafe");
@@ -144,7 +146,7 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
-    public virtual void MxM_stopStrafing()
+    public virtual void MxM_StopStrafing()
     {
         m_animator.ClearRequiredTags();
         m_trajectory.TrajectoryMode = ETrajectoryMoveMode.Normal;
@@ -153,19 +155,19 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
-    public virtual void MxM_clearRequiredTags()
+    public virtual void MxM_ClearRequiredTags()
     {
         m_animator.ClearRequiredTags();
     }
 
 
-    public virtual void MxM_removeRequiredTag(String tag)
+    public virtual void MxM_RemoveRequiredTag(String tag)
     {
         m_animator.RemoveRequiredTag(tag);
     }
 
 
-    public virtual void MxM_waitForEventComplete()
+    public virtual void MxM_WaitForEventComplete()
     {
         StartCoroutine(WaitEventComplete());
     }
@@ -180,7 +182,7 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
-    public virtual void MxM_waitForEventContact()
+    public virtual void MxM_WaitForEventContact()
     {
         StartCoroutine(WaitEventContact());
     }
@@ -194,5 +196,6 @@ public class ECAAnimatorMxM : ECAAnimator
             EventContact(this, EventArgs.Empty);
     }
 
+    //MxM METHODS IMPLEMENTATION END
 
 }

@@ -30,8 +30,7 @@ public class ECAAnimator : MonoBehaviour
     public event EventHandler AudioEnded;
     public event EventHandler HasArrived;
     public event EventHandler IsLookingAt;
-    public event EventHandler EventComplete;
-    public event EventHandler EventContact;
+    public event EventHandler WaitComplete;
 
     public GameObject TextPanel;
     public Text ECAText;
@@ -292,7 +291,7 @@ public class ECAAnimator : MonoBehaviour
     /// If <paramref name="oppositeDirection"/> = true, then i will look at the opposite direction of the target
     /// </summary>
     /// <param name="target"></param>
-    public virtual void LookAt(Transform target = null, bool oppositeDirection = false) { }
+    public virtual void LookAt(Transform target = null, bool turnToSit = false) { }
 
     /// <summary>
     /// Waits for the ECA to turn in the given direction of the LookAt method, then trows the event IsLookingAt
@@ -314,5 +313,23 @@ public class ECAAnimator : MonoBehaviour
     /// <param name="target"></param>
     public virtual void PointAt(Transform target) { }
     //BODY GESTURES END
+
+    public virtual void Wait(float time)
+    {
+        StartCoroutine(WaitFor(time));
+    }
+
+    private IEnumerator WaitFor(float time)
+    {
+        yield return new WaitForSeconds(time);
+        if (WaitComplete != null)
+            WaitComplete(this, EventArgs.Empty);
+    }
+
+    protected virtual void EndLookingAt()
+    {
+        if (IsLookingAt != null)
+            IsLookingAt(this, EventArgs.Empty);
+    }
 
 }

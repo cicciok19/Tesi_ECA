@@ -76,9 +76,6 @@ protected static int counter = 0;
         GoToPainting(paintings[0]);
     }
 
-
-
-
     public override void SetEcaId()
     {
         ID = Ecas.Default;
@@ -89,7 +86,17 @@ protected static int counter = 0;
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
         GoToStage reachPainting = new GoToStage(painting.GetChairDestination());
+        TurnStage turn = new TurnStage(painting.GetChairSitPoint(), true);
+        SitStageWithIK sit = new SitStageWithIK(painting.GetChairEmpties());
+        //CI VUOLE IL LOOK AT STAGE
+        WaitStage wait = new WaitStage(6f);
+        StandUpStage standUp = new StandUpStage(painting.GetChairSitPoint());
         stages.Add(reachPainting);
+        stages.Add(turn);
+        stages.Add(sit);
+        stages.Add(wait);
+        stages.Add(standUp);
+
         ECAAction newAction = new ECAAction(this, stages);
     
     

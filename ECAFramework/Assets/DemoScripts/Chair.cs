@@ -17,21 +17,20 @@ class Chair : MonoBehaviour
 {
 
     protected ChairSitPoint sitPoint;
-    protected ChairLeftFoot leftFootPosition;
-    protected ChairRightFoot rightFootPosition;
+    protected ChairLeftFoot leftFootTransform;
+    protected ChairRightFoot rightFootTransform;
     protected ChairDestination destination;
 
 
     protected void Awake()
     {
         sitPoint = GetComponentInChildren<ChairSitPoint>();
-        leftFootPosition = GetComponentInChildren<ChairLeftFoot>();
-        rightFootPosition = GetComponentInChildren<ChairRightFoot>();
+        leftFootTransform = GetComponentInChildren<ChairLeftFoot>();
+        rightFootTransform = GetComponentInChildren<ChairRightFoot>();
         destination = GetComponentInChildren<ChairDestination>();
     }
 
-
-
+    //GETTERS START
 
     public Transform GetDestination()
     {
@@ -39,6 +38,29 @@ class Chair : MonoBehaviour
       UnityEngine.Assertions.Assert.IsNotNull(destination.transform);
       return destination.transform;
     }
+
+    public Transform GetSitPoint()
+    {
+        UnityEngine.Assertions.Assert.IsNotNull(sitPoint);
+        UnityEngine.Assertions.Assert.IsNotNull(sitPoint.transform);
+        return sitPoint.transform;
+    }
+
+    public Transform GetLeftFootTransform()
+    {
+        UnityEngine.Assertions.Assert.IsNotNull(leftFootTransform);
+        UnityEngine.Assertions.Assert.IsNotNull(leftFootTransform.transform);
+        return leftFootTransform.transform;
+    }
+
+    public Transform GetRightFootTransform()
+    {
+        UnityEngine.Assertions.Assert.IsNotNull(rightFootTransform);
+        UnityEngine.Assertions.Assert.IsNotNull(rightFootTransform.transform);
+        return rightFootTransform.transform;
+    }
+
+    //GETTERS END
 
 
 }

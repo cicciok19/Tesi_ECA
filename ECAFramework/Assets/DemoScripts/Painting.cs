@@ -32,5 +32,20 @@ class Painting : MonoBehaviour
         return chair.GetDestination();
     }
 
+    public Transform GetChairSitPoint()
+    {
+        return chair.GetSitPoint();
+    }
+
+    public Transform[] GetChairEmpties()
+    {
+        var sitPoint = chair.GetSitPoint();
+        var rFoot = chair.GetRightFootTransform();
+        var lFoot = chair.GetLeftFootTransform();
+
+        return new Transform[] { sitPoint, rFoot, lFoot };
+
+    }
+
 
 }
