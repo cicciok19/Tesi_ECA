@@ -1,4 +1,4 @@
-:ArrayOb.273{6:Dictionary.4369{32 17:JLSGlobalDeclare.286331408{:String.17{8 9 "98375288"}
+:ArrayOb.273{6:Dictionary.4369{32 19:JLSGlobalDeclare.286331408{:String.17{8 9 "98375288"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{18 19 "Global Declaration"}
@@ -18,7 +18,7 @@ using System.Linq;\n
 @0  52 45 0.4 0 0 #4{16 17 "public ECAAction"}
  20.0743 2.2 10.24 4  0 #4{0 1 ""}
 #4{0 1 ""}
-@0  5.41785 3.74855 0
+@0  4.47607 4.24178 0
  0  0 #4{16 26 "public ECAAction"}
 #4{0 7 ""}
 #4{0 13 ""}
@@ -81,11 +81,11 @@ using System.Linq;\n
  1.3 0.88 3.6 1  15 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{245 246 "\[\n
+ 1  1 #4{243 246 "\[\n
     if (CurrentStage != null)\n
     \[\n
         //iscrivo l'azione all'evento che segnala la fine dello stage\n
-        //CurrentStage.StageFinished += OnStageFinished;\n
+        CurrentStage.StageFinished += OnStageFinished;\n
         CurrentStage.StartStage();\n
     \]\n
     else\n
@@ -96,20 +96,36 @@ using System.Linq;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#7{#4{9 10 "130572360"}
+#7{#4{9 10 "118544504"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{11 12 "EcaAnimator"}
- 1.3 1.88 4.4 1  38 #4{0 1 ""}
+@0  8 2 0.4 0 0 #4{9 10 "ikManager"}
+ 1.3 1.88 3.6 1  40 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{11 12 "EcaAnimator"}
-#4{11 12 "ECAAnimator"}
+ 1  0 #4{9 10 "ikManager"}
+#4{8 9 "IKSetter"}
 #4{0 1 ""}
 #6{16 0}
 #6{16 0}
 #4{0 2 ""}
 @0 #4{0 1 ""}
+#4{0 1 ""}
+}
+#8{#4{9 10 "129308888"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{17 18 "OnCompletedAction"}
+ 1.3 0.879999 6.8 1  17 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{84 85 "\[\n
+    if (CompletedAction != null)\n
+        CompletedAction(this, EventArgs.Empty);\n
+\]"}
+#4{17 18 "OnCompletedAction"}
+#4{12 13 "virtual void"}
+#4{0 1 ""}
 #4{0 1 ""}
 }
 #8{#4{9 10 "129303400"}
@@ -133,20 +149,20 @@ using System.Linq;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#8{#4{9 10 "129308888"}
+#7{#4{9 10 "130572360"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{17 18 "OnCompletedAction"}
- 1.3 0.879999 6.8 1  17 #4{0 1 ""}
+@0  8 2 0.4 0 0 #4{11 12 "EcaAnimator"}
+ 1.3 1.88 4.4 1  38 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{84 85 "\[\n
-    if (CompletedAction != null)\n
-        CompletedAction(this, EventArgs.Empty);\n
-\]"}
-#4{17 18 "OnCompletedAction"}
-#4{12 13 "virtual void"}
+ 1  1 #4{11 12 "EcaAnimator"}
+#4{11 12 "ECAAnimator"}
 #4{0 1 ""}
+#6{16 0}
+#6{16 0}
+#4{0 2 ""}
+@0 #4{0 1 ""}
 #4{0 1 ""}
 }
 :SLSConstructor.286331408{#4{9 10 "119130208"}
@@ -156,12 +172,12 @@ using System.Linq;\n
  0.299999 0.88 6.4 47  6 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{200 201 "\[\n
+ 1  1 #4{202 203 "\[\n
     EcaAnimator = ecaAnimator;\n
     foreach(var stage in stages)\n
     \[\n
         stage.Animator = ecaAnimator;\n
-        stage.StageFinished += OnStageFinished;\n
+        //stage.StageFinished += OnStageFinished;\n
     \]\n
 \n
     AllStages = stages.ToArray();\n
@@ -178,12 +194,12 @@ using System.Linq;\n
  0.299999 0.88 6.4 47  5 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{205 206 "\[\n
+ 1  1 #4{207 208 "\[\n
     EcaAnimator = eca.ecaAnimator;\n
     foreach(var stage in stages)\n
     \[\n
 \t    stage.Animator = eca.ecaAnimator;\n
-        stage.StageFinished += OnStageFinished;\n
+        //stage.StageFinished += OnStageFinished;\n
     \]\n
 \n
     AllStages = stages.ToArray();\n
@@ -193,6 +209,21 @@ using System.Linq;\n
 #4{36 53 "ECA eca, List<ECAActionStage> stages"}
 #4{0 1 ""}
 }
+:SLSProtectMethod.286331408{#4{9 10 "127721464"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{12 13 "GetIkManager"}
+ 1.3 0.88 4.8 10  7 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{49 50 "\[\n
+    ikManager = eca.GetComponent<IKSetter>();\n
+\]"}
+#4{12 13 "GetIkManager"}
+#4{12 13 "virtual void"}
+#4{7 8 "ECA eca"}
+#4{0 1 ""}
+ 0}
 #7{#4{9 10 "119128888"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -231,15 +262,6 @@ using System.Linq;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-:JLSFriendDeclare.286331408{#4{8 9 "98376056"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{17 18 "Class Declaration"}
- 0.299999 0.88 6.8 33  5 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 0  0 #4{0 1 ""}
-}
 #8{#4{9 10 "129307712"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -256,6 +278,15 @@ using System.Linq;\n
 #4{12 13 "virtual void"}
 #4{26 27 "object sender, EventArgs e"}
 #4{0 1 ""}
+}
+:JLSFriendDeclare.286331408{#4{8 9 "98376056"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{17 18 "Class Declaration"}
+ 0.299999 0.88 6.8 33  5 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 0  0 #4{0 1 ""}
 }
 :JLSExternObject.286331409{#4{9 10 "131321384"}
 #1{2@0 @0 }
@@ -286,23 +317,23 @@ using System.Linq;\n
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @11 @3 @168 @0 #6{16 0}
+:CLSCSSem.1118481{ 56  51 @11 @3 @207 @0 #6{16 0}
 #6{16 0}
 #6{16 0}
-#6{16 0}
+#6{16 1@155 }
 #6{16 0}
 #6{16 0}
 #6{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#6{16 1@188 }
-#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @26 @0 @140 @0 @0 @0 @77 @0 @0 @0 @0 @0 }
-#1{30@41 @0 @0 @0 @0 @0 @0 @155 @92 @65 @176 @104 @53 @201 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{16@128 @116 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#6{16 1@215 }
+#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @26 @0 @167 @0 @0 @0 @116 @0 @77 @0 @0 @0 }
+#1{30@41 @0 @0 @0 @0 @0 @0 @182 @104 @65 @195 @92 @53 @228 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{16@143 @131 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #6{16 0}
  0}
 :Float.17{0 }
-#14{1 }
-#14{0 }
-#14{1 }
+#15{1 }
+#15{0 }
+#15{1 }
 }
