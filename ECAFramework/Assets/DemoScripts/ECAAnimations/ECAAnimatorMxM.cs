@@ -15,6 +15,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UI;
 using CrazyMinnow.SALSA;
 using UnityEngine.AI;
@@ -26,10 +27,8 @@ using MxM;
 
 public class ECAAnimatorMxM : ECAAnimator
 {
-    public event EventHandler EventComplete;
-    public event EventHandler EventContact;
 
-    public Dictionary<String, MxMEventDefinition> MxM_EventDefinitions =  new Dictionary<String, MxMEventDefinition>();
+    public Dictionary<String, MxMEventDefinition> MxM_EventDefinitions =     new Dictionary<String, MxMEventDefinition>();
     public MxMTrajectoryGenerator_BasicAI m_trajectory;
     public MxMAnimator m_animator;
 
@@ -57,6 +56,24 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
+    protected IEnumerator WaitEventContact()
+    {
+        while (m_animator.CurrentEventState != EEventState.Action)
+            yield return null;
+    
+        RaiseEvent("TriggeredAnimationContact", EventArgs.Empty);
+    }
+
+
+    protected IEnumerator WaitEventComplete()
+    {
+        while (!m_animator.IsEventComplete)
+            yield return null;
+    
+        RaiseEvent("TriggeredAnimationComplete", EventArgs.Empty);
+    }
+
+
 
 
     public override void Init()
@@ -69,48 +86,15 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
-    public override void LookAt(Transform target = null, bool turnToSit = false)
-    {
-        //If the target is not specified, the ECA will look to the player
-        if (target == null)
-            target = Player.transform;
-    
-        Vector3 dir = (target.position - this.transform.position).normalized;
-    
-        //MxM_startStrafing();
-        m_trajectory.FaceDirectiononIdle = true;
-    
-        if (!turnToSit)
-            m_trajectory.StrafeDirection = dir;
-        else
-            m_trajectory.StrafeDirection = -dir;
-    
-        StartCoroutine(EndLookAt(dir));
-    }
-
-    /// <summary>
-    /// Waits for the ECA to turn in the given direction of the LookAt method, then trows the event IsLookingAt
-    /// </summary>
-    /// <returns></returns>
-    public override IEnumerator EndLookAt(Vector3 dir)
-    {
-        //DOVREI FARLO CON GLI ANGOLI E NON CON IL TEMPO
-        yield return new WaitForSeconds(1f);
-        //MxM_stopStrafing();
-        m_trajectory.FaceDirectiononIdle = false;
-        base.EndLookingAt();
-    }
-
-
     public override void GoTo(Vector3 target, float arrivalDeltaDistance)
     {
+        Assert.IsNotNull(navMeshAgent);
         navMeshAgent.SetDestination(target);
         StartCoroutine(WaitArrival(target, arrivalDeltaDistance + 0.5f));
     }
 
-    //MxM METHODS IMPLEMENTATION START
 
-    public virtual void MxM_BeginEvent(string id, Transform contact = null, string tag = null)
+    public override void TriggerAnimation(string id, Transform contact = null, string tag = null)
     {
         var eventDef = MxM_EventDefinitions[id];
     
@@ -129,14 +113,42 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
-    public virtual void MxM_SetTag(string tag)
+    public override void SetAnimationGroup(string tag)
     {
         m_animator.ClearRequiredTags();
         m_animator.AddRequiredTag(tag);
     }
 
 
-    public virtual void MxM_StartStrafing()
+    public override void LookAt(Transform target = null, bool turnToSit = false)
+    {
+        //If the target is not specified, the ECA will look to the player
+        if (target == null)
+            target = Player.transform;
+        if (turnToSit)
+        {
+            Vector3 dir = target.forward;
+    
+            m_trajectory.FaceDirectiononIdle = true;
+            m_trajectory.StrafeDirection = dir;
+    
+            StartCoroutine(WaitLookAt(dir));
+        }
+    
+        Debug.DrawRay(target.position, target.forward * 50, Color.red, 10);
+    }
+
+
+    public override IEnumerator WaitLookAt(Vector3 dir)
+    {
+        //DOVREI FARLO CON GLI ANGOLI E NON CON IL TEMPO
+        yield return new WaitForSeconds(.7f);
+        m_trajectory.FaceDirectiononIdle = false;
+        EndLookingAt();
+    }
+
+
+    public void MxM_StartStrafing()
     {
         m_animator.ClearRequiredTags();
         m_animator.SetRequiredTag("Strafe");
@@ -146,7 +158,7 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
-    public virtual void MxM_StopStrafing()
+    public void MxM_StopStrafing()
     {
         m_animator.ClearRequiredTags();
         m_trajectory.TrajectoryMode = ETrajectoryMoveMode.Normal;
@@ -155,47 +167,34 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
-    public virtual void MxM_ClearRequiredTags()
+    public void MxM_ClearRequiredTags()
     {
         m_animator.ClearRequiredTags();
     }
 
 
-    public virtual void MxM_RemoveRequiredTag(String tag)
+    public void MxM_RemoveRequiredTag(String tag)
     {
         m_animator.RemoveRequiredTag(tag);
     }
 
 
-    public virtual void MxM_WaitForEventComplete()
+    public override void ClearAnimationGroup()
     {
-        StartCoroutine(WaitEventComplete());
+        m_animator.ClearRequiredTags();
     }
 
 
-    public IEnumerator WaitEventComplete()
-    {
-        while (!m_animator.IsEventComplete)
-            yield return null;
-        if (EventComplete != null)
-            EventComplete(this, EventArgs.Empty);
-    }
-
-
-    public virtual void MxM_WaitForEventContact()
+    public override void WaitForTriggeredAnimationContact()
     {
         StartCoroutine(WaitEventContact());
     }
 
 
-    public IEnumerator WaitEventContact()
+    public override void WaitForTriggeredAnimationComplete()
     {
-        while (m_animator.CurrentEventState != EEventState.Action)
-            yield return null;
-        if (EventContact != null)
-            EventContact(this, EventArgs.Empty);
+        StartCoroutine(WaitEventComplete());
     }
 
-    //MxM METHODS IMPLEMENTATION END
 
 }

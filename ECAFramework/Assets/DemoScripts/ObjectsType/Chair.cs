@@ -28,6 +28,8 @@ class Chair : MonoBehaviour
         leftFootTransform = GetComponentInChildren<ChairLeftFoot>();
         rightFootTransform = GetComponentInChildren<ChairRightFoot>();
         destination = GetComponentInChildren<ChairDestination>();
+
+        SetCorrectSitDirection();
     }
 
     //GETTERS START
@@ -61,6 +63,20 @@ class Chair : MonoBehaviour
     }
 
     //GETTERS END
+
+    /// <summary>
+    /// Used to set the correct orientation of the sit point
+    /// </summary>
+    public void SetCorrectSitDirection()
+    {
+
+        var destinationTransform = destination.transform;
+        var sitPointTransform = sitPoint.transform;
+
+        Vector3 dir = (destinationTransform.position - sitPointTransform.position).normalized;
+        dir.y = 0;
+        sitPoint.transform.forward = dir;
+    }
 
 
 }

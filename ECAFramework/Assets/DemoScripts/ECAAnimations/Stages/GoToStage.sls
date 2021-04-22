@@ -1,14 +1,15 @@
-:ArrayOb.273{6:Dictionary.4369{16 8:SLSPublicMethod.286331408{:String.17{9 10 "155400552"}
+:ArrayOb.273{6:Dictionary.4369{16 11:SLSPublicMethod.286331408{:String.17{9 10 "155400552"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{10 11 "StartStage"}
  1.3 0.88 4 1  6 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{115 122 "\[\n
+ 1  1 #4{190 191 "\[\n
     base.StartStage();\n
-    animator.GoTo(destination.position, 0.05f);\n
-    animator.HasArrived += OnArrivedECA;\n
+    animator.navMeshAgent.SetDestination(destination.position);\n
+    //animator.GoTo(destination.position, stopDistance);\n
+    //animator.HasArrived += OnArrivedECA;\n
 \]"}
 #4{10 11 "StartStage"}
 #4{13 14 "override void"}
@@ -22,9 +23,9 @@
  0.299999 0.88 6.4 47  5 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{52 70 ": base()\n
+ 1  1 #4{59 70 ":base()\n
 \[\n
-        this.destination = destination;\n
+                this.destination = destination;\n
 \]"}
 #4{9 12 "GoToStage"}
 #4{0 1 ""}
@@ -45,6 +46,22 @@
 #7{16 0}
 #4{1 2 "S"}
 @0 #4{0 1 ""}
+}
+:SLSProperty.286331392{#4{9 10 "132243528"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{12 13 "StopDistance"}
+ 1.3 0.88 4.8 1  8 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{15 180 "\[\n
+  set; get;\n
+\]"}
+#4{12 13 "StopDistance"}
+#4{5 6 "float"}
+#4{0 1 ""}
+#4{0 1 ""}
+#4{0 6 ""}
 }
 :JLSFriendDeclare.286331408{#4{9 10 "130155600"}
 #1{2@0 @0 }
@@ -85,6 +102,22 @@
 #4{0 1 ""}
 #4{0 1 ""}
 }
+:SLSProtectMember.286331409{#4{9 10 "162894944"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{12 13 "stopDistance"}
+ 1.6 1.88 4.8 11  30 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{12 13 "stopDistance"}
+#4{5 6 "float"}
+#4{0 1 ""}
+#7{16 0}
+#7{16 0}
+#4{1 2 "S"}
+@0 #4{8 9 "   0.05f"}
+#4{0 1 ""}
+}
 :JLSGlobalDeclare.286331408{#4{9 10 "130155344"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -97,6 +130,22 @@ using System.Collections.Generic;\n
 using UnityEngine;\n
 using System;\n
 "}
+}
+#3{#4{9 10 "164810488"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{6 7 "Update"}
+ 1.3 0.88 2.4 1  13 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{110 112 "\[\n
+  if(Vector3.Distance(destination.position, animator.Eca.transform.position) <= stopDistance)\n
+\tEndStage();\n
+\]"}
+#4{6 7 "Update"}
+#4{13 14 "override void"}
+#4{0 1 ""}
+#4{0 1 ""}
 }
 :SLSPrivateMember.286331409{#4{8 9 "96613904"}
 #1{2@0 @0 }
@@ -115,23 +164,23 @@ using System;\n
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @27 @73 @41 @0 #7{16 1@81 }
-#7{16 0}
-#7{16 1@49 }
-#7{16 0}
-#7{16 0}
+:CLSCSSem.1118481{ 56  51 @27 @101 @54 @0 #7{16 1@121 }
+#7{16 1@86 }
+#7{16 1@62 }
 #7{16 0}
 #7{16 0}
-#1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#7{16 0}
 #7{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{16@3 @61 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#7{16 0}
+#1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{16@3 @74 @41 @0 @0 @0 @0 @109 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@15 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #7{16 0}
  0}
 :Float.17{0 }
-#13{1 }
-#13{0 }
-#13{1 }
+#15{1 }
+#15{0 }
+#15{1 }
 }

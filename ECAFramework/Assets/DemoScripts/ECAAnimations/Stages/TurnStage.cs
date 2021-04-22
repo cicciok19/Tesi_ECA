@@ -19,7 +19,6 @@ public class TurnStage : ECAActionStage
     {
         animator.IsLookingAt += OnTurningFinished;
         animator.LookAt(sitPoint, turnToSit);
-        //endStage();
     }
 
     public override void EndStage()

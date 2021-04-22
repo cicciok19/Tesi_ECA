@@ -13,43 +13,59 @@ using UnityEngine;
 
 class Painting : MonoBehaviour
 {
-    public int id;
-    private bool occupied;
-    protected LookableObject lookable;
-    protected Chair chair;
 
-    public bool Occupied { get { return occupied; } set { occupied = value; } }
+    private bool occupied;
+
+    protected LookableObject lookable;
+
+    public int id;
+
 
     protected void Awake()
     {
         lookable = GetComponentInChildren<LookableObject>();
-        chair = GetComponentInChildren<Chair>();
+        chair = GetComponentInChildren<SittableObject>();
     }
 
-    public Transform GetChairDestination()
-    {
-        return chair.GetDestination();
-    }
+
+
 
     public Transform GetChairSitPoint()
     {
         return chair.GetSitPoint();
     }
 
+
+    public Transform GetChairDestination()
+    {
+        return chair.GetDestination();
+    }
+
+
     public Transform[] GetChairEmpties()
     {
         var sitPoint = chair.GetSitPoint();
         var rFoot = chair.GetRightFootTransform();
         var lFoot = chair.GetLeftFootTransform();
-
+    
         return new Transform[] { sitPoint, rFoot, lFoot };
-
     }
+
 
     public Transform GetLookableObject()
     {
         return lookable.transform;
     }
+
+
+    public SittableObject chair
+    {
+      set; get;
+    }
+
+
+    public bool Occupied
+    { get { return occupied; } set { occupied = value; } }
 
 
 }

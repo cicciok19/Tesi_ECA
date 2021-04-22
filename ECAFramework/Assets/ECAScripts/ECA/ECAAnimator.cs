@@ -15,40 +15,49 @@ using UnityEngine.AI;
 using DG.Tweening;
 using MxM;
 
-// global declaration end
 
 //define all body parts of ECA
-public enum BodyParts
+		public enum BodyParts
 {
     Head,
     ArmL,
     ArmR
 }
 
+
+// global declaration end
+
 public class ECAAnimator : MonoBehaviour
 {
     public event EventHandler AudioEnded;
     public event EventHandler HasArrived;
     public event EventHandler IsLookingAt;
+    public event EventHandler EventContact;
     public event EventHandler WaitComplete;
+    public event EventHandler TriggeredAnimationComplete;
+    public event EventHandler TriggeredAnimationContact;
 
-    public GameObject TextPanel;
-    public Text ECAText;
-
-    protected ECA Eca;
-    protected NavMeshAgent navMeshAgent;
-
-    public Animator Animator;
-    public AudioSource audioSource;
-
-    public GameObject Player;
+    internal NavMeshAgent navMeshAgent;
 
     protected ECAAction CurrentAction;
 
-    //Settings
-    /// <summary>
-    /// Create an AudioSource in order to speech. If an audio source has already been applied to the object, this is used
-    /// </summary>
+    public GameObject Player;
+    public Text ECAText;
+    public GameObject TextPanel;
+    public Animator Animator;
+    public AudioSource audioSource;
+
+
+    private IEnumerator WaitFor(float time)
+    {
+        yield return new WaitForSeconds(time);
+        if (WaitComplete != null)
+            WaitComplete(this, EventArgs.Empty);
+    }
+
+
+
+
     protected virtual void CreateAudioSource()
     {
         if (this.GetComponent<AudioSource>() != null)
@@ -59,9 +68,8 @@ public class ECAAnimator : MonoBehaviour
         else
             audioSource = gameObject.AddComponent<AudioSource>();
     }
-    /// <summary>
-    /// Override this methond if you want customize audioSource parameters
-    /// </summary>
+
+
     protected virtual void ConfigureAudioSource()
     {
         if(audioSource == null)
@@ -77,12 +85,15 @@ public class ECAAnimator : MonoBehaviour
         audioSource.maxDistance = 1000;
         audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
     }
+
+
     protected virtual void SetAnimator()
     {
         Animator = GetComponent<Animator>();
         if (Animator == null)
             Utility.LogWarning("No animator found for ECA: " + Eca.Name);
     }
+
 
     protected virtual void SetNavMeshAgent()
     {
@@ -91,20 +102,44 @@ public class ECAAnimator : MonoBehaviour
             Utility.LogError("No navMesh attached for ECA: " + Eca.Name + ". CREATE ONE");
     }
 
-    /// <summary>
-    /// Called whenever an event causes the emotional state of the ECA to be updated
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
+
     protected virtual void UpdateEmotionAnimation(object sender, EventArgs e)
     {
         //Manage here emotion updating!!
         //GameObject.FindObjectOfType<GuiDebug>().ShowEmotion(Eca.Name, Eca.EmotionManager.ActualEmotion);
     }
 
-    /// <summary>
-    /// Called in ECAGameManager to init all the variables we neew
-    /// </summary>
+
+    protected virtual void EndLookingAt()
+    {
+        if (IsLookingAt != null)
+            IsLookingAt(this, EventArgs.Empty);
+    }
+
+
+    protected void RaiseEvent(string handlerName, EventArgs args)
+    {
+        EventHandler handler = null;
+        if (handlerName == "TriggeredAnimationComplete")
+            handler = TriggeredAnimationComplete;
+        else
+        if (handlerName == "TriggeredAnimationContact")
+            handler = TriggeredAnimationContact;
+    
+        if (handler != null)
+    	handler(this, args);
+    }
+
+
+    protected void Update()
+    {
+      if(currentStage != null)
+    	currentStage.Update();
+    }
+
+
+
+
     public virtual void Init()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -118,58 +153,13 @@ public class ECAAnimator : MonoBehaviour
         UpdateEmotionAnimation(null, null);
     }
 
-    // TEXT DISPLAY:
 
-    /// <summary>
-    /// Active (-> show) optional text panel used to contain text to speech.
-    /// </summary>
-    public void ActivateTextPanel()
-    {
-        if (TextPanel == null || ECAText == null)
-            Utility.LogWarning("TextPanel or ECAText not setted");
-        else
-            TextPanel.SetActive(false);
-    }
-    /// <summary>
-    /// Show text to speech in ECA related text panel.
-    /// </summary>
-    /// <param name="text">text pronounced by ECA</param>
-    public void ShowText(string text)
-    {
-        if (TextPanel != null && ECAText != null)
-        {
-            TextPanel.SetActive(true);
-            ECAText.text = text;
-        }
-    }
-    /// <summary>
-    /// Hide textPanel and reset text value.
-    /// </summary>
-    public void HideText()
-    {
-        if (TextPanel != null && ECAText != null)
-        {
-            ECAText.text = "";
-            TextPanel.SetActive(false);
-        }
-    }
-    
-    //TEXT DISPLAY END
-
-    //AUDIO PLAY:
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="audioData">audio version of the message</param>
-    /// <param name="messageContent">string version of the message</param>
-    /// <returns></returns>
     public IEnumerator Play(float[] audioData, string messageContent, Func<bool> condition = null)
     {
         //if condition for play audio not satisfied not play audio
         if (condition != null && !condition())
             yield return null;
-
+    
         else if (audioSource != null)
         {
             Salsa3D salsa = this.GetComponent<Salsa3D>();
@@ -203,27 +193,13 @@ public class ECAAnimator : MonoBehaviour
             AudioEnded(this, EventArgs.Empty);
     }
 
-    //AUDIO PLAY END:
 
-    //MOVEMENTS:
-    /// <summary>
-    /// With NavMeshAgent: send the eca to the specified target until it reaches a distance of <paramref name="arrivalDeltaDistance"/>
-    /// Without NavMesh: teleportation is applied
-    /// In both cases, the method <see cref="Arrived"/> is launched when the agent arrives at the destination
-    /// </summary>
-    /// <param name="target"></param>
-    /// <param name="arrivalDeltaDistance"></param>
     public virtual void GoTo(Vector3 target, float arrivalDeltaDistance)
     {
         throw new NotImplementedException();
     }
 
-    /// <summary>
-    /// Waits until the ECA has arrived to the destination target
-    /// </summary>
-    /// <param name="target"></param>
-    /// <param name="deltaDistance"></param>
-    /// <returns></returns>
+
     public virtual IEnumerator WaitArrival(Vector3 target, float deltaDistance)
     {
         if (deltaDistance > 0)
@@ -233,12 +209,11 @@ public class ECAAnimator : MonoBehaviour
         }
         else
             Utility.LogError("delta Distance <= 0");
-
+    
         Arrived();
     }
-    /// <summary>
-    /// Called when eca arrive to the target specified by <see cref="GoTo(Transform, float)"/>
-    /// </summary>
+
+
     public virtual void Arrived()
     {
         Utility.Log(Eca.name + " Arrived to destination!");
@@ -246,14 +221,11 @@ public class ECAAnimator : MonoBehaviour
             Utility.LogWarning("No navMeshAgent found. Add NamMeshAgent or override this method if you wont to use your policy");
         else
             navMeshAgent.isStopped = true;
-
+    
         if (HasArrived != null)
             HasArrived(this, EventArgs.Empty);
     }
-    //MOVEMENTS END
 
-
-    //VISION CAPABILITY:
 
     public virtual bool IsWatchingSomewhere(Camera camera, Collider Traget)
     {
@@ -263,13 +235,8 @@ public class ECAAnimator : MonoBehaviour
         else
             return false;
     }
-    /// <summary>
-    /// To check if the ECA is observed by someone
-    /// </summary>
-    /// <param name="camera">defines the point of view from which one could be observed</param>
-    /// <param name="minDistance">minimum distance at which the camera must be so that it can be assumed that you are being watched</param>
-    /// <param name="specificPartOfTheBody">if you want to specify a particular area of the body that needs to be looked at</param>
-    /// <returns></returns>
+
+
     public virtual bool IsWatchingMe(Camera camera, float minDistance = 4f, Collider specificPartOfTheBody = null)
     {
           if (specificPartOfTheBody == null)
@@ -289,50 +256,105 @@ public class ECAAnimator : MonoBehaviour
         else
             return false;
     }
-    /// <summary>
-    /// Look at target position. If target==null, ECA will look to the player, otherwise the ECA will look to the specified target.
-    /// If <paramref name="oppositeDirection"/> = true, then i will look at the opposite direction of the target
-    /// </summary>
-    /// <param name="target"></param>
-    public virtual void LookAt(Transform target = null, bool turnToSit = false) { }
 
-    /// <summary>
-    /// Waits for the ECA to turn in the given direction of the LookAt method, then trows the event IsLookingAt
-    /// </summary>
-    /// <returns></returns>
-    public virtual IEnumerator EndLookAt(Vector3 dir)
+
+    public void ActivateTextPanel()
+    {
+        if (TextPanel == null || ECAText == null)
+            Utility.LogWarning("TextPanel or ECAText not setted");
+        else
+            TextPanel.SetActive(false);
+    }
+
+
+    public void ShowText(string text)
+    {
+        if (TextPanel != null && ECAText != null)
+        {
+            TextPanel.SetActive(true);
+            ECAText.text = text;
+        }
+    }
+
+
+    public void HideText()
+    {
+        if (TextPanel != null && ECAText != null)
+        {
+            ECAText.text = "";
+            TextPanel.SetActive(false);
+        }
+    }
+
+
+    public ECA Eca
+    {
+      set; get;
+    }
+
+
+    public ECAActionStage currentStage
+    {
+      set; get;
+    } = null;
+
+
+    public virtual void PointAt(Transform target)
+    {
+    }
+
+
+    public virtual void LookAt(Transform target = null, bool turnToSit = false)
+    {
+    }
+
+
+    public virtual IEnumerator WaitLookAt(Vector3 dir)
     {
         yield return new WaitForSeconds(0.1f);
     }
 
-    //VISION CAPABILITY END
-
-
-    //BODY GESTURES:
-
-    /// <summary>
-    /// Default <see cref="BodyParts"/> used = ArmL
-    /// </summary>
-    /// <param name="target"></param>
-    public virtual void PointAt(Transform target) { }
-    //BODY GESTURES END
 
     public virtual void Wait(float time)
     {
         StartCoroutine(WaitFor(time));
     }
 
-    private IEnumerator WaitFor(float time)
+
+    public void ToggleNavMesh(bool enable)
     {
-        yield return new WaitForSeconds(time);
-        if (WaitComplete != null)
-            WaitComplete(this, EventArgs.Empty);
+            navMeshAgent.enabled = enable;
     }
 
-    protected virtual void EndLookingAt()
+
+    public virtual void WaitForTriggeredAnimationComplete()
     {
-        if (IsLookingAt != null)
-            IsLookingAt(this, EventArgs.Empty);
+      // to be redefined in derived classes
     }
+
+
+    public virtual void WaitForTriggeredAnimationContact()
+    {
+      // to be redefined in derived classes
+    }
+
+
+    public virtual void TriggerAnimation(string id, Transform contact = null, string tag = null)
+    {
+      // to be redefined in derived classes
+    }
+
+
+    public virtual void SetAnimationGroup(string tag)
+    {
+      // to be redefined in derived classes
+    }
+
+
+    public virtual void ClearAnimationGroup()
+    {
+      // to be redefined in derived classes
+    }
+
 
 }

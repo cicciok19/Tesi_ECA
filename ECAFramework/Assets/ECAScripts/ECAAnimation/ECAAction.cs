@@ -60,12 +60,56 @@ public class ECAAction
     }
 
 
+    protected virtual void OnStageFinished(object sender, EventArgs e)
+    {
+        Detach(CurrentStage);
+        CurrentStageIdx++;
+        NextStage();
+    }
+
+
+    protected virtual void OnStageAborted(object sender, EventArgs e)
+    {
+        Utility.Log("Stage " + sender.GetType() + "has aborted");
+        Detach(CurrentStage);
+    }
+
+
+    protected virtual void OnStagePaused(object sender, EventArgs e)
+    {
+        Utility.Log("Stage " + sender.GetType() + "has paused");
+    }
+
+
+    protected void Attach(ECAActionStage stage)
+    {
+        stage.StageFinished += OnStageFinished;
+        stage.StageAborted += OnStageAborted;
+        stage.StagePaused += OnStagePaused;
+    }
+
+
+    protected void Detach(ECAActionStage stage)
+    {
+        stage.StageFinished -= OnStageFinished;
+        stage.StageAborted -= OnStageAborted;
+        stage.StagePaused -= OnStagePaused;
+    }
+
+
 
 
     public virtual void SetupAction()
     {
         CurrentStageIdx = 0;
         CurrentStage.StageFinished += OnStageFinished;
+    }
+
+
+    public void Abort()
+    {
+        Utility.Log("Action aborted");
+        State = ActionState.Aborted;
     }
 
 
@@ -87,7 +131,9 @@ public class ECAAction
         {
             if(CurrentStage != null)
             {
-                CurrentStage.StartStage();
+    		State = ActionState.Running;
+    		Attach(CurrentStage);
+                	CurrentStage.StartStage();
             }
         }
     }
@@ -98,19 +144,11 @@ public class ECAAction
         if (CurrentStage != null)
         {
             //iscrivo l'azione all'evento che segnala la fine dello stage
-            CurrentStage.StageFinished += OnStageFinished;
+            Attach(CurrentStage);
             CurrentStage.StartStage();
         }
         else
             OnCompletedAction();
-    }
-
-
-    public virtual void OnStageFinished(object sender, EventArgs e)
-    {
-        CurrentStage.StageFinished -= OnStageFinished;
-        CurrentStageIdx++;
-        NextStage();
     }
 
 
@@ -128,6 +166,29 @@ public class ECAAction
 
     public virtual void OnLabelUpdate()
     {
+    }
+
+
+    public ActionState State
+    {
+        set {
+    	if(CurrentStage == null)
+    		return;
+    
+            if (value == ActionState.Paused)
+    		CurrentStage.PauseStage();
+    	    else
+    	    if(value == ActionState.Aborted)
+    		    CurrentStage.AbortStage();
+    	    else
+                	CurrentStage.State = value;
+        }
+      get {
+    	if(CurrentStage != null)
+    		return CurrentStage.State;
+    	else
+    		return ActionState.Inactive;
+      }
     }
 
 

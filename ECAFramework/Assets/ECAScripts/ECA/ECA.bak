@@ -1,4 +1,4 @@
-:ArrayOb.273{6:Dictionary.4369{64 33:SLSPublicMethod.286331408{:String.17{8 9 "85914928"}
+:ArrayOb.273{6:Dictionary.4369{64 37:SLSPublicMethod.286331408{:String.17{8 9 "85914928"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{11 12 "SendMessage"}
@@ -66,10 +66,13 @@
  0.299999 0.88 7.2 33  3 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 0  0 #4{2211 2212 "using System;\n
+ 0  0 #4{2244 2245 "using System;\n
 using System.Collections.Generic;\n
 using IntentRecognitionResults;\n
 using UnityEngine;\n
+using UnityEngine.Assertions;\n
+\n
+\n
 \n
 \n
 \n
@@ -128,11 +131,28 @@ public class ECAParameters\n
 \n
 \n
 \n
+\n
 /// <summary>\n
 /// Allows access to all the features and properties of a specific eca. \n
 /// Identified by an ID can be retrieved via <see cref=\"ECAManager\"/> which keeps track of all the eca instanced in the scene.\n
 /// </summary>\n
 "}
+}
+:SLSProperty.286331392{#4{9 10 "164790328"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{9 10 "ikManager"}
+ 1.3 0.88 3.6 1  20 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{25 26 "\[\n
+  protected set; get;\n
+\]"}
+#4{9 10 "ikManager"}
+#4{8 9 "IKSetter"}
+#4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
 }
 :SLSPublicMember.286331409{#4{9 10 "158918344"}
 #1{2@0 @0 }
@@ -141,7 +161,7 @@ public class ECAParameters\n
  1.3 1.88 4.4 1  39 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  0 #4{11 12 "ecaAnimator"}
+ 1  1 #4{11 12 "ecaAnimator"}
 #4{11 12 "ECAAnimator"}
 #4{0 1 ""}
 #6{16 0}
@@ -166,7 +186,7 @@ public class ECAParameters\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-:SLSProperty.286331392{#4{8 9 "85941736"}
+#8{#4{8 9 "85941736"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{8 9 "Language"}
@@ -209,7 +229,7 @@ public class ECAParameters\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#9{#4{8 9 "85948728"}
+#8{#4{8 9 "85948728"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{13 14 "ActualEmotion"}
@@ -228,7 +248,7 @@ public class ECAParameters\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#9{#4{8 9 "93717440"}
+#8{#4{8 9 "93717440"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{17 18 "EmotionalMessages"}
@@ -256,7 +276,7 @@ public class ECAParameters\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#9{#4{8 9 "85620112"}
+#8{#4{8 9 "85620112"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{10 11 "IntentName"}
@@ -266,34 +286,6 @@ public class ECAParameters\n
  1  1 #4{13 16 "\[ get; set; \]"}
 #4{10 11 "IntentName"}
 #4{12 13 "List<string>"}
-#4{0 1 ""}
-#4{0 1 ""}
-#4{0 1 ""}
-}
-#5{#4{9 10 "104346152"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{0 1 ""}
- 4 1.88 0 10  45 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{0 1 ""}
-#4{16 17 "EmotionalMessage"}
-#4{0 1 ""}
-#6{16 0}
-#6{16 0}
-#4{1 2 "S"}
-@0 }
-#9{#4{8 9 "85977272"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{4 5 "Name"}
- 1.3 0.88 1.6 1  14 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{29 30 "\[ get => myParameters.Name; \]"}
-#4{4 5 "Name"}
-#4{6 7 "string"}
 #4{0 1 ""}
 #4{0 1 ""}
 #4{0 1 ""}
@@ -313,6 +305,48 @@ public class ECAParameters\n
 #4{1 2 "S"}
 @0 #4{0 1 ""}
 }
+#8{#4{8 9 "85977272"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{4 5 "Name"}
+ 1.3 0.88 1.6 1  14 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{29 30 "\[ get => myParameters.Name; \]"}
+#4{4 5 "Name"}
+#4{6 7 "string"}
+#4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#5{#4{9 10 "104346152"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{0 1 ""}
+ 4 1.88 0 10  45 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{0 1 ""}
+#4{16 17 "EmotionalMessage"}
+#4{0 1 ""}
+#6{16 0}
+#6{16 0}
+#4{1 2 "S"}
+@0 }
+#5{#4{9 10 "164789056"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{0 1 ""}
+ 4 1.88 1 19  45 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{0 1 ""}
+#4{8 9 "IKSetter"}
+#4{0 1 ""}
+#6{16 0}
+#6{16 0}
+#4{1 2 "S"}
+@0 }
 :SLSProtectMethod.286331408{#4{8 9 "85662088"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -320,8 +354,9 @@ public class ECAParameters\n
  1.3 0.88 2 10  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{47 877 "\[\n
+ 1  1 #4{67 877 "\[\n
     Utility.Log(\"ECA \" + name + \" awaken\");\n
+    AddIKManager();\n
 \]"}
 #4{5 6 "Awake"}
 #4{12 13 "virtual void"}
@@ -351,16 +386,15 @@ public class ECAParameters\n
  0.3 0.88 4.4 1  10 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{389 390 "\[\n
+ 1  1 #4{388 390 "\[\n
         if (!GeneralMessagesCltn.ContainsKey(msgType))\n
         \[\n
             Debug.LogError(\"This message does not exist\");\n
             return;\n
         \]\n
-        SpeechInfo speechInfo = new SpeechInfo(ECAAnimator, Language, VoiceName, GeneralMessagesCltn[msgType][0].message, functionToBeExecuted, anytime, CheckIfMsgIsActive(msgType));\n
+        SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, GeneralMessagesCltn[msgType][0].message, functionToBeExecuted, anytime, CheckIfMsgIsActive(msgType));\n
         TtsManager.Instance.Speech(speechInfo);\n
-\]\n
-"}
+\]"}
 #4{11 12 "SendMessage"}
 #4{4 5 "void"}
 #4{71 72 "string msgType, Action functionToBeExecuted = null, bool anytime = true"}
@@ -407,7 +441,7 @@ public class ECAParameters\n
 #4{0 1 ""}
 #4{0 1 ""}
  0}
-#9{#4{8 9 "85942520"}
+#8{#4{8 9 "85942520"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{11 12 "EcaPresence"}
@@ -421,7 +455,7 @@ public class ECAParameters\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#9{#4{8 9 "85912552"}
+#8{#4{8 9 "85912552"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{12 13 "myParameters"}
@@ -435,7 +469,7 @@ public class ECAParameters\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#9{#4{8 9 "85913872"}
+#8{#4{8 9 "85913872"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{2 3 "ID"}
@@ -449,7 +483,7 @@ public class ECAParameters\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#9{#4{8 9 "93718712"}
+#8{#4{8 9 "93718712"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{19 20 "GeneralMessagesCltn"}
@@ -524,20 +558,6 @@ public class ECAParameters\n
 #4{14 15 "string msgType"}
 #4{0 1 ""}
 }
-#9{#4{8 9 "85916640"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{14 15 "EmotionManager"}
- 1.3 0.879999 5.6 1  23 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{13 16 "\[ get; set; \]"}
-#4{14 15 "EmotionManager"}
-#4{17 18 "ECAEmotionManager"}
-#4{0 1 ""}
-#4{0 1 ""}
-#4{0 1 ""}
-}
 #11{#4{9 10 "104297120"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -554,6 +574,38 @@ public class ECAParameters\n
 #4{16 17 "AddIntentHandler"}
 #4{4 5 "void"}
 #4{17 42 "string intentName"}
+#4{0 1 ""}
+ 0}
+#8{#4{8 9 "85916640"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{14 15 "EmotionManager"}
+ 1.3 0.879999 5.6 1  23 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{13 16 "\[ get; set; \]"}
+#4{14 15 "EmotionManager"}
+#4{17 18 "ECAEmotionManager"}
+#4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#11{#4{9 10 "131538713"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{15 16 "CreateIKManager"}
+ 1.3 0.879999 6 10  16 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{114 157 "\[\n
+    Assert.IsNull(ikManager);\n
+    IKSetter manager = gameObject.AddComponent<IKSetter>();\n
+\n
+    return manager;\n
+\]"}
+#4{15 16 "CreateIKManager"}
+#4{16 17 "virtual IKSetter"}
+#4{0 1 ""}
 #4{0 1 ""}
  0}
 #11{#4{8 9 "85708344"}
@@ -584,7 +636,7 @@ public class ECAParameters\n
 #4{13 14 "Intent intent"}
 #4{0 1 ""}
 }
-#9{#4{8 9 "85942128"}
+#8{#4{8 9 "85942128"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{9 10 "VoiceName"}
@@ -598,6 +650,24 @@ public class ECAParameters\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
+#11{#4{9 10 "131538712"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{12 13 "AddIKManager"}
+ 1.3 0.88 4.8 10  14 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{144 157 "\[\n
+    ikManager = GetComponent<IKSetter>();\n
+    if (ikManager == null)\n
+        ikManager = CreateIKManager();\n
+    Assert.IsNotNull(ikManager);\n
+\]"}
+#4{12 16 "AddIKManager"}
+#4{4 14 "void"}
+#4{0 1 ""}
+#4{0 1 ""}
+ 0}
 :JLSFriendDeclare.286331408{#4{8 9 "85679976"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -608,17 +678,17 @@ public class ECAParameters\n
  0  0 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @177 @40 @401 @0 #6{16 0}
+:CLSCSSem.1118481{ 56  51 @164 @40 @451 @0 #6{16 0}
 #6{16 0}
-#6{16 2@327 @315 }
-#6{16 6@191 @364 @352 @303 @239 @227 }
+#6{16 2@353 @341 }
+#6{16 8@217 @402 @365 @329 @265 @253 @439 @390 }
 #6{16 0}
 #6{16 0}
 #6{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#6{16 2@27 @151 }
-#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @48 @0 @0 @0 @0 }
-#1{40@63 @100 @113 @3 @215 @203 @88 @277 @164 @75 @388 @251 @15 @290 @0 @0 @0 @339 @0 @264 @138 @0 @0 @0 @0 @0 @0 @0 @376 @126 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#6{16 3@27 @191 @204 }
+#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @61 @0 @0 @0 @0 }
+#1{40@76 @113 @126 @3 @241 @229 @101 @303 @178 @88 @426 @277 @15 @316 @48 @0 @0 @377 @0 @290 @151 @0 @0 @0 @0 @0 @0 @0 @414 @139 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #6{16 0}

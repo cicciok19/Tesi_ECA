@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using IntentRecognitionResults;
 using UnityEngine;
+using UnityEngine.Assertions;
+
+
 
 
 
@@ -67,6 +70,7 @@ public class ECAParameters
 
 
 
+
 /// <summary>
 /// Allows access to all the features and properties of a specific eca. 
 /// Identified by an ID can be retrieved via <see cref="ECAManager"/> which keeps track of all the eca instanced in the scene.
@@ -111,6 +115,7 @@ public class ECA : MonoBehaviour, IIntentHandler
     protected virtual void Awake()
     {
         Utility.Log("ECA " + name + " awaken");
+        AddIKManager();
     }
 
 
@@ -136,12 +141,49 @@ public class ECA : MonoBehaviour, IIntentHandler
       return null;
     }
 
-    protected virtual void CreateAnimator()
+
+    protected virtual ECAAnimator AddECAAnimator()
     {
-        throw new NotImplementedException();
+      return gameObject.AddComponent<ECAAnimator>();
     }
 
-    protected virtual void CreateIKManager() { }
+
+    protected virtual void CreateAnimator()
+    {
+        if (ecaAnimator == null)
+        {
+            ecaAnimator = GetComponent<ECAAnimator>();
+            if (ecaAnimator == null)
+            {
+                ecaAnimator = AddECAAnimator();
+                Utility.LogWarning("No ECAAnimator directly assigned by editor to the ECA Script " +
+                                    " and no ECAAnimator Component assigned! therefore it was created automatically");
+            }
+        }
+    
+        ecaAnimator.Init();
+    }
+
+
+    protected void AddIKManager()
+    {
+        ikManager = GetComponent<IKSetter>();
+        if (ikManager == null)
+            ikManager = CreateIKManager();
+        Assert.IsNotNull(ikManager);
+    }
+
+
+    protected virtual IKSetter CreateIKManager()
+    {
+        Assert.IsNull(ikManager);
+        IKSetter manager = gameObject.AddComponent<IKSetter>();
+    
+        return manager;
+    }
+
+
+
 
     public virtual void SetEcaId()
     {
@@ -216,10 +258,9 @@ public class ECA : MonoBehaviour, IIntentHandler
         GeneralMessagesCltn = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);
     
         EmotionManager = new ECAEmotionManager(myParameters.EmotionModel);
-        //ECAManager.Instance.AvailableEcas.Add(ID, this);
+        ECAManager.Instance.AvailableEcas.Add(ID, this);
     
         CreateAnimator();
-        ecaAnimator.Init();
     
         SubscribeHandlerToIntentManager();
     
@@ -254,6 +295,12 @@ public class ECA : MonoBehaviour, IIntentHandler
 
     public Dictionary<string, List<EmotionalMessage>> GeneralMessagesCltn
     { get; private set; }
+
+
+    public IKSetter ikManager
+    {
+      protected set; get;
+    }
 
 
     public ECAEmotionManager EmotionManager

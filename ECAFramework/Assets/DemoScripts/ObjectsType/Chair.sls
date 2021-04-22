@@ -1,4 +1,54 @@
-:ArrayOb.273{6:Dictionary.4369{16 9:JLSGlobalDeclare.286331408{:String.17{8 9 "94854464"}
+:ArrayOb.273{6:Dictionary.4369{16 14:SLSPublicMethod.286331408{:String.17{9 10 "163251576"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{20 21 "GetLeftFootTransform"}
+ 0.3 0.88 8 1  8 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{181 182 "\[\n
+    UnityEngine.Assertions.Assert.IsNotNull(leftFootTransform);\n
+    UnityEngine.Assertions.Assert.IsNotNull(leftFootTransform.transform);\n
+    return leftFootTransform.transform;\n
+\]"}
+#4{20 21 "GetLeftFootTransform"}
+#4{9 10 "Transform"}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#3{#4{9 10 "163251968"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{21 22 "GetRightFootTransform"}
+ 0.3 0.88 8.4 1  9 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{184 185 "\[\n
+    UnityEngine.Assertions.Assert.IsNotNull(rightFootTransform);\n
+    UnityEngine.Assertions.Assert.IsNotNull(rightFootTransform.transform);\n
+    return rightFootTransform.transform;\n
+\]"}
+#4{21 22 "GetRightFootTransform"}
+#4{9 10 "Transform"}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+:SLSProtectMember.286331409{#4{9 10 "164519048"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{18 19 "rightFootTransform"}
+ 0.4 1.88 7.2 19  26 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{18 19 "rightFootTransform"}
+#4{14 15 "ChairRightFoot"}
+#4{0 1 ""}
+:OrderedCltn.4369{16 0}
+#6{16 0}
+#4{0 2 ""}
+@0 #4{0 1 ""}
+#4{0 1 ""}
+}
+:JLSGlobalDeclare.286331408{#4{8 9 "94854464"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{18 19 "Global Declaration"}
@@ -11,20 +61,37 @@ using IntentRecognitionResults;\n
 using UnityEngine;\n
 "}
 }
-:SLSProtectMember.286331409{#4{8 9 "94305011"}
+#5{#4{9 10 "164518608"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{11 12 "destination"}
- 1.8 1.88 4.4 37  38 #4{0 1 ""}
+@0  8 2 0.4 0 0 #4{17 18 "leftFootTransform"}
+ 0.6 1.88 6.8 10  26 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{11 12 "destination"}
-#4{16 17 "ChairDestination"}
+ 1  1 #4{17 18 "leftFootTransform"}
+#4{13 14 "ChairLeftFoot"}
 #4{0 1 ""}
-:OrderedCltn.4369{16 0}
 #6{16 0}
-#4{1 2 "S"}
+#6{16 0}
+#4{0 2 ""}
 @0 #4{0 1 ""}
+#4{0 1 ""}
+}
+#3{#4{9 10 "158483144"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{14 15 "GetDestination"}
+ 0.3 0.88 5.6 1  6 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{157 234 "\[\n
+  UnityEngine.Assertions.Assert.IsNotNull(destination);\n
+  UnityEngine.Assertions.Assert.IsNotNull(destination.transform);\n
+  return destination.transform;\n
+\]"}
+#4{14 15 "GetDestination"}
+#4{9 10 "Transform"}
+#4{0 1 ""}
 #4{0 1 ""}
 }
 #5{#4{8 9 "94305010"}
@@ -43,21 +110,20 @@ using UnityEngine;\n
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
-:SLSPublicMethod.286331408{#4{9 10 "158483144"}
+#5{#4{8 9 "94305011"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{14 15 "GetDestination"}
- 0.3 0.88 5.6 1  6 #4{0 1 ""}
+@0  8 2 0.4 0 0 #4{11 12 "destination"}
+ 1.8 1.88 4.4 37  38 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{157 234 "\[\n
-  UnityEngine.Assertions.Assert.IsNotNull(destination);\n
-  UnityEngine.Assertions.Assert.IsNotNull(destination.transform);\n
-  return destination.transform;\n
-\]"}
-#4{14 15 "GetDestination"}
-#4{9 10 "Transform"}
+ 1  1 #4{11 12 "destination"}
+#4{16 17 "ChairDestination"}
 #4{0 1 ""}
+#6{16 0}
+#6{16 0}
+#4{1 2 "S"}
+@0 #4{0 1 ""}
 #4{0 1 ""}
 }
 :SLSThisIcon.286331409{#4{8 9 "93964464"}
@@ -75,6 +141,27 @@ using UnityEngine;\n
 #4{1 2 "S"}
 @0 #4{0 1 ""}
 }
+#3{#4{9 10 "163250008"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{22 23 "SetCorrectSitDirection"}
+ 0.3 0.88 8.8 1  10 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{251 252 "\[\n
+\n
+    var destinationTransform = destination.transform;\n
+    var sitPointTransform = sitPoint.transform;\n
+\n
+    Vector3 dir = (destinationTransform.position - sitPointTransform.position).normalized;\n
+    dir.y = 0;\n
+    sitPoint.transform.forward = dir;\n
+\]"}
+#4{22 23 "SetCorrectSitDirection"}
+#4{4 5 "void"}
+#4{0 1 ""}
+#4{0 1 ""}
+}
 #5{#4{8 9 "94305008"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -84,22 +171,6 @@ using UnityEngine;\n
 @0  0 0 1
  1  1 #4{8 9 "sitPoint"}
 #4{13 14 "ChairSitPoint"}
-#4{0 1 ""}
-#6{16 0}
-#6{16 0}
-#4{1 2 "S"}
-@0 #4{0 1 ""}
-#4{0 1 ""}
-}
-#5{#4{8 9 "94305009"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{16 17 "leftFootPosition"}
- 0.799999 1.88 6.4 19  38 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{16 17 "leftFootPosition"}
-#4{13 14 "ChairLeftFoot"}
 #4{0 1 ""}
 #6{16 0}
 #6{16 0}
@@ -123,29 +194,48 @@ using UnityEngine;\n
  1.3 0.88 2 10  8 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{251 252 "\[\n
+ 1  1 #4{284 285 "\[\n
     sitPoint = GetComponentInChildren<ChairSitPoint>();\n
-    leftFootPosition = GetComponentInChildren<ChairLeftFoot>();\n
-    rightFootPosition = GetComponentInChildren<ChairRightFoot>();\n
+    leftFootTransform = GetComponentInChildren<ChairLeftFoot>();\n
+    rightFootTransform = GetComponentInChildren<ChairRightFoot>();\n
     destination = GetComponentInChildren<ChairDestination>();\n
+\n
+    SetCorrectSitDirection();\n
 \]"}
 #4{5 6 "Awake"}
 #4{4 5 "void"}
 #4{0 1 ""}
 #4{0 1 ""}
  0}
+#3{#4{9 10 "163253536"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{11 12 "GetSitPoint"}
+ 0.3 0.88 4.4 1  7 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{154 155 "\[\n
+    UnityEngine.Assertions.Assert.IsNotNull(sitPoint);\n
+    UnityEngine.Assertions.Assert.IsNotNull(sitPoint.transform);\n
+    return sitPoint.transform;\n
+\]"}
+#4{11 12 "GetSitPoint"}
+#4{9 10 "Transform"}
+#4{0 1 ""}
+#4{0 1 ""}
 }
-:CLSCSSem.1118481{ 56  51 @53 @3 @97 @0 #6{16 0}
-#6{16 4@67 @82 @26 @11 }
+}
+:CLSCSSem.1118481{ 56  51 @107 @42 @148 @0 #6{16 0}
+#6{16 5@133 @77 @92 @50 @27 }
 #6{16 0}
-#6{16 1@105 }
+#6{16 1@156 }
 #6{16 0}
 #6{16 0}
 #6{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #6{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{16@41 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{16@65 @168 @3 @15 @121 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #6{16 0}

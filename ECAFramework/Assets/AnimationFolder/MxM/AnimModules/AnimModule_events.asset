@@ -36,7 +36,7 @@ MonoBehaviour:
     Recovery: 0.2
     Contacts:
     - Position: {x: 0.04955432, y: 0.42, z: -0.49012494}
-      RotationY: 90
+      RotationY: 0
   LeftFootStepTrack:
     m_trackId: 0
     m_trackName: Footstep Left
@@ -319,7 +319,7 @@ MonoBehaviour:
   - EventId: 2
     EventName: PickUp
     EventTime: 1.2918426
-    Windup: 0.19184287
+    Windup: 0.19184293
     Actions:
     - 0.2
     FollowThrough: 0.2
@@ -527,7 +527,7 @@ MonoBehaviour:
   Tags: 2
   FavourTags: 0
   MinLoops: 1
-  MaxLoops: 4
+  MaxLoops: 20
   m_targetPreProcessData: {fileID: 0}
   m_targetAnimModule: {fileID: 11400000}
 --- !u!114 &7467482008821759942
@@ -559,7 +559,7 @@ MonoBehaviour:
   - EventId: 3
     EventName: PickDown
     EventTime: 1.2683545
-    Windup: 0.21835478
+    Windup: 0.21835484
     Actions:
     - 0.2
     FollowThrough: 0.2

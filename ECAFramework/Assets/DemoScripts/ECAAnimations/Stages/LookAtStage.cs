@@ -1,18 +1,39 @@
-﻿using System.Collections;
+/* File LookAtStage C# implementation of class LookAtStage */
+
+
+
+// global declaration start
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
+// global declaration end
+
 public class LookAtStage : ECAActionStage
 {
-    Transform lookAtObject;
-    IKECA ikManager;
 
-    public LookAtStage(Transform lookAtObject, IKECA ikManager)
+    protected Transform lookAtObject;
+
+
+    public LookAtStage(Transform lookAtObject)
     {
         this.lookAtObject = lookAtObject;
-        this.ikManager = ikManager;
     }
+
+
+
+
+    private void OnWaitComplete(object sender, EventArgs e)
+    {
+        EndStage();
+    }
+
+
+
 
     public override void EndStage()
     {
@@ -20,17 +41,15 @@ public class LookAtStage : ECAActionStage
         base.EndStage();
     }
 
+
     public override void StartStage()
     {
         base.StartStage();
-
+    
         animator.WaitComplete += OnWaitComplete;
         ikManager.SetTargetAimIK(ikManager.headIK, lookAtObject);
         animator.Wait(6f);
     }
 
-    private void OnWaitComplete(object sender, EventArgs e)
-    {
-        EndStage();
-    }
+
 }
