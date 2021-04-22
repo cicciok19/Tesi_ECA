@@ -78,5 +78,10 @@ public abstract class ECAActionStage
     {
     }
 
+    protected virtual void OnEventComplete(object sender, EventArgs e)
+    {
+        EndStage();
+    }
+
 
 }

@@ -12,6 +12,7 @@ public class SitStageWithIK : ECAActionStage
     private IKECA ikManager;
     private ECAAnimatorMxM animatorMxM;
 
+    //if you want to use IK use this constructor
     public SitStageWithIK(Transform[] empties, IKECA ikManager)
     {
         sitPoint = empties[0];
@@ -20,8 +21,6 @@ public class SitStageWithIK : ECAActionStage
 
         ///IK MANAGEMENT
         this.ikManager = ikManager;
-        //prova con handIK con lo stesso effector dei piedi
-        //ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, sitPoint, leftFootEffector, rightFootEffector, leftFootEffector, rightFootEffector);
     }
 
     public SitStageWithIK(Transform[] empties)
@@ -33,20 +32,25 @@ public class SitStageWithIK : ECAActionStage
 
     public override void StartStage()
     {
-        ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, sitPoint, leftFootEffector, rightFootEffector, leftFootEffector, rightFootEffector);
+        if (ikManager != null)
+        {
+            //prova con effector delle mani uguale a quello dei piedi
+            ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, sitPoint, leftFootEffector, rightFootEffector, leftFootEffector, rightFootEffector);
+        }
 
         animatorMxM = (ECAAnimatorMxM)animator;
         base.StartStage();
         animatorMxM.MxM_BeginEvent("SitDown", sitPoint);
         ikManager.SetWeightsForSitting();
-        EndStage();
+
+        animatorMxM.EventComplete += OnEventComplete;
+        animatorMxM.MxM_WaitForEventComplete();
+
     }
 
     public override void EndStage()
     {
-        animatorMxM.MxM_WaitForEventComplete();
         animatorMxM.MxM_SetTag("Sitting");
         base.EndStage();
     }
-
 }

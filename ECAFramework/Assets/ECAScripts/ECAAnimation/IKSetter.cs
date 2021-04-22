@@ -150,7 +150,6 @@ public class IKSetter : MonoBehaviour
     public virtual void SetTargetFullBodyIK(FullBodyBipedIK fullBody, Transform bodyEffector, Transform leftHandEffector = null, Transform rightHandEffector = null,
         Transform leftFootEffector = null, Transform rightFootEffector = null)
     {
-        Debug.Log(fullBody.solver.effectors.Length);
         fullBody.solver.bodyEffector.position = bodyEffector.position;
         if (leftHandEffector != null)
         {

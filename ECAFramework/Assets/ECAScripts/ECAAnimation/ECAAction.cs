@@ -34,6 +34,7 @@ public class ECAAction
         }
     
         AllStages = stages.ToArray();
+        SetupAction();
     }
 
 
@@ -47,6 +48,7 @@ public class ECAAction
         }
     
         AllStages = stages.ToArray();
+        SetupAction();
     }
 
 

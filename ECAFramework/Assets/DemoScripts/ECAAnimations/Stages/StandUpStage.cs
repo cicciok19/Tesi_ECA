@@ -14,6 +14,7 @@ public class StandUpStage : ECAActionStage
         this.sitPoint = sitPoint;
     }
 
+    //if you want to use IK use this constructor
     public StandUpStage(Transform sitPoint, IKECA ikManager)
     {
         this.sitPoint = sitPoint;
@@ -27,7 +28,9 @@ public class StandUpStage : ECAActionStage
         base.StartStage();
         animatorMxM.MxM_ClearRequiredTags();
         animatorMxM.MxM_BeginEvent("StandUp", sitPoint);
-        ikManager.SetWeightsToStandUp();
+
+        if (ikManager != null)
+            ikManager.SetWeightsToStandUp();
 
         animatorMxM.EventComplete += OnEventComplete;
         animatorMxM.MxM_WaitForEventComplete();
@@ -36,10 +39,5 @@ public class StandUpStage : ECAActionStage
     public override void EndStage()
     {
         base.EndStage();
-    }
-
-    private void OnEventComplete(object sender, EventArgs e)
-    {
-        EndStage();
     }
 }

@@ -20,7 +20,6 @@ public class GoToStage : ECAActionStage
 
 
     public GoToStage(Transform destination)
-    : base()
     {
             this.destination = destination;
     }
