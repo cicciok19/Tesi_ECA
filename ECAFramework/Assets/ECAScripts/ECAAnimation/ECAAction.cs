@@ -30,7 +30,7 @@ public class ECAAction
         foreach(var stage in stages)
         {
     	    stage.Animator = eca.ecaAnimator;
-            stage.StageFinished += OnStageFinished;
+            //stage.StageFinished += OnStageFinished;
         }
     
         AllStages = stages.ToArray();
@@ -43,16 +43,20 @@ public class ECAAction
         foreach(var stage in stages)
         {
             stage.Animator = ecaAnimator;
-            stage.StageFinished += OnStageFinished;
+            //stage.StageFinished += OnStageFinished;
         }
     
         AllStages = stages.ToArray();
     }
 
+
+
+
     protected virtual void GetIkManager(ECA eca)
     {
         ikManager = eca.GetComponent<IKSetter>();
     }
+
 
 
 
@@ -92,7 +96,7 @@ public class ECAAction
         if (CurrentStage != null)
         {
             //iscrivo l'azione all'evento che segnala la fine dello stage
-            //CurrentStage.StageFinished += OnStageFinished;
+            CurrentStage.StageFinished += OnStageFinished;
             CurrentStage.StartStage();
         }
         else

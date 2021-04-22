@@ -25,6 +25,9 @@ public abstract class ECAActionStage
        animator = ecaAnimator;
     }
 
+
+
+
     protected virtual void ActivateBodyParts()
     {
     }
@@ -33,6 +36,9 @@ public abstract class ECAActionStage
     protected virtual void DisactivateBodyParts()
     {
     }
+
+
+
 
     public ECAAnimator Animator
     {
@@ -44,6 +50,7 @@ public abstract class ECAActionStage
     public virtual void StartStage()
     {
     }
+
 
     public virtual void EndStage()
     {
