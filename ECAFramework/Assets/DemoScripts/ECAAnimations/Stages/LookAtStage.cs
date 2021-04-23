@@ -19,7 +19,7 @@ public class LookAtStage : ECAActionStage
     protected Transform lookAtObject;
 
 
-    public LookAtStage(Transform lookAtObject)
+    public LookAtStage(Transform lookAtObject) : base()
     {
         this.lookAtObject = lookAtObject;
     }
@@ -31,9 +31,6 @@ public class LookAtStage : ECAActionStage
     {
         EndStage();
     }
-
-
-
 
     public override void EndStage()
     {
@@ -50,6 +47,5 @@ public class LookAtStage : ECAActionStage
         ikManager.SetTargetAimIK(ikManager.headIK, lookAtObject);
         animator.Wait(6f);
     }
-
 
 }

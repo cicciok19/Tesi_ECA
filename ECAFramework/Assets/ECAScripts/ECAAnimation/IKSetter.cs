@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RootMotion.FinalIK;
+using RootMotion;
 
 
 //principal class for setting the Final IK
@@ -21,21 +22,16 @@ public class IKSetter : MonoBehaviour
 
     private Transform root;
     private Transform headBone;
-    [SerializeField]
     private Transform RightForeArm;
-    [SerializeField]
     private Transform NeckBone;
     private Transform leftForeArm;
     private Transform leftShoulder;
-    [SerializeField]
     private Transform LeftShoulder;
     private Transform rightHandBone;
     private Transform rightShoulder;
-    [SerializeField]
     private Transform LeftForeArm;
     private Transform leftHandBone;
     private Transform rightForeArm;
-    [SerializeField]
     private Transform RightShoulder;
     private Transform leftArm;
     private Transform neckBone;
@@ -49,79 +45,14 @@ public class IKSetter : MonoBehaviour
     public AimIK headIK;
 
 
-    protected AimIK SetIKHead(Transform headBone, Transform neckBone)
-    {       
-        AimIK HeadIK = this.gameObject.AddComponent<AimIK>();
-        HeadIK.GetIKSolver().Initiate(root);
-        HeadIK.solver.transform = headBone;
-        HeadIK.solver.AddBone(neckBone);
-        HeadIK.solver.IKPositionWeight = 0;
-        return HeadIK;
-    }
-
-
-    protected AimIK SetIKRightHand(Transform rightHandBone, Transform rightForeArm, Transform rightArm, Transform rightShoulder)
-    {
-        AimIK RightIK = this.gameObject.AddComponent<AimIK>();
-        RightIK.GetIKSolver().Initiate(root);
-        RightIK.solver.axis = new Vector3(0, 1, 0);
-        RightIK.solver.transform = rightHandBone;
-        RightIK.solver.AddBone(rightShoulder);
-        RightIK.solver.AddBone(rightArm);
-        RightIK.solver.AddBone(rightForeArm);
-        RightIK.solver.IKPositionWeight = 0;
-    
-        return RightIK;
-    }
-
-
-    protected AimIK SetIKLeftHand(Transform leftHandBone, Transform leftForeArm, Transform leftArm, Transform leftShoulder)
-    {
-        AimIK LeftIK = this.gameObject.AddComponent<AimIK>();
-        LeftIK.GetIKSolver().Initiate(root);
-        LeftIK.solver.axis = new Vector3(0, 1, 0);
-        LeftIK.solver.transform = leftHandBone;
-        LeftIK.solver.AddBone(leftShoulder);
-        LeftIK.solver.AddBone(leftArm);
-        LeftIK.solver.AddBone(leftForeArm);
-        LeftIK.solver.IKPositionWeight = 0;
-    
-        return LeftIK;
-    }
-
-
-    protected IEnumerator SetWeightFullIK(IKEffector effector, float weight, float speed)
-    {
-        float var = effector.positionWeight;
-    
-        if (var < weight)
-        {
-            while (var < weight)
-            {
-                var += .01f;
-                effector.positionWeight = var;
-                yield return new WaitForSeconds(speed);
-            }
-        }
-        else
-        {
-            while (var > weight)
-            {
-                var -= .01f;
-                effector.positionWeight = var;
-                yield return new WaitForSeconds(speed);
-            }
-        }
-    }
-
-
     protected virtual void Start()
     {
         animator = this.GetComponent<Animator>();
-    
+
         // Get the bones
-    
-        root = GetBone(HumanBodyBones.Hips);
+
+        //root = GetBone(HumanBodyBones.Hips);
+        root = this.transform;
         headBone = GetBone(HumanBodyBones.Head);
         neckBone = GetBone(HumanBodyBones.Neck);
         rightHandBone = GetBone(HumanBodyBones.RightHand);
@@ -163,13 +94,78 @@ public class IKSetter : MonoBehaviour
         }
     }
 
+    protected AimIK SetIKHead(Transform headBone, Transform neckBone)
+    {
+        AimIK HeadIK = this.gameObject.AddComponent<AimIK>();
+        HeadIK.GetIKSolver().Initiate(root);
+        HeadIK.solver.transform = headBone;
+        HeadIK.solver.AddBone(neckBone);
+        HeadIK.solver.IKPositionWeight = 0;
+        return HeadIK;
+    }
+
+
+    protected AimIK SetIKRightHand(Transform rightHandBone, Transform rightForeArm, Transform rightArm, Transform rightShoulder)
+    {
+        AimIK RightIK = this.gameObject.AddComponent<AimIK>();
+        RightIK.GetIKSolver().Initiate(root);
+        RightIK.solver.axis = new Vector3(0, 1, 0);
+        RightIK.solver.transform = rightHandBone;
+        RightIK.solver.AddBone(rightShoulder);
+        RightIK.solver.AddBone(rightArm);
+        RightIK.solver.AddBone(rightForeArm);
+        RightIK.solver.IKPositionWeight = 0;
+
+        return RightIK;
+    }
+
+
+    protected AimIK SetIKLeftHand(Transform leftHandBone, Transform leftForeArm, Transform leftArm, Transform leftShoulder)
+    {
+        AimIK LeftIK = this.gameObject.AddComponent<AimIK>();
+        LeftIK.GetIKSolver().Initiate(root);
+        LeftIK.solver.axis = new Vector3(0, 1, 0);
+        LeftIK.solver.transform = leftHandBone;
+        LeftIK.solver.AddBone(leftShoulder);
+        LeftIK.solver.AddBone(leftArm);
+        LeftIK.solver.AddBone(leftForeArm);
+        LeftIK.solver.IKPositionWeight = 0;
+
+        return LeftIK;
+    }
+
+
+    protected IEnumerator SetWeightFullIK(IKEffector effector, float weight, float speed)
+    {
+        float var = effector.positionWeight;
+
+        if (var < weight)
+        {
+            while (var < weight)
+            {
+                var += .01f;
+                effector.positionWeight = var;
+                yield return new WaitForSeconds(speed);
+            }
+        }
+        else
+        {
+            while (var > weight)
+            {
+                var -= .01f;
+                effector.positionWeight = var;
+                yield return new WaitForSeconds(speed);
+            }
+        }
+    }
 
     protected FullBodyBipedIK SetFullBodyIK()
     {
         //this.gameObject.AddComponent<FullBodyBipedIK>().solver.effectors = new IKEffector[9];
         FullBodyBipedIK BodyIK = this.gameObject.AddComponent<FullBodyBipedIK>();
+        BipedReferences.AutoDetectReferences(ref BodyIK.references, root, BipedReferences.AutoDetectParams.Default );
+        BodyIK.solver.SetToReferences(BodyIK.references, null);
         //BodyIK.GetIKSolver().Initiate(root);
-        BodyIK.solver.rootNode = root;
         return BodyIK;
     }
 

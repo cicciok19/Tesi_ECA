@@ -18,13 +18,12 @@ public class GoToStage : ECAActionStage
 
     private Transform destination;
 
-    protected float stopDistance =   0.05f;
+    protected float stopDistance =   0.5f;
 
 
-    public GoToStage(Transform destination)
-    :base()
+    public GoToStage(Transform destination) : base()
     {
-                this.destination = destination;
+        this.destination = destination;
     }
 
 
@@ -42,8 +41,6 @@ public class GoToStage : ECAActionStage
     {
         base.StartStage();
         animator.navMeshAgent.SetDestination(destination.position);
-        //animator.GoTo(destination.position, stopDistance);
-        //animator.HasArrived += OnArrivedECA;
     }
 
 
@@ -61,9 +58,9 @@ public class GoToStage : ECAActionStage
 
     public override void Update()
     {
-      if(Vector3.Distance(destination.position, animator.Eca.transform.position) <= stopDistance)
-    	EndStage();
-    }
+        if (Vector3.Distance(destination.position, animator.Eca.transform.position) <= stopDistance)
+            EndStage();
+    }   
 
 
 }

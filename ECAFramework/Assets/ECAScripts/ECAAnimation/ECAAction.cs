@@ -34,7 +34,7 @@ public class ECAAction
         }
     
         AllStages = stages.ToArray();
-        SetupAction();
+        CurrentStageIdx = 0;
     }
 
 
@@ -48,7 +48,7 @@ public class ECAAction
         }
     
         AllStages = stages.ToArray();
-        SetupAction();
+        CurrentStageIdx = 0;
     }
 
 
@@ -96,16 +96,6 @@ public class ECAAction
         stage.StagePaused -= OnStagePaused;
     }
 
-
-
-
-    public virtual void SetupAction()
-    {
-        CurrentStageIdx = 0;
-        CurrentStage.StageFinished += OnStageFinished;
-    }
-
-
     public void Abort()
     {
         Utility.Log("Action aborted");
@@ -131,9 +121,9 @@ public class ECAAction
         {
             if(CurrentStage != null)
             {
-    		State = ActionState.Running;
-    		Attach(CurrentStage);
-                	CurrentStage.StartStage();
+    		    State = ActionState.Running;
+    		    Attach(CurrentStage);
+                CurrentStage.StartStage();
             }
         }
     }

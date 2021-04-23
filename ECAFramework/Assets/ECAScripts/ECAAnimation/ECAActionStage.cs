@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using System;
 
-			public enum ActionState {
+public enum ActionState {
 	Inactive,
 	Running,
 	Paused,

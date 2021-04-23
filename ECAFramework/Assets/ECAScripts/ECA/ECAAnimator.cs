@@ -44,7 +44,7 @@ public class ECAAnimator : MonoBehaviour
     public GameObject Player;
     public Text ECAText;
     public GameObject TextPanel;
-    public Animator Animator;
+    public Animator mecanimAnimator;
     public AudioSource audioSource;
 
 
@@ -89,8 +89,8 @@ public class ECAAnimator : MonoBehaviour
 
     protected virtual void SetAnimator()
     {
-        Animator = GetComponent<Animator>();
-        if (Animator == null)
+        mecanimAnimator = GetComponent<Animator>();
+        if (mecanimAnimator == null)
             Utility.LogWarning("No animator found for ECA: " + Eca.Name);
     }
 
@@ -127,7 +127,7 @@ public class ECAAnimator : MonoBehaviour
             handler = TriggeredAnimationContact;
     
         if (handler != null)
-    	handler(this, args);
+    	    handler(this, args);
     }
 
 

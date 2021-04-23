@@ -24,7 +24,7 @@ class SitStage : ECAActionStage
     protected SittableObject sittableObject;
 
 
-    public SitStage(SittableObject obj)
+    public SitStage(SittableObject obj) : base()
     {
         Assert.IsNotNull(obj);
     
@@ -53,10 +53,13 @@ class SitStage : ECAActionStage
 
     public override void StartStage()
     {
+        base.StartStage();
+
         Utility.Log("SitStage::StartStage");
         animator.TriggerAnimation("SitDown", sitPoint);
     
         SetWeightsForSitting();
+        animator.Eca.DetachEvent("SittableBusy", EventArgs.Empty);
         sittableObject.Occupied = true;
     
         animator.TriggeredAnimationComplete += OnEventComplete;
@@ -66,7 +69,7 @@ class SitStage : ECAActionStage
 
     public override void EndStage()
     {
-        animator.SetAnimationGroup("Sitting");
+        //animator.SetAnimationGroup("Sitting");
         base.EndStage();
     }
 

@@ -23,6 +23,7 @@ class SittableObject : MonoBehaviour
     protected ChairDestination destination;
     protected ChairLeftFoot leftFootTransform;
     protected ChairRightFoot rightFootTransform;
+
     protected bool occupied = false;
 
 
@@ -80,6 +81,8 @@ class SittableObject : MonoBehaviour
         Vector3 dir = (destinationTransform.position - sitPointTransform.position).normalized;
         dir.y = 0;
         sitPoint.transform.forward = dir;
+
+        Debug.DrawRay(sitPoint.transform.position, dir, Color.red, 100);
     }
 
 

@@ -324,5 +324,8 @@ public class ECA : MonoBehaviour, IIntentHandler
     {
     }
 
+    public virtual void DetachEvent(string handlerName, EventArgs args)
+    {
+    }
 
 }

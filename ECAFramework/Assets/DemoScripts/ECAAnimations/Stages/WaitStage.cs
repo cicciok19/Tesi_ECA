@@ -6,7 +6,7 @@ using System;
 public class WaitStage : ECAActionStage
 {
     float time;
-    public WaitStage(float time)
+    public WaitStage(float time) : base()
     {
         this.time = time;
     }
@@ -26,6 +26,11 @@ public class WaitStage : ECAActionStage
     private void OnWaitComplete(object sender, EventArgs e)
     {
         EndStage();
+    }
+
+    public override void Update()
+    {
+        base.Update();
     }
 
 }

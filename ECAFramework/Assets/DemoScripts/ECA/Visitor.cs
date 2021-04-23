@@ -36,7 +36,7 @@ protected static int counter = 0;
         paintings[idxPaint].chair.SittableBusy -= OnChairBusy;
         paintings[idxPaint].chair.SittableFree -= OnChairFree;
     
-    /*
+    
         idxPaint++;
     
         if (paintings.Count > idxPaint)
@@ -52,15 +52,14 @@ protected static int counter = 0;
             GoToPainting(paintings[idxPaint]);
         }
         else
-    */
         {
             Utility.Log("END OF APPLICATION");
-    	action = null;
+    	    action = null;
         }
     }
 
 
-    private void OnChairBusy(object sender, EventArgs e)
+    public void OnChairBusy(object sender, EventArgs e)
     {
         Utility.Log("Visitor " + this.Name + " going to " + sender + " that becomes busy");
         Painting painting = paintings[idxPaint];
@@ -132,7 +131,7 @@ protected static int counter = 0;
         paintings = scenePaintings.ToList<Painting>();
         
         // shuffle list, tricks from stackoverflow
-        // paintings = paintings.OrderBy(a => Guid.NewGuid()).ToList();
+        paintings = paintings.OrderBy(a => Guid.NewGuid()).ToList();
     
         // just as debug, go to the first painting
         GoToPainting(paintings[idxPaint]);
@@ -190,7 +189,15 @@ protected static int counter = 0;
     
         newAction.StartAction();
     
-        Invoke("OccupyChair", 1.0f);
+        //Invoke("OccupyChair", 1.0f);
+    }
+
+    public override void DetachEvent(string handlerName, EventArgs args)
+    {
+        if (handlerName == "SittableBusy")
+            paintings[idxPaint].chair.SittableBusy -= OnChairBusy;
+        if(handlerName == "SittableFree")
+            paintings[idxPaint].chair.SittableFree -= OnChairFree;
     }
 
 

@@ -24,7 +24,7 @@ class StandUpStage : ECAActionStage
     protected SittableObject sittableObject;
 
 
-    public StandUpStage(SittableObject obj)
+    public StandUpStage(SittableObject obj) : base()
     {
         Assert.IsNotNull(obj);
     
