@@ -19,9 +19,23 @@ class Visitor : ECA
 {
 // class declaration start
 protected static int counter = 0;
-// class declaration end
+    // class declaration end
 
-
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            ECAAnimatorMxM m_animator = (ECAAnimatorMxM)ecaAnimator;
+            m_animator.MxM_StartStrafing();
+        }
+        else
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            ECAAnimatorMxM m_animator = (ECAAnimatorMxM)ecaAnimator;
+            m_animator.MxM_StopStrafing();
+        }
+    }
+    
     private int idxPaint;
 
     protected List<Painting> paintings =      new List<Painting>();

@@ -69,7 +69,7 @@ class SitStage : ECAActionStage
 
     public override void EndStage()
     {
-        //animator.SetAnimationGroup("Sitting");
+        animator.SetAnimationGroup("Sitting");
         base.EndStage();
     }
 

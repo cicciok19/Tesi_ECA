@@ -54,9 +54,8 @@ class StandUpStage : ECAActionStage
     public override void StartStage()
     {
         base.StartStage();
-        animator.ClearAnimationGroup();
         animator.TriggerAnimation("StandUp", sitPoint);
-    
+
         SetWeightsToStandUp();
     
         animator.TriggeredAnimationComplete += OnEventComplete;
@@ -67,6 +66,9 @@ class StandUpStage : ECAActionStage
     public override void EndStage()
     {
         sittableObject.Occupied = false;
+
+        animator.ClearAnimationGroup();
+
         base.EndStage();
     }
 

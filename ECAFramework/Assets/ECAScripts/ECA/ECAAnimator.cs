@@ -323,7 +323,7 @@ public class ECAAnimator : MonoBehaviour
 
     public void ToggleNavMesh(bool enable)
     {
-            navMeshAgent.enabled = enable;
+        navMeshAgent.enabled = enable;
     }
 
 

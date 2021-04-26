@@ -290,6 +290,140 @@ MonoBehaviour:
   m_targetAnimModule: {fileID: 11400000}
   m_targetPrefab: {fileID: 919132149155446097, guid: c9daf4987fe34914fb68111111165aa5,
     type: 3}
+--- !u!114 &-2952458316867189460
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e0c90096ff9a54bb00ca4e068031a7, type: 3}
+  m_Name: sittingIdle_comp
+  m_EditorClassIdentifier: 
+  PrimaryClip: {fileID: -203655887218126122, guid: 77b22a257a328594d9bd35d97b101fdd,
+    type: 3}
+  BeforeClips: []
+  AfterClips: []
+  Looping: 1
+  IgnoreEdges: 0
+  ExtrapolateTrajectory: 1
+  FlattenTrajectory: 1
+  RuntimeSplicing: 0
+  GlobalTags: 2
+  GlobalFavourTags: 0
+  TagTracks: []
+  FavourTagTracks: []
+  Events: []
+  LeftFootStepTrack:
+    m_trackId: 0
+    m_trackName: Footstep Left
+    m_clipLength: 4.3
+    m_tagPositions: []
+    m_footStepData: []
+  RightFootStepTrack:
+    m_trackId: 1
+    m_trackName: Footstep Right
+    m_clipLength: 4.3
+    m_tagPositions: []
+    m_footStepData: []
+  WarpPositionTrack:
+    m_trackId: 2
+    m_trackName: Disable Warp (Position)
+    m_clipLength: 4.3
+    m_tagPositions: []
+  WarpRotationTrack:
+    m_trackId: 3
+    m_trackName: Disable Warp (Rotation)
+    m_clipLength: 4.3
+    m_tagPositions: []
+  EnableRootMotionTrack:
+    m_trackId: 4
+    m_trackName: Disable Matching
+    m_clipLength: 4.3
+    m_tagPositions: []
+  PoseFavourTrack:
+    m_trackId: 5
+    m_trackName: Pose Favour
+    m_clipLength: 4.3
+    m_tagPositions: []
+    m_values: []
+    m_defaultValue: 1
+  WarpTrajLatTrack:
+    m_trackId: 6
+    m_trackName: Disable Trajectory Warp (Angular)
+    m_clipLength: 4.3
+    m_tagPositions: []
+  WarpTrajLongTrack:
+    m_trackId: 7
+    m_trackName: Disable Trajectory Warp (Long)
+    m_clipLength: 4.3
+    m_tagPositions: []
+  UserBoolTracks: []
+  UseSpeedMods: 0
+  MotionModifier:
+    MotionSections:
+    - MotionSectionId: 0
+      MotionPresetId: 0
+      ModType: 0
+      SmoothType: 0
+      RawModValue: 1
+      UsePresets: 1
+      EndTime: 4.3
+  GeneratedClip: {fileID: 0}
+  GeneratedTagTracks: []
+  GeneratedFavourTagTracks: []
+  GeneratedEvents: []
+  GeneratedLeftFootStepTrack:
+    m_trackId: 0
+    m_trackName: 
+    m_clipLength: 0
+    m_tagPositions: []
+    m_footStepData: []
+  GeneratedRightFootStepTrack:
+    m_trackId: 0
+    m_trackName: 
+    m_clipLength: 0
+    m_tagPositions: []
+    m_footStepData: []
+  GeneratedWarpPositionTrack:
+    m_trackId: 0
+    m_trackName: 
+    m_clipLength: 0
+    m_tagPositions: []
+  GeneratedWarpRotationTrack:
+    m_trackId: 0
+    m_trackName: 
+    m_clipLength: 0
+    m_tagPositions: []
+  GeneratedEnableRootMotionTrack:
+    m_trackId: 0
+    m_trackName: 
+    m_clipLength: 0
+    m_tagPositions: []
+  GeneratedPoseFavourTrack:
+    m_trackId: 0
+    m_trackName: 
+    m_clipLength: 0
+    m_tagPositions: []
+    m_values: []
+    m_defaultValue: 0
+  GeneratedWarpTrajLatTrack:
+    m_trackId: 0
+    m_trackName: 
+    m_clipLength: 0
+    m_tagPositions: []
+  GeneratedWarpTrajLongTrack:
+    m_trackId: 0
+    m_trackName: 
+    m_clipLength: 0
+    m_tagPositions: []
+  GeneratedUserBoolTracks: []
+  m_targetPreProcessData: {fileID: 0}
+  m_targetAnimModule: {fileID: 11400000}
+  m_targetPrefab: {fileID: 919132149155446097, guid: c9daf4987fe34914fb68111111165aa5,
+    type: 3}
 --- !u!114 &-1450078126797064731
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,7 +453,7 @@ MonoBehaviour:
   - EventId: 2
     EventName: PickUp
     EventTime: 1.2918426
-    Windup: 0.19184293
+    Windup: 0.19184287
     Actions:
     - 0.2
     FollowThrough: 0.2
@@ -458,6 +592,7 @@ MonoBehaviour:
   - CatagoryName: SitDown
     Composites:
     - {fileID: -7216906412167657673}
+    - {fileID: -2952458316867189460}
     IgnoreEdges_default: 0
     Extrapolate_default: 1
     FlattenTrajectory_default: 1
@@ -559,7 +694,7 @@ MonoBehaviour:
   - EventId: 3
     EventName: PickDown
     EventTime: 1.2683545
-    Windup: 0.21835484
+    Windup: 0.21835478
     Actions:
     - 0.2
     FollowThrough: 0.2
