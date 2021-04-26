@@ -11,4 +11,8 @@ using UnityEngine;
 
 class LookableObject : MonoBehaviour
 {
+    private void Start()
+    {
+    }
+
 }

@@ -53,10 +53,11 @@ public class GoToStage : ECAActionStage
     public override void Update()
     {
         base.Update();
-        Debug.Log(Vector3.Distance(destination.position, animator.Eca.transform.position));
+        //Debug.Log(Vector3.Distance(destination.position, animator.Eca.transform.position));
         if (Vector3.Distance(destination.position, animator.Eca.transform.position) <= stopDistance + 0.5f)
         {
             animator.navMeshAgent.isStopped = true;
+            animator.navMeshAgent.SetDestination(animator.transform.position);
             EndStage();
         }
         else

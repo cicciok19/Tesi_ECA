@@ -22,7 +22,7 @@ class Visitor : ECA
     
     private int idxPaint;
 
-    protected List<Painting> paintings =      new List<Painting>();
+    protected List<Painting> paintings = new List<Painting>();
     protected ECAAction action =  null;
 
     // class declaration end
@@ -104,7 +104,7 @@ class Visitor : ECA
         painting.chair.SittableFree -= OnChairFree;
 
         GoToStage reachPainting = new GoToStage(painting.GetLookableObject());
-        reachPainting.StopDistance = 5f;
+        reachPainting.StopDistance = 2.5f;
         LookAtStage lookAt = new LookAtStage(painting.GetLookableObject());
 
         List<ECAActionStage> stages = new List<ECAActionStage>();
