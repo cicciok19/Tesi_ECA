@@ -187,8 +187,8 @@ public class ECA : MonoBehaviour, IIntentHandler
 
     public virtual void SetEcaId()
     {
-        //ID = Ecas.Default;
-        throw new NotImplementedException();
+        ID = Ecas.Default;
+        //throw new NotImplementedException();
     }
 
 
