@@ -11,15 +11,13 @@ using UnityEngine;
 using System;
 using UnityEngine.AI;
 
-
-// global declaration end
-
 public class GoToStage : ECAActionStage
 {
-
+    //global declaratio start
     private Transform destination;
     protected float stopDistance =   0.5f;
     protected float range = 0f;
+    
 
     protected Vector3 randomDestination;
 
@@ -28,6 +26,8 @@ public class GoToStage : ECAActionStage
         set { stopDistance = value; }
         get { return stopDistance; }
     }
+
+    //global declaration end
 
 
     public GoToStage(Transform destination) : base()
@@ -81,24 +81,29 @@ public class GoToStage : ECAActionStage
     /// <returns></returns>
     public bool RandomDestination(float range)
     {
-        Vector3 center = animator.Eca.transform.position;
+        Vector3 center = GameObject.FindGameObjectWithTag("Destination").transform.position;
 
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 10; i++)
         {
             Vector3 randomPoint = center + UnityEngine.Random.insideUnitSphere * range;
             NavMeshHit hit;
 
-            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomPoint, out hit, 1f, areaMask:-3))
             {
+                Debug.DrawRay(hit.position, Vector3.up, Color.red, 10f);
                 randomDestination = hit.position;
                 animator.navMeshAgent.SetDestination(randomDestination);
                 return true;
             }
         }
-
         return false;
 
     }
 
-
+    //when the stage is aborted the ECA will stop waliùking
+    public override void AbortStage()
+    {
+        base.AbortStage();
+        animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
+    }
 }

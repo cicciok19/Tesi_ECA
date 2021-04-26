@@ -7,6 +7,8 @@ using UnityEngine.AI;
 public class Passenger : ECA
 {
     private ECAAction actualAction = null;
+    private Train train;
+    private float maxRange;
 
     public override void Init()
     {
@@ -21,7 +23,12 @@ public class Passenger : ECA
     protected override void Start()
     {
         base.Start();
+        train = GameObject.FindObjectOfType<Train>();
 
+        maxRange = 8f;
+
+        train.Arriving += OnTrainArriving;
+        
         GoSomewhere();
     }
 
@@ -33,7 +40,7 @@ public class Passenger : ECA
     private void GoSomewhere()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
-        GoToStage goRandom = new GoToStage(10f);
+        GoToStage goRandom = new GoToStage(maxRange);
         WaitStage wait = new WaitStage(3f);
         stages.Add(goRandom);
         stages.Add(wait);
@@ -50,6 +57,19 @@ public class Passenger : ECA
     {
         actualAction.CompletedAction -= OnDestinationArrived;
         GoSomewhere();
+    }
+
+    private void OnTrainArriving(object sender, EventArgs e)
+    {
+        Utility.Log("Train is arriving");
+        train.Arrived += OnTrainArrived;
+
+        actualAction.CurrentStage.AbortStage();
+    }
+
+    private void OnTrainArrived(object sender, EventArgs e)
+    {
+        Utility.Log("Train is arrived, you can go in");
     }
 
 }

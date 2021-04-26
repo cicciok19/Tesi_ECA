@@ -22,7 +22,7 @@ class Visitor : ECA
     
     private int idxPaint;
 
-    protected List<Painting> paintings =      new List<Painting>();
+    protected List<Painting> paintings = new List<Painting>();
     protected ECAAction action =  null;
 
     // class declaration end
