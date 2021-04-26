@@ -70,14 +70,14 @@ public class ECAAction
 
     protected virtual void OnStageAborted(object sender, EventArgs e)
     {
-        Utility.Log("Stage " + sender.GetType() + "has aborted");
+        Utility.Log("Stage " + sender.GetType() + " has aborted");
         Detach(CurrentStage);
     }
 
 
     protected virtual void OnStagePaused(object sender, EventArgs e)
     {
-        Utility.Log("Stage " + sender.GetType() + "has paused");
+        Utility.Log("Stage " + sender.GetType() + " has paused");
     }
 
 
@@ -166,12 +166,12 @@ public class ECAAction
     		return;
     
             if (value == ActionState.Paused)
-    		CurrentStage.PauseStage();
+    		    CurrentStage.PauseStage();
     	    else
     	    if(value == ActionState.Aborted)
     		    CurrentStage.AbortStage();
     	    else
-                	CurrentStage.State = value;
+                CurrentStage.State = value;
         }
       get {
     	if(CurrentStage != null)

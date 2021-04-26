@@ -42,10 +42,16 @@ public class LookAtStage : ECAActionStage
     public override void StartStage()
     {
         base.StartStage();
-    
+
+        Utility.Log("LookAtStage started");
         animator.WaitComplete += OnWaitComplete;
         ikManager.SetTargetAimIK(ikManager.headIK, lookAtObject);
         animator.Wait(6f);
+    }
+
+    public override void Update()
+    {
+        base.Update();
     }
 
 }

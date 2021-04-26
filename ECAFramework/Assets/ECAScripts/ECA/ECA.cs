@@ -258,7 +258,7 @@ public class ECA : MonoBehaviour, IIntentHandler
         GeneralMessagesCltn = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);
     
         EmotionManager = new ECAEmotionManager(myParameters.EmotionModel);
-        ECAManager.Instance.AvailableEcas.Add(ID, this);
+        //ECAManager.Instance.AvailableEcas.Add(ID, this);
     
         CreateAnimator();
     

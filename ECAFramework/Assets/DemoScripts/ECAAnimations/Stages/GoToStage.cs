@@ -26,16 +26,10 @@ public class GoToStage : ECAActionStage
         this.destination = destination;
     }
 
-
-
-
     private void OnArrivedECA(object sender, EventArgs e)
     {
         EndStage();
     }
-
-
-
 
     public override void StartStage()
     {
@@ -52,14 +46,21 @@ public class GoToStage : ECAActionStage
 
     public float StopDistance
     {
-      set; get;
+        set { stopDistance = value; } get { return stopDistance; }
     }
 
 
     public override void Update()
     {
-        if (Vector3.Distance(destination.position, animator.Eca.transform.position) <= stopDistance)
+        base.Update();
+        Debug.Log(Vector3.Distance(destination.position, animator.Eca.transform.position));
+        if (Vector3.Distance(destination.position, animator.Eca.transform.position) <= stopDistance + 0.5f)
+        {
+            animator.navMeshAgent.isStopped = true;
             EndStage();
+        }
+        else
+            Debug.Log("ciao");
     }   
 
 

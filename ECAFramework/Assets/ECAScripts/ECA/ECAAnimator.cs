@@ -133,8 +133,10 @@ public class ECAAnimator : MonoBehaviour
 
     protected void Update()
     {
-      if(currentStage != null)
-    	currentStage.Update();
+        if (currentStage != null)
+        {
+            currentStage.Update();
+        }
     }
 
 
