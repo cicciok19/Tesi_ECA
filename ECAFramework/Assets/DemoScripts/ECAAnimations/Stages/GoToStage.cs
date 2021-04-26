@@ -60,8 +60,6 @@ public class GoToStage : ECAActionStage
             animator.navMeshAgent.SetDestination(animator.transform.position);
             EndStage();
         }
-        else
-            Debug.Log("ciao");
     }   
 
 

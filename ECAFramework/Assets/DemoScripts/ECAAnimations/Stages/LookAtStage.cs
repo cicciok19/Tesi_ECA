@@ -50,7 +50,7 @@ public class LookAtStage : ECAActionStage
 
             ikManager.SetTargetAimIK(ikManager.headIK, newLookObj.transform);
 
-            animator.Wait(.5f);
+            animator.Wait(3f);
 
             counter++;
         }

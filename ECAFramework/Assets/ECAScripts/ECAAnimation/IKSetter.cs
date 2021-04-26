@@ -195,12 +195,6 @@ public class IKSetter : MonoBehaviour
                 var -= .01f;
             }
         }
-
-        if (aimStopDictionary[aimIK] == true)
-        {
-            aimIK.solver.target = null;
-            aimStopDictionary[aimIK] = false;
-        }
     }
 
 
@@ -211,7 +205,6 @@ public class IKSetter : MonoBehaviour
         if (aimIK.solver.target == null)
         {
             aimIK.solver.target = target;
-            aimStopDictionary[aimIK] = false;
 
             if (aimIK.solver.IKPosition != null)
             {
@@ -230,23 +223,24 @@ public class IKSetter : MonoBehaviour
 
     protected IEnumerator ChangeTarget(AimIK aimIK, Transform target, float weight, float speed)
     {
-        float var = aimIK.solver.IKPositionWeight;
+        float varOld = aimIK.solver.IKPositionWeight;
+        float varNew = 0;
 
-        while(var > 0 && !aimStopDictionary[aimIK] )
+        AimIK newHeadIk = this.SetIKHead(headBone, neckBone);
+
+        SetTargetAimIK(newHeadIk, target, 0);
+
+        while (varOld > 0 || varNew < 1)
         {
-            aimIK.solver.SetIKPositionWeight(var);
+            aimIK.solver.SetIKPositionWeight(varOld);
+            newHeadIk.solver.SetIKPositionWeight(varNew);
             yield return new WaitForSeconds(speed);
-            var -= .01f;
+            varOld -= .01f;
+            varNew += .01f;
         }
 
-        aimIK.solver.target = target;
-
-        while (var < weight && !aimStopDictionary[aimIK])
-        {
-            aimIK.solver.SetIKPositionWeight(var);
-            yield return new WaitForSeconds(speed);
-            var += .01f;
-        }
+        Destroy(aimIK);
+        headIK = newHeadIk;
     }
 
 
@@ -283,11 +277,6 @@ public class IKSetter : MonoBehaviour
 
     public virtual void SetWeightTargetAimIK(AimIK aimIK, float weight, float speed = .01f)
     {
-        if (weight == 0)
-            aimStopDictionary[aimIK] = true;
-        else
-            aimStopDictionary[aimIK] = false;
-
         if (aimIK.solver.target != null)
             StartCoroutine(SetWeightAimIK(aimIK, weight, speed));
         else

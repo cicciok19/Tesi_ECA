@@ -166,6 +166,20 @@ public class ECAAnimatorMxM : ECAAnimator
         m_animator.AngularErrorWarpRate = 45f;
     }
 
+    public void MxM_BlendController(float value)
+    {
+        if (value > 0f)
+            m_animator.BlendInController(value);
+        else if (value == 0)
+            m_animator.BlendOutController(value);
+    }
+
+    public void MxM_SetMaskBodyPart(AvatarMaskBodyPart bodyPart, bool active)
+    {
+        m_animator.AnimatorControllerMask.SetHumanoidBodyPartActive(bodyPart, active);
+        m_animator.UpdateAvatarMask();
+    }
+
 
     public void MxM_ClearRequiredTags()
     {

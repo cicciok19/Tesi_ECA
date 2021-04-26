@@ -106,10 +106,13 @@ class Visitor : ECA
         GoToStage reachPainting = new GoToStage(painting.GetLookableObject());
         reachPainting.StopDistance = 2.5f;
         LookAtStage lookAt = new LookAtStage(painting.GetLookableObject());
+        //PointAtStage pointAt = new PointAtStage(painting.GetLookableObject(), 3f);
 
         List<ECAActionStage> stages = new List<ECAActionStage>();
         stages.Add(reachPainting);
+        //stages.Add(pointAt);
         stages.Add(lookAt);
+
 
         action.Abort();
 
@@ -133,6 +136,7 @@ class Visitor : ECA
         SitStage sit = new SitStage(painting.chair);
         LookAtStage lookAt = new LookAtStage(painting.GetLookableObject());
         StandUpStage standUp = new StandUpStage(painting.chair);
+        //PointAtStage pointAt = new PointAtStage(painting.GetLookableObject(), 3f);
 
 
         painting.chair.SittableBusy += OnChairBusy;
@@ -143,6 +147,7 @@ class Visitor : ECA
         stages.Add(sit);
         stages.Add(lookAt);
         stages.Add(standUp);
+        //stages.Add(pointAt);
 
         ECAAction newAction = new ECAAction(this, stages);
         action = newAction;
