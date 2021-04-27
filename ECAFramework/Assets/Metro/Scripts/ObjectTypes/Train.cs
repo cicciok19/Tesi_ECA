@@ -6,12 +6,15 @@ using UnityEngine;
 public class Train : MonoBehaviour
 {
     private TrainDoor[] doors;
+    private PassengerPlace[] places;
+    public int passengers;          //to be filled
     public event EventHandler Arriving;
-    public event EventHandler Arrived;
+    public event EventHandler DoorsOpen;
 
     void Start()
     {
         doors = GameObject.FindObjectsOfType<TrainDoor>();
+        places = GameObject.FindObjectsOfType<PassengerPlace>();
         StartCoroutine(WaitArriving());
     }
 
@@ -21,20 +24,25 @@ public class Train : MonoBehaviour
         if (Arriving != null)
             Arriving(this, EventArgs.Empty);
 
-        StartCoroutine(WaitArrived());
+        StartCoroutine(WaitDoorsOpen());
     }
 
-    private IEnumerator WaitArrived()
+    private IEnumerator WaitDoorsOpen()
     {
         yield return new WaitForSeconds(10f);
-        if (Arrived != null)
-            Arrived(this, EventArgs.Empty);
+        if (DoorsOpen != null)
+            DoorsOpen(this, EventArgs.Empty);
     }
 
     //TODO: could do a shuffle or analyze the nerarest door and select that one
     public TrainDoor[] GetTrainDoors()
     {
         return doors;
+    }
+
+    public PassengerPlace[] GetPassengerPlaces()
+    {
+        return places;
     }
 
 }

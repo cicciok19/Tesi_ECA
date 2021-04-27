@@ -35,10 +35,15 @@ public class GoToStage : ECAActionStage
         this.destination = destination;
     }
 
-    public GoToStage(Transform destination, float range) : base()
+    /// <summary>
+    /// Use this if you want to generate a random destination around the center
+    /// </summary>
+    /// <param name="center"></param>
+    /// <param name="range"></param>
+    public GoToStage(Transform center, float range) : base()
     {
         this.range = range;
-        this.destination = destination;
+        this.destination = center;
     }
 
 
@@ -68,7 +73,8 @@ public class GoToStage : ECAActionStage
         base.Update();
         if (Vector3.Distance(destination.position, animator.Eca.transform.position) <= stopDistance + 0.5f)
         {
-            animator.navMeshAgent.isStopped = true;
+            //animator.navMeshAgent.isStopped = true;
+            animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
             EndStage();
         }
     }   

@@ -10,6 +10,7 @@ public class Passenger : ECA
     private Train train;
     private TrainDoor doorSelected = null;
     private Binary binary;
+    private PassengerPlace placeSelected = null;
     private float maxRange;
 
     public override void Init()
@@ -33,6 +34,7 @@ public class Passenger : ECA
         maxRange = 5f;
 
         train.Arriving += OnTrainArriving;
+        //ecaAnimator.navMeshAgent.areaMask = NavMesh.GetAreaFromName("Binary");
         
         GoSomewhere();
     }
@@ -67,19 +69,20 @@ public class Passenger : ECA
     private void OnTrainArriving(object sender, EventArgs e)
     {
         Utility.Log("Train is arriving");
-        train.Arrived += OnTrainArrived;
+        train.DoorsOpen += OnDoorsOpen;
 
         //actualAction.CurrentStage.AbortStage();
         actualAction.Abort();
 
         //DO SOMETHING
-        GoToStage goNearTrainDoor = new GoToStage(train.GetTrainDoors()[0].transform, 3f);
+        GoToStage goNearTrainDoor = new GoToStage(train.GetTrainDoors()[0].transform);
+        goNearTrainDoor.StopDistance = 5f;
         ECAAction newAction = new ECAAction(this, goNearTrainDoor);
         actualAction = newAction;
         actualAction.StartAction();
     }
 
-    private void OnTrainArrived(object sender, EventArgs e)
+    private void OnDoorsOpen(object sender, EventArgs e)
     {
         Utility.Log("Train is arrived, you can go in");
 
@@ -90,6 +93,7 @@ public class Passenger : ECA
     private void EnterTrain()
     {
         doorSelected = train.GetTrainDoors()[0];
+
         if (doorSelected.Occupied)
         {
             doorSelected.DoorFree += OnDoorFree;
@@ -99,10 +103,19 @@ public class Passenger : ECA
         {
             doorSelected.DoorFree -= OnDoorFree;
             doorSelected.Occupied = true;
-
-            WaitStage enter = new WaitStage(5f);
+            foreach(var p in train.GetPassengerPlaces())
+            {
+                if (!p.Occupied)
+                {
+                    placeSelected = p;
+                    break;
+                }
+            }
+            GoToStage enter = new GoToStage(placeSelected.transform);
             ECAAction newAction = new ECAAction(this, enter);
             actualAction = newAction;
+
+            //TODO: the next ECA should enter even before that this ECA will arrive at destination
             actualAction.CompletedAction += Entered;
             actualAction.StartAction();
 
@@ -119,6 +132,7 @@ public class Passenger : ECA
     {
         actualAction.CompletedAction -= Entered;
         doorSelected.Occupied = false;
+        placeSelected.Occupied = true;
     }
 
 }
