@@ -23,6 +23,7 @@ public class ECAAction
     public ECAAnimator EcaAnimator;
     public IKSetter ikManager;
 
+    //CONSTRUCTORS START
 
     public ECAAction(ECA eca, List<ECAActionStage> stages)
     {
@@ -37,7 +38,6 @@ public class ECAAction
         CurrentStageIdx = 0;
     }
 
-
     public ECAAction(ECAAnimator ecaAnimator, List<ECAActionStage> stages)
     {
         EcaAnimator = ecaAnimator;
@@ -51,8 +51,15 @@ public class ECAAction
         CurrentStageIdx = 0;
     }
 
+    public ECAAction(ECA eca, ECAActionStage stage)
+    {
+        stage.Animator = eca.ecaAnimator;
+        AllStages = new ECAActionStage[1];
+        AllStages[0] = stage;
+        CurrentStageIdx = 0;
+    }
 
-
+    //CONSTRUCTORS END
 
     protected virtual void GetIkManager(ECA eca)
     {
@@ -165,13 +172,13 @@ public class ECAAction
     	if(CurrentStage == null)
     		return;
     
-            if (value == ActionState.Paused)
-    		    CurrentStage.PauseStage();
-    	    else
-    	    if(value == ActionState.Aborted)
-    		    CurrentStage.AbortStage();
-    	    else
-                CurrentStage.State = value;
+        if (value == ActionState.Paused)
+    		CurrentStage.PauseStage();
+    	else
+    	if(value == ActionState.Aborted)
+    		CurrentStage.AbortStage();
+    	else
+            CurrentStage.State = value;
         }
       get {
     	if(CurrentStage != null)

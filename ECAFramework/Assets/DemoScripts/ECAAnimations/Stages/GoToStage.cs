@@ -13,7 +13,7 @@ using UnityEngine.AI;
 
 public class GoToStage : ECAActionStage
 {
-    //global declaratio start
+    //global declaration start
     private Transform destination;
     protected float stopDistance =   0.5f;
     protected float range = 0f;
@@ -35,9 +35,10 @@ public class GoToStage : ECAActionStage
         this.destination = destination;
     }
 
-    public GoToStage(float range) : base()
+    public GoToStage(Transform destination, float range) : base()
     {
         this.range = range;
+        this.destination = destination;
     }
 
 
@@ -47,8 +48,8 @@ public class GoToStage : ECAActionStage
 
         if (range != 0f)
             RandomDestination(range);
-        else
-            animator.navMeshAgent.SetDestination(destination.position);
+
+        animator.navMeshAgent.SetDestination(destination.position);
     }
 
 
@@ -65,13 +66,11 @@ public class GoToStage : ECAActionStage
     public override void Update()
     {
         base.Update();
-        if (destination != null && Vector3.Distance(destination.position, animator.Eca.transform.position) <= stopDistance + 0.5f)
+        if (Vector3.Distance(destination.position, animator.Eca.transform.position) <= stopDistance + 0.5f)
         {
             animator.navMeshAgent.isStopped = true;
             EndStage();
         }
-        else if (Vector3.Distance(randomDestination, animator.Eca.transform.position) <= stopDistance + 0.5f)
-            EndStage();
     }   
 
     /// <summary>
@@ -81,7 +80,8 @@ public class GoToStage : ECAActionStage
     /// <returns></returns>
     public bool RandomDestination(float range)
     {
-        Vector3 center = GameObject.FindGameObjectWithTag("Destination").transform.position;
+        //Vector3 center = GameObject.FindGameObjectWithTag("Destination").transform.position;
+        Vector3 center = destination.transform.position;
 
         for (int i = 0; i < 10; i++)
         {
@@ -91,8 +91,8 @@ public class GoToStage : ECAActionStage
             if (NavMesh.SamplePosition(randomPoint, out hit, 1f, areaMask:-3))
             {
                 Debug.DrawRay(hit.position, Vector3.up, Color.red, 10f);
-                randomDestination = hit.position;
-                animator.navMeshAgent.SetDestination(randomDestination);
+                destination.position = hit.position;
+                //animator.navMeshAgent.SetDestination(randomDestination);
                 return true;
             }
         }

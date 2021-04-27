@@ -12,12 +12,12 @@ public class Train : MonoBehaviour
     void Start()
     {
         doors = GameObject.FindObjectsOfType<TrainDoor>();
-        //StartCoroutine(WaitArriving());
+        StartCoroutine(WaitArriving());
     }
 
     private IEnumerator WaitArriving()
     {
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(10f);
         if (Arriving != null)
             Arriving(this, EventArgs.Empty);
 
@@ -26,9 +26,15 @@ public class Train : MonoBehaviour
 
     private IEnumerator WaitArrived()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
         if (Arrived != null)
             Arrived(this, EventArgs.Empty);
+    }
+
+    //TODO: could do a shuffle or analyze the nerarest door and select that one
+    public TrainDoor[] GetTrainDoors()
+    {
+        return doors;
     }
 
 }
