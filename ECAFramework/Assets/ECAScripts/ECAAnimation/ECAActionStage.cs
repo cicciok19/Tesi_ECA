@@ -49,6 +49,16 @@ public abstract class ECAActionStage
     {
     }
 
+    protected virtual void ActivateLayer(int layerIndex, float weightLayer)
+    {
+
+    }
+
+    protected virtual void DeactivateLayer(int layerIndex, float weightLayer)
+    {
+
+    }
+
 
     protected virtual void OnEventComplete(object sender, EventArgs e)
     {

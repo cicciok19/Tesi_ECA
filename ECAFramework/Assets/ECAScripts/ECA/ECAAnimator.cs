@@ -310,6 +310,11 @@ public class ECAAnimator : MonoBehaviour
     {
     }
 
+    public void DestroyObj(GameObject obj)
+    {
+        Destroy(obj);
+    }
+
 
     public virtual IEnumerator WaitLookAt(Vector3 dir)
     {

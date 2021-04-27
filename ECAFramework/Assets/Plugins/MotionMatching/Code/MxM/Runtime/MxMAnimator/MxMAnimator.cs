@@ -713,6 +713,7 @@ namespace MxM
         public void UpdateAvatarMask()
         {
             m_animationLayerMixer.SetLayerMaskFromAvatarMask(1, m_animatorControllerMask);
+            //SetupAnimator();
         }
 
         //============================================================================================

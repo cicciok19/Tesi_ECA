@@ -206,7 +206,7 @@ public class IKSetter : MonoBehaviour
         {
             aimIK.solver.target = target;
 
-            if (aimIK.solver.IKPosition != null)
+            if (aimIK.solver.target != null)
             {
                 StartCoroutine(SetWeightAimIK(aimIK, weight, speed));
             }
@@ -226,7 +226,7 @@ public class IKSetter : MonoBehaviour
         float varOld = aimIK.solver.IKPositionWeight;
         float varNew = 0;
 
-        AimIK newHeadIk = this.SetIKHead(headBone, neckBone);
+        AimIK newHeadIk = SetIKHead(headBone, neckBone);
 
         SetTargetAimIK(newHeadIk, target, 0);
 

@@ -23,6 +23,8 @@ public class LookAtStage : ECAActionStage
 
     protected int counter;
 
+    bool wait = false;
+
 
     public LookAtStage(Transform lookAtObject) : base()
     {
@@ -37,18 +39,18 @@ public class LookAtStage : ECAActionStage
 
     private void OnWaitComplete(object sender, EventArgs e)
     {
+        GameObject newLookObjArray = new GameObject();
+
         if (counter < 4)
         {
-            GameObject newLookObj = new GameObject();
-
             float newHeight = UnityEngine.Random.Range(-height / 2, height / 2);
             float newWidth = UnityEngine.Random.Range(-width / 2, width / 2);
 
-            newLookObj.transform.position = new Vector3(lookAtObject.position.x + newWidth, lookAtObject.position.y + newHeight, lookAtObject.position.z);
-            newLookObj.transform.rotation = lookAtObject.transform.rotation;
-            newLookObj.transform.localScale = lookAtObject.transform.localScale;
+            newLookObjArray.transform.position = new Vector3(lookAtObject.position.x + newWidth, lookAtObject.position.y + newHeight, lookAtObject.position.z);
+            newLookObjArray.transform.rotation = lookAtObject.transform.rotation;
+            newLookObjArray.transform.localScale = lookAtObject.transform.localScale;
 
-            ikManager.SetTargetAimIK(ikManager.headIK, newLookObj.transform);
+            ikManager.SetTargetAimIK(ikManager.headIK, newLookObjArray.transform);
 
             animator.Wait(3f);
 
@@ -56,15 +58,16 @@ public class LookAtStage : ECAActionStage
         }
         else
         {
-            EndStage();
+            ikManager.SetWeightTargetAimIK(ikManager.headIK, 0);
+            ikManager.headIK.solver.target = null;
+
+            counter = 0;
+            wait = true;
         }
     }
 
     public override void EndStage()
     {
-        ikManager.SetWeightTargetAimIK(ikManager.headIK, 0);
-        counter = 0;
-
         animator.WaitComplete -= OnWaitComplete;
         base.EndStage();
     }
@@ -85,6 +88,9 @@ public class LookAtStage : ECAActionStage
     public override void Update()
     {
         base.Update();
+
+        if (ikManager.headIK.solver.IKPositionWeight < .01f && wait)
+            EndStage();
     }
 
 }

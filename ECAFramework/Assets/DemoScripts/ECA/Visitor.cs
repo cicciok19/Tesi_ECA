@@ -106,11 +106,11 @@ class Visitor : ECA
         GoToStage reachPainting = new GoToStage(painting.GetLookableObject());
         reachPainting.StopDistance = 2.5f;
         LookAtStage lookAt = new LookAtStage(painting.GetLookableObject());
-        //PointAtStage pointAt = new PointAtStage(painting.GetLookableObject(), 3f);
+        PointAtStage pointAt = new PointAtStage(painting.GetLookableObject(), 3f);
 
         List<ECAActionStage> stages = new List<ECAActionStage>();
         stages.Add(reachPainting);
-        //stages.Add(pointAt);
+        stages.Add(pointAt);
         stages.Add(lookAt);
 
 
