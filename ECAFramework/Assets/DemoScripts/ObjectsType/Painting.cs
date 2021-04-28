@@ -1,5 +1,11 @@
 /* File Painting C# implementation of class Painting */
 
+/*      CG&VG group @ Politecnico di Torino               */
+/*              All Rights Reserved	                      */
+/*                                                        */
+/*  THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF CG&VG  */
+/*  The copyright notice above does not evidence any      */
+/*  actual or intended publication of such source code.   */
 
 
 // global declaration start
@@ -52,9 +58,9 @@ class Painting : MonoBehaviour
     }
 
 
-    public Transform GetLookableObject()
+    public LookableObject GetLookableObject()
     {
-        return lookable.transform;
+        return lookable;
     }
 
 

@@ -13,7 +13,7 @@ namespace RootMotion.Demos {
 		// GUI for testing
 		public int GUIspace;
 
-		void OnGUI() {
+        void OnGUI() {
 			GUILayout.BeginHorizontal();
 			GUILayout.Space(GUIspace);
 

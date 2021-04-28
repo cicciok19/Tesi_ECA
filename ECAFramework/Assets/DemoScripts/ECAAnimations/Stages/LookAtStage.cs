@@ -1,5 +1,11 @@
 /* File LookAtStage C# implementation of class LookAtStage */
 
+/*      CG&VG group @ Politecnico di Torino               */
+/*              All Rights Reserved	                      */
+/*                                                        */
+/*  THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF CG&VG  */
+/*  The copyright notice above does not evidence any      */
+/*  actual or intended publication of such source code.   */
 
 
 // global declaration start
@@ -17,80 +23,62 @@ public class LookAtStage : ECAActionStage
 {
 
     protected Transform lookAtObject;
-
-    protected float width; 
-    protected float height;
-
     protected int counter;
+    protected LookableObject lookableObject;
 
-    bool wait = false;
 
-
-    public LookAtStage(Transform lookAtObject) : base()
+    public LookAtStage(LookableObject lookableObject)
+    : base()
     {
-        this.lookAtObject = lookAtObject;
-
-        width = lookAtObject.GetComponent<MeshRenderer>().bounds.size.x;
-        height = lookAtObject.GetComponent<MeshRenderer>().bounds.size.y;
+            this.lookableObject = lookableObject;
+    
+    	counter = (int)Mathf.Round(UnityEngine.Random.Range(2f ,5f));
+    
     }
 
 
 
 
-    private void OnWaitComplete(object sender, EventArgs e)
+    private void OnAimCompleted(object sender, EventArgs e)
     {
-        GameObject newLookObjArray = new GameObject();
-
-        if (counter < 4)
-        {
-            float newHeight = UnityEngine.Random.Range(-height / 2, height / 2);
-            float newWidth = UnityEngine.Random.Range(-width / 2, width / 2);
-
-            newLookObjArray.transform.position = new Vector3(lookAtObject.position.x + newWidth, lookAtObject.position.y + newHeight, lookAtObject.position.z);
-            newLookObjArray.transform.rotation = lookAtObject.transform.rotation;
-            newLookObjArray.transform.localScale = lookAtObject.transform.localScale;
-
-            ikManager.SetTargetAimIK(ikManager.headIK, newLookObjArray.transform);
-
-            animator.Wait(3f);
-
-            counter++;
-        }
-        else
-        {
-            ikManager.SetWeightTargetAimIK(ikManager.headIK, 0);
-            ikManager.headIK.solver.target = null;
-
-            counter = 0;
-            wait = true;
-        }
+      WaitFor(UnityEngine.Random.Range(0f, 3.0f));
     }
+
+
+
+
+    protected override void OnWaitCompleted()
+    {   
+        if(counter == 0)
+        {
+    	EndStage();
+    	return;
+        }
+    
+    
+        counter--;
+        ikManager.SetTargetAimIK(ikManager.headIK, lookableObject.GetRandomLookPosition());
+    }
+
+
+
 
     public override void EndStage()
     {
-        animator.WaitComplete -= OnWaitComplete;
         base.EndStage();
+        ikManager.RemoveTarget(ikManager.headIK);
+        
     }
 
 
     public override void StartStage()
     {
         base.StartStage();
-
-        counter = 0;
-
+    
         Utility.Log("LookAtStage started");
-        animator.WaitComplete += OnWaitComplete;
-        ikManager.SetTargetAimIK(ikManager.headIK, lookAtObject);
-        animator.Wait(3f);
+        ikManager.AimCompleted += OnAimCompleted;
+        ikManager.SetTargetAimIK(ikManager.headIK, lookableObject.GetLookPosition());
     }
 
-    public override void Update()
-    {
-        base.Update();
-
-        if (ikManager.headIK.solver.IKPositionWeight < .01f && wait)
-            EndStage();
-    }
 
 }

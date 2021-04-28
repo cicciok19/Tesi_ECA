@@ -1,4 +1,4 @@
-:ArrayOb.273{6:Dictionary.4369{64 37:SLSPublicMember.286331409{:String.17{9 10 "126345112"}
+:ArrayOb.273{6:Dictionary.4369{64 36:SLSPublicMember.286331409{:String.17{9 10 "126345112"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{15 16 "fullBodyBipedIK"}
@@ -30,22 +30,6 @@
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
-#6{#4{9 10 "156732040"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{12 13 "RightForeArm"}
- 1.6 1.88 4.8 37  29 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{12 13 "RightForeArm"}
-#4{9 10 "Transform"}
-#4{0 1 ""}
-#5{16 0}
-#5{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{16 17 "[SerializeField]"}
-}
 #3{#4{9 10 "127108776"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -62,6 +46,26 @@
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
+:SLSProtectMethod.286331408{#4{8 9 "75556664"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{9 10 "SetPickUp"}
+ 1.3 0.88 3.6 37  7 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{205 206 "\[\n
+    InteractionSystem intSys = this.gameObject.AddComponent<InteractionSystem>();\n
+    PickUp pickUp = this.gameObject.AddComponent<PickUp>();\n
+\n
+    pickUp.interactionSystem = intSys;\n
+\n
+    return pickUp;\n
+\]"}
+#4{9 10 "SetPickUp"}
+#4{6 7 "PickUp"}
+#4{0 1 ""}
+#4{0 1 ""}
+ 0}
 #6{#4{9 10 "156735560"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -94,40 +98,6 @@
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
-:SLSProtectMethod.286331408{#4{8 9 "94198736"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{14 15 "SetWeightAimIK"}
- 1.3 0.88 5.6 10  9 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{460 461 "\[\n
-    float var = aimIK.solver.IKPositionWeight;\n
-\n
-    if (var < weight)\n
-    \[\n
-        while (var < weight)\n
-        \[\n
-            aimIK.solver.SetIKPositionWeight(var);\n
-            yield return new WaitForSeconds(speed);\n
-            var += .01f;\n
-        \]\n
-    \]\n
-    else\n
-    \[\n
-        while (var > weight)\n
-        \[\n
-            aimIK.solver.SetIKPositionWeight(var);\n
-            yield return new WaitForSeconds(speed);\n
-            var -= .01f;\n
-        \]\n
-    \]\n
-\]"}
-#4{14 15 "SetWeightAimIK"}
-#4{11 12 "IEnumerator"}
-#4{38 39 "AimIK aimIK, float speed, float weight"}
-#4{0 1 ""}
- 0}
 #3{#4{9 10 "126345992"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -183,7 +153,7 @@
  1.3 0.88 5.6 19  11 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{460 461 "\[\n
+ 1  1 #4{532 533 "\[\n
     float var = aimIK.solver.IKPositionWeight;\n
 \n
     if (var < weight)\n
@@ -204,6 +174,9 @@
             var -= .01f;\n
         \]\n
     \]\n
+\n
+    if(AimCompleted != null)\n
+\tAimCompleted(this, new EventArgs.Empty);\n
 \]"}
 #4{14 15 "SetWeightAimIK"}
 #4{11 12 "IEnumerator"}
@@ -244,22 +217,6 @@
 #4{46 47 "IKEffector effector, float weight, float speed"}
 #4{0 1 ""}
  0}
-#6{#4{9 10 "156736440"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{12 13 "LeftShoulder"}
- 1.6 1.88 4.8 46  29 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{12 13 "LeftShoulder"}
-#4{9 10 "Transform"}
-#4{0 1 ""}
-#5{16 0}
-#5{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{16 17 "[SerializeField]"}
-}
 :JLSGlobalDeclare.286331408{#4{9 10 "129754464"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -267,10 +224,12 @@
  0.299999 0.88 7.2 33  3 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 0  0 #4{150 151 "using System.Collections;\n
+ 0  0 #4{192 193 "using System.Collections;\n
 using System.Collections.Generic;\n
 using UnityEngine;\n
 using RootMotion.FinalIK;\n
+using RootMotion;\n
+using RootMotion.Demos;\n
 \n
 \n
 //principal class for setting the Final IK\n
@@ -362,11 +321,12 @@ using RootMotion.FinalIK;\n
  1.3 0.88 5.2 10  11 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{270 271 "\[\n
+ 1  1 #4{409 410 "\[\n
     //this.gameObject.AddComponent<FullBodyBipedIK>().solver.effectors = new IKEffector[9];\n
     FullBodyBipedIK BodyIK = this.gameObject.AddComponent<FullBodyBipedIK>();\n
+    BipedReferences.AutoDetectReferences(ref BodyIK.references, root, BipedReferences.AutoDetectParams.Default );\n
+    BodyIK.solver.SetToReferences(BodyIK.references, null);\n
     //BodyIK.GetIKSolver().Initiate(root);\n
-    BodyIK.solver.rootNode = root;\n
     return BodyIK;\n
 \]"}
 #4{13 14 "SetFullBodyIK"}
@@ -406,12 +366,15 @@ using RootMotion.FinalIK;\n
  1.3 0.88 3.6 10  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{245 268 "\[       \n
+ 1  1 #4{282 283 "\[\n
     AimIK HeadIK = this.gameObject.AddComponent<AimIK>();\n
     HeadIK.GetIKSolver().Initiate(root);\n
     HeadIK.solver.transform = headBone;\n
     HeadIK.solver.AddBone(neckBone);\n
     HeadIK.solver.IKPositionWeight = 0;\n
+\n
+    aimStopDictionary.Add(HeadIK, false);\n
+\n
     return HeadIK;\n
 \]"}
 #4{9 10 "SetIKHead"}
@@ -419,22 +382,6 @@ using RootMotion.FinalIK;\n
 #4{38 39 "Transform headBone, Transform neckBone"}
 #4{0 1 ""}
  0}
-#6{#4{9 10 "156730280"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{11 12 "LeftForeArm"}
- 1.8 1.88 4.4 28  29 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{11 12 "LeftForeArm"}
-#4{9 10 "Transform"}
-#4{0 1 ""}
-#5{16 0}
-#5{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{16 17 "[SerializeField]"}
-}
 #6{#4{9 10 "118486256"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -458,15 +405,23 @@ using RootMotion.FinalIK;\n
  1.3 0.88 5.6 1  6 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{237 251 "\[\n
-    aimIK.solver.target = target;\n
-    if (aimIK.solver.IKPosition != null)\n
+ 1  1 #4{408 409 "\[\n
+    if (aimIK.solver.target == null)\n
     \[\n
-        StartCoroutine(SetWeightAimIK(aimIK, weight, speed));\n
+        aimIK.solver.target = target;\n
+\n
+        if (aimIK.solver.target != null)\n
+        \[\n
+            StartCoroutine(SetWeightAimIK(aimIK, weight, speed));\n
+        \]\n
+        else\n
+        \[\n
+            Debug.Log(\"The target is null, first set the target.\");\n
+        \]\n
     \]\n
     else\n
     \[\n
-        Debug.Log(\"The target is null, first set the target.\");\n
+        StartCoroutine(ChangeTarget(aimIK, target, weight, speed));\n
     \]\n
 \]"}
 #4{14 15 "SetTargetAimIK"}
@@ -492,6 +447,22 @@ using RootMotion.FinalIK;\n
 #4{53 54 "IKEffector effector, float weight, float speed = .01f"}
 #4{0 1 ""}
 }
+:SLSThisIcon.286331409{#4{8 9 "94276208"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  52 45 0.4 0 0 #4{31 32 "public IKSetter : MonoBehaviour"}
+ 17.3314 2.2 19.84 4  0 #4{0 1 ""}
+#4{0 1 ""}
+@0  5.34541 3.74855 0
+ 0  0 #4{15 16 "public IKSetter"}
+#4{13 14 "MonoBehaviour"}
+#4{0 13 ""}
+#5{16 1#4{39 40 "public event EventHandler AimCompleted;"}
+}
+#5{16 0}
+#4{1 2 "S"}
+@0 #4{0 1 ""}
+}
 #7{#4{8 9 "94203048"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -499,7 +470,7 @@ using RootMotion.FinalIK;\n
  1.3 0.88 5.6 19  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{383 384 "\[\n
+ 1  1 #4{427 428 "\[\n
     AimIK RightIK = this.gameObject.AddComponent<AimIK>();\n
     RightIK.GetIKSolver().Initiate(root);\n
     RightIK.solver.axis = new Vector3(0, 1, 0);\n
@@ -508,6 +479,8 @@ using RootMotion.FinalIK;\n
     RightIK.solver.AddBone(rightArm);\n
     RightIK.solver.AddBone(rightForeArm);\n
     RightIK.solver.IKPositionWeight = 0;\n
+\n
+    aimStopDictionary.Add(RightIK, false);\n
 \n
     return RightIK;\n
 \]"}
@@ -539,7 +512,7 @@ using RootMotion.FinalIK;\n
  1.3 0.88 5.2 28  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{370 371 "\[\n
+ 1  1 #4{413 414 "\[\n
     AimIK LeftIK = this.gameObject.AddComponent<AimIK>();\n
     LeftIK.GetIKSolver().Initiate(root);\n
     LeftIK.solver.axis = new Vector3(0, 1, 0);\n
@@ -548,6 +521,8 @@ using RootMotion.FinalIK;\n
     LeftIK.solver.AddBone(leftArm);\n
     LeftIK.solver.AddBone(leftForeArm);\n
     LeftIK.solver.IKPositionWeight = 0;\n
+\n
+    aimStopDictionary.Add(LeftIK, false);\n
 \n
     return LeftIK;\n
 \]"}
@@ -563,12 +538,13 @@ using RootMotion.FinalIK;\n
  1.3 0.88 2 28  9 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{922 923 "\[\n
+ 1  1 #4{980 981 "\[\n
     animator = this.GetComponent<Animator>();\n
 \n
     // Get the bones\n
 \n
-    root = GetBone(HumanBodyBones.Hips);\n
+    //root = GetBone(HumanBodyBones.Hips);\n
+    root = this.transform;\n
     headBone = GetBone(HumanBodyBones.Head);\n
     neckBone = GetBone(HumanBodyBones.Neck);\n
     rightHandBone = GetBone(HumanBodyBones.RightHand);\n
@@ -585,6 +561,8 @@ using RootMotion.FinalIK;\n
     rightHandIK = SetIKRightHand(rightHandBone, rightForeArm, rightArm, rightShoulder);\n
     leftHandIK = SetIKLeftHand(leftHandBone, leftForeArm, leftArm, leftShoulder);\n
     fullBodyBipedIK = SetFullBodyIK();\n
+\n
+    //pickUp = SetPickUp();\n
 \]"}
 #4{5 6 "Start"}
 #4{12 13 "virtual void"}
@@ -607,37 +585,38 @@ using RootMotion.FinalIK;\n
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
-:SLSThisIcon.286331409{#4{8 9 "94276208"}
+#7{#4{8 9 "75556272"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  52 45 0.4 0 0 #4{31 32 "public IKSetter : MonoBehaviour"}
- 17.3314 2.2 19.84 4  0 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{12 13 "ChangeTarget"}
+ 1.3 0.88 4.8 10  9 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 0  0 #4{15 16 "public IKSetter"}
-#4{13 14 "MonoBehaviour"}
-#4{0 13 ""}
-#5{16 0}
-#5{16 0}
-#4{1 2 "S"}
-@0 #4{0 1 ""}
-}
-#6{#4{9 10 "156731600"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{13 14 "RightShoulder"}
- 1.4 1.88 5.2 10  32 #4{0 1 ""}
+ 1  1 #4{467 468 "\[\n
+    float varOld = aimIK.solver.IKPositionWeight;\n
+    float varNew = 0;\n
+\n
+    AimIK newHeadIk = SetIKHead(headBone, neckBone);\n
+\n
+    SetTargetAimIK(newHeadIk, target, 0);\n
+\n
+    while (varOld > 0 || varNew < 1)\n
+    \[\n
+        aimIK.solver.SetIKPositionWeight(varOld);\n
+        newHeadIk.solver.SetIKPositionWeight(varNew);\n
+        yield return new WaitForSeconds(speed);\n
+        varOld -= .01f;\n
+        varNew += .01f;\n
+    \]\n
+\n
+    Destroy(aimIK);\n
+    headIK = newHeadIk;\n
+\]"}
+#4{12 13 "ChangeTarget"}
+#4{11 12 "IEnumerator"}
+#4{56 57 "AimIK aimIK, Transform target, float weight, float speed"}
 #4{0 1 ""}
-@0  0 0 1
- 1  1 #4{13 14 "RightShoulder"}
-#4{9 10 "Transform"}
-#4{0 1 ""}
-#5{16 0}
-#5{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{16 17 "[SerializeField]"}
-}
+ 0}
 :SLSProtectMember.286331409{#4{9 10 "131452952"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -647,6 +626,38 @@ using RootMotion.FinalIK;\n
 @0  0 0 1
  1  1 #4{8 9 "animator"}
 #4{8 9 "Animator"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{0 1 ""}
+#4{0 1 ""}
+}
+#12{#4{8 9 "75745976"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{17 18 "aimStopDictionary"}
+ 0.6 1.88 6.8 10  26 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{17 18 "aimStopDictionary"}
+#4{23 24 "Dictionary<AimIK, bool>"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{30 31 " new Dictionary<AimIK, bool>()"}
+#4{0 1 ""}
+}
+#12{#4{8 9 "75741576"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{6 7 "pickUp"}
+ 2.8 1.88 2.4 19  26 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{6 7 "pickUp"}
+#4{6 7 "PickUp"}
 #4{0 1 ""}
 #5{16 0}
 #5{16 0}
@@ -721,19 +732,25 @@ using RootMotion.FinalIK;\n
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @403 @189 @263 @0 #5{48 16@388 @18 @33 @63 @78 @120 @174 @221 @248 @283 @298 @349 @417 @459 @474 @489 }
-#5{16 1@432 }
+:CLSCSSem.1118481{ 56  51 @292 @159 @233 @0 #5{48 12@358 @18 @60 @75 @105 @191 @218 @253 @319 @442 @457 @472 }
+#5{16 3@385 @400 @415 }
 #5{16 0}
-#5{16 9@271 @337 @364 @93 @162 @376 @197 @236 @150 }
+#5{16 10@241 @307 @334 @147 @346 @167 @206 @135 @48 @373 }
 #5{16 0}
 #5{16 0}
 #5{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #5{16 0}
-#1{30@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @3 @0 @135 @0 @105 @0 @48 @0 @0 @0 }
-#1{16@313 @209 @325 @447 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{30@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @3 @0 @120 @0 @90 @0 @33 @0 @0 @0 }
+#1{16@268 @179 @280 @430 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#4{0 1 ""}
+#4{366 367 "/*      CG&VG group @ Politecnico di Torino               */\n
+/*              All Rights Reserved\t                      */\n
+/*                                                        */\n
+/*  THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF CG&VG  */\n
+/*  The copyright notice above does not evidence any      */\n
+/*  actual or intended publication of such source code.   */\n
+"}
 #5{16 0}
  0}
 :Float.17{0 }

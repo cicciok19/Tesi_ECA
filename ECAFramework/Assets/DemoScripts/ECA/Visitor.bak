@@ -5,13 +5,14 @@
  1.3 0.88 6 10  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{577 590 "\[\n
+ 1  1 #4{583 590 "\[\n
     Utility.Log(\"Visitor \" + this.Name + \" visited paint \" + paintings[idxPaint].id);\n
 \n
     //free the paint\n
     paintings[idxPaint].chair.SittableBusy -= OnChairBusy;\n
     paintings[idxPaint].chair.SittableFree -= OnChairFree;\n
 \n
+/*\n
     idxPaint++;\n
 \n
     if (paintings.Count > idxPaint)\n
@@ -27,6 +28,7 @@
         GoToPainting(paintings[idxPaint]);\n
     \]\n
     else\n
+*/\n
     \[\n
         Utility.Log(\"END OF APPLICATION\");\n
 \taction = null;\n

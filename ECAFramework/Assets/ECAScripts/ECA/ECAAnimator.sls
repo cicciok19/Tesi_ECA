@@ -1,8 +1,8 @@
-:ArrayOb.273{6:Dictionary.4369{64 41:SLSProperty.286331392{:String.17{9 10 "131134360"}
+:ArrayOb.273{6:Dictionary.4369{64 42:SLSProperty.286331392{:String.17{9 10 "131134360"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{12 13 "currentStage"}
- 1.3 0.88 4.8 1  17 #4{0 1 ""}
+ 1.3 0.879999 4.8 1  17 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
  1  1 #4{15 16 "\[\n
@@ -23,22 +23,6 @@
 @0  0 0 1
  0  0 #4{0 1 ""}
 }
-:SLSInternalMember.286331409{#4{9 10 "119132408"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{12 13 "navMeshAgent"}
- 1.6 1.88 4.8 37  26 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{12 13 "navMeshAgent"}
-#4{12 13 "NavMeshAgent"}
-#4{0 1 ""}
-:OrderedCltn.4369{16 0}
-#7{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{0 1 ""}
-}
 :SLSPublicMethod.286331408{#4{9 10 "155398201"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -52,6 +36,22 @@
 #4{32 34 "WaitForTriggeredAnimationContact"}
 #4{12 21 "virtual void"}
 #4{0 1 ""}
+#4{0 1 ""}
+}
+:SLSInternalMember.286331409{#4{9 10 "119132408"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{12 13 "navMeshAgent"}
+ 1.6 1.88 4.8 37  26 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{12 13 "navMeshAgent"}
+#4{12 13 "NavMeshAgent"}
+#4{0 1 ""}
+:OrderedCltn.4369{16 0}
+#8{16 0}
+#4{0 2 ""}
+@0 #4{0 1 ""}
 #4{0 1 ""}
 }
 :SLSProtectMethod.286331408{#4{8 9 "86243960"}
@@ -75,31 +75,49 @@
 #4{0 1 ""}
 #4{0 1 ""}
  0}
-#8{#4{9 10 "163856488"}
+#6{#4{9 10 "163856488"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{13 14 "ToggleNavMesh"}
  0.3 0.879999 5.2 1  22 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{42 43 "\[\n
-        navMeshAgent.enabled = enable;\n
+ 1  1 #4{38 43 "\[\n
+    navMeshAgent.enabled = enable;\n
 \]"}
 #4{13 14 "ToggleNavMesh"}
 #4{4 5 "void"}
 #4{11 12 "bool enable"}
 #4{0 1 ""}
 }
+:SLSPublicMember.286331409{#4{8 9 "85942912"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{11 12 "audioSource"}
+ 1.3 1.88 4.4 1  40 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{11 12 "audioSource"}
+#4{11 12 "AudioSource"}
+#4{0 1 ""}
+#8{16 0}
+#8{16 0}
+#4{0 2 ""}
+@0 #4{0 1 ""}
+#4{0 1 ""}
+}
 #9{#4{9 10 "164808920"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{6 7 "Update"}
- 1.3 0.880004 2.4 11  13 #4{0 1 ""}
+ 1.3 0.88 2.4 11  13 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{54 56 "\[\n
-  if(currentStage != null)\n
-\tcurrentStage.Update();\n
+ 1  1 #4{76 77 "\[\n
+    if (currentStage != null)\n
+    \[\n
+        currentStage.Update();\n
+    \]\n
 \]"}
 #4{6 7 "Update"}
 #4{4 5 "void"}
@@ -122,22 +140,6 @@
 #4{0 1 ""}
 #4{0 1 ""}
 }
-:SLSPublicMember.286331409{#4{8 9 "85942912"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{11 12 "audioSource"}
- 1.3 1.88 4.4 1  40 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{11 12 "audioSource"}
-#4{11 12 "AudioSource"}
-#4{0 1 ""}
-#7{16 0}
-#7{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{0 1 ""}
-}
 #9{#4{8 9 "85615464"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -155,7 +157,7 @@
 #4{0 1 ""}
 #4{0 1 ""}
  0}
-#8{#4{9 10 "155398200"}
+#6{#4{9 10 "155398200"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{33 34 "WaitForTriggeredAnimationComplete"}
@@ -170,7 +172,7 @@
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#8{#4{8 9 "86258648"}
+#6{#4{8 9 "86258648"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{11 12 "WaitArrival"}
@@ -193,7 +195,7 @@
 #4{35 38 "Vector3 target, float deltaDistance"}
 #4{0 1 ""}
 }
-#8{#4{9 10 "125104488"}
+#6{#4{9 10 "125104488"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{8 9 "HideText"}
@@ -219,9 +221,9 @@
  1.3 0.88 4.4 28  11 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{140 141 "\[\n
-    Animator = GetComponent<Animator>();\n
-    if (Animator == null)\n
+ 1  1 #4{154 155 "\[\n
+    mecanimAnimator = GetComponent<Animator>();\n
+    if (mecanimAnimator == null)\n
         Utility.LogWarning(\"No animator found for ECA: \" + Eca.Name);\n
 \]"}
 #4{11 12 "SetAnimator"}
@@ -265,8 +267,8 @@
  1  1 #4{7 8 "ECAText"}
 #4{4 5 "Text"}
 #4{0 1 ""}
-#7{16 0}
-#7{16 0}
+#8{16 0}
+#8{16 0}
 #4{0 2 ""}
 @0 #4{0 1 ""}
 #4{0 1 ""}
@@ -302,42 +304,33 @@ using MxM;\n
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{6 7 "Player"}
- 1.3 1.88 2.4 1  23 #4{0 1 ""}
+ 1.3 1.88 2.4 1  38 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
  1  1 #4{6 7 "Player"}
 #4{10 11 "GameObject"}
 #4{0 1 ""}
-#7{16 0}
-#7{16 0}
+#8{16 0}
+#8{16 0}
 #4{0 2 ""}
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
-#8{#4{8 9 "86238488"}
+#6{#4{9 10 "125111152"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{4 5 "Init"}
- 1.3 0.88 1.6 1  6 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{7 8 "PointAt"}
+ 1.3 0.879999 2.8 1  18 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{322 470 "\[\n
-    Player = GameObject.FindGameObjectWithTag(\"Player\");\n
-    Eca = GetComponent<ECA>();\n
-    Eca.EmotionManager.GlobalEmotionUpdated += UpdateEmotionAnimation;\n
-    CreateAudioSource();\n
-    ConfigureAudioSource();\n
-    ActivateTextPanel();\n
-    SetAnimator();\n
-    SetNavMeshAgent();\n
-    UpdateEmotionAnimation(null, null);\n
+ 1  1 #4{3 174 "\[\n
 \]"}
-#4{4 5 "Init"}
+#4{7 8 "PointAt"}
 #4{12 13 "virtual void"}
-#4{0 1 ""}
+#4{16 17 "Transform target"}
 #4{0 1 ""}
 }
-#8{#4{8 9 "86238880"}
+#6{#4{8 9 "86238880"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{4 5 "Play"}
@@ -386,21 +379,30 @@ using MxM;\n
 #4{69 70 "float[] audioData, string messageContent, Func<bool> condition = null"}
 #4{0 1 ""}
 }
-#8{#4{9 10 "125111152"}
+#6{#4{8 9 "86238488"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{7 8 "PointAt"}
- 1.3 0.879999 2.8 1  18 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{4 5 "Init"}
+ 1.3 0.88 1.6 1  6 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{3 174 "\[\n
+ 1  1 #4{322 470 "\[\n
+    Player = GameObject.FindGameObjectWithTag(\"Player\");\n
+    Eca = GetComponent<ECA>();\n
+    Eca.EmotionManager.GlobalEmotionUpdated += UpdateEmotionAnimation;\n
+    CreateAudioSource();\n
+    ConfigureAudioSource();\n
+    ActivateTextPanel();\n
+    SetAnimator();\n
+    SetNavMeshAgent();\n
+    UpdateEmotionAnimation(null, null);\n
 \]"}
-#4{7 8 "PointAt"}
+#4{4 5 "Init"}
 #4{12 13 "virtual void"}
-#4{16 17 "Transform target"}
+#4{0 1 ""}
 #4{0 1 ""}
 }
-#8{#4{8 9 "86260456"}
+#6{#4{8 9 "86260456"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{7 8 "Arrived"}
@@ -422,11 +424,11 @@ using MxM;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#8{#4{9 10 "164809312"}
+#6{#4{9 10 "164809312"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{19 20 "ClearAnimationGroup"}
- 1.3 0.880001 7.6 1  32 #4{0 1 ""}
+ 1.3 0.880001 7.6 1  30 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
  1  1 #4{43 45 "\[\n
@@ -444,7 +446,7 @@ using MxM;\n
  1.3 0.879999 4 15  29 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{289 290 "\[\n
+ 1  1 #4{293 294 "\[\n
     EventHandler handler = null;\n
     if (handlerName == \"TriggeredAnimationComplete\")\n
         handler = TriggeredAnimationComplete;\n
@@ -453,18 +455,18 @@ using MxM;\n
         handler = TriggeredAnimationContact;\n
 \n
     if (handler != null)\n
-\thandler(this, args);\n
+\t    handler(this, args);\n
 \]"}
 #4{10 11 "RaiseEvent"}
 #4{4 5 "void"}
 #4{34 35 "string handlerName, EventArgs args"}
 #4{0 1 ""}
  0}
-#8{#4{9 10 "155399768"}
+#6{#4{9 10 "155399768"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{17 18 "SetAnimationGroup"}
- 1.3 0.879999 6.8 1  31 #4{0 1 ""}
+ 1.3 0.879999 6.8 1  28 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
  1  1 #4{43 76 "\[\n
@@ -475,7 +477,7 @@ using MxM;\n
 #4{10 11 "string tag"}
 #4{0 1 ""}
 }
-#8{#4{8 9 "86262616"}
+#6{#4{8 9 "86262616"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{12 13 "IsWatchingMe"}
@@ -505,7 +507,7 @@ using MxM;\n
 #4{76 77 "Camera camera, float minDistance = 4f, Collider specificPartOfTheBody = null"}
 #4{0 1 ""}
 }
-#8{#4{9 10 "155399376"}
+#6{#4{9 10 "155399376"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{16 17 "TriggerAnimation"}
@@ -520,7 +522,7 @@ using MxM;\n
 #4{54 55 "string id, Transform contact = null, string tag = null"}
 #4{0 1 ""}
 }
-#8{#4{9 10 "125106448"}
+#6{#4{9 10 "125106448"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{17 18 "ActivateTextPanel"}
@@ -544,11 +546,11 @@ using MxM;\n
 @0  52 45 0.4 0 0 #4{34 35 "public ECAAnimator : MonoBehaviour"}
  16.7829 2.2 21.76 4  0 #4{0 1 ""}
 #4{0 1 ""}
-@0  14.9081 5.12959 0
+@0  6.50453 4.14313 0
  0  0 #4{18 19 "public ECAAnimator"}
 #4{13 14 "MonoBehaviour"}
 #4{0 13 ""}
-#7{16 7#4{37 38 "public event EventHandler AudioEnded;"}
+#8{16 7#4{37 38 "public event EventHandler AudioEnded;"}
 #4{37 38 "public event EventHandler HasArrived;"}
 #4{38 39 "public event EventHandler IsLookingAt;"}
 #4{39 40 "public event EventHandler EventContact;"}
@@ -556,7 +558,7 @@ using MxM;\n
 #4{53 54 "public event EventHandler TriggeredAnimationComplete;"}
 #4{52 53 "public event EventHandler TriggeredAnimationContact;"}
 }
-#7{16 0}
+#8{16 0}
 #4{1 2 "S"}
 @0 #4{0 1 ""}
 }
@@ -576,6 +578,21 @@ using MxM;\n
 #4{26 27 "object sender, EventArgs e"}
 #4{0 1 ""}
  0}
+#6{#4{8 9 "75582416"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{10 11 "DestroyObj"}
+ 0.3 0.88 4 1  23 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{21 22 "\[\n
+    Destroy(obj);\n
+\]"}
+#4{10 11 "DestroyObj"}
+#4{4 5 "void"}
+#4{14 15 "GameObject obj"}
+#4{0 1 ""}
+}
 :SLSProtectMember.286331409{#4{9 10 "119129328"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -586,13 +603,13 @@ using MxM;\n
  1  1 #4{13 14 "CurrentAction"}
 #4{9 10 "ECAAction"}
 #4{0 1 ""}
-#7{16 0}
-#7{16 0}
+#8{16 0}
+#8{16 0}
 #4{0 2 ""}
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
-#8{#4{9 10 "125110368"}
+#6{#4{9 10 "125110368"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{8 9 "ShowText"}
@@ -628,7 +645,7 @@ using MxM;\n
 #4{10 11 "float time"}
 #4{0 1 ""}
 }
-#8{#4{9 10 "162274304"}
+#6{#4{9 10 "162274304"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{4 5 "Wait"}
@@ -643,7 +660,7 @@ using MxM;\n
 #4{10 11 "float time"}
 #4{0 1 ""}
 }
-#8{#4{9 10 "162269992"}
+#6{#4{9 10 "162269992"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{10 11 "WaitLookAt"}
@@ -658,7 +675,7 @@ using MxM;\n
 #4{11 12 "Vector3 dir"}
 #4{0 1 ""}
 }
-#8{#4{8 9 "86259040"}
+#6{#4{8 9 "86259040"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{19 20 "IsWatchingSomewhere"}
@@ -677,7 +694,7 @@ using MxM;\n
 #4{30 31 "Camera camera, Collider Traget"}
 #4{0 1 ""}
 }
-#8{#4{9 10 "162273912"}
+#6{#4{9 10 "162273912"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{6 7 "LookAt"}
@@ -691,7 +708,7 @@ using MxM;\n
 #4{47 48 "Transform target = null, bool turnToSit = false"}
 #4{0 1 ""}
 }
-#8{#4{8 9 "86258256"}
+#6{#4{8 9 "86258256"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{4 5 "GoTo"}
@@ -704,6 +721,22 @@ using MxM;\n
 #4{4 5 "GoTo"}
 #4{12 13 "virtual void"}
 #4{42 45 "Vector3 target, float arrivalDeltaDistance"}
+#4{0 1 ""}
+}
+#10{#4{8 9 "75442312"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{15 16 "mecanimAnimator"}
+ 1.3 1.88 6 1  32 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  0 #4{15 16 "mecanimAnimator"}
+#4{8 9 "Animator"}
+#4{0 1 ""}
+#8{16 0}
+#8{16 0}
+#4{0 2 ""}
+@0 #4{0 1 ""}
 #4{0 1 ""}
 }
 #9{#4{9 10 "163858448"}
@@ -722,22 +755,6 @@ using MxM;\n
 #4{0 1 ""}
 #4{0 1 ""}
  0}
-#10{#4{8 9 "86219184"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{8 9 "Animator"}
- 1.3 1.88 3.2 1  38 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{8 9 "Animator"}
-#4{8 9 "Animator"}
-#4{0 1 ""}
-#7{16 0}
-#7{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{0 1 ""}
-}
 #10{#4{9 10 "126678136"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -748,27 +765,33 @@ using MxM;\n
  1  1 #4{9 10 "TextPanel"}
 #4{10 11 "GameObject"}
 #4{0 1 ""}
-#7{16 0}
-#7{16 0}
+#8{16 0}
+#8{16 0}
 #4{0 2 ""}
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @345 @202 @16 @0 #7{16 0}
-#7{16 1@378 }
-#7{16 1@405 }
-#7{16 8@51 @175 @163 @115 @366 @477 @285 @75 }
-#7{16 1@24 }
-#7{16 0}
-#7{16 0}
+:CLSCSSem.1118481{ 56  51 @345 @202 @16 @0 #8{16 0}
+#8{16 1@390 }
+#8{16 1@417 }
+#8{16 8@51 @175 @163 @115 @366 @504 @285 @90 }
+#8{16 1@36 }
+#8{16 0}
+#8{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#7{16 0}
-#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @210 @0 @0 @0 @0 @0 @0 @0 @187 @0 @504 @0 @489 @0 @100 @0 @0 @0 }
-#1{36@225 @237 @465 @139 @261 @441 @309 @333 @393 @151 @87 @3 @249 @453 @429 @417 @63 @0 @0 @0 @127 @39 @0 @321 @0 @297 @273 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#8{16 0}
+#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @210 @0 @0 @0 @0 @0 @489 @0 @187 @0 @516 @0 @0 @0 @75 @0 @0 @0 }
+#1{36@249 @237 @477 @139 @261 @453 @309 @333 @405 @151 @102 @3 @225 @465 @441 @429 @63 @378 @0 @0 @127 @24 @297 @321 @273 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#4{0 1 ""}
-#7{16 0}
+#4{366 367 "/*      CG&VG group @ Politecnico di Torino               */\n
+/*              All Rights Reserved\t                      */\n
+/*                                                        */\n
+/*  THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF CG&VG  */\n
+/*  The copyright notice above does not evidence any      */\n
+/*  actual or intended publication of such source code.   */\n
+"}
+#8{16 0}
  0}
 :Float.17{0 }
 #16{1 }

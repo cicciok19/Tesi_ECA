@@ -1,5 +1,11 @@
 /* File ECAAnimator C# implementation of class ECAAnimator */
 
+/*      CG&VG group @ Politecnico di Torino               */
+/*              All Rights Reserved	                      */
+/*                                                        */
+/*  THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF CG&VG  */
+/*  The copyright notice above does not evidence any      */
+/*  actual or intended publication of such source code.   */
 
 
 // global declaration start
@@ -17,7 +23,7 @@ using MxM;
 
 
 //define all body parts of ECA
-		public enum BodyParts
+			public enum BodyParts
 {
     Head,
     ArmL,
@@ -42,9 +48,9 @@ public class ECAAnimator : MonoBehaviour
     protected ECAAction CurrentAction;
 
     public GameObject Player;
+    public Animator mecanimAnimator;
     public Text ECAText;
     public GameObject TextPanel;
-    public Animator mecanimAnimator;
     public AudioSource audioSource;
 
 
@@ -310,11 +316,6 @@ public class ECAAnimator : MonoBehaviour
     {
     }
 
-    public void DestroyObj(GameObject obj)
-    {
-        Destroy(obj);
-    }
-
 
     public virtual IEnumerator WaitLookAt(Vector3 dir)
     {
@@ -334,6 +335,12 @@ public class ECAAnimator : MonoBehaviour
     }
 
 
+    public void DestroyObj(GameObject obj)
+    {
+        Destroy(obj);
+    }
+
+
     public virtual void WaitForTriggeredAnimationComplete()
     {
       // to be redefined in derived classes
@@ -346,13 +353,13 @@ public class ECAAnimator : MonoBehaviour
     }
 
 
-    public virtual void TriggerAnimation(string id, Transform contact = null, string tag = null)
+    public virtual void SetAnimationGroup(string tag)
     {
       // to be redefined in derived classes
     }
 
 
-    public virtual void SetAnimationGroup(string tag)
+    public virtual void TriggerAnimation(string id, Transform contact = null, string tag = null)
     {
       // to be redefined in derived classes
     }
