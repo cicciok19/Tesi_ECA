@@ -66,7 +66,7 @@ class Visitor : ECA
         paintings = scenePaintings.ToList<Painting>();
         
         // shuffle list, tricks from stackoverflow
-         paintings = paintings.OrderBy(a => Guid.NewGuid()).ToList();
+        // paintings = paintings.OrderBy(a => Guid.NewGuid()).ToList();
     
         // just as debug, go to the first painting
         GoToPainting(paintings[idxPaint]);

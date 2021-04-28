@@ -44,7 +44,7 @@ public class IKSetter : MonoBehaviour
     private Transform rightArm;
 
     protected Animator animator;
-    protected Dictionary<AimIK, bool> aimStopDictionary =  new Dictionary<AimIK, bool>();
+    protected Dictionary<AimIK, bool> aimStopDictionary =   new Dictionary<AimIK, bool>();
     protected PickUp pickUp;
 
     public FullBodyBipedIK fullBodyBipedIK;
@@ -213,7 +213,7 @@ public class IKSetter : MonoBehaviour
         }
     
         if(AimCompleted != null)
-    	AimCompleted(this, EventArgs.Empty);
+    	    AimCompleted(this, EventArgs.Empty);
     }
 
 
@@ -319,6 +319,12 @@ public class IKSetter : MonoBehaviour
     {
        SetWeightTargetAimIK(aimIK, 0);
        aimIK.solver.target = null;
+    }
+
+
+    public ECA eca
+    {
+      set; get;
     }
 
 

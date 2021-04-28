@@ -1,4 +1,4 @@
-:ArrayOb.273{6:Dictionary.4369{64 36:SLSPublicMember.286331409{:String.17{9 10 "126345112"}
+:ArrayOb.273{6:Dictionary.4369{64 38:SLSPublicMember.286331409{:String.17{9 10 "126345112"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{15 16 "fullBodyBipedIK"}
@@ -176,7 +176,7 @@
     \]\n
 \n
     if(AimCompleted != null)\n
-\tAimCompleted(this, new EventArgs.Empty);\n
+\t    AimCompleted(this, EventArgs.Empty);\n
 \]"}
 #4{14 15 "SetWeightAimIK"}
 #4{11 12 "IEnumerator"}
@@ -224,12 +224,13 @@
  0.299999 0.88 7.2 33  3 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 0  0 #4{192 193 "using System.Collections;\n
+ 0  0 #4{206 207 "using System.Collections;\n
 using System.Collections.Generic;\n
 using UnityEngine;\n
 using RootMotion.FinalIK;\n
 using RootMotion;\n
 using RootMotion.Demos;\n
+using System;\n
 \n
 \n
 //principal class for setting the Final IK\n
@@ -359,6 +360,22 @@ using RootMotion.Demos;\n
 @0  0 0 1
  0  0 #4{0 1 ""}
 }
+:SLSProperty.286331392{#4{9 10 "142562600"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{3 4 "eca"}
+ 1.3 0.88 1.2 1  11 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{15 16 "\[\n
+  set; get;\n
+\]"}
+#4{3 4 "eca"}
+#4{3 4 "ECA"}
+#4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
+}
 #7{#4{8 9 "94196384"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -453,7 +470,7 @@ using RootMotion.Demos;\n
 @0  52 45 0.4 0 0 #4{31 32 "public IKSetter : MonoBehaviour"}
  17.3314 2.2 19.84 4  0 #4{0 1 ""}
 #4{0 1 ""}
-@0  5.34541 3.74855 0
+@0  5.34541 -100 0
  0  0 #4{15 16 "public IKSetter"}
 #4{13 14 "MonoBehaviour"}
 #4{0 13 ""}
@@ -489,6 +506,22 @@ using RootMotion.Demos;\n
 #4{92 93 "Transform rightHandBone, Transform rightForeArm, Transform rightArm, Transform rightShoulder"}
 #4{0 1 ""}
  0}
+#9{#4{8 9 "73484344"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{12 13 "RemoveTarget"}
+ 0.3 0.88 4.8 1  10 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{69 71 "\[\n
+   SetWeightTargetAimIK(aimIK, 0);\n
+   aimIK.solver.target = null;\n
+\]"}
+#4{12 13 "RemoveTarget"}
+#4{4 5 "void"}
+#4{11 12 "AimIK aimIK"}
+#4{0 1 ""}
+}
 #6{#4{9 10 "126346432"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -633,7 +666,7 @@ using RootMotion.Demos;\n
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
-#12{#4{8 9 "75745976"}
+#13{#4{8 9 "75745976"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{17 18 "aimStopDictionary"}
@@ -646,10 +679,10 @@ using RootMotion.Demos;\n
 #5{16 0}
 #5{16 0}
 #4{0 2 ""}
-@0 #4{30 31 " new Dictionary<AimIK, bool>()"}
+@0 #4{31 32 "  new Dictionary<AimIK, bool>()"}
 #4{0 1 ""}
 }
-#12{#4{8 9 "75741576"}
+#13{#4{8 9 "75741576"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{6 7 "pickUp"}
@@ -732,17 +765,17 @@ using RootMotion.Demos;\n
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @292 @159 @233 @0 #5{48 12@358 @18 @60 @75 @105 @191 @218 @253 @319 @442 @457 @472 }
-#5{16 3@385 @400 @415 }
+:CLSCSSem.1118481{ 56  51 @305 @159 @233 @0 #5{48 12@383 @18 @60 @75 @105 @191 @218 @266 @344 @467 @482 @497 }
+#5{16 3@410 @425 @440 }
 #5{16 0}
-#5{16 10@241 @307 @334 @147 @346 @167 @206 @135 @48 @373 }
+#5{16 10@254 @320 @359 @147 @371 @167 @206 @135 @48 @398 }
 #5{16 0}
 #5{16 0}
 #5{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #5{16 0}
 #1{30@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @3 @0 @120 @0 @90 @0 @33 @0 @0 @0 }
-#1{16@268 @179 @280 @430 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{16@281 @179 @293 @455 @332 @241 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{366 367 "/*      CG&VG group @ Politecnico di Torino               */\n
 /*              All Rights Reserved\t                      */\n
@@ -754,7 +787,7 @@ using RootMotion.Demos;\n
 #5{16 0}
  0}
 :Float.17{0 }
-#14{1 }
-#14{0 }
-#14{1 }
+#15{1 }
+#15{0 }
+#15{1 }
 }

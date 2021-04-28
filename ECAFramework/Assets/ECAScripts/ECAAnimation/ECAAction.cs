@@ -96,6 +96,9 @@ public class ECAAction
         stage.StagePaused -= OnStagePaused;
     }
 
+
+
+
     public void Abort()
     {
         Utility.Log("Action aborted");

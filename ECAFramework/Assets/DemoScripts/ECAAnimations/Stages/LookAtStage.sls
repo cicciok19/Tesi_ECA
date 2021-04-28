@@ -121,18 +121,22 @@ using System;\n
 @0  0 0 1
  0  0 #4{0 1 ""}
 }
-:SLSPublicMethod.286331408{#4{9 10 "131537928"}
+:SLSPublicMethod.286331408{#4{9 10 "131540672"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{8 9 "EndStage"}
- 1.3 0.88 3.2 1  6 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{10 11 "StartStage"}
+ 1.3 0.88 4 1  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{70 82 "\[\n
-    base.EndStage();\n
-    ikManager.RemoveTarget(ikManager.headIK);\n
+ 1  1 #4{256 262 "\[\n
+    base.StartStage();\n
+\n
+    Utility.Log(\"LookAtStage started\");\n
+    ikManager.AimCompleted += OnAimCompleted;\n
+    ikManager.AimCompleted += lookableObject.OnAimCompleted;\n
+    ikManager.SetTargetAimIK(ikManager.headIK, lookableObject.GetLookPosition());\n
 \]"}
-#4{8 9 "EndStage"}
+#4{10 11 "StartStage"}
 #4{13 14 "override void"}
 #4{0 1 ""}
 #4{0 1 ""}
@@ -155,21 +159,20 @@ using System;\n
 #4{29 40 "LookableObject lookableObject"}
 #4{0 1 ""}
 }
-#11{#4{9 10 "131540672"}
+#11{#4{9 10 "131537928"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{10 11 "StartStage"}
- 1.3 0.88 4 1  7 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{8 9 "EndStage"}
+ 1.3 0.88 3.2 1  6 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{195 262 "\[\n
-    base.StartStage();\n
-\n
-    Utility.Log(\"LookAtStage started\");\n
-    ikManager.AimCompleted += OnAimCompleted;\n
-    ikManager.SetTargetAimIK(ikManager.headIK, lookableObject.GetLookPosition());\n
+ 1  1 #4{177 178 "\[\n
+    base.EndStage();\n
+    ikManager.RemoveTarget(ikManager.headIK);\n
+    ikManager.AimCompleted -= OnAimCompleted;\n
+    ikManager.AimCompleted -= lookableObject.OnAimCompleted;\n
 \]"}
-#4{10 11 "StartStage"}
+#4{8 9 "EndStage"}
 #4{13 14 "override void"}
 #4{0 1 ""}
 #4{0 1 ""}
@@ -185,7 +188,7 @@ using System;\n
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #5{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{16@102 @126 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{16@126 @102 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@114 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{366 367 "/*      CG&VG group @ Politecnico di Torino               */\n
 /*              All Rights Reserved\t                      */\n

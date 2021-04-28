@@ -1,4 +1,4 @@
-:ArrayOb.273{6:Dictionary.4369{64 37:SLSPublicMethod.286331408{:String.17{8 9 "85914928"}
+:ArrayOb.273{6:Dictionary.4369{64 38:SLSPublicMethod.286331408{:String.17{8 9 "85914928"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{11 12 "SendMessage"}
@@ -29,6 +29,20 @@
 #4{11 12 "SendMessage"}
 #4{4 5 "bool"}
 #4{139 140 "SmartAction smartAction, string msgType, Action functionToBeExecuted = null, bool anytime = true, Func<bool> conditionJustBeforePlay = null"}
+#4{0 1 ""}
+}
+#3{#4{8 9 "74753208"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{11 12 "DetachEvent"}
+ 1.3 0.879999 4.4 1  21 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{3 5 "\[\n
+\]"}
+#4{11 12 "DetachEvent"}
+#4{12 13 "virtual void"}
+#4{34 35 "string handlerName, EventArgs args"}
 #4{0 1 ""}
 }
 #3{#4{9 10 "129305752"}
@@ -66,11 +80,13 @@
  0.299999 0.88 7.2 33  3 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 0  0 #4{2244 2245 "using System;\n
+ 0  0 #4{2247 2248 "using System;\n
 using System.Collections.Generic;\n
 using IntentRecognitionResults;\n
 using UnityEngine;\n
 using UnityEngine.Assertions;\n
+\n
+\n
 \n
 \n
 \n
@@ -132,6 +148,7 @@ public class ECAParameters\n
 \n
 \n
 \n
+\n
 /// <summary>\n
 /// Allows access to all the features and properties of a specific eca. \n
 /// Identified by an ID can be retrieved via <see cref=\"ECAManager\"/> which keeps track of all the eca instanced in the scene.\n
@@ -142,7 +159,7 @@ public class ECAParameters\n
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{9 10 "ikManager"}
- 1.3 0.88 3.6 1  20 #4{0 1 ""}
+ 1.3 0.879999 3.6 1  20 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
  1  1 #4{25 26 "\[\n
@@ -151,6 +168,22 @@ public class ECAParameters\n
 #4{9 10 "ikManager"}
 #4{8 9 "IKSetter"}
 #4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#3{#4{8 9 "85535760"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{8 9 "SetEcaId"}
+ 1.3 0.88 3.2 1  6 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{69 70 "\[\n
+    //ID = Ecas.Default;\n
+    throw new NotImplementedException();\n
+\]"}
+#4{8 9 "SetEcaId"}
+#4{12 13 "virtual void"}
 #4{0 1 ""}
 #4{0 1 ""}
 }
@@ -168,22 +201,6 @@ public class ECAParameters\n
 #6{16 0}
 #4{0 2 ""}
 @0 #4{0 1 ""}
-#4{0 1 ""}
-}
-#3{#4{8 9 "85535760"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{8 9 "SetEcaId"}
- 1.3 0.88 3.2 1  6 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{69 70 "\[\n
-    //ID = Ecas.Default;\n
-    throw new NotImplementedException();\n
-\]"}
-#4{8 9 "SetEcaId"}
-#4{12 13 "virtual void"}
-#4{0 1 ""}
 #4{0 1 ""}
 }
 #8{#4{8 9 "85941736"}
@@ -207,7 +224,7 @@ public class ECAParameters\n
  1.3 0.88 1.6 1  12 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{602 603 "\[\n
+ 1  1 #4{604 605 "\[\n
     SetEcaId();\n
 \n
     IntentName = new List<string>();\n
@@ -216,7 +233,7 @@ public class ECAParameters\n
     GeneralMessagesCltn = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);\n
 \n
     EmotionManager = new ECAEmotionManager(myParameters.EmotionModel);\n
-    ECAManager.Instance.AvailableEcas.Add(ID, this);\n
+    //ECAManager.Instance.AvailableEcas.Add(ID, this);\n
 \n
     CreateAnimator();\n
 \n
@@ -262,20 +279,6 @@ public class ECAParameters\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#3{#4{8 9 "85653424"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{31 32 "SubscribeHandlerToIntentManager"}
- 1.3 0.880001 12.4 1  35 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{3 5 "\[\n
-\]"}
-#4{31 32 "SubscribeHandlerToIntentManager"}
-#4{12 13 "virtual void"}
-#4{0 1 ""}
-#4{0 1 ""}
-}
 #8{#4{8 9 "85620112"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -287,6 +290,20 @@ public class ECAParameters\n
 #4{10 11 "IntentName"}
 #4{12 13 "List<string>"}
 #4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#3{#4{8 9 "85653424"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{31 32 "SubscribeHandlerToIntentManager"}
+ 1.3 0.880001 12.4 1  35 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{3 5 "\[\n
+\]"}
+#4{31 32 "SubscribeHandlerToIntentManager"}
+#4{12 13 "virtual void"}
 #4{0 1 ""}
 #4{0 1 ""}
 }
@@ -337,7 +354,7 @@ public class ECAParameters\n
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{0 1 ""}
- 4 1.88 1 19  45 #4{0 1 ""}
+ 4 1.88 0 19  45 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
  1  1 #4{0 1 ""}
@@ -483,38 +500,6 @@ public class ECAParameters\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#8{#4{8 9 "93718712"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{19 20 "GeneralMessagesCltn"}
- 1.3 0.879999 7.6 1  19 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{21 22 "\[ get; private set; \]"}
-#4{19 20 "GeneralMessagesCltn"}
-#4{42 43 "Dictionary<string, List<EmotionalMessage>>"}
-#4{0 1 ""}
-#4{0 1 ""}
-#4{0 1 ""}
-}
-#11{#4{8 9 "86347568"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{21 22 "GetGeneralMessagesFor"}
- 1.3 0.879999 8.4 26  18 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{92 126 "\[\n
-  if(EmotionalMessages.ContainsKey(key))\n
-\treturn EmotionalMessages[key];\n
-\n
-  return null;\n
-\]"}
-#4{21 22 "GetGeneralMessagesFor"}
-#4{22 23 "List<EmotionalMessage>"}
-#4{10 11 "string key"}
-#4{0 1 ""}
- 0}
 :SLSPrivateMethod.286331408{#4{8 9 "85917840"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -536,6 +521,102 @@ public class ECAParameters\n
 #4{10 11 "int weight"}
 #4{0 1 ""}
 }
+#11{#4{8 9 "86347568"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{21 22 "GetGeneralMessagesFor"}
+ 1.3 0.879999 8.4 26  18 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{92 126 "\[\n
+  if(EmotionalMessages.ContainsKey(key))\n
+\treturn EmotionalMessages[key];\n
+\n
+  return null;\n
+\]"}
+#4{21 22 "GetGeneralMessagesFor"}
+#4{22 23 "List<EmotionalMessage>"}
+#4{10 11 "string key"}
+#4{0 1 ""}
+ 0}
+#8{#4{8 9 "93718712"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{19 20 "GeneralMessagesCltn"}
+ 1.3 0.879999 7.6 1  19 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{21 22 "\[ get; private set; \]"}
+#4{19 20 "GeneralMessagesCltn"}
+#4{42 43 "Dictionary<string, List<EmotionalMessage>>"}
+#4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#11{#4{8 9 "85708344"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{5 6 "Start"}
+ 1.3 0.88 2 19  7 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{3 903 "\[\n
+\]"}
+#4{5 6 "Start"}
+#4{12 13 "virtual void"}
+#4{0 1 ""}
+#4{0 1 ""}
+ 0}
+#11{#4{9 10 "131538713"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{15 16 "CreateIKManager"}
+ 1.3 0.879999 6 10  16 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{114 157 "\[\n
+    Assert.IsNull(ikManager);\n
+    IKSetter manager = gameObject.AddComponent<IKSetter>();\n
+\n
+    return manager;\n
+\]"}
+#4{15 16 "CreateIKManager"}
+#4{16 17 "virtual IKSetter"}
+#4{0 1 ""}
+#4{0 1 ""}
+ 0}
+#8{#4{8 9 "85916640"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{14 15 "EmotionManager"}
+ 1.3 0.879999 5.6 1  23 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{13 16 "\[ get; set; \]"}
+#4{14 15 "EmotionManager"}
+#4{17 18 "ECAEmotionManager"}
+#4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#11{#4{9 10 "104297120"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{16 17 "AddIntentHandler"}
+ 1.3 0.88 6.4 10  11 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{172 441 "\[\n
+    Utility.Log(\"ECA \" + name + \" subscribing to intent \" + intentName);\n
+\n
+    IntentName.Add(intentName);\n
+    IntentManager.Instance.AddIntentHandler(intentName, this);\n
+\]"}
+#4{16 17 "AddIntentHandler"}
+#4{4 5 "void"}
+#4{17 42 "string intentName"}
+#4{0 1 ""}
+ 0}
 #12{#4{8 9 "85912160"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -558,70 +639,6 @@ public class ECAParameters\n
 #4{14 15 "string msgType"}
 #4{0 1 ""}
 }
-#11{#4{9 10 "104297120"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{16 17 "AddIntentHandler"}
- 1.3 0.88 6.4 10  11 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{172 441 "\[\n
-    Utility.Log(\"ECA \" + name + \" subscribing to intent \" + intentName);\n
-\n
-    IntentName.Add(intentName);\n
-    IntentManager.Instance.AddIntentHandler(intentName, this);\n
-\]"}
-#4{16 17 "AddIntentHandler"}
-#4{4 5 "void"}
-#4{17 42 "string intentName"}
-#4{0 1 ""}
- 0}
-#8{#4{8 9 "85916640"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{14 15 "EmotionManager"}
- 1.3 0.879999 5.6 1  23 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{13 16 "\[ get; set; \]"}
-#4{14 15 "EmotionManager"}
-#4{17 18 "ECAEmotionManager"}
-#4{0 1 ""}
-#4{0 1 ""}
-#4{0 1 ""}
-}
-#11{#4{9 10 "131538713"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{15 16 "CreateIKManager"}
- 1.3 0.879999 6 10  16 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{114 157 "\[\n
-    Assert.IsNull(ikManager);\n
-    IKSetter manager = gameObject.AddComponent<IKSetter>();\n
-\n
-    return manager;\n
-\]"}
-#4{15 16 "CreateIKManager"}
-#4{16 17 "virtual IKSetter"}
-#4{0 1 ""}
-#4{0 1 ""}
- 0}
-#11{#4{8 9 "85708344"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{5 6 "Start"}
- 1.3 0.88 2 19  7 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{3 903 "\[\n
-\]"}
-#4{5 6 "Start"}
-#4{12 13 "virtual void"}
-#4{0 1 ""}
-#4{0 1 ""}
- 0}
 #3{#4{8 9 "85582320"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -657,11 +674,13 @@ public class ECAParameters\n
  1.3 0.88 4.8 10  14 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{144 157 "\[\n
+ 1  1 #4{171 172 "\[\n
     ikManager = GetComponent<IKSetter>();\n
     if (ikManager == null)\n
         ikManager = CreateIKManager();\n
     Assert.IsNotNull(ikManager);\n
+\n
+    ikManager.eca = this;\n
 \]"}
 #4{12 16 "AddIKManager"}
 #4{4 14 "void"}
@@ -678,17 +697,17 @@ public class ECAParameters\n
  0  0 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @164 @40 @451 @0 #6{16 0}
+:CLSCSSem.1118481{ 56  51 @176 @52 @463 @0 #6{16 0}
 #6{16 0}
-#6{16 2@353 @341 }
-#6{16 8@217 @402 @365 @329 @265 @253 @439 @390 }
+#6{16 2@414 @328 }
+#6{16 8@229 @365 @402 @340 @277 @265 @451 @377 }
 #6{16 0}
 #6{16 0}
 #6{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#6{16 3@27 @191 @204 }
-#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @61 @0 @0 @0 @0 }
-#1{40@76 @113 @126 @3 @241 @229 @101 @303 @178 @88 @426 @277 @15 @316 @48 @0 @0 @377 @0 @290 @151 @0 @0 @0 @0 @0 @0 @0 @414 @139 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#6{16 3@39 @203 @216 }
+#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @85 @0 @0 @0 @0 }
+#1{40@73 @125 @138 @3 @253 @241 @113 @315 @190 @100 @438 @289 @27 @352 @60 @15 @0 @389 @0 @302 @151 @0 @0 @0 @0 @0 @0 @0 @426 @164 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #6{16 0}

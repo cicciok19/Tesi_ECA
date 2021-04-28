@@ -21,6 +21,8 @@ using UnityEngine.Assertions;
 
 
 
+
+
 public class ECAParameters
 {
     //Static Attributes
@@ -66,6 +68,7 @@ public class ECAParameters
                 "Level of presence = " + EcaPresence.ToString() + "\n";
     }
 }
+
 
 
 
@@ -171,6 +174,8 @@ public class ECA : MonoBehaviour, IIntentHandler
         if (ikManager == null)
             ikManager = CreateIKManager();
         Assert.IsNotNull(ikManager);
+    
+        ikManager.eca = this;
     }
 
 
@@ -303,6 +308,11 @@ public class ECA : MonoBehaviour, IIntentHandler
     }
 
 
+    public virtual void DetachEvent(string handlerName, EventArgs args)
+    {
+    }
+
+
     public ECAEmotionManager EmotionManager
     { get; set; }
 
@@ -324,8 +334,5 @@ public class ECA : MonoBehaviour, IIntentHandler
     {
     }
 
-    public virtual void DetachEvent(string handlerName, EventArgs args)
-    {
-    }
 
 }

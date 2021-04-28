@@ -1,5 +1,10 @@
 /* File LookableObject C# implementation of class LookableObject */
 
+
+
+// global declaration start
+
+
 /*      CG&VG group @ Politecnico di Torino               */
 /*              All Rights Reserved	                      */
 /*                                                        */
@@ -8,9 +13,9 @@
 /*  actual or intended publication of such source code.   */
 
 
-// global declaration start
 
 
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -19,12 +24,8 @@ using UnityEngine.Assertions;
 
 public class LookableObject : MonoBehaviour
 {
-// class declaration start
-public static implicit operator Transform(LookableObject d) => d.transform;
-// class declaration end
 
-
-    protected GameObject lookPosition =   null;
+    protected GameObject lookPosition =     null;
     protected Vector3 bounds;
     protected Vector3 center;
 
@@ -39,6 +40,7 @@ public static implicit operator Transform(LookableObject d) => d.transform;
       lookPosition.transform.position = Vector3.zero;
       lookPosition.transform.rotation = Quaternion.identity;
       lookPosition.transform.localScale = Vector3.one;
+    
     
       // computing object bounds
     
@@ -56,7 +58,9 @@ public static implicit operator Transform(LookableObject d) => d.transform;
 
     public Transform GetLookPosition()
     {
-      return lookPosition.transform;
+        GameObject gop = Instantiate(lookPosition); 
+      gop.transform.parent = transform;
+      return gop.transform;
     }
 
 
@@ -70,9 +74,24 @@ public static implicit operator Transform(LookableObject d) => d.transform;
     	center.z + bounds.z * extent * (float)random.NextDouble()
       );
     
-      lookPosition.transform.position = randomShift; 
-    
-      return lookPosition.transform;
+      lookPosition.transform.position = randomShift;
+      GameObject gop = Instantiate(lookPosition);
+      gop.transform.parent = transform;
+      return gop.transform;
+    }
+
+
+    public void OnAimCompleted(object sender, EventArgs args)
+    {
+        IKSetter ikManager = (IKSetter)sender;
+        Transform target = ikManager.headIK.solver.target;
+        Destroy(target.gameObject);
+    }
+
+
+    public static implicit operator Transform(LookableObject d)
+    {
+      return d.transform;
     }
 
 

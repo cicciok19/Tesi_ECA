@@ -30,10 +30,9 @@ public class LookAtStage : ECAActionStage
     public LookAtStage(LookableObject lookableObject)
     : base()
     {
-            this.lookableObject = lookableObject;
-    
-    	counter = (int)Mathf.Round(UnityEngine.Random.Range(2f ,5f));
-    
+                this.lookableObject = lookableObject;
+        
+        	counter = (int)Mathf.Round(UnityEngine.Random.Range(2f ,5f));
     }
 
 
@@ -67,7 +66,8 @@ public class LookAtStage : ECAActionStage
     {
         base.EndStage();
         ikManager.RemoveTarget(ikManager.headIK);
-        
+        ikManager.AimCompleted -= OnAimCompleted;
+        ikManager.AimCompleted -= lookableObject.OnAimCompleted;
     }
 
 
@@ -77,6 +77,7 @@ public class LookAtStage : ECAActionStage
     
         Utility.Log("LookAtStage started");
         ikManager.AimCompleted += OnAimCompleted;
+        ikManager.AimCompleted += lookableObject.OnAimCompleted;
         ikManager.SetTargetAimIK(ikManager.headIK, lookableObject.GetLookPosition());
     }
 
