@@ -1,37 +1,28 @@
-:ArrayOb.273{6:Dictionary.4369{32 19:SLSPrivateMethod.286331408{:String.17{9 10 "131539496"}
+:ArrayOb.273{6:Dictionary.4369{32 20:SLSPrivateMethod.286331408{:String.17{9 10 "131539496"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{15 16 "OnEndPaintVisit"}
  1.3 0.88 6 10  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{583 590 "\[\n
+ 1  1 #4{452 590 "\[\n
     Utility.Log(\"Visitor \" + this.Name + \" visited paint \" + paintings[idxPaint].id);\n
 \n
     //free the paint\n
     paintings[idxPaint].chair.SittableBusy -= OnChairBusy;\n
     paintings[idxPaint].chair.SittableFree -= OnChairFree;\n
 \n
-/*\n
     idxPaint++;\n
 \n
     if (paintings.Count > idxPaint)\n
     \[\n
-\t\n
-\n
-        while (paintings[idxPaint].Occupied)\n
-        \[ \n
-            //while next paint is occupied do nothing\n
-        \]\n
-        \n
         //then visit paint\n
         GoToPainting(paintings[idxPaint]);\n
     \]\n
     else\n
-*/\n
     \[\n
         Utility.Log(\"END OF APPLICATION\");\n
-\taction = null;\n
+        action = null;\n
     \]\n
 \]"}
 #4{15 16 "OnEndPaintVisit"}
@@ -39,38 +30,22 @@
 #4{26 27 "object sender, EventArgs e"}
 #4{0 1 ""}
 }
-#3{#4{9 10 "131539497"}
+:SLSPublicMethod.286331408{#4{8 9 "23533416"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{11 16 "OnChairBusy"}
- 1.3 0.88 4.4 10  15 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{11 12 "DetachEvent"}
+ 1.3 0.88 4.4 1  10 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{676 677 "\[\n
-    Utility.Log(\"Visitor \" + this.Name + \" going to \" + sender + \" that becomes busy\");\n
-    Painting painting = paintings[idxPaint];\n
-\n
-    painting.chair.SittableBusy -= OnChairBusy;\n
-    painting.chair.SittableFree -= OnChairFree;\n
-\n
-    GoToStage reachPainting = new GoToStage(painting.GetLookableObject());\n
-    reachPainting.StopDistance = 2.5f;\n
-    LookAtStage lookAt = new LookAtStage(painting.GetLookableObject());\n
-\n
-    List<ECAActionStage> stages = new List<ECAActionStage>();\n
-    stages.Add(reachPainting);\n
-    stages.Add(lookAt);\n
-\n
-    action.Abort();\n
-\n
-    action = new ECAAction(this, stages);\n
-    action.CompletedAction += OnEndPaintVisit;\n
-\n
-    action.StartAction();\n
+ 1  1 #4{206 207 "\[\n
+    if (handlerName == \"SittableBusy\")\n
+        paintings[idxPaint].chair.SittableBusy -= OnChairBusy;\n
+    if(handlerName == \"SittableFree\")\n
+        paintings[idxPaint].chair.SittableFree -= OnChairFree;\n
 \]"}
-#4{11 16 "OnChairBusy"}
-#4{4 5 "void"}
-#4{26 27 "object sender, EventArgs e"}
+#4{11 12 "DetachEvent"}
+#4{13 14 "override void"}
+#4{34 35 "string handlerName, EventArgs args"}
 #4{0 1 ""}
 }
 :SLSProtectMethod.286331408{#4{9 10 "131543416"}
@@ -91,7 +66,7 @@
 #4{0 1 ""}
 #4{0 1 ""}
  0}
-#5{#4{9 10 "164238728"}
+#6{#4{9 10 "164238728"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{11 12 "OccupyChair"}
@@ -106,7 +81,7 @@
 #4{0 1 ""}
 #4{0 1 ""}
  0}
-:SLSPublicMethod.286331408{#4{9 10 "131537144"}
+#5{#4{9 10 "131537144"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{4 5 "Init"}
@@ -134,7 +109,7 @@
 :OrderedCltn.4369{16 0}
 #8{16 0}
 #4{1 2 "S"}
-@0 #4{5 6 " null"}
+@0 #4{6 7 "  null"}
 #4{0 1 ""}
 }
 :SLSPrivateMember.286331409{#4{8 9 "77769920"}
@@ -177,7 +152,7 @@
 #4{1 2 "S"}
 @0 #4{0 1 ""}
 }
-#5{#4{9 10 "131537536"}
+#6{#4{9 10 "131537536"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{14 15 "CreateAnimator"}
@@ -253,10 +228,10 @@ using UnityEngine.Assertions;\n
 #8{16 0}
 #8{16 0}
 #4{0 2 ""}
-@0 #4{25 26 "     new List<Painting>()"}
+@0 #4{21 26 " new List<Painting>()"}
 #4{0 1 ""}
 }
-#6{#4{8 9 "77550664"}
+#5{#4{8 9 "77550664"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{8 9 "SetEcaId"}
@@ -271,7 +246,7 @@ using UnityEngine.Assertions;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#5{#4{8 9 "77552232"}
+#6{#4{8 9 "77552232"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{18 19 "SelectDestinations"}
@@ -315,23 +290,58 @@ using UnityEngine.Assertions;\n
 #4{26 27 "object sender, EventArgs e"}
 #4{0 1 ""}
 }
-#6{#4{8 9 "77552624"}
+#5{#4{8 9 "23534200"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{11 12 "OnChairBusy"}
+ 0.3 0.88 4.4 1  9 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{781 782 "\[\n
+    Utility.Log(\"Visitor \" + this.Name + \" going to \" + sender + \" that becomes busy\");\n
+    Painting painting = paintings[idxPaint];\n
+\n
+    painting.chair.SittableBusy -= OnChairBusy;\n
+    painting.chair.SittableFree -= OnChairFree;\n
+\n
+    GoToStage reachPainting = new GoToStage(painting.GetLookableObject());\n
+    reachPainting.StopDistance = 2.5f;\n
+    LookAtStage lookAt = new LookAtStage(painting.GetLookableObject());\n
+    PointAtStage pointAt = new PointAtStage(painting.GetLookableObject(), 3f);\n
+\n
+    List<ECAActionStage> stages = new List<ECAActionStage>();\n
+    stages.Add(reachPainting);\n
+    stages.Add(pointAt);\n
+    stages.Add(lookAt);\n
+\n
+\n
+    action.Abort();\n
+\n
+    action = new ECAAction(this, stages);\n
+    action.CompletedAction += OnEndPaintVisit;\n
+\n
+    action.StartAction();\n
+\]"}
+#4{11 12 "OnChairBusy"}
+#4{4 5 "void"}
+#4{26 27 "object sender, EventArgs e"}
+#4{0 1 ""}
+}
+#5{#4{8 9 "77552624"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{12 13 "GoToPainting"}
  0.3 0.88 4.8 1  8 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{989 1030 "\[\n
-    //set the status of the paint to occupied, only one visitor at time\n
-    painting.Occupied = true;\n
-\n
+ 1  1 #4{994 1030 "\[\n
     List<ECAActionStage> stages = new List<ECAActionStage>();\n
     GoToStage reachPainting = new GoToStage(painting.GetChairDestination());\n
     TurnStage turn = new TurnStage(painting.GetChairSitPoint(), true);\n
     SitStage sit = new SitStage(painting.chair);\n
     LookAtStage lookAt = new LookAtStage(painting.GetLookableObject());\n
     StandUpStage standUp = new StandUpStage(painting.chair);\n
+    //PointAtStage pointAt = new PointAtStage(painting.GetLookableObject(), 3f);\n
 \n
 \n
     painting.chair.SittableBusy += OnChairBusy;\n
@@ -342,6 +352,7 @@ using UnityEngine.Assertions;\n
     stages.Add(sit);\n
     stages.Add(lookAt);\n
     stages.Add(standUp);\n
+    //stages.Add(pointAt);\n
 \n
     ECAAction newAction = new ECAAction(this, stages);\n
     action = newAction;\n
@@ -359,7 +370,7 @@ using UnityEngine.Assertions;\n
 #4{17 18 "Painting painting"}
 #4{0 1 ""}
 }
-#5{#4{9 10 "131543024"}
+#6{#4{9 10 "131543024"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{5 6 "Awake"}
@@ -377,17 +388,23 @@ using UnityEngine.Assertions;\n
 }
 :CLSCSSem.1118481{ 56  51 @101 @153 @93 @0 #8{16 1@78 }
 #8{16 2@161 @63 }
-#8{16 3@3 @15 @200 }
-#8{16 5@224 @27 @115 @188 @39 }
+#8{16 2@3 @200 }
+#8{16 5@236 @27 @115 @188 @39 }
 #8{16 0}
 #8{16 0}
 #8{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #8{16 2@127 @140 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{16@51 @176 @212 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{16@51 @176 @224 @212 @15 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#4{0 1 ""}
+#4{366 367 "/*      CG&VG group @ Politecnico di Torino               */\n
+/*              All Rights Reserved\t                      */\n
+/*                                                        */\n
+/*  THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF CG&VG  */\n
+/*  The copyright notice above does not evidence any      */\n
+/*  actual or intended publication of such source code.   */\n
+"}
 #8{16 0}
  0}
 :Float.17{0 }

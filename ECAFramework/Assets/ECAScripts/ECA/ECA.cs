@@ -192,8 +192,7 @@ public class ECA : MonoBehaviour, IIntentHandler
 
     public virtual void SetEcaId()
     {
-        //ID = Ecas.Default;
-        throw new NotImplementedException();
+        ID = Ecas.Default;
     }
 
 
@@ -323,6 +322,14 @@ public class ECA : MonoBehaviour, IIntentHandler
 
     public List<string> IntentName
     { get; set; }
+
+
+    public ECAAction currentAction
+    {
+      get {
+    	return ecaAnimator.CurrentAction;
+      }
+    }
 
 
     public virtual void Handle(Intent intent)

@@ -1,5 +1,11 @@
 /* File Visitor C# implementation of class Visitor */
 
+/*      CG&VG group @ Politecnico di Torino               */
+/*              All Rights Reserved	                      */
+/*                                                        */
+/*  THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF CG&VG  */
+/*  The copyright notice above does not evidence any      */
+/*  actual or intended publication of such source code.   */
 
 
 // global declaration start
@@ -17,15 +23,47 @@ using UnityEngine.Assertions;
 
 class Visitor : ECA
 {
-    // class declaration start
-    protected static int counter = 0;
-    
+// class declaration start
+protected static int counter = 0;
+// class declaration end
+
+
     private int idxPaint;
 
-    protected List<Painting> paintings = new List<Painting>();
-    protected ECAAction action =  null;
+    protected List<Painting> paintings =  new List<Painting>();
+    protected ECAAction action =   null;
 
-    // class declaration end
+
+    private void OnEndPaintVisit(object sender, EventArgs e)
+    {
+        Utility.Log("Visitor " + this.Name + " visited paint " + paintings[idxPaint].id);
+    
+        //free the paint
+        paintings[idxPaint].chair.SittableBusy -= OnChairBusy;
+        paintings[idxPaint].chair.SittableFree -= OnChairFree;
+    
+        idxPaint++;
+    
+        if (paintings.Count > idxPaint)
+        {
+            //then visit paint
+            GoToPainting(paintings[idxPaint]);
+        }
+        else
+        {
+            Utility.Log("END OF APPLICATION");
+            action = null;
+        }
+    }
+
+
+    private void OnChairFree(object sender, EventArgs e)
+    {
+        Utility.Log("Visitor " + this.Name + " going to " + sender + " that becomes free");
+    }
+
+
+
 
     protected override void Awake()
     {
@@ -72,95 +110,6 @@ class Visitor : ECA
         GoToPainting(paintings[idxPaint]);
     }
 
-    private void OnEndPaintVisit(object sender, EventArgs e)
-    {
-        Utility.Log("Visitor " + this.Name + " visited paint " + paintings[idxPaint].id);
-
-        //free the paint
-        paintings[idxPaint].chair.SittableBusy -= OnChairBusy;
-        paintings[idxPaint].chair.SittableFree -= OnChairFree;
-
-        idxPaint++;
-
-        if (paintings.Count > idxPaint)
-        {
-            //then visit paint
-            GoToPainting(paintings[idxPaint]);
-        }
-        else
-        {
-            Utility.Log("END OF APPLICATION");
-            action = null;
-        }
-    }
-
-
-    public void OnChairBusy(object sender, EventArgs e)
-    {
-        Utility.Log("Visitor " + this.Name + " going to " + sender + " that becomes busy");
-        Painting painting = paintings[idxPaint];
-
-        painting.chair.SittableBusy -= OnChairBusy;
-        painting.chair.SittableFree -= OnChairFree;
-
-        GoToStage reachPainting = new GoToStage(painting.GetLookableObject());
-        reachPainting.StopDistance = 2.5f;
-        LookAtStage lookAt = new LookAtStage(painting.GetLookableObject());
-        PointAtStage pointAt = new PointAtStage(painting.GetLookableObject(), 3f);
-
-        List<ECAActionStage> stages = new List<ECAActionStage>();
-        stages.Add(reachPainting);
-        stages.Add(pointAt);
-        stages.Add(lookAt);
-
-
-        action.Abort();
-
-        action = new ECAAction(this, stages);
-        action.CompletedAction += OnEndPaintVisit;
-
-        action.StartAction();
-    }
-
-
-    private void OnChairFree(object sender, EventArgs e)
-    {
-        Utility.Log("Visitor " + this.Name + " going to " + sender + " that becomes free");
-    }
-
-    public void GoToPainting(Painting painting)
-    {
-        List<ECAActionStage> stages = new List<ECAActionStage>();
-        GoToStage reachPainting = new GoToStage(painting.GetChairDestination());
-        TurnStage turn = new TurnStage(painting.GetChairSitPoint(), true);
-        SitStage sit = new SitStage(painting.chair);
-        LookAtStage lookAt = new LookAtStage(painting.GetLookableObject());
-        StandUpStage standUp = new StandUpStage(painting.chair);
-        //PointAtStage pointAt = new PointAtStage(painting.GetLookableObject(), 3f);
-
-
-        painting.chair.SittableBusy += OnChairBusy;
-        painting.chair.SittableFree += OnChairFree;
-
-        stages.Add(reachPainting);
-        stages.Add(turn);
-        stages.Add(sit);
-        stages.Add(lookAt);
-        stages.Add(standUp);
-        //stages.Add(pointAt);
-
-        ECAAction newAction = new ECAAction(this, stages);
-        action = newAction;
-
-
-        newAction.CompletedAction += OnEndPaintVisit;
-        Utility.Log("Visitor " + this.Name + " moving to " + painting.name);
-
-        newAction.StartAction();
-
-        Invoke("OccupyChair", 1.0f);
-    }
-
 
     protected void OccupyChair()
     {
@@ -176,13 +125,67 @@ class Visitor : ECA
     }
 
 
-    public override void SetEcaId()
+    public void GoToPainting(Painting painting)
     {
-        ID = Ecas.Default;
+        List<ECAActionStage> stages = new List<ECAActionStage>();
+        GoToStage reachPainting = new GoToStage(painting.GetChairDestination());
+        TurnStage turn = new TurnStage(painting.GetChairSitPoint(), true);
+        SitStage sit = new SitStage(painting.chair);
+        LookAtStage lookAt = new LookAtStage(painting.GetLookableObject());
+        StandUpStage standUp = new StandUpStage(painting.chair);
+        //PointAtStage pointAt = new PointAtStage(painting.GetLookableObject(), 3f);
+    
+    
+        painting.chair.SittableBusy += OnChairBusy;
+        painting.chair.SittableFree += OnChairFree;
+    
+        stages.Add(reachPainting);
+        stages.Add(turn);
+        stages.Add(sit);
+        stages.Add(lookAt);
+        stages.Add(standUp);
+        //stages.Add(pointAt);
+    
+        ECAAction newAction = new ECAAction(this, stages);
+        action = newAction;
+    
+    
+        newAction.CompletedAction += OnEndPaintVisit;
+        Utility.Log("Visitor " + this.Name + " moving to " + painting.name);
+    
+        newAction.StartAction();
+    
+        Invoke("OccupyChair", 1.0f);
     }
 
 
+    public void OnChairBusy(object sender, EventArgs e)
+    {
+        Utility.Log("Visitor " + this.Name + " going to " + sender + " that becomes busy");
+        Painting painting = paintings[idxPaint];
     
+        painting.chair.SittableBusy -= OnChairBusy;
+        painting.chair.SittableFree -= OnChairFree;
+    
+        GoToStage reachPainting = new GoToStage(painting.GetLookableObject());
+        reachPainting.StopDistance = 2.5f;
+        LookAtStage lookAt = new LookAtStage(painting.GetLookableObject());
+        PointAtStage pointAt = new PointAtStage(painting.GetLookableObject(), 3f);
+    
+        List<ECAActionStage> stages = new List<ECAActionStage>();
+        stages.Add(reachPainting);
+        stages.Add(pointAt);
+        stages.Add(lookAt);
+    
+    
+        action.Abort();
+    
+        action = new ECAAction(this, stages);
+        action.CompletedAction += OnEndPaintVisit;
+    
+        action.StartAction();
+    }
+
 
     public override void DetachEvent(string handlerName, EventArgs args)
     {

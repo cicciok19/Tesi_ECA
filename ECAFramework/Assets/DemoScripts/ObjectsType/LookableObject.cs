@@ -5,16 +5,6 @@
 // global declaration start
 
 
-/*      CG&VG group @ Politecnico di Torino               */
-/*              All Rights Reserved	                      */
-/*                                                        */
-/*  THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF CG&VG  */
-/*  The copyright notice above does not evidence any      */
-/*  actual or intended publication of such source code.   */
-
-
-
-
 using System;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -25,7 +15,7 @@ using UnityEngine.Assertions;
 public class LookableObject : MonoBehaviour
 {
 
-    protected GameObject lookPosition =     null;
+    protected GameObject lookPosition =      null;
     protected Vector3 bounds;
     protected Vector3 center;
 
@@ -66,12 +56,10 @@ public class LookableObject : MonoBehaviour
 
     public Transform GetRandomLookPosition(float extent = 1.0f)
     {
-      System.Random random = new System.Random();
-    
       Vector3 randomShift = new Vector3(
-    	center.x + bounds.x * extent * (float)random.NextDouble(),
-    	center.y + bounds.y * extent * (float)random.NextDouble(),
-    	center.z + bounds.z * extent * (float)random.NextDouble()
+    	center.x + bounds.x * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f),
+    	center.y + bounds.y * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f),
+    	center.z + bounds.z * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f)
       );
     
       lookPosition.transform.position = randomShift;

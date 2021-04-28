@@ -1,4 +1,4 @@
-:ArrayOb.273{6:Dictionary.4369{32 20:SLSPrivateMethod.286331408{:String.17{9 10 "131539496"}
+:ArrayOb.273{6:Dictionary.4369{32 19:SLSPrivateMethod.286331408{:String.17{9 10 "131539496"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{15 16 "OnEndPaintVisit"}
@@ -66,21 +66,6 @@
 #4{0 1 ""}
 #4{0 1 ""}
  0}
-#5{#4{9 10 "131537144"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{4 5 "Init"}
- 1.3 0.88 1.6 1  6 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{20 45 "\[\n
-    base.Init();\n
-\]"}
-#4{4 5 "Init"}
-#4{13 14 "override void"}
-#4{0 1 ""}
-#4{0 1 ""}
-}
 #6{#4{9 10 "164238728"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -96,6 +81,21 @@
 #4{0 1 ""}
 #4{0 1 ""}
  0}
+#5{#4{9 10 "131537144"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{4 5 "Init"}
+ 1.3 0.88 1.6 1  6 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{20 45 "\[\n
+    base.Init();\n
+\]"}
+#4{4 5 "Init"}
+#4{13 14 "override void"}
+#4{0 1 ""}
+#4{0 1 ""}
+}
 :SLSProtectMember.286331409{#4{9 10 "131451192"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -231,21 +231,6 @@ using UnityEngine.Assertions;\n
 @0 #4{21 26 " new List<Painting>()"}
 #4{0 1 ""}
 }
-#5{#4{8 9 "77550664"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{8 9 "SetEcaId"}
- 1.3 0.88 3.2 1  7 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{26 27 "\[\n
-    ID = Ecas.Default;\n
-\]"}
-#4{8 9 "SetEcaId"}
-#4{13 14 "override void"}
-#4{0 1 ""}
-#4{0 1 ""}
-}
 #6{#4{8 9 "77552232"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -253,7 +238,7 @@ using UnityEngine.Assertions;\n
  1.3 0.88 7.2 19  9 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{478 481 "\[\n
+ 1  1 #4{480 481 "\[\n
     Painting[] scenePaintings = FindObjectsOfType<Painting>();\n
 \n
     if(scenePaintings == null)\n
@@ -265,7 +250,7 @@ using UnityEngine.Assertions;\n
     paintings = scenePaintings.ToList<Painting>();\n
     \n
     // shuffle list, tricks from stackoverflow\n
-     paintings = paintings.OrderBy(a => Guid.NewGuid()).ToList();\n
+    // paintings = paintings.OrderBy(a => Guid.NewGuid()).ToList();\n
 \n
     // just as debug, go to the first painting\n
     GoToPainting(paintings[idxPaint]);\n
@@ -388,15 +373,15 @@ using UnityEngine.Assertions;\n
 }
 :CLSCSSem.1118481{ 56  51 @101 @153 @93 @0 #8{16 1@78 }
 #8{16 2@161 @63 }
-#8{16 2@3 @200 }
-#8{16 5@236 @27 @115 @188 @51 }
+#8{16 2@3 @188 }
+#8{16 5@224 @27 @115 @176 @39 }
 #8{16 0}
 #8{16 0}
 #8{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #8{16 2@127 @140 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{16@39 @176 @224 @212 @15 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{16@51 @0 @212 @200 @15 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{366 367 "/*      CG&VG group @ Politecnico di Torino               */\n
 /*              All Rights Reserved\t                      */\n

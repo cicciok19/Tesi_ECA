@@ -38,13 +38,11 @@
  0.3 0.88 8.4 1  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{427 428 "\[\n
-  System.Random random = new System.Random();\n
-\n
+ 1  1 #4{386 428 "\[\n
   Vector3 randomShift = new Vector3(\n
-\tcenter.x + bounds.x * extent * (float)random.NextDouble(),\n
-\tcenter.y + bounds.y * extent * (float)random.NextDouble(),\n
-\tcenter.z + bounds.z * extent * (float)random.NextDouble()\n
+\tcenter.x + bounds.x * extent * (float)Random.Range(-1f, 1f),\n
+\tcenter.y + bounds.y * extent * (float)Random.Range(-1f, 1f),\n
+\tcenter.z + bounds.z * extent * (float)Random.Range(-1f, 1f)\n
   );\n
 \n
   lookPosition.transform.position = randomShift;\n
@@ -73,17 +71,7 @@
  0.299999 0.88 7.2 33  3 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 0  0 #4{433 434 "/*      CG&VG group @ Politecnico di Torino               */\n
-/*              All Rights Reserved\t                      */\n
-/*                                                        */\n
-/*  THIS IS UNPUBLISHED PROPRIETARY SOURCE CODE OF CG&VG  */\n
-/*  The copyright notice above does not evidence any      */\n
-/*  actual or intended publication of such source code.   */\n
-\n
-\n
-\n
-\n
-using System;\n
+ 0  0 #4{63 434 "using System;\n
 using UnityEngine;\n
 using UnityEngine.Assertions;\n
 "}
@@ -101,7 +89,7 @@ using UnityEngine.Assertions;\n
 #5{16 0}
 #5{16 0}
 #4{0 2 ""}
-@0 #4{8 9 "    null"}
+@0 #4{9 10 "     null"}
 #4{0 1 ""}
 }
 #6{#4{9 10 "142103336"}
@@ -136,6 +124,37 @@ using UnityEngine.Assertions;\n
 #4{16 17 "LookableObject d"}
 #4{0 1 ""}
 }
+#3{#4{9 10 "144397264"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{6 7 "center"}
+ 2.8 1.88 2.4 28  26 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{6 7 "center"}
+#4{7 8 "Vector3"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{0 1 ""}
+#4{0 1 ""}
+}
+:SLSThisIcon.286331409{#4{9 10 "141876912"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  52 45 0.4 0 0 #4{37 38 "public LookableObject : MonoBehaviour"}
+ 16.2343 2.2 23.68 4  0 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 0  0 #4{21 22 "public LookableObject"}
+#4{13 14 "MonoBehaviour"}
+#4{0 13 ""}
+#5{16 0}
+#5{16 0}
+#4{1 2 "S"}
+@0 #4{0 1 ""}
+}
 :SLSPrivateMethod.286331408{#4{9 10 "142108824"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -169,41 +188,10 @@ using UnityEngine.Assertions;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-:SLSThisIcon.286331409{#4{9 10 "141876912"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  52 45 0.4 0 0 #4{37 38 "public LookableObject : MonoBehaviour"}
- 16.2343 2.2 23.68 4  0 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 0  0 #4{21 22 "public LookableObject"}
-#4{13 14 "MonoBehaviour"}
-#4{0 13 ""}
-#5{16 0}
-#5{16 0}
-#4{1 2 "S"}
-@0 #4{0 1 ""}
 }
-#3{#4{9 10 "144397264"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{6 7 "center"}
- 2.8 1.88 2.4 28  26 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{6 7 "center"}
-#4{7 8 "Vector3"}
-#4{0 1 ""}
-#5{16 0}
-#5{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{0 1 ""}
-}
-}
-:CLSCSSem.1118481{ 56  51 @109 @50 @42 @0 #5{16 0}
-#5{16 3@58 @3 @123 }
-#5{16 1@97 }
+:CLSCSSem.1118481{ 56  51 @112 @50 @42 @0 #5{16 0}
+#5{16 3@58 @3 @97 }
+#5{16 1@126 }
 #5{16 0}
 #5{16 0}
 #5{16 0}

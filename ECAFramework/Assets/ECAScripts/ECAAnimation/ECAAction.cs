@@ -52,6 +52,16 @@ public class ECAAction
     }
 
 
+    public ECAAction(ECA eca, ECAActionStage stage)
+    {
+        EcaAnimator = eca.ecaAnimator;
+        AllStages = new ECAActionStage[1];
+        AllStages[0] = stage;
+        stage.Animator = eca.ecaAnimator;
+        CurrentStageIdx = 0;
+    }
+
+
 
 
     protected virtual void GetIkManager(ECA eca)
@@ -124,9 +134,14 @@ public class ECAAction
         {
             if(CurrentStage != null)
             {
-    		    State = ActionState.Running;
-    		    Attach(CurrentStage);
-                CurrentStage.StartStage();
+    		if(EcaAnimator.CurrentAction != null && 
+    		(EcaAnimator.CurrentAction.State == ActionState.Running || EcaAnimator.CurrentAction.State == ActionState.Paused))
+    			  EcaAnimator.CurrentAction.Abort();
+    
+    		State = ActionState.Running;
+    		Attach(CurrentStage);	
+    		CurrentStage.StartStage();
+    		EcaAnimator.CurrentAction = this;
             }
         }
     }

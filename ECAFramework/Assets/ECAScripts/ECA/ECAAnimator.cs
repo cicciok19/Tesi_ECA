@@ -44,8 +44,7 @@ public class ECAAnimator : MonoBehaviour
     public event EventHandler TriggeredAnimationContact;
 
     internal NavMeshAgent navMeshAgent;
-
-    protected ECAAction CurrentAction;
+    internal ECAAction CurrentAction;
 
     public GameObject Player;
     public Animator mecanimAnimator;
