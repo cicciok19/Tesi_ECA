@@ -20,7 +20,7 @@ public class Train : MonoBehaviour
 
     private IEnumerator WaitArriving()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(20f);
         if (Arriving != null)
             Arriving(this, EventArgs.Empty);
 

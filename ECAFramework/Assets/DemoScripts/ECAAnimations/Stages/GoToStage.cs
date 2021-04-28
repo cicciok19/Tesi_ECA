@@ -17,6 +17,7 @@ public class GoToStage : ECAActionStage
     private Transform destination;
     protected float stopDistance =   0.5f;
     protected float range = 0f;
+    protected int areaMask;
     
 
     protected Vector3 randomDestination;
@@ -40,10 +41,11 @@ public class GoToStage : ECAActionStage
     /// </summary>
     /// <param name="center"></param>
     /// <param name="range"></param>
-    public GoToStage(Transform center, float range) : base()
+    public GoToStage(Transform center, float range, int areaMask = 1) : base()
     {
         this.range = range;
         this.destination = center;
+        this.areaMask = areaMask;
     }
 
 
@@ -51,10 +53,15 @@ public class GoToStage : ECAActionStage
     {
         base.StartStage();
 
-        if (range != 0f)
-            RandomDestination(range);
+        //use this in order to not modify the destination transform
+        Vector3 x;
 
-        animator.navMeshAgent.SetDestination(destination.position);
+        if (range != 0f)
+            x = RandomDestination(range);
+        else
+            x = destination.position;
+
+        animator.navMeshAgent.SetDestination(x);
     }
 
 
@@ -71,9 +78,9 @@ public class GoToStage : ECAActionStage
     public override void Update()
     {
         base.Update();
+
         if (Vector3.Distance(destination.position, animator.Eca.transform.position) <= stopDistance + 0.5f)
         {
-            //animator.navMeshAgent.isStopped = true;
             animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
             EndStage();
         }
@@ -83,26 +90,27 @@ public class GoToStage : ECAActionStage
     /// Select a random destination in the NavMesh. Tries 30 times, if can't find a correct point returns false
     /// </summary>
     /// <param name="range">max distance from the ECA</param>
+    /// <param name="x">destination point that this method returns</param>
     /// <returns></returns>
-    public bool RandomDestination(float range)
+    public Vector3 RandomDestination(float range)
     {
-        //Vector3 center = GameObject.FindGameObjectWithTag("Destination").transform.position;
         Vector3 center = destination.transform.position;
 
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 30; i++)
         {
             Vector3 randomPoint = center + UnityEngine.Random.insideUnitSphere * range;
             NavMeshHit hit;
 
-            if (NavMesh.SamplePosition(randomPoint, out hit, 1f, areaMask:-3))
+            if (NavMesh.SamplePosition(randomPoint, out hit, 2f, 1 << areaMask))
             {
-                Debug.DrawRay(hit.position, Vector3.up, Color.red, 10f);
-                destination.position = hit.position;
-                //animator.navMeshAgent.SetDestination(randomDestination);
-                return true;
+                Debug.DrawRay(hit.position, Vector3.up *20, Color.green, 10f);
+                Vector3 x = hit.position;
+                return x;
             }
         }
-        return false;
+
+        //if didn't find a valid position returns ECA actual position
+        return animator.Eca.transform.position;
 
     }
 

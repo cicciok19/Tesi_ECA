@@ -195,40 +195,6 @@ public class ECAAnimator : MonoBehaviour
             AudioEnded(this, EventArgs.Empty);
     }
 
-
-    public virtual void GoTo(Vector3 target, float arrivalDeltaDistance)
-    {
-        throw new NotImplementedException();
-    }
-
-
-    public virtual IEnumerator WaitArrival(Vector3 target, float deltaDistance)
-    {
-        if (deltaDistance > 0)
-        {
-            while (Vector3.Distance(target, transform.position) >= deltaDistance)
-                yield return null;
-        }
-        else
-            Utility.LogError("delta Distance <= 0");
-    
-        Arrived();
-    }
-
-
-    public virtual void Arrived()
-    {
-        Utility.Log(Eca.name + " Arrived to destination!");
-        if (navMeshAgent == null || navMeshAgent.enabled == false)
-            Utility.LogWarning("No navMeshAgent found. Add NamMeshAgent or override this method if you wont to use your policy");
-        else
-            navMeshAgent.isStopped = true;
-    
-        if (HasArrived != null)
-            HasArrived(this, EventArgs.Empty);
-    }
-
-
     public virtual bool IsWatchingSomewhere(Camera camera, Collider Traget)
     {
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);
@@ -299,23 +265,6 @@ public class ECAAnimator : MonoBehaviour
     {
       set; get;
     } = null;
-
-
-    public virtual void PointAt(Transform target)
-    {
-    }
-
-
-    public virtual void LookAt(Transform target = null, bool turnToSit = false)
-    {
-    }
-
-
-    public virtual IEnumerator WaitLookAt(Vector3 dir)
-    {
-        yield return new WaitForSeconds(0.1f);
-    }
-
 
     public virtual void Wait(float time)
     {

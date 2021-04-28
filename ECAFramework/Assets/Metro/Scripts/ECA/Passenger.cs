@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class Passenger : ECA
 {
+    //global declaration start
+
     private ECAAction actualAction = null;
     private Train train;
     private TrainDoor doorSelected = null;
@@ -13,15 +15,7 @@ public class Passenger : ECA
     private PassengerPlace placeSelected = null;
     private float maxRange;
 
-    public override void Init()
-    {
-        base.Init();
-    }
-
-    protected override void Awake()
-    {
-        base.Awake();
-    }
+    //global declaration end
 
     protected override void Start()
     {
@@ -29,28 +23,26 @@ public class Passenger : ECA
 
         train = GameObject.FindObjectOfType<Train>();
         binary = GameObject.FindObjectOfType<Binary>();
-        
-        //max distance from the destination (es. door when waiting)
-        maxRange = 5f;
+
+        //max distance from the destination (es. door when waiting, binary's empty)
+        //maxRange = 5f;
+        maxRange = 10f;
+
 
         train.Arriving += OnTrainArriving;
-        //ecaAnimator.navMeshAgent.areaMask = NavMesh.GetAreaFromName("Binary");
+        int maskIndex = NavMesh.GetAreaFromName("Binary");
+        ecaAnimator.navMeshAgent.areaMask = (1 << maskIndex) | (1 << 0);
         
         GoSomewhere();
     }
 
-    public override void DetachEvent(string handlerName, EventArgs args)
-    {
-        base.DetachEvent(handlerName, args);
-    }
+    //ACTIONS START
 
     private void GoSomewhere()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
-        GoToStage goRandom = new GoToStage(binary.transform, maxRange);
-        WaitStage wait = new WaitStage(3f);
+        GoToStage goRandom = new GoToStage(binary.transform, maxRange, 3);
         stages.Add(goRandom);
-        stages.Add(wait);
 
         ECAAction newAction = new ECAAction(this, stages);
         actualAction = newAction;
@@ -60,34 +52,13 @@ public class Passenger : ECA
 
     }
 
-    private void OnDestinationArrived(object sender, EventArgs e)
+    private void GoNearTrainDoor()
     {
-        actualAction.CompletedAction -= OnDestinationArrived;
-        //GoSomewhere();
-    }
-
-    private void OnTrainArriving(object sender, EventArgs e)
-    {
-        Utility.Log("Train is arriving");
-        train.DoorsOpen += OnDoorsOpen;
-
-        //actualAction.CurrentStage.AbortStage();
-        actualAction.Abort();
-
-        //DO SOMETHING
-        GoToStage goNearTrainDoor = new GoToStage(train.GetTrainDoors()[0].transform);
-        goNearTrainDoor.StopDistance = 5f;
+        GoToStage goNearTrainDoor = new GoToStage(train.GetTrainDoors()[0].transform, maxRange, 3);
+        //goNearTrainDoor.StopDistance = 5f;
         ECAAction newAction = new ECAAction(this, goNearTrainDoor);
         actualAction = newAction;
         actualAction.StartAction();
-    }
-
-    private void OnDoorsOpen(object sender, EventArgs e)
-    {
-        Utility.Log("Train is arrived, you can go in");
-
-        //DO SOMETHING
-        EnterTrain();
     }
 
     private void EnterTrain()
@@ -103,6 +74,7 @@ public class Passenger : ECA
         {
             doorSelected.DoorFree -= OnDoorFree;
             doorSelected.Occupied = true;
+
             foreach(var p in train.GetPassengerPlaces())
             {
                 if (!p.Occupied)
@@ -111,6 +83,7 @@ public class Passenger : ECA
                     break;
                 }
             }
+
             GoToStage enter = new GoToStage(placeSelected.transform);
             ECAAction newAction = new ECAAction(this, enter);
             actualAction = newAction;
@@ -123,6 +96,12 @@ public class Passenger : ECA
         }
     }
 
+
+
+    //ACTIONS END
+
+    //DELEGATES START
+
     private void OnDoorFree(object sender, EventArgs e)
     {
         EnterTrain();
@@ -134,5 +113,36 @@ public class Passenger : ECA
         doorSelected.Occupied = false;
         placeSelected.Occupied = true;
     }
+
+    private void OnTrainArriving(object sender, EventArgs e)
+    {
+        Utility.Log("Train is arriving");
+        train.DoorsOpen += OnDoorsOpen;
+
+        actualAction.Abort();
+
+        //DO SOMETHING
+        GoNearTrainDoor();
+    }
+
+    private void OnDoorsOpen(object sender, EventArgs e)
+    {
+        Utility.Log("Train is arrived, you can go in");
+
+        ecaAnimator.navMeshAgent.areaMask = (1 << 3) | (1 << 10) | (1 << 4) | (1 << 0);
+
+        //DO SOMETHING
+        EnterTrain();
+    }
+
+
+    private void OnDestinationArrived(object sender, EventArgs e)
+    {
+        actualAction.CompletedAction -= OnDestinationArrived;
+        ecaAnimator.navMeshAgent.areaMask = 1 << NavMesh.GetAreaFromName("Binary");
+        //GoSomewhere();
+    }
+
+    //DELEGATES END
 
 }

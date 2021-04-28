@@ -86,14 +86,6 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
-    public override void GoTo(Vector3 target, float arrivalDeltaDistance)
-    {
-        Assert.IsNotNull(navMeshAgent);
-        navMeshAgent.SetDestination(target);
-        StartCoroutine(WaitArrival(target, arrivalDeltaDistance + 0.5f));
-    }
-
-
     public override void TriggerAnimation(string id, Transform contact = null, string tag = null)
     {
         var eventDef = MxM_EventDefinitions[id];
@@ -118,35 +110,6 @@ public class ECAAnimatorMxM : ECAAnimator
         m_animator.ClearRequiredTags();
         m_animator.AddRequiredTag(tag);
     }
-
-
-    public override void LookAt(Transform target = null, bool turnToSit = false)
-    {
-        //If the target is not specified, the ECA will look to the player
-        if (target == null)
-            target = Player.transform;
-        if (turnToSit)
-        {
-            Vector3 dir = target.forward;
-    
-            m_trajectory.FaceDirectiononIdle = true;
-            m_trajectory.StrafeDirection = dir;
-    
-            StartCoroutine(WaitLookAt(dir));
-        }
-    
-        Debug.DrawRay(target.position, target.forward * 50, Color.red, 10);
-    }
-
-
-    public override IEnumerator WaitLookAt(Vector3 dir)
-    {
-        //DOVREI FARLO CON GLI ANGOLI E NON CON IL TEMPO
-        yield return new WaitForSeconds(.7f);
-        m_trajectory.FaceDirectiononIdle = false;
-        EndLookingAt();
-    }
-
 
     public void MxM_StartStrafing()
     {
