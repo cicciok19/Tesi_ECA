@@ -30,7 +30,7 @@ public class LookAtStage : ECAActionStage
     public LookAtStage(LookableObject lookableObject)
     : base()
     {
-                this.lookableObject = lookableObject;
+            this.lookableObject = lookableObject;
         
         	counter = (int)Mathf.Round(UnityEngine.Random.Range(2f ,5f));
     }
@@ -40,7 +40,7 @@ public class LookAtStage : ECAActionStage
 
     private void OnAimCompleted(object sender, EventArgs e)
     {
-      WaitFor(UnityEngine.Random.Range(0f, 3.0f));
+        WaitFor(UnityEngine.Random.Range(2.0f, 5.0f));
     }
 
 
@@ -50,8 +50,8 @@ public class LookAtStage : ECAActionStage
     {   
         if(counter == 0)
         {
-    	EndStage();
-    	return;
+    	    EndStage();
+    	    return;
         }
     
     

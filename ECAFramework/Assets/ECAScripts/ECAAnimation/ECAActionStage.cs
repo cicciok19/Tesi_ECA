@@ -77,9 +77,9 @@ public abstract class ECAActionStage
 
     protected void WaitFor(float seconds)
     {
-      waitStatus = true;
-      waitTime = seconds * 1000;
-      startTime = DateTime.Now;
+        waitStatus = true;
+        waitTime = seconds * 1000;
+        startTime = DateTime.Now;
     }
 
 

@@ -231,6 +231,7 @@ public class IKSetter : MonoBehaviour
     protected IEnumerator ChangeTarget(AimIK aimIK, Transform target, float weight, float speed)
     {
         float varOld = aimIK.solver.IKPositionWeight;
+        GameObject targetOld = aimIK.solver.target.gameObject;
         float varNew = 0;
     
         AimIK newHeadIk = SetIKHead(headBone, neckBone);
@@ -245,7 +246,8 @@ public class IKSetter : MonoBehaviour
             varOld -= .01f;
             varNew += .01f;
         }
-    
+
+        Destroy(targetOld);
         Destroy(aimIK);
         headIK = newHeadIk;
     }
@@ -317,8 +319,8 @@ public class IKSetter : MonoBehaviour
 
     public void RemoveTarget(AimIK aimIK)
     {
-       SetWeightTargetAimIK(aimIK, 0);
-       aimIK.solver.target = null;
+        SetWeightTargetAimIK(aimIK, 0);
+        Destroy(aimIK.solver.target.gameObject);
     }
 
 

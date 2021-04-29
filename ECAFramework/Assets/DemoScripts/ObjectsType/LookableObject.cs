@@ -15,7 +15,7 @@ using UnityEngine.Assertions;
 public class LookableObject : MonoBehaviour
 {
 
-    protected GameObject lookPosition =      null;
+    protected GameObject lookPosition = null;
     protected Vector3 bounds;
     protected Vector3 center;
 
@@ -49,23 +49,25 @@ public class LookableObject : MonoBehaviour
     public Transform GetLookPosition()
     {
         GameObject gop = Instantiate(lookPosition); 
-      gop.transform.parent = transform;
-      return gop.transform;
+        gop.transform.parent = transform;
+        gop.transform.localPosition = Vector3.zero;
+        return gop.transform;
     }
 
 
     public Transform GetRandomLookPosition(float extent = 1.0f)
     {
-      Vector3 randomShift = new Vector3(
-    	center.x + bounds.x * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f),
-    	center.y + bounds.y * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f),
-    	center.z + bounds.z * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f)
-      );
+        Vector3 randomShift = new Vector3(
+            center.x + bounds.x * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f),
+            center.y + bounds.y * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f),
+            center.z + bounds.z * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f)
+        );
     
-      lookPosition.transform.position = randomShift;
-      GameObject gop = Instantiate(lookPosition);
-      gop.transform.parent = transform;
-      return gop.transform;
+        //lookPosition.transform.position = randomShift;
+        GameObject gop = Instantiate(lookPosition);
+        //gop.transform.parent = transform;
+        gop.transform.localPosition = randomShift;
+        return gop.transform;
     }
 
 
@@ -73,7 +75,7 @@ public class LookableObject : MonoBehaviour
     {
         IKSetter ikManager = (IKSetter)sender;
         Transform target = ikManager.headIK.solver.target;
-        Destroy(target.gameObject);
+
     }
 
 
