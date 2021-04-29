@@ -32,7 +32,7 @@ public class PointAtStage : ECAActionStage
         sem = false;
         mecanimAnimator = false;
 
-        ikManager.SetTargetAimIK(ikManager.leftHandIK, target, 1, 0.005f);
+        ikManager.SetTargetAimIK(ikManager.leftHandIK, target, 1, .5f);
         
         //ikManager.SetWeightTargetAimIK(ikManager.leftHandIK, 1);
 
@@ -62,7 +62,7 @@ public class PointAtStage : ECAActionStage
     {
         if (wait1 == false)
         {
-            ikManager.SetWeightTargetAimIK(ikManager.leftHandIK, 0f, .005f);
+            ikManager.SetWeightTargetAimIK(ikManager.leftHandIK, 0f, .5f);
             wait1 = true;
         }
         else if (wait2 == true)
