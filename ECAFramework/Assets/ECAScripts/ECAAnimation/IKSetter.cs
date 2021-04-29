@@ -238,41 +238,70 @@ public class IKSetter : MonoBehaviour
     
         SetTargetAimIK(newHeadIk, target, 0);
     
-        while (varOld > 0 || varNew < 1)
+        while (varOld > 0 || varNew < weight)
         {
             aimIK.solver.SetIKPositionWeight(varOld);
             newHeadIk.solver.SetIKPositionWeight(varNew);
             yield return new WaitForSeconds(speed);
-            varOld -= .01f;
-            varNew += .01f;
+            if(varOld > 0)
+                varOld -= .01f;
+            if(varNew < weight)
+                varNew += .01f;
         }
 
         Destroy(targetOld);
         Destroy(aimIK);
         headIK = newHeadIk;
+
+        if (AimCompleted != null)
+            AimCompleted(this, EventArgs.Empty);
     }
 
 
 
 
-    public virtual void SetTargetAimIK(AimIK aimIK, Transform target, float weight = 1f, float speed = .01f)
+    public virtual void SetTargetAimIK(AimIK aimIK, Transform target, float weight = 1f, float speed = 1f)
     {
+
+
         if (aimIK.solver.target == null)
         {
+            float coroutineSpeed;
+            float weightOperation = aimIK.solver.IKPositionWeight;
+
+            if (weightOperation < weight)
+                weightOperation = weight - weightOperation;
+            else
+                weightOperation -= weight;
+
+            coroutineSpeed = (speed * .01f) / weightOperation;
+
             aimIK.solver.target = target;
     
-            if (aimIK.solver.target != null)
+            if (aimIK.solver.target != null && weightOperation != 0)
             {
-                StartCoroutine(SetWeightAimIK(aimIK, weight, speed));
+                StartCoroutine(SetWeightAimIK(aimIK, weight, coroutineSpeed));
             }
-            else
+            else if (aimIK.solver.target == null)
             {
-                Debug.Log("The target is null, first set the target.");
+                Debug.LogError("The target is null, first set the target.");
             }
         }
         else
         {
-            StartCoroutine(ChangeTarget(aimIK, target, weight, speed));
+            float coroutineSpeed;
+            float weightOperation = 0;
+
+            if (weightOperation < weight)
+                weightOperation = weight - weightOperation;
+            else
+                weightOperation -= weight;
+
+            coroutineSpeed = (speed * .01f) / weightOperation;
+
+            StartCoroutine(ChangeTarget(aimIK, target, weight, coroutineSpeed));
+
+            Debug.Log("Change target");
         }
     }
 
@@ -299,21 +328,51 @@ public class IKSetter : MonoBehaviour
     }
 
 
-    public virtual void SetWeightsFullBodyIK(IKEffector effector, float weight, float speed = .01f)
+    public virtual void SetWeightsFullBodyIK(IKEffector effector, float weight, float speed = 1f)
     {
-        if (effector != null)
-            StartCoroutine(SetWeightFullIK(effector, weight, speed));
+        float coroutineSpeed;
+        float weightOperation = effector.positionWeight;
+
+        if (weightOperation < weight)
+            weightOperation = weight - weightOperation;
         else
-            Debug.Log("The effector is null, first set the target.");
+            weightOperation -= weight;
+        if (weightOperation != 0)
+        {
+            coroutineSpeed = (speed * .01f) / weightOperation;
+
+            if (effector != null)
+                StartCoroutine(SetWeightFullIK(effector, weight, coroutineSpeed));
+            else
+                Debug.LogError("The effector is null, first set the target.");
+        }
+        else
+            Debug.LogError("The weight is alredy " + weight);
     }
 
 
-    public virtual void SetWeightTargetAimIK(AimIK aimIK, float weight, float speed = .01f)
+    public virtual void SetWeightTargetAimIK(AimIK aimIK, float weight, float speed = 1f)
     {
-        if (aimIK.solver.target != null)
-            StartCoroutine(SetWeightAimIK(aimIK, weight, speed));
+        float coroutineSpeed;
+        float weightOperation = aimIK.solver.IKPositionWeight;
+
+        if (weightOperation < weight)
+            weightOperation = weight - weightOperation;
         else
-            Debug.Log("The target is null, first set the target.");
+            weightOperation -= weight;
+
+
+        if (weightOperation != 0)
+        {
+            coroutineSpeed = (speed * .01f) / weightOperation;
+
+            if (aimIK.solver.target != null)
+                StartCoroutine(SetWeightAimIK(aimIK, weight, coroutineSpeed));
+            else
+                Debug.LogError("The target is null, first set the target.");
+        }
+        else
+            Debug.LogError("The weight is alredy " + weight);
     }
 
 
