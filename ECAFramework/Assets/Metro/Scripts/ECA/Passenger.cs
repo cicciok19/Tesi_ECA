@@ -41,7 +41,7 @@ public class Passenger : ECA
     {
         doorSelected = station.train.NearestDoor(transform.position);
         Utility.Log("Going to " + doorSelected);
-        ECAAction newAction = new ECAAction(this, new GoToStage(doorSelected.GetRandomPosition()));
+        ECAAction newAction = new ECAAction(this, new GoToStage(Randomize.GetRandomPosition(doorSelected.FrontDoor)));
         newAction.StartAction();
     }
 

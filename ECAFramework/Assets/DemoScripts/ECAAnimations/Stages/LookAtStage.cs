@@ -56,7 +56,7 @@ public class LookAtStage : ECAActionStage
     
     
         counter--;
-        ikManager.SetTargetAimIK(ikManager.headIK, lookableObject.GetRandomLookPosition());
+        ikManager.SetTargetAimIK(ikManager.headIK, Randomize.GetRandomPosition(lookableObject.gameObject));
     }
 
 

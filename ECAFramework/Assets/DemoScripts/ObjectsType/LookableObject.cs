@@ -15,10 +15,11 @@ using UnityEngine.Assertions;
 public class LookableObject : MonoBehaviour
 {
 
-    protected GameObject lookPosition = null;
+    private GameObject lookPosition = null;
     protected Vector3 bounds;
     protected Vector3 center;
 
+    public GameObject LookPosition { get => lookPosition; protected set => lookPosition = value; }
 
     private void Start()
     {
@@ -37,8 +38,8 @@ public class LookableObject : MonoBehaviour
       Renderer renderer = GetComponent<Renderer>();
       Assert.IsNotNull(renderer);
     
-      bounds = renderer.bounds.size;
-      center = renderer.bounds.center;
+     /* bounds = renderer.bounds.size;
+      center = renderer.bounds.center;*/
     
       lookPosition.transform.position = center;
     }

@@ -23,7 +23,9 @@ public class TrainDoor : MonoBehaviour
 
     protected Vector3 bounds;
     protected Vector3 center;
-    protected LandingArea frontDoor;
+    private LandingArea frontDoor;
+
+    public LandingArea FrontDoor { get => frontDoor;  protected set => frontDoor = value; }
 
     public int id;
 
@@ -41,7 +43,7 @@ public class TrainDoor : MonoBehaviour
 
     public Vector3 GetRandomPosition(float extent = 1.0f)
     {
-       return frontDoor.GetRandomPosition();
+       return Randomize.GetRandomPosition(frontDoor);
     }
 
 

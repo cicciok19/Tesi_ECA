@@ -48,7 +48,7 @@ public class Station : MonoBehaviour
 
     public Vector3 GetPositionOnPlatform()
     {
-        return platform.GetRandomPosition();
+        return Randomize.GetRandomPosition(platform);
     }
 
 
