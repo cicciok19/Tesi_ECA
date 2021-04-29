@@ -119,6 +119,8 @@ public class ECA : MonoBehaviour, IIntentHandler
     {
         Utility.Log("ECA " + name + " awaken");
         AddIKManager();
+        if (GetComponent<Rigidbody>() == null)
+            gameObject.AddComponent<Rigidbody>().useGravity = false;
     }
 
 

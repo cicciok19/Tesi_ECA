@@ -71,7 +71,7 @@ public class Train : MonoBehaviour
 
     public Vector3 NearestDoorPosition(Vector3 ecaPosition)
     {
-      return NearestDoor(ecaPosition).GetRandomPosition();
+      return Randomize.GetRandomPosition(NearestDoor(ecaPosition).FrontDoor);
     }
 
 

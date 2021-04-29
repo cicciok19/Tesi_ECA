@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Assertions;
 
 
 // global declaration end
@@ -28,10 +29,15 @@ public class Passenger : ECA
     private void GoToPlatform()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
-    
-        Vector3 platformPosition = station.GetPositionOnPlatform();
-    
-        ECAAction newAction = new ECAAction(this, new GoToStage(platformPosition));
+
+        Vector3 platformPosition = Randomize.GetRandomPosition(station.GetPlatform());
+        GoToStage reachPlatform = new GoToStage(platformPosition);
+        TurnStage turnToTrain = new TurnStage(train.transform);
+        stages.Add(reachPlatform);
+        stages.Add(turnToTrain);
+
+        ECAAction newAction = new ECAAction(this, stages);
+
         newAction.CompletedAction += OnPlatformReached;
         newAction.StartAction();
     }
@@ -56,7 +62,7 @@ public class Passenger : ECA
         else
         {
             doorSelected.DoorFree -= OnDoorFree;
-            doorSelected.Occupied = true;
+            //doorSelected.Occupied = true;
     
             foreach(var p in station.train.GetPassengerPlaces())
             {
@@ -69,9 +75,10 @@ public class Passenger : ECA
     
             GoToStage enter = new GoToStage(placeSelected.transform);
             ECAAction newAction = new ECAAction(this, enter);
-    
+
             //TODO: the next ECA should enter even before that this ECA will arrive at destination
-            newAction.CompletedAction += Entered;
+            //newAction.CompletedAction += Entered;
+            doorSelected.DoorFree += Entered;
             newAction.StartAction();
     
             Utility.Log(this.gameObject + " is entering the train at door " + doorSelected.gameObject);
@@ -98,8 +105,6 @@ public class Passenger : ECA
         Utility.Log("Train is arriving");
     
         station.train.DoorsOpen += OnDoorsOpen;
-    
-        //DO SOMETHING
         GoNearTrainDoor();
     }
 
@@ -107,10 +112,7 @@ public class Passenger : ECA
     private void OnDoorsOpen(object sender, EventArgs e)
     {
         Utility.Log("Train is arrived, you can go in");
-    
-        //ecaAnimator.navMeshAgent.areaMask = (1 << 3) | (1 << 10) | (1 << 4) | (1 << 0);
-    
-        //DO SOMETHING
+
         EnterTrain();
     }
 
@@ -119,8 +121,6 @@ public class Passenger : ECA
     {
         Utility.Log("" + name);
         currentAction.CompletedAction -= OnPlatformReached;
-        //ecaAnimator.navMeshAgent.areaMask = 1 << NavMesh.GetAreaFromName("Binary");
-        //GoSomewhere();
     }
 
 
@@ -129,7 +129,6 @@ public class Passenger : ECA
     protected override void Start()
     {
         base.Start();
-    
     
         station = GameObject.FindObjectOfType<Station>();
         station.TrainArriving += OnTrainArriving;
@@ -142,9 +141,18 @@ public class Passenger : ECA
     
     
         int maskIndex = NavMesh.GetAreaFromName("Binary");
-        ecaAnimator.navMeshAgent.areaMask = (1 << maskIndex) | (1 << 0);
         
         GoToPlatform();
+    }
+
+    protected override void CreateAnimator()
+    {
+        ecaAnimator = GetComponent<ECAAnimatorMxM>();
+        if (ecaAnimator == null)
+            ecaAnimator = gameObject.AddComponent<ECAAnimatorMxM>();
+        Assert.IsNotNull(ecaAnimator);
+
+        ecaAnimator.Init();
     }
 
 
