@@ -5,50 +5,51 @@ using System;
 
 public class TurnStage : ECAActionStage
 {
-    private Transform sitPoint;
+    private Transform target;
     private bool turnToSit;
+    private ECAAnimatorMxM animatorMxM;
 
-    //just for debug
-    private int i;
-
-    public TurnStage(Transform sitPoint, bool turnToSit) : base()
+    public TurnStage(Transform target, bool turnToSit = false) : base()
     {
-        this.sitPoint = sitPoint;
+        this.target = target;
         this.turnToSit = turnToSit;
 
-        Debug.DrawRay(sitPoint.transform.position, sitPoint.transform.forward, Color.green, 10);
+        
+        Debug.DrawRay(target.transform.position, target.transform.forward, Color.green, 10);
     }
 
     public override void StartStage()
     {
         base.StartStage();
-        var animatorMxM = (ECAAnimatorMxM)animator;
+        animatorMxM = (ECAAnimatorMxM)animator;
+        Vector3 dir;
 
-        i = 0;
-
-        Vector3 dir = sitPoint.forward;
+        if (turnToSit)
+            dir = target.forward;
+        else
+            dir = (target.position - animatorMxM.Eca.transform.position).normalized;
 
         animatorMxM.m_trajectory.FaceDirectiononIdle = true;
         animatorMxM.m_trajectory.StrafeDirection = dir;
 
+        //TODO: change this, it's just for debug
+        WaitFor(0.5f);
     }
 
     public override void EndStage()
     {
         base.EndStage();
-        var animatorMxM = (ECAAnimatorMxM)animator;
         animatorMxM.m_trajectory.FaceDirectiononIdle = false;
-
     }
 
     public override void Update()
     {
-        var avatarDir = animator.mecanimAnimator.GetBoneTransform(HumanBodyBones.Head).forward.normalized;
-        if(Vector3.Dot(avatarDir, sitPoint.forward) >= 0.8f )
-        {
-            i++;
-            if(i==500)
-                EndStage();
-        }
+        base.Update();
+    }
+
+    protected override void OnWaitCompleted()
+    {
+        base.OnWaitCompleted();
+        EndStage();
     }
 }

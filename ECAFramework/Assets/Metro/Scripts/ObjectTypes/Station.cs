@@ -26,29 +26,23 @@ public class Station : MonoBehaviour
     {
         Utility.Log("Train is arriving");
         if(TrainArriving != null)
-    	TrainArriving(this, EventArgs.Empty);
+    	    TrainArriving(this, EventArgs.Empty);
     }
-
-
-
 
     protected void Awake()
     {
-      platform = GetComponentInChildren<LandingArea>();
+        platform = GetComponentInChildren<LandingArea>();
         Assert.IsNotNull(platform);
-      train = GameObject.FindObjectOfType<Train>();
+        train = GameObject.FindObjectOfType<Train>();
         Assert.IsNotNull(train);
         binary = GameObject.FindObjectOfType<Binary>();
     
-      train.Arriving += OnTrainArriving;
+        train.Arriving += OnTrainArriving;
     }
 
-
-
-
-    public Vector3 GetPositionOnPlatform()
+    public LandingArea GetPlatform()
     {
-        return Randomize.GetRandomPosition(platform);
+        return platform;
     }
 
 

@@ -38,15 +38,6 @@ public class TrainDoor : MonoBehaviour
     
     }
 
-
-
-
-    public Vector3 GetRandomPosition(float extent = 1.0f)
-    {
-       return Randomize.GetRandomPosition(frontDoor);
-    }
-
-
     public bool Occupied
     {
         get { return occupied; }
@@ -58,6 +49,18 @@ public class TrainDoor : MonoBehaviour
                     DoorFree(this, EventArgs.Empty);
             }
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Utility.Log(other.name + " occuping");
+        Occupied = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Utility.Log(other.name + " free");
+        Occupied = false;
     }
 
 
