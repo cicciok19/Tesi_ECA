@@ -120,6 +120,11 @@ public abstract class ECAActionStage
       }
     }
 
+    public virtual void LateUpdate()
+    {
+
+    }
+
 
     public virtual void PauseStage()
     {

@@ -25,7 +25,7 @@ public class GoToStage : ECAActionStage
 
     private Vector3 destination;
 
-    protected float stopDistance =    0.5f;
+    protected float stopDistance = 0.5f;
     protected float range =  0f;
     protected int areaMask;
     protected Vector3 randomDestination;

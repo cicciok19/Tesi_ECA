@@ -46,7 +46,7 @@ namespace RootMotion.Demos {
 		private Vector3 pickUpPosition;
 		private Quaternion pickUpRotation;
 		
-		void Start() {
+		protected void Start() {
 			// Listen to interaction events
 			interactionSystem.OnInteractionStart += OnStart;
 			interactionSystem.OnInteractionPause += OnPause;
@@ -54,13 +54,15 @@ namespace RootMotion.Demos {
 		}
 		
 		// Called by the InteractionSystem when an interaction is paused (on trigger)
-		private void OnPause(FullBodyBipedEffector effectorType, InteractionObject interactionObject) {
+		protected void OnPause(FullBodyBipedEffector effectorType, InteractionObject interactionObject) {
 			if (effectorType != FullBodyBipedEffector.LeftHand) return;
 			if (interactionObject != obj) return;
 
 			// Make the object inherit the character's movement
 			obj.transform.parent = interactionSystem.transform;
-			
+
+			Debug.Log("I'm in pause.");
+
 			// Make the object kinematic
 			var r = obj.GetComponent<Rigidbody>();
 			if (r != null) r.isKinematic = true;
@@ -73,7 +75,7 @@ namespace RootMotion.Demos {
 		}
 		
 		// Called by the InteractionSystem when an interaction starts
-		private void OnStart(FullBodyBipedEffector effectorType, InteractionObject interactionObject) {
+		protected void OnStart(FullBodyBipedEffector effectorType, InteractionObject interactionObject) {
 			if (effectorType != FullBodyBipedEffector.LeftHand) return;
 			if (interactionObject != obj) return;
 			
@@ -85,7 +87,7 @@ namespace RootMotion.Demos {
 		}
 		
 		// Called by the InteractionSystem when an interaction is resumed from being paused
-		private void OnDrop(FullBodyBipedEffector effectorType, InteractionObject interactionObject) {
+		protected void OnDrop(FullBodyBipedEffector effectorType, InteractionObject interactionObject) {
 			if (effectorType != FullBodyBipedEffector.LeftHand) return;
 			if (interactionObject != obj) return;
 			
@@ -108,14 +110,14 @@ namespace RootMotion.Demos {
 		}
 		
 		// Are we currently holding the object?
-		private bool holding {
+		protected bool holding {
 			get {
 				return interactionSystem.IsPaused(FullBodyBipedEffector.LeftHand);
 			}
 		}
 
 		// Clean up delegates
-		void OnDestroy() {
+		protected void OnDestroy() {
 			if (interactionSystem == null) return;
 
 			interactionSystem.OnInteractionStart -= OnStart;
