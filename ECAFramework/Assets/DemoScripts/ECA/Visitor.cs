@@ -33,6 +33,8 @@ protected static int counter = 0;
     protected List<Painting> paintings =  new List<Painting>();
     protected ECAAction action =   null;
 
+    protected GrabbableObject grabbable;
+
 
     private void OnEndPaintVisit(object sender, EventArgs e)
     {
@@ -76,8 +78,11 @@ protected static int counter = 0;
         base.Start();
     
         idxPaint = 0;
-        SelectDestinations();
+        //SelectDestinations();
+        grabbable = GameObject.FindObjectOfType<GrabbableObject>();
+        PickUp(grabbable);
     }
+
 
 
     protected override void CreateAnimator()
@@ -124,6 +129,19 @@ protected static int counter = 0;
         base.Init();
     }
 
+
+    public void PickUp(GrabbableObject grabbable)
+    {
+
+        List<ECAActionStage> stages = new List<ECAActionStage>();
+        GoToStage reachGrab = new GoToStage(grabbable.transform);
+        PickStage pick = new PickStage(grabbable.transform, .3f, TypePick.rightHand, true);
+
+        stages.Add(reachGrab);
+        stages.Add(pick);
+        ECAAction newAction = new ECAAction(this, stages);
+        newAction.StartAction();
+    }
 
     public void GoToPainting(Painting painting)
     {

@@ -10,16 +10,7 @@ using System.Collections.Generic;
 using IntentRecognitionResults;
 using UnityEngine;
 using UnityEngine.Assertions;
-
-
-
-
-
-
-
-
-
-
+using RootMotion.FinalIK;
 
 
 
@@ -136,7 +127,6 @@ public class ECA : MonoBehaviour, IIntentHandler
         IntentName.Add(intentName);
         IntentManager.Instance.AddIntentHandler(intentName, this);
     }
-
 
     protected List<EmotionalMessage> GetGeneralMessagesFor(string key)
     {

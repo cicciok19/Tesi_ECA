@@ -144,6 +144,12 @@ public class ECAAnimator : MonoBehaviour
         }
     }
 
+    protected void LateUpdate()
+    {
+        if (currentStage != null)
+            currentStage.LateUpdate();
+    }
+
 
 
 

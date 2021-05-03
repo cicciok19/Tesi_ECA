@@ -31,8 +31,6 @@ public class IKSetter : MonoBehaviour
 
     private Transform root;
     private Transform headBone;
-    [SerializeField]
-    private Transform NeckBone;
     private Transform leftForeArm;
     private Transform leftShoulder;
     private Transform rightHandBone;
@@ -45,13 +43,12 @@ public class IKSetter : MonoBehaviour
 
     protected Animator animator;
     protected Dictionary<AimIK, bool> aimStopDictionary =   new Dictionary<AimIK, bool>();
-    protected PickUp pickUp;
+
 
     public FullBodyBipedIK fullBodyBipedIK;
     public AimIK leftHandIK;
     public AimIK rightHandIK;
     public AimIK headIK;
-
 
     protected AimIK SetIKHead(Transform headBone, Transform neckBone)
     {
@@ -126,7 +123,7 @@ public class IKSetter : MonoBehaviour
     }
 
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         animator = this.GetComponent<Animator>();
     
@@ -150,8 +147,6 @@ public class IKSetter : MonoBehaviour
         rightHandIK = SetIKRightHand(rightHandBone, rightForeArm, rightArm, rightShoulder);
         leftHandIK = SetIKLeftHand(leftHandBone, leftForeArm, leftArm, leftShoulder);
         fullBodyBipedIK = SetFullBodyIK();
-    
-        //pickUp = SetPickUp();
     }
 
 
@@ -214,17 +209,6 @@ public class IKSetter : MonoBehaviour
     
         if(AimCompleted != null)
     	    AimCompleted(this, EventArgs.Empty);
-    }
-
-
-    protected PickUp SetPickUp()
-    {
-        InteractionSystem intSys = this.gameObject.AddComponent<InteractionSystem>();
-        PickUp pickUp = this.gameObject.AddComponent<PickUp>();
-    
-        pickUp.interactionSystem = intSys;
-    
-        return pickUp;
     }
 
 
