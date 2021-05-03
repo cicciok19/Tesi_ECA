@@ -7,7 +7,7 @@ public class CollisionTester : ECA
 {
     private ECAAnimatorMxM animatorMxM;
     private Vector3 translateCenter = new Vector3(0, 1, 0);
-    private Transform destination;
+    private Destination destination;
 
     protected override ECAAnimator AddECAAnimator()
     {
@@ -18,6 +18,8 @@ public class CollisionTester : ECA
     protected override void Awake()
     {
         base.Awake();
+        destination = GetComponentInChildren<Destination>();
+        destination.transform.parent = null;
     }
 
     protected override void Start()
@@ -30,9 +32,10 @@ public class CollisionTester : ECA
 
     private void GoToDestination()
     {
-        destination = GameObject.FindGameObjectWithTag("Destination").transform;
-        ECAAction newAction = new ECAAction(this, new GoToStage(destination));
+        destination.Chosen = true;
+        ECAAction newAction = new ECAAction(this, new GoToStage(destination.transform));
         newAction.StartAction();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,12 +49,14 @@ public class CollisionTester : ECA
             var otherDir = otherEca.GetComponent<MxMTrajectoryGenerator_BasicAI>().InputVector;
             Vector2 otherDir2d = new Vector2(otherDir.x, otherDir.z);
 
-            var angleMiddle = Vector3.Angle(ecaDir, otherDir)/2;
-            Debug.Log(angleMiddle);
-            Vector3 newDir = new Vector3(ecaDir.x * -Mathf.Cos(Mathf.Deg2Rad * angleMiddle), 0, ecaDir.z * Mathf.Sin(Mathf.Deg2Rad * angleMiddle));
+            var angle = Vector3.Angle(ecaDir, otherDir);
+            Debug.Log(angle);
+            Vector3 newDir = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), 0, Mathf.Sin(Mathf.Deg2Rad * angle));
 
             Debug.DrawRay(transform.position + translateCenter, ecaDir * 10, Color.red, 20f);
-            Debug.DrawRay(destination.position + translateCenter , newDir * 10, Color.green, 20f);
+            Debug.DrawRay(transform.position + translateCenter , (newDir - ecaDir) * 10, Color.green, 20f);
+
+            animatorMxM.m_trajectory.InputVector = newDir - ecaDir * 20;
         }
     }
 }
