@@ -133,6 +133,11 @@ public abstract class ECAActionStage
             StagePaused(this, EventArgs.Empty);
     }
 
+    public virtual void ResumeStage()
+    {
+        State = ActionState.Running;
+    }
+
 
     public virtual void AbortStage()
     {

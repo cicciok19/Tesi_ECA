@@ -53,9 +53,6 @@ public class GoToStage : ECAActionStage
             this.destination = destination;
     }
 
-
-
-
     private void OnArrivedECA(object sender, EventArgs e)
     {
         EndStage();
@@ -119,6 +116,18 @@ public class GoToStage : ECAActionStage
     {
         base.AbortStage();
         animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
+    }
+
+    public override void PauseStage()
+    {
+        base.PauseStage();
+        animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
+    }
+
+    public override void ResumeStage()
+    {
+        base.ResumeStage();
+        StartStage();
     }
 
 

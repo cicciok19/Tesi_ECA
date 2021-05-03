@@ -115,6 +115,23 @@ public class ECAAction
         State = ActionState.Aborted;
     }
 
+    public void Pause()
+    {
+        Utility.Log("Action paused");
+        State = ActionState.Paused;
+    }
+
+    public void Resume()
+    {
+        if(State == ActionState.Paused)
+        {
+            Utility.Log("Action resumed");
+            State = ActionState.Running;
+            CurrentStage.ResumeStage();
+        }
+
+    }
+
 
     public ECAActionStage CurrentStage
     {

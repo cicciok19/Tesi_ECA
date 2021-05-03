@@ -23,6 +23,10 @@ public class Passenger : ECA
     private PassengerPlace placeSelected =   null;
     private float maxRange;
 
+    public bool stopped = false;
+    public event EventHandler Stationary;
+
+
     protected Station station;
 
 
@@ -76,8 +80,6 @@ public class Passenger : ECA
             GoToStage enter = new GoToStage(placeSelected.transform);
             ECAAction newAction = new ECAAction(this, enter);
 
-            //TODO: the next ECA should enter even before that this ECA will arrive at destination
-            //newAction.CompletedAction += Entered;
             doorSelected.DoorFree += Entered;
             newAction.StartAction();
     
@@ -94,9 +96,11 @@ public class Passenger : ECA
 
     private void Entered(object sender, EventArgs e)
     {
-        currentAction.CompletedAction -= Entered;
+        doorSelected.DoorFree -= Entered;
         doorSelected.Occupied = false;
         placeSelected.Occupied = true;
+
+        currentAction.CompletedAction += PlaceReached;
     }
 
 
@@ -138,10 +142,7 @@ public class Passenger : ECA
         //max distance from the destination (es. door when waiting, binary's empty)
         //maxRange = 5f;
         maxRange = 10f;
-    
-    
-        int maskIndex = NavMesh.GetAreaFromName("Binary");
-        
+
         GoToPlatform();
     }
 
@@ -155,5 +156,48 @@ public class Passenger : ECA
         ecaAnimator.Init();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Passenger otherEca;
+        
+        if (other.TryGetComponent<Passenger>(out otherEca))
+        {
+            if (!otherEca.stopped)
+            {
+                stopped = true;
+                currentAction.Pause();
+                otherEca.Stationary += OtherEcaIsStationary;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Passenger otherEca;
+
+        if (other.TryGetComponent<Passenger>(out otherEca))
+        {
+                stopped = false;
+                otherEca.Stationary -= OtherEcaIsStationary;
+                currentAction.Resume();
+        }
+    }
+
+    private void PlaceReached(object sender, EventArgs e)
+    {
+        gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        gameObject.AddComponent<NavMeshObstacle>().carving = true;
+
+        if (Stationary != null)
+            Stationary(this, EventArgs.Empty);
+    }
+
+    private void OtherEcaIsStationary(object sender, EventArgs e)
+    {
+        stopped = false;
+        //mi devo disiscrivere dall'evento dell'altro eca Stationary
+        //sender.Stationary -= OtherEcaIsStationary;
+        currentAction.Resume();
+    }
 
 }
