@@ -215,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ecaAnimator: {fileID: 0}
   stopped: 0
+  ecaInTrigger: 0
 --- !u!65 &14330175
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -680,6 +681,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ecaAnimator: {fileID: 0}
+  stopped: 0
+  ecaInTrigger: 0
   FirstPaintInteraction: 0
   SecondPaintInteraction: 0
   ThirdPaintInteraction: 0
@@ -1706,6 +1709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ecaAnimator: {fileID: 0}
   stopped: 0
+  ecaInTrigger: 0
 --- !u!65 &1095924882
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2544,6 +2548,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ecaAnimator: {fileID: 0}
   stopped: 0
+  ecaInTrigger: 0
 --- !u!65 &1339551945
 BoxCollider:
   m_ObjectHideFlags: 0
