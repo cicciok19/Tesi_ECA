@@ -26,17 +26,19 @@ public class PickStage : ECAActionStage
 	private InteractionObject obj; // The object to pick up
 	private Transform pivot; // The pivot point of the hand targets
 	private Transform holdPoint; // The point where the object will lerp to when picked up
-	private float pickUpTime; // Maximum lerp speed of the object. Decrease this value to give the object more weight
+	private float weightObj; // Maximum lerp speed of the object. Decrease this value to give the object more weight
+	private bool grab;
 
 	private float holdWeight, holdWeightVel;
 	private Vector3 pickUpPosition;
 	private Quaternion pickUpRotation;
 
-    public PickStage(Transform target, float pickUpTime, TypePick typePick) : base()
+    public PickStage(Transform target, float weightObj, TypePick typePick, bool grab = false) : base()
     {
 		this.target = target;
-		this.pickUpTime = pickUpTime;
+		this.weightObj = weightObj;
 		this.typePick = typePick;
+		this.grab = grab;
     }
 
     public override void StartStage()
@@ -108,7 +110,8 @@ public class PickStage : ECAActionStage
 		if (interactionObject != obj) return;
 
 		// Make the object inherit the character's movement
-		obj.transform.parent = interactionSystem.transform;
+		if(!grab)
+			obj.transform.parent = interactionSystem.transform;
 
 		// Make the object kinematic
 		var r = obj.GetComponent<Rigidbody>();
@@ -161,12 +164,17 @@ public class PickStage : ECAActionStage
 		if (holding)
 		{
 			// Smoothing in the hold weight
-			holdWeight = Mathf.SmoothDamp(holdWeight, 1f, ref holdWeightVel, pickUpTime);
+			holdWeight = Mathf.SmoothDamp(holdWeight, 1f, ref holdWeightVel, weightObj);
 
-			// Interpolation
-			obj.transform.position = Vector3.Lerp(pickUpPosition, holdPoint.position, holdWeight);
-			obj.transform.rotation = Quaternion.Lerp(pickUpRotation, holdPoint.rotation, holdWeight);
+
+			if (!grab)
+			{
+				// Interpolation
+				obj.transform.position = Vector3.Lerp(pickUpPosition, holdPoint.position, holdWeight);
+				obj.transform.rotation = Quaternion.Lerp(pickUpRotation, holdPoint.rotation, holdWeight);
+			}
 		}
+
 	}
 
 	// Are we currently holding the object?
