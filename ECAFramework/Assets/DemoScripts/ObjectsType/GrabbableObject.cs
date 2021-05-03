@@ -8,6 +8,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.AI;
 using RootMotion.Demos;
 using RootMotion.FinalIK;
 
@@ -20,6 +22,7 @@ public class GrabbableObject : MonoBehaviour
     protected InteractionObject interactionObj;
     protected AnimationCurve curveOne;
     protected AnimationCurve curveTwo;
+    protected Rigidbody rb;
 
     protected void Start()
     {
@@ -55,12 +58,21 @@ public class GrabbableObject : MonoBehaviour
             interactionObj.multipliers[1].result = InteractionObject.WeightCurve.Type.PositionWeight;
 
             //creating event
+            
             interactionObj.events = new InteractionObject.InteractionEvent[1];
 
             interactionObj.events[0] = new InteractionObject.InteractionEvent();
+            interactionObj.events[0].unityEvent = new UnityEngine.Events.UnityEvent();
+            interactionObj.events[0].animations = new InteractionObject.AnimatorEvent[0];
+            interactionObj.events[0].messages = new InteractionObject.Message[0];
             interactionObj.events[0].time = .5f;
             interactionObj.events[0].pause = true;
-            interactionObj.events[0].pickUp = true;
+            interactionObj.events[0].pickUp = false;
+        }
+
+        if(GetComponent<Rigidbody>() == null)
+        {
+            rb = this.gameObject.AddComponent<Rigidbody>();
         }
     }
 

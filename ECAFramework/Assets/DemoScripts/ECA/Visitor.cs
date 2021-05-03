@@ -78,9 +78,9 @@ protected static int counter = 0;
         base.Start();
     
         idxPaint = 0;
-        SelectDestinations();
+        //SelectDestinations();
         grabbable = GameObject.FindObjectOfType<GrabbableObject>();
-        //PickUp(grabbable);
+        PickUp(grabbable);
     }
 
 

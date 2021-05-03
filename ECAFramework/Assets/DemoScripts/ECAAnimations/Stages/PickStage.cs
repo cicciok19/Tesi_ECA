@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using RootMotion.FinalIK;
 using RootMotion;
 
@@ -64,6 +65,11 @@ public class PickStage : ECAActionStage
 		else
 			interactionSystem = animator.Eca.GetComponent<InteractionSystem>();
 
+		interactionSystem.ik = animator.Eca.GetComponent<FullBodyBipedIK>();
+		Assert.IsNotNull(interactionSystem.ik);
+
+		interactionSystem.Start();
+
 		if (target.GetComponentInChildren<PivotObject>() == null)
 		{
 			Debug.LogError("The target does not have a pivot object.");
@@ -79,13 +85,13 @@ public class PickStage : ECAActionStage
 
 		if (typePick == TypePick.leftHand)
 		{
-			interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
 			effector = FullBodyBipedEffector.LeftHand;
+			interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
 		}
 		else if (typePick == TypePick.rightHand)
 		{
-			interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
 			effector = FullBodyBipedEffector.RightHand;
+			interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
 		}
 		else
 		{
