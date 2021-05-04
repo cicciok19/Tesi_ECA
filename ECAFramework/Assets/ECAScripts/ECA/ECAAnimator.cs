@@ -105,6 +105,15 @@ public class ECAAnimator : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         if (navMeshAgent == null)
             Utility.LogError("No navMesh attached for ECA: " + Eca.Name + ". CREATE ONE");
+
+        NavMeshObstacle navMeshObstacle;
+        if (!TryGetComponent<NavMeshObstacle>(out navMeshObstacle))
+        {
+            navMeshObstacle = gameObject.AddComponent<NavMeshObstacle>();
+            navMeshObstacle.enabled = false;
+            navMeshObstacle.carving = true;
+        }
+            
     }
 
 

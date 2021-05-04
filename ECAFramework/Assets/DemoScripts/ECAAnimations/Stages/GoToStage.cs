@@ -24,11 +24,12 @@ public class GoToStage : ECAActionStage
 {
 
     private Vector3 destination;
-
     protected float stopDistance = 0.5f;
-    protected float range =  0f;
-    protected int areaMask;
-    protected Vector3 randomDestination;
+    public float StopDistance
+    {
+        set { stopDistance = value; }
+        get { return stopDistance; }
+    }
 
 
     public GoToStage(Transform destination)
@@ -36,16 +37,6 @@ public class GoToStage : ECAActionStage
     {
             this.destination = destination.position;
     }
-
-
-    public GoToStage(Transform center, float range, int areaMask = 1)
-    : base()
-    {
-            this.range = range;
-            this.destination = center.position;
-            this.areaMask = areaMask;
-    }
-
 
     public GoToStage(Vector3 destination)
     : base()
@@ -58,58 +49,26 @@ public class GoToStage : ECAActionStage
         EndStage();
     }
 
-
-
-
     public override void StartStage()
     {
         base.StartStage();
-    
-        //use this in order to not modify the destination transform
-        Vector3 x;
-    
-        if (range != 0f)
-            x = RandomDestination(range);
-        else
-            x = destination;
-    
-        animator.navMeshAgent.SetDestination(x);
-    }
+        Vector3 x = destination;
 
+        animator.Eca.ActivateNavMeshAgent();
+
+        //use this in order to not modify the destination transform
+        if (animator.Eca.ecaInTrigger == 0)
+            animator.navMeshAgent.SetDestination(x);
+        else
+            animator.Eca.currentAction.Pause();
+    }
 
     public override void EndStage()
     {
         base.EndStage();
+        //animator.Eca.DisactivateNavMeshAgent();
     }
 
-
-    public float StopDistance
-    {
-        set { stopDistance = value; }
-        get { return stopDistance; }
-    }
-
-
-    public Vector3 RandomDestination(float range)
-    {
-        Vector3 center = destination;
-    
-        for (int i = 0; i < 30; i++)
-        {
-            Vector3 randomPoint = center + UnityEngine.Random.insideUnitSphere * range;
-            NavMeshHit hit;
-    
-            if (NavMesh.SamplePosition(randomPoint, out hit, 2f, 1 << areaMask))
-            {
-                Debug.DrawRay(hit.position, Vector3.up *20, Color.green, 10f);
-                Vector3 x = hit.position;
-                return x;
-            }
-        }
-    
-        //if didn't find a valid position returns ECA actual position
-        return animator.Eca.transform.position;
-    }
 
 
     public override void AbortStage()
@@ -122,11 +81,13 @@ public class GoToStage : ECAActionStage
     {
         base.PauseStage();
         animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
+        //animator.Eca.DisactivateNavMeshAgent();
     }
 
     public override void ResumeStage()
     {
         base.ResumeStage();
+        //animator.Eca.ActivateNavMeshAgent();
         StartStage();
     }
 

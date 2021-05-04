@@ -80,6 +80,7 @@ public class ECA : MonoBehaviour, IIntentHandler
     public event EventHandler Stationary;
 
     public int ecaInTrigger = 0;
+    private readonly object ecaInTrigger_lock = new object();
 
 
     private bool CheckIfMsgIsActive(string msgType)
@@ -347,7 +348,10 @@ public class ECA : MonoBehaviour, IIntentHandler
                 stopped = true;
                 currentAction.Pause();
                 otherEca.Stationary += OtherEcaIsStationary;
-                ecaInTrigger++;
+                lock (ecaInTrigger_lock)
+                {
+                    ecaInTrigger++;
+                }
             }
         }
     }
@@ -356,28 +360,25 @@ public class ECA : MonoBehaviour, IIntentHandler
     {
         Passenger otherEca;
 
-
         if (other.TryGetComponent<Passenger>(out otherEca))
         {
-            ecaInTrigger--;
-            if (ecaInTrigger == 0)
+            lock (ecaInTrigger_lock)
             {
-                stopped = false;
-                otherEca.Stationary -= OtherEcaIsStationary;
-                currentAction.Resume();
+                ecaInTrigger--;
+                if (ecaInTrigger <= 0)
+                {
+                    ecaInTrigger = 0;
+                    stopped = false;
+                    otherEca.Stationary -= OtherEcaIsStationary;
+                    currentAction.Resume();
+                }
             }
         }
     }
 
     protected virtual void PlaceReached(object sender, EventArgs e)
     {
-        gameObject.GetComponent<NavMeshAgent>().enabled = false;
-        var navMeshObstacle = GetComponent<NavMeshObstacle>();
-
-        if (navMeshObstacle == null)
-            navMeshObstacle = gameObject.AddComponent<NavMeshObstacle>();
-
-        navMeshObstacle.carving = true;
+        DisactivateNavMeshAgent();
 
         if (Stationary != null)
             Stationary(this, EventArgs.Empty);
@@ -389,6 +390,18 @@ public class ECA : MonoBehaviour, IIntentHandler
         //mi devo disiscrivere dall'evento dell'altro eca Stationary
         //sender.Stationary -= OtherEcaIsStationary;
         currentAction.Resume();
+    }
+
+    public void ActivateNavMeshAgent()
+    {
+        GetComponent<NavMeshAgent>().enabled = true;
+        GetComponent<NavMeshObstacle>().enabled = false;
+    }
+
+    public void DisactivateNavMeshAgent()
+    {
+        GetComponent<NavMeshAgent>().enabled = false;
+        GetComponent<NavMeshObstacle>().enabled = true;
     }
 
 
