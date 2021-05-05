@@ -64,7 +64,6 @@ public class GoToStage : ECAActionStage
     public override void EndStage()
     {
         base.EndStage();
-        //animator.Eca.DisactivateNavMeshAgent();
     }
 
 
@@ -84,10 +83,8 @@ public class GoToStage : ECAActionStage
     public override void ResumeStage()
     {
         base.ResumeStage();
-        //animator.Eca.ActivateNavMeshAgent();
         StartStage();
     }
-
 
     public override void Update()
     {

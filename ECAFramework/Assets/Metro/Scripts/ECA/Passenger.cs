@@ -46,7 +46,7 @@ public class Passenger : ECA
     private void GoNearTrainDoor()
     {
         doorSelected = station.train.NearestDoor(transform.position);
-        Utility.Log("Going to " + doorSelected);
+        Utility.Log(name + " going to " + doorSelected);
         ECAAction newAction = new ECAAction(this, new GoToStage(Randomize.GetRandomPosition(doorSelected.FrontDoor)));
         newAction.StartAction();
     }
@@ -54,59 +54,48 @@ public class Passenger : ECA
 
     private void EnterTrain()
     {
-        if (doorSelected.Occupied)
+        foreach(var p in station.train.GetPassengerPlaces())
         {
-            doorSelected.DoorFree += OnDoorFree;
-            Utility.Log(this.gameObject + " tried to enter " + doorSelected.gameObject + " but someone is already entering");
+            if (!p.Occupied)
+            {
+                placeSelected = p;
+                p.Occupied = true;
+                break;
+            }
         }
-        else
+
+        List<ECAActionStage> stages = new List<ECAActionStage>();
+
+
+        switch (placeSelected.GetType().ToString())
         {
-            doorSelected.DoorFree -= OnDoorFree;
-            //doorSelected.Occupied = true;
-    
-            foreach(var p in station.train.GetPassengerPlaces())
-            {
-                if (!p.Occupied)
-                {
-                    placeSelected = p;
-                    p.Occupied = true;
-                    break;
-                }
-            }
+            case "SittableObject":
+                var chair = (SittableObject)placeSelected;
+                GoToStage reachChair = new GoToStage(chair.GetDestination());
+                TurnStage turn = new TurnStage(chair.GetSitPoint(), true);
+                SitStage sit = new SitStage(chair);
+                stages.Add(reachChair);
+                stages.Add(turn);
+                stages.Add(sit);
+                break;
 
-            List<ECAActionStage> stages = new List<ECAActionStage>();
+            case "GrabbableObject":
+                var handle = (GrabbableObject)placeSelected;
+                GoToStage reachHandle = new GoToStage(new Vector3(handle.transform.position.x, transform.position.y, handle.transform.position.z));
+                PickStage grab = new PickStage(handle.transform, .3f, TypePick.rightHand, true);
+                stages.Add(reachHandle);
+                stages.Add(grab);
+                break;
+        }
 
+        if(stages.Count != 0)
+        {
+            ECAAction newAction = new ECAAction(this, stages);
+            newAction.StartAction();
 
-            switch (placeSelected.GetType().ToString())
-            {
-                case "SittableObject":
-                    var chair = (SittableObject)placeSelected;
-                    GoToStage reachChair = new GoToStage(chair.GetDestination());
-                    TurnStage turn = new TurnStage(chair.GetSitPoint(), true);
-                    SitStage sit = new SitStage(chair);
-                    stages.Add(reachChair);
-                    stages.Add(turn);
-                    stages.Add(sit);
-                    break;
+            newAction.CompletedAction += PlaceReached;
 
-                case "GrabbableObject":
-                    var handle = (GrabbableObject)placeSelected;
-                    GoToStage reachHandle = new GoToStage(new Vector3(handle.transform.position.x, transform.position.y, handle.transform.position.z));
-                    PickStage grab = new PickStage(handle.transform, .3f, TypePick.RightHand, true);
-                    stages.Add(reachHandle);
-                    stages.Add(grab);
-                    break;
-            }
-
-            if(stages.Count != 0)
-            {
-                ECAAction newAction = new ECAAction(this, stages);
-                doorSelected.DoorFree += Entered;
-                newAction.StartAction();
-
-                Utility.Log(this.gameObject + " is entering the train at door " + doorSelected.gameObject);
-            }
-
+            Utility.Log(this.gameObject + " is entering the train at door " + doorSelected.gameObject);
         }
     }
 
@@ -114,16 +103,6 @@ public class Passenger : ECA
     private void OnDoorFree(object sender, EventArgs e)
     {
         EnterTrain();
-    }
-
-
-    private void Entered(object sender, EventArgs e)
-    {
-        doorSelected.DoorFree -= Entered;
-        doorSelected.Occupied = false;
-        placeSelected.Occupied = true;
-
-        currentAction.CompletedAction += PlaceReached;
     }
 
 
@@ -146,7 +125,7 @@ public class Passenger : ECA
 
     private void OnPlatformReached(object sender, EventArgs e)
     {
-        Utility.Log("" + name);
+        Utility.Log(" " + name);
         currentAction.CompletedAction -= OnPlatformReached;
     }
 

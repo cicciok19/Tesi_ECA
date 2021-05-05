@@ -33,7 +33,7 @@ public class TurnStage : ECAActionStage
         animatorMxM.m_trajectory.StrafeDirection = dir;
 
         //TODO: change this, it's just for debug
-        WaitFor(0.5f);
+        //WaitFor(.5f);
     }
 
     public override void EndStage()
@@ -45,6 +45,8 @@ public class TurnStage : ECAActionStage
     public override void Update()
     {
         base.Update();
+        if (Vector3.Dot(target.forward, animator.Eca.transform.forward) > 0.9f)
+            EndStage();
     }
 
     protected override void OnWaitCompleted()
