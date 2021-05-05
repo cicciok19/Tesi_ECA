@@ -13,7 +13,7 @@ using UnityEngine;
 
 // global declaration end
 
-class SittableObject : MonoBehaviour
+class SittableObject : ECAInteractableObject
 {
     public EventHandler SittableBusy;
     public EventHandler SittableFree;
@@ -23,8 +23,6 @@ class SittableObject : MonoBehaviour
     protected ChairDestination destination;
     protected ChairLeftFoot leftFootTransform;
     protected ChairRightFoot rightFootTransform;
-
-    protected bool occupied = false;
 
 
     protected void Awake()
@@ -87,7 +85,7 @@ class SittableObject : MonoBehaviour
 
 
     [SerializeField]
-    public bool Occupied
+    public override bool Occupied
     { 
       get{
     	return occupied;

@@ -16,7 +16,7 @@ using RootMotion.FinalIK;
 
 // global declaration end
 
-public class GrabbableObject : MonoBehaviour
+public class GrabbableObject : ECAInteractableObject
 {
 
     protected InteractionObject interactionObj;
@@ -26,6 +26,7 @@ public class GrabbableObject : MonoBehaviour
 
     protected void Start()
     {
+        occupied = false;
 
         if (this.gameObject.GetComponent<InteractionObject>() == null)
         {
@@ -93,10 +94,6 @@ public class GrabbableObject : MonoBehaviour
     }
 
 
-
-    protected void Update()
-    {
-    }
 
 
 }

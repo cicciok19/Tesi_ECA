@@ -2,19 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PassengerPlace : MonoBehaviour
+public class ECAInteractableObject : MonoBehaviour
 {
-    private bool occupied;
-
-    public bool Occupied
+    protected bool occupied;
+    public virtual bool Occupied
     {
         get { return occupied; }
         set { occupied = value; }
     }
-
-    void Start()
-    {
-        occupied = false;
-    }
-
 }

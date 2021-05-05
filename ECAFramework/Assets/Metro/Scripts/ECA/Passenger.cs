@@ -20,7 +20,7 @@ public class Passenger : ECA
 
     private Train train;
     private TrainDoor doorSelected =   null;
-    private PassengerPlace placeSelected =   null;
+    private ECAInteractableObject placeSelected =   null;
     private float maxRange;
 
     protected Station station;
@@ -73,14 +73,40 @@ public class Passenger : ECA
                     break;
                 }
             }
-    
-            GoToStage enter = new GoToStage(placeSelected.transform);
-            ECAAction newAction = new ECAAction(this, enter);
 
-            doorSelected.DoorFree += Entered;
-            newAction.StartAction();
-    
-            Utility.Log(this.gameObject + " is entering the train at door " + doorSelected.gameObject);
+            List<ECAActionStage> stages = new List<ECAActionStage>();
+
+
+            switch (placeSelected.GetType().ToString())
+            {
+                case "SittableObejct":
+                    var chair = (SittableObject)placeSelected;
+                    GoToStage reachChair = new GoToStage(chair.GetDestination());
+                    TurnStage turn = new TurnStage(chair.GetSitPoint(), true);
+                    SitStage sit = new SitStage(chair);
+                    stages.Add(reachChair);
+                    stages.Add(turn);
+                    stages.Add(sit);
+                    break;
+
+                case "GrabbableObject":
+                    var handle = (GrabbableObject)placeSelected;
+                    GoToStage reachHandle = new GoToStage(new Vector3(handle.transform.position.x, transform.position.y, handle.transform.position.z));
+                    PickStage grab = new PickStage(handle.transform, .3f, TypePick.rightHand, true);
+                    stages.Add(reachHandle);
+                    stages.Add(grab);
+                    break;
+            }
+
+            if(stages.Count != 0)
+            {
+                ECAAction newAction = new ECAAction(this, stages);
+                doorSelected.DoorFree += Entered;
+                newAction.StartAction();
+
+                Utility.Log(this.gameObject + " is entering the train at door " + doorSelected.gameObject);
+            }
+
         }
     }
 
