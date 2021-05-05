@@ -85,6 +85,8 @@ public class PickStage : ECAActionStage
 		interactionSystem.OnInteractionPause += OnPause;
 		interactionSystem.OnInteractionResume += OnDrop;
 
+		interactionSystem.fadeInTime = .5f;
+
 		if (typePick == TypePick.leftHand)
 		{
 			effector = FullBodyBipedEffector.LeftHand;

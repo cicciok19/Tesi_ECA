@@ -165,7 +165,7 @@ namespace MxM
             {
                 if(m_applyRootSpeedToNavAgent)
                 {
-                    Vector3 v = m_navAgent.velocity * Time.deltaTime;
+                    Vector3 v = new Vector3(0, 0, 0);
                     Vector3 animatorDelta = p_animator.deltaPosition;
 
                     float rootSpeed = 0f;

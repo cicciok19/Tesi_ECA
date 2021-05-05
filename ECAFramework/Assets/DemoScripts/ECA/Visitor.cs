@@ -135,7 +135,7 @@ protected static int counter = 0;
 
         List<ECAActionStage> stages = new List<ECAActionStage>();
         GoToStage reachGrab = new GoToStage(grabbable.transform);
-        PickStage pick = new PickStage(grabbable.transform, .3f, TypePick.rightHand, true);
+        PickStage pick = new PickStage(grabbable.transform, .3f, TypePick.rightHand);
 
         stages.Add(reachGrab);
         stages.Add(pick);

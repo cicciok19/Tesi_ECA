@@ -80,8 +80,6 @@ public class ECA : MonoBehaviour, IIntentHandler
     public event EventHandler Stationary;
 
     public int ecaInTrigger = 0;
-    private readonly object ecaInTrigger_lock = new object();
-
 
     private bool CheckIfMsgIsActive(string msgType)
     {
@@ -348,10 +346,7 @@ public class ECA : MonoBehaviour, IIntentHandler
                 stopped = true;
                 currentAction.Pause();
                 otherEca.Stationary += OtherEcaIsStationary;
-                lock (ecaInTrigger_lock)
-                {
-                    ecaInTrigger++;
-                }
+                ecaInTrigger++;
             }
         }
     }
@@ -362,23 +357,20 @@ public class ECA : MonoBehaviour, IIntentHandler
 
         if (other.TryGetComponent<Passenger>(out otherEca))
         {
-            lock (ecaInTrigger_lock)
+            ecaInTrigger--;
+            if (ecaInTrigger <= 0)
             {
-                ecaInTrigger--;
-                if (ecaInTrigger <= 0)
-                {
-                    ecaInTrigger = 0;
-                    stopped = false;
-                    otherEca.Stationary -= OtherEcaIsStationary;
-                    currentAction.Resume();
-                }
+                ecaInTrigger = 0;
+                stopped = false;
+                otherEca.Stationary -= OtherEcaIsStationary;
+                currentAction.Resume();
             }
         }
     }
 
     protected virtual void PlaceReached(object sender, EventArgs e)
     {
-        DisactivateNavMeshAgent();
+        stopped = true;
 
         if (Stationary != null)
             Stationary(this, EventArgs.Empty);
@@ -391,19 +383,5 @@ public class ECA : MonoBehaviour, IIntentHandler
         //sender.Stationary -= OtherEcaIsStationary;
         currentAction.Resume();
     }
-
-    public void ActivateNavMeshAgent()
-    {
-        GetComponent<NavMeshAgent>().enabled = true;
-        GetComponent<NavMeshObstacle>().enabled = false;
-    }
-
-    public void DisactivateNavMeshAgent()
-    {
-        GetComponent<NavMeshAgent>().enabled = false;
-        GetComponent<NavMeshObstacle>().enabled = true;
-    }
-
-
 
 }

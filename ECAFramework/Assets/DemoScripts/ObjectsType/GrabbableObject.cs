@@ -73,6 +73,7 @@ public class GrabbableObject : MonoBehaviour
         if(GetComponent<Rigidbody>() == null)
         {
             rb = this.gameObject.AddComponent<Rigidbody>();
+            rb.useGravity = false;
         }
     }
 

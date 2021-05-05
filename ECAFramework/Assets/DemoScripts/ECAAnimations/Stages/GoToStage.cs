@@ -54,8 +54,6 @@ public class GoToStage : ECAActionStage
         base.StartStage();
         Vector3 x = destination;
 
-        animator.Eca.ActivateNavMeshAgent();
-
         //use this in order to not modify the destination transform
         if (animator.Eca.ecaInTrigger == 0)
             animator.navMeshAgent.SetDestination(x);
@@ -81,7 +79,6 @@ public class GoToStage : ECAActionStage
     {
         base.PauseStage();
         animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
-        //animator.Eca.DisactivateNavMeshAgent();
     }
 
     public override void ResumeStage()
