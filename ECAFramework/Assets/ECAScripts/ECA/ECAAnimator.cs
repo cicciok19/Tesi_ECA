@@ -46,6 +46,8 @@ public class ECAAnimator : MonoBehaviour
     internal NavMeshAgent navMeshAgent;
     internal ECAAction CurrentAction;
 
+    public string currentActionName;
+
     public GameObject Player;
     public Animator mecanimAnimator;
     public Text ECAText;
