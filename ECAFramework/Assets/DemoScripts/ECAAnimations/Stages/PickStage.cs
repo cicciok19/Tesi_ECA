@@ -8,9 +8,10 @@ using RootMotion;
 
 public enum TypePick
 {
-	leftHand,
-	rightHand,
-	bothHands
+	LeftHand,
+	RightHand,
+	BothHands,
+    Nothing
 }
 
 /// <summary>
@@ -18,12 +19,12 @@ public enum TypePick
 /// </summary>
 public class PickStage : ECAActionStage
 {
-	private Transform target;
-	private TypePick typePick;
-	private FullBodyBipedEffector effector;
+	internal Transform target;
+	internal TypePick typePick = TypePick.Nothing;
+	internal FullBodyBipedEffector effector;
 
-	private InteractionSystem interactionSystem; // The InteractionSystem of the character
-	private InteractionObject obj; // The object to pick up
+	internal InteractionSystem interactionSystem; // The InteractionSystem of the character
+	internal InteractionObject obj; // The object to pick up
 	private Transform pivot; // The pivot point of the hand targets
 	private Transform holdPoint; // The point where the object will lerp to when picked up
 	private float weightObj; // Maximum lerp speed of the object. Decrease this value to give the object more weight
@@ -87,22 +88,26 @@ public class PickStage : ECAActionStage
 
 		interactionSystem.fadeInTime = .5f;
 
-		if (typePick == TypePick.leftHand)
+		if (typePick == TypePick.LeftHand)
 		{
 			effector = FullBodyBipedEffector.LeftHand;
 			interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
 		}
-		else if (typePick == TypePick.rightHand)
+		else if (typePick == TypePick.RightHand)
 		{
 			effector = FullBodyBipedEffector.RightHand;
 			interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
 		}
-		else
+		else if (typePick == TypePick.BothHands)
 		{
 			effector = FullBodyBipedEffector.LeftHand;
 			interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
 			interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
 		}
+        else if(typePick == TypePick.Nothing)
+        {
+            Debug.LogError("Select a TypePick!");
+        }
 	}
 
 	// Called by the InteractionSystem when an interaction is paused (on trigger)
@@ -125,7 +130,8 @@ public class PickStage : ECAActionStage
 		holdWeight = 0f;
 		holdWeightVel = 0f;
 
-		EndStage();
+		if (grab)
+			EndStage();
 	}
 
     // Called by the InteractionSystem when an interaction starts
@@ -169,6 +175,9 @@ public class PickStage : ECAActionStage
 				obj.transform.position = Vector3.Lerp(pickUpPosition, holdPoint.position, holdWeight);
 				obj.transform.rotation = Quaternion.Lerp(pickUpRotation, holdPoint.rotation, holdWeight);
 			}
+
+			if (holdPoint.position.magnitude - obj.transform.position.magnitude <= .05f && !grab)
+				EndStage();
 		}
 
 	}

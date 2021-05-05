@@ -135,10 +135,12 @@ protected static int counter = 0;
 
         List<ECAActionStage> stages = new List<ECAActionStage>();
         GoToStage reachGrab = new GoToStage(grabbable.transform);
-        PickStage pick = new PickStage(grabbable.transform, .3f, TypePick.rightHand);
+        PickStage pick = new PickStage(grabbable.transform, .3f, TypePick.RightHand);
+        DropStage drop = new DropStage(pick, grabbable.transform);
 
         stages.Add(reachGrab);
         stages.Add(pick);
+        stages.Add(drop);
         ECAAction newAction = new ECAAction(this, stages);
         newAction.StartAction();
     }

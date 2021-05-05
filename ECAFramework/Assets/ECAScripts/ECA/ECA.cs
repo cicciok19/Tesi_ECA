@@ -79,6 +79,8 @@ public class ECA : MonoBehaviour, IIntentHandler
     public bool stopped = false;
     public event EventHandler Stationary;
 
+    public TypePick typePick;
+
     public int ecaInTrigger = 0;
 
     private bool CheckIfMsgIsActive(string msgType)
