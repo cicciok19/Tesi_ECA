@@ -45,12 +45,12 @@ public class PickStage : ECAActionStage
 	{
 		base.StartStage();
 
-		if (animator.Eca.GetComponentInChildren<HoldPoint>() == null)
+		if (animator.Eca.GetComponentInChildren<HoldPoint>() == null  && !grab)
 		{
 			Debug.LogError("The target does not have the hold point.");
 			return;
 		}
-		else
+		else if (!grab)
 			holdPoint = animator.Eca.GetComponentInChildren<HoldPoint>().transform;
 
 		if (target.GetComponent<InteractionObject>() == null)
@@ -83,7 +83,7 @@ public class PickStage : ECAActionStage
 
 		interactionSystem.OnInteractionStart += OnStart;
 		interactionSystem.OnInteractionPause += OnPause;
-		interactionSystem.OnInteractionResume += OnDrop;
+		//interactionSystem.OnInteractionResume += OnDrop;
 
 		interactionSystem.fadeInTime = .5f;
 
@@ -125,15 +125,8 @@ public class PickStage : ECAActionStage
 		holdWeight = 0f;
 		holdWeightVel = 0f;
 
-		WaitFor(5f);
-	}
-
-    protected override void OnWaitCompleted()
-    {
-        base.OnWaitCompleted();
-
 		EndStage();
-    }
+	}
 
     // Called by the InteractionSystem when an interaction starts
     private void OnStart(FullBodyBipedEffector effectorType, InteractionObject interactionObject)
@@ -145,7 +138,8 @@ public class PickStage : ECAActionStage
 		RotatePivot();
 
 		// Rotate the hold point so it matches the current rotation of the object
-		holdPoint.rotation = obj.transform.rotation;
+		if(!grab)
+			holdPoint.rotation = obj.transform.rotation;
 	}
 
 	// Called by the InteractionSystem when an interaction is resumed from being paused
@@ -211,10 +205,10 @@ public class PickStage : ECAActionStage
         base.EndStage();
 
 		//drop obj
-		interactionSystem.ResumeAll();
+		//interactionSystem.ResumeAll();
 
 		interactionSystem.OnInteractionStart -= OnStart;
 		interactionSystem.OnInteractionPause -= OnPause;
-		interactionSystem.OnInteractionResume -= OnDrop;
+		//interactionSystem.OnInteractionResume -= OnDrop;
 	}
 }

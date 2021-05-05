@@ -79,7 +79,7 @@ public class Passenger : ECA
 
             switch (placeSelected.GetType().ToString())
             {
-                case "SittableObejct":
+                case "SittableObject":
                     var chair = (SittableObject)placeSelected;
                     GoToStage reachChair = new GoToStage(chair.GetDestination());
                     TurnStage turn = new TurnStage(chair.GetSitPoint(), true);
