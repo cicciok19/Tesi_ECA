@@ -386,4 +386,14 @@ public class ECA : MonoBehaviour, IIntentHandler
         currentAction.Resume();
     }
 
+    public void DisactivateNavMeshAgent()
+    {
+        GetComponent<NavMeshAgent>().enabled = false;
+    }
+
+    public void ActivateNavMeshAgent()
+    {
+        GetComponent<NavMeshAgent>().enabled = true;
+    }
+
 }

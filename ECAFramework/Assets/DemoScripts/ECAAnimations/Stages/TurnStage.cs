@@ -8,6 +8,7 @@ public class TurnStage : ECAActionStage
     private Transform target;
     private bool turnToSit;
     private ECAAnimatorMxM animatorMxM;
+    private Vector3 dir;
 
     public TurnStage(Transform target, bool turnToSit = false) : base()
     {
@@ -22,12 +23,16 @@ public class TurnStage : ECAActionStage
     {
         base.StartStage();
         animatorMxM = (ECAAnimatorMxM)animator;
-        Vector3 dir;
 
         if (turnToSit)
             dir = target.forward;
         else
-            dir = (target.position - animatorMxM.Eca.transform.position).normalized;
+        {
+            var targetOnPlane = new Vector3();
+            targetOnPlane = target.position;
+            targetOnPlane.y = animator.Eca.transform.position.y;
+            dir = (targetOnPlane - animatorMxM.Eca.transform.position).normalized;
+        }
 
         animatorMxM.m_trajectory.FaceDirectiononIdle = true;
         animatorMxM.m_trajectory.StrafeDirection = dir;
@@ -45,13 +50,7 @@ public class TurnStage : ECAActionStage
     public override void Update()
     {
         base.Update();
-        if (Vector3.Dot(target.forward, animator.Eca.transform.forward) > 0.9f)
+        if (Vector3.Dot(dir, animator.Eca.transform.forward) > 0.9f)
             EndStage();
-    }
-
-    protected override void OnWaitCompleted()
-    {
-        base.OnWaitCompleted();
-        EndStage();
     }
 }
