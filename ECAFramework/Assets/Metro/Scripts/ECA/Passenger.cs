@@ -47,7 +47,13 @@ public class Passenger : ECA
     {
         doorSelected = station.train.NearestDoor(transform.position);
         Utility.Log(name + " going to " + doorSelected);
-        ECAAction newAction = new ECAAction(this, new GoToStage(Randomize.GetRandomPosition(doorSelected.FrontDoor)));
+
+        List<ECAActionStage> stages = new List<ECAActionStage>();
+        GoToStage goNear = new GoToStage(Randomize.GetRandomPosition(doorSelected.FrontDoor));
+        TurnStage turn = new TurnStage(doorSelected.transform);
+        stages.Add(goNear);
+        stages.Add(turn);
+        ECAAction newAction = new ECAAction(this, stages);
         newAction.StartAction();
     }
 
@@ -82,7 +88,7 @@ public class Passenger : ECA
             case "GrabbableObject":
                 var handle = (GrabbableObject)placeSelected;
                 GoToStage reachHandle = new GoToStage(new Vector3(handle.transform.position.x, transform.position.y, handle.transform.position.z));
-                PickStage grab = new PickStage(handle.transform, .3f, TypePick.rightHand, true);
+                PickStage grab = new PickStage(handle.transform, .3f, TypePick.RightHand, true);
                 stages.Add(reachHandle);
                 stages.Add(grab);
                 break;

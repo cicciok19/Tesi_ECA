@@ -52,18 +52,17 @@ public class GoToStage : ECAActionStage
     public override void StartStage()
     {
         base.StartStage();
+        //use this in order to not modify the destination transform
         Vector3 x = destination;
 
-        //use this in order to not modify the destination transform
-        if (animator.Eca.ecaInTrigger == 0)
-            animator.navMeshAgent.SetDestination(x);
-        else
-            animator.Eca.currentAction.Pause();
+        animator.navMeshAgent.SetDestination(x);
+        animator.Eca.ecaInTrigger = 0;
     }
 
     public override void EndStage()
     {
         base.EndStage();
+        animator.Eca.stopped = true;
     }
 
 
