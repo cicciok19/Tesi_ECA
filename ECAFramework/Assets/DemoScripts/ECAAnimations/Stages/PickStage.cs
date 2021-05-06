@@ -34,13 +34,13 @@ public class PickStage : ECAActionStage
 	private Vector3 pickUpPosition;
 	private Quaternion pickUpRotation;
 
-    public PickStage(Transform target, float weightObj, TypePick typePick, bool grab = false) : base()
+    public PickStage(Transform target, float weightObj,  bool grab = false, TypePick typePick = TypePick.Nothing) : base()
     {
 		this.target = target;
 		this.weightObj = weightObj;
-		this.typePick = typePick;
 		this.grab = grab;
-    }
+		this.typePick = typePick;
+	}
 
     public override void StartStage()
 	{
@@ -87,6 +87,19 @@ public class PickStage : ECAActionStage
 		//interactionSystem.OnInteractionResume += OnDrop;
 
 		interactionSystem.fadeInTime = .5f;
+
+		if(typePick == TypePick.Nothing)
+        {
+			Transform rightHand = animator.mecanimAnimator.GetBoneTransform(HumanBodyBones.RightHand);
+			Transform leftHand = animator.mecanimAnimator.GetBoneTransform(HumanBodyBones.LeftHand);
+
+			if (Vector3.Distance(rightHand.position, obj.transform.position) < Vector3.Distance(leftHand.position, obj.transform.position))
+				typePick = TypePick.RightHand;
+			else
+				typePick = TypePick.LeftHand;
+
+			Debug.Log(animator.Eca.name + " ha scelto " + typePick);
+		}
 
 		if (typePick == TypePick.LeftHand)
 		{

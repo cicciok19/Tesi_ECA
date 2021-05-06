@@ -9,8 +9,6 @@ using System;
 public class DropStage : ECAActionStage
 {
     private PickStage pickStage;
-    private Transform target;
-    private TypePick typePick;
     private InteractionSystem interactionSystem;
     private InteractionObject obj;
 
@@ -35,8 +33,6 @@ public class DropStage : ECAActionStage
     public DropStage(PickStage pickStage) : base()
     {
         this.pickStage = pickStage;
-        this.target = pickStage.target;
-        this.typePick = pickStage.typePick;
         this.interactionSystem = pickStage.interactionSystem;
         this.obj = pickStage.obj;
     }
@@ -45,8 +41,6 @@ public class DropStage : ECAActionStage
     {
         base.StartStage();
 
-        this.target = pickStage.target;
-        this.typePick = pickStage.typePick;
         this.interactionSystem = pickStage.interactionSystem;
         this.obj = pickStage.obj;
 
@@ -77,7 +71,7 @@ public class DropStage : ECAActionStage
             obj.transform.rotation = Quaternion.Lerp(objInitiaRotation, pickDownRotation, holdWeight);
         }
 
-        if(obj.transform.position == pickDownPosition)
+        if (obj.transform.position == pickDownPosition)
         {
             dropping = false;
             EndStage();
