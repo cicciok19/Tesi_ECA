@@ -31,9 +31,11 @@ protected static int counter = 0;
     private int idxPaint;
 
     protected List<Painting> paintings =  new List<Painting>();
+    protected List<LandingAreaCircular> landingAreas = new List<LandingAreaCircular>();
     protected ECAAction action =   null;
 
     protected GrabbableObject grabbable;
+    protected LandingAreaCircular landing;
 
 
     private void OnEndPaintVisit(object sender, EventArgs e)
@@ -79,10 +81,11 @@ protected static int counter = 0;
     
         idxPaint = 0;
         //SelectDestinations();
-        grabbable = GameObject.FindObjectOfType<GrabbableObject>();
-        PickUp(grabbable);
+        //grabbable = GameObject.FindObjectOfType<GrabbableObject>();
+        //PickUp(grabbable);
+        Landing();
+        
     }
-
 
 
     protected override void CreateAnimator()
@@ -143,6 +146,49 @@ protected static int counter = 0;
         //stages.Add(drop);
         ECAAction newAction = new ECAAction(this, stages);
         newAction.StartAction();
+    }
+
+
+    protected void Landing()
+    {
+        landingAreas = FindObjectsOfType<LandingAreaCircular>().ToList();
+        if(landing == null)
+            landing = new LandingAreaCircular();
+
+        foreach (LandingAreaCircular landingAreaC in landingAreas)
+        {
+            if (landingAreaC.transform.childCount == 0)
+            {
+                landing = landingAreaC;
+            }
+        }
+
+        GoToLanding(landing);
+    }
+
+    public void GoToLanding(LandingAreaCircular landingArea)
+    {
+        landing = landingArea;
+
+        List<ECAActionStage> stages = new List<ECAActionStage>();
+            
+        Vector3 landingPosition_1 = Randomize.GetRandomPositionRound(landingArea.gameObject, landingArea.innerRadius, landingArea.radius);
+        GoToStage goTo_1 = new GoToStage(landingPosition_1);
+
+        landingArea.SpaceCompleted += OnSpaceCompleted;
+
+        stages.Add(goTo_1);
+
+        ECAAction newAction = new ECAAction(this, stages);
+        newAction.StartAction();
+        
+    }
+
+    public void OnSpaceCompleted(object sender, EventArgs eventArgs)
+    {
+        currentAction.Abort();
+        if (landing.transform.parent.GetComponent<LandingAreaCircular>() != null)
+            GoToLanding(landing.transform.parent.GetComponent<LandingAreaCircular>());
     }
 
     public void GoToPainting(Painting painting)
@@ -213,6 +259,8 @@ protected static int counter = 0;
             paintings[idxPaint].chair.SittableBusy -= OnChairBusy;
         if(handlerName == "SittableFree")
             paintings[idxPaint].chair.SittableFree -= OnChairFree;
+        if (handlerName == "SpaceCompleted")
+            landing.SpaceCompleted -= OnSpaceCompleted;
     }
 
 

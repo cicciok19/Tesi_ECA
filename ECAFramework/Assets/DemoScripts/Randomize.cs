@@ -41,7 +41,6 @@ public class Randomize : MonoBehaviour
         return Vector3.zero;
     }
 
-
     public static Transform GetRandomPosition(GameObject gameObject, float extent = 1.0f, int x = 1, int y = 1, int z = 1)
     {
         Renderer renderer = gameObject.GetComponent<Renderer>();
@@ -61,6 +60,44 @@ public class Randomize : MonoBehaviour
         GameObject gop = Instantiate(gameObject);
         gop.transform.localPosition = randomShift;
         return gop.transform;
+    }
+
+    public static Vector3 GetRandomPositionRound(GameObject gameObject, float minDistance, float maxDistance)
+    {
+        Renderer renderer = gameObject.GetComponent<Renderer>();
+        Assert.IsNotNull(renderer);
+
+        Vector3 center = renderer.bounds.center;
+        Vector2 position;
+
+        if(minDistance == 0)
+            position = Random.insideUnitCircle * maxDistance;
+        else
+        {
+            float wallRadius = (maxDistance - minDistance) * .5f;
+            float ringRadius = wallRadius + minDistance;
+            float rndAngle = Random.value * 6.28f;
+
+            float cX = Mathf.Sin(rndAngle);
+            float cZ = Mathf.Cos(rndAngle);
+
+            Vector2 ringPos = new Vector2(cX, cZ);
+            ringPos *= ringRadius;
+
+            Vector2 sPos = Random.insideUnitCircle * wallRadius;
+
+            position = ringPos + sPos;
+        }
+
+        Vector3 randomShift = new Vector3(
+            center.x + position.x,
+            center.y,
+            center.z + position.y
+            );
+
+        Debug.DrawRay(randomShift, Vector3.up, Color.green, 15f);
+
+        return randomShift;
     }
 
 }
