@@ -104,29 +104,22 @@ public class PickStage : ECAActionStage
 		{
 			effector = FullBodyBipedEffector.LeftHand;
 			interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
-			ActivateLayer(3);
 		}
 		else if (typePick == HandSide.RightHand)
 		{
 			effector = FullBodyBipedEffector.RightHand;
 			interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
-			ActivateLayer(4);
 		}
 		else if (typePick == HandSide.BothHands)
 		{
 			effector = FullBodyBipedEffector.LeftHand;
 			interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
 			interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
-			ActivateLayer(3);
-			ActivateLayer(4);
 		}
         else if(typePick == HandSide.Nothing)
         {
             Debug.LogError("Select a TypePick!");
         }
-
-		ActivateBodyParts();
-		animatorMxM.MxM_BlendController(1f, true);
 	}
 
 	// Called by the InteractionSystem when an interaction is paused (on trigger)
@@ -163,8 +156,8 @@ public class PickStage : ECAActionStage
 		RotatePivot();
 
 		// Rotate the hold point so it matches the current rotation of the object
-		/*if(!grab)
-			holdPoint.rotation = new Quaternion(obj.transform.rotation.x, obj.transform.rotation.y, obj.transform.rotation.z, obj.transform.rotation.w);*/
+		if(!grab)
+			holdPoint.rotation = new Quaternion(obj.transform.rotation.x, obj.transform.rotation.y, obj.transform.rotation.z, obj.transform.rotation.w);
 	}
 
 	public override void LateUpdate()
