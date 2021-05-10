@@ -81,43 +81,7 @@ public class DropStage : ECAActionStage
         {
             dropping = false;
 
-            /*animatorMxM.MxM_BlendController(1f, false);
-
-            DisactivateBodyParts();
-
-            if (typePick == TypePick.LeftHand)
-            {
-                DeactivateLayer(3);
-            }
-            else if (typePick == TypePick.RightHand)
-            {
-                DeactivateLayer(4);
-            }
-            else if (typePick == TypePick.BothHands)
-            {
-                DeactivateLayer(3);
-                DeactivateLayer(4);
-            }*/
-
-
             EndStage();
         }
     }
-
-    /*
-    protected override void DisactivateBodyParts()
-    {
-        if (typePick == TypePick.LeftHand)
-            animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftFingers, false);
-        else if (typePick == TypePick.RightHand)
-            animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightFingers, false);
-        else if (typePick == TypePick.BothHands)
-        {
-            animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftFingers, false);
-            animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightFingers, false);
-        }
-
-        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.Root, false);
-    }
-    */
 }
