@@ -35,6 +35,13 @@ public class LookAtStage : ECAActionStage
         	counter = (int)Mathf.Round(UnityEngine.Random.Range(2f ,5f));
     }
 
+    public LookAtStage(LookableObject lookableObject, int c)
+    : base()
+    {
+        this.lookableObject = lookableObject;
+        counter = c;
+    }
+
 
 
 

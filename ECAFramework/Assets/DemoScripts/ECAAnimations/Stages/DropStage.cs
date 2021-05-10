@@ -11,7 +11,7 @@ public class DropStage : ECAActionStage
     private PickStage pickStage;
     private InteractionSystem interactionSystem;
     private InteractionObject obj;
-    private TypePick typePick;
+    private HandSide typePick;
 
     private ECAAnimatorMxM animatorMxM;
 
@@ -84,15 +84,15 @@ public class DropStage : ECAActionStage
 
             DisactivateBodyParts();
 
-            if (typePick == TypePick.LeftHand)
+            if (typePick == HandSide.LeftHand)
             {
                 DeactivateLayer(3);
             }
-            else if (typePick == TypePick.RightHand)
+            else if (typePick == HandSide.RightHand)
             {
                 DeactivateLayer(4);
             }
-            else if (typePick == TypePick.BothHands)
+            else if (typePick == HandSide.BothHands)
             {
                 DeactivateLayer(3);
                 DeactivateLayer(4);
@@ -105,11 +105,11 @@ public class DropStage : ECAActionStage
 
     protected override void DisactivateBodyParts()
     {
-        if (typePick == TypePick.LeftHand)
+        if (typePick == HandSide.LeftHand)
             animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftFingers, false);
-        else if (typePick == TypePick.RightHand)
+        else if (typePick == HandSide.RightHand)
             animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightFingers, false);
-        else if (typePick == TypePick.BothHands)
+        else if (typePick == HandSide.BothHands)
         {
             animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftFingers, false);
             animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightFingers, false);

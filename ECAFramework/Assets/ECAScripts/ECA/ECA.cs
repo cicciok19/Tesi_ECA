@@ -79,7 +79,7 @@ public class ECA : MonoBehaviour, IIntentHandler
     public bool stopped = false;
     public event EventHandler Stationary;
 
-    public TypePick typePick;
+    public HandSide typePick;
 
     public int ecaInTrigger = 0;
 
@@ -343,7 +343,7 @@ public class ECA : MonoBehaviour, IIntentHandler
 
         if (other.TryGetComponent<Passenger>(out otherEca))
         {
-            if (!otherEca.stopped)
+            if (!otherEca.stopped || otherEca.inQueue)
             {
                 stopped = true;
                 currentAction.Pause();

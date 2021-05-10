@@ -55,23 +55,6 @@ public class LookableObject : MonoBehaviour
         return gop.transform;
     }
 
-
-    public Transform GetRandomLookPosition(float extent = 1.0f)
-    {
-        Vector3 randomShift = new Vector3(
-            center.x + bounds.x * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f),
-            center.y + bounds.y * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f),
-            center.z + bounds.z * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f)
-        );
-    
-        //lookPosition.transform.position = randomShift;
-        GameObject gop = Instantiate(lookPosition);
-        //gop.transform.parent = transform;
-        gop.transform.localPosition = randomShift;
-        return gop.transform;
-    }
-
-
     public void OnAimCompleted(object sender, EventArgs args)
     {
         IKSetter ikManager = (IKSetter)sender;

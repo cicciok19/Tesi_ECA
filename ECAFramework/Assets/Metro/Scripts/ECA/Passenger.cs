@@ -23,8 +23,46 @@ public class Passenger : ECA
     private ECAInteractableObject placeSelected =   null;
     private float maxRange;
 
-    protected Station station;
+    private BuyTicket buyTicket;
 
+    public bool inQueue;
+    public bool ticketTaken;
+    public int ecaTurn;
+
+    public Station station;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        station = GameObject.FindObjectOfType<Station>();
+        station.TrainArriving += OnTrainArriving;
+
+        train = station.train;
+        inQueue = false;
+        ticketTaken = false;
+
+        buyTicket = new BuyTicket(this);
+        buyTicket.TicketBought += OnTicketBought;
+
+        //max distance from the destination (es. door when waiting, binary's empty)
+        //maxRange = 5f;
+        maxRange = 10f;
+
+
+        //GoToPlatform();
+        buyTicket.GoToVendingMachine();
+    }
+
+    protected override void CreateAnimator()
+    {
+        ecaAnimator = GetComponent<ECAAnimatorMxM>();
+        if (ecaAnimator == null)
+            ecaAnimator = gameObject.AddComponent<ECAAnimatorMxM>();
+        Assert.IsNotNull(ecaAnimator);
+
+        ecaAnimator.Init();
+    }
 
     private void GoToPlatform()
     {
@@ -108,6 +146,7 @@ public class Passenger : ECA
     }
 
 
+
     private void OnDoorFree(object sender, EventArgs e)
     {
         EnterTrain();
@@ -137,35 +176,8 @@ public class Passenger : ECA
         currentAction.CompletedAction -= OnPlatformReached;
     }
 
-
-
-
-    protected override void Start()
+    private void OnTicketBought(object sender, EventArgs e)
     {
-        base.Start();
-    
-        station = GameObject.FindObjectOfType<Station>();
-        station.TrainArriving += OnTrainArriving;
-    
-        train = station.train;
-    
-        //max distance from the destination (es. door when waiting, binary's empty)
-        //maxRange = 5f;
-        maxRange = 10f;
-
-        GoToPlatform();
+        ticketTaken = true;
     }
-
-    protected override void CreateAnimator()
-    {
-        ecaAnimator = GetComponent<ECAAnimatorMxM>();
-        if (ecaAnimator == null)
-            ecaAnimator = gameObject.AddComponent<ECAAnimatorMxM>();
-        Assert.IsNotNull(ecaAnimator);
-
-        ecaAnimator.Init();
-    }
-
-
-
 }

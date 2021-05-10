@@ -20,7 +20,7 @@ class SittableObject : ECAInteractableObject
 
     protected ChairSitPoint sitPoint;
     protected ChairRightFoot rightFootPosition;
-    protected ChairDestination destination;
+    protected Destination destination;
     protected ChairLeftFoot leftFootTransform;
     protected ChairRightFoot rightFootTransform;
 
@@ -30,7 +30,7 @@ class SittableObject : ECAInteractableObject
         sitPoint = GetComponentInChildren<ChairSitPoint>();
         leftFootTransform = GetComponentInChildren<ChairLeftFoot>();
         rightFootTransform = GetComponentInChildren<ChairRightFoot>();
-        destination = GetComponentInChildren<ChairDestination>();
+        destination = GetComponentInChildren<Destination>();
     
         SetCorrectSitDirection();
     }
