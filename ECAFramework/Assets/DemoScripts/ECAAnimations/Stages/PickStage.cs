@@ -130,9 +130,6 @@ public class PickStage : ECAActionStage
         {
             Debug.LogError("Select a TypePick!");
         }
-
-		ActivateBodyParts();
-		animatorMxM.MxM_BlendController(1f, true);
 	}
 
 	// Called by the InteractionSystem when an interaction is paused (on trigger)
@@ -194,6 +191,7 @@ public class PickStage : ECAActionStage
 
 	}
 
+	/*
     protected override void ActivateBodyParts()
     {
 		if (typePick == TypePick.LeftHand)
@@ -230,6 +228,7 @@ public class PickStage : ECAActionStage
     {
 		base.DeactivateLayer(layerIndex);
     }
+	*/
 
     // Are we currently holding the object?
     private bool holding

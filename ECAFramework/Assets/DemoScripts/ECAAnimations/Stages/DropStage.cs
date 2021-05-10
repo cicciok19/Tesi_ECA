@@ -80,7 +80,8 @@ public class DropStage : ECAActionStage
         if (obj.transform.position == pickDownPosition)
         {
             dropping = false;
-            animatorMxM.MxM_BlendController(1f, false);
+
+            /*animatorMxM.MxM_BlendController(1f, false);
 
             DisactivateBodyParts();
 
@@ -96,13 +97,14 @@ public class DropStage : ECAActionStage
             {
                 DeactivateLayer(3);
                 DeactivateLayer(4);
-            }
+            }*/
 
 
             EndStage();
         }
     }
 
+    /*
     protected override void DisactivateBodyParts()
     {
         if (typePick == TypePick.LeftHand)
@@ -117,4 +119,5 @@ public class DropStage : ECAActionStage
 
         animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.Root, false);
     }
+    */
 }
