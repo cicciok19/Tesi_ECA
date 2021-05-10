@@ -65,13 +65,15 @@ public abstract class ECAActionStage
     }
 
 
-    protected virtual void ActivateLayer(int layerIndex, float weightLayer)
+    protected virtual void ActivateLayer(int layerIndex)
     {
+        animator.SetWeightLayerMecanicAnimator(layerIndex, 1);
     }
 
 
-    protected virtual void DeactivateLayer(int layerIndex, float weightLayer)
+    protected virtual void DeactivateLayer(int layerIndex)
     {
+        animator.SetWeightLayerMecanicAnimator(layerIndex, 0);
     }
 
 

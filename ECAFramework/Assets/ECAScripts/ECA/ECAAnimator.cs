@@ -341,6 +341,36 @@ public class ECAAnimator : MonoBehaviour
         navMeshAgent.enabled = enable;
     }
 
+    public void SetWeightLayerMecanicAnimator(int idLayer, float weightLayer)
+    {
+        StartCoroutine(LayerAnimator(idLayer, weightLayer));
+    }
+
+    IEnumerator LayerAnimator(int idLayer, float weightLayer)
+    {
+
+        float var = mecanimAnimator.GetLayerWeight(idLayer);
+
+        if (var < weightLayer)
+        {
+            while (var < weightLayer)
+            {
+                mecanimAnimator.SetLayerWeight(idLayer, var);
+                var += .01f;
+                yield return new WaitForSeconds(.005f);
+            }
+        }
+        else if (var > weightLayer)
+        {
+            while (var > weightLayer)
+            {
+                mecanimAnimator.SetLayerWeight(idLayer, var);
+                var -= .01f;
+                yield return new WaitForSeconds(.005f);
+            }
+        }
+    }
+
 
     public void DestroyObj(GameObject obj)
     {

@@ -25,7 +25,7 @@ public class PointAtStage : ECAActionStage
     public override void StartStage()
     {
         base.StartStage();
-        animatorMxM = (ECAAnimatorMxM)animator;
+        animatorMxM = (ECAAnimatorMxM)base.animator;
 
         wait1 = false;
         wait2 = false;
@@ -33,22 +33,16 @@ public class PointAtStage : ECAActionStage
         mecanimAnimator = false;
 
         ikManager.SetTargetAimIK(ikManager.leftHandIK, target, 1, .5f);
-        
-        //ikManager.SetWeightTargetAimIK(ikManager.leftHandIK, 1);
 
-        animatorMxM.WaitComplete += OnWaitComplete;
-
-        ActivateLayer(1,1);
+        ActivateLayer(1);
         ActivateBodyParts();
-        animatorMxM.MxM_BlendController(1f);
-        animatorMxM.Wait(time);
+        animatorMxM.MxM_BlendController(1f, true);
+        WaitFor(time);
     }
 
     public override void EndStage()
     {
-
-        animatorMxM.WaitComplete -= OnWaitComplete;
-        animatorMxM.MxM_BlendController(2.5f);
+        animatorMxM.MxM_BlendController(2.5f, false);
 
         DisactivateBodyParts();
 
@@ -74,18 +68,18 @@ public class PointAtStage : ECAActionStage
 
     protected override void ActivateBodyParts()
     {
-        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftArm, true, false);
-        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftFingers, true, false);
-        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.Root, true, false);
-        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftHandIK, true, true);
+        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftArm, true);
+        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftFingers, true);
+        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.Root, true);
+        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftHandIK, true);
     }
 
     protected override void DisactivateBodyParts()
     {
-        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftArm, false, false);
-        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftFingers, false, false);
-        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.Root, false, false);
-        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftHandIK, false, true);
+        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftArm, false);
+        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftFingers, false);
+        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.Root, false);
+        animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftHandIK, false);
     }
 
     public override void Update()
@@ -96,27 +90,27 @@ public class PointAtStage : ECAActionStage
         {
             sem = true;
             wait1 = false;
-            DeactivateLayer(1,0);
+            DeactivateLayer(1);
         }
 
         if (animatorMxM.mecanimAnimator.GetLayerWeight(1) < .01f && mecanimAnimator)
         {
             mecanimAnimator = false;
-            animatorMxM.MxM_BlendController(5f);
+            animatorMxM.MxM_BlendController(5f, false);
             wait1 = true;
             wait2 = true;
-            animatorMxM.Wait(2f);
+            WaitFor(2f);
         }
     }
 
-    protected override void DeactivateLayer(int layerIndex, float weightLayer)
+    protected override void DeactivateLayer(int layerIndex)
     {
-        animatorMxM.SetWeightLayerMecanicAnimator(layerIndex, weightLayer);
+        base.DeactivateLayer(layerIndex);
         mecanimAnimator = true;
     }
 
-    protected override void ActivateLayer(int layerIndex, float weightLayer)
+    protected override void ActivateLayer(int layerIndex)
     {
-        animatorMxM.SetWeightLayerMecanicAnimator(layerIndex, weightLayer);
+        base.ActivateLayer(layerIndex);
     }
 }

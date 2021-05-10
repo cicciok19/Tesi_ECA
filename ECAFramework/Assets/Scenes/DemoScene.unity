@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45100325, g: 0.5008545, b: 0.574312, a: 1}
+  m_IndirectSpecularColor: {r: 0.45100272, g: 0.5008537, b: 0.574311, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -882,6 +882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ecaAnimator: {fileID: 0}
   stopped: 0
+  typePick: 0
   ecaInTrigger: 0
   FirstPaintInteraction: 0
   SecondPaintInteraction: 0
@@ -911,6 +912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 904137fbd797bc545a024bb12a6cd854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentActionName: 
   Player: {fileID: 0}
   mecanimAnimator: {fileID: 0}
   ECAText: {fileID: 1267864217}
@@ -1329,6 +1331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ecaAnimator: {fileID: 0}
   stopped: 0
+  typePick: 0
   ecaInTrigger: 0
 --- !u!1001 &798501849
 PrefabInstance:
@@ -1340,6 +1343,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_Name
       value: FPSController
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_TagString
@@ -3174,6 +3181,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4145267338840526388, guid: 99ffe07babecf5f4492e09c7e1718a9f,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.15201573
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145267338840526388, guid: 99ffe07babecf5f4492e09c7e1718a9f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.15201573
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145267338840526388, guid: 99ffe07babecf5f4492e09c7e1718a9f,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.15201573
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145267338840526388, guid: 99ffe07babecf5f4492e09c7e1718a9f,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.006
       objectReference: {fileID: 0}
@@ -3218,6 +3240,46 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4145267338840526388, guid: 99ffe07babecf5f4492e09c7e1718a9f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145267339984873866, guid: 99ffe07babecf5f4492e09c7e1718a9f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145267339984873866, guid: 99ffe07babecf5f4492e09c7e1718a9f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145267339984873866, guid: 99ffe07babecf5f4492e09c7e1718a9f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145267339984873866, guid: 99ffe07babecf5f4492e09c7e1718a9f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145267339984873867, guid: 99ffe07babecf5f4492e09c7e1718a9f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145267340130539492, guid: 99ffe07babecf5f4492e09c7e1718a9f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145267340130539492, guid: 99ffe07babecf5f4492e09c7e1718a9f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145267340130539492, guid: 99ffe07babecf5f4492e09c7e1718a9f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
