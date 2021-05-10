@@ -6,13 +6,7 @@ using RootMotion.FinalIK;
 using RootMotion;
 
 
-public enum TypePick
-{
-	LeftHand,
-	RightHand,
-	BothHands,
-    Nothing
-}
+
 
 /// <summary>
 /// Picking up a box shaped object with both hands.
@@ -20,7 +14,7 @@ public enum TypePick
 public class PickStage : ECAActionStage
 {
 	internal Transform target;
-	internal TypePick typePick = TypePick.Nothing;
+	internal HandSide typePick = HandSide.Nothing;
 	internal FullBodyBipedEffector effector;
 
 	private ECAAnimatorMxM animatorMxM;
@@ -37,7 +31,7 @@ public class PickStage : ECAActionStage
 	private Vector3 pickUpPosition;
 	private Quaternion pickUpRotation;
 
-    public PickStage(Transform target, float weightObj,  bool grab = false, TypePick typePick = TypePick.Nothing) : base()
+    public PickStage(Transform target, float weightObj,  bool grab = false, HandSide typePick = HandSide.Nothing) : base()
     {
 		this.target = target;
 		this.weightObj = weightObj;
@@ -93,36 +87,36 @@ public class PickStage : ECAActionStage
 
 		interactionSystem.fadeInTime = .5f;
 
-		if(typePick == TypePick.Nothing)
+		if(typePick == HandSide.Nothing)
         {
 			Transform rightHand = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.RightHand);
 			Transform leftHand = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.LeftHand);
 
 			if (Vector3.Distance(rightHand.position, obj.transform.position) < Vector3.Distance(leftHand.position, obj.transform.position))
-				typePick = TypePick.RightHand;
+				typePick = HandSide.RightHand;
 			else
-				typePick = TypePick.LeftHand;
+				typePick = HandSide.LeftHand;
 
 			Debug.Log(animatorMxM.Eca.name + " ha scelto " + typePick);
 		}
 
-		if (typePick == TypePick.LeftHand)
+		if (typePick == HandSide.LeftHand)
 		{
 			effector = FullBodyBipedEffector.LeftHand;
 			interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
 		}
-		else if (typePick == TypePick.RightHand)
+		else if (typePick == HandSide.RightHand)
 		{
 			effector = FullBodyBipedEffector.RightHand;
 			interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
 		}
-		else if (typePick == TypePick.BothHands)
+		else if (typePick == HandSide.BothHands)
 		{
 			effector = FullBodyBipedEffector.LeftHand;
 			interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
 			interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
 		}
-        else if(typePick == TypePick.Nothing)
+        else if(typePick == HandSide.Nothing)
         {
             Debug.LogError("Select a TypePick!");
         }
@@ -186,6 +180,43 @@ public class PickStage : ECAActionStage
 		}
 
 	}
+
+    protected override void ActivateBodyParts()
+    {
+		if (typePick == HandSide.LeftHand)
+		{
+			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftFingers, true);
+			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftArm, true);
+			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftHandIK, true);
+		}
+		else if (typePick == HandSide.RightHand)
+		{
+			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightFingers, true);
+			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightArm, true);
+			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightHandIK, true);
+		}
+		else if (typePick == HandSide.BothHands)
+		{
+			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftFingers, true);
+			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightFingers, true);
+			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftArm, true);
+			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftHandIK, true);
+			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightArm, true);
+			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightHandIK, true);	 
+		}
+
+		animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.Root, true);
+	}
+
+    protected override void ActivateLayer(int layerIndex)
+    {
+		base.ActivateLayer(layerIndex);
+    }
+
+    protected override void DeactivateLayer(int layerIndex)
+    {
+		base.DeactivateLayer(layerIndex);
+    }
 
     // Are we currently holding the object?
     private bool holding

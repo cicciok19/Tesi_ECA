@@ -19,7 +19,7 @@ class Chair : MonoBehaviour
     protected ChairSitPoint sitPoint;
     protected ChairLeftFoot leftFootTransform;
     protected ChairRightFoot rightFootTransform;
-    protected ChairDestination destination;
+    protected Destination destination;
 
 
     protected void Awake()
@@ -27,7 +27,7 @@ class Chair : MonoBehaviour
         sitPoint = GetComponentInChildren<ChairSitPoint>();
         leftFootTransform = GetComponentInChildren<ChairLeftFoot>();
         rightFootTransform = GetComponentInChildren<ChairRightFoot>();
-        destination = GetComponentInChildren<ChairDestination>();
+        destination = GetComponentInChildren<Destination>();
 
         SetCorrectSitDirection();
     }

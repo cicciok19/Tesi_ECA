@@ -61,6 +61,11 @@ public class ECAAction
         CurrentStageIdx = 0;
     }
 
+    public ECAAction(ECA eca)
+    {
+        EcaAnimator = eca.ecaAnimator;
+    }
+
 
 
 

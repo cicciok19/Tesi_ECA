@@ -1,19 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+/* File ChairDestination C# implementation of class ChairDestination */
+
+
+
+// global declaration start
+
+
 using UnityEngine;
 
-public class Destination : MonoBehaviour
+// global declaration end
+
+class Destination : MonoBehaviour
 {
-    private bool chosen;
-
-    public bool Chosen {
-        get { return chosen; }
-        set { chosen = value; }
-    }
-
-    void Start()
-    {
-        chosen = false;
-    }
-
 }

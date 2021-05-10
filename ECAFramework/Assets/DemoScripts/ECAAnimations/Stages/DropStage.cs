@@ -11,7 +11,7 @@ public class DropStage : ECAActionStage
     private PickStage pickStage;
     private InteractionSystem interactionSystem;
     private InteractionObject obj;
-    private TypePick typePick;
+    private HandSide typePick;
 
     private ECAAnimatorMxM animatorMxM;
 

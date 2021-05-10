@@ -28,7 +28,7 @@ public class Train : MonoBehaviour
 
     private IEnumerator WaitArriving()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(100f);
         if (Arriving != null)
             Arriving(this, EventArgs.Empty);
     
@@ -38,7 +38,7 @@ public class Train : MonoBehaviour
 
     private IEnumerator WaitDoorsOpen()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
         if (DoorsOpen != null)
             DoorsOpen(this, EventArgs.Empty);
     }
