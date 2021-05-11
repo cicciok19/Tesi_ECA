@@ -17,7 +17,7 @@ public class LandingArea : MonoBehaviour
 {
     protected int ecaIn;
     public int maxOccupancy;
-    internal bool full;
+    public bool full;
 
     public event EventHandler SpaceCompleted;
 
@@ -31,15 +31,21 @@ public class LandingArea : MonoBehaviour
 
     protected virtual void Start()
     {
-        if(transform.childCount != 0)
-        {
-            for(int i = 0; i < transform.childCount; i++)
-            {
-                maxOccupancy += transform.GetChild(i).GetComponent<LandingArea>().maxOccupancy;
-            }
+    }
+
+    public int EcaIn
+    {
+        get => ecaIn;
+        set {
+            ecaIn = value;
+            if (ecaIn >= maxOccupancy && !full)
+                full = true;
+            else if (full && ecaIn < maxOccupancy)
+                full = false;
         }
     }
 
+    /*
     public void OnTriggerEnter(Collider other)
     {
         ECA eca;
@@ -69,6 +75,9 @@ public class LandingArea : MonoBehaviour
         if (other.TryGetComponent<ECA>(out eca))
         {
             ecaIn--;
+            if (!full)
+                full = true;
         }
     }
+    */
 }

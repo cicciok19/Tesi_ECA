@@ -162,8 +162,25 @@ protected static int counter = 0;
                 landing = landingAreaC;
             }
         }
+        lock (landing)
+        {
+            if (landing.full)
+            {
+                while (landing.full)
+                {
+                    if (landing.transform.parent != null)
+                        if (landing.transform.parent.GetComponent<LandingAreaCircular>())
+                        {
+                            landing = landing.transform.parent.GetComponent<LandingAreaCircular>();
+                            if (!landing.full)
+                                break;
+                        }
+                }
+            }
 
-        GoToLanding(landing);
+            landing.EcaIn++;
+            GoToLanding(landing);
+        }
     }
 
     public void GoToLanding(LandingAreaCircular landingArea)
@@ -175,20 +192,11 @@ protected static int counter = 0;
         Vector3 landingPosition_1 = Randomize.GetRandomPositionRound(landingArea.gameObject, landingArea.innerRadius, landingArea.radius);
         GoToStage goTo_1 = new GoToStage(landingPosition_1);
 
-        landingArea.SpaceCompleted += OnSpaceCompleted;
-
         stages.Add(goTo_1);
 
         ECAAction newAction = new ECAAction(this, stages);
         newAction.StartAction();
         
-    }
-
-    public void OnSpaceCompleted(object sender, EventArgs eventArgs)
-    {
-        currentAction.Abort();
-        if (landing.transform.parent.GetComponent<LandingAreaCircular>() != null)
-            GoToLanding(landing.transform.parent.GetComponent<LandingAreaCircular>());
     }
 
     public void GoToPainting(Painting painting)
@@ -259,8 +267,6 @@ protected static int counter = 0;
             paintings[idxPaint].chair.SittableBusy -= OnChairBusy;
         if(handlerName == "SittableFree")
             paintings[idxPaint].chair.SittableFree -= OnChairFree;
-        if (handlerName == "SpaceCompleted")
-            landing.SpaceCompleted -= OnSpaceCompleted;
     }
 
 
