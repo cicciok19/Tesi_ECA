@@ -25,6 +25,12 @@ public class GoToStage : ECAActionStage
 
     private Vector3 destination;
     protected float stopDistance = 0.5f;
+    private bool warping = false;
+    private Vector3 warpDirection = new Vector3();
+    private float startWarpSpeed = 0;
+    private float finalWarpSpeed = 0.3f;
+
+    private float actualWarpSpeed = 0;
     public float StopDistance
     {
         set { stopDistance = value; }
@@ -89,10 +95,26 @@ public class GoToStage : ECAActionStage
     {
         base.Update();
     
-        if (Vector3.Distance(destination, animator.Eca.transform.position) <= stopDistance + 0.5f)
+        if (Vector3.Distance(destination, animator.Eca.transform.position) <= stopDistance + 0.5f && !warping)
         {
             animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
-            EndStage();
+            Debug.DrawRay(animator.Eca.transform.position, animator.Eca.transform.forward * 20, Color.red, 20f);
+            warpDirection = animator.Eca.transform.forward;
+
+            warping = true;
+        }
+
+        if (warping)
+        {
+            if(Vector3.Distance(destination, animator.Eca.transform.position) >= 0.35f)
+            {
+                Debug.Log(Vector3.Distance(destination, animator.Eca.transform.position));
+                actualWarpSpeed = Mathf.SmoothDamp(actualWarpSpeed, 1f, ref startWarpSpeed, 3);
+                animator.Eca.transform.position = Vector3.Lerp(animator.Eca.transform.position, destination,actualWarpSpeed);
+            }
+                //animator.Eca.transform.Translate(warpDirection * Time.deltaTime);
+            else
+                EndStage();
         }
     }
 

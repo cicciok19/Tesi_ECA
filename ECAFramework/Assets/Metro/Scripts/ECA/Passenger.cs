@@ -179,5 +179,15 @@ public class Passenger : ECA
     private void OnTicketBought(object sender, EventArgs e)
     {
         ticketTaken = true;
+        if (train.trainArrived)
+        {
+            GoNearTrainDoor();
+            //devo settare qualhe booleano 
+        }
+            
+        else if (train.doorsOpened)
+            EnterTrain();
+        else
+            GoToPlatform();
     }
 }

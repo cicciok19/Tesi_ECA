@@ -42,7 +42,7 @@ public class IKSetter : MonoBehaviour
     private Transform rightArm;
 
     protected Animator animator;
-    protected Dictionary<AimIK, bool> aimStopDictionary =   new Dictionary<AimIK, bool>();
+    protected Dictionary<Transform, AimIK> aimDictionary =   new Dictionary<Transform, AimIK>();
 
 
     public FullBodyBipedIK fullBodyBipedIK;
@@ -58,7 +58,7 @@ public class IKSetter : MonoBehaviour
         HeadIK.solver.AddBone(neckBone);
         HeadIK.solver.IKPositionWeight = 0;
     
-        aimStopDictionary.Add(HeadIK, false);
+        //aimStopDictionary.Add(HeadIK, false);
     
         return HeadIK;
     }
@@ -75,7 +75,7 @@ public class IKSetter : MonoBehaviour
         RightIK.solver.AddBone(rightForeArm);
         RightIK.solver.IKPositionWeight = 0;
     
-        aimStopDictionary.Add(RightIK, false);
+        //aimStopDictionary.Add(RightIK, false);
     
         return RightIK;
     }
@@ -92,7 +92,7 @@ public class IKSetter : MonoBehaviour
         LeftIK.solver.AddBone(leftForeArm);
         LeftIK.solver.IKPositionWeight = 0;
     
-        aimStopDictionary.Add(LeftIK, false);
+        //aimStopDictionary.Add(LeftIK, false);
     
         return LeftIK;
     }
@@ -144,8 +144,14 @@ public class IKSetter : MonoBehaviour
     
         //create the IKs
         headIK = SetIKHead(headBone, neckBone);
+        aimDictionary.Add(headBone, headIK);
+
         rightHandIK = SetIKRightHand(rightHandBone, rightForeArm, rightArm, rightShoulder);
+        aimDictionary.Add(rightHandBone, rightHandIK);
+
         leftHandIK = SetIKLeftHand(leftHandBone, leftForeArm, leftArm, leftShoulder);
+        aimDictionary.Add(leftHandBone, leftHandIK);
+
         fullBodyBipedIK = SetFullBodyIK();
     }
 
@@ -217,15 +223,21 @@ public class IKSetter : MonoBehaviour
         float varOld = aimIK.solver.IKPositionWeight;
         GameObject targetOld = aimIK.solver.target.gameObject;
         float varNew = 0;
-    
-        AimIK newHeadIk = SetIKHead(headBone, neckBone);
-    
-        SetTargetAimIK(newHeadIk, target, 0);
+
+        AimIK newAimIK;
+        if (aimIK == aimDictionary[headBone])
+            newAimIK = SetIKHead(headBone, neckBone);
+        else if(aimIK == aimDictionary[rightHandBone])
+            newAimIK = SetIKRightHand(rightHandBone, rightForeArm, rightArm, rightShoulder);
+        else
+            newAimIK = SetIKLeftHand(leftHandBone, leftForeArm, leftArm, leftShoulder);
+
+        SetTargetAimIK(newAimIK, target, 0);
     
         while (varOld > 0 || varNew < weight)
         {
             aimIK.solver.SetIKPositionWeight(varOld);
-            newHeadIk.solver.SetIKPositionWeight(varNew);
+            newAimIK.solver.SetIKPositionWeight(varNew);
             yield return new WaitForSeconds(speed);
             if(varOld > 0)
                 varOld -= .01f;
@@ -235,7 +247,12 @@ public class IKSetter : MonoBehaviour
 
         Destroy(targetOld);
         Destroy(aimIK);
-        headIK = newHeadIk;
+        if (aimIK == aimDictionary[headBone])
+            headIK = newAimIK;
+        else if (aimIK == aimDictionary[rightHandBone])
+            rightHandIK = newAimIK;
+        else
+            leftHandIK = newAimIK;        
 
         if (AimCompleted != null)
             AimCompleted(this, EventArgs.Empty);
@@ -244,7 +261,7 @@ public class IKSetter : MonoBehaviour
 
 
 
-    public virtual void SetTargetAimIK(AimIK aimIK, Transform target, float weight = 1f, float speed = 1f)
+    public virtual void SetTargetAimIK(AimIK aimIK, Transform target, float weight = 1f, float duration = 1f)
     {
 
 
@@ -258,7 +275,7 @@ public class IKSetter : MonoBehaviour
             else
                 weightOperation -= weight;
 
-            coroutineSpeed = (speed * .01f) / weightOperation;
+            coroutineSpeed = (duration * .01f) / weightOperation;
 
             aimIK.solver.target = target;
     
@@ -281,7 +298,7 @@ public class IKSetter : MonoBehaviour
             else
                 weightOperation -= weight;
 
-            coroutineSpeed = (speed * .01f) / weightOperation;
+            coroutineSpeed = (duration * .01f) / weightOperation;
 
             StartCoroutine(ChangeTarget(aimIK, target, weight, coroutineSpeed));
 
@@ -312,7 +329,7 @@ public class IKSetter : MonoBehaviour
     }
 
 
-    public virtual void SetWeightsFullBodyIK(IKEffector effector, float weight, float speed = 1f)
+    public virtual void SetWeightsFullBodyIK(IKEffector effector, float weight, float duration = 1f)
     {
         float coroutineSpeed;
         float weightOperation = effector.positionWeight;
@@ -323,7 +340,7 @@ public class IKSetter : MonoBehaviour
             weightOperation -= weight;
         if (weightOperation != 0)
         {
-            coroutineSpeed = (speed * .01f) / weightOperation;
+            coroutineSpeed = (duration * .01f) / weightOperation;
 
             if (effector != null)
                 StartCoroutine(SetWeightFullIK(effector, weight, coroutineSpeed));
@@ -335,7 +352,7 @@ public class IKSetter : MonoBehaviour
     }
 
 
-    public virtual void SetWeightTargetAimIK(AimIK aimIK, float weight, float speed = 1f)
+    public virtual void SetWeightTargetAimIK(AimIK aimIK, float weight, float duration = 1f)
     {
         float coroutineSpeed;
         float weightOperation = aimIK.solver.IKPositionWeight;
@@ -348,7 +365,7 @@ public class IKSetter : MonoBehaviour
 
         if (weightOperation != 0)
         {
-            coroutineSpeed = (speed * .01f) / weightOperation;
+            coroutineSpeed = (duration * .01f) / weightOperation;
 
             if (aimIK.solver.target != null)
                 StartCoroutine(SetWeightAimIK(aimIK, weight, coroutineSpeed));

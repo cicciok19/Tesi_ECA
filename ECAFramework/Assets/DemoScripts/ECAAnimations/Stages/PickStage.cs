@@ -13,7 +13,7 @@ using RootMotion;
 /// </summary>
 public class PickStage : ECAActionStage
 {
-	internal Transform target;
+	internal GrabbableObject target;
 	internal HandSide typePick = HandSide.Nothing;
 	internal FullBodyBipedEffector effector;
 
@@ -24,17 +24,18 @@ public class PickStage : ECAActionStage
 	internal InteractionObject obj; // The object to pick up
 	private Transform pivot; // The pivot point of the hand targets
 	private Transform holdPoint; // The point where the object will lerp to when picked up
-	private float weightObj; // Maximum lerp speed of the object. Decrease this value to give the object more weight
+	private float pickSpeed; // Maximum lerp speed of the object. Decrease this value to give the object more weight
 	private bool grab;
 
 	private float holdWeight, holdWeightVel;
 	private Vector3 pickUpPosition;
 	private Quaternion pickUpRotation;
 
-    public PickStage(Transform target, float weightObj,  bool grab = false, HandSide typePick = HandSide.Nothing) : base()
+	public PickStage(Transform target, float pickSpeed, bool grab = false, HandSide typePick = HandSide.Nothing) : base()
     {
-		this.target = target;
-		this.weightObj = weightObj;
+		this.target = target.GetComponent<GrabbableObject>();
+		Assert.IsNotNull(this.target);
+		this.pickSpeed = pickSpeed;
 		this.grab = grab;
 		this.typePick = typePick;
 	}
@@ -46,7 +47,7 @@ public class PickStage : ECAActionStage
 		animatorMxM = (ECAAnimatorMxM)animator;
 		mecanimAnimator = animatorMxM.mecanimAnimator;
 
-		if (animatorMxM.Eca.GetComponentInChildren<HoldPoint>() == null  && !grab)
+		if (animatorMxM.Eca.GetComponentInChildren<HoldPoint>() == null && !grab)
 		{
 			Debug.LogError("The target does not have the hold point.");
 			return;
@@ -61,6 +62,7 @@ public class PickStage : ECAActionStage
 		}
 		else
 			obj = target.GetComponent<InteractionObject>();
+
 
 
 		if (animatorMxM.Eca.GetComponent<InteractionSystem>() == null)
@@ -85,7 +87,7 @@ public class PickStage : ECAActionStage
 		interactionSystem.OnInteractionStart += OnStart;
 		interactionSystem.OnInteractionPause += OnPause;
 
-		interactionSystem.fadeInTime = .5f;
+		interactionSystem.speed = .5f;
 
 		if(typePick == HandSide.Nothing)
         {
@@ -165,7 +167,7 @@ public class PickStage : ECAActionStage
 		if (holding)
 		{
 			// Smoothing in the hold weight
-			holdWeight = Mathf.SmoothDamp(holdWeight, 1f, ref holdWeightVel, weightObj);
+			holdWeight = Mathf.SmoothDamp(holdWeight, 1f, ref holdWeightVel, pickSpeed);
 
 
 			if (!grab)

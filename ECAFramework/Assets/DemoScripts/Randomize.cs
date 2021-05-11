@@ -58,6 +58,7 @@ public class Randomize : MonoBehaviour
 
 
         GameObject gop = Instantiate(gameObject);
+        gop.transform.localScale = Vector3.zero;
         gop.transform.localPosition = randomShift;
         return gop.transform;
     }

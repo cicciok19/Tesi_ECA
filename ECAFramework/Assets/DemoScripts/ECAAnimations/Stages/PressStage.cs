@@ -5,7 +5,7 @@ using System;
 
 public class PressStage : ECAActionStage
 {
-    GameObject objToPress;
+    PressableObject objToPress;
     ECAAnimatorMxM animatorMxM;
     int counter;
     HandSide handSide;
@@ -14,7 +14,7 @@ public class PressStage : ECAActionStage
     bool ended;
     bool sem;
 
-    public PressStage(GameObject obj, HandSide hs = HandSide.Nothing, int c = 0) : base()
+    public PressStage(PressableObject obj, HandSide hs = HandSide.Nothing, int c = 0) : base()
     {
         objToPress = obj;
         if (c == 0)
@@ -51,12 +51,12 @@ public class PressStage : ECAActionStage
         if(handSide == HandSide.LeftHand)
         {
             ActivateLayer(1);
-            ikManager.SetTargetAimIK(ikManager.leftHandIK, objToPress.transform, 1, .5f);
+            ikManager.SetTargetAimIK(ikManager.leftHandIK, objToPress.GetPressPosition().transform, 1, .5f);
         }
         else if(handSide == HandSide.RightHand)
         {
             ActivateLayer(2);
-            ikManager.SetTargetAimIK(ikManager.rightHandIK, objToPress.transform, 1, .5f);
+            ikManager.SetTargetAimIK(ikManager.rightHandIK, objToPress.GetPressPosition().transform, 1, .5f);
         }
 
         ActivateBodyParts();
@@ -88,7 +88,7 @@ public class PressStage : ECAActionStage
                 if (ikManager.rightHandIK.solver.IKPositionWeight < .02f && !sem)
                 {
                     sem = true;
-                    DeactivateLayer(1);
+                    DeactivateLayer(2);
                 }
                 if (animatorMxM.mecanimAnimator.GetLayerWeight(2) < .01f && !ended)
                 {
@@ -97,32 +97,31 @@ public class PressStage : ECAActionStage
                     WaitFor(2f);
                 }
             }
-
-
-
         }
 
     }
 
     private void OnAimCompleted(object sender, EventArgs e)
     {
-        WaitFor(UnityEngine.Random.Range(2.0f, 5.0f));
+        //WaitFor(UnityEngine.Random.Range(2.0f, 5.0f));
+        WaitFor(0.5f);
     }
 
     protected override void OnWaitCompleted()
     {
+        counter--;
+
         if (counter == 0 && !ended)
         {
             startEvaluate = true;
             if(handSide == HandSide.LeftHand)
-                ikManager.SetWeightTargetAimIK(ikManager.leftHandIK, 0f, .5f);
+                ikManager.SetWeightTargetAimIK(ikManager.leftHandIK, 0f, 0.2f);
             else
-                ikManager.SetWeightTargetAimIK(ikManager.rightHandIK, 0f, .5f);
+                ikManager.SetWeightTargetAimIK(ikManager.rightHandIK, 0f, 0.2f);
 
         }
-        else if(counter != 0)
+        else if(counter > 0)
         {
-            counter--;
             if (handSide == HandSide.LeftHand)
                 ikManager.SetTargetAimIK(ikManager.leftHandIK, Randomize.GetRandomPosition(objToPress.gameObject));
             else

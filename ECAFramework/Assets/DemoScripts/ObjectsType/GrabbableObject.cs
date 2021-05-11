@@ -31,7 +31,7 @@ public class GrabbableObject : ECAInteractableObject
         if (this.gameObject.GetComponent<InteractionObject>() == null)
         {
             interactionObj = this.gameObject.AddComponent<InteractionObject>();
-            curveOne = SetGaussianCurve(0, 1);
+            curveOne = SetGaussianCurve(0, 1f);
             curveTwo = SetGaussianCurve(0, .23f);
 
             //creating the weight curves
@@ -50,12 +50,12 @@ public class GrabbableObject : ECAInteractableObject
 
             interactionObj.multipliers[0] = new InteractionObject.Multiplier();
             interactionObj.multipliers[0].curve = InteractionObject.WeightCurve.Type.PositionWeight;
-            interactionObj.multipliers[0].multiplier = 1;
+            interactionObj.multipliers[0].multiplier = 1f;
             interactionObj.multipliers[0].result = InteractionObject.WeightCurve.Type.RotateBoneWeight;
 
             interactionObj.multipliers[1] = new InteractionObject.Multiplier();
             interactionObj.multipliers[1].curve = InteractionObject.WeightCurve.Type.PositionWeight;
-            interactionObj.multipliers[1].multiplier = 1;
+            interactionObj.multipliers[1].multiplier = 1f;
             interactionObj.multipliers[1].result = InteractionObject.WeightCurve.Type.PositionWeight;
 
             //creating event
@@ -68,7 +68,6 @@ public class GrabbableObject : ECAInteractableObject
             interactionObj.events[0].messages = new InteractionObject.Message[0];
             interactionObj.events[0].time = .5f;
             interactionObj.events[0].pause = true;
-            interactionObj.events[0].pickUp = false;
         }
 
         if(GetComponent<Rigidbody>() == null)
@@ -91,6 +90,11 @@ public class GrabbableObject : ECAInteractableObject
         curve = new AnimationCurve(kS);
 
         return curve;
+    }
+
+    public void SetPick(bool pick)
+    {
+        interactionObj.events[0].pickUp = pick;
     }
 
 

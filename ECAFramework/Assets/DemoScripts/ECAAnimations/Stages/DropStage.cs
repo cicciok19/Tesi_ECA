@@ -50,8 +50,10 @@ public class DropStage : ECAActionStage
         this.interactionSystem = pickStage.interactionSystem;
         this.obj = pickStage.obj;
 
-        pickDownPosition = dropPosition;
-        pickDownRotation = dropRotation;
+        Transform dropPosition = GameObject.FindObjectOfType<DropPosition>().transform;
+
+        pickDownPosition = dropPosition.position;
+        pickDownRotation = dropPosition.rotation;
         objInitialPosition = obj.transform.position;
         objInitiaRotation = obj.transform.rotation;
 

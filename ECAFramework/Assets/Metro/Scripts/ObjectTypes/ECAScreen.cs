@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ECAScreen : MonoBehaviour
+public class ECAScreen : PressableObject
 {
 
 }

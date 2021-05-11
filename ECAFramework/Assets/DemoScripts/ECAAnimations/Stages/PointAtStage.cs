@@ -52,7 +52,7 @@ public class PointAtStage : ECAActionStage
     }
 
 
-    private void OnWaitComplete(object sender, EventArgs e)
+    protected override void OnWaitCompleted()
     {
         if (wait1 == false)
         {

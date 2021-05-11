@@ -5,8 +5,8 @@ using System;
 
 public class VendingMachine : ECAInteractableObject
 {
-    private ECAButton button;
-    private ECAScreen screen;
+    private PressableObject button;
+    private PressableObject screen;
     private TicketReady ticketReady;
     private Destination[] destinations;
     private ECA lastPassenger;
@@ -49,13 +49,14 @@ public class VendingMachine : ECAInteractableObject
 
     public Transform GetNextPassengerPosition()
     {
-        if (lastPassenger == null)
+        /*if (lastPassenger == null)
             return destinations[++idx].transform; //da modificare
         else
-            return destinations[++idx].transform;     //da sistemare perchè deve esserci un offset
+            return destinations[++idx].transform;     //da sistemare perchè deve esserci un offset*/
+        return destinations[0].transform;
     }
 
-    public ECAScreen GetScreen()
+    public PressableObject GetScreen()
     {
         return screen;
     }
@@ -67,7 +68,7 @@ public class VendingMachine : ECAInteractableObject
         return ticket.transform;
     }
 
-    public ECAButton GetButton()
+    public PressableObject GetButton()
     {
         return button;
     }

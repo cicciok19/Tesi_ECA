@@ -18,6 +18,10 @@ public class Train : MonoBehaviour
     public event EventHandler Arriving;
     public event EventHandler DoorsOpen;
 
+    public bool doorsOpened { get; private set; }
+    public bool trainArrived { get; private set; }
+
+
     private TrainDoor[] doors;
     private ECAInteractableObject[] places;
 
@@ -51,7 +55,7 @@ public class Train : MonoBehaviour
         doors = GameObject.FindObjectsOfType<TrainDoor>();
         places = GameObject.FindObjectsOfType<ECAInteractableObject>();
         landingArea = GameObject.FindObjectOfType<LandingArea>();
-        StartCoroutine(WaitArriving());
+        //StartCoroutine(WaitArriving());
     }
 
 

@@ -36,10 +36,7 @@ public class LookableObject : MonoBehaviour
       // computing object bounds
     
       Renderer renderer = GetComponent<Renderer>();
-      Assert.IsNotNull(renderer);
-    
-     /* bounds = renderer.bounds.size;
-      center = renderer.bounds.center;*/
+      Assert.IsNotNull(renderer);   
     
       lookPosition.transform.position = center;
     }
@@ -59,7 +56,6 @@ public class LookableObject : MonoBehaviour
     {
         IKSetter ikManager = (IKSetter)sender;
         Transform target = ikManager.headIK.solver.target;
-
     }
 
 

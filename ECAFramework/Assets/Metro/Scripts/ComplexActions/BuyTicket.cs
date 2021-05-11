@@ -71,12 +71,14 @@ public class BuyTicket
     private void SelectTicket()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
-        PressStage useScreen = new PressStage(vendingMachine.GetScreen().gameObject);
-        PressStage pressButton = new PressStage(vendingMachine.GetButton().gameObject, HandSide.RightHand, 1);
-        PickStage takeTicket = new PickStage(vendingMachine.GetTicket(), 1);
+        PressStage useScreen = new PressStage(vendingMachine.GetScreen(), HandSide.LeftHand, 3);
+        PressStage pressButton = new PressStage(vendingMachine.GetButton(), HandSide.RightHand, 1);
+        PickStage takeTicket = new PickStage(vendingMachine.GetTicket(), 10, false, HandSide.RightHand);
+        DropStage dropTicket = new DropStage(takeTicket);           //non va bene...
         stages.Add(useScreen);
         stages.Add(pressButton);
         stages.Add(takeTicket);
+        stages.Add(dropTicket);
 
         ECAAction newAction = new ECAAction(eca, stages);
         newAction.StartAction();
