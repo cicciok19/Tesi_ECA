@@ -73,7 +73,7 @@ public class BuyTicket
         List<ECAActionStage> stages = new List<ECAActionStage>();
         //PressStage useScreen = new PressStage(vendingMachine.GetScreen(), HandSide.LeftHand, 3);
         //PressStage pressButton = new PressStage(vendingMachine.GetButton(), HandSide.RightHand, 1);
-        PressStage useScreen = new PressStage(vendingMachine.GetScreen(), HandSide.RightHand, 3);
+        PressStage useScreen = new PressStage(vendingMachine.GetScreen(), HandSide.RightHand);
         PressStage pressButton = new PressStage(vendingMachine.GetButton(), HandSide.RightHand);
         PickStage takeTicket = new PickStage(vendingMachine.GetTicket(), 10, false, HandSide.RightHand);
         DropStage dropTicket = new DropStage(takeTicket);           //non va bene...

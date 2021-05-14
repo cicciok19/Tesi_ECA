@@ -121,7 +121,7 @@ public class Randomize : MonoBehaviour
         GameObject gop = Instantiate((GameObject)Resources.Load("Prefab/PressPosition_R"));
         InteractionObject intObj = gop.GetComponent<InteractionObject>();
         Assert.IsNotNull(intObj);
-        gop.transform.localPosition = randomShift;
+        gop.transform.position = randomShift;
         return intObj;
     }
 
