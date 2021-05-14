@@ -9,7 +9,6 @@ using System;
 public class DropStage : ECAActionStage
 {
     private PickStage pickStage;
-    private InteractionSystem interactionSystem;
     private InteractionObject obj;
     private HandSide typePick;
 
@@ -37,7 +36,6 @@ public class DropStage : ECAActionStage
     public DropStage(PickStage pickStage) : base()
     {
         this.pickStage = pickStage;
-        this.interactionSystem = pickStage.interactionSystem;
         this.obj = pickStage.obj;
     }
 
@@ -47,7 +45,6 @@ public class DropStage : ECAActionStage
 
         animatorMxM = (ECAAnimatorMxM)animator;
 
-        this.interactionSystem = pickStage.interactionSystem;
         this.obj = pickStage.obj;
 
         Transform dropPosition = GameObject.FindObjectOfType<DropPosition>().transform;
@@ -66,7 +63,7 @@ public class DropStage : ECAActionStage
     {
         base.EndStage();
 
-        interactionSystem.ResumeAll();
+        ikManager.interactionSystem.ResumeAll();
     }
 
     public override void LateUpdate()

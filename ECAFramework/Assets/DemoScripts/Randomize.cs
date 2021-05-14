@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using RootMotion.FinalIK;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -99,6 +100,29 @@ public class Randomize : MonoBehaviour
         Debug.DrawRay(randomShift, Vector3.up, Color.green, 15f);
 
         return randomShift;
+    }
+
+    public static InteractionObject GetRandomPressPosition(PressableObject obj, float extent = 1.0f, int x = 1, int y = 1, int z = 1)
+    {
+        Renderer renderer = obj.GetComponent<Renderer>();
+        Assert.IsNotNull(renderer);
+
+        var bounds = renderer.bounds.size;
+        var center = renderer.bounds.center;
+
+
+        Vector3 randomShift = new Vector3(
+            center.x + bounds.x * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f) * x,
+            center.y + bounds.y * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f) * y,
+            center.z + bounds.z * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f) * z
+        );
+
+
+        GameObject gop = Instantiate((GameObject)Resources.Load("Prefab/PressPosition_R"));
+        InteractionObject intObj = gop.GetComponent<InteractionObject>();
+        Assert.IsNotNull(intObj);
+        gop.transform.localPosition = randomShift;
+        return intObj;
     }
 
 }

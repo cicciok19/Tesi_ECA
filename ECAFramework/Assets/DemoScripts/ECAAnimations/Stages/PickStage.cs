@@ -20,7 +20,6 @@ public class PickStage : ECAActionStage
 	private ECAAnimatorMxM animatorMxM;
 	internal Animator mecanimAnimator;
 
-	internal InteractionSystem interactionSystem; // The InteractionSystem of the character
 	internal InteractionObject obj; // The object to pick up
 	private Transform pivot; // The pivot point of the hand targets
 	private Transform holdPoint; // The point where the object will lerp to when picked up
@@ -63,17 +62,7 @@ public class PickStage : ECAActionStage
 		else
 			obj = target.GetComponent<InteractionObject>();
 
-
-
-		if (animatorMxM.Eca.GetComponent<InteractionSystem>() == null)
-			interactionSystem = animatorMxM.Eca.gameObject.AddComponent<InteractionSystem>();
-		else
-			interactionSystem = animatorMxM.Eca.GetComponent<InteractionSystem>();
-
-		interactionSystem.ik = animatorMxM.Eca.GetComponent<FullBodyBipedIK>();
-		Assert.IsNotNull(interactionSystem.ik);
-
-		interactionSystem.Start();
+		ikManager.interactionSystem.Start();
 
 		if (target.GetComponentInChildren<PivotObject>() == null)
 		{
@@ -83,11 +72,8 @@ public class PickStage : ECAActionStage
 		else
 			pivot = target.GetComponentInChildren<PivotObject>().transform;
 
-
-		interactionSystem.OnInteractionStart += OnStart;
-		interactionSystem.OnInteractionPause += OnPause;
-
-		interactionSystem.speed = .5f;
+        //does the start of the interactionSystem, mandatory
+        SetupInteractionSystem();
 
 		if(typePick == HandSide.Nothing)
         {
@@ -98,25 +84,23 @@ public class PickStage : ECAActionStage
 				typePick = HandSide.RightHand;
 			else
 				typePick = HandSide.LeftHand;
-
-			Debug.Log(animatorMxM.Eca.name + " ha scelto " + typePick);
 		}
 
 		if (typePick == HandSide.LeftHand)
 		{
 			effector = FullBodyBipedEffector.LeftHand;
-			interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
+			ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
 		}
 		else if (typePick == HandSide.RightHand)
 		{
 			effector = FullBodyBipedEffector.RightHand;
-			interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
+            ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
 		}
 		else if (typePick == HandSide.BothHands)
 		{
 			effector = FullBodyBipedEffector.LeftHand;
-			interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
-			interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
+            ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
+            ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
 		}
         else if(typePick == HandSide.Nothing)
         {
@@ -132,7 +116,7 @@ public class PickStage : ECAActionStage
 
 		// Make the object inherit the character's movement
 		if (!grab)
-			obj.transform.parent = interactionSystem.transform;
+			obj.transform.parent = animator.Eca.transform;
 
 		// Make the object kinematic
 		var r = obj.GetComponent<Rigidbody>();
@@ -225,7 +209,7 @@ public class PickStage : ECAActionStage
 	{
 		get
 		{
-			return interactionSystem.IsPaused(effector);
+			return ikManager.interactionSystem.IsPaused(effector);
 		}
 	}
 
@@ -233,7 +217,7 @@ public class PickStage : ECAActionStage
 	private void RotatePivot()
 	{
 		// Get the flat direction towards the character
-		Vector3 characterDirection = (pivot.position - interactionSystem.transform.position).normalized;
+		Vector3 characterDirection = (pivot.position - ikManager.interactionSystem.transform.position).normalized;
 		characterDirection.y = 0f;
 
 		// Convert the direction to local space of the object
@@ -241,7 +225,7 @@ public class PickStage : ECAActionStage
 
 		// QuaTools.GetAxis returns a 90 degree ortographic axis for any direction
 		Vector3 axis = QuaTools.GetAxis(characterDirectionLocal);
-		Vector3 upAxis = QuaTools.GetAxis(obj.transform.InverseTransformDirection(interactionSystem.transform.up));
+		Vector3 upAxis = QuaTools.GetAxis(obj.transform.InverseTransformDirection(ikManager.interactionSystem.transform.up));
 
 		// Rotate towards axis and upAxis
 		pivot.localRotation = Quaternion.LookRotation(axis, upAxis);
@@ -251,7 +235,18 @@ public class PickStage : ECAActionStage
     {
         base.EndStage();
 
-		interactionSystem.OnInteractionStart -= OnStart;
-		interactionSystem.OnInteractionPause -= OnPause;
+        ikManager.interactionSystem.OnInteractionStart -= OnStart;
+        ikManager. interactionSystem.OnInteractionPause -= OnPause;
 	}
+
+    private void SetupInteractionSystem()
+    {
+        ikManager.interactionSystem.Start();
+
+        ikManager.interactionSystem.OnInteractionStart += OnStart;
+        ikManager.interactionSystem.OnInteractionPause += OnPause;
+
+        ikManager.interactionSystem.speed = .5f;
+    }
+
 }

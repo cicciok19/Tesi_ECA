@@ -108,7 +108,6 @@ public class GoToStage : ECAActionStage
         {
             if(Vector3.Distance(destination, animator.Eca.transform.position) >= 0.35f)
             {
-                Debug.Log(Vector3.Distance(destination, animator.Eca.transform.position));
                 actualWarpSpeed = Mathf.SmoothDamp(actualWarpSpeed, 1f, ref startWarpSpeed, 3);
                 animator.Eca.transform.position = Vector3.Lerp(animator.Eca.transform.position, destination,actualWarpSpeed);
             }

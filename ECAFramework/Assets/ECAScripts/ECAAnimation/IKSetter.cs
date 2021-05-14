@@ -42,13 +42,52 @@ public class IKSetter : MonoBehaviour
     private Transform rightArm;
 
     protected Animator animator;
-    protected Dictionary<Transform, AimIK> aimDictionary =   new Dictionary<Transform, AimIK>();
-
+    protected Dictionary<HumanBodyBones, AimIK> aimDictionary =   new Dictionary<HumanBodyBones, AimIK>();
 
     public FullBodyBipedIK fullBodyBipedIK;
     public AimIK leftHandIK;
     public AimIK rightHandIK;
     public AimIK headIK;
+
+    public InteractionSystem interactionSystem;
+
+    protected virtual void Awake()
+    {
+        animator = this.GetComponent<Animator>();
+
+        // Get the bones
+
+        //root = GetBone(HumanBodyBones.Hips);
+        root = this.transform;
+        headBone = GetBone(HumanBodyBones.Head);
+        neckBone = GetBone(HumanBodyBones.Neck);
+        rightHandBone = GetBone(HumanBodyBones.RightHand);
+        rightForeArm = GetBone(HumanBodyBones.RightLowerArm);
+        rightArm = GetBone(HumanBodyBones.RightUpperArm);
+        rightShoulder = GetBone(HumanBodyBones.RightShoulder);
+        leftHandBone = GetBone(HumanBodyBones.LeftHand);
+        leftForeArm = GetBone(HumanBodyBones.LeftLowerArm);
+        leftArm = GetBone(HumanBodyBones.LeftUpperArm);
+        leftShoulder = GetBone(HumanBodyBones.LeftShoulder);
+
+        //create the IKs
+        headIK = SetIKHead(headBone, neckBone);
+        aimDictionary.Add(HumanBodyBones.Head, headIK);
+
+        rightHandIK = SetIKRightHand(rightHandBone, rightForeArm, rightArm, rightShoulder);
+        aimDictionary.Add(HumanBodyBones.RightHand, rightHandIK);
+
+        leftHandIK = SetIKLeftHand(leftHandBone, leftForeArm, leftArm, leftShoulder);
+        aimDictionary.Add(HumanBodyBones.LeftHand, leftHandIK);
+
+        fullBodyBipedIK = SetFullBodyIK();
+
+        interactionSystem = GetComponent<InteractionSystem>();
+        if (interactionSystem == null)
+           interactionSystem = gameObject.AddComponent<InteractionSystem>();
+
+        interactionSystem.ik = fullBodyBipedIK;
+    }
 
     protected AimIK SetIKHead(Transform headBone, Transform neckBone)
     {
@@ -123,37 +162,7 @@ public class IKSetter : MonoBehaviour
     }
 
 
-    protected virtual void Awake()
-    {
-        animator = this.GetComponent<Animator>();
-    
-        // Get the bones
-    
-        //root = GetBone(HumanBodyBones.Hips);
-        root = this.transform;
-        headBone = GetBone(HumanBodyBones.Head);
-        neckBone = GetBone(HumanBodyBones.Neck);
-        rightHandBone = GetBone(HumanBodyBones.RightHand);
-        rightForeArm = GetBone(HumanBodyBones.RightLowerArm);
-        rightArm = GetBone(HumanBodyBones.RightUpperArm);
-        rightShoulder = GetBone(HumanBodyBones.RightShoulder);
-        leftHandBone = GetBone(HumanBodyBones.LeftHand);
-        leftForeArm = GetBone(HumanBodyBones.LeftLowerArm);
-        leftArm = GetBone(HumanBodyBones.LeftUpperArm);
-        leftShoulder = GetBone(HumanBodyBones.LeftShoulder);
-    
-        //create the IKs
-        headIK = SetIKHead(headBone, neckBone);
-        aimDictionary.Add(headBone, headIK);
 
-        rightHandIK = SetIKRightHand(rightHandBone, rightForeArm, rightArm, rightShoulder);
-        aimDictionary.Add(rightHandBone, rightHandIK);
-
-        leftHandIK = SetIKLeftHand(leftHandBone, leftForeArm, leftArm, leftShoulder);
-        aimDictionary.Add(leftHandBone, leftHandIK);
-
-        fullBodyBipedIK = SetFullBodyIK();
-    }
 
 
     protected virtual Transform GetBone(HumanBodyBones bone)
@@ -223,14 +232,26 @@ public class IKSetter : MonoBehaviour
         float varOld = aimIK.solver.IKPositionWeight;
         GameObject targetOld = aimIK.solver.target.gameObject;
         float varNew = 0;
+        HumanBodyBones key;
+        bool sameTarget = false;
 
         AimIK newAimIK;
-        if (aimIK == aimDictionary[headBone])
+        if (aimIK == aimDictionary[HumanBodyBones.Head])
+        {
             newAimIK = SetIKHead(headBone, neckBone);
-        else if(aimIK == aimDictionary[rightHandBone])
+            key = HumanBodyBones.Head;
+        }
+        else if(aimIK == aimDictionary[HumanBodyBones.RightHand])
+        {
             newAimIK = SetIKRightHand(rightHandBone, rightForeArm, rightArm, rightShoulder);
+            key = HumanBodyBones.RightHand;
+        }
         else
+        {
             newAimIK = SetIKLeftHand(leftHandBone, leftForeArm, leftArm, leftShoulder);
+            key = HumanBodyBones.LeftHand;
+        }
+
 
         SetTargetAimIK(newAimIK, target, 0);
     
@@ -245,14 +266,35 @@ public class IKSetter : MonoBehaviour
                 varNew += .01f;
         }
 
-        Destroy(targetOld);
-        Destroy(aimIK);
-        if (aimIK == aimDictionary[headBone])
+        //controllo che nessun altro abbia lo stesso target, altrimenti lo distruggo
+        foreach(var k in aimDictionary.Keys)
+        {
+            if (k != key && aimDictionary[k].solver.target == targetOld)
+            {
+                sameTarget = true;
+            }
+        }
+        if (!sameTarget)
+            Destroy(targetOld);
+
+        if (aimIK == aimDictionary[HumanBodyBones.Head])
+        {
             headIK = newAimIK;
-        else if (aimIK == aimDictionary[rightHandBone])
+            aimDictionary[key] = newAimIK;
+        }
+
+        else if (aimIK == aimDictionary[HumanBodyBones.RightHand])
+        {
             rightHandIK = newAimIK;
+            aimDictionary[key] = newAimIK;
+        }
         else
-            leftHandIK = newAimIK;        
+        {
+            leftHandIK = newAimIK;
+            aimDictionary[key] = newAimIK;
+        }
+
+        Destroy(aimIK);
 
         if (AimCompleted != null)
             AimCompleted(this, EventArgs.Empty);
