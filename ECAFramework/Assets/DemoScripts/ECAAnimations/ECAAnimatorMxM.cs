@@ -124,7 +124,7 @@ public class ECAAnimatorMxM : ECAAnimator
     {
         //If the target is not specified, the ECA will look to the player
         if (target == null)
-            target = Player.transform;
+            target = player.transform;
         if (turnToSit)
         {
             Vector3 dir = target.forward;

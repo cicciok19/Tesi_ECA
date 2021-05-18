@@ -13,6 +13,17 @@ using UnityEngine;
 /// Aprraisal variables are used from external events, actions ecc to specify how it must be perceived by an ECA
 /// these will then be used to update the agent's emotional state
 /// </summary>
+/// 
+
+public class EmotionArgs : EventArgs
+{
+    public EmotionArgs(ECAEmotion emotion)
+    {
+        ActualEmotion = emotion;
+    }
+    public ECAEmotion ActualEmotion { get; set; }
+}
+
 	public enum AppraisalVariables
 {
     Good,
@@ -55,7 +66,10 @@ using UnityEngine;
 /// </summary>
 public class ECAEmotionManager
 {
-    public event EventHandler GlobalEmotionUpdated;
+    public event EventHandler ActualEmotionUpdated;
+    public event EventHandler ActualEmotionChanged;
+
+    private ECAEmotion actualEmotion;
 
     public Dictionary<AppraisalVariables, List<KeyValuePair<AvailableEmotions, float>>> Rules;
 
@@ -87,7 +101,7 @@ public class ECAEmotionManager
         };
     
         ActualEmotion = Joy;
-        //defineRules();
+
         if (xmlDocumentForModel != "")
             Rules = XmlParser.GetEmotionModel(xmlDocumentForModel);
     }
@@ -97,7 +111,7 @@ public class ECAEmotionManager
     /// </summary>
     /// <param name="appraisalVariable"><see cref="AppraisalVariables"/> related to event</param>
     /// <param name="scaleFactor">dull or amplifies the effect</param>
-    public virtual void updateEmotion(AppraisalVariables appraisalVariable, float scaleFactor = 1.0f)
+    public void UpdateEmotion(AppraisalVariables appraisalVariable, float scaleFactor = 1.0f)
     {
         if (Rules == null || Rules.Count == 0)
         {
@@ -106,12 +120,25 @@ public class ECAEmotionManager
         }
         if (Rules.ContainsKey(appraisalVariable))
         {
+            var tempActualEmotion = ActualEmotion;
+
             for (int i = 0; i < Rules[appraisalVariable].Count; i++)
             {
                 ECAEmotion EmotionToUpdate = Emotions[Rules[appraisalVariable][i].Key];
-                EmotionToUpdate.updateValue(Rules[appraisalVariable][i].Value * scaleFactor);
+                EmotionToUpdate.UpdateValue(Rules[appraisalVariable][i].Value * scaleFactor);
                 if (EmotionToUpdate.Value > ActualEmotion.Value)
+                {
                     ActualEmotion = EmotionToUpdate;
+                } 
+            }
+
+            if(tempActualEmotion != ActualEmotion)
+            {
+                if (ActualEmotionChanged != null)
+                {
+                    EmotionArgs args = new EmotionArgs(ActualEmotion);
+                    ActualEmotionChanged(this, args);
+                }
             }
         }
         else
@@ -119,15 +146,23 @@ public class ECAEmotionManager
             Utility.LogError("there is no rule that controls this Appraisal Variable: " + appraisalVariable.ToString());
         }
     
-        if (GlobalEmotionUpdated != null)
-            GlobalEmotionUpdated(this, EventArgs.Empty);
+        if (ActualEmotionUpdated != null)
+            ActualEmotionUpdated(this, EventArgs.Empty);
     }
 
     /// <summary>
     /// Current main emotion (the one with highest <see cref="ECAEmotion.Value"/>)
     /// </summary>
     public ECAEmotion ActualEmotion
-    { get; set; }
+    { get => actualEmotion;
+        set 
+        {
+            actualEmotion.SwitchedLevel -= OnSwitchedLevel;
+            actualEmotion = value;
+            actualEmotion.SwitchedLevel += OnSwitchedLevel;
+
+        } 
+    }
 
 
     public override string ToString()
@@ -159,6 +194,12 @@ public class ECAEmotionManager
     {
        ActualEmotion = Emotions[emotion];
        ActualEmotion.Value = strength;
+    }
+
+    private void OnSwitchedLevel(object sender, EventArgs e)
+    {
+        if (ActualEmotionUpdated != null)
+            ActualEmotionUpdated(this, EventArgs.Empty);
     }
 
 

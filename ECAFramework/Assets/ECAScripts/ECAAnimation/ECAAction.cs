@@ -18,15 +18,15 @@ public class ECAAction
 {
     public event EventHandler CompletedAction;
 
-    public int CurrentStageIdx;
+    public int actualStageIdx;
     public ECAActionStage[] AllStages;
-    public ECAAnimator EcaAnimator;
+    public ECAAnimator ecaAnimator;
     public IKSetter ikManager;
 
 
     public ECAAction(ECA eca, List<ECAActionStage> stages)
     {
-        EcaAnimator = eca.ecaAnimator;
+        ecaAnimator = eca.ecaAnimator;
         foreach(var stage in stages)
         {
     	    stage.Animator = eca.ecaAnimator;
@@ -34,13 +34,13 @@ public class ECAAction
         }
     
         AllStages = stages.ToArray();
-        CurrentStageIdx = 0;
+        actualStageIdx = 0;
     }
 
 
     public ECAAction(ECAAnimator ecaAnimator, List<ECAActionStage> stages)
     {
-        EcaAnimator = ecaAnimator;
+        this.ecaAnimator = ecaAnimator;
         foreach(var stage in stages)
         {
             stage.Animator = ecaAnimator;
@@ -48,22 +48,22 @@ public class ECAAction
         }
     
         AllStages = stages.ToArray();
-        CurrentStageIdx = 0;
+        actualStageIdx = 0;
     }
 
 
     public ECAAction(ECA eca, ECAActionStage stage)
     {
-        EcaAnimator = eca.ecaAnimator;
+        ecaAnimator = eca.ecaAnimator;
         AllStages = new ECAActionStage[1];
         AllStages[0] = stage;
         stage.Animator = eca.ecaAnimator;
-        CurrentStageIdx = 0;
+        actualStageIdx = 0;
     }
 
     public ECAAction(ECA eca)
     {
-        EcaAnimator = eca.ecaAnimator;
+        ecaAnimator = eca.ecaAnimator;
     }
 
 
@@ -77,8 +77,8 @@ public class ECAAction
 
     protected virtual void OnStageFinished(object sender, EventArgs e)
     {
-        Detach(CurrentStage);
-        CurrentStageIdx++;
+        Detach(ActualStage);
+        actualStageIdx++;
         NextStage();
     }
 
@@ -86,7 +86,7 @@ public class ECAAction
     protected virtual void OnStageAborted(object sender, EventArgs e)
     {
         Utility.Log("Stage " + sender.GetType() + " has aborted");
-        Detach(CurrentStage);
+        Detach(ActualStage);
     }
 
 
@@ -132,18 +132,18 @@ public class ECAAction
         {
             Utility.Log("Action resumed");
             State = ActionState.Running;
-            CurrentStage.ResumeStage();
+            ActualStage.ResumeStage();
         }
 
     }
 
 
-    public ECAActionStage CurrentStage
+    public ECAActionStage ActualStage
     {
         get
         {
-            if (CurrentStageIdx >= 0 && CurrentStageIdx < AllStages.Length)
-                return AllStages[CurrentStageIdx];
+            if (actualStageIdx >= 0 && actualStageIdx < AllStages.Length)
+                return AllStages[actualStageIdx];
     
             return null;
         }
@@ -154,16 +154,16 @@ public class ECAAction
     {
         if (AllStages != null)
         {
-            if(CurrentStage != null)
+            if(ActualStage != null)
             {
-    		if(EcaAnimator.CurrentAction != null && 
-    		(EcaAnimator.CurrentAction.State == ActionState.Running || EcaAnimator.CurrentAction.State == ActionState.Paused))
-    			  EcaAnimator.CurrentAction.Abort();
+    		if(ecaAnimator.actualAction != null && 
+    		(ecaAnimator.actualAction.State == ActionState.Running || ecaAnimator.actualAction.State == ActionState.Paused))
+    			  ecaAnimator.actualAction.Abort();
     
     		State = ActionState.Running;
-    		Attach(CurrentStage);	
-    		CurrentStage.StartStage();
-    		EcaAnimator.CurrentAction = this;
+    		Attach(ActualStage);	
+    		ActualStage.StartStage();
+    		ecaAnimator.actualAction = this;
             }
         }
     }
@@ -171,11 +171,11 @@ public class ECAAction
 
     public virtual void NextStage()
     {
-        if (CurrentStage != null)
+        if (ActualStage != null)
         {
             //iscrivo l'azione all'evento che segnala la fine dello stage
-            Attach(CurrentStage);
-            CurrentStage.StartStage();
+            Attach(ActualStage);
+            ActualStage.StartStage();
         }
         else
             OnCompletedAction();
@@ -189,33 +189,43 @@ public class ECAAction
     }
 
 
-    public virtual void OnStateUpdate()
+    protected virtual void OnStateUpdate(object sender, EventArgs e)
     {
     }
 
 
-    public virtual void OnLabelUpdate()
+    protected virtual void OnLabelUpdate(object sender, EventArgs e)
     {
+    }
+
+    public virtual void OnEmotionChanged(ECAEmotion emotion) 
+    {
+        ActualStage.ReactToEmotionChanged(emotion);    
+    }
+
+    public virtual void OnEmotionUpdated(ECAEmotion emotion)
+    {
+        ActualStage.ReactToEmotionUpdated(emotion);
     }
 
 
     public ActionState State
     {
         set {
-    	if(CurrentStage == null)
+    	if(ActualStage == null)
     		return;
     
             if (value == ActionState.Paused)
-    		    CurrentStage.PauseStage();
+    		    ActualStage.PauseStage();
     	    else
     	    if(value == ActionState.Aborted)
-    		    CurrentStage.AbortStage();
+    		    ActualStage.AbortStage();
     	    else
-                CurrentStage.State = value;
+                ActualStage.State = value;
         }
       get {
-    	if(CurrentStage != null)
-    		return CurrentStage.State;
+    	if(ActualStage != null)
+    		return ActualStage.State;
     	else
     		return ActionState.Inactive;
       }

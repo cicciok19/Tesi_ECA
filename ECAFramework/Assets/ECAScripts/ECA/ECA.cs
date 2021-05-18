@@ -258,6 +258,9 @@ public class ECA : MonoBehaviour, IIntentHandler
         GeneralMessagesCltn = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);
     
         EmotionManager = new ECAEmotionManager(myParameters.EmotionModel);
+        EmotionManager.ActualEmotionChanged += OnEmotionChanged;
+        EmotionManager.ActualEmotionUpdated += OnEmotionUpdated;
+        
         //ECAManager.Instance.AvailableEcas.Add(ID, this);
     
         CreateAnimator();
@@ -267,6 +270,15 @@ public class ECA : MonoBehaviour, IIntentHandler
         Utility.Log("ECA setted");
     }
 
+    protected virtual void OnEmotionChanged(object sender, EventArgs e)
+    {
+        ecaAnimator.OnEmotionChanged(ActualEmotion);
+    }
+
+    protected virtual  void OnEmotionUpdated(object sender, EventArgs e)
+    {
+        ecaAnimator.OnEmotionUpdated(ActualEmotion);
+    }
 
     public Ecas ID
     { get; protected set; }
@@ -323,7 +335,7 @@ public class ECA : MonoBehaviour, IIntentHandler
     public ECAAction currentAction
     {
       get {
-    	return ecaAnimator.CurrentAction;
+    	return ecaAnimator.actualAction;
       }
     }
 

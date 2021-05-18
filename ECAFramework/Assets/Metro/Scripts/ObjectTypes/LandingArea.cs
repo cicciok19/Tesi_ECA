@@ -44,40 +44,4 @@ public class LandingArea : MonoBehaviour
                 full = false;
         }
     }
-
-    /*
-    public void OnTriggerEnter(Collider other)
-    {
-        ECA eca;
-
-        if(other.TryGetComponent<ECA>(out eca))
-        {
-            if (ecaIn < maxOccupancy)
-            {
-                ecaIn++;
-                if(ecaIn == maxOccupancy)
-                {
-                    full = true;
-                }
-            }
-            else
-            {
-                if (SpaceCompleted != null)
-                    SpaceCompleted(this, EventArgs.Empty);
-            }
-        }
-    }
-
-    public void OnTriggerExit(Collider other)
-    {
-        ECA eca;
-
-        if (other.TryGetComponent<ECA>(out eca))
-        {
-            ecaIn--;
-            if (!full)
-                full = true;
-        }
-    }
-    */
 }

@@ -44,11 +44,11 @@ public class ECAAnimator : MonoBehaviour
     public event EventHandler TriggeredAnimationContact;
 
     internal NavMeshAgent navMeshAgent;
-    internal ECAAction CurrentAction;
+    internal ECAAction actualAction;
 
-    public string currentActionName;
+    public string actualActionName;
 
-    public GameObject Player;
+    public GameObject player;
     public Animator mecanimAnimator;
     public Text ECAText;
     public GameObject TextPanel;
@@ -110,10 +110,14 @@ public class ECAAnimator : MonoBehaviour
     }
 
 
-    protected virtual void UpdateEmotionAnimation(object sender, EventArgs e)
+    public virtual void OnEmotionChanged(ECAEmotion emotion)
     {
-        //Manage here emotion updating!!
-        //GameObject.FindObjectOfType<GuiDebug>().ShowEmotion(Eca.Name, Eca.EmotionManager.ActualEmotion);
+        actualAction.OnEmotionChanged(emotion);
+    }
+
+    public virtual void OnEmotionUpdated(ECAEmotion emotion)
+    {
+        actualAction.OnEmotionUpdated(emotion);
     }
 
 
@@ -157,15 +161,14 @@ public class ECAAnimator : MonoBehaviour
 
     public virtual void Init()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         Eca = GetComponent<ECA>();
-        Eca.EmotionManager.GlobalEmotionUpdated += UpdateEmotionAnimation;
         CreateAudioSource();
         ConfigureAudioSource();
         ActivateTextPanel();
         SetAnimator();
         SetNavMeshAgent();
-        UpdateEmotionAnimation(null, null);
+        //UpdateEmotionAnimation(null, null);
     }
 
 

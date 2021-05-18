@@ -20,7 +20,7 @@ using UnityEngine;
 /// </summary>
 public class ECAEmotion
 {
-    public event EventHandler switchedLevel;
+    public event EventHandler SwitchedLevel;
 
     protected float _value;
 
@@ -33,10 +33,10 @@ public class ECAEmotion
         EmotionType = emotionType;
         MaxValue = 1.5f;
         MinValue = -1.5f;
-        MediumHigThrashold = 0.5f;
-        LowMediumThrashold = -0.5f;
+        MediumHighThreshold = 0.5f;
+        LowMediumThreshold = -0.5f;
         Value = initialValue;
-        Level = belongToLevel(Value);
+        Level = BelongToLevel(Value);
     }
 
 
@@ -52,11 +52,11 @@ public class ECAEmotion
     /// </summary>
     /// <param name="value"></param>
     /// <returns>Level of the this emotion for the value passed as parameter</returns>
-    private EmotionLevel belongToLevel(float value)
+    private EmotionLevel BelongToLevel(float value)
     {
-        if (value > MediumHigThrashold)
+        if (value > MediumHighThreshold)
             return EmotionLevel.High;
-        else if (value < LowMediumThrashold)
+        else if (value < LowMediumThreshold)
             return EmotionLevel.Low;
         else
             return EmotionLevel.Medium;
@@ -69,15 +69,15 @@ public class ECAEmotion
     /// </summary>
     /// <param name="deltaValue">Added to <see cref="Value"/>. use negative values in order to subtract</param>
     /// <returns></returns>
-    public float updateValue(float deltaValue)
+    public float UpdateValue(float deltaValue)
     {
         float newValue = Clamp(Value + deltaValue, MinValue, MaxValue);
         Value = newValue;
-        if (!belongToLevel(newValue).Equals(Level))
+        if (!BelongToLevel(newValue).Equals(Level))
         {
-            Level = belongToLevel(newValue);
-            if (switchedLevel != null)
-                switchedLevel(this, EventArgs.Empty);
+            Level = BelongToLevel(newValue);
+            if (SwitchedLevel != null)
+                SwitchedLevel(this, EventArgs.Empty);
         }
         return Value;
     }
@@ -91,7 +91,7 @@ public class ECAEmotion
      
       set {
     	_value = value;
-        Level = belongToLevel(value);
+        Level = BelongToLevel(value);
       }
     }
 
@@ -108,11 +108,11 @@ public class ECAEmotion
     { get; protected set; }
 
 
-    public float LowMediumThrashold
+    public float LowMediumThreshold
     { get; set; }
 
 
-    public float MediumHigThrashold
+    public float MediumHighThreshold
     { get; set; }
 
 
@@ -121,7 +121,7 @@ public class ECAEmotion
         return "Emotion Type: " + this.EmotionType.ToString() + "\n" +
                 "Actual value = " + this.Value + "\n" +
                 "Actual Level = " + this.Level.ToString() + "\n" +
-                "Max value = " + MaxValue + " Min value = " + MinValue + " LowMediumThrashold = " + LowMediumThrashold + " MediumHighThrashold = " + MediumHigThrashold + "\n";
+                "Max value = " + MaxValue + " Min value = " + MinValue + " LowMediumThrashold = " + LowMediumThreshold + " MediumHighThrashold = " + MediumHighThreshold + "\n";
     }
 
 

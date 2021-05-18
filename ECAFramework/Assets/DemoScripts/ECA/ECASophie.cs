@@ -83,7 +83,7 @@ public class ECASophie : ECA
             case "None":
                 if (focusedEcas.Count == 0 || focusedEcas.Contains(this))
                     SendMessage("Misunderstood");
-                EmotionManager.updateEmotion(AppraisalVariables.UnexpectedNegative, 0.5f);
+                EmotionManager.UpdateEmotion(AppraisalVariables.UnexpectedNegative, 0.5f);
                 break;
             case "Presentation":
                 if (focusedEcas.Count == 0 || focusedEcas.Contains(this))
@@ -142,11 +142,11 @@ public class ECASophie : ECA
 
         //update emotions
         if (Labels.Good.Equals(smartAction.AccuracyLabel) && Labels.Good.Equals(smartAction.StagingLabel))
-            EmotionManager.updateEmotion(AppraisalVariables.Good);
+            EmotionManager.UpdateEmotion(AppraisalVariables.Good);
         else if (Labels.Good.Equals(smartAction.AccuracyLabel) || Labels.Good.Equals(smartAction.StagingLabel))
-            EmotionManager.updateEmotion(AppraisalVariables.Good, 0.8f);
+            EmotionManager.UpdateEmotion(AppraisalVariables.Good, 0.8f);
         else
-            EmotionManager.updateEmotion(AppraisalVariables.Good, 0.4f);
+            EmotionManager.UpdateEmotion(AppraisalVariables.Good, 0.4f);
 
         smartAction.Finished -= OnActionFinished;
     }
@@ -171,7 +171,7 @@ public class ECASophie : ECA
             //some criteria has reached the limit value
             if (smartAction.GetLabelOfCriteria(smartAction.LastUpdatedCriteria).Equals(Labels.Bad))
             {
-                EmotionManager.updateEmotion(AppraisalVariables.Bad, 0.1f);
+                EmotionManager.UpdateEmotion(AppraisalVariables.Bad, 0.1f);
                 isMessageAccepted = SendMessage(smartAction, "Support", null, false);
                 /*if (GivingSupport != null)
                     GivingSupport(isMessageAccepted);
@@ -201,7 +201,7 @@ public class ECASophie : ECA
         switch (smartAction.GetLabelOfLastSwitchedCriteria())
         {
             case Labels.Bad:
-                EmotionManager.updateEmotion(AppraisalVariables.Bad, 0.4f);
+                EmotionManager.UpdateEmotion(AppraisalVariables.Bad, 0.4f);
                 if (smartAction.LastSwitchedCriteria.Equals(Criteria.Staging))
                 {
                     StagingLabelUpdated(smartAction);
@@ -216,7 +216,7 @@ public class ECASophie : ECA
 
                 break;
             case Labels.Normal:
-                EmotionManager.updateEmotion(AppraisalVariables.Bad, 0.4f);
+                EmotionManager.UpdateEmotion(AppraisalVariables.Bad, 0.4f);
                 if (smartAction.LastSwitchedCriteria.Equals(Criteria.Staging))
                     StagingLabelUpdated(smartAction);
                 else
@@ -239,7 +239,7 @@ public class ECASophie : ECA
 
                 break;
             case Labels.Good:
-                EmotionManager.updateEmotion(AppraisalVariables.Good);
+                EmotionManager.UpdateEmotion(AppraisalVariables.Good);
 
                 //CHIAMO ANIMAZIONE ECA
 

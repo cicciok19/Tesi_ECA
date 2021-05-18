@@ -59,7 +59,6 @@ public class PressStage : ECAActionStage
             else
             {
                 hand = HandSide.LeftHand;
-                startPosition = leftHand;
             }
 
         }

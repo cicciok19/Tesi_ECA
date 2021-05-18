@@ -187,6 +187,10 @@ public abstract class ECAActionStage
     {
     }
 
+    public virtual void ReactToEmotionUpdated(ECAEmotion emotion) { }
+
+    public virtual void ReactToEmotionChanged(ECAEmotion emotion) { }
+
 
     public ActionState State
     {
