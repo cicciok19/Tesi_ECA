@@ -9,6 +9,6 @@ using UnityEngine;
 
 // global declaration end
 
-class Destination : MonoBehaviour
+public class Destination : MonoBehaviour
 {
 }

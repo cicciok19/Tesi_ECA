@@ -27,10 +27,8 @@ public class BuyTicket
         ECAAction newAction = new ECAAction(eca, stages);
         newAction.StartAction();
 
-        newAction.CompletedAction += NotificateArrival;
-        newAction.CompletedAction += EvaluateQueue;
-        Arrived += vendingMachine.PassengerArrived;
         vendingMachine.QueueUpdated += GetNewDestination;
+        newAction.CompletedAction += EvaluateQueue;
     }
 
     private void EvaluateQueue(object sender, EventArgs e)
@@ -41,33 +39,29 @@ public class BuyTicket
             eca.inQueue = true;
 
             //se la macchinetta è libera, il suo turno è il primo
-            if (vendingMachine.EcasQueue == 0)
+            if (eca.ecaTurn == 0)
             {
-                eca.ecaTurn = 1;
-                vendingMachine.EcasQueue++;
+                vendingMachine.QueueUpdated -= GetNewDestination;
                 SelectTicket();
             }
             //altrimenti devo vedere quanto è lunga la fila e settarlo di conseguenza
             else
             {
                 Utility.Log(eca.name + " waiting in queue");
-                eca.ecaTurn = vendingMachine.EcasQueue + 1;
-                vendingMachine.EcasQueue++;
-                vendingMachine.GoAhead += EvaluateQueue;
+                vendingMachine.GoAhead += GetNewDestination;
             }
         }
         else
         {
             eca.ecaTurn--;
-            if (eca.ecaTurn == 1)
+            if (eca.ecaTurn == 0)
             {
-                
+                vendingMachine.GoAhead -= GetNewDestination;
                 SelectTicket();
-                vendingMachine.GoAhead -= EvaluateQueue;
             }
             else
             {
-                ECAAction newAction = new ECAAction(eca, new GoToStage(vendingMachine.GetDestination()));
+                ECAAction newAction = new ECAAction(eca, new GoToStage(vendingMachine.GetNextPassengerPosition(eca)));
                 newAction.StartAction();
             } 
         }
@@ -78,7 +72,7 @@ public class BuyTicket
         Utility.Log(eca.name + " selecting ticket");
 
         List<ECAActionStage> stages = new List<ECAActionStage>();
-        GoToStage goToDestination = new GoToStage(vendingMachine.GetDestination());
+        GoToStage goToDestination = new GoToStage(vendingMachine.GetNextPassengerPosition(eca));
         PressStage useScreen = new PressStage(vendingMachine.GetScreen(), HandSide.RightHand);
         PressStage pressButton = new PressStage(vendingMachine.GetButton(), HandSide.RightHand);
         PickStage takeTicket = new PickStage(vendingMachine.GetTicket(), 10, false, HandSide.RightHand);
@@ -98,35 +92,35 @@ public class BuyTicket
     private void TicketTaken(object sender, EventArgs e)
     {
         vendingMachine.EcasQueue--;     //questo chiama il GoAhead
+
         if (TicketBought != null)
             TicketBought(this, EventArgs.Empty);
     }
 
-    //chiamato quando un eca riesce ad arrivare a destinazione, lo segnala alla vendingMachine
-    private void NotificateArrival(object sender, EventArgs e)
-    {
-        vendingMachine.QueueUpdated -= GetNewDestination;
-        Utility.Log(eca.name + " arrived");
-        if (Arrived != null)
-            Arrived(eca, EventArgs.Empty);
-
-    }
-
     private void GetNewDestination(object sender, EventArgs e)
     {
-        Arrived -= vendingMachine.PassengerArrived;
-
         Utility.Log(eca.name + " going in queue");
+
+        vendingMachine.QueueUpdated -= GetNewDestination;
 
         List<ECAActionStage> stages = new List<ECAActionStage>();
         GoToStage goToVendingMachine = new GoToStage(vendingMachine.GetNextPassengerPosition(eca));
+        Utility.Log(eca.name + " advance at " + vendingMachine.GetNextPassengerPosition(eca));
         TurnStage turn = new TurnStage(vendingMachine.transform);
         stages.Add(goToVendingMachine);
         stages.Add(turn);
         ECAAction newAction = new ECAAction(eca, stages);
         newAction.StartAction();
 
-        newAction.CompletedAction += NotificateArrival;
+        //newAction.CompletedAction += vendingMachine.PassengerArrived;
         newAction.CompletedAction += EvaluateQueue;
+    }
+
+    public void Evaluate()
+    {
+        if(eca.ecaTurn == 0)
+        {
+            SelectTicket();
+        }
     }
 }

@@ -35,6 +35,8 @@ public class Passenger : ECA
     {
         base.Start();
 
+        ecaTurn = -1;       //non è in coda
+
         station = GameObject.FindObjectOfType<Station>();
         station.TrainArriving += OnTrainArriving;
 
@@ -69,8 +71,10 @@ public class Passenger : ECA
         List<ECAActionStage> stages = new List<ECAActionStage>();
 
         Vector3 platformPosition = Randomize.GetRandomPosition(station.GetPlatform());
+        GoToStage exitQueue = new GoToStage(station.GetVendingMachine().GetExitPoint());
         GoToStage reachPlatform = new GoToStage(platformPosition);
         TurnStage turnToTrain = new TurnStage(train.transform);
+        stages.Add(exitQueue);
         stages.Add(reachPlatform);
         stages.Add(turnToTrain);
 

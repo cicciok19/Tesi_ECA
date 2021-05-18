@@ -251,22 +251,25 @@ public class ECA : MonoBehaviour, IIntentHandler
     public virtual void Init()
     {
         SetEcaId();
-    
+
+        CreateAnimator();
+
         IntentName = new List<string>();
     
         myParameters = XmlParser.GetEcaParameters(ID, Configuration.Instance.XmlDocumentNames.EcaList); //GET parameters of this eca from XML!! BUT, set the ID first (required to select ECA in XML file)
         GeneralMessagesCltn = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);
-    
-        EmotionManager = new ECAEmotionManager(myParameters.EmotionModel);
-        EmotionManager.ActualEmotionChanged += OnEmotionChanged;
-        EmotionManager.ActualEmotionUpdated += OnEmotionUpdated;
-        
+
+        //CREA PROBLEMI, NON SO PERCHE'
+        //EmotionManager = new ECAEmotionManager(myParameters.EmotionModel);
+        /*EmotionManager.ActualEmotionChanged += OnEmotionChanged;
+        EmotionManager.ActualEmotionUpdated += OnEmotionUpdated;*/
+
         //ECAManager.Instance.AvailableEcas.Add(ID, this);
-    
-        CreateAnimator();
-    
+
         SubscribeHandlerToIntentManager();
-    
+
+
+
         Utility.Log("ECA setted");
     }
 
@@ -349,7 +352,7 @@ public class ECA : MonoBehaviour, IIntentHandler
     {
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
+  /*  protected virtual void OnTriggerEnter(Collider other)
     {
         Passenger otherEca;
 
@@ -380,7 +383,7 @@ public class ECA : MonoBehaviour, IIntentHandler
                 currentAction.Resume();
             }
         }
-    }
+    }*/
 
     protected virtual void PlaceReached(object sender, EventArgs e)
     {

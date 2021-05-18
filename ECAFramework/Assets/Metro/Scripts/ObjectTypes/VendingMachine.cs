@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Text.RegularExpressions;
 
 public class VendingMachine : ECAInteractableObject
 {
     private PressableObject button;
     private PressableObject screen;
     private TicketReady ticketReady;
-    private Destination destination;
+    private Destination[] destinations;
+    private DestinationExit exitPoint;
     private Passenger lastPassenger;
     private int ecasQueue;
 
@@ -49,21 +51,26 @@ public class VendingMachine : ECAInteractableObject
         button = GetComponentInChildren<ECAButton>();
         screen = GetComponentInChildren<ECAScreen>();
         ticketReady = GetComponentInChildren<TicketReady>();
-        destination = GetComponentInChildren<Destination>();
+        destinations = GetComponentsInChildren<Destination>();
+        exitPoint = GetComponentInChildren<DestinationExit>();
     }
 
     public Vector3 GetNextPassengerPosition(Passenger eca)
     {
-        if (lastPassenger == null)
+        if(eca.ecaTurn == -1)
         {
-            return destination.transform.position;
+            eca.ecaTurn = EcasQueue;
+            EcasQueue++;
+            Utility.Log(eca.name + " TO " + destinations[ecasQueue - 1].name);
+            return destinations[ecasQueue-1].transform.position;
         }
         else
         {
-            var newPosition = lastPassenger.transform.position - lastPassenger.transform.forward;
-            Debug.DrawRay(newPosition, Vector3.up, Color.blue, 20f);
-            return newPosition;
-        }
+            if (eca.ecaTurn == 0)
+                return destinations[0].transform.position;
+            else
+                return destinations[eca.ecaTurn].transform.position;
+        }    
     }
 
     public PressableObject GetScreen()
@@ -83,17 +90,26 @@ public class VendingMachine : ECAInteractableObject
         return button;
     }
 
-    public Transform GetDestination()
+    public Destination[] GetDestinations()
     {
-        return destination.transform;
+        Destination[] tempDestinations = destinations;
+        foreach(var d in tempDestinations)
+        {
+            int number = Int32.Parse(Regex.Match(d.name, @"\d+").Value);
+            destinations[number] = d;
+        }
+        return destinations;
     }
 
     public void PassengerArrived(object sender, EventArgs e)
     {
-        lastPassenger = (Passenger)sender;
-        
-
         if (QueueUpdated != null)
             QueueUpdated(this, EventArgs.Empty);
     }
+
+    public Transform GetExitPoint()
+    {
+        return exitPoint.transform;
+    }
+
 }
