@@ -104,7 +104,6 @@ public class PressStage : ECAActionStage
         
         if (startEvaluate)
         {
-            Debug.Log(interactionObj.GetValue(InteractionObject.WeightCurve.Type.PoserWeight, interactionTarget, timer));
             if (interactionObj.GetValue(InteractionObject.WeightCurve.Type.PoserWeight, interactionTarget, timer) < 0.01f)
                 EndStage();
         }

@@ -47,7 +47,7 @@ public class DropStage : ECAActionStage
 
         this.obj = pickStage.obj;
 
-        Transform dropPosition = GameObject.FindObjectOfType<DropPosition>().transform;
+        Transform dropPosition = animatorMxM.Eca.GetComponentInChildren<DropPosition>().transform;
 
         pickDownPosition = dropPosition.position;
         pickDownRotation = dropPosition.rotation;

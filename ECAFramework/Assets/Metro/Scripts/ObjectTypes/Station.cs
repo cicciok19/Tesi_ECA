@@ -55,15 +55,16 @@ public class Station : MonoBehaviour
         VendingMachine vendingMachine = null;
         int min = 0;
 
-        foreach(VendingMachine vm in vendingMachines)
+        /*foreach(VendingMachine vm in vendingMachines)
         {
             if(vm.EcasQueue <= min)
             {
                 vendingMachine = vm;
                 min = vm.EcasQueue;
             }
-        }
+        }*/
 
+        vendingMachine = vendingMachines[0];
         Assert.IsNotNull(vendingMachine);
         return vendingMachine;
     }

@@ -8,11 +8,13 @@ public class VendingMachine : ECAInteractableObject
     private PressableObject button;
     private PressableObject screen;
     private TicketReady ticketReady;
-    private Destination[] destinations;
-    private ECA lastPassenger;
+    private Destination destination;
+    private Passenger lastPassenger;
     private int ecasQueue;
 
     private int idx = 0;
+
+    public event EventHandler QueueUpdated;
 
     public int EcasQueue 
     { 
@@ -21,7 +23,8 @@ public class VendingMachine : ECAInteractableObject
         { 
             if (ecasQueue != 0)
                 Occupied = true;
-            else if(value!=0 && value < ecasQueue)
+
+            if(value!=0 && value < ecasQueue)
             {
                 if (GoAhead != null)
                     GoAhead(this, EventArgs.Empty);
@@ -30,6 +33,8 @@ public class VendingMachine : ECAInteractableObject
             {
                 if (FreeMachine != null)
                     FreeMachine(this, EventArgs.Empty);
+
+                lastPassenger = null;
             }
 
             ecasQueue = value;
@@ -44,16 +49,21 @@ public class VendingMachine : ECAInteractableObject
         button = GetComponentInChildren<ECAButton>();
         screen = GetComponentInChildren<ECAScreen>();
         ticketReady = GetComponentInChildren<TicketReady>();
-        destinations = GetComponentsInChildren<Destination>();
+        destination = GetComponentInChildren<Destination>();
     }
 
-    public Transform GetNextPassengerPosition()
+    public Vector3 GetNextPassengerPosition(Passenger eca)
     {
-        /*if (lastPassenger == null)
-            return destinations[++idx].transform; //da modificare
+        if (lastPassenger == null)
+        {
+            return destination.transform.position;
+        }
         else
-            return destinations[++idx].transform;     //da sistemare perchè deve esserci un offset*/
-        return destinations[0].transform;
+        {
+            var newPosition = lastPassenger.transform.position - lastPassenger.transform.forward;
+            Debug.DrawRay(newPosition, Vector3.up, Color.blue, 20f);
+            return newPosition;
+        }
     }
 
     public PressableObject GetScreen()
@@ -71,5 +81,19 @@ public class VendingMachine : ECAInteractableObject
     public PressableObject GetButton()
     {
         return button;
+    }
+
+    public Transform GetDestination()
+    {
+        return destination.transform;
+    }
+
+    public void PassengerArrived(object sender, EventArgs e)
+    {
+        lastPassenger = (Passenger)sender;
+        
+
+        if (QueueUpdated != null)
+            QueueUpdated(this, EventArgs.Empty);
     }
 }
