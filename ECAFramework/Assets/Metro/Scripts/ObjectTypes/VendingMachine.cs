@@ -22,7 +22,7 @@ public class VendingMachine : ECAInteractableObject
 
     private PressableObject button;
     private PressableObject screen;
-    private TicketReady ticketReady;
+    private RetireProduct ticketReady;
     private Destination[] destinations;
     private DestinationExit exitPoint;
     private int ecasQueue;
@@ -35,13 +35,10 @@ public class VendingMachine : ECAInteractableObject
     {
         button = GetComponentInChildren<ECAButton>();
         screen = GetComponentInChildren<ECAScreen>();
-        ticketReady = GetComponentInChildren<TicketReady>();
+        ticketReady = GetComponentInChildren<RetireProduct>();
         destinations = GetComponentsInChildren<Destination>();
         exitPoint = GetComponentInChildren<DestinationExit>();
     }
-
-
-
 
     public Vector3 GetNextPassengerPosition(Passenger eca)
     {
