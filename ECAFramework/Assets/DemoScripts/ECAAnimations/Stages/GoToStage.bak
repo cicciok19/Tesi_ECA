@@ -1,4 +1,20 @@
-:ArrayOb.273{6:Dictionary.4369{32 17:SLSProtectMember.286331409{:String.17{9 10 "144980552"}
+:ArrayOb.273{6:Dictionary.4369{32 21:SLSPrivateMember.286331409{:String.17{9 10 "103357424"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{14 15 "startWarpSpeed"}
+ 1.2 1.88 5.6 28  29 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{14 15 "startWarpSpeed"}
+#4{5 6 "float"}
+#4{0 1 ""}
+:OrderedCltn.4369{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{2 3 " 0"}
+#4{0 1 ""}
+}
+:SLSProtectMember.286331409{#4{9 10 "144980552"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{8 9 "areaMask"}
@@ -8,13 +24,13 @@
  1  1 #4{8 9 "areaMask"}
 #4{3 4 "int"}
 #4{0 1 ""}
-:OrderedCltn.4369{16 0}
+#5{16 0}
 #5{16 0}
 #4{0 2 ""}
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
-#3{#4{9 10 "162894944"}
+#6{#4{9 10 "162894944"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{12 13 "stopDistance"}
@@ -27,23 +43,23 @@
 #5{16 0}
 #5{16 0}
 #4{1 2 "S"}
-@0 #4{7 9 "   0.5f"}
+@0 #4{5 9 " 0.5f"}
 #4{0 1 ""}
 }
-#3{#4{9 10 "144983192"}
+:SLSPublicMethod.286331408{#4{8 9 "13895808"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{5 6 "range"}
- 3 1.88 2 19  26 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{10 11 "PauseStage"}
+ 1.3 0.88 4 1  11 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{5 6 "range"}
-#4{5 6 "float"}
+ 1  1 #4{101 102 "\[\n
+    base.PauseStage();\n
+    animator.navMeshAgent.SetDestination(animator.Eca.transform.position);\n
+\]"}
+#4{10 11 "PauseStage"}
+#4{13 14 "override void"}
 #4{0 1 ""}
-#5{16 0}
-#5{16 0}
-#4{0 2 ""}
-@0 #4{3 4 " 0f"}
 #4{0 1 ""}
 }
 :JLSFriendDeclare.286331408{#4{9 10 "130155600"}
@@ -55,25 +71,36 @@
 @0  0 0 1
  0  0 #4{0 1 ""}
 }
-:SLSPublicMethod.286331408{#4{9 10 "164810488"}
+#3{#4{9 10 "103357864"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{6 7 "Update"}
- 1.3 0.88 2.4 1  13 #4{0 1 ""}
+@0  8 2 0.4 0 0 #4{14 15 "finalWarpSpeed"}
+ 1.2 1.88 5.6 37  29 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{238 372 "\[\n
-    base.Update();\n
-\n
-    if (Vector3.Distance(destination.position, animator.Eca.transform.position) <= stopDistance + 0.5f)\n
-    \[\n
-        animator.navMeshAgent.SetDestination(animator.Eca.transform.position);\n
-        EndStage();\n
-    \]\n
-\]"}
-#4{6 7 "Update"}
-#4{13 14 "override void"}
+ 1  1 #4{14 15 "finalWarpSpeed"}
+#4{5 6 "float"}
 #4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{5 6 " 0.3f"}
+#4{0 1 ""}
+}
+#3{#4{9 10 "103356104"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{13 14 "warpDirection"}
+ 1.4 1.88 5.2 19  29 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{13 14 "warpDirection"}
+#4{7 8 "Vector3"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{14 15 " new Vector3()"}
 #4{0 1 ""}
 }
 :SLSThisIcon.286331409{#4{9 10 "129304192"}
@@ -90,6 +117,74 @@
 #5{16 0}
 #4{1 2 "S"}
 @0 #4{0 1 ""}
+}
+#3{#4{9 10 "103353024"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{15 16 "actualWarpSpeed"}
+ 1 1.88 6 46  29 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{15 16 "actualWarpSpeed"}
+#4{5 6 "float"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{2 3 " 0"}
+#4{0 1 ""}
+}
+#7{#4{9 10 "164810488"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{6 7 "Update"}
+ 1.3 0.88 2.4 1  13 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{876 877 "\[\n
+    base.Update();\n
+\n
+    if (Vector3.Distance(destination, animator.Eca.transform.position) <= stopDistance + 0.5f && !warping)\n
+    \[\n
+        animator.navMeshAgent.SetDestination(animator.Eca.transform.position);\n
+        Debug.DrawRay(animator.Eca.transform.position, animator.Eca.transform.forward * 20, Color.red, 20f);\n
+        warpDirection = animator.Eca.transform.forward;\n
+\n
+        warping = true;\n
+    \]\n
+\n
+    if (warping)\n
+    \[\n
+        if(Vector3.Distance(destination, animator.Eca.transform.position) >= 0.35f)\n
+        \[\n
+            actualWarpSpeed = Mathf.SmoothDamp(actualWarpSpeed, 1f, ref startWarpSpeed, 3);\n
+            animator.Eca.transform.position = Vector3.Lerp(animator.Eca.transform.position, destination,actualWarpSpeed);\n
+        \]\n
+            //animator.Eca.transform.Translate(warpDirection * Time.deltaTime);\n
+        else\n
+            EndStage();\n
+    \]\n
+\]"}
+#4{6 7 "Update"}
+#4{13 14 "override void"}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#3{#4{9 10 "103353904"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{7 8 "warping"}
+ 2.6 1.88 2.8 46  26 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{7 8 "warping"}
+#4{4 5 "bool"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{6 7 " false"}
+#4{0 1 ""}
 }
 :JLSGlobalDeclare.286331408{#4{9 10 "130155344"}
 #1{2@0 @0 }
@@ -122,54 +217,7 @@ using UnityEngine.AI;\n
 #4{0 1 ""}
 #4{0 6 ""}
 }
-#7{#4{9 10 "176149720"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{17 18 "RandomDestination"}
- 0.3 0.88 6.8 1  9 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{554 555 "\[\n
-    Vector3 center = destination.transform.position;\n
-\n
-    for (int i = 0; i < 30; i++)\n
-    \[\n
-        Vector3 randomPoint = center + UnityEngine.Random.insideUnitSphere * range;\n
-        NavMeshHit hit;\n
-\n
-        if (NavMesh.SamplePosition(randomPoint, out hit, 2f, 1 << areaMask))\n
-        \[\n
-            Debug.DrawRay(hit.position, Vector3.up *20, Color.green, 10f);\n
-            Vector3 x = hit.position;\n
-            return x;\n
-        \]\n
-    \]\n
-\n
-    //if didn't find a valid position returns ECA actual position\n
-    return animator.Eca.transform.position;\n
-\]"}
-#4{17 18 "RandomDestination"}
-#4{7 8 "Vector3"}
-#4{11 12 "float range"}
-#4{0 1 ""}
-}
-#3{#4{9 10 "144984072"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{17 18 "randomDestination"}
- 0.599998 1.88 6.8 37  26 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{17 18 "randomDestination"}
-#4{7 8 "Vector3"}
-#4{0 1 ""}
-#5{16 0}
-#5{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{0 1 ""}
-}
-:SLSPrivateMember.286331409{#4{8 9 "96613904"}
+#3{#4{8 9 "96613904"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{11 12 "destination"}
@@ -177,7 +225,7 @@ using UnityEngine.AI;\n
 #4{0 1 ""}
 @0  0 0 1
  1  1 #4{11 12 "destination"}
-#4{9 10 "Transform"}
+#4{7 10 "Vector3"}
 #4{0 1 ""}
 #5{16 0}
 #5{16 0}
@@ -201,22 +249,20 @@ using UnityEngine.AI;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-:SLSConstructor.286331408{#4{9 10 "144980992"}
+:SLSConstructor.286331408{#4{8 9 "96612585"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{16 17 "Transform center"}
- 0.299999 0.88 6.4 47  6 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{16 17 "Vector3 destinat"}
+ 0.299999 0.88 6.4 47  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{109 110 ": base()\n
+ 1  1 #4{56 70 ": base()\n
 \[\n
-        this.range = range;\n
-        this.destination = center;\n
-        this.areaMask = areaMask;\n
+            this.destination = destination;\n
 \]"}
-#4{11 12 "Constructor"}
+#4{9 12 "GoToStage"}
 #4{0 1 ""}
-#4{47 48 "Transform center, float range, int areaMask = 1"}
+#4{19 72 "Vector3 destination"}
 #4{0 1 ""}
 }
 #12{#4{8 9 "96612584"}
@@ -226,9 +272,9 @@ using UnityEngine.AI;\n
  0.299999 0.88 6.4 47  5 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{52 70 ": base()\n
+ 1  1 #4{65 70 ": base()\n
 \[\n
-        this.destination = destination;\n
+            this.destination = destination.position;\n
 \]"}
 #4{9 12 "GoToStage"}
 #4{0 1 ""}
@@ -242,10 +288,27 @@ using UnityEngine.AI;\n
  1.3 0.88 3.2 1  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{24 25 "\[\n
+ 1  1 #4{57 58 "\[\n
     base.EndStage();\n
+    animator.Eca.stopped = true;\n
 \]"}
 #4{8 9 "EndStage"}
+#4{13 14 "override void"}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#7{#4{9 10 "104804208"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{11 12 "ResumeStage"}
+ 1.3 0.88 4.4 1  12 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{45 46 "\[\n
+    base.ResumeStage();\n
+    StartStage();\n
+\]"}
+#4{11 12 "ResumeStage"}
 #4{13 14 "override void"}
 #4{0 1 ""}
 #4{0 1 ""}
@@ -272,18 +335,13 @@ using UnityEngine.AI;\n
  1.3 0.88 4 1  6 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{255 256 "\[\n
+ 1  1 #4{200 256 "\[\n
     base.StartStage();\n
-\n
     //use this in order to not modify the destination transform\n
-    Vector3 x;\n
-\n
-    if (range != 0f)\n
-        x = RandomDestination(range);\n
-    else\n
-        x = destination.position;\n
+    Vector3 x = destination;\n
 \n
     animator.navMeshAgent.SetDestination(x);\n
+    animator.Eca.ecaInTrigger = 0;\n
 \]"}
 #4{10 11 "StartStage"}
 #4{13 14 "override void"}
@@ -291,9 +349,9 @@ using UnityEngine.AI;\n
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @68 @82 @48 @0 #5{16 1@130 }
-#5{16 4@18 @33 @3 @115 }
-#5{16 1@193 }
+:CLSCSSem.1118481{ 56  51 @98 @154 @60 @0 #5{16 6@175 @139 @83 @3 @68 @112 }
+#5{16 2@33 @18 }
+#5{16 1@250 }
 #5{16 0}
 #5{16 0}
 #5{16 0}
@@ -301,8 +359,8 @@ using UnityEngine.AI;\n
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #5{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{16@205 @181 @90 @103 @145 @0 @0 @56 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{16@169 @157 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{16@262 @226 @162 @0 @190 @48 @238 @127 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{16@214 @0 @202 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{366 367 "/*      CG&VG group @ Politecnico di Torino               */\n
 /*              All Rights Reserved\t                      */\n
 /*                                                        */\n

@@ -30,6 +30,9 @@ public class Station : MonoBehaviour
     	    TrainArriving(this, EventArgs.Empty);
     }
 
+
+
+
     protected void Awake()
     {
         platform = GetComponentInChildren<LandingArea>();
@@ -40,31 +43,56 @@ public class Station : MonoBehaviour
         Assert.IsNotNull(binary);
         vendingMachines = GetComponentsInChildren<VendingMachine>();
         Assert.IsNotNull(vendingMachines);
-
-
+    
+    
         train.Arriving += OnTrainArriving;
     }
+
+
+
 
     public LandingArea GetPlatform()
     {
         return platform;
     }
 
+
     public VendingMachine GetVendingMachine()
     {
         VendingMachine vendingMachine = null;
-        int min = 0;
-
-        /*foreach(VendingMachine vm in vendingMachines)
+        int min = 1000000;
+    
+        foreach(VendingMachine vm in vendingMachines)
         {
             if(vm.EcasQueue <= min)
             {
                 vendingMachine = vm;
                 min = vm.EcasQueue;
             }
-        }*/
+        }
+    
+        //vendingMachine = vendingMachines[0];
+        Assert.IsNotNull(vendingMachine);
+        return vendingMachine;
+    }
 
-        vendingMachine = vendingMachines[0];
+
+    public VendingMachine GetVendingMachine(ECA eca)
+    {
+        VendingMachine vendingMachine = null;
+        float min = Mathf.Infinity;
+    
+        foreach(VendingMachine vm in vendingMachines)
+        {
+            float distance = Vector3.Distance(eca.transform.position, vm.transform.position);
+            if(distance <= min)
+            {
+                vendingMachine = vm;
+                min = distance;
+            }
+        }
+    
+        //vendingMachine = vendingMachines[0];
         Assert.IsNotNull(vendingMachine);
         return vendingMachine;
     }

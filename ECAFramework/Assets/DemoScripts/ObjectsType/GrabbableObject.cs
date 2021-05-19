@@ -24,7 +24,7 @@ public class GrabbableObject : ECAInteractableObject
     protected AnimationCurve curveTwo;
     protected Rigidbody rb;
 
-    protected void Start()
+    protected void Awake()
     {
         occupied = false;
 
@@ -74,6 +74,7 @@ public class GrabbableObject : ECAInteractableObject
         {
             rb = this.gameObject.AddComponent<Rigidbody>();
             rb.useGravity = false;
+            rb.isKinematic = true;
         }
     }
 

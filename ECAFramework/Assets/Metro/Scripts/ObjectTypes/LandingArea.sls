@@ -1,33 +1,64 @@
-:ArrayOb.273{6:Dictionary.4369{16 7:SLSProtectMember.286331409{:String.17{9 10 "144398144"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{6 7 "bounds"}
- 2.8 1.88 2.4 10  37 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{6 7 "bounds"}
-#4{7 8 "Vector3"}
-#4{0 1 ""}
-:OrderedCltn.4369{16 0}
-#5{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{0 1 ""}
-}
-:SLSThisIcon.286331409{#4{9 10 "141930296"}
+:ArrayOb.273{6:Dictionary.4369{16 10:SLSThisIcon.286331409{:String.17{9 10 "141930296"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  52 45 0.4 0 0 #4{34 35 "public LandingArea : MonoBehaviour"}
  16.7829 2.2 21.76 4  0 #4{0 1 ""}
 #4{0 1 ""}
-@0  0 0 1
+@0  4.62096 3.94584 0
  0  0 #4{18 19 "public LandingArea"}
 #4{13 14 "MonoBehaviour"}
 #4{0 13 ""}
-#5{16 0}
+:OrderedCltn.4369{16 1#4{41 42 "public event EventHandler SpaceCompleted;"}
+}
 #5{16 0}
 #4{1 2 "S"}
 @0 #4{0 1 ""}
+}
+:SLSPublicMember.286331409{#4{8 9 "75469520"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{4 5 "full"}
+ 1.3 1.88 1.6 1  38 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  0 #4{4 5 "full"}
+#4{4 5 "bool"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{0 1 ""}
+#4{0 1 ""}
+}
+:SLSProtectMethod.286331408{#4{8 9 "74952744"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{5 6 "Start"}
+ 1.3 0.88 2 10  7 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{3 5 "\[\n
+\]"}
+#4{5 6 "Start"}
+#4{12 13 "virtual void"}
+#4{0 1 ""}
+#4{0 1 ""}
+ 0}
+#6{#4{9 10 "131128272"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{12 13 "maxOccupancy"}
+ 1.3 1.88 4.8 1  40 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  0 #4{12 13 "maxOccupancy"}
+#4{3 4 "int"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{0 1 ""}
+#4{0 1 ""}
 }
 :JLSGlobalDeclare.286331408{#4{8 9 "74753720"}
 #1{2@0 @0 }
@@ -42,43 +73,43 @@ using UnityEngine.AI;\n
 using UnityEngine.Assertions;\n
 "}
 }
-:SLSPublicMethod.286331408{#4{9 10 "176142664"}
+:SLSProtectMember.286331409{#4{9 10 "131130032"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{17 18 "GetRandomPosition"}
- 0.3 0.88 6.8 1  6 #4{0 1 ""}
+@0  8 2 0.4 0 0 #4{5 6 "ecaIn"}
+ 3 1.88 2 10  26 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{615 616 "\[\n
-    NavMeshHit hit;  \n
-    bool found = false;\n
-\n
-    for(int i = 0; i < 10 ; i++)\n
-    \[\n
-\t\n
-  \tVector3 position = new Vector3(\n
-\t\tcenter.x + bounds.x * extent * (float)UnityEngine.Random.Range(-1f, 1f),\n
-\t\tcenter.y,\n
-\t\tcenter.z + bounds.z * extent * (float)UnityEngine.Random.Range(-1f, 1f)\n
-  \t);\n
-\n
-\tbool found = NavMesh.SamplePosition(position, out hit, 2f, NavMesh.AllAreas);\n
-\n
-\n
-        if (found)\n
-        \[\n
-            Debug.DrawRay(position, Vector3.up, Color.green, 15f);\n
-            return hit.position;\n
-        \]\n
-        \t\n
+ 1  1 #4{5 6 "ecaIn"}
+#4{3 4 "int"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{0 1 ""}
+#4{0 1 ""}
+}
+:SLSProperty.286331392{#4{8 9 "75278288"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{5 6 "EcaIn"}
+ 1.3 0.88 2 1  26 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{202 203 "\[\n
+    get => ecaIn;\n
+    set \[\n
+        ecaIn = value;\n
+        if (ecaIn >= maxOccupancy && !full)\n
+            full = true;\n
+        else if (full && ecaIn < maxOccupancy)\n
+            full = false;\n
     \]\n
-\n
-    Utility.LogError(\"Cannot find a position in \" + name);\n
-    return Vector3.zero;\n
 \]"}
-#4{17 18 "GetRandomPosition"}
-#4{7 8 "Vector3"}
-#4{19 20 "float extent = 1.0f"}
+#4{5 6 "EcaIn"}
+#4{3 4 "int"}
+#4{0 1 ""}
+#4{0 1 ""}
 #4{0 1 ""}
 }
 :JLSFriendDeclare.286331408{#4{8 9 "74753464"}
@@ -90,28 +121,25 @@ using UnityEngine.Assertions;\n
 @0  0 0 1
  0  0 #4{0 1 ""}
 }
-:SLSProtectMethod.286331408{#4{9 10 "176140312"}
+#7{#4{9 10 "176140312"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{5 6 "Awake"}
  1.3 0.88 2 10  6 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{180 437 "\[\n
+ 1  1 #4{87 437 "\[\n
+    ecaIn = 0;\n
+    full = false;\n
+    maxOccupancy = 3;\n
   // computing object bounds\n
-\n
-  Renderer renderer = GetComponent<Renderer>();\n
-  Assert.IsNotNull(renderer);\n
-\n
-  bounds = renderer.bounds.size;\n
-  center = renderer.bounds.center;\n
 \]"}
 #4{5 6 "Awake"}
-#4{4 5 "void"}
+#4{12 13 "virtual void"}
 #4{0 1 ""}
 #4{0 1 ""}
  0}
-#3{#4{9 10 "144397264"}
+#9{#4{9 10 "144397264"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{6 7 "center"}
@@ -128,23 +156,23 @@ using UnityEngine.Assertions;\n
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @18 @32 @52 @0 #5{16 0}
-#5{16 2@3 @72 }
+:CLSCSSem.1118481{ 56  51 @3 @60 @96 @0 #5{16 0}
+#5{16 2@116 @68 }
 #5{16 0}
-#5{16 1@60 }
+#5{16 2@104 @33 }
 #5{16 0}
 #5{16 0}
-#5{16 0}
-#1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #5{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{16@40 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#5{16 0}
+#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @18 @0 @45 @0 @0 @0 }
+#1{30@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @83 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #5{16 0}
  0}
 :Float.17{0 }
-#12{1 }
-#12{0 }
-#12{1 }
+#13{1 }
+#13{0 }
+#13{1 }
 }

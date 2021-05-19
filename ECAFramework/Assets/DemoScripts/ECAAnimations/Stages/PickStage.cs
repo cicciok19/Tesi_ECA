@@ -13,7 +13,7 @@ using RootMotion;
 /// </summary>
 public class PickStage : ECAActionStage
 {
-	internal GrabbableObject target;
+	internal GrabbableObject target = null;
 	internal HandSide typePick = HandSide.Nothing;
 	internal FullBodyBipedEffector effector;
 
@@ -29,6 +29,7 @@ public class PickStage : ECAActionStage
 	private float holdWeight, holdWeightVel;
 	private Vector3 pickUpPosition;
 	private Quaternion pickUpRotation;
+	private VendingMachine vendingMachine = null;
 
 	public PickStage(Transform target, float pickSpeed, bool grab = false, HandSide typePick = HandSide.Nothing) : base()
     {
@@ -39,9 +40,26 @@ public class PickStage : ECAActionStage
 		this.typePick = typePick;
 	}
 
-    public override void StartStage()
+	public PickStage(VendingMachine vendingMachine, float pickSpeed, bool grab = false, HandSide typePick = HandSide.Nothing) : base()
+	{
+		this.vendingMachine = vendingMachine;
+		this.pickSpeed = pickSpeed;
+		this.grab = grab;
+		this.typePick = typePick;
+	}
+
+	public override void StartStage()
 	{
 		base.StartStage();
+
+		InteractionObject interactionObject = null;
+
+		if(target == null)
+        {
+			target = vendingMachine.GetTicket().GetComponent<GrabbableObject>();
+			interactionObject = target.GetComponent<InteractionObject>();
+		}
+			
 
 		animatorMxM = (ECAAnimatorMxM)animator;
 		mecanimAnimator = animatorMxM.mecanimAnimator;
@@ -54,6 +72,7 @@ public class PickStage : ECAActionStage
 		else if (!grab)
 			holdPoint = animatorMxM.Eca.GetComponentInChildren<HoldPoint>().transform;
 
+		/*
 		if (target.GetComponent<InteractionObject>() == null)
 		{
 			Debug.LogError("Target is not a grabbable object.");
@@ -61,6 +80,8 @@ public class PickStage : ECAActionStage
 		}
 		else
 			obj = target.GetComponent<InteractionObject>();
+		*/
+		obj = interactionObject;
 
 		ikManager.interactionSystem.Start();
 
@@ -74,6 +95,8 @@ public class PickStage : ECAActionStage
 
         //does the start of the interactionSystem, mandatory
         SetupInteractionSystem();
+
+
 
 		if(typePick == HandSide.Nothing)
         {
@@ -246,7 +269,7 @@ public class PickStage : ECAActionStage
         ikManager.interactionSystem.OnInteractionStart += OnStart;
         ikManager.interactionSystem.OnInteractionPause += OnPause;
 
-        ikManager.interactionSystem.speed = .5f;
+        ikManager.interactionSystem.speed = .2f;
     }
 
 }

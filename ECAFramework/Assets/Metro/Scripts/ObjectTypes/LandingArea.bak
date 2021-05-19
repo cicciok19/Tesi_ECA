@@ -49,11 +49,11 @@ using UnityEngine.Assertions;\n
  0.3 0.88 6.8 1  6 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{536 537 "\[\n
+ 1  1 #4{615 616 "\[\n
     NavMeshHit hit;  \n
     bool found = false;\n
 \n
-    while(!found)\n
+    for(int i = 0; i < 10 ; i++)\n
     \[\n
 \t\n
   \tVector3 position = new Vector3(\n
@@ -62,7 +62,7 @@ using UnityEngine.Assertions;\n
 \t\tcenter.z + bounds.z * extent * (float)UnityEngine.Random.Range(-1f, 1f)\n
   \t);\n
 \n
-\tfound = NavMesh.SamplePosition(position, out hit, 2f, NavMesh.AllAreas);\n
+\tbool found = NavMesh.SamplePosition(position, out hit, 2f, NavMesh.AllAreas);\n
 \n
 \n
         if (found)\n
@@ -73,6 +73,7 @@ using UnityEngine.Assertions;\n
         \t\n
     \]\n
 \n
+    Utility.LogError(\"Cannot find a position in \" + name);\n
     return Vector3.zero;\n
 \]"}
 #4{17 18 "GetRandomPosition"}

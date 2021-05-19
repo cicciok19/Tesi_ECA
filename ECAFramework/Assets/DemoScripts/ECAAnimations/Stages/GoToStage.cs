@@ -24,46 +24,50 @@ public class GoToStage : ECAActionStage
 {
 
     private Vector3 destination;
-    protected float stopDistance = 0.5f;
-    private bool warping = false;
-    private Vector3 warpDirection = new Vector3();
-    private float startWarpSpeed = 0;
-    private float finalWarpSpeed = 0.3f;
+    private bool warping =  false;
+    private Vector3 warpDirection =  new Vector3();
+    private float startWarpSpeed =  0;
+    private float finalWarpSpeed =  0.3f;
+    private float actualWarpSpeed =  0;
 
-    private float actualWarpSpeed = 0;
-    public float StopDistance
-    {
-        set { stopDistance = value; }
-        get { return stopDistance; }
-    }
+    protected float stopDistance =  0.5f;
+    protected int areaMask;
 
 
     public GoToStage(Transform destination)
     : base()
     {
-            this.destination = destination.position;
+                this.destination = destination.position;
     }
+
 
     public GoToStage(Vector3 destination)
     : base()
     {
-            this.destination = destination;
+                this.destination = destination;
     }
+
+
+
 
     private void OnArrivedECA(object sender, EventArgs e)
     {
         EndStage();
     }
 
+
+
+
     public override void StartStage()
     {
         base.StartStage();
         //use this in order to not modify the destination transform
         Vector3 x = destination;
-
+    
         animator.navMeshAgent.SetDestination(x);
         animator.Eca.ecaInTrigger = 0;
     }
+
 
     public override void EndStage()
     {
@@ -72,6 +76,12 @@ public class GoToStage : ECAActionStage
     }
 
 
+    public float StopDistance
+    {
+        set { stopDistance = value; }
+        get { return stopDistance; }
+    }
+
 
     public override void AbortStage()
     {
@@ -79,17 +89,20 @@ public class GoToStage : ECAActionStage
         animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
     }
 
+
     public override void PauseStage()
     {
         base.PauseStage();
         animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
     }
 
+
     public override void ResumeStage()
     {
         base.ResumeStage();
         StartStage();
     }
+
 
     public override void Update()
     {
@@ -100,10 +113,10 @@ public class GoToStage : ECAActionStage
             animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
             Debug.DrawRay(animator.Eca.transform.position, animator.Eca.transform.forward * 20, Color.red, 20f);
             warpDirection = animator.Eca.transform.forward;
-
+    
             warping = true;
         }
-
+    
         if (warping)
         {
             if(Vector3.Distance(destination, animator.Eca.transform.position) >= 0.35f)
@@ -115,6 +128,13 @@ public class GoToStage : ECAActionStage
             else
                 EndStage();
         }
+    }
+
+
+    public void ChangeDestination(Vector3 newDestination)
+    {
+        destination = newDestination;
+        animator.navMeshAgent.SetDestination(newDestination);
     }
 
 

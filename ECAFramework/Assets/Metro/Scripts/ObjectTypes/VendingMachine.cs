@@ -1,11 +1,25 @@
+/* File VendingMachine C# implementation of class VendingMachine */
+
+
+
+// global declaration start
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Text.RegularExpressions;
 
+
+// global declaration end
+
 public class VendingMachine : ECAInteractableObject
 {
+    public event EventHandler QueueUpdated;
+    public event EventHandler GoAhead;
+    public event EventHandler FreeMachine;
+
     private PressableObject button;
     private PressableObject screen;
     private TicketReady ticketReady;
@@ -13,38 +27,10 @@ public class VendingMachine : ECAInteractableObject
     private DestinationExit exitPoint;
     private Passenger lastPassenger;
     private int ecasQueue;
+    private int idx =   0;
 
-    private int idx = 0;
+    protected const float PROXIMITY_DISTANCE =  0.2f;
 
-    public event EventHandler QueueUpdated;
-
-    public int EcasQueue 
-    { 
-        get => ecasQueue;
-        set
-        { 
-            if (ecasQueue != 0)
-                Occupied = true;
-
-            if(value!=0 && value < ecasQueue)
-            {
-                if (GoAhead != null)
-                    GoAhead(this, EventArgs.Empty);
-            }
-            else if(value == 0)
-            {
-                if (FreeMachine != null)
-                    FreeMachine(this, EventArgs.Empty);
-
-                lastPassenger = null;
-            }
-
-            ecasQueue = value;
-        }
-    }
-
-    public event EventHandler GoAhead;
-    public event EventHandler FreeMachine;
 
     private void Awake()
     {
@@ -54,6 +40,9 @@ public class VendingMachine : ECAInteractableObject
         destinations = GetComponentsInChildren<Destination>();
         exitPoint = GetComponentInChildren<DestinationExit>();
     }
+
+
+
 
     public Vector3 GetNextPassengerPosition(Passenger eca)
     {
@@ -70,13 +59,15 @@ public class VendingMachine : ECAInteractableObject
                 return destinations[0].transform.position;
             else
                 return destinations[eca.ecaTurn].transform.position;
-        }    
+        }
     }
+
 
     public PressableObject GetScreen()
     {
         return screen;
     }
+
 
     public Transform GetTicket()
     {
@@ -85,10 +76,12 @@ public class VendingMachine : ECAInteractableObject
         return ticket.transform;
     }
 
+
     public PressableObject GetButton()
     {
         return button;
     }
+
 
     public Destination[] GetDestinations()
     {
@@ -101,15 +94,60 @@ public class VendingMachine : ECAInteractableObject
         return destinations;
     }
 
+
     public void PassengerArrived(object sender, EventArgs e)
     {
         if (QueueUpdated != null)
             QueueUpdated(this, EventArgs.Empty);
     }
 
+
     public Transform GetExitPoint()
     {
         return exitPoint.transform;
     }
+
+
+    public bool isQueued(ECA eca)
+    {
+      return Vector3.Distance(eca.transform.position, FrontPosition) <= PROXIMITY_DISTANCE;
+    }
+
+
+    public Vector3 FrontPosition
+    {
+      get => destinations[0].transform.position;
+    }
+
+
+    public int EcasQueue
+    { 
+        get => ecasQueue;
+        set
+        {
+            int prevQueueValue = ecasQueue;
+            ecasQueue = value;
+    
+            if (ecasQueue != 0)
+                Occupied = true;
+            else
+                Occupied = false;
+    
+            if(value!=0 && value < prevQueueValue)
+            {
+                if (GoAhead != null)
+                    GoAhead(this, EventArgs.Empty);
+            }
+            else if(value == 0)
+            {
+                if (FreeMachine != null)
+                    FreeMachine(this, EventArgs.Empty);
+    
+                lastPassenger = null;
+            }
+    
+        }
+    }
+
 
 }

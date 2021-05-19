@@ -18,30 +18,27 @@ public class ECAAction
 {
     public event EventHandler CompletedAction;
 
-    public int actualStageIdx;
-    public ECAActionStage[] AllStages;
+    protected int actualStageIdx;
+    protected ECA eca;
+
     public ECAAnimator ecaAnimator;
+    public ECAActionStage[] AllStages;
     public IKSetter ikManager;
 
 
     public ECAAction(ECA eca, List<ECAActionStage> stages)
     {
+        this.eca = eca;
         ecaAnimator = eca.ecaAnimator;
-        foreach(var stage in stages)
-        {
-    	    stage.Animator = eca.ecaAnimator;
-            //stage.StageFinished += OnStageFinished;
-        }
-    
-        AllStages = stages.ToArray();
-        actualStageIdx = 0;
+        SetStages(stages);
     }
 
 
     public ECAAction(ECAAnimator ecaAnimator, List<ECAActionStage> stages)
     {
         this.ecaAnimator = ecaAnimator;
-        foreach(var stage in stages)
+        this.eca = ecaAnimator.Eca;
+        foreach (var stage in stages)
         {
             stage.Animator = ecaAnimator;
             //stage.StageFinished += OnStageFinished;
@@ -54,6 +51,7 @@ public class ECAAction
 
     public ECAAction(ECA eca, ECAActionStage stage)
     {
+        this.eca = eca;
         ecaAnimator = eca.ecaAnimator;
         AllStages = new ECAActionStage[1];
         AllStages[0] = stage;
@@ -61,8 +59,10 @@ public class ECAAction
         actualStageIdx = 0;
     }
 
+
     public ECAAction(ECA eca)
     {
+        this.eca = eca;
         ecaAnimator = eca.ecaAnimator;
     }
 
@@ -112,6 +112,49 @@ public class ECAAction
     }
 
 
+    protected virtual void OnStateUpdate(object sender, EventArgs e)
+    {
+    }
+
+
+    protected virtual void OnLabelUpdate(object sender, EventArgs e)
+    {
+    }
+
+
+    protected virtual void NextStage()
+    {
+        if (ActualStage != null)
+        {
+            //iscrivo l'azione all'evento che segnala la fine dello stage
+            Attach(ActualStage);
+            ActualStage.StartStage();
+        }
+        else
+            OnCompletedAction();
+    }
+
+
+    protected void SetStages(List<ECAActionStage> stages)
+    {
+        foreach(var stage in stages)
+        {
+    	    stage.Animator = eca.ecaAnimator;
+            //stage.StageFinished += OnStageFinished;
+        }
+    
+        AllStages = stages.ToArray();
+        actualStageIdx = 0;
+    }
+
+
+
+
+    public void Pause()
+    {
+        Utility.Log("Action paused");
+        State = ActionState.Paused;
+    }
 
 
     public void Abort()
@@ -120,11 +163,6 @@ public class ECAAction
         State = ActionState.Aborted;
     }
 
-    public void Pause()
-    {
-        Utility.Log("Action paused");
-        State = ActionState.Paused;
-    }
 
     public void Resume()
     {
@@ -134,19 +172,18 @@ public class ECAAction
             State = ActionState.Running;
             ActualStage.ResumeStage();
         }
-
     }
 
 
-    public ECAActionStage ActualStage
+    public virtual void OnEmotionChanged(ECAEmotion emotion)
     {
-        get
-        {
-            if (actualStageIdx >= 0 && actualStageIdx < AllStages.Length)
-                return AllStages[actualStageIdx];
-    
-            return null;
-        }
+        ActualStage.ReactToEmotionChanged(emotion);
+    }
+
+
+    public virtual void OnEmotionUpdated(ECAEmotion emotion)
+    {
+        ActualStage.ReactToEmotionUpdated(emotion);
     }
 
 
@@ -169,43 +206,12 @@ public class ECAAction
     }
 
 
-    public virtual void NextStage()
-    {
-        if (ActualStage != null)
-        {
-            //iscrivo l'azione all'evento che segnala la fine dello stage
-            Attach(ActualStage);
-            ActualStage.StartStage();
-        }
-        else
-            OnCompletedAction();
-    }
-
-
     public virtual void OnCompletedAction()
     {
+        State = ActionState.Completed;
+    
         if (CompletedAction != null)
             CompletedAction(this, EventArgs.Empty);
-    }
-
-
-    protected virtual void OnStateUpdate(object sender, EventArgs e)
-    {
-    }
-
-
-    protected virtual void OnLabelUpdate(object sender, EventArgs e)
-    {
-    }
-
-    public virtual void OnEmotionChanged(ECAEmotion emotion) 
-    {
-        ActualStage.ReactToEmotionChanged(emotion);    
-    }
-
-    public virtual void OnEmotionUpdated(ECAEmotion emotion)
-    {
-        ActualStage.ReactToEmotionUpdated(emotion);
     }
 
 
@@ -229,6 +235,27 @@ public class ECAAction
     	else
     		return ActionState.Inactive;
       }
+    }
+
+
+    public ECAActionStage ActualStage
+    {
+        get
+        {
+            try
+            {
+                if (AllStages != null && actualStageIdx >= 0 && actualStageIdx < AllStages.Length)
+                    return AllStages[actualStageIdx];
+    
+            }
+            catch (Exception e)
+            {
+                Utility.LogError("Generated exception :: " + e.Message);
+            }
+    
+    
+            return null;
+        }
     }
 
 

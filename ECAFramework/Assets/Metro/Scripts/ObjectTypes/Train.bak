@@ -1,4 +1,4 @@
-:ArrayOb.273{6:Dictionary.4369{16 14:SLSPrivateMethod.286331408{:String.17{9 10 "176146584"}
+:ArrayOb.273{6:Dictionary.4369{16 16:SLSPrivateMethod.286331408{:String.17{9 10 "176146584"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{13 14 "WaitDoorsOpen"}
@@ -31,6 +31,20 @@
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
+:SLSProperty.286331392{#4{8 9 "75279136"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{11 12 "doorsOpened"}
+ 1.3 0.879999 4.4 1  26 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{21 22 "\[ get; private set; \]"}
+#4{11 12 "doorsOpened"}
+#4{4 5 "bool"}
+#4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
+}
 :SLSPrivateMember.286331409{#4{9 10 "144298240"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -54,8 +68,8 @@
  1.3 0.88 4.8 19  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{150 151 "\[\n
-    yield return new WaitForSeconds(20f);\n
+ 1  1 #4{151 152 "\[\n
+    yield return new WaitForSeconds(100f);\n
     if (Arriving != null)\n
         Arriving(this, EventArgs.Empty);\n
 \n
@@ -72,7 +86,7 @@
 @0  52 45 0.4 0 0 #4{28 29 "public Train : MonoBehaviour"}
  17.88 2.2 17.92 4  0 #4{0 1 ""}
 #4{0 1 ""}
-@0  5.27296 -100 0
+@0  5.20052 3.74855 0
  0  0 #4{12 13 "public Train"}
 #4{13 14 "MonoBehaviour"}
 #4{0 13 ""}
@@ -90,9 +104,9 @@
  1.3 0.88 2 10  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{217 220 "\[\n
+ 1  1 #4{224 227 "\[\n
     doors = GameObject.FindObjectsOfType<TrainDoor>();\n
-    places = GameObject.FindObjectsOfType<PassengerPlace>();\n
+    places = GameObject.FindObjectsOfType<ECAInteractableObject>();\n
     landingArea = GameObject.FindObjectOfType<LandingArea>();\n
     StartCoroutine(WaitArriving());\n
 \]"}
@@ -108,15 +122,15 @@
  0.3 0.88 7.6 1  8 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{58 350 "\[\n
-  return NearestDoor(ecaPosition).GetRandomPosition();\n
+ 1  1 #4{77 350 "\[\n
+  return Randomize.GetRandomPosition(NearestDoor(ecaPosition).FrontDoor);\n
 \]"}
 #4{19 20 "NearestDoorPosition"}
 #4{7 8 "Vector3"}
 #4{19 20 "Vector3 ecaPosition"}
 #4{0 1 ""}
 }
-#10{#4{9 10 "176136785"}
+#11{#4{9 10 "176136785"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{11 12 "NearestDoor"}
@@ -144,7 +158,7 @@
 #4{19 20 "Vector3 ecaPosition"}
 #4{0 1 ""}
 }
-#10{#4{9 10 "176141488"}
+#11{#4{9 10 "176141488"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{18 19 "GetPassengerPlaces"}
@@ -155,7 +169,7 @@
     return places;\n
 \]"}
 #4{18 19 "GetPassengerPlaces"}
-#4{16 17 "PassengerPlace[]"}
+#4{23 24 "ECAInteractableObject[]"}
 #4{0 1 ""}
 #4{0 1 ""}
 }
@@ -181,7 +195,7 @@ using System.Collections.Generic;\n
 using UnityEngine;\n
 "}
 }
-#7{#4{9 10 "144296920"}
+#8{#4{9 10 "144296920"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{6 7 "places"}
@@ -189,7 +203,7 @@ using UnityEngine;\n
 #4{0 1 ""}
 @0  0 0 1
  1  1 #4{6 7 "places"}
-#4{16 17 "PassengerPlace[]"}
+#4{23 24 "ECAInteractableObject[]"}
 #4{0 1 ""}
 #6{16 0}
 #6{16 0}
@@ -213,7 +227,21 @@ using UnityEngine;\n
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
-#10{#4{9 10 "176144624"}
+#7{#4{8 9 "75276168"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{12 13 "trainArrived"}
+ 1.3 0.88 4.8 1  10 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{21 22 "\[ get; private set; \]"}
+#4{12 13 "trainArrived"}
+#4{4 5 "bool"}
+#4{0 1 ""}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#11{#4{9 10 "176144624"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{13 14 "GetTrainDoors"}
@@ -229,23 +257,23 @@ using UnityEngine;\n
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @57 @129 @121 @0 #6{16 2@30 @137 }
-#6{16 1@152 }
-#6{16 2@45 @3 }
-#6{16 1@73 }
+:CLSCSSem.1118481{ 56  51 @70 @142 @134 @0 #6{16 2@43 @150 }
+#6{16 1@165 }
+#6{16 2@58 @3 }
+#6{16 1@86 }
 #6{16 0}
 #6{16 0}
 #6{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #6{16 0}
 #1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @15 @0 @0 @0 }
-#1{16@167 @109 @85 @97 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{30@193 @122 @98 @110 @180 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @30 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #6{16 0}
  0}
 :Float.17{0 }
-#15{1 }
-#15{0 }
-#15{1 }
+#16{1 }
+#16{0 }
+#16{1 }
 }
