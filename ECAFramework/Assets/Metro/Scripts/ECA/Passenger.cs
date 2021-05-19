@@ -19,7 +19,6 @@ public class Passenger : ECA
 {
 
     private Train train;
-    private float maxRange;
     private BuyTicket buyTicket;
 
     protected const float TAKE_TICKET_CHANCE =   0.2f;
@@ -62,7 +61,6 @@ public class Passenger : ECA
         ecaTurn = -1;       //non è in coda
     
         station = GameObject.FindObjectOfType<Station>();
-        //station.TrainArriving += OnTrainArriving;
     
         train = station.train;
         inQueue = false;
@@ -75,26 +73,17 @@ public class Passenger : ECA
             Utility.Log(name + " is taking ticket");
         	buyTicket = new BuyTicket(this);
     
-    	buyTicket.CompletedAction += OnActionCompleted;
-    	actionList.Add(buyTicket);
+    	    buyTicket.CompletedAction += OnActionCompleted;
+    	    actionList.Add(buyTicket);
     
-    	GoToTakeTrain();
+    	    GoToTakeTrain();
         }
         else
         {
-    	GoToTakeTrain();
+    	    GoToTakeTrain();
         }
         
-    
-    
-        //max distance from the destination (es. door when waiting, binary's empty)
-        //maxRange = 5f;
-        maxRange = 10f;
-    
         actionList[0].StartAction();
-    
-        //GoToPlatform();
-        // buyTicket.GoToVendingMachine();
     }
 
 

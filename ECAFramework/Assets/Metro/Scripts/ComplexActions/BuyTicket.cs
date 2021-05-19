@@ -28,8 +28,8 @@ public class BuyTicket : ECACompositeAction
     public BuyTicket(Passenger eca)
     :base(eca)
     {
-            this.eca = eca;
-            vendingMachine = this.eca.station.GetVendingMachine(eca);
+        this.eca = eca;
+        vendingMachine = this.eca.station.GetVendingMachine(eca);
     }
 
 
@@ -71,7 +71,7 @@ public class BuyTicket : ECACompositeAction
     private void GetNewDestination(object sender, EventArgs e)
     {
         if(queuedECA)
-    	return;
+    	    return;
     
         Utility.Log(eca.name + " going in queue");
         goingToMachine.ChangeDestination(vendingMachine.GetNextPassengerPosition(eca));
@@ -125,21 +125,21 @@ public class BuyTicket : ECACompositeAction
 
     protected void CreateActionList()
     {
-      GoToVendingMachine();
-      CompleteQueueing();
-      SelectTicket();
+        GoToVendingMachine();
+        CompleteQueueing();
+        SelectTicket();
     }
 
 
     protected void CompleteQueueing()
     {
-      actions.Add(new ManageVendingMachineQueue(eca, vendingMachine));
+        actions.Add(new ManageVendingMachineQueue(eca, vendingMachine));
     }
 
 
     protected void OnVendingMachineReached(object sender, EventArgs e)
     {
-       Utility.Log(" arrived " + eca.name);
+        Utility.Log(" arrived " + eca.name);
     
         ECAAction goToVendingMachine = (ECAAction)sender;
         goToVendingMachine.CompletedAction -= OnVendingMachineReached;
@@ -151,8 +151,8 @@ public class BuyTicket : ECACompositeAction
 
     public override void StartAction()
     {
-       CreateActionList();
-       base.StartAction();
+        CreateActionList();
+        base.StartAction();
     }
 
 

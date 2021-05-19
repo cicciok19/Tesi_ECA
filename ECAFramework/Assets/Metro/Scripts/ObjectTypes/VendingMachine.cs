@@ -25,7 +25,6 @@ public class VendingMachine : ECAInteractableObject
     private TicketReady ticketReady;
     private Destination[] destinations;
     private DestinationExit exitPoint;
-    private Passenger lastPassenger;
     private int ecasQueue;
     private int idx =   0;
 
@@ -46,19 +45,18 @@ public class VendingMachine : ECAInteractableObject
 
     public Vector3 GetNextPassengerPosition(Passenger eca)
     {
+        //it's not queued
         if(eca.ecaTurn == -1)
         {
             eca.ecaTurn = EcasQueue;
             EcasQueue++;
             Utility.Log(eca.name + " TO " + destinations[ecasQueue - 1].name);
+
             return destinations[ecasQueue-1].transform.position;
         }
         else
         {
-            if (eca.ecaTurn == 0)
-                return destinations[0].transform.position;
-            else
-                return destinations[eca.ecaTurn].transform.position;
+            return destinations[eca.ecaTurn].transform.position;
         }
     }
 
@@ -86,11 +84,13 @@ public class VendingMachine : ECAInteractableObject
     public Destination[] GetDestinations()
     {
         Destination[] tempDestinations = destinations;
+
         foreach(var d in tempDestinations)
         {
             int number = Int32.Parse(Regex.Match(d.name, @"\d+").Value);
             destinations[number] = d;
         }
+
         return destinations;
     }
 
@@ -110,13 +110,13 @@ public class VendingMachine : ECAInteractableObject
 
     public bool isQueued(ECA eca)
     {
-      return Vector3.Distance(eca.transform.position, FrontPosition) <= PROXIMITY_DISTANCE;
+        return Vector3.Distance(eca.transform.position, FrontPosition) <= PROXIMITY_DISTANCE;
     }
 
 
     public Vector3 FrontPosition
     {
-      get => destinations[0].transform.position;
+        get => destinations[0].transform.position;
     }
 
 
@@ -142,8 +142,6 @@ public class VendingMachine : ECAInteractableObject
             {
                 if (FreeMachine != null)
                     FreeMachine(this, EventArgs.Empty);
-    
-                lastPassenger = null;
             }
     
         }

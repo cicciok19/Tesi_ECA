@@ -96,7 +96,7 @@ public class EnterTrain : ECACompositeAction
         if(stages.Count != 0)
         {
             enterTrain = new ECAAction(eca, stages);
-    	actions.Add(enterTrain);
+    	    actions.Add(enterTrain);
         }
     }
 
@@ -108,7 +108,7 @@ public class EnterTrain : ECACompositeAction
         doorOpened = true;
         if(ActualAction == goToDoor)
         {
-    	CompleteAndAdvance();
+    	    CompleteAndAdvance();
         }
     
     }
@@ -119,7 +119,7 @@ public class EnterTrain : ECACompositeAction
     protected override void OnActualActionCompleted(object sender, EventArgs e)
     {
         if(doorOpened)
-    	CompleteAndAdvance();
+    	    CompleteAndAdvance();
     }
 
 
