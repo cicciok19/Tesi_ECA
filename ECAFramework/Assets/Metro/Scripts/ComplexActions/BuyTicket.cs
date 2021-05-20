@@ -32,13 +32,8 @@ public class BuyTicket : ECACompositeAction
         vendingMachine = this.eca.station.GetVendingMachine(eca);
     }
 
-
-
-
     private void SelectTicket()
     {
-        //Utility.Log(eca.name + " selecting ticket");
-    
         List<ECAActionStage> stages = new List<ECAActionStage>();
         PressStage useScreen = new PressStage(vendingMachine.GetScreen(), HandSide.RightHand);
         PressStage pressButton = new PressStage(vendingMachine.GetButton(), HandSide.RightHand);
@@ -123,7 +118,7 @@ public class BuyTicket : ECACompositeAction
     }
 
 
-    protected void CreateActionList()
+    protected override void CreateActionList()
     {
         GoToVendingMachine();
         CompleteQueueing();
@@ -133,7 +128,7 @@ public class BuyTicket : ECACompositeAction
 
     protected void CompleteQueueing()
     {
-        actions.Add(new ManageVendingMachineQueue(eca, vendingMachine));
+        actions.Add(new ManageQueue(eca, vendingMachine));
     }
 
 

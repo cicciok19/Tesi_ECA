@@ -102,5 +102,10 @@ public class ECACompositeAction : ECAAction
         }
     }
 
+    protected virtual void CreateActionList()
+    {
+
+    }
+
 
 }

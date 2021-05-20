@@ -30,7 +30,6 @@ public class Passenger : ECA
     public Station station;
     public int ecaTurn;
     public bool ticketTaken;
-    public bool inQueue;
 
 
     private void OnActionCompleted(object sender, EventArgs e)
@@ -39,9 +38,6 @@ public class Passenger : ECA
       if(actionIdx < actionList.Count)
     	actionList[actionIdx].StartAction();
     }
-
-
-
 
     protected override void CreateAnimator()
     {
@@ -63,11 +59,11 @@ public class Passenger : ECA
         station = GameObject.FindObjectOfType<Station>();
     
         train = station.train;
-        inQueue = false;
         ticketTaken = false;
     
         float chance = UnityEngine.Random.Range(0f, 1f);
     
+        //evaluate probability of taking the ticket
         if(chance < TAKE_TICKET_CHANCE)
         {
             Utility.Log(name + " is taking ticket");

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Distributor : MonoBehaviour
+public class Distributor : QueueableObject
 {
     private Destination[] destinations;
     private ECAButton[] buttons;
@@ -18,9 +18,9 @@ public class Distributor : MonoBehaviour
         enterMoney = GetComponentInChildren<EnterMoney>();
     }
 
-    public EnterMoney GetEnterMoney()
+    public Transform GetEnterMoney()
     {
-        return enterMoney;
+        return enterMoney.transform;
     }
 
     public ECAButton GetRandomButton()
@@ -30,6 +30,13 @@ public class Distributor : MonoBehaviour
     }
 
     public Transform GetProduct()
+    {
+        GameObject bottle = (GameObject)GameObject.Instantiate(Resources.Load("Prefab/DrinkBottle"), retireProduct.transform);
+        bottle.transform.localPosition = new Vector3(0, 0, 0);
+        return bottle.transform;
+    }
+
+    public Transform GetBottle()
     {
         GameObject bottle = (GameObject)GameObject.Instantiate(Resources.Load("Prefab/DrinkBottle"), retireProduct.transform);
         bottle.transform.localPosition = new Vector3(0, 0, 0);

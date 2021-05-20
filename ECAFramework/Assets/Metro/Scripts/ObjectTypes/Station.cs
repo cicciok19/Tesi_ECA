@@ -19,6 +19,7 @@ public class Station : MonoBehaviour
     internal Train train;
     internal Binary binary;
     internal VendingMachine[] vendingMachines;
+    internal Distributor[] distributors;
 
     protected LandingArea platform;
 
@@ -43,6 +44,8 @@ public class Station : MonoBehaviour
         Assert.IsNotNull(binary);
         vendingMachines = GetComponentsInChildren<VendingMachine>();
         Assert.IsNotNull(vendingMachines);
+        distributors = GetComponentsInChildren<Distributor>();
+        Assert.IsNotNull(distributors);
     
     
         train.Arriving += OnTrainArriving;
@@ -57,6 +60,7 @@ public class Station : MonoBehaviour
     }
 
 
+    //get vending machine with less queue (to be corrected)
     public VendingMachine GetVendingMachine()
     {
         VendingMachine vendingMachine = null;
@@ -76,7 +80,7 @@ public class Station : MonoBehaviour
         return vendingMachine;
     }
 
-
+    //get nearest vending machine
     public VendingMachine GetVendingMachine(ECA eca)
     {
         VendingMachine vendingMachine = null;
@@ -95,6 +99,26 @@ public class Station : MonoBehaviour
         //vendingMachine = vendingMachines[0];
         Assert.IsNotNull(vendingMachine);
         return vendingMachine;
+    }
+
+    //get nearest distributor
+    public Distributor GetDistributor(ECA eca)
+    {
+        Distributor distributor = null;
+        float min = Mathf.Infinity;
+
+        foreach (Distributor d in distributors)
+        {
+            float distance = Vector3.Distance(eca.transform.position, d.transform.position);
+            if (distance <= min)
+            {
+                distributor = d;
+                min = distance;
+            }
+        }
+
+        Assert.IsNotNull(distributor);
+        return distributor;
     }
 
 
