@@ -29,7 +29,7 @@ public class PickStage : ECAActionStage
 	private float holdWeight, holdWeightVel;
 	private Vector3 pickUpPosition;
 	private Quaternion pickUpRotation;
-	private VendingMachine vendingMachine = null;
+	private QueueableObject queueableObject = null;
 
 	public PickStage(Transform target, float pickSpeed, bool grab = false, HandSide typePick = HandSide.Nothing) : base()
     {
@@ -40,9 +40,9 @@ public class PickStage : ECAActionStage
 		this.typePick = typePick;
 	}
 
-	public PickStage(VendingMachine vendingMachine, float pickSpeed, bool grab = false, HandSide typePick = HandSide.Nothing) : base()
+	public PickStage(QueueableObject queueableObject, float pickSpeed, bool grab = false, HandSide typePick = HandSide.Nothing) : base()
 	{
-		this.vendingMachine = vendingMachine;
+		this.queueableObject = queueableObject;
 		this.pickSpeed = pickSpeed;
 		this.grab = grab;
 		this.typePick = typePick;
@@ -52,12 +52,12 @@ public class PickStage : ECAActionStage
 	{
 		base.StartStage();
 
-		InteractionObject interactionObject = null;
+		//InteractionObject interactionObject = null;
 
 		if(target == null)
         {
-			target = vendingMachine.GetTicket().GetComponent<GrabbableObject>();
-			interactionObject = target.GetComponent<InteractionObject>();
+			target = queueableObject.GetGrabbableGameObject().GetComponent<GrabbableObject>();
+			//obj = target.GetComponent<InteractionObject>();
 		}
 			
 
@@ -81,7 +81,8 @@ public class PickStage : ECAActionStage
 		else
 			obj = target.GetComponent<InteractionObject>();
 		*/
-		obj = interactionObject;
+		//obj = interactionObject;
+		obj = target.GetComponent<InteractionObject>();
 
 		ikManager.interactionSystem.Start();
 
@@ -97,7 +98,7 @@ public class PickStage : ECAActionStage
         SetupInteractionSystem();
 
 
-
+		//if handSide is not specified gets the closest hand
 		if(typePick == HandSide.Nothing)
         {
 			Transform rightHand = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.RightHand);
@@ -109,6 +110,7 @@ public class PickStage : ECAActionStage
 				typePick = HandSide.LeftHand;
 		}
 
+		//start the interaction with the correct hand
 		if (typePick == HandSide.LeftHand)
 		{
 			effector = FullBodyBipedEffector.LeftHand;
@@ -125,10 +127,7 @@ public class PickStage : ECAActionStage
             ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
             ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
 		}
-        else if(typePick == HandSide.Nothing)
-        {
-            Debug.LogError("Select a TypePick!");
-        }
+
 	}
 
 	// Called by the InteractionSystem when an interaction is paused (on trigger)

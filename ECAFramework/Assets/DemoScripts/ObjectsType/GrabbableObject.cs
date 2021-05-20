@@ -74,7 +74,7 @@ public class GrabbableObject : ECAInteractableObject
         {
             rb = this.gameObject.AddComponent<Rigidbody>();
             rb.useGravity = false;
-            rb.isKinematic = true;
+            //rb.isKinematic = true;
         }
     }
 

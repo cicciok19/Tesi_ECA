@@ -15,10 +15,11 @@ public class QueueableObject : MonoBehaviour
 
     private Destination[] destinations;
     private DestinationExit exitPoint;
+
     private int ecasQueue;
     private int idx = 0;
 
-    private void Awake()
+    protected  virtual void Awake()
     {
         destinations = GetComponentsInChildren<Destination>();
         exitPoint = GetComponentInChildren<DestinationExit>();
@@ -84,6 +85,7 @@ public class QueueableObject : MonoBehaviour
             int prevQueueValue = ecasQueue;
             ecasQueue = value;
 
+            //se diminuisce il numero di eca in fila
             if (value != 0 && value < prevQueueValue)
             {
                 if (GoAhead != null)
@@ -96,5 +98,21 @@ public class QueueableObject : MonoBehaviour
             }
 
         }
+    }
+
+    public bool Full
+    {
+        get
+        {
+            if (ecasQueue < destinations.Length)
+                return false;
+            else
+                return true;
+        }
+    }
+
+    public virtual Transform GetGrabbableGameObject()
+    {
+        return null;
     }
 }

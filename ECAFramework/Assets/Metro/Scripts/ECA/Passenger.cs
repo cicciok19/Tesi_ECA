@@ -20,8 +20,11 @@ public class Passenger : ECA
 
     private Train train;
     private BuyTicket buyTicket;
+    private BuyBottle buyBottle;
 
     protected const float TAKE_TICKET_CHANCE =   0.2f;
+    protected const float TAKE_DRINK_CHANCE = 0.2f;
+
     protected EnterTrain enterTrain;
     protected ReachPlatform reachPlatform;
     protected List<ECAAction> actionList =  new List<ECAAction>();
@@ -30,6 +33,7 @@ public class Passenger : ECA
     public Station station;
     public int ecaTurn;
     public bool ticketTaken;
+    public bool bottleTaken;
 
 
     private void OnActionCompleted(object sender, EventArgs e)
@@ -60,24 +64,31 @@ public class Passenger : ECA
     
         train = station.train;
         ticketTaken = false;
+        bottleTaken = false;
     
-        float chance = UnityEngine.Random.Range(0f, 1f);
-    
+        float chanceTicket = UnityEngine.Random.Range(0f, 1f);
+        float chanceBottle = UnityEngine.Random.Range(0f, 1f);
+
         //evaluate probability of taking the ticket
-        if(chance < TAKE_TICKET_CHANCE)
+        if (chanceTicket < TAKE_TICKET_CHANCE)
         {
             Utility.Log(name + " is taking ticket");
         	buyTicket = new BuyTicket(this);
     
     	    buyTicket.CompletedAction += OnActionCompleted;
     	    actionList.Add(buyTicket);
-    
-    	    GoToTakeTrain();
         }
-        else
+        if(chanceBottle < TAKE_DRINK_CHANCE)
         {
-    	    GoToTakeTrain();
+            Utility.Log(name + " is taking drink");
+            buyBottle = new BuyBottle(this);
+
+            buyBottle.CompletedAction += OnActionCompleted;
+            actionList.Add(buyBottle);
         }
+    	
+        //a prescindere l'obiettivo finale è andare a prendere il treno
+        GoToTakeTrain();
         
         actionList[0].StartAction();
     }
@@ -93,6 +104,7 @@ public class Passenger : ECA
        actionList.Add(enterTrain);
        enterTrain.CompletedAction += OnActionCompleted;
     }
+
 
 
 }

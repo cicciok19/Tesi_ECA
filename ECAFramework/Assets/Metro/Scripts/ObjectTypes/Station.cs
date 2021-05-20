@@ -89,7 +89,7 @@ public class Station : MonoBehaviour
         foreach(VendingMachine vm in vendingMachines)
         {
             float distance = Vector3.Distance(eca.transform.position, vm.transform.position);
-            if(distance <= min)
+            if(distance <= min && !vm.Full)
             {
                 vendingMachine = vm;
                 min = distance;
@@ -110,7 +110,7 @@ public class Station : MonoBehaviour
         foreach (Distributor d in distributors)
         {
             float distance = Vector3.Distance(eca.transform.position, d.transform.position);
-            if (distance <= min)
+            if (distance <= min && !d.Full)
             {
                 distributor = d;
                 min = distance;

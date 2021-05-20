@@ -24,8 +24,9 @@ public class VendingMachine : QueueableObject
     protected const float PROXIMITY_DISTANCE =  0.2f;
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         button = GetComponentInChildren<ECAButton>();
         screen = GetComponentInChildren<ECAScreen>();
         ticketReady = GetComponentInChildren<RetireProduct>();
@@ -37,7 +38,7 @@ public class VendingMachine : QueueableObject
     }
 
 
-    public Transform GetTicket()
+    public override Transform GetGrabbableGameObject()
     {
         GameObject ticket = (GameObject)Instantiate(Resources.Load("Prefab/Ticket"), ticketReady.transform);
         ticket.transform.localPosition = new Vector3(0, 0, 0);

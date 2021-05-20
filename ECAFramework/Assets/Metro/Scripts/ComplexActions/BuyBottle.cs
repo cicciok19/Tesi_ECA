@@ -20,18 +20,15 @@ public class BuyBottle : ECACompositeAction
 
     private void SelectDrink()
     {
-        var pocket = eca.GetComponentInChildren<DropPosition>();
-        var money = new GameObject("momey");
-
         List<ECAActionStage> stages = new List<ECAActionStage>();
-        PickStage pickMoney = new PickStage(money.transform, 10, false, HandSide.RightHand);
-        DropStage enterMoney = new DropStage(pickMoney, distributor.GetEnterMoney());
+        /*PickStage pickMoney = new PickStage(distributor, 10, false, HandSide.RightHand);
+        DropStage enterMoney = new DropStage(pickMoney, distributor.GetEnterMoney());*/
         PressStage pressButton = new PressStage(distributor.GetRandomButton(), HandSide.LeftHand);
-        PickStage pickBottle = new PickStage(distributor.GetBottle(), 10, false, HandSide.RightHand);
+        PickStage pickBottle = new PickStage(distributor, 10, false, HandSide.RightHand);
         GoToStage exitQueue = new GoToStage(distributor.GetExitPoint());
 
-        stages.Add(pickMoney);
-        stages.Add(enterMoney);
+        /*stages.Add(pickMoney);
+        stages.Add(enterMoney);*/
         stages.Add(pressButton);
         stages.Add(pickBottle);
         stages.Add(exitQueue);
