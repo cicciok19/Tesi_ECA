@@ -15,7 +15,6 @@ public class PressableObject : MonoBehaviour
 
     private void Awake()
     {
-        pressPosition = GameObject.Instantiate((GameObject)Resources.Load("Prefab/PressPosition_R"), this.transform);
     }
 
     private void SetupInteractionObject()
