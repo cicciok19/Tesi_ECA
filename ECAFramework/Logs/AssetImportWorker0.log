@@ -15,11 +15,11 @@ D:/Università/Tesi/ECA_Framework/Tesi_ECA/ECAFramework
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-61095
+61434
 Successfully changed project path to: D:/Università/Tesi/ECA_Framework/Tesi_ECA/ECAFramework
 D:/Università/Tesi/ECA_Framework/Tesi_ECA/ECAFramework
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 126.07 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 113.97 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.6f1 (338bb68529b2)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Resources/UnitySubsystems
@@ -35,159 +35,135 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56424
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56452
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.004438 seconds.
+Registered in 0.004539 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 88.91 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 113.71 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  3.473 seconds
+- Completed reload, in  3.425 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.014978 seconds.
+Registered in 0.020535 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.03 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.07 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.423 seconds
+- Completed reload, in  2.907 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.09 seconds
-Refreshing native plugins compatible for Editor in 1.10 ms, found 2 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.10 seconds
+Refreshing native plugins compatible for Editor in 1.46 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2735 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 126.5 MB.
 System memory in use after: 126.4 MB.
 
 Unloading 80 unused Assets to reduce memory usage. Loaded Objects now: 3146.
-Total: 8.588600 ms (FindLiveObjects: 0.323900 ms CreateObjectMapping: 0.203300 ms MarkObjects: 7.658400 ms  DeleteObjects: 0.401500 ms)
+Total: 9.098700 ms (FindLiveObjects: 0.511500 ms CreateObjectMapping: 0.210300 ms MarkObjects: 7.641800 ms  DeleteObjects: 0.733300 ms)
 
 ========================================================================
 Received Import Request.
-  path: Assets/ExternalAssets/Standard Assets/Vehicles/Aircraft/Materials/AircraftFuselageGrey.mat
-  artifactKey: Guid(141b5bb76b8b39342a5a787acbeaabfd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Vehicles/Aircraft/Materials/AircraftFuselageGrey.mat using Guid(141b5bb76b8b39342a5a787acbeaabfd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f601c45f3548337d4dcd15c4af0e519') in 0.650412 seconds
-  Import took 0.657348 seconds .
+  path: Assets/Metro/Prefab/torus.fbx
+  artifactKey: Guid(85325f35e4d00c14baaad979ccca6edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Prefab/torus.fbx using Guid(85325f35e4d00c14baaad979ccca6edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c3bc2e4ae792174760e0da2e06e1cf2') in 0.251066 seconds
+  Import took 0.295034 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000441 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Vehicles/Aircraft/Models/AircraftFuselage.fbx
-  artifactKey: Guid(4fea6053a1424d44daf193f09be2d491) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Vehicles/Aircraft/Models/AircraftFuselage.fbx using Guid(4fea6053a1424d44daf193f09be2d491) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0878fcfa1ad9884e46d26ac502bf4c69') in 0.229140 seconds
-  Import took 0.237604 seconds .
+  Time since last request: 83.613342 seconds.
+  path: Assets/ExternalAssets/SALSA(lipSync)/SALSA with RandomEyes/Examples/Models/boxHead/Materials
+  artifactKey: Guid(671b2547fa4211247b46ee758477088a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExternalAssets/SALSA(lipSync)/SALSA with RandomEyes/Examples/Models/boxHead/Materials using Guid(671b2547fa4211247b46ee758477088a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '04dd2b582cdbb11d9b1c1d56eb11f610') in 0.009224 seconds
+  Import took 0.015342 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000371 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Vehicles/Aircraft/Materials/AircraftFuselageWhite.mat
-  artifactKey: Guid(6f36a222811073946936cf1cdeb78f9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Vehicles/Aircraft/Materials/AircraftFuselageWhite.mat using Guid(6f36a222811073946936cf1cdeb78f9c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d1b00dd8a7c6356b52b0b2178ead6b4') in 0.043455 seconds
-  Import took 0.050774 seconds .
+  Time since last request: 19.477097 seconds.
+  path: Assets/ECAScripts/ObjectTypes
+  artifactKey: Guid(1af124213e7da9c4d9a71db62c55589b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ECAScripts/ObjectTypes using Guid(1af124213e7da9c4d9a71db62c55589b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d0f24ac4864f812d3f7c78682a6ce3c') in 0.007018 seconds
+  Import took 0.013968 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000394 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Vehicles/Aircraft/Textures/AircraftFuselageNormals.png
-  artifactKey: Guid(c7e9ae087ac710a4980ed418c192e2fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Vehicles/Aircraft/Textures/AircraftFuselageNormals.png using Guid(c7e9ae087ac710a4980ed418c192e2fb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '518fe5c76736ce9af9f1d5a8a9e27eeb') in 0.069897 seconds
-  Import took 0.076500 seconds .
+  Time since last request: 42.631730 seconds.
+  path: Assets/Plugins/MotionMatching/Demo
+  artifactKey: Guid(949c5dac24e7dd343aed408cd0eb4bb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/MotionMatching/Demo using Guid(949c5dac24e7dd343aed408cd0eb4bb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f310df523fc8ed614b8b2a2e046ef26') in 0.009156 seconds
+  Import took 0.035113 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000385 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Vehicles/Aircraft/Models/AircraftWingsJet.fbx
-  artifactKey: Guid(63742edd796d522458d772b44affdf9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Vehicles/Aircraft/Models/AircraftWingsJet.fbx using Guid(63742edd796d522458d772b44affdf9b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5427bde97e0b6de7dcf68b0b743aa165') in 0.562368 seconds
-  Import took 0.569800 seconds .
+  Time since last request: 289.101519 seconds.
+  path: Assets/Metro/Torus.mat
+  artifactKey: Guid(fed9fbe6d9f368a42b17ccce57289670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Torus.mat using Guid(fed9fbe6d9f368a42b17ccce57289670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f49db13496162ca71189c61642a0a057') in 0.054400 seconds
+  Import took 0.060796 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000490 seconds.
-  path: Assets/Prefabs/GenericECA.prefab
-  artifactKey: Guid(4a94c89d9b148bd4b9ae99f2de7be792) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/GenericECA.prefab using Guid(4a94c89d9b148bd4b9ae99f2de7be792) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36004c6ddddafd04c67e6505273b4496') in 3.121179 seconds
-  Import took 3.164904 seconds .
+  Time since last request: 37.611403 seconds.
+  path: Assets/Metro/Prefab/torus.prefab
+  artifactKey: Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Prefab/torus.prefab using Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0ac260e518b9f66d14c6c9e676a5902') in 0.016788 seconds
+  Import took 0.022200 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000597 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Vehicles/Aircraft/Textures/AircraftFuselageOcclusion.png
-  artifactKey: Guid(d378ff11c42566d46b0b11cd91eca3a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Vehicles/Aircraft/Textures/AircraftFuselageOcclusion.png using Guid(d378ff11c42566d46b0b11cd91eca3a3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4da4e257c790cef6c23a1ac26cbeacc0') in 0.029257 seconds
-  Import took 0.044298 seconds .
+  Time since last request: 0.001269 seconds.
+  path: Assets/Metro/Prefab/torus.prefab
+  artifactKey: Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Prefab/torus.prefab using Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0ac260e518b9f66d14c6c9e676a5902') in 0.011387 seconds
+  Import took 0.018577 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.860166 seconds.
-  path: Assets/Prefabs/GenericECA.prefab
-  artifactKey: Guid(4a94c89d9b148bd4b9ae99f2de7be792) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/GenericECA.prefab using Guid(4a94c89d9b148bd4b9ae99f2de7be792) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a1d51e380c5af1ccd322116f7fd90665') in 2.902196 seconds
-  Import took 2.922678 seconds .
+  Time since last request: 90.511989 seconds.
+  path: Assets/Metro/Prefab/torus.fbx
+  artifactKey: Guid(85325f35e4d00c14baaad979ccca6edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Prefab/torus.fbx using Guid(85325f35e4d00c14baaad979ccca6edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0568b054ad4054323edee7cde8bdbc20') in 0.027082 seconds
+  Import took 0.121116 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 3.399056 seconds.
-  path: Assets/Prefabs/GenericECA.prefab
-  artifactKey: Guid(4a94c89d9b148bd4b9ae99f2de7be792) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/GenericECA.prefab using Guid(4a94c89d9b148bd4b9ae99f2de7be792) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e76a33dc42901d91de4f4725ad0ac6b7') in 2.885953 seconds
-  Import took 2.926479 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 32.714827 seconds.
-  path: Assets/Prefabs/GenericECA.prefab
-  artifactKey: Guid(4a94c89d9b148bd4b9ae99f2de7be792) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/GenericECA.prefab using Guid(4a94c89d9b148bd4b9ae99f2de7be792) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83faa1735c82a7d164044da9c6d95db0') in 3.206176 seconds
-  Import took 3.224036 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.776592 seconds.
-  path: Assets/Prefabs/GenericECA.prefab
-  artifactKey: Guid(4a94c89d9b148bd4b9ae99f2de7be792) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/GenericECA.prefab using Guid(4a94c89d9b148bd4b9ae99f2de7be792) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f894a9695855b019d533797708bc83f') in 3.001443 seconds
-  Import took 3.017362 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 26.757060 seconds.
-  path: Assets/Metro/Scripts/ECA/Passenger.cs
-  artifactKey: Guid(8df3070290f18344d97a6bcfcbf67b0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Metro/Scripts/ECA/Passenger.cs using Guid(8df3070290f18344d97a6bcfcbf67b0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4ae0808c8254b01c34b21e331a0f883d') in 0.015601 seconds
-  Import took 0.021746 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 20.317672 seconds.
-  path: Assets/Metro/Scripts/ECA/Passenger.cs
-  artifactKey: Guid(8df3070290f18344d97a6bcfcbf67b0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Metro/Scripts/ECA/Passenger.cs using Guid(8df3070290f18344d97a6bcfcbf67b0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8cffe569f843bfa3732df5bed6af4e1') in 0.033470 seconds
-  Import took 0.044523 seconds .
+  Time since last request: 4.334888 seconds.
+  path: Assets/Metro/Prefab/torus.prefab
+  artifactKey: Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Prefab/torus.prefab using Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6e48d4824bd12f4bb611da803f5582af') in 0.023043 seconds
+  Import took 0.034718 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.013693 seconds.
+Registered in 0.014766 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.10 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.90 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.764 seconds
+- Completed reload, in  1.630 seconds
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 1.34 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.08 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2709 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 141.6 MB.
-System memory in use after: 141.5 MB.
+System memory in use before: 127.8 MB.
+System memory in use after: 127.7 MB.
 
-Unloading 71 unused Assets to reduce memory usage. Loaded Objects now: 3198.
-Total: 10.200100 ms (FindLiveObjects: 0.399400 ms CreateObjectMapping: 0.229400 ms MarkObjects: 9.032900 ms  DeleteObjects: 0.536200 ms)
+Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 3194.
+Total: 9.763000 ms (FindLiveObjects: 0.435000 ms CreateObjectMapping: 0.187000 ms MarkObjects: 8.770700 ms  DeleteObjects: 0.367600 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 391.904433 seconds.
+  path: Assets/DemoScripts/ECAAnimations/Stages/PickStage.cs
+  artifactKey: Guid(deb0e7e1c173ab742b93209d5db0fe60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DemoScripts/ECAAnimations/Stages/PickStage.cs using Guid(deb0e7e1c173ab742b93209d5db0fe60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86e53b86cc73605daf661052b7ac96f7') in 0.017176 seconds
+  Import took 0.062175 seconds .
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
