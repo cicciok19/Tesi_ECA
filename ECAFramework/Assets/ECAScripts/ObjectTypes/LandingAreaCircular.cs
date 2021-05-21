@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LandingAreaCircular : LandingArea
 {
-    internal float radius;
-    internal float innerRadius;
+    private float radius;
+    private float innerRadius;
 
     protected override void Awake()
     {
@@ -23,5 +23,10 @@ public class LandingAreaCircular : LandingArea
 
         if (GetComponentsInChildren<LandingAreaCircular>().Length != 1)
             innerRadius = GetComponentsInChildren<LandingAreaCircular>()[1].radius;
+    }
+
+    public override Vector3 GetRandomPosition()
+    {
+        return Randomize.GetRandomPositionRound(this.gameObject, innerRadius, radius);
     }
 }

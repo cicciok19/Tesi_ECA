@@ -81,9 +81,12 @@ protected static int counter = 0;
     
         idxPaint = 0;
         //SelectDestinations();
-        grabbable = GameObject.FindObjectOfType<GrabbableObject>();
-        PickUp(grabbable);
+        //grabbable = GameObject.FindObjectOfType<GrabbableObject>();
+        //PickUp(grabbable);
         //Landing();
+
+        ManageLandingArea landing = new ManageLandingArea(this);
+        landing.StartAction();
         
     }
 
@@ -150,7 +153,7 @@ protected static int counter = 0;
     }
 
 
-    protected void Landing()
+    /*protected void Landing()
     {
         landingAreas = FindObjectsOfType<LandingAreaCircular>().ToList();
         if(landing == null)
@@ -199,6 +202,7 @@ protected static int counter = 0;
         newAction.StartAction();
         
     }
+    */
 
     public void GoToPainting(Painting painting)
     {

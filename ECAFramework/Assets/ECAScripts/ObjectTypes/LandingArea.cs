@@ -44,4 +44,9 @@ public class LandingArea : MonoBehaviour
                 full = false;
         }
     }
+
+    public virtual Vector3 GetRandomPosition()
+    {
+        return Randomize.GetRandomPosition(this);
+    }
 }
