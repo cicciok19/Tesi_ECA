@@ -86,7 +86,7 @@ public class EnterTrain : ECACompositeAction
                 var handle = (GrabbableObject)placeSelected;
                 GoToStage reachHandle = new GoToStage(new Vector3(handle.transform.position.x, eca.transform.position.y, handle.transform.position.z));
                 TurnStage turnToHandle = new TurnStage(handle.transform);
-                PickStage grab = new PickStage(handle.transform, .3f, true);
+                PickStage grab = new PickStage(handle.transform, 10f, true);
                 stages.Add(reachHandle);
                 stages.Add(turnToHandle);
                 stages.Add(grab);

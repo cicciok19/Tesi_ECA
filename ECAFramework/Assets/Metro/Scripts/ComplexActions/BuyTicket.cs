@@ -21,6 +21,7 @@ public class BuyTicket : ECACompositeAction
 
     protected Passenger eca;
     protected VendingMachine vendingMachine;
+    protected GrabbableObject ticket;
     protected bool queuedECA =  false;
     protected GoToStage goingToMachine =  null;
 
@@ -30,6 +31,7 @@ public class BuyTicket : ECACompositeAction
     {
         this.eca = eca;
         vendingMachine = this.eca.station.GetVendingMachine(eca);
+        ticket = GameObject.FindObjectOfType<GrabbableObject>();
     }
 
     private void SelectTicket()
@@ -37,7 +39,7 @@ public class BuyTicket : ECACompositeAction
         List<ECAActionStage> stages = new List<ECAActionStage>();
         PressStage useScreen = new PressStage(vendingMachine.GetScreen(), HandSide.RightHand);
         PressStage pressButton = new PressStage(vendingMachine.GetButton(), HandSide.RightHand);
-        PickStage takeTicket = new PickStage(vendingMachine, 10, false, HandSide.RightHand);
+        PickStage takeTicket = new PickStage(vendingMachine.GetGrabbableGameObject(), 10, false, HandSide.RightHand);
         DropStage dropTicket = new DropStage(takeTicket);
         stages.Add(useScreen);
         stages.Add(pressButton);
@@ -106,7 +108,7 @@ public class BuyTicket : ECACompositeAction
         List<ECAActionStage> stages = new List<ECAActionStage>();
     
         stages.Add(goingToMachine);
-        stages.Add(turn);
+        //stages.Add(turn);
     
     
         ECAAction goToVendingMachine = new ECAAction(eca, stages);

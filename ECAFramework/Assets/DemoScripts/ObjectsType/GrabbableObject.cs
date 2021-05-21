@@ -68,13 +68,14 @@ public class GrabbableObject : ECAInteractableObject
             interactionObj.events[0].messages = new InteractionObject.Message[0];
             interactionObj.events[0].time = .5f;
             interactionObj.events[0].pause = true;
+            //SetPick(true);
         }
 
         if(GetComponent<Rigidbody>() == null)
         {
             rb = this.gameObject.AddComponent<Rigidbody>();
             rb.useGravity = false;
-            //rb.isKinematic = true;
+            rb.isKinematic = true;
         }
     }
 

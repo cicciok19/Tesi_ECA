@@ -72,7 +72,7 @@ public class PickStage : ECAActionStage
 		else if (!grab)
 			holdPoint = animatorMxM.Eca.GetComponentInChildren<HoldPoint>().transform;
 
-		/*
+		
 		if (target.GetComponent<InteractionObject>() == null)
 		{
 			Debug.LogError("Target is not a grabbable object.");
@@ -80,9 +80,9 @@ public class PickStage : ECAActionStage
 		}
 		else
 			obj = target.GetComponent<InteractionObject>();
-		*/
+		
 		//obj = interactionObject;
-		obj = target.GetComponent<InteractionObject>();
+		//obj = target.GetComponent<InteractionObject>();
 
 		ikManager.interactionSystem.Start();
 

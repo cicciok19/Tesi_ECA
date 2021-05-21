@@ -30,7 +30,7 @@ public class TurnStage : ECAActionStage
         {
             var targetOnPlane = new Vector3();
             targetOnPlane = target.position;
-            targetOnPlane.y = base.animator.Eca.transform.position.y;
+            targetOnPlane.y = animatorMxM.Eca.transform.position.y;
             dir = (targetOnPlane - animatorMxM.Eca.transform.position).normalized;
         }
 
@@ -50,7 +50,10 @@ public class TurnStage : ECAActionStage
     public override void Update()
     {
         base.Update();
-        if (Vector3.Dot(dir, base.animator.Eca.transform.forward) > 0.9f)
+        Debug.Log(Vector3.Dot(dir, animatorMxM.Eca.transform.forward));
+        if (Vector3.Dot(dir, animatorMxM.Eca.transform.forward) > 0.9f)
             EndStage();
+        else
+            animatorMxM.m_trajectory.StrafeDirection = dir;
     }
 }

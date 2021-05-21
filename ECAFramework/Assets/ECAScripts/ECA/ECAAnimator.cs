@@ -45,6 +45,7 @@ public class ECAAnimator : MonoBehaviour
 
     internal NavMeshAgent navMeshAgent;
     internal ECAAction actualAction;
+    public string currentStageName; //for debugging
 
     public string actualActionName;
 
@@ -146,6 +147,7 @@ public class ECAAnimator : MonoBehaviour
     {
         if (currentStage != null)
         {
+            currentStageName = currentStage.ToString();
             currentStage.Update();
         }
     }
@@ -313,9 +315,10 @@ public class ECAAnimator : MonoBehaviour
 
     public ECAActionStage currentStage
     {
-      set; get;
+        set;
+        get;
     } = null;
-
+    
 
     public virtual void PointAt(Transform target)
     {

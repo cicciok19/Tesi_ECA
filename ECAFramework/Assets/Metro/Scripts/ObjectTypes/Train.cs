@@ -24,10 +24,13 @@ public class Train : MonoBehaviour
     protected LandingArea landingArea;
 
     public int passengers;
+    public bool arriving;
+    public bool arrived;
 
 
     private IEnumerator WaitArriving()
     {
+        arriving = true;
         yield return new WaitForSeconds(10f);
         if (Arriving != null)
             Arriving(this, EventArgs.Empty);
@@ -41,6 +44,8 @@ public class Train : MonoBehaviour
         yield return new WaitForSeconds(10f);
         if (DoorsOpen != null)
             DoorsOpen(this, EventArgs.Empty);
+
+        arrived = true;
     }
 
 
@@ -52,6 +57,9 @@ public class Train : MonoBehaviour
         places = GameObject.FindObjectsOfType<ECAInteractableObject>();
         landingArea = GameObject.FindObjectOfType<LandingArea>();
         StartCoroutine(WaitArriving());
+
+        arriving = false;
+        arrived = false;
     }
 
 

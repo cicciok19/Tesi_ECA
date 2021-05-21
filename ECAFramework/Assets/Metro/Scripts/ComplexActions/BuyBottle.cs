@@ -24,13 +24,15 @@ public class BuyBottle : ECACompositeAction
         /*PickStage pickMoney = new PickStage(distributor, 10, false, HandSide.RightHand);
         DropStage enterMoney = new DropStage(pickMoney, distributor.GetEnterMoney());*/
         PressStage pressButton = new PressStage(distributor.GetRandomButton(), HandSide.LeftHand);
-        PickStage pickBottle = new PickStage(distributor, 10, false, HandSide.RightHand);
+        PickStage pickBottle = new PickStage(distributor.GetGrabbableGameObject(), 10, false, HandSide.RightHand);
+        DropStage dropBottle = new DropStage(pickBottle);
         GoToStage exitQueue = new GoToStage(distributor.GetExitPoint());
 
         /*stages.Add(pickMoney);
         stages.Add(enterMoney);*/
         stages.Add(pressButton);
         stages.Add(pickBottle);
+        stages.Add(dropBottle);
         stages.Add(exitQueue);
 
         ECAAction newAction = new ECAAction(eca, stages);
@@ -55,7 +57,7 @@ public class BuyBottle : ECACompositeAction
         List<ECAActionStage> stages = new List<ECAActionStage>();
 
         stages.Add(goingToDistributor);
-        stages.Add(turn);
+        //stages.Add(turn);
 
 
         ECAAction goToDistributor = new ECAAction(eca, stages);
