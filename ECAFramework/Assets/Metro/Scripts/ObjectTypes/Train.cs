@@ -24,14 +24,25 @@ public class Train : MonoBehaviour
     protected LandingArea landingArea;
 
     public int passengers;
-    public bool arriving;
-    public bool arrived;
+    private bool doorsOpened;
+    private bool arrived;
 
+    protected void Start()
+    {
+        doors = GetComponentsInChildren<TrainDoor>();
+        places = GetComponentsInChildren<ECAInteractableObject>();
+        landingArea = GetComponentInChildren<LandingArea>();
+        StartCoroutine(WaitArriving());
+
+        doorsOpened = false;
+        arrived = false;
+    }
 
     private IEnumerator WaitArriving()
     {
-        arriving = true;
         yield return new WaitForSeconds(10f);
+
+        arrived = true;
         if (Arriving != null)
             Arriving(this, EventArgs.Empty);
     
@@ -42,28 +53,11 @@ public class Train : MonoBehaviour
     private IEnumerator WaitDoorsOpen()
     {
         yield return new WaitForSeconds(10f);
-        if (DoorsOpen != null)
-            DoorsOpen(this, EventArgs.Empty);
-
-        arrived = true;
+        
+        doorsOpened = true;
+        DoorsOpen(this, EventArgs.Empty);
+        Utility.Log("Train is arrived, you can go in");
     }
-
-
-
-
-    protected void Start()
-    {
-        doors = GameObject.FindObjectsOfType<TrainDoor>();
-        places = GameObject.FindObjectsOfType<ECAInteractableObject>();
-        landingArea = GameObject.FindObjectOfType<LandingArea>();
-        StartCoroutine(WaitArriving());
-
-        arriving = false;
-        arrived = false;
-    }
-
-
-
 
     public TrainDoor[] GetTrainDoors()
     {
@@ -102,12 +96,12 @@ public class Train : MonoBehaviour
     }
 
 
-    public bool trainArrived
-    { get; private set; }
+    public bool DoorsOpened
+    { get => doorsOpened; private set => doorsOpened=value; }
 
 
-    public bool doorsOpened
-    { get; private set; }
+    public bool TrainArrived
+    { get => arrived; private set => arrived=value; }
 
 
 }

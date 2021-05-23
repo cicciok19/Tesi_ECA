@@ -16,20 +16,15 @@ using System;
 
 public class ReachPlatform : ECAAction
 {
-
     protected Passenger eca;
     protected Station station;
-
 
     public ReachPlatform(Passenger eca)
     :base(eca)
     {
-            this.eca = eca;
+        this.eca = eca;
     	station = eca.station;
     }
-
-
-
 
     private void SetupAction()
     {
@@ -39,7 +34,7 @@ public class ReachPlatform : ECAAction
         GoToStage reachPlatform = new GoToStage(platformPosition);
         TurnStage turnToTrain = new TurnStage(station.train.transform);
         stages.Add(reachPlatform);
-        stages.Add(turnToTrain);
+        //stages.Add(turnToTrain);
     
         SetStages(stages);
     }

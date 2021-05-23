@@ -50,7 +50,7 @@ public class TurnStage : ECAActionStage
     public override void Update()
     {
         base.Update();
-        Debug.Log(Vector3.Dot(dir, animatorMxM.Eca.transform.forward));
+        //Debug.Log(Vector3.Dot(dir, animatorMxM.Eca.transform.forward));
         if (Vector3.Dot(dir, animatorMxM.Eca.transform.forward) > 0.9f)
             EndStage();
         else

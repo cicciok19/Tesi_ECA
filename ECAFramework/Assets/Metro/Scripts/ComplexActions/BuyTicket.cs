@@ -59,7 +59,9 @@ public class BuyTicket : ECACompositeAction
     private void TicketTaken(object sender, EventArgs e)
     {
         vendingMachine.EcasQueue--;     //questo chiama il GoAhead
-    
+
+        eca.ticketTaken = true;
+
         if (TicketBought != null)
             TicketBought(this, EventArgs.Empty);
     }
@@ -72,29 +74,6 @@ public class BuyTicket : ECACompositeAction
     
         Utility.Log(eca.name + " going in queue");
         goingToMachine.ChangeDestination(vendingMachine.GetNextPassengerPosition(eca));
-        
-    
-    /*
-        List<ECAActionStage> stages = new List<ECAActionStage>();
-        GoToStage goToVendingMachine = new GoToStage(vendingMachine.GetNextPassengerPosition(eca));
-        Utility.Log(eca.name + " advance at " + vendingMachine.GetNextPassengerPosition(eca));
-        TurnStage turn = new TurnStage(vendingMachine.transform);
-        stages.Add(goToVendingMachine);
-        stages.Add(turn);
-    
-        if(goingToMachine != null)
-    	goingToMachine.CompletedAction -= EvaluateQueue;
-    
-        oldGoing = goingToMachine;
-    
-    
-        goingToMachine = new ECAAction(eca, stages);
-        action.Add(goingToMachine);    
-    
-    
-        //newAction.CompletedAction += vendingMachine.PassengerArrived;
-        newAction.CompletedAction += EvaluateQueue;
-    */
     }
 
 
@@ -102,7 +81,7 @@ public class BuyTicket : ECACompositeAction
 
     protected void GoToVendingMachine()
     {
-        GoToStage goingToMachine  = new GoToStage(vendingMachine.GetNextPassengerPosition(eca));
+        GoToStage goingToMachine  = new GoToStage(vendingMachine.GetNextPassengerPosition(eca), vendingMachine.transform);
         TurnStage turn = new TurnStage(vendingMachine.transform);
     
         List<ECAActionStage> stages = new List<ECAActionStage>();

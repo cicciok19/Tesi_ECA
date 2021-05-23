@@ -24,7 +24,9 @@ public class GoToStage : ECAActionStage
 {
 
     private Vector3 destination;
+    private Transform objToFace;
     private bool warping =  false;
+    private bool changeOrientationWhileWalking = false;
     private Vector3 warpDirection =  new Vector3();
     private float startWarpSpeed =  0;
     private float finalWarpSpeed =  0.3f;
@@ -33,18 +35,24 @@ public class GoToStage : ECAActionStage
     protected float stopDistance =  0.5f;
     protected int areaMask;
 
+    private ECAAnimatorMxM animatorMxM;
 
-    public GoToStage(Transform destination)
+
+    public GoToStage(Transform destination, Transform objToFace = null)
     : base()
     {
-                this.destination = destination.position;
+        this.destination = destination.position;
+        if (objToFace != null)
+            this.objToFace = objToFace;
     }
 
 
-    public GoToStage(Vector3 destination)
+    public GoToStage(Vector3 destination, Transform objToFace = null)
     : base()
     {
-                this.destination = destination;
+        this.destination = destination;
+        if(objToFace!= null)
+            this.objToFace = objToFace;
     }
 
 
@@ -63,6 +71,8 @@ public class GoToStage : ECAActionStage
         base.StartStage();
         //use this in order to not modify the destination transform
         Vector3 x = destination;
+
+        animatorMxM = (ECAAnimatorMxM)animator;
     
         animator.navMeshAgent.SetDestination(x);
         animator.Eca.ecaInTrigger = 0;
@@ -71,8 +81,11 @@ public class GoToStage : ECAActionStage
 
     public override void EndStage()
     {
-        base.EndStage();
+        if (objToFace != null)
+            animatorMxM.MxM_StopStrafing();
         animator.Eca.stopped = true;
+
+        base.EndStage();
     }
 
 
@@ -107,24 +120,32 @@ public class GoToStage : ECAActionStage
     public override void Update()
     {
         base.Update();
-    
-        if (Vector3.Distance(destination, animator.Eca.transform.position) <= stopDistance + 0.5f && !warping)
+
+        float distance = Vector3.Distance(destination, animator.Eca.transform.position);
+
+        if (distance <= 5f && !changeOrientationWhileWalking)
         {
-            animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
-            Debug.DrawRay(animator.Eca.transform.position, animator.Eca.transform.forward * 20, Color.red, 20f);
-            warpDirection = animator.Eca.transform.forward;
+            changeOrientationWhileWalking = true;
+            if(objToFace != null)
+                animatorMxM.MxM_StartStrafing(objToFace);
+        }
     
+        if (distance <= stopDistance + 0.5f && !warping)
+        {
+            //animator.navMeshAgent.SetDestination(animator.Eca.transform.position);
+            //Debug.DrawRay(animator.Eca.transform.position, animator.Eca.transform.forward * 20, Color.red, 20f);
+            warpDirection = animator.Eca.transform.forward;
+            
             warping = true;
         }
     
         if (warping)
         {
-            if(Vector3.Distance(destination, animator.Eca.transform.position) >= 0.35f)
+            if(distance >= 0.35f)
             {
                 actualWarpSpeed = Mathf.SmoothDamp(actualWarpSpeed, 1f, ref startWarpSpeed, 3);
-                animator.Eca.transform.position = Vector3.Lerp(animator.Eca.transform.position, destination,actualWarpSpeed);
+                animator.Eca.transform.position = Vector3.Lerp(animator.Eca.transform.position, destination, actualWarpSpeed);
             }
-                //animator.Eca.transform.Translate(warpDirection * Time.deltaTime);
             else
                 EndStage();
         }

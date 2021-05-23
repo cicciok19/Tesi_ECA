@@ -22,7 +22,7 @@ public class Passenger : ECA
     private BuyTicket buyTicket;
     private BuyBottle buyBottle;
 
-    protected const float TAKE_TICKET_CHANCE =   .3f;
+    protected const float TAKE_TICKET_CHANCE =   1f;
     protected const float TAKE_DRINK_CHANCE = .3f;
 
     protected EnterTrain enterTrain;
@@ -60,13 +60,16 @@ public class Passenger : ECA
         base.Start();
     
         ecaTurn = -1;       //non è in coda
+        
     
         station = GameObject.FindObjectOfType<Station>();
     
         train = station.train;
         ticketTaken = false;
         bottleTaken = false;
-    
+
+        train.Arriving += OnTrainArriving;
+
         float chanceTicket = UnityEngine.Random.Range(0f, 1f);
         float chanceBottle = UnityEngine.Random.Range(0f, 1f);
 
@@ -97,13 +100,25 @@ public class Passenger : ECA
 
     protected void GoToTakeTrain()
     {
-       ReachPlatform reachPlatform = new ReachPlatform(this);
+       reachPlatform = new ReachPlatform(this);
        reachPlatform.CompletedAction += OnActionCompleted;
        actionList.Add(reachPlatform);
     
-       EnterTrain enterTrain = new EnterTrain(this);
+       enterTrain = new EnterTrain(this);
        actionList.Add(enterTrain);
        enterTrain.CompletedAction += OnActionCompleted;
+    }
+
+    private void OnTrainArriving(object sender, EventArgs e)
+    {
+        ECAAction currentAction = actionList[actionIdx];
+        if (currentAction != enterTrain && ticketTaken)
+        {
+            currentAction.Abort();
+            Debug.Log(currentAction.ToString());
+            actionList = null;
+            enterTrain.StartAction();
+        }
     }
 
 

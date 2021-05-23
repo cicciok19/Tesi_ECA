@@ -21,16 +21,16 @@ public class EnterTrain : ECACompositeAction
 
     protected Passenger eca;
     protected Train train;
-    protected bool doorOpened = false;
     protected ECAAction goToDoor;
     protected ECAAction enterTrain;
-
 
     public EnterTrain(Passenger eca)
     :base(eca)
     {
-            this.eca = eca;
+        this.eca = eca;
     	train = eca.station.train;
+
+        //train.DoorsOpen += OnDoorsOpen;
     }
 
 
@@ -45,7 +45,7 @@ public class EnterTrain : ECACompositeAction
         GoToStage goNear = new GoToStage(Randomize.GetRandomPosition(doorSelected.FrontDoor));
         TurnStage turn = new TurnStage(doorSelected.transform);
         stages.Add(goNear);
-        stages.Add(turn);
+        //stages.Add(turn);
     
         goToDoor = new ECAAction(eca, stages);
         actions.Add(goToDoor);
@@ -88,7 +88,7 @@ public class EnterTrain : ECACompositeAction
                 TurnStage turnToHandle = new TurnStage(handle.transform);
                 PickStage grab = new PickStage(handle.transform, 10f, true);
                 stages.Add(reachHandle);
-                stages.Add(turnToHandle);
+                //stages.Add(turnToHandle);
                 stages.Add(grab);
                 break;
         }
@@ -103,14 +103,13 @@ public class EnterTrain : ECACompositeAction
 
     private void OnDoorsOpen(object sender, EventArgs e)
     {
-        Utility.Log("Train is arrived, you can go in");
-    
-        doorOpened = true;
-        if(ActualAction == goToDoor)
+        if (ActualAction != null)
         {
-    	    CompleteAndAdvance();
+            if (ActualAction == goToDoor && ActualAction.State != ActionState.Completed)
+            {
+                CompleteAndAdvance();
+            }
         }
-    
     }
 
 
@@ -118,15 +117,20 @@ public class EnterTrain : ECACompositeAction
 
     protected override void OnActualActionCompleted(object sender, EventArgs e)
     {
-        if(doorOpened)
+        if(train.DoorsOpened)
     	    CompleteAndAdvance();
     }
 
 
     protected void SetupAction()
     {
-      GoNearTrainDoor();
-      Enter();
+        if(train.DoorsOpened)
+            Enter();
+        else
+        {
+            GoNearTrainDoor();
+            Enter();
+        }
     }
 
 

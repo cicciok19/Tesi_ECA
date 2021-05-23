@@ -148,13 +148,21 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
-    public void MxM_StartStrafing()
+    public void MxM_StartStrafing(Transform objToFace = null)
     {
         m_animator.ClearRequiredTags();
         m_animator.SetRequiredTag("Strafe");
         m_trajectory.TrajectoryMode = ETrajectoryMoveMode.Strafe;
         m_animator.AngularErrorWarpMethod = EAngularErrorWarpMethod.TrajectoryHeading;
         m_animator.AngularErrorWarpRate = 360f;
+
+        if(objToFace != null)
+        {
+            Debug.DrawRay(objToFace.position, objToFace.forward, Color.blue, 10f);
+            //var dir = -objToFace.InverseTransformDirection(objToFace.forward);
+            //Debug.DrawRay(objToFace.position, dir, Color.red, 10f);
+            m_trajectory.StrafeDirection = -objToFace.forward;
+        }
     }
 
 
