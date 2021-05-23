@@ -55,7 +55,8 @@ public class Train : MonoBehaviour
         yield return new WaitForSeconds(10f);
         
         doorsOpened = true;
-        DoorsOpen(this, EventArgs.Empty);
+        if(DoorsOpen!=null)
+            DoorsOpen(this, EventArgs.Empty);
         Utility.Log("Train is arrived, you can go in");
     }
 
