@@ -1,0 +1,169 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.6f1 (338bb68529b2) revision 3378102'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19041.985; Version 2004; 64bit' Language: 'it' Physical Memory: 16282 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+D:/Università/Tesi/ECA_Framework/Tesi_ECA/ECAFramework
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+61434
+Successfully changed project path to: D:/Università/Tesi/ECA_Framework/Tesi_ECA/ECAFramework
+D:/Università/Tesi/ECA_Framework/Tesi_ECA/ECAFramework
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 113.97 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.6f1 (338bb68529b2)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Università/Tesi/ECA_Framework/Tesi_ECA/ECAFramework/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 960M (ID=0x139b)
+    Vendor:   
+    VRAM:     4055 MB
+    Driver:   27.21.14.6192
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56452
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.004539 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 113.71 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.425 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.020535 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.07 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.907 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.10 seconds
+Refreshing native plugins compatible for Editor in 1.46 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2735 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 126.5 MB.
+System memory in use after: 126.4 MB.
+
+Unloading 80 unused Assets to reduce memory usage. Loaded Objects now: 3146.
+Total: 9.098700 ms (FindLiveObjects: 0.511500 ms CreateObjectMapping: 0.210300 ms MarkObjects: 7.641800 ms  DeleteObjects: 0.733300 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Metro/Prefab/torus.fbx
+  artifactKey: Guid(85325f35e4d00c14baaad979ccca6edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Prefab/torus.fbx using Guid(85325f35e4d00c14baaad979ccca6edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c3bc2e4ae792174760e0da2e06e1cf2') in 0.251066 seconds
+  Import took 0.295034 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 83.613342 seconds.
+  path: Assets/ExternalAssets/SALSA(lipSync)/SALSA with RandomEyes/Examples/Models/boxHead/Materials
+  artifactKey: Guid(671b2547fa4211247b46ee758477088a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ExternalAssets/SALSA(lipSync)/SALSA with RandomEyes/Examples/Models/boxHead/Materials using Guid(671b2547fa4211247b46ee758477088a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '04dd2b582cdbb11d9b1c1d56eb11f610') in 0.009224 seconds
+  Import took 0.015342 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 19.477097 seconds.
+  path: Assets/ECAScripts/ObjectTypes
+  artifactKey: Guid(1af124213e7da9c4d9a71db62c55589b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ECAScripts/ObjectTypes using Guid(1af124213e7da9c4d9a71db62c55589b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d0f24ac4864f812d3f7c78682a6ce3c') in 0.007018 seconds
+  Import took 0.013968 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 42.631730 seconds.
+  path: Assets/Plugins/MotionMatching/Demo
+  artifactKey: Guid(949c5dac24e7dd343aed408cd0eb4bb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/MotionMatching/Demo using Guid(949c5dac24e7dd343aed408cd0eb4bb8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f310df523fc8ed614b8b2a2e046ef26') in 0.009156 seconds
+  Import took 0.035113 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 289.101519 seconds.
+  path: Assets/Metro/Torus.mat
+  artifactKey: Guid(fed9fbe6d9f368a42b17ccce57289670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Torus.mat using Guid(fed9fbe6d9f368a42b17ccce57289670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f49db13496162ca71189c61642a0a057') in 0.054400 seconds
+  Import took 0.060796 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 37.611403 seconds.
+  path: Assets/Metro/Prefab/torus.prefab
+  artifactKey: Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Prefab/torus.prefab using Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0ac260e518b9f66d14c6c9e676a5902') in 0.016788 seconds
+  Import took 0.022200 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001269 seconds.
+  path: Assets/Metro/Prefab/torus.prefab
+  artifactKey: Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Prefab/torus.prefab using Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0ac260e518b9f66d14c6c9e676a5902') in 0.011387 seconds
+  Import took 0.018577 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 90.511989 seconds.
+  path: Assets/Metro/Prefab/torus.fbx
+  artifactKey: Guid(85325f35e4d00c14baaad979ccca6edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Prefab/torus.fbx using Guid(85325f35e4d00c14baaad979ccca6edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0568b054ad4054323edee7cde8bdbc20') in 0.027082 seconds
+  Import took 0.121116 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.334888 seconds.
+  path: Assets/Metro/Prefab/torus.prefab
+  artifactKey: Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Prefab/torus.prefab using Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6e48d4824bd12f4bb611da803f5582af') in 0.023043 seconds
+  Import took 0.034718 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.014766 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.90 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.630 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.08 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2709 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 127.8 MB.
+System memory in use after: 127.7 MB.
+
+Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 3194.
+Total: 9.763000 ms (FindLiveObjects: 0.435000 ms CreateObjectMapping: 0.187000 ms MarkObjects: 8.770700 ms  DeleteObjects: 0.367600 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 391.904433 seconds.
+  path: Assets/DemoScripts/ECAAnimations/Stages/PickStage.cs
+  artifactKey: Guid(deb0e7e1c173ab742b93209d5db0fe60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DemoScripts/ECAAnimations/Stages/PickStage.cs using Guid(deb0e7e1c173ab742b93209d5db0fe60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86e53b86cc73605daf661052b7ac96f7') in 0.017176 seconds
+  Import took 0.062175 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

@@ -147,6 +147,7 @@ public class PickStage : ECAActionStage
 		// Set object pick up position and rotation to current
 		pickUpPosition = obj.transform.position;
 		pickUpRotation = obj.transform.rotation;
+		
 		holdWeight = 0f;
 		holdWeightVel = 0f;
 

@@ -56,7 +56,7 @@ public class GrabbableObject : ECAInteractableObject
             interactionObj.multipliers[1] = new InteractionObject.Multiplier();
             interactionObj.multipliers[1].curve = InteractionObject.WeightCurve.Type.PositionWeight;
             interactionObj.multipliers[1].multiplier = 1f;
-            interactionObj.multipliers[1].result = InteractionObject.WeightCurve.Type.PositionWeight;
+            interactionObj.multipliers[1].result = InteractionObject.WeightCurve.Type.PoserWeight;
 
             //creating event
             

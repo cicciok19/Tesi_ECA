@@ -81,12 +81,12 @@ protected static int counter = 0;
     
         idxPaint = 0;
         //SelectDestinations();
-        //grabbable = GameObject.FindObjectOfType<GrabbableObject>();
-        //PickUp(grabbable);
+        grabbable = GameObject.FindObjectOfType<GrabbableObject>();
+        PickUp(grabbable);
         //Landing();
 
-        ManageLandingArea landing = new ManageLandingArea(this);
-        landing.StartAction();
+        //ManageLandingArea landing = new ManageLandingArea(this);
+        //landing.StartAction();
         
     }
 
@@ -142,7 +142,7 @@ protected static int counter = 0;
         Transform destination = GameObject.FindObjectOfType<Destination>().transform;
         List<ECAActionStage> stages = new List<ECAActionStage>();
         GoToStage reachGrab = new GoToStage(destination);
-        PickStage pick = new PickStage(grabbable.transform, .3f, false, HandSide.RightHand);
+        PickStage pick = new PickStage(grabbable.transform, .3f, true, HandSide.RightHand);
         DropStage drop = new DropStage(pick);
 
         stages.Add(reachGrab);

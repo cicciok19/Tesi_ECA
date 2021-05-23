@@ -41,7 +41,7 @@ public class PressStage : ECAActionStage
 
         animatorMxM = (ECAAnimatorMxM)animator;
 
-        interactionObj = target.GetComponentInChildren<InteractionObject>();
+        interactionObj = target.GetComponent<InteractionObject>();
         Assert.IsNotNull(interactionObj);
 
         InteractionTarget[] interactionTargets = interactionObj.GetComponentsInChildren<InteractionTarget>();
