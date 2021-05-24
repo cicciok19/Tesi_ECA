@@ -38,17 +38,15 @@ public class Station : MonoBehaviour
     {
         platform = GetComponentInChildren<LandingArea>();
         Assert.IsNotNull(platform);
-        train = GameObject.FindObjectOfType<Train>();
-        Assert.IsNotNull(train);
-        binary = GameObject.FindObjectOfType<Binary>();
-        Assert.IsNotNull(binary);
+        //train = GameObject.FindObjectOfType<Train>();
+        //Assert.IsNotNull(train);
         vendingMachines = GetComponentsInChildren<VendingMachine>();
         Assert.IsNotNull(vendingMachines);
         distributors = GetComponentsInChildren<Distributor>();
         Assert.IsNotNull(distributors);
     
     
-        train.Arriving += OnTrainArriving;
+        //train.Arriving += OnTrainArriving;
     }
 
 

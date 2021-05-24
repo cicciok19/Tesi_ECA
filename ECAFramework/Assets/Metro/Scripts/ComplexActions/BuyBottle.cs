@@ -51,7 +51,7 @@ public class BuyBottle : ECACompositeAction
 
     protected void GoToDistributor()
     {
-        GoToStage goingToDistributor = new GoToStage(distributor.GetNextPassengerPosition(eca));
+        GoToStage goingToDistributor = new GoToStage(distributor.GetNextPassengerPosition(eca), distributor.transform);
         TurnStage turn = new TurnStage(distributor.transform);
 
         List<ECAActionStage> stages = new List<ECAActionStage>();
