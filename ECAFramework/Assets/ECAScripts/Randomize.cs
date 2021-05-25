@@ -28,7 +28,7 @@ public class Randomize : MonoBehaviour
               center.z + bounds.z * extent * (float)UnityEngine.Random.Range(-0.5f, 0.5f)
             );
 
-            found = NavMesh.SamplePosition(position, out hit, 2f, NavMesh.AllAreas);
+            found = NavMesh.SamplePosition(position, out hit, 4f, NavMesh.AllAreas);
 
             if (found)
             {
