@@ -26,7 +26,7 @@ namespace MxM
         None = 0,
         Strafe = 1 << 0,
         Sitting = 1 << 1,
-        Tag3 = 1 << 2,
+        Run = 1 << 2,
         Tag4 = 1 << 3,
         Tag5 = 1 << 4,
         Tag6 = 1 << 5,

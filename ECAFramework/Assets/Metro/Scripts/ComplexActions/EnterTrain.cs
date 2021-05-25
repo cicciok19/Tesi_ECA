@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
+using MxM;
 
 
 // global declaration end
@@ -17,12 +18,13 @@ using System;
 public class EnterTrain : ECACompositeAction
 {
 
-    private TrainDoor doorSelected =      null;
+    private TrainDoor doorSelected = null;
 
     protected Passenger eca;
     protected Train train;
     protected ECAAction goToDoor;
     protected ECAAction enterTrain;
+    protected ECAAnimatorMxM ecaAnimatorMxM;
 
     public EnterTrain(Passenger eca)
     :base(eca)
@@ -56,7 +58,7 @@ public class EnterTrain : ECACompositeAction
     {
         ECAInteractableObject placeSelected = null;
 
-        foreach(var p in train.GetPassengerPlaces())
+        foreach (var p in train.GetPassengerPlaces())
         {
             if (!p.Occupied)
             {
@@ -124,7 +126,11 @@ public class EnterTrain : ECACompositeAction
 
     protected void SetupAction()
     {
-        if(train.DoorsOpened)
+        ecaAnimatorMxM = (ECAAnimatorMxM)eca.ecaAnimator;
+        ecaAnimatorMxM.m_animator.RemoveRequiredTag("Run");
+        eca.GetComponent<MxMTrajectoryGenerator_BasicAI>().MaxSpeed = 2;
+
+        if (train.DoorsOpened)
             Enter();
         else
         {

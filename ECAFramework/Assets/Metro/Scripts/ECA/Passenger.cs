@@ -22,7 +22,7 @@ public class Passenger : ECA
     private BuyTicket buyTicket;
     private BuyBottle buyBottle;
 
-    protected const float TAKE_TICKET_CHANCE =   1f;
+    protected const float TAKE_TICKET_CHANCE =   .3f;
     protected const float TAKE_DRINK_CHANCE = .3f;
 
     protected EnterTrain enterTrain;
@@ -63,7 +63,7 @@ public class Passenger : ECA
         
     
         station = GameObject.FindObjectOfType<Station>();
-    
+
         train = station.train;
         ticketTaken = false;
         bottleTaken = false;
@@ -115,7 +115,7 @@ public class Passenger : ECA
         if (currentAction != enterTrain && ticketTaken)
         {
             currentAction.Abort();
-            Debug.Log(currentAction.ToString());
+            Debug.Log(currentAction.ToString());    
             actionList = null;
             enterTrain.StartAction();
         }

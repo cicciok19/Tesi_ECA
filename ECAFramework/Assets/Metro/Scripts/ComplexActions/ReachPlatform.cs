@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
+using MxM;
 
 
 // global declaration end
@@ -18,6 +19,7 @@ public class ReachPlatform : ECAAction
 {
     protected Passenger eca;
     protected Station station;
+    protected ECAAnimatorMxM ecaAnimatorMxM;
 
     public ReachPlatform(Passenger eca)
     :base(eca)
@@ -28,6 +30,10 @@ public class ReachPlatform : ECAAction
 
     private void SetupAction()
     {
+        ecaAnimatorMxM = (ECAAnimatorMxM)eca.ecaAnimator;
+        ecaAnimatorMxM.m_animator.SetRequiredTag("Run");
+        eca.GetComponent<MxMTrajectoryGenerator_BasicAI>().MaxSpeed = 4;
+
         List<ECAActionStage> stages = new List<ECAActionStage>();
     
         Vector3 platformPosition = Randomize.GetRandomPosition(station.GetPlatform());
