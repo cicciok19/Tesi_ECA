@@ -24,7 +24,7 @@ public class Distributor : QueueableObject
 
     public ECAButton GetRandomButton()
     {
-        int randomIndex = Random.Range(0, buttons.Length);
+        int randomIndex = Random.Range(0, buttons.Length-1);
         return buttons[randomIndex];
     }
 

@@ -21,8 +21,6 @@ public class Train : MonoBehaviour
     private TrainDoor[] doors;
     private ECAInteractableObject[] places;
 
-    protected LandingArea landingArea;
-
     public int passengers;
     private bool doorsOpened;
     private bool arrived;
@@ -31,7 +29,6 @@ public class Train : MonoBehaviour
     {
         doors = GetComponentsInChildren<TrainDoor>();
         places = GetComponentsInChildren<ECAInteractableObject>();
-        landingArea = GetComponentInChildren<LandingArea>();
         StartCoroutine(WaitArriving());
 
         doorsOpened = false;
@@ -55,6 +52,11 @@ public class Train : MonoBehaviour
         yield return new WaitForSeconds(10f);
         
         doorsOpened = true;
+
+        //"apro" le porte
+        foreach (var d in doors)
+            d.enabled = false;
+
         if(DoorsOpen!=null)
             DoorsOpen(this, EventArgs.Empty);
         Utility.Log("Train is arrived, you can go in");

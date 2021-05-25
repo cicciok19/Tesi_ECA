@@ -64,11 +64,11 @@ public class Passenger : ECA
     
         station = GameObject.FindObjectOfType<Station>();
     
-        //train = station.train;
+        train = station.train;
         ticketTaken = false;
         bottleTaken = false;
 
-        //train.Arriving += OnTrainArriving;
+        train.Arriving += OnTrainArriving;
 
         float chanceTicket = UnityEngine.Random.Range(0f, 1f);
         float chanceBottle = UnityEngine.Random.Range(0f, 1f);
@@ -92,7 +92,7 @@ public class Passenger : ECA
         }
     	
         //a prescindere l'obiettivo finale è andare a prendere il treno
-        //GoToTakeTrain();
+        GoToTakeTrain();
         
         actionList[0].StartAction();
     }

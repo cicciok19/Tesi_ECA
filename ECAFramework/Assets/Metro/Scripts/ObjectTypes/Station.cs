@@ -14,39 +14,22 @@ using UnityEngine.Assertions;
 
 public class Station : MonoBehaviour
 {
-    public event EventHandler TrainArriving;
-
     internal Train train;
-    internal Binary binary;
     internal VendingMachine[] vendingMachines;
     internal Distributor[] distributors;
 
     protected LandingArea platform;
 
-
-    private void OnTrainArriving(object sender, EventArgs e)
-    {
-        Utility.Log("Train is arriving");
-        if(TrainArriving != null)
-    	    TrainArriving(this, EventArgs.Empty);
-    }
-
-
-
-
     protected void Awake()
     {
         platform = GetComponentInChildren<LandingArea>();
         Assert.IsNotNull(platform);
-        //train = GameObject.FindObjectOfType<Train>();
-        //Assert.IsNotNull(train);
+        train = GameObject.FindObjectOfType<Train>();
+        Assert.IsNotNull(train);
         vendingMachines = GetComponentsInChildren<VendingMachine>();
         Assert.IsNotNull(vendingMachines);
         distributors = GetComponentsInChildren<Distributor>();
         Assert.IsNotNull(distributors);
-    
-    
-        //train.Arriving += OnTrainArriving;
     }
 
 
@@ -73,7 +56,6 @@ public class Station : MonoBehaviour
             }
         }
     
-        //vendingMachine = vendingMachines[0];
         Assert.IsNotNull(vendingMachine);
         return vendingMachine;
     }
@@ -93,8 +75,7 @@ public class Station : MonoBehaviour
                 min = distance;
             }
         }
-    
-        //vendingMachine = vendingMachines[0];
+
         Assert.IsNotNull(vendingMachine);
         return vendingMachine;
     }
