@@ -22,7 +22,7 @@ public class Passenger : ECA
     private BuyTicket buyTicket;
     private BuyBottle buyBottle;
 
-    protected const float TAKE_TICKET_CHANCE =   .3f;
+    protected const float TAKE_TICKET_CHANCE = 1f;
     protected const float TAKE_DRINK_CHANCE = .3f;
 
     protected EnterTrain enterTrain;

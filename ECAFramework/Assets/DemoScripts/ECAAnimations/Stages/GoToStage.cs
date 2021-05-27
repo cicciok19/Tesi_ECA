@@ -152,10 +152,11 @@ public class GoToStage : ECAActionStage
     }
 
 
-    public void ChangeDestination(Vector3 newDestination)
+    public void ChangeDestination(Vector3 newDestination, bool changeInstantly = true)
     {
         destination = newDestination;
-        animator.navMeshAgent.SetDestination(newDestination);
+        if(changeInstantly)
+            animator.navMeshAgent.SetDestination(newDestination);
     }
 
 

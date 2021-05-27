@@ -53,6 +53,7 @@ public class ECACompositeAction : ECAAction
         {
             //iscrivo l'azione all'evento che segnala la fine dello stage
             Attach(ActualAction);
+            ActualAction.SetupAction();
             ActualAction.StartAction();
         }
         else
@@ -83,6 +84,7 @@ public class ECACompositeAction : ECAAction
     		    ecaAnimator.actualAction = ActualAction;
     
     		    State = ActionState.Running;
+                ActualAction.SetupAction();
     		    ActualAction.StartAction();
             }
         }

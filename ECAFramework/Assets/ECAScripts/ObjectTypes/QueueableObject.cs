@@ -44,11 +44,9 @@ public class QueueableObject : MonoBehaviour
         //it's not queued
         if (eca.ecaTurn == -1)
         {
-            eca.ecaTurn = EcasQueue;
-            EcasQueue++;
-            Utility.Log(eca.name + " TO " + destinations[ecasQueue - 1].name);
+            Utility.Log(eca.name + " TO " + destinations[ecasQueue].name);
 
-            return destinations[ecasQueue - 1].transform.position;
+            return destinations[ecasQueue].transform.position;
         }
         else
         {
@@ -56,10 +54,9 @@ public class QueueableObject : MonoBehaviour
         }
     }
 
-    public void PassengerArrived(object sender, EventArgs e)
+    public Vector3 GetLastPosition()
     {
-        if (QueueUpdated != null)
-            QueueUpdated(this, EventArgs.Empty);
+        return destinations[destinations.Length-1].transform.position;
     }
 
     public bool isQueued(ECA eca)
@@ -90,6 +87,11 @@ public class QueueableObject : MonoBehaviour
             {
                 if (GoAhead != null)
                     GoAhead(this, EventArgs.Empty);
+            }
+            else if (value!=0 && value > prevQueueValue)
+            {
+                if (QueueUpdated != null)
+                    QueueUpdated(this, EventArgs.Empty);
             }
             else if (value == 0)
             {

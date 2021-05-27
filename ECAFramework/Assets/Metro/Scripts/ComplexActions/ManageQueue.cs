@@ -44,7 +44,7 @@ public class ManageQueue : ECAAction
 
     protected void OnArrivedToMachine(object sender, EventArgs e)
     {
-      OnCompletedAction();
+        OnCompletedAction();
     }
 
 
@@ -54,11 +54,16 @@ public class ManageQueue : ECAAction
     {
        if(eca.ecaTurn == 0)
        {
-    	OnCompletedAction();
-    	return;
+            OnCompletedAction();
+            return;
        }
     
        queueableObject.GoAhead += OnGoAhead;
+    }
+
+    public void ChangeVendingMachine(QueueableObject q)
+    {
+        queueableObject = q;
     }
 
 

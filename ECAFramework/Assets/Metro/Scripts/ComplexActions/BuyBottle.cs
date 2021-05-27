@@ -64,6 +64,7 @@ public class BuyBottle : ECACompositeAction
         actions.Add(goToDistributor);
 
         goToDistributor.CompletedAction += OnDistributorReached;
+        //goToDistributor.CompletedAction += distributor.PassengerArrived;
 
         distributor.QueueUpdated += GetNewDestination;
     }
@@ -88,6 +89,12 @@ public class BuyBottle : ECACompositeAction
 
         ECAAction goToDistributor = (ECAAction)sender;
         goToDistributor.CompletedAction -= OnDistributorReached;
+        distributor.QueueUpdated -= GetNewDestination;
+        //goToDistributor.CompletedAction -= distributor.PassengerArrived;
+
+        eca.ecaTurn = distributor.EcasQueue;
+        distributor.EcasQueue++;
+        
         queuedECA = true;
     }
 

@@ -193,14 +193,14 @@ public class ECAAction
         {
             if(ActualStage != null)
             {
-    		if(ecaAnimator.actualAction != null && 
-    		(ecaAnimator.actualAction.State == ActionState.Running || ecaAnimator.actualAction.State == ActionState.Paused))
-    			  ecaAnimator.actualAction.Abort();
+    		    if(ecaAnimator.actualAction != null && 
+    		    (ecaAnimator.actualAction.State == ActionState.Running || ecaAnimator.actualAction.State == ActionState.Paused))
+    			      ecaAnimator.actualAction.Abort();
     
-    		State = ActionState.Running;
-    		Attach(ActualStage);	
-    		ActualStage.StartStage();
-    		ecaAnimator.actualAction = this;
+    		    State = ActionState.Running;
+    		    Attach(ActualStage);	
+    		    ActualStage.StartStage();
+    		    ecaAnimator.actualAction = this;
             }
         }
     }
@@ -256,6 +256,11 @@ public class ECAAction
     
             return null;
         }
+    }
+
+    public virtual void SetupAction()
+    {
+
     }
 
 
