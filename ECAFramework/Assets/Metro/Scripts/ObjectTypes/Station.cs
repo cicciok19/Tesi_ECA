@@ -100,5 +100,24 @@ public class Station : MonoBehaviour
         return distributor;
     }
 
+    //get vending machine with less queue
+    public Distributor GetDistributor()
+    {
+        Distributor distributor = null;
+        int min = 1000000;
+
+        foreach (Distributor d in distributors)
+        {
+            if (d.EcasQueue <= min)
+            {
+                distributor = d;
+                min = d.EcasQueue;
+            }
+        }
+
+        Assert.IsNotNull(distributor);
+        return distributor;
+    }
+
 
 }

@@ -18,7 +18,7 @@ public class ManageQueue : ECAAction
 
     protected QueueableObject queueableObject = null;
     protected Passenger eca;
-
+    protected bool inQueue;
 
     public ManageQueue(Passenger eca,QueueableObject qo)
     :base(eca)
@@ -33,11 +33,11 @@ public class ManageQueue : ECAAction
         ECAAction advance = new ECAAction(eca, new GoToStage(queueableObject.GetNextPassengerPosition(eca)));
         advance.StartAction();
     
-      if(eca.ecaTurn == 0)
-      {
-    	advance.CompletedAction += OnArrivedToMachine;
-       	queueableObject.GoAhead -= OnGoAhead;
-      }
+    if(eca.ecaTurn == 0)
+    {
+        advance.CompletedAction += OnArrivedToMachine;
+        queueableObject.GoAhead -= OnGoAhead;
+    }
     
     }
 
@@ -48,22 +48,32 @@ public class ManageQueue : ECAAction
     }
 
 
-
-
     public override void StartAction()
     {
-       if(eca.ecaTurn == 0)
-       {
-            OnCompletedAction();
+        inQueue = true;
+
+        if(eca.ecaTurn == 0)
+        {
+            ECAAction newAction = new ECAAction(eca, new GoToStage(queueableObject.GetNextPassengerPosition(eca)));
+            newAction.StartAction();
+            newAction.CompletedAction += OnArrivedToMachine;
+            //OnCompletedAction();
             return;
-       }
+        }
     
-       queueableObject.GoAhead += OnGoAhead;
+        queueableObject.GoAhead += OnGoAhead;
     }
 
-    public void ChangeVendingMachine(QueueableObject q)
+    public void ChangeQueueableObject(QueueableObject q)
     {
-        queueableObject = q;
+        if (inQueue)
+        {
+            queueableObject.GoAhead -= OnGoAhead;
+            queueableObject = q;
+            queueableObject.GoAhead += OnGoAhead;
+        }
+        else
+            queueableObject = q;
     }
 
 

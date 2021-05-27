@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectProduct : ECAAction
+public class SelectTicket : ECAAction
 {
     private VendingMachine vendingMachine;
-    private ECA eca;
 
-    public SelectProduct(ECA eca, VendingMachine machine) : base(eca)
+    public SelectTicket(ECA eca, VendingMachine machine) : base(eca)
     {
         vendingMachine = machine;
-        this.eca = eca;
     }
 
     public override void SetupAction()

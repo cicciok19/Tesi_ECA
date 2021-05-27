@@ -5,40 +5,33 @@ using System;
 
 public class BuyBottle : ECACompositeAction
 {
-    private Distributor distributor;
-    private Passenger eca;
-    protected bool queuedECA = false;
-    protected GoToStage goingToDistributor = null;
-
     public event EventHandler BottleBought;
-        
+
+    private Distributor distributor;
+    private Passenger passenger;
+    private Station station;
+    protected bool queuedECA = false;
+
+    protected GoToStage goingToDistributor = null;
+    protected GoToStage goingToLastPosition = null;
+    protected SelectBottle selectBottle;
+    protected ManageQueue manageQueue;
+
+
+
     public BuyBottle(Passenger eca) : base(eca)
     {
-        this.eca = eca;
-        distributor = this.eca.station.GetDistributor(eca);
+        this.passenger = eca;
+        station = eca.station;
+        distributor = station.GetDistributor(eca);
+        //ticket = vendingMachine.GetComponentInChildren<GrabbableObject>();
     }
 
     private void SelectDrink()
     {
-        List<ECAActionStage> stages = new List<ECAActionStage>();
-        /*PickStage pickMoney = new PickStage(distributor, 10, false, HandSide.RightHand);
-        DropStage enterMoney = new DropStage(pickMoney, distributor.GetEnterMoney());*/
-        PressStage pressButton = new PressStage(distributor.GetRandomButton(), HandSide.LeftHand);
-        PickStage pickBottle = new PickStage(distributor.GetGrabbableGameObject(), 10, false, HandSide.RightHand);
-        DropStage dropBottle = new DropStage(pickBottle);
-        GoToStage exitQueue = new GoToStage(distributor.GetExitPoint());
-
-        /*stages.Add(pickMoney);
-        stages.Add(enterMoney);*/
-        stages.Add(pressButton);
-        stages.Add(pickBottle);
-        stages.Add(dropBottle);
-        stages.Add(exitQueue);
-
-        ECAAction newAction = new ECAAction(eca, stages);
-        newAction.CompletedAction += BottleTaken;
-
-        actions.Add(newAction);
+        selectBottle = new SelectBottle(passenger, distributor);
+        selectBottle.CompletedAction += BottleTaken;
+        actions.Add(selectBottle);
     }
 
     private void BottleTaken(object sender, EventArgs e)
@@ -51,27 +44,26 @@ public class BuyBottle : ECACompositeAction
 
     protected void GoToDistributor()
     {
-        GoToStage goingToDistributor = new GoToStage(distributor.GetNextPassengerPosition(eca), distributor.transform);
-        TurnStage turn = new TurnStage(distributor.transform);
+        goingToLastPosition = new GoToStage(distributor.GetLastPosition());
+        goingToDistributor = new GoToStage(distributor.GetNextPassengerPosition(passenger));
 
         List<ECAActionStage> stages = new List<ECAActionStage>();
 
+        stages.Add(goingToLastPosition);
         stages.Add(goingToDistributor);
-        //stages.Add(turn);
 
+        ECAAction goToVendingMachine = new ECAAction(passenger, stages);
+        actions.Add(goToVendingMachine);
 
-        ECAAction goToDistributor = new ECAAction(eca, stages);
-        actions.Add(goToDistributor);
-
-        goToDistributor.CompletedAction += OnDistributorReached;
-        //goToDistributor.CompletedAction += distributor.PassengerArrived;
+        goToVendingMachine.CompletedAction += OnDistributorReached;
 
         distributor.QueueUpdated += GetNewDestination;
     }
 
     protected void CompleteQueueing()
     {
-        actions.Add(new ManageQueue(eca, distributor));
+        manageQueue = new ManageQueue(passenger, distributor);  
+        actions.Add(manageQueue);
     }
 
     private void GetNewDestination(object sender, EventArgs e)
@@ -79,22 +71,29 @@ public class BuyBottle : ECACompositeAction
         if (queuedECA)
             return;
 
-        Utility.Log(eca.name + " going in queue");
-        goingToDistributor.ChangeDestination(distributor.GetNextPassengerPosition(eca));
+        Distributor = station.GetDistributor();
+
+        Utility.Log(passenger.name + " going in queue");
+        if (goingToLastPosition.State == ActionState.Running)
+        {
+            goingToLastPosition.ChangeDestination(distributor.GetLastPosition());
+            goingToDistributor.ChangeDestination(distributor.GetNextPassengerPosition(passenger), false);
+        }
+        else
+            goingToDistributor.ChangeDestination(distributor.GetNextPassengerPosition(passenger));
     }
 
     protected void OnDistributorReached(object sender, EventArgs e)
     {
-        Utility.Log(" arrived " + eca.name);
+        Utility.Log(" arrived " + passenger.name);
 
         ECAAction goToDistributor = (ECAAction)sender;
         goToDistributor.CompletedAction -= OnDistributorReached;
         distributor.QueueUpdated -= GetNewDestination;
-        //goToDistributor.CompletedAction -= distributor.PassengerArrived;
 
-        eca.ecaTurn = distributor.EcasQueue;
+        passenger.ecaTurn = distributor.EcasQueue;
         distributor.EcasQueue++;
-        
+
         queuedECA = true;
     }
 
@@ -110,5 +109,19 @@ public class BuyBottle : ECACompositeAction
     {
         CreateActionList();
         base.StartAction();
+    }
+
+    public Distributor Distributor
+    {
+        get => distributor;
+        private set
+        {
+            distributor.QueueUpdated -= GetNewDestination;
+            distributor = value;
+            distributor.QueueUpdated += GetNewDestination;
+
+            selectBottle.ChangeDistributor(distributor);
+            manageQueue.ChangeQueueableObject(distributor);
+        }
     }
 }
