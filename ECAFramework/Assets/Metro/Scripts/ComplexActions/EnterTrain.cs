@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using System;
+using System.Linq;
 
 
 // global declaration end
@@ -55,8 +56,10 @@ public class EnterTrain : ECACompositeAction
     private void Enter()
     {
         ECAInteractableObject placeSelected = null;
+        var places = train.GetPassengerPlaces();
+        places = places.OrderBy(p => Vector3.Distance(p.transform.position, eca.transform.position)).ToArray();
 
-        foreach(var p in train.GetPassengerPlaces())
+        foreach(var p in places)
         {
             if (!p.Occupied)
             {

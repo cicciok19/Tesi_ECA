@@ -22,8 +22,8 @@ public class Passenger : ECA
     private BuyTicket buyTicket;
     private BuyBottle buyBottle;
 
-    protected const float TAKE_TICKET_CHANCE = 1f;
-    protected const float TAKE_DRINK_CHANCE = 0f;
+    protected const float TAKE_TICKET_CHANCE = 0.6f;
+    protected const float TAKE_DRINK_CHANCE = 0.3f;
 
     protected EnterTrain enterTrain;
     protected ReachPlatform reachPlatform;
@@ -77,11 +77,14 @@ public class Passenger : ECA
         if (chanceTicket < TAKE_TICKET_CHANCE)
         {
             Utility.Log(name + " is taking ticket");
-        	buyTicket = new BuyTicket(this);
-    
-    	    buyTicket.CompletedAction += OnActionCompleted;
-    	    actionList.Add(buyTicket);
+            buyTicket = new BuyTicket(this);
+
+            buyTicket.CompletedAction += OnActionCompleted;
+            actionList.Add(buyTicket);
         }
+        else
+            ticketTaken = true;
+
         if(chanceBottle < TAKE_DRINK_CHANCE)
         {
             Utility.Log(name + " is taking drink");

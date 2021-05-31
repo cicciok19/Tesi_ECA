@@ -8,6 +8,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 
@@ -17,6 +18,7 @@ public class Train : MonoBehaviour
 {
     public event EventHandler Arriving;
     public event EventHandler DoorsOpen;
+    private Animator trainAnimator;
 
     private TrainDoor[] doors;
     private ECAInteractableObject[] places;
@@ -29,6 +31,7 @@ public class Train : MonoBehaviour
     {
         doors = GetComponentsInChildren<TrainDoor>();
         places = GetComponentsInChildren<ECAInteractableObject>();
+        trainAnimator = GetComponent<Animator>();
         StartCoroutine(WaitArriving());
         StartCoroutine(WaitDoorsOpen());
 
@@ -40,6 +43,8 @@ public class Train : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
 
+        trainAnimator.SetTrigger("LaunchTrain");
+        
         arrived = true;
         if (Arriving != null)
             Arriving(this, EventArgs.Empty);
