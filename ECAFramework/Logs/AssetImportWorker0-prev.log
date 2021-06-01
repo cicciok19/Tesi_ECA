@@ -15,11 +15,11 @@ C:/Users/franc/Documents/GitHub/Tesi_ECA/ECAFramework
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-54681
+54208
 Successfully changed project path to: C:/Users/franc/Documents/GitHub/Tesi_ECA/ECAFramework
 C:/Users/franc/Documents/GitHub/Tesi_ECA/ECAFramework
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 149.29 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 138.03 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.8f1 (507919d4fff5)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/2020.3.8f1/Editor/Data/Resources/UnitySubsystems
@@ -36,142 +36,214 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/2020.3.8f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/2020.3.8f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/2020.3.8f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56612
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56500
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/2020.3.8f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002581 seconds.
+Registered in 0.002427 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 126.88 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 121.18 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.296 seconds
+- Completed reload, in  1.204 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.014020 seconds.
+Registered in 0.012259 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 136.57 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 121.69 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.233 seconds
+- Completed reload, in  2.116 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 1.26 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.30 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5273 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 250.1 MB.
-System memory in use after: 250.2 MB.
+Unloading 5272 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 250.3 MB.
+System memory in use after: 250.4 MB.
 
-Unloading 81 unused Assets to reduce memory usage. Loaded Objects now: 5703.
-Total: 6.172500 ms (FindLiveObjects: 0.792000 ms CreateObjectMapping: 0.405800 ms MarkObjects: 4.697900 ms  DeleteObjects: 0.275500 ms)
+Unloading 81 unused Assets to reduce memory usage. Loaded Objects now: 5702.
+Total: 7.012000 ms (FindLiveObjects: 0.537300 ms CreateObjectMapping: 0.304600 ms MarkObjects: 5.897600 ms  DeleteObjects: 0.271500 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/ACLS
+  artifactKey: Guid(a39dc35a1c2513d4ba05e6d12a8ce53b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ACLS using Guid(a39dc35a1c2513d4ba05e6d12a8ce53b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f7051e0a45cb72be7bb4325bf5624ea') in 0.009056 seconds
+  Import took 0.016732 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.024843 seconds.
+  path: Assets/ACLS/NewBehaviourScript.cs
+  artifactKey: Guid(c830300d2a7d7a3449fa4e0707231182) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ACLS/NewBehaviourScript.cs using Guid(c830300d2a7d7a3449fa4e0707231182) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f399170fb392fe2755b31f722213ddb') in 0.014721 seconds
+  Import took 0.029319 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.019120 seconds.
+  path: Assets/DemoScripts
+  artifactKey: Guid(13dfb324c288fbf4ba500eb344aa744b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DemoScripts using Guid(13dfb324c288fbf4ba500eb344aa744b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd5123e4e56cbd0fae6543cbe3f0614d4') in 0.002965 seconds
+  Import took 0.010730 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.018856 seconds.
+  path: Assets/DemoScripts
+  artifactKey: Guid(13dfb324c288fbf4ba500eb344aa744b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DemoScripts using Guid(13dfb324c288fbf4ba500eb344aa744b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd5123e4e56cbd0fae6543cbe3f0614d4') in 0.002154 seconds
+  Import took 0.009004 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.013023 seconds.
+Registered in 0.012731 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.33 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.25 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.530 seconds
+- Completed reload, in  1.420 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.27 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.32 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4929 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 229.2 MB.
-System memory in use after: 229.4 MB.
+System memory in use before: 229.4 MB.
+System memory in use after: 229.6 MB.
 
-Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5708.
-Total: 7.119200 ms (FindLiveObjects: 0.472300 ms CreateObjectMapping: 0.310400 ms MarkObjects: 6.051200 ms  DeleteObjects: 0.284100 ms)
+Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5707.
+Total: 6.141000 ms (FindLiveObjects: 0.505700 ms CreateObjectMapping: 0.296200 ms MarkObjects: 5.076800 ms  DeleteObjects: 0.261300 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 23.002000 seconds.
+  path: Assets/ACLS/Prefabs
+  artifactKey: Guid(df254199bc4cb7d448802d8efb944ee9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ACLS/Prefabs using Guid(df254199bc4cb7d448802d8efb944ee9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e5caf6f59f18f5794b14bc65745ce78') in 0.007319 seconds
+  Import took 0.016162 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.008896 seconds.
+  path: Assets/ACLS/Prefabs
+  artifactKey: Guid(df254199bc4cb7d448802d8efb944ee9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ACLS/Prefabs using Guid(df254199bc4cb7d448802d8efb944ee9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e5caf6f59f18f5794b14bc65745ce78') in 0.002441 seconds
+  Import took 0.010160 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.715219 seconds.
+  path: Assets/_TerrainAutoUpgrade
+  artifactKey: Guid(d3e87334f8120bc43815a66252ad3293) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_TerrainAutoUpgrade using Guid(d3e87334f8120bc43815a66252ad3293) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '501384cf767ea1b86ea84581d7b02fb2') in 0.002861 seconds
+  Import took 0.012563 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000800 seconds.
+  path: Assets/_TerrainAutoUpgrade
+  artifactKey: Guid(d3e87334f8120bc43815a66252ad3293) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_TerrainAutoUpgrade using Guid(d3e87334f8120bc43815a66252ad3293) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '501384cf767ea1b86ea84581d7b02fb2') in 0.002106 seconds
+  Import took 0.009427 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.480086 seconds.
+  path: Assets/ACLS/Scripts
+  artifactKey: Guid(1ac7832bbd3f42f4d9bb2b5ecd725934) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ACLS/Scripts using Guid(1ac7832bbd3f42f4d9bb2b5ecd725934) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '18b58daeb6508b0d0275e7e05f38fcd0') in 0.004208 seconds
+  Import took 0.011897 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.283366 seconds.
+  path: Assets/ACLS/ECA
+  artifactKey: Guid(d9c9e167600fcaf408a78c292a2221f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ACLS/ECA using Guid(d9c9e167600fcaf408a78c292a2221f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a338d85e983dc42ef1ee79ab88051ab6') in 0.003393 seconds
+  Import took 0.011231 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.007202 seconds.
+  path: Assets/ACLS/ECA
+  artifactKey: Guid(d9c9e167600fcaf408a78c292a2221f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ACLS/ECA using Guid(d9c9e167600fcaf408a78c292a2221f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a338d85e983dc42ef1ee79ab88051ab6') in 0.002161 seconds
+  Import took 0.009673 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.758595 seconds.
+  path: Assets/ACLS/ECAs
+  artifactKey: Guid(d9c9e167600fcaf408a78c292a2221f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ACLS/ECAs using Guid(d9c9e167600fcaf408a78c292a2221f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1dac596d0b77989c2290322fd55d3494') in 0.003395 seconds
+  Import took 0.011612 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.371686 seconds.
+  path: Assets/ACLS/Scene
+  artifactKey: Guid(907c9d4cfaa749b4a97fd9ad70322e15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ACLS/Scene using Guid(907c9d4cfaa749b4a97fd9ad70322e15) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9fc958a1bdca72a3357eda19b775a498') in 0.003596 seconds
+  Import took 0.011448 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 30.646810 seconds.
+  path: Assets/Scenes/SampleSceneECAFramework.unity
+  artifactKey: Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/SampleSceneECAFramework.unity using Guid(9fc0d4010bbf28b4594072e72b8655ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '118df7b5ad82dd8416ecafd89f731b50') in 0.022868 seconds
+  Import took 0.038520 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.015201 seconds.
+Registered in 0.014002 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.21 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.23 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.478 seconds
+- Completed reload, in  1.438 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.31 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.36 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4929 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 229.3 MB.
-System memory in use after: 229.5 MB.
+Unloading 4977 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 234.3 MB.
+System memory in use after: 234.5 MB.
 
-Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5713.
-Total: 6.214300 ms (FindLiveObjects: 0.527900 ms CreateObjectMapping: 0.489100 ms MarkObjects: 4.905200 ms  DeleteObjects: 0.291100 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/Metro/TrainAnimations/Train_Animated_SingleBinary.controller
-  artifactKey: Guid(ef7ad0aa72501c24bbe404ae6e6b7c2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Metro/TrainAnimations/Train_Animated_SingleBinary.controller using Guid(ef7ad0aa72501c24bbe404ae6e6b7c2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3ef65b76006a05bff50871e5243a24d') in 0.061963 seconds
-  Import took 0.071406 seconds .
+Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5760.
+Total: 7.306700 ms (FindLiveObjects: 0.584100 ms CreateObjectMapping: 0.308300 ms MarkObjects: 6.056200 ms  DeleteObjects: 0.357100 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.961756 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/ServiceDoor.cs
-  artifactKey: Guid(747820ede3577e14d89cfb3f1e454bb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/ServiceDoor.cs using Guid(747820ede3577e14d89cfb3f1e454bb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7dd06cc0bc66565c532a379e287043bf') in 0.018085 seconds
-  Import took 0.025354 seconds .
+  Time since last request: 190.328978 seconds.
+  path: Assets/Scenes/SampleSceneECAFramework 1.unity
+  artifactKey: Guid(133e7c21bf0f64940aad60fecf9b1209) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/SampleSceneECAFramework 1.unity using Guid(133e7c21bf0f64940aad60fecf9b1209) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '207a5445f023d2979b2cf59af2a50b46') in 0.027994 seconds
+  Import took 0.043181 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.010453 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/ServiceDoor.cs
-  artifactKey: Guid(747820ede3577e14d89cfb3f1e454bb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/ServiceDoor.cs using Guid(747820ede3577e14d89cfb3f1e454bb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7dd06cc0bc66565c532a379e287043bf') in 0.002851 seconds
-  Import took 0.010476 seconds .
+  Time since last request: 37.581316 seconds.
+  path: Assets/ACLS/Scene/ACLS.unity
+  artifactKey: Guid(133e7c21bf0f64940aad60fecf9b1209) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ACLS/Scene/ACLS.unity using Guid(133e7c21bf0f64940aad60fecf9b1209) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '129b6d05d324033202283b46c8dcedad') in 0.003485 seconds
+  Import took 0.013095 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.473867 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/TicketMachine.cs
-  artifactKey: Guid(d51e9f60da021d84abe7ebe383efab14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/TicketMachine.cs using Guid(d51e9f60da021d84abe7ebe383efab14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef36be44139cbe5fa5830630d6cbdb3f') in 0.003071 seconds
-  Import took 0.018304 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.325641 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/Timer.cs
-  artifactKey: Guid(c36d911898ea42e4b9d797d11165eb0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/Timer.cs using Guid(c36d911898ea42e4b9d797d11165eb0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '375b5aeddd083eed46b1962111fbdd58') in 0.002367 seconds
-  Import took 0.016999 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.453593 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/Train1.cs
-  artifactKey: Guid(837f248ff935aa2428fe06ee38e8f6bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/Train1.cs using Guid(837f248ff935aa2428fe06ee38e8f6bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e19d865761c405dc32c89732142023e8') in 0.003628 seconds
-  Import took 0.010937 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 116.353113 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/TrainDoors.cs
-  artifactKey: Guid(5fd5c25a4e2fc8a499b77b6d14e681aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/TrainDoors.cs using Guid(5fd5c25a4e2fc8a499b77b6d14e681aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8df52769b7f4c3b6fb502f52db599b8') in 0.003636 seconds
-  Import took 0.012567 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.001959 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/TrainDoors.cs
-  artifactKey: Guid(5fd5c25a4e2fc8a499b77b6d14e681aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/TrainDoors.cs using Guid(5fd5c25a4e2fc8a499b77b6d14e681aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8df52769b7f4c3b6fb502f52db599b8') in 0.002698 seconds
-  Import took 0.009851 seconds .
+  Time since last request: 0.008419 seconds.
+  path: Assets/ACLS/Scene/ACLS.unity
+  artifactKey: Guid(133e7c21bf0f64940aad60fecf9b1209) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/ACLS/Scene/ACLS.unity using Guid(133e7c21bf0f64940aad60fecf9b1209) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '129b6d05d324033202283b46c8dcedad') in 0.002671 seconds
+  Import took 0.010903 seconds .
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
