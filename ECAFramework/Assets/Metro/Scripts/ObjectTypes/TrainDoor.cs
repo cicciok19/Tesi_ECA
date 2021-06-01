@@ -32,7 +32,6 @@ public class TrainDoor : MonoBehaviour
     {
         // computing object bounds
         frontDoor = GetComponentInChildren<LandingArea>();
-    
     }
 
 

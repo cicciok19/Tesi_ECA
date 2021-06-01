@@ -15,11 +15,11 @@ C:/Users/franc/Documents/GitHub/Tesi_ECA/ECAFramework
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-54681
+55124
 Successfully changed project path to: C:/Users/franc/Documents/GitHub/Tesi_ECA/ECAFramework
 C:/Users/franc/Documents/GitHub/Tesi_ECA/ECAFramework
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 149.29 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 157.26 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.8f1 (507919d4fff5)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/2020.3.8f1/Editor/Data/Resources/UnitySubsystems
@@ -36,142 +36,152 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/2020.3.8f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/2020.3.8f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/2020.3.8f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56612
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56624
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/2020.3.8f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002581 seconds.
+Registered in 0.002252 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 126.88 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 119.00 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.296 seconds
+- Completed reload, in  1.250 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.014020 seconds.
+Registered in 0.013032 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 136.57 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 133.18 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.233 seconds
+- Completed reload, in  2.167 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 1.26 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.24 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5273 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 250.1 MB.
-System memory in use after: 250.2 MB.
+Unloading 5272 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 250.2 MB.
+System memory in use after: 250.3 MB.
 
-Unloading 81 unused Assets to reduce memory usage. Loaded Objects now: 5703.
-Total: 6.172500 ms (FindLiveObjects: 0.792000 ms CreateObjectMapping: 0.405800 ms MarkObjects: 4.697900 ms  DeleteObjects: 0.275500 ms)
+Unloading 81 unused Assets to reduce memory usage. Loaded Objects now: 5702.
+Total: 6.544200 ms (FindLiveObjects: 0.622900 ms CreateObjectMapping: 0.402600 ms MarkObjects: 5.251500 ms  DeleteObjects: 0.265900 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Metro/TrainAnimations/Train_appr_singleBinary.anim
+  artifactKey: Guid(bcfba0bdf85f0b642b3144f4e0835714) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/TrainAnimations/Train_appr_singleBinary.anim using Guid(bcfba0bdf85f0b642b3144f4e0835714) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c27178b14f6f630286c420386011299') in 0.030545 seconds
+  Import took 0.038186 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.013023 seconds.
+Registered in 0.013636 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.33 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.23 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.530 seconds
+- Completed reload, in  1.434 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.27 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 1.39 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 4929 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 229.2 MB.
-System memory in use after: 229.4 MB.
-
-Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5708.
-Total: 7.119200 ms (FindLiveObjects: 0.472300 ms CreateObjectMapping: 0.310400 ms MarkObjects: 6.051200 ms  DeleteObjects: 0.284100 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.015201 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.21 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.478 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Refreshing native plugins compatible for Editor in 1.31 ms, found 2 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4929 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 229.3 MB.
+System memory in use before: 229.4 MB.
 System memory in use after: 229.5 MB.
 
-Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5713.
-Total: 6.214300 ms (FindLiveObjects: 0.527900 ms CreateObjectMapping: 0.489100 ms MarkObjects: 4.905200 ms  DeleteObjects: 0.291100 ms)
+Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5707.
+Total: 7.035600 ms (FindLiveObjects: 0.512100 ms CreateObjectMapping: 0.330600 ms MarkObjects: 5.889900 ms  DeleteObjects: 0.302100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.012848 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.32 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.462 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.29 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4929 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 229.4 MB.
+System memory in use after: 229.6 MB.
+
+Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5712.
+Total: 7.057500 ms (FindLiveObjects: 0.736600 ms CreateObjectMapping: 0.389300 ms MarkObjects: 5.606200 ms  DeleteObjects: 0.324400 ms)
 
 ========================================================================
 Received Import Request.
-  path: Assets/Metro/TrainAnimations/Train_Animated_SingleBinary.controller
-  artifactKey: Guid(ef7ad0aa72501c24bbe404ae6e6b7c2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Metro/TrainAnimations/Train_Animated_SingleBinary.controller using Guid(ef7ad0aa72501c24bbe404ae6e6b7c2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b3ef65b76006a05bff50871e5243a24d') in 0.061963 seconds
-  Import took 0.071406 seconds .
+  Time since last request: 541.928135 seconds.
+  path: Assets/Metro/Scripts/ObjectTypes/TrainDoor.cs
+  artifactKey: Guid(afb33bdb9f324bb43b19408e43834621) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Scripts/ObjectTypes/TrainDoor.cs using Guid(afb33bdb9f324bb43b19408e43834621) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6dbef5a0aa73290f46ba334b16d8df04') in 0.018498 seconds
+  Import took 0.026563 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 6.961756 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/ServiceDoor.cs
-  artifactKey: Guid(747820ede3577e14d89cfb3f1e454bb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/ServiceDoor.cs using Guid(747820ede3577e14d89cfb3f1e454bb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7dd06cc0bc66565c532a379e287043bf') in 0.018085 seconds
-  Import took 0.025354 seconds .
+  Time since last request: 0.007613 seconds.
+  path: Assets/Metro/Scripts/ObjectTypes/TrainDoor.cs
+  artifactKey: Guid(afb33bdb9f324bb43b19408e43834621) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Scripts/ObjectTypes/TrainDoor.cs using Guid(afb33bdb9f324bb43b19408e43834621) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6dbef5a0aa73290f46ba334b16d8df04') in 0.003481 seconds
+  Import took 0.011288 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.012332 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.26 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.512 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.95 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4929 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 229.5 MB.
+System memory in use after: 229.6 MB.
+
+Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5717.
+Total: 6.782200 ms (FindLiveObjects: 0.515500 ms CreateObjectMapping: 0.347000 ms MarkObjects: 5.608600 ms  DeleteObjects: 0.308900 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.010453 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/ServiceDoor.cs
-  artifactKey: Guid(747820ede3577e14d89cfb3f1e454bb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/ServiceDoor.cs using Guid(747820ede3577e14d89cfb3f1e454bb4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7dd06cc0bc66565c532a379e287043bf') in 0.002851 seconds
-  Import took 0.010476 seconds .
+  Time since last request: 22.772131 seconds.
+  path: Assets/Metro/Scripts/ObjectTypes/TrainDoor.cs
+  artifactKey: Guid(afb33bdb9f324bb43b19408e43834621) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Metro/Scripts/ObjectTypes/TrainDoor.cs using Guid(afb33bdb9f324bb43b19408e43834621) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69af5a1d33fd5d42798b0f661103b4d8') in 0.008928 seconds
+  Import took 0.019493 seconds .
 
 ========================================================================
-Received Import Request.
-  Time since last request: 0.473867 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/TicketMachine.cs
-  artifactKey: Guid(d51e9f60da021d84abe7ebe383efab14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/TicketMachine.cs using Guid(d51e9f60da021d84abe7ebe383efab14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef36be44139cbe5fa5830630d6cbdb3f') in 0.003071 seconds
-  Import took 0.018304 seconds .
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.012441 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.27 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.430 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.35 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4929 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 229.5 MB.
+System memory in use after: 229.7 MB.
 
-========================================================================
-Received Import Request.
-  Time since last request: 0.325641 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/Timer.cs
-  artifactKey: Guid(c36d911898ea42e4b9d797d11165eb0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/Timer.cs using Guid(c36d911898ea42e4b9d797d11165eb0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '375b5aeddd083eed46b1962111fbdd58') in 0.002367 seconds
-  Import took 0.016999 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.453593 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/Train1.cs
-  artifactKey: Guid(837f248ff935aa2428fe06ee38e8f6bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/Train1.cs using Guid(837f248ff935aa2428fe06ee38e8f6bc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e19d865761c405dc32c89732142023e8') in 0.003628 seconds
-  Import took 0.010937 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 116.353113 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/TrainDoors.cs
-  artifactKey: Guid(5fd5c25a4e2fc8a499b77b6d14e681aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/TrainDoors.cs using Guid(5fd5c25a4e2fc8a499b77b6d14e681aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8df52769b7f4c3b6fb502f52db599b8') in 0.003636 seconds
-  Import took 0.012567 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.001959 seconds.
-  path: Assets/UrbanUnderground/Source/Scripts/TrainDoors.cs
-  artifactKey: Guid(5fd5c25a4e2fc8a499b77b6d14e681aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UrbanUnderground/Source/Scripts/TrainDoors.cs using Guid(5fd5c25a4e2fc8a499b77b6d14e681aa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8df52769b7f4c3b6fb502f52db599b8') in 0.002698 seconds
-  Import took 0.009851 seconds .
+Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5722.
+Total: 6.198300 ms (FindLiveObjects: 0.526300 ms CreateObjectMapping: 0.281000 ms MarkObjects: 5.045800 ms  DeleteObjects: 0.344200 ms)
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
