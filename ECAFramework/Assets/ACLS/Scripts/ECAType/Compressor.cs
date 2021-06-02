@@ -6,7 +6,7 @@ public class Compressor : ECA
 {
     public string[] intentNames = { "StartCPR" };
 
-    private CPR cpr;
+    private CPRAction cpr;
 
     protected override ECAAnimator AddECAAnimator()
     {

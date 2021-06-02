@@ -9,17 +9,23 @@ public class Patient : ECA
     private InjectionPosition injectionPosition;
     private CPRPosition cprPosition;
     private AdvancedCapnographyPosition capnographyPosition;
+    private GiveOxygenPosition giveOxygenPosition;
+    private DefLeftPosition defLeftPosition;
+    private DefRightPosition defRightPosition;
 
     private void Awake()
     {
         injectionPosition = GetComponentInChildren<InjectionPosition>();
         cprPosition = GetComponentInChildren<CPRPosition>();
         capnographyPosition = GetComponentInChildren<AdvancedCapnographyPosition>();
+        giveOxygenPosition = GetComponentsInChildren<GiveOxygenPosition>();
+        defLeftPosition = GetComponentInChildren<DefLeftPosition>();
+        defRightPosition = GetComponentInChildren<DefRightPosition>();
     }
 
     //medical status managemente
     //status should be updated at every task completed by the team
-    private void OnShock(object sender, EventArgs e)
+    private void OnShockReceived(object sender, EventArgs e)
     {
 
     }
@@ -27,17 +33,15 @@ public class Patient : ECA
     {
 
     }
-    private void OnAmiodarone(object sender, EventArgs e)
+    private void OnAmiodaroneDone(object sender, EventArgs e)
     {
 
     }
 
-    private void OnEpinephrine(object sender, EventArgs e)
+    private void OnEpinephrineDone(object sender, EventArgs e)
     {
 
     }
-
-
 
     public Transform GetCPRPosition()
     {
@@ -52,6 +56,21 @@ public class Patient : ECA
     public Transform GetInjectionPosition()
     {
         return injectionPosition.transform;
+    }
+
+    public Transform GetGiveOxygenPosition()
+    {
+        return giveOxygenPosition.transform;
+    }
+
+    public Transform GetDefRightPosition()
+    {
+        return defRightPosition.transform;
+    }
+
+    public Transform GetDefLeftPosition()
+    {
+        return defLeftPosition.transform;
     }
 
 }

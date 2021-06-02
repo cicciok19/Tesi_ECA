@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CPR : ECACompositeAction
+public class CPRAction : ECACompositeAction
 {
-    public CPR(ECA eca) : base(eca)
+    public CPRAction(ECA eca) : base(eca)
     {
     }
 }
