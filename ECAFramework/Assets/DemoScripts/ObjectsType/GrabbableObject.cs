@@ -27,8 +27,9 @@ public class GrabbableObject : ECAInteractableObject
     protected void Awake()
     {
         occupied = false;
+        interactionObj = this.gameObject.GetComponent<InteractionObject>();
 
-        if (this.gameObject.GetComponent<InteractionObject>() == null)
+        if (interactionObj == null)
         {
             interactionObj = this.gameObject.AddComponent<InteractionObject>();
             curveOne = SetGaussianCurve(0, 1f);
@@ -68,7 +69,6 @@ public class GrabbableObject : ECAInteractableObject
             interactionObj.events[0].messages = new InteractionObject.Message[0];
             interactionObj.events[0].time = .5f;
             interactionObj.events[0].pause = true;
-            //SetPick(true);
         }
 
         if(GetComponent<Rigidbody>() == null)
@@ -94,9 +94,20 @@ public class GrabbableObject : ECAInteractableObject
         return curve;
     }
 
-    public void SetPick(bool pick)
+    protected void SetPick(bool pick)
     {
-        interactionObj.events[0].pickUp = pick;
+        if (interactionObj != null)
+            interactionObj.events[0].pickUp = pick;
+        else
+            Debug.LogError("There isn't an interaction object attached");
+    }
+
+    protected void SetPause(bool pause)
+    {
+        if (interactionObj != null)
+            interactionObj.events[0].pause = pause;
+        else
+            Debug.LogError("There isn't an interaction object attached");
     }
 
 

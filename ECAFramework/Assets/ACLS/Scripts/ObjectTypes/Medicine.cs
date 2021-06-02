@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MedicineName
+{
+    Amiodarone,
+    Epinephrine
+}
+
 public class Medicine : MonoBehaviour
 {
     private Syringe syringe;
+    public MedicineName medicineName;
     private Destination destination;
     private bool taken;
 

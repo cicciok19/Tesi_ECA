@@ -7,7 +7,7 @@ public class MedicationProvider : ECA
 {
     public string[] intentNames = { "IVAccess", "Epinephrine", "Amiodarone" };
 
-    private MedicalRoom medicalRoom;
+    public MedicalRoom medicalRoom;
     private UseMedicine useMedicine;
     private IVAccess ivAccess;
     private MedicationTable medicationTable;
@@ -16,10 +16,19 @@ public class MedicationProvider : ECA
 
     protected override void Awake()
     {
+        base.Awake();
         medicalRoom = FindObjectOfType<MedicalRoom>();
         destination = FindObjectOfType<DestinationMedicationProvider>();
+
+    }
+
+    protected override void Start()
+    {
+        base.Start();
         medicationTable = medicalRoom.GetMedicationTable();
         pole = medicalRoom.GetPole();
+        //just for debug
+        HandleUseMedicine(MedicineName.Epinephrine);
     }
 
     public override void Handle(Intent intent)
@@ -27,12 +36,14 @@ public class MedicationProvider : ECA
         base.Handle(intent);
     }
 
-    private void HandleUseMedicine(string medicineName)
+    private void HandleUseMedicine(MedicineName medicineName)
     {
         Medicine m = medicationTable.GetMedicine(medicineName);
         Assert.IsNotNull(m);
         //send message
         useMedicine = new UseMedicine(this, m);
+        useMedicine.StartAction();
+
 
     }
 

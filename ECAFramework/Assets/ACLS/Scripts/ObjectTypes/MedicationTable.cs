@@ -12,11 +12,11 @@ public class MedicationTable : MonoBehaviour
         medicines = GetComponentsInChildren<Medicine>();
     }
 
-    public Medicine GetMedicine(string name)
+    public Medicine GetMedicine(MedicineName name)
     {
         foreach(var m in medicines)
         {
-            if (m.name == name && !m.Taken)
+            if (m.medicineName == name && !m.Taken)
                 return m;
         }
 

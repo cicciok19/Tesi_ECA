@@ -11,7 +11,9 @@ public class UseMedicine : ECAAction
     public UseMedicine(ECA eca, Medicine m) : base(eca)
     {
         medicine = m;
-        medicationProvider = (MedicationProvider)eca; 
+        medicationProvider = (MedicationProvider)eca;
+        pole = medicationProvider.medicalRoom.GetPole();
+        
     }
 
     public override void StartAction()

@@ -18,7 +18,7 @@ public class Patient : ECA
         injectionPosition = GetComponentInChildren<InjectionPosition>();
         cprPosition = GetComponentInChildren<CPRPosition>();
         capnographyPosition = GetComponentInChildren<AdvancedCapnographyPosition>();
-        giveOxygenPosition = GetComponentsInChildren<GiveOxygenPosition>();
+        giveOxygenPosition = GetComponentInChildren<GiveOxygenPosition>();
         defLeftPosition = GetComponentInChildren<DefLeftPosition>();
         defRightPosition = GetComponentInChildren<DefRightPosition>();
     }

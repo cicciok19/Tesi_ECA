@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Amiodarone : Medicine
 {
-
+    private void Start()
+    {
+        medicineName = MedicineName.Amiodarone;
+    }
 }

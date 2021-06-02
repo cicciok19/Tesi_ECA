@@ -47,10 +47,10 @@ public class DropStage : ECAActionStage
 
         this.obj = pickStage.obj;
 
-        Transform dropPosition = animatorMxM.Eca.GetComponentInChildren<DropPosition>().transform;
+        //Transform dropPosition = animatorMxM.Eca.GetComponentInChildren<DropPosition>().transform;
 
-        pickDownPosition = dropPosition.position;
-        pickDownRotation = dropPosition.rotation;
+        pickDownPosition = dropPosition;
+        pickDownRotation = dropRotation;
         objInitialPosition = obj.transform.position;
         objInitiaRotation = obj.transform.rotation;
 
@@ -62,7 +62,7 @@ public class DropStage : ECAActionStage
     public override void EndStage()
     {
         base.EndStage();
-
+        ikManager.interactionSystem.StopInteraction(pickStage.effector);
         ikManager.interactionSystem.ResumeAll();
     }
 

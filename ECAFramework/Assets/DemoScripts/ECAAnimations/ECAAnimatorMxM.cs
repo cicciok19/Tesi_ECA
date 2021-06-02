@@ -86,14 +86,6 @@ public class ECAAnimatorMxM : ECAAnimator
     }
 
 
-    public override void GoTo(Vector3 target, float arrivalDeltaDistance)
-    {
-        Assert.IsNotNull(navMeshAgent);
-        navMeshAgent.SetDestination(target);
-        StartCoroutine(WaitArrival(target, arrivalDeltaDistance + 0.5f));
-    }
-
-
     public override void TriggerAnimation(string id, Transform contact = null, string tag = null)
     {
         var eventDef = MxM_EventDefinitions[id];

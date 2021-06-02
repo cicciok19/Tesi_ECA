@@ -25,6 +25,7 @@ public class PickStage : ECAActionStage
 	private Transform holdPoint; // The point where the object will lerp to when picked up
 	private float pickSpeed; // Maximum lerp speed of the object. Decrease this value to give the object more weight
 	private bool grab;
+	private bool pickUp;
 
 	private float holdWeight, holdWeightVel;
 	private Vector3 pickUpPosition;
@@ -169,7 +170,7 @@ public class PickStage : ECAActionStage
 			holdPoint.rotation = new Quaternion(obj.transform.rotation.x, obj.transform.rotation.y, obj.transform.rotation.z, obj.transform.rotation.w);
 	}
 
-	public override void LateUpdate()
+    public override void LateUpdate()
 	{
 		if (holding)
 		{
@@ -185,6 +186,11 @@ public class PickStage : ECAActionStage
 			}
 
 			if (holdPoint.position.magnitude - obj.transform.position.magnitude <= .05f && !grab)
+				EndStage();
+		}
+		else
+        {
+			if (Vector3.Distance(holdPoint.position, obj.transform.position) <= .22f && !grab)
 				EndStage();
 		}
 
