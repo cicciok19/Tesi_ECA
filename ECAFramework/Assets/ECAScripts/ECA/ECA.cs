@@ -143,7 +143,7 @@ public class ECA : MonoBehaviour, IIntentHandler
 
     protected virtual ECAAnimator AddECAAnimator()
     {
-      return gameObject.AddComponent<ECAAnimator>();
+        return gameObject.AddComponent<ECAAnimator>();
     }
 
 
@@ -194,9 +194,10 @@ public class ECA : MonoBehaviour, IIntentHandler
 
     public ECAEmotion ActualEmotion
     { 
-      get {
-    	return EmotionManager.ActualEmotion;
-      } 
+        get 
+        {
+    	    return EmotionManager.ActualEmotion;
+        } 
     
     }
 
@@ -231,13 +232,13 @@ public class ECA : MonoBehaviour, IIntentHandler
 
     public void SendMessage(string msgType, Action functionToBeExecuted = null, bool anytime = true)
     {
-            if (!GeneralMessagesCltn.ContainsKey(msgType))
-            {
-                Debug.LogError("This message does not exist");
-                return;
-            }
-            SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, GeneralMessagesCltn[msgType][0].message, functionToBeExecuted, anytime, CheckIfMsgIsActive(msgType));
-            TtsManager.Instance.Speech(speechInfo);
+        if (!GeneralMessagesCltn.ContainsKey(msgType))
+        {
+            Debug.LogError("This message does not exist");
+            return;
+        }
+        SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, GeneralMessagesCltn[msgType][0].message, functionToBeExecuted, anytime, CheckIfMsgIsActive(msgType));
+        TtsManager.Instance.Speech(speechInfo);
     }
 
 

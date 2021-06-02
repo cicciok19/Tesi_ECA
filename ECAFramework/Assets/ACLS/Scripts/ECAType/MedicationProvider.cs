@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class MedicationProvider : ECA
 {
+    public string[] intentNames = { "IVAccess", "Epinephrine", "Amiodarone" };
+
+    private UseMedicine useMedicine;
+    private IVAccess ivAccess;
+
     public override void Handle(Intent intent)
     {
         base.Handle(intent);
@@ -11,6 +16,6 @@ public class MedicationProvider : ECA
 
     protected override ECAAnimator AddECAAnimator()
     {
-        return base.AddECAAnimator();
+        return gameObject.AddComponent<ECAAnimatorMxM>();
     }
 }
