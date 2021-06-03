@@ -31,11 +31,11 @@ public class UseMedicine : ECAAction
 
     public override void StartAction()
     {
-        DoTask();
+        SetupAction();
         base.StartAction();
     }
 
-    private void DoTask()
+    public override void SetupAction()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
         GoToStage goToMedicine = new GoToStage(medicine.GetDestination());

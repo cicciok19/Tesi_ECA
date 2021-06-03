@@ -7,4 +7,9 @@ public class CPRAction : ECACompositeAction
     public CPRAction(ECA eca) : base(eca)
     {
     }
+
+    public override void SetupAction()
+    {
+        
+    }
 }
