@@ -14,6 +14,7 @@ public class DropStage : ECAActionStage
 
     private ECAAnimatorMxM animatorMxM;
 
+    private Transform dropTransform;
     private Vector3 dropPosition;
     private Quaternion dropRotation;
     private Vector3 pickDownPosition;
@@ -29,6 +30,7 @@ public class DropStage : ECAActionStage
         this.pickStage = pickStage;
         this.typePick = pickStage.typePick;
 
+        this.dropTransform = dropPosition;
         this.dropPosition = dropPosition.position;
         this.dropRotation = dropPosition.rotation;
     }
@@ -57,29 +59,78 @@ public class DropStage : ECAActionStage
         dropping = true;
         holdWeight = 0f;
         holdWeightVel = 0f;
+
+        ikManager.interactionSystem.StopInteraction(pickStage.effector);
+        ikManager.interactionSystem.ResumeAll();
     }
 
     public override void EndStage()
     {
         base.EndStage();
-        ikManager.interactionSystem.StopInteraction(pickStage.effector);
-        ikManager.interactionSystem.ResumeAll();
+
     }
 
     public override void LateUpdate()
     {
         if (dropping)
         {
-            holdWeight = Mathf.SmoothDamp(holdWeight, 1f, ref holdWeightVel, .3f);
+            /*holdWeight = Mathf.SmoothDamp(holdWeight, 1f, ref holdWeightVel, .3f);
 
             obj.transform.position = Vector3.Lerp(objInitialPosition, pickDownPosition, holdWeight);
             obj.transform.rotation = Quaternion.Lerp(objInitiaRotation, pickDownRotation, holdWeight);
-        }
-
-        if (obj.transform.position == pickDownPosition)
-        {
+            */
             dropping = false;
 
+            if (typePick == HandSide.LeftHand)
+            {
+                ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, dropTransform);
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, .9f, .6f);
+            }
+            if (typePick == HandSide.RightHand)
+            {
+                ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, null, dropTransform);
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, .9f, .6f);
+            }
+        }
+
+        Debug.Log("position obj predrop: " + obj.transform.position);
+
+        /*
+        if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight > .89f)
+        {
+            obj.GetComponent<InteractionObject>().enabled = false;
+            //obj.transform.SetParent(dropTransform);
+
+            Debug.Log("position obj postdrop: " + obj.transform.position);
+
+            if (typePick == HandSide.LeftHand)
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, 0f);
+            if (typePick == HandSide.RightHand)
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, 0f);
+
+
+            Debug.Log("position obj postdrop: " + obj.transform.position);
+            EndStage();
+        }
+        */
+    }
+
+    public override void Update()
+    {
+        if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight > .89f)
+        {
+            obj.GetComponent<InteractionObject>().enabled = false;
+            obj.transform.SetParent(dropTransform);
+
+            Debug.Log("position obj postdrop: " + obj.transform.position);
+
+            if (typePick == HandSide.LeftHand)
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, 0f);
+            if (typePick == HandSide.RightHand)
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, 0f);
+
+
+            Debug.Log("position obj postdrop: " + obj.transform.position);
             EndStage();
         }
     }
