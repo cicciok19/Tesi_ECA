@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using System;
 
 public class MedicationProvider : ECA
 {
@@ -19,7 +20,6 @@ public class MedicationProvider : ECA
         base.Awake();
         medicalRoom = FindObjectOfType<MedicalRoom>();
         destination = FindObjectOfType<DestinationMedicationProvider>();
-
     }
 
     protected override void Start()
@@ -42,9 +42,8 @@ public class MedicationProvider : ECA
         Assert.IsNotNull(m);
         //send message
         useMedicine = new UseMedicine(this, m);
+        useMedicine.InjectionDone += OnInjectionDone;
         useMedicine.StartAction();
-
-
     }
 
     protected override ECAAnimator AddECAAnimator()
@@ -55,5 +54,13 @@ public class MedicationProvider : ECA
     public Vector3 GetDestinationNearTable()
     {
         return destination.transform.position;
+    }
+
+    private void OnInjectionDone(object sender, EventArgs e)
+    {
+        useMedicine.InjectionDone -= OnInjectionDone;
+        UseMedicineEventArgs args = (UseMedicineEventArgs)e;
+        Medicine m = args.medicine;
+        //send message of completed action
     }
 }
