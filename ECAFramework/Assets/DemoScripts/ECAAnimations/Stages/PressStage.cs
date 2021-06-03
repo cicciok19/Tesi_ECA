@@ -60,7 +60,6 @@ public class PressStage : ECAActionStage
             {
                 hand = HandSide.LeftHand;
             }
-
         }
 
         SetupInteractionSystem();
@@ -92,7 +91,7 @@ public class PressStage : ECAActionStage
             ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, interactionObj, true);
         }
 
-        WaitFor(.5f);
+        WaitFor(2f);
     }
 
     public override void Update()

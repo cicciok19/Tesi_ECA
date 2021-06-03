@@ -43,9 +43,9 @@ public class Patient : ECA
 
     }
 
-    public Transform GetCPRPosition()
+    public CPRPosition GetCPRPosition()
     {
-        return cprPosition.transform;
+        return cprPosition;
     }
 
     public Transform GetCapnographyPosition()

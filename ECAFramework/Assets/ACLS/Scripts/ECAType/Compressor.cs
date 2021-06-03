@@ -9,7 +9,7 @@ public class Compressor : ECA
     private CPRAction cpr;
     private Patient patient;
     private TimeRecorder timeRecorder;
-    private Transform cprPosition;
+    private CPRPosition cprPosition;
 
     protected override void Start()
     {
@@ -18,8 +18,11 @@ public class Compressor : ECA
         timeRecorder = FindObjectOfType<TimeRecorder>();
         cprPosition = patient.GetCPRPosition();
 
+        //ikManager.ChangeFadeInTime(5f);
+
         //just for debug
         HandleStartCPR();
+        
     }
 
     protected override ECAAnimator AddECAAnimator()
@@ -37,6 +40,8 @@ public class Compressor : ECA
         //send message
         StartCoroutine(CompressFor(10f));
         //do action
+        cpr = new CPRAction(this, cprPosition);
+        cpr.StartAction();
     }
 
     private IEnumerator CompressFor(float time)

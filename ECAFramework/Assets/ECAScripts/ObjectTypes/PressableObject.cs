@@ -7,7 +7,7 @@ public class PressableObject : MonoBehaviour
 {
     private InteractionObject interactionObj;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         interactionObj = GetComponent<InteractionObject>();
     }

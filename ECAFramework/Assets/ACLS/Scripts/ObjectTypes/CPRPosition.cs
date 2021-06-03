@@ -1,18 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RootMotion.FinalIK;
 
-public class CPRPosition : MonoBehaviour
+public class CPRPosition : PressableObject
 {
-    // Start is called before the first frame update
-    void Start()
+    private InteractionTarget target_R;
+    private InteractionTarget target_L;
+
+    protected override void Awake()
     {
-        
+        base.Awake();
+        var targets = GetComponentsInChildren<InteractionTarget>();
+
+        foreach(var t in targets)
+        {
+            if (t.effectorType == FullBodyBipedEffector.RightHand)
+                target_R = t;
+            else if (t.effectorType == FullBodyBipedEffector.LeftHand)
+                target_L = t;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public InteractionTarget GetInteractionTarget_R()
     {
-        
+        return target_R;
     }
+
+    public InteractionTarget GetInteractionTarget_L()
+    {
+        return target_L;
+    }
+
+
 }

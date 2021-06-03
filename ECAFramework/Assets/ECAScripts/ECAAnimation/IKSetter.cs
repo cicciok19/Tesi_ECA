@@ -439,4 +439,9 @@ public class IKSetter : MonoBehaviour
         interactionSystem.ik = fullBodyBipedIK;
     }
 
+    public void ChangeFadeInTime(float time)
+    {
+        interactionSystem.fadeInTime = time;
+    }
+
 }
