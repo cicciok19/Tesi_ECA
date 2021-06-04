@@ -155,14 +155,16 @@ public abstract class ECAActionStage
     public virtual void StartStage()
     {
     	State = ActionState.Running;
-    	animator.currentStage = this;
+        if (animator.currentStage == null || animator.currentStage.GetType().ToString() != "ECAParallelActionStage")
+            animator.currentStage = this;
     }
 
 
     public virtual void EndStage()
     {
         State = ActionState.Completed;
-        animator.currentStage = null;
+        if(animator.currentStage.GetType().ToString() != "ECAParallelActionStage")
+            animator.currentStage = null;
         if (StageFinished != null)
             StageFinished(this, EventArgs.Empty);
     }
@@ -195,6 +197,12 @@ public abstract class ECAActionStage
     public ActionState State
     {
       set; get;
+    }
+
+    protected void LaunchStageFinished()
+    {
+        if (StageFinished != null)
+            StageFinished(this, EventArgs.Empty);
     }
 
 

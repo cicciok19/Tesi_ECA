@@ -64,15 +64,6 @@ public class PickStage : ECAActionStage
 
 		animatorMxM = (ECAAnimatorMxM)animator;
 		mecanimAnimator = animatorMxM.mecanimAnimator;
-
-		if (animatorMxM.Eca.GetComponentInChildren<HoldPoint>() == null && !grab)
-		{
-			Debug.LogError("The target does not have the hold point.");
-			return;
-		}
-		else if (!grab)
-			holdPoint = animatorMxM.Eca.GetComponentInChildren<HoldPoint>().transform;
-
 		
 		if (target.GetComponent<InteractionObject>() == null)
 		{
@@ -110,6 +101,22 @@ public class PickStage : ECAActionStage
 			else
 				typePick = HandSide.LeftHand;
 		}
+
+
+		if (animatorMxM.Eca.GetComponentInChildren<HoldPoint>() == null && !grab)
+		{
+			Debug.LogError("The target does not have the hold point.");
+			return;
+		}
+		else if (!grab)
+        {
+			if(typePick == HandSide.RightHand)
+				holdPoint = animatorMxM.Eca.GetComponentInChildren<HoldPointRight>().transform;
+			else
+				holdPoint = animatorMxM.Eca.GetComponentInChildren<HoldPointLeft>().transform;
+		}
+
+
 
 		//start the interaction with the correct hand
 		if (typePick == HandSide.LeftHand)
@@ -163,7 +170,7 @@ public class PickStage : ECAActionStage
 		if (interactionObject != obj) return;
 
 		// Rotate the pivot of the hand targets
-		RotatePivot();
+		//RotatePivot();
 
 		// Rotate the hold point so it matches the current rotation of the object
 		if(!grab)
@@ -185,12 +192,14 @@ public class PickStage : ECAActionStage
 				obj.transform.rotation = Quaternion.Lerp(pickUpRotation, holdPoint.rotation, holdWeight);
 			}
 
-			if (holdPoint.position.magnitude - obj.transform.position.magnitude <= .05f && !grab)
+
+			if (Vector3.Distance(holdPoint.position, obj.transform.position) <= .22f && !grab)
 				EndStage();
 		}
 		else
         {
-			if (Vector3.Distance(holdPoint.position, obj.transform.position) <= .22f && !grab)
+			Debug.Log(Vector3.Distance(holdPoint.position, obj.transform.position));
+			if (Vector3.Distance(holdPoint.position, obj.transform.position) <= .3f && !grab)
 				EndStage();
 		}
 
