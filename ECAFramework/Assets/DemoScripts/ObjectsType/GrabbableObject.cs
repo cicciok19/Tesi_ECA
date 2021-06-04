@@ -22,6 +22,7 @@ public class GrabbableObject : ECAInteractableObject
     protected InteractionObject interactionObj;
     protected AnimationCurve curveOne;
     protected AnimationCurve curveTwo;
+    protected AnimationCurve curveThree;
     protected Rigidbody rb;
 
     protected void Awake()
@@ -34,9 +35,10 @@ public class GrabbableObject : ECAInteractableObject
             interactionObj = this.gameObject.AddComponent<InteractionObject>();
             curveOne = SetGaussianCurve(0, 1f);
             curveTwo = SetGaussianCurve(0, .23f);
+            curveThree = SetPoserWeightCurve();
 
             //creating the weight curves
-            interactionObj.weightCurves = new InteractionObject.WeightCurve[2];
+            interactionObj.weightCurves = new InteractionObject.WeightCurve[3];
 
             interactionObj.weightCurves[0] = new InteractionObject.WeightCurve();
             interactionObj.weightCurves[0].type = InteractionObject.WeightCurve.Type.PositionWeight;
@@ -46,18 +48,22 @@ public class GrabbableObject : ECAInteractableObject
             interactionObj.weightCurves[1].type = InteractionObject.WeightCurve.Type.Reach;
             interactionObj.weightCurves[1].curve = curveTwo;
 
+            interactionObj.weightCurves[2] = new InteractionObject.WeightCurve();
+            interactionObj.weightCurves[2].type = InteractionObject.WeightCurve.Type.PoserWeight;
+            interactionObj.weightCurves[2].curve = curveThree;
+
             //creating multipliers
-            interactionObj.multipliers = new InteractionObject.Multiplier[2];
+            interactionObj.multipliers = new InteractionObject.Multiplier[1];
 
             interactionObj.multipliers[0] = new InteractionObject.Multiplier();
             interactionObj.multipliers[0].curve = InteractionObject.WeightCurve.Type.PositionWeight;
             interactionObj.multipliers[0].multiplier = 1f;
             interactionObj.multipliers[0].result = InteractionObject.WeightCurve.Type.RotateBoneWeight;
 
-            interactionObj.multipliers[1] = new InteractionObject.Multiplier();
+            /*interactionObj.multipliers[1] = new InteractionObject.Multiplier();
             interactionObj.multipliers[1].curve = InteractionObject.WeightCurve.Type.PositionWeight;
             interactionObj.multipliers[1].multiplier = 1f;
-            interactionObj.multipliers[1].result = InteractionObject.WeightCurve.Type.PoserWeight;
+            interactionObj.multipliers[1].result = InteractionObject.WeightCurve.Type.PoserWeight;*/
 
             //creating event
             
@@ -88,6 +94,21 @@ public class GrabbableObject : ECAInteractableObject
         kS[0] = new Keyframe(0, minValue, 0, 0);
         kS[1] = new Keyframe(.5f, maxValue, 0, 0);
         kS[2] = new Keyframe(1, minValue, 0, 0);
+
+        curve = new AnimationCurve(kS);
+
+        return curve;
+    }
+
+    private AnimationCurve SetPoserWeightCurve()
+    {
+        AnimationCurve curve;
+
+        Keyframe[] kS = new Keyframe[3];
+
+        kS[0] = new Keyframe(0, 0, 0, 0);
+        kS[1] = new Keyframe(0.5f, 1, 0, 0);
+        kS[2] = new Keyframe(1, 1, 0, 0);
 
         curve = new AnimationCurve(kS);
 

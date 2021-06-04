@@ -148,14 +148,34 @@ public class ECAAnimator : MonoBehaviour
         if (currentStage != null)
         {
             currentStageName = currentStage.ToString();
-            currentStage.Update();
+            if (currentStage.GetType().ToString() == "ECAParallelActionStage")
+            {
+                ECAParallelActionStage parallelStage = (ECAParallelActionStage)currentStage;
+                foreach (var s in parallelStage.parallelStages)
+                    s.Update();
+            }
+            else
+            {
+                currentStage.Update();
+            }
         }
     }
 
     protected void LateUpdate()
     {
         if (currentStage != null)
-            currentStage.LateUpdate();
+        {
+            if (currentStage.GetType().ToString() == "ECAParallelActionStage")
+            {
+                ECAParallelActionStage parallelStage = (ECAParallelActionStage)currentStage;
+                foreach (var s in parallelStage.parallelStages)
+                    s.LateUpdate();
+            }
+            else
+            {
+                currentStage.LateUpdate();
+            }
+        }   
     }
 
 
