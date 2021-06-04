@@ -29,6 +29,7 @@ public class IKSetter : MonoBehaviour
 {
     public event EventHandler AimCompleted;
 
+    private Transform hips;
     private Transform root;
     private Transform headBone;
     private Transform leftForeArm;
@@ -40,6 +41,8 @@ public class IKSetter : MonoBehaviour
     private Transform leftArm;
     private Transform neckBone;
     private Transform rightArm;
+    private Transform leftFoot;
+    private Transform rightFoot;
 
     protected Animator animator;
     protected Dictionary<HumanBodyBones, AimIK> aimDictionary =   new Dictionary<HumanBodyBones, AimIK>();
@@ -57,7 +60,7 @@ public class IKSetter : MonoBehaviour
 
         // Get the bones
 
-        //root = GetBone(HumanBodyBones.Hips);
+        hips = GetBone(HumanBodyBones.Hips);
         root = this.transform;
         headBone = GetBone(HumanBodyBones.Head);
         neckBone = GetBone(HumanBodyBones.Neck);
@@ -69,6 +72,7 @@ public class IKSetter : MonoBehaviour
         leftForeArm = GetBone(HumanBodyBones.LeftLowerArm);
         leftArm = GetBone(HumanBodyBones.LeftUpperArm);
         leftShoulder = GetBone(HumanBodyBones.LeftShoulder);
+        leftFoot = GetBone(HumanBodyBones.LeftFoot);
 
         //create the IKs
         headIK = SetIKHead(headBone, neckBone);
@@ -300,8 +304,39 @@ public class IKSetter : MonoBehaviour
             AimCompleted(this, EventArgs.Empty);
     }
 
+    /*
+    IEnumerator ChangeTargetFullIK(IKEffector effector, Transform target, float weight, float speed)
+    {
+        yield return new WaitForSeconds(.1f);
 
+        float varOld = effector.positionWeight;
+        GameObject targetOld = effector.target.gameObject;
+        float varNew = 0;
+        bool sameTarget = false;
 
+        FullBodyBipedIK newFullIK = SetFullBodyIK();
+
+        if (effector.bone == hips)
+            SetTargetFullBodyIK(newFullIK, target);
+        else if (effector.bone == leftHandBone)
+            SetTargetFullBodyIK(newFullIK, null, target);
+        else if (effector.bone == rightHandBone)
+            SetTargetFullBodyIK(newFullIK, null, null, target);
+        else if (effector.bone == lef)
+
+        //SetTargetAimIK(newAimIK, target, 0);
+
+        while (varOld > 0 || varNew < weight)
+        {
+            aimIK.solver.SetIKPositionWeight(varOld);
+            newAimIK.solver.SetIKPositionWeight(varNew);
+            yield return new WaitForSeconds(speed);
+            if (varOld > 0)
+                varOld -= .01f;
+            if (varNew < weight)
+                varNew += .01f;
+        }
+    }*/
 
     public virtual void SetTargetAimIK(AimIK aimIK, Transform target, float weight = 1f, float duration = 1f)
     {
