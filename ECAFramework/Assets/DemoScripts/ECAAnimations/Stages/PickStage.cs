@@ -185,7 +185,9 @@ public class PickStage : ECAActionStage
 				obj.transform.rotation = Quaternion.Lerp(pickUpRotation, holdPoint.rotation, holdWeight);
 			}
 
-			if (holdPoint.position.magnitude - obj.transform.position.magnitude <= .05f && !grab)
+			Debug.Log(Vector3.Distance(holdPoint.position, obj.transform.position));
+
+			if (Vector3.Distance(holdPoint.position, obj.transform.position) <= .05f && !grab)
 				EndStage();
 		}
 		else

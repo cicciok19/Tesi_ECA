@@ -2,10 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Capnography : ECACompositeAction
+public class Capnography : ECAAction
 {
-    public Capnography(ECA eca) : base(eca)
+    Transform capnography;
+
+    public Capnography(ECA eca, Transform capnography) : base(eca)
     {
+        this.capnography = capnography;
+    }
+
+    public override void SetupAction()
+    {
+        List<ECAActionStage> stages = new List<ECAActionStage>();
     }
 
 }
