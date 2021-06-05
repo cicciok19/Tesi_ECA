@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class DefibrillatorTable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Defibrillator defibrillator;
+
+    private void Start()
     {
-        
+        defibrillator = GetComponentInChildren<Defibrillator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public Defibrillator GetDefibrillator()
     {
-        
+        return defibrillator;
     }
 }

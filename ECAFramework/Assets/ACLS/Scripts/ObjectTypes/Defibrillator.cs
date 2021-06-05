@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RootMotion.FinalIK;
 
 public class Defibrillator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private GrabbableObject leftPaddle;
+    private GrabbableObject rightPaddle;
+
+    private void Awake()
     {
-        
+        InteractionTarget[] targets = GetComponentsInChildren<InteractionTarget>();
+        foreach (var t in targets)
+        {
+            if (t.effectorType == FullBodyBipedEffector.RightHand)
+                rightPaddle = t.GetComponentInParent<GrabbableObject>();
+            else
+                leftPaddle = t.GetComponentInParent<GrabbableObject>();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public GrabbableObject GetRightPaddle()
     {
-        
+        return rightPaddle;
+    }
+
+    public GrabbableObject GetLeftPaddle()
+    {
+        return leftPaddle;
     }
 }
