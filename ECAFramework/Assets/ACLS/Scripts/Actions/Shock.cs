@@ -21,8 +21,19 @@ public class Shock : ECACompositeAction
 
     private void PickPaddles()
     {
-        ECAAction action = new ECAAction(defManager, new PickStage(defibrillator.GetLeftPaddle().transform, 1, false, HandSide.LeftHand));
-        actions.Add(action);
+        List<ECAActionStage> pickStages = new List<ECAActionStage>()
+        {
+            new PickStage(defibrillator.GetLeftPaddle().transform, 1, false, HandSide.LeftHand),
+            new PickStage(defibrillator.GetRightPaddle().transform, 1, false, HandSide.RightHand)
+        };
+
+        ECAParallelActionStage pick = new ECAParallelActionStage(pickStages.ToArray());
+
+        List<ECAActionStage> list = new List<ECAActionStage>();
+        list.Add(pick);
+
+        takePaddles = new ECAAction(defManager, list);
+        actions.Add(takePaddles);
     }
 
 }

@@ -194,6 +194,7 @@ public class PickStage : ECAActionStage
 		}
 		else
         {
+			Debug.Log(Vector3.Distance(holdPoint.position, obj.transform.position));
 			if (Vector3.Distance(holdPoint.position, obj.transform.position) <= .3f && !grab)
 				EndStage();
 		}
