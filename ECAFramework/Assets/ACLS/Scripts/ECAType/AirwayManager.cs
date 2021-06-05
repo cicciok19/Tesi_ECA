@@ -24,7 +24,7 @@ public class AirwayManager : ECA
         airwayTable = medicalRoom.GetAirwayTable();
 
         //just for debug
-        HandleGiveOxygen(airwayTable.GetOxygenMask(), giveOxygenPosition);
+        HandleGiveOxygen(airwayTable.GetOxygen(), giveOxygenPosition);
     }
     protected override ECAAnimator AddECAAnimator()
     {
@@ -36,9 +36,9 @@ public class AirwayManager : ECA
         base.Handle(intent);
     }
 
-    private void HandleGiveOxygen(Transform oxygenMask, Transform giveOxygenPosition)
+    private void HandleGiveOxygen(Oxygen oxygen, Transform giveOxygenPosition)
     {
-        giveOxygen = new GiveOxygen(this, oxygenMask, giveOxygenPosition);
+        giveOxygen = new GiveOxygen(this, oxygen, giveOxygenPosition);
         giveOxygen.StartAction();
     }
 }

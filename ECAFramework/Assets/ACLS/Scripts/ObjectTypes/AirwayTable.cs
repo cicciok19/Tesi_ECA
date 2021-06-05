@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class AirwayTable : MonoBehaviour
 {
-    OxygenMask oxygenMask;
+    Oxygen oxygen;
 
     // Start is called before the first frame update
     void Start()
     {
-        oxygenMask = GetComponentInChildren<OxygenMask>();
+        oxygen = GetComponentInChildren<Oxygen>();
     }
 
-    public Transform GetOxygenMask()
+    public Oxygen GetOxygen()
     {
-        return oxygenMask.transform;
+        return oxygen;
     }
 }
