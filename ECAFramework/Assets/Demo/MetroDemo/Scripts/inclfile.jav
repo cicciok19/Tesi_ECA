@@ -1,0 +1,9 @@
+BuyTicket                      .\..\ComplexActions ?   
+ECAAction                      .\..\..\..\ECAScripts\ECAAnimation S  
+ECACompositeAction             .\..\..\..\ECAScripts\ECAAnimation S  
+GoToStage                      .\..\..\..\DemoScripts\ECAAnimations\Stages S  
+VendingMachine                 .\..\ObjectTypes S  
+Station                        ./../ObjectTypes ?   
+ReachPlatform                  ./../ComplexActions S  
+EnterTrain                     ./../ComplexActions S  
+Train                          ./../ObjectTypes ?   
