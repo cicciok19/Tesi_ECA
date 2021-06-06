@@ -23,7 +23,6 @@ public class ECAAction
 
     public ECAAnimator ecaAnimator;
     public ECAActionStage[] AllStages;
-    public IKSetter ikManager;
 
 
     public ECAAction(ECA eca, List<ECAActionStage> stages)
@@ -32,22 +31,6 @@ public class ECAAction
         ecaAnimator = eca.ecaAnimator;
         SetStages(stages);
     }
-
-
-    public ECAAction(ECAAnimator ecaAnimator, List<ECAActionStage> stages)
-    {
-        this.ecaAnimator = ecaAnimator;
-        this.eca = ecaAnimator.Eca;
-        foreach (var stage in stages)
-        {
-            stage.Animator = ecaAnimator;
-            //stage.StageFinished += OnStageFinished;
-        }
-    
-        AllStages = stages.ToArray();
-        actualStageIdx = 0;
-    }
-
 
     public ECAAction(ECA eca, ECAActionStage stage)
     {
@@ -64,14 +47,6 @@ public class ECAAction
     {
         this.eca = eca;
         ecaAnimator = eca.ecaAnimator;
-    }
-
-
-
-
-    protected virtual void GetIkManager(ECA eca)
-    {
-        ikManager = eca.GetComponent<IKSetter>();
     }
 
 

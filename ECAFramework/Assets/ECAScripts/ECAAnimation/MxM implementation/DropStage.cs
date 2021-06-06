@@ -15,24 +15,14 @@ public class DropStage : ECAActionStage
     private ECAAnimatorMxM animatorMxM;
 
     private Transform dropTransform;
-    private Vector3 dropPosition;
-    private Quaternion dropRotation;
-    private Vector3 pickDownPosition;
-    private Vector3 objInitialPosition;
-    private Quaternion pickDownRotation;
-    private Quaternion objInitiaRotation;
     private bool dropping;
-    private float holdWeight, holdWeightVel;
 
 
-    public DropStage(PickStage pickStage, Transform dropPosition) : base()
+    public DropStage(PickStage pickStage, Transform dropTransform) : base()
     {
         this.pickStage = pickStage;
         this.typePick = pickStage.typePick;
-
-        this.dropTransform = dropPosition;
-        this.dropPosition = dropPosition.position;
-        this.dropRotation = dropPosition.rotation;
+        this.dropTransform = dropTransform;
     }
 
     public DropStage(PickStage pickStage) : base()
@@ -49,16 +39,7 @@ public class DropStage : ECAActionStage
 
         this.obj = pickStage.obj;
 
-        //Transform dropPosition = animatorMxM.Eca.GetComponentInChildren<DropPosition>().transform;
-
-        pickDownPosition = dropPosition;
-        pickDownRotation = dropRotation;
-        objInitialPosition = obj.transform.position;
-        objInitiaRotation = obj.transform.rotation;
-
         dropping = true;
-        holdWeight = 0f;
-        holdWeightVel = 0f;
 
         ikManager.interactionSystem.StopInteraction(pickStage.effector);
         ikManager.interactionSystem.ResumeAll();

@@ -467,17 +467,5 @@ public class IKSetter : MonoBehaviour
       set; get;
     }
 
-    public void ResetInteractionSystem()
-    {
-        interactionSystem.StopAll();
-        Destroy(interactionSystem);
-        interactionSystem = gameObject.AddComponent<InteractionSystem>();
-        interactionSystem.ik = fullBodyBipedIK;
-    }
-
-    public void ChangeFadeInTime(float time)
-    {
-        interactionSystem.fadeInTime = time;
-    }
 
 }

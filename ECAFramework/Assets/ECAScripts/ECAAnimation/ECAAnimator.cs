@@ -36,10 +36,7 @@ using MxM;
 public class ECAAnimator : MonoBehaviour
 {
     public event EventHandler AudioEnded;
-    public event EventHandler HasArrived;
-    public event EventHandler IsLookingAt;
     public event EventHandler EventContact;
-    public event EventHandler WaitComplete;
     public event EventHandler TriggeredAnimationComplete;
     public event EventHandler TriggeredAnimationContact;
 
@@ -54,17 +51,6 @@ public class ECAAnimator : MonoBehaviour
     public Text ECAText;
     public GameObject TextPanel;
     public AudioSource audioSource;
-
-
-    private IEnumerator WaitFor(float time)
-    {
-        yield return new WaitForSeconds(time);
-        if (WaitComplete != null)
-            WaitComplete(this, EventArgs.Empty);
-    }
-
-
-
 
     protected virtual void CreateAudioSource()
     {
@@ -119,13 +105,6 @@ public class ECAAnimator : MonoBehaviour
     public virtual void OnEmotionUpdated(ECAEmotion emotion)
     {
         actualAction.OnEmotionUpdated(emotion);
-    }
-
-
-    protected virtual void EndLookingAt()
-    {
-        if (IsLookingAt != null)
-            IsLookingAt(this, EventArgs.Empty);
     }
 
 
@@ -234,39 +213,6 @@ public class ECAAnimator : MonoBehaviour
     }
 
 
-    public virtual void GoTo(Vector3 target, float arrivalDeltaDistance)
-    {
-        throw new NotImplementedException();
-    }
-
-
-    public virtual IEnumerator WaitArrival(Vector3 target, float deltaDistance)
-    {
-        if (deltaDistance > 0)
-        {
-            while (Vector3.Distance(target, transform.position) >= deltaDistance)
-                yield return null;
-        }
-        else
-            Utility.LogError("delta Distance <= 0");
-    
-        Arrived();
-    }
-
-
-    public virtual void Arrived()
-    {
-        Utility.Log(Eca.name + " Arrived to destination!");
-        if (navMeshAgent == null || navMeshAgent.enabled == false)
-            Utility.LogWarning("No navMeshAgent found. Add NamMeshAgent or override this method if you wont to use your policy");
-        else
-            navMeshAgent.isStopped = true;
-    
-        if (HasArrived != null)
-            HasArrived(this, EventArgs.Empty);
-    }
-
-
     public virtual bool IsWatchingSomewhere(Camera camera, Collider Traget)
     {
         Plane[] planes = GeometryUtility.CalculateFrustumPlanes(camera);
@@ -338,29 +284,6 @@ public class ECAAnimator : MonoBehaviour
         set;
         get;
     } = null;
-    
-
-    public virtual void PointAt(Transform target)
-    {
-    }
-
-
-    public virtual void LookAt(Transform target = null, bool turnToSit = false)
-    {
-    }
-
-
-    public virtual IEnumerator WaitLookAt(Vector3 dir)
-    {
-        yield return new WaitForSeconds(0.1f);
-    }
-
-
-    public virtual void Wait(float time)
-    {
-        StartCoroutine(WaitFor(time));
-    }
-
 
     public void ToggleNavMesh(bool enable)
     {

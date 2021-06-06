@@ -10,8 +10,6 @@ public class Syringe : GrabbableObject
     void Start()
     {
         used = false;
-        SetPick(true);
-        SetPause(false);
     }
 
 

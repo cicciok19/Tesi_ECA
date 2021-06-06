@@ -19,12 +19,12 @@ public class WaitStage : ECAActionStage
     public override void StartStage()
     {
         base.StartStage();
-        animator.WaitComplete += OnWaitComplete;
-        animator.Wait(time);
+        WaitFor(time);
     }
 
-    private void OnWaitComplete(object sender, EventArgs e)
+    protected override void OnWaitCompleted()
     {
+        base.OnWaitCompleted();
         EndStage();
     }
 

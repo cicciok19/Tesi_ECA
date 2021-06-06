@@ -68,7 +68,7 @@ public class GrabbableObject : ECAInteractableObject
             interactionObj.events[0].animations = new InteractionObject.AnimatorEvent[0];
             interactionObj.events[0].messages = new InteractionObject.Message[0];
             interactionObj.events[0].time = .5f;
-            interactionObj.events[0].pause = true;
+            interactionObj.events[0].pickUp = true;
         }
 
         if(GetComponent<Rigidbody>() == null)
@@ -94,7 +94,7 @@ public class GrabbableObject : ECAInteractableObject
         return curve;
     }
 
-    protected void SetPick(bool pick)
+    public void SetPick(bool pick)
     {
         if (interactionObj != null)
             interactionObj.events[0].pickUp = pick;
@@ -102,7 +102,7 @@ public class GrabbableObject : ECAInteractableObject
             Debug.LogError("There isn't an interaction object attached");
     }
 
-    protected void SetPause(bool pause)
+    public void SetPause(bool pause)
     {
         if (interactionObj != null)
             interactionObj.events[0].pause = pause;

@@ -18,120 +18,41 @@ public class PickStage : ECAActionStage
 	internal FullBodyBipedEffector effector;
 
 	private ECAAnimatorMxM animatorMxM;
-	internal Animator mecanimAnimator;
 
 	internal InteractionObject obj; // The object to pick up
 	private Transform pivot; // The pivot point of the hand targets
 	private Transform holdPoint; // The point where the object will lerp to when picked up
 	private float pickSpeed; // Maximum lerp speed of the object. Decrease this value to give the object more weight
 	private bool grab;
-	private bool pickUp;
 
 	private float holdWeight, holdWeightVel;
 	private Vector3 pickUpPosition;
 	private Quaternion pickUpRotation;
-	private QueueableObject queueableObject = null;
 
 	public PickStage(Transform target, float pickSpeed, bool grab = false, HandSide typePick = HandSide.Nothing) : base()
     {
 		this.target = target.GetComponent<GrabbableObject>();
 		Assert.IsNotNull(this.target);
 		this.pickSpeed = pickSpeed;
-		this.grab = grab;
 		this.typePick = typePick;
-	}
-
-	public PickStage(QueueableObject queueableObject, float pickSpeed, bool grab = false, HandSide typePick = HandSide.Nothing) : base()
-	{
-		this.queueableObject = queueableObject;
-		this.pickSpeed = pickSpeed;
 		this.grab = grab;
-		this.typePick = typePick;
 	}
 
 	public override void StartStage()
 	{
 		base.StartStage();
-
-		//InteractionObject interactionObject = null;
-
-		if(target == null)
-        {
-			target = queueableObject.GetGrabbableGameObject().GetComponent<GrabbableObject>();
-			//obj = target.GetComponent<InteractionObject>();
-		}
 			
-
 		animatorMxM = (ECAAnimatorMxM)animator;
-		mecanimAnimator = animatorMxM.mecanimAnimator;
-		
-		if (target.GetComponent<InteractionObject>() == null)
-		{
-			Debug.LogError("Target is not a grabbable object.");
-			return;
-		}
-		else
-			obj = target.GetComponent<InteractionObject>();
-		
-		//obj = interactionObject;
-		//obj = target.GetComponent<InteractionObject>();
-
 		ikManager.interactionSystem.Start();
 
-		if (target.GetComponentInChildren<PivotObject>() == null)
-		{
-			Debug.LogError("The target does not have a pivot object.");
-			return;
-		}
-		else
-			pivot = target.GetComponentInChildren<PivotObject>().transform;
+		//set components needed to start the interaction
+		SetupComponents();
 
         //does the start of the interactionSystem, mandatory
         SetupInteractionSystem();
 
-
-		//if handSide is not specified gets the closest hand
-		if(typePick == HandSide.Nothing)
-        {
-			Transform rightHand = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.RightHand);
-			Transform leftHand = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.LeftHand);
-
-			if (Vector3.Distance(rightHand.position, obj.transform.position) < Vector3.Distance(leftHand.position, obj.transform.position))
-				typePick = HandSide.RightHand;
-			else
-				typePick = HandSide.LeftHand;
-		}
-
-		if (animatorMxM.Eca.GetComponentInChildren<HoldPoint>() == null && !grab)
-		{
-			Debug.LogError("The target does not have the hold point.");
-			return;
-		}
-		else if (!grab)
-		{
-			if (typePick == HandSide.RightHand)
-				holdPoint = animatorMxM.Eca.GetComponentInChildren<HoldPointRight>().transform;
-			else
-				holdPoint = animatorMxM.Eca.GetComponentInChildren<HoldPointLeft>().transform;
-		}
-
-		//start the interaction with the correct hand
-		if (typePick == HandSide.LeftHand)
-		{
-			effector = FullBodyBipedEffector.LeftHand;
-			ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
-		}
-		else if (typePick == HandSide.RightHand)
-		{
-			effector = FullBodyBipedEffector.RightHand;
-            ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
-		}
-		else if (typePick == HandSide.BothHands)
-		{
-			effector = FullBodyBipedEffector.LeftHand;
-            ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
-            ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
-		}
+		//choose type pick and starts the interaction
+		SetTypePick();
 
 	}
 
@@ -181,7 +102,6 @@ public class PickStage : ECAActionStage
 			// Smoothing in the hold weight
 			holdWeight = Mathf.SmoothDamp(holdWeight, 1f, ref holdWeightVel, pickSpeed);
 
-
 			if (!grab)
 			{
 				// Interpolation
@@ -194,49 +114,12 @@ public class PickStage : ECAActionStage
 		}
 		else
         {
-			Debug.Log(Vector3.Distance(holdPoint.position, obj.transform.position));
+			//Debug.Log(Vector3.Distance(holdPoint.position, obj.transform.position));
 			if (Vector3.Distance(holdPoint.position, obj.transform.position) <= .3f && !grab)
 				EndStage();
 		}
 
 	}
-
-    protected override void ActivateBodyParts()
-    {
-		if (typePick == HandSide.LeftHand)
-		{
-			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftFingers, true);
-			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftArm, true);
-			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftHandIK, true);
-		}
-		else if (typePick == HandSide.RightHand)
-		{
-			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightFingers, true);
-			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightArm, true);
-			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightHandIK, true);
-		}
-		else if (typePick == HandSide.BothHands)
-		{
-			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftFingers, true);
-			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightFingers, true);
-			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftArm, true);
-			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.LeftHandIK, true);
-			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightArm, true);
-			animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.RightHandIK, true);	 
-		}
-
-		animatorMxM.MxM_SetMaskBodyPart(AvatarMaskBodyPart.Root, true);
-	}
-
-    protected override void ActivateLayer(int layerIndex)
-    {
-		base.ActivateLayer(layerIndex);
-    }
-
-    protected override void DeactivateLayer(int layerIndex)
-    {
-		base.DeactivateLayer(layerIndex);
-    }
 
     // Are we currently holding the object?
     private bool holding
@@ -282,5 +165,80 @@ public class PickStage : ECAActionStage
 
         ikManager.interactionSystem.speed = .2f;
     }
+
+	private void SetupComponents()
+    {
+		//INTERACTION OBJECT
+		if (target.GetComponent<InteractionObject>() == null)
+		{
+			Debug.LogError("Target is not a grabbable object.");
+			return;
+		}
+		else
+			obj = target.GetComponent<InteractionObject>();
+
+        if (grab)
+        {
+			var grabbableObject = obj.GetComponent<GrabbableObject>();
+			grabbableObject.SetPause(true);
+			grabbableObject.SetPick(false);
+        }
+
+		//PIVOT OBJECT
+		if (target.GetComponentInChildren<PivotObject>() == null)
+		{
+			Debug.LogError("The target does not have a pivot object.");
+			return;
+		}
+		else
+			pivot = target.GetComponentInChildren<PivotObject>().transform;
+
+		//HOLD POINT
+		if (animatorMxM.Eca.GetComponentInChildren<HoldPoint>() == null && !grab)
+		{
+			Debug.LogError("The target does not have the hold point.");
+			return;
+		}
+		else if (!grab)
+		{
+			if (typePick == HandSide.RightHand)
+				holdPoint = animatorMxM.Eca.GetComponentInChildren<HoldPointRight>().transform;
+			else
+				holdPoint = animatorMxM.Eca.GetComponentInChildren<HoldPointLeft>().transform;
+		}
+	}
+
+	private void SetTypePick()
+    {
+		//if handSide is not specified gets the closest hand
+		if (typePick == HandSide.Nothing)
+		{
+			Transform rightHand = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.RightHand);
+			Transform leftHand = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.LeftHand);
+
+			if (Vector3.Distance(rightHand.position, obj.transform.position) < Vector3.Distance(leftHand.position, obj.transform.position))
+				typePick = HandSide.RightHand;
+			else
+				typePick = HandSide.LeftHand;
+		}
+
+		//start the interaction with the correct hand
+		if (typePick == HandSide.LeftHand)
+		{
+			effector = FullBodyBipedEffector.LeftHand;
+			ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
+		}
+		else if (typePick == HandSide.RightHand)
+		{
+			effector = FullBodyBipedEffector.RightHand;
+			ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
+		}
+		else if (typePick == HandSide.BothHands)
+		{
+			effector = FullBodyBipedEffector.LeftHand;
+			ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
+			ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
+		}
+	}
 
 }

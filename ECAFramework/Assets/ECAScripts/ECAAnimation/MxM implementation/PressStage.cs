@@ -44,52 +44,15 @@ public class PressStage : ECAActionStage
         interactionObj = target.GetComponent<InteractionObject>();
         Assert.IsNotNull(interactionObj);
 
-        InteractionTarget[] interactionTargets = interactionObj.GetComponentsInChildren<InteractionTarget>();
-        Assert.IsNotNull(interactionTargets);
+        InteractionTarget interactionTarget = interactionObj.GetComponentInChildren<InteractionTarget>();
+        Assert.IsNotNull(interactionTarget);
 
-        if (hand == HandSide.Nothing)
-        {
-            Transform rightHand = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.RightHand);
-            Transform leftHand = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.LeftHand);
 
-            if (Vector3.Distance(rightHand.position, interactionObj.transform.position) < Vector3.Distance(leftHand.position, interactionObj.transform.position))
-            {
-                hand = HandSide.RightHand;
-            }
-            else
-            {
-                hand = HandSide.LeftHand;
-            }
-        }
-
+        //does the start of the interactionSystem, mandatory
         SetupInteractionSystem();
 
-        foreach(InteractionTarget it in interactionTargets)
-        {
-            if (hand == HandSide.LeftHand)
-            {
-                if(it.effectorType == FullBodyBipedEffector.LeftHand)
-                    interactionTarget = it;
-            }
-            else if (hand == HandSide.RightHand)
-            {
-                if (it.effectorType == FullBodyBipedEffector.RightHand)
-                    interactionTarget = it;
-            }
-        }
-
-        if (hand == HandSide.LeftHand)
-        {
-            effector = FullBodyBipedEffector.LeftHand;
-            startPosition = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.RightHand);
-            ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, interactionObj, true);
-        }
-        else if (hand == HandSide.RightHand)
-        {
-            effector = FullBodyBipedEffector.RightHand;
-            startPosition = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.LeftHand);
-            ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, interactionObj, true);
-        }
+        //choose type pick and starts the interaction
+        SetTypePick();
 
         WaitFor(2f);
     }
@@ -117,5 +80,36 @@ public class PressStage : ECAActionStage
         ikManager.interactionSystem.Start();
         ikManager.interactionSystem.speed = .5f;
         speed = ikManager.interactionSystem.speed;
+    }
+
+    private void SetTypePick()
+    {
+        if (hand == HandSide.Nothing)
+        {
+            Transform rightHand = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.RightHand);
+            Transform leftHand = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.LeftHand);
+
+            if (Vector3.Distance(rightHand.position, interactionObj.transform.position) < Vector3.Distance(leftHand.position, interactionObj.transform.position))
+            {
+                hand = HandSide.RightHand;
+            }
+            else
+            {
+                hand = HandSide.LeftHand;
+            }
+        }
+
+        if (hand == HandSide.LeftHand)
+        {
+            effector = FullBodyBipedEffector.LeftHand;
+            startPosition = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.RightHand);
+            ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, interactionObj, true);
+        }
+        else if (hand == HandSide.RightHand)
+        {
+            effector = FullBodyBipedEffector.RightHand;
+            startPosition = animatorMxM.mecanimAnimator.GetBoneTransform(HumanBodyBones.LeftHand);
+            ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, interactionObj, true);
+        }
     }
 }

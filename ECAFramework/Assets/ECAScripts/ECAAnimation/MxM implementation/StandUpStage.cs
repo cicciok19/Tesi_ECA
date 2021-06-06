@@ -16,13 +16,11 @@ using UnityEngine.Assertions;
 
 class StandUpStage : ECAActionStage
 {
-
     private Transform leftFootEffector;
     private Transform rightFootEffector;
 
     protected Transform sitPoint;
     protected SittableObject sittableObject;
-
 
     public StandUpStage(SittableObject obj) : base()
     {
@@ -33,9 +31,16 @@ class StandUpStage : ECAActionStage
         rightFootEffector = sittableObject.GetRightFootTransform();
         leftFootEffector = sittableObject.GetLeftFootTransform();
     }
+    public override void StartStage()
+    {
+        base.StartStage();
+        animator.TriggerAnimation("StandUp", sitPoint);
 
+        SetWeightsToStandUp();
 
-
+        animator.TriggeredAnimationComplete += OnEventComplete;
+        animator.WaitForTriggeredAnimationComplete();
+    }
 
     protected void SetWeightsToStandUp()
     {
@@ -48,21 +53,6 @@ class StandUpStage : ECAActionStage
         ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, 0, 0.05f);
     }
 
-
-
-
-    public override void StartStage()
-    {
-        base.StartStage();
-        animator.TriggerAnimation("StandUp", sitPoint);
-
-        SetWeightsToStandUp();
-    
-        animator.TriggeredAnimationComplete += OnEventComplete;
-        animator.WaitForTriggeredAnimationComplete();
-    }
-
-
     public override void EndStage()
     {
         sittableObject.Occupied = false;
@@ -71,6 +61,4 @@ class StandUpStage : ECAActionStage
 
         base.EndStage();
     }
-
-
 }

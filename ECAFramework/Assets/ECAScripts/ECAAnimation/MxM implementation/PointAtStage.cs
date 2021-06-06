@@ -21,7 +21,6 @@ public class PointAtStage : ECAActionStage
         this.target = target;
     }
 
-
     public override void StartStage()
     {
         base.StartStage();

@@ -27,31 +27,22 @@ public class LookAtStage : ECAActionStage
     protected LookableObject lookableObject;
 
 
-    public LookAtStage(LookableObject lookableObject)
-    : base()
+    public LookAtStage(LookableObject lookableObject) : base()
     {
-            this.lookableObject = lookableObject;
-        
-        	counter = (int)Mathf.Round(UnityEngine.Random.Range(2f ,5f));
+        this.lookableObject = lookableObject;
+        counter = (int)Mathf.Round(UnityEngine.Random.Range(2f ,5f));
     }
 
-    public LookAtStage(LookableObject lookableObject, int c)
-    : base()
+    public LookAtStage(LookableObject lookableObject, int c) : base()
     {
         this.lookableObject = lookableObject;
         counter = c;
     }
 
-
-
-
     private void OnAimCompleted(object sender, EventArgs e)
     {
         WaitFor(UnityEngine.Random.Range(2.0f, 5.0f));
     }
-
-
-
 
     protected override void OnWaitCompleted()
     {   
@@ -61,13 +52,9 @@ public class LookAtStage : ECAActionStage
     	    return;
         }
     
-    
         counter--;
         ikManager.SetTargetAimIK(ikManager.headIK, Randomize.GetRandomPosition(lookableObject.gameObject));
     }
-
-
-
 
     public override void EndStage()
     {
@@ -76,7 +63,6 @@ public class LookAtStage : ECAActionStage
         ikManager.AimCompleted -= OnAimCompleted;
         ikManager.AimCompleted -= lookableObject.OnAimCompleted;
     }
-
 
     public override void StartStage()
     {

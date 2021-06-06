@@ -15,8 +15,7 @@ public class TurnStage : ECAActionStage
         this.target = target;
         this.turnToSit = turnToSit;
 
-        
-        Debug.DrawRay(target.transform.position, target.transform.forward, Color.green, 10);
+        //Debug.DrawRay(target.transform.position, target.transform.forward, Color.green, 10);
     }
 
     public override void StartStage()

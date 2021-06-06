@@ -113,7 +113,7 @@ public class ECA : MonoBehaviour, IIntentHandler
     protected virtual void Awake()
     {
         Utility.Log("ECA " + name + " awaken");
-        AddIKManager();
+        CreateIKManager();
         if (GetComponent<Rigidbody>() == null)
             gameObject.AddComponent<Rigidbody>().useGravity = false;
     }
@@ -164,18 +164,18 @@ public class ECA : MonoBehaviour, IIntentHandler
     }
 
 
-    protected void AddIKManager()
+    protected void CreateIKManager()
     {
         ikManager = GetComponent<IKSetter>();
         if (ikManager == null)
-            ikManager = CreateIKManager();
+            ikManager = AddIKManager();
         Assert.IsNotNull(ikManager);
     
         ikManager.eca = this;
     }
 
 
-    protected virtual IKSetter CreateIKManager()
+    protected virtual IKSetter AddIKManager()
     {
         Assert.IsNull(ikManager);
         IKSetter manager = gameObject.AddComponent<IKSetter>();
