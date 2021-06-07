@@ -229,6 +229,8 @@ public class PickStage : ECAActionStage
 		{
 			effector = FullBodyBipedEffector.LeftHand;
 			ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
+
+			//obj.otherLookAtTarget = obj.transform;
 		}
 		else if (typePick == HandSide.RightHand)
 		{
@@ -241,6 +243,8 @@ public class PickStage : ECAActionStage
 			ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
 			ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
 		}
+
+		
 	}
 
     protected override void OnWaitCompleted()

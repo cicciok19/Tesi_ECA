@@ -39,6 +39,13 @@ public class PlaceObjectStage : ECAActionStage
             ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, destinationObject, false);
             ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, destinationObject, false);
         }
+
+        //ikManager.SetTargetAimIK(ikManager.headIK, destinationObject.transform);
+        ikManager.interactionSystem.lookAt = new InteractionLookAt();
+        ikManager.interactionSystem.lookAt.ik = ikManager.lookAtIK;
+
+        destinationObject.otherLookAtTarget = destinationObject.transform;
+
     }
 
     public override void Update()

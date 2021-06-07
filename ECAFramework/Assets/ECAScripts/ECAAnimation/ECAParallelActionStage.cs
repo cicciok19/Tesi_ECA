@@ -58,10 +58,12 @@ public class ECAParallelActionStage : ECAActionStage
     {
         doNotAdvance = false;
 
-        foreach (var s in parallelStages)
-        {
-            if (s.State != ActionState.Completed)
-                doNotAdvance = true;
+        lock(parallelStages){
+            foreach (var s in parallelStages)
+            {
+                if (s.State != ActionState.Completed)
+                    doNotAdvance = true;
+            }
         }
 
         if(!doNotAdvance)

@@ -6,7 +6,7 @@ using System;
 public class DefibrillatorManager : ECA
 {
     public string[] intentNames = { "AttachMonitor", "Shock" };
-    public event EventHandler ShockFinished;
+    public event EventHandler ShockCompleted;
 
     private Shock shock;
     private AttachMonitor attachMonitor;
@@ -35,6 +35,12 @@ public class DefibrillatorManager : ECA
     private void HandleShock()
     {
         shock = new Shock(this, defibrillatorTable.GetDefibrillator(), patient);
+        shock.CompletedAction += OnShockCompleted;
         shock.StartAction();
+    }
+
+    private void OnShockCompleted(object sender, EventArgs e)
+    {
+        patient.OnShockReceived();
     }
 }

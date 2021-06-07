@@ -25,16 +25,8 @@ namespace RootMotion.Demos {
 
 					// Use the HitReaction
 					hitReaction.Hit(hit.collider, ray.direction * hitForce, hit.point);
-
-					// Just for GUI
-					colliderName = hit.collider.name;
 				}
 			}
-		}
-
-		void OnGUI() {
-			GUILayout.Label("LMB to shoot the Dummy, RMB to rotate the camera.");
-			if (colliderName != string.Empty) GUILayout.Label("Last Bone Hit: " + colliderName);
 		}
 	}
 }

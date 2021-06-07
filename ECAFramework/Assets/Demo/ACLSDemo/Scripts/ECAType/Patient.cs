@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using RootMotion.FinalIK;
 
 public class Patient : ECA
 {
@@ -12,6 +13,7 @@ public class Patient : ECA
     private GiveOxygenPosition giveOxygenPosition;
     private DefLeftPosition defLeftPosition;
     private DefRightPosition defRightPosition;
+    private HitReaction hitReaction;
 
     private void Awake()
     {
@@ -21,13 +23,16 @@ public class Patient : ECA
         giveOxygenPosition = GetComponentInChildren<GiveOxygenPosition>();
         defLeftPosition = GetComponentInChildren<DefLeftPosition>();
         defRightPosition = GetComponentInChildren<DefRightPosition>();
+        hitReaction = GetComponent<HitReaction>();
     }
 
     //medical status managemente
     //status should be updated at every task completed by the team
-    private void OnShockReceived(object sender, EventArgs e)
+    public void OnShockReceived()
     {
-
+        Debug.Log("Sono shockato");
+        hitReaction.Hit(this.GetComponent<MeshCollider>(), Vector3.down * 1f, defLeftPosition.transform.position);
+        hitReaction.Hit(this.GetComponent<MeshCollider>(), Vector3.down * 1f, defRightPosition.transform.position);
     }
     private void OnCPREnded(object sender, EventArgs e)
     {

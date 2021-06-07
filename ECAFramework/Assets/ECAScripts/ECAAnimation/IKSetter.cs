@@ -43,6 +43,10 @@ public class IKSetter : MonoBehaviour
     private Transform rightArm;
     private Transform leftFoot;
     private Transform rightFoot;
+    private Transform chest;
+    private Transform upperChest;
+    private Transform spine;
+
 
     protected Animator animator;
     protected Dictionary<HumanBodyBones, AimIK> aimDictionary =   new Dictionary<HumanBodyBones, AimIK>();
@@ -51,6 +55,7 @@ public class IKSetter : MonoBehaviour
     public AimIK leftHandIK;
     public AimIK rightHandIK;
     public AimIK headIK;
+    public LookAtIK lookAtIK;
 
     public InteractionSystem interactionSystem;
 
@@ -73,8 +78,13 @@ public class IKSetter : MonoBehaviour
         leftArm = GetBone(HumanBodyBones.LeftUpperArm);
         leftShoulder = GetBone(HumanBodyBones.LeftShoulder);
         leftFoot = GetBone(HumanBodyBones.LeftFoot);
+        chest = GetBone(HumanBodyBones.Chest);
+        upperChest = GetBone(HumanBodyBones.UpperChest);
+        spine = GetBone(HumanBodyBones.Spine);
 
         //create the IKs
+
+        lookAtIK = SetLookAtIK();
         headIK = SetIKHead(headBone, neckBone);
         aimDictionary.Add(HumanBodyBones.Head, headIK);
 
@@ -91,6 +101,16 @@ public class IKSetter : MonoBehaviour
            interactionSystem = gameObject.AddComponent<InteractionSystem>();
 
         interactionSystem.ik = fullBodyBipedIK;
+    }
+
+    protected LookAtIK SetLookAtIK()
+    {
+        LookAtIK lookIK = this.gameObject.AddComponent<LookAtIK>();
+        lookIK.solver.bodyWeight = .2f;
+        lookIK.solver.headWeight = .4f;
+        Transform[] spineChain = {spine, chest, upperChest, neckBone };
+        lookIK.solver.SetChain(spineChain, headBone, null, root);
+        return lookIK;
     }
 
     protected AimIK SetIKHead(Transform headBone, Transform neckBone)
