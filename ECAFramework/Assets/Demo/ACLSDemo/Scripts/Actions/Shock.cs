@@ -8,6 +8,8 @@ public class Shock : ECACompositeAction
     private DefibrillatorManager defManager;
     private Transform defLeftPosition;
     private Transform defRightPosition;
+    private Transform turnAtPosition;
+    private Transform leftFootPosition;
 
     private List<PickStage> pickStages;
     private List<PlaceObjectStage> placePaddles;
@@ -20,6 +22,8 @@ public class Shock : ECACompositeAction
         this.defibrillator = defibrillator;
         defLeftPosition = patient.GetDefLeftPosition();
         defRightPosition = patient.GetDefRightPosition();
+        turnAtPosition = patient.GetDefLeftPosition();
+        leftFootPosition = defibrillator.GetComponentInChildren<LeftFootPosition>().transform;
         CreateActionList();
     }
 
@@ -32,7 +36,7 @@ public class Shock : ECACompositeAction
         };
 
         ECAParallelActionStage pick = new ECAParallelActionStage(pickStages.ToArray());
-        TurnStage turnToPatient = new TurnStage(defLeftPosition);
+        TurnStage turnToPatient = new TurnStage(turnAtPosition, false, leftFootPosition);
 
         List<ECAActionStage> list = new List<ECAActionStage>();
         list.Add(pick);
