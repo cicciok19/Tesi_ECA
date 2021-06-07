@@ -51,8 +51,10 @@ public class PickStage : ECAActionStage
         //does the start of the interactionSystem, mandatory
         SetupInteractionSystem();
 
+		WaitFor(.2f);
+
 		//choose type pick and starts the interaction
-		SetTypePick();
+		//SetTypePick();
 
 	}
 
@@ -239,6 +241,12 @@ public class PickStage : ECAActionStage
 			ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, obj, false);
 			ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, obj, false);
 		}
+	}
+
+    protected override void OnWaitCompleted()
+    {
+        base.OnWaitCompleted();
+		SetTypePick();
 	}
 
 }

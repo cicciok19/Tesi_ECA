@@ -17,7 +17,7 @@ public class PlaceObjectPosition : MonoBehaviour
         {
             interactionObj = this.gameObject.AddComponent<InteractionObject>();
             positionWeight = SetSigmoid(1);
-            reach = SetSigmoid(0.3f);
+            reach = SetSigmoid(0.2f);
             poserWeight = SetSigmoid(1);
 
             //creating the weight curves
