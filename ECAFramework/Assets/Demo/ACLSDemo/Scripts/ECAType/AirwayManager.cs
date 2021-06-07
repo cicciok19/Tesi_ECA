@@ -18,9 +18,9 @@ public class AirwayManager : ECA
     {
         base.Start();
         patient = FindObjectOfType<Patient>();
+        medicalRoom = FindObjectOfType<MedicalRoom>();
         capnographyPosition = patient.GetCapnographyPosition();
         giveOxygenPosition = patient.GetGiveOxygenPosition();
-        medicalRoom = FindObjectOfType<MedicalRoom>();
         airwayTable = medicalRoom.GetAirwayTable();
 
         //just for debug

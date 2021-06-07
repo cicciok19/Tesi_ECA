@@ -17,7 +17,6 @@ public class DropStage : ECAActionStage
     private Transform dropTransform;
     private bool dropping;
 
-
     public DropStage(PickStage pickStage, Transform dropTransform) : base()
     {
         this.pickStage = pickStage;
@@ -54,30 +53,25 @@ public class DropStage : ECAActionStage
     public override void LateUpdate()
     {
         if (dropping)
-        {
-            /*holdWeight = Mathf.SmoothDamp(holdWeight, 1f, ref holdWeightVel, .3f);
-
-            obj.transform.position = Vector3.Lerp(objInitialPosition, pickDownPosition, holdWeight);
-            obj.transform.rotation = Quaternion.Lerp(objInitiaRotation, pickDownRotation, holdWeight);
-            */
+        {         
             dropping = false;
 
             if (typePick == HandSide.LeftHand)
             {
                 ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, dropTransform);
-                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, .9f, .6f);
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, .9f, .8f);
             }
             if (typePick == HandSide.RightHand)
             {
                 ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, null, dropTransform);
-                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, .9f, .6f);
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, .9f, .8f);
             }
         }
     }
 
     public override void Update()
     {
-        if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight > .89f)
+        if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight > .98f)
         {
             obj.GetComponent<InteractionObject>().enabled = false;
             obj.transform.SetParent(dropTransform);
@@ -88,7 +82,6 @@ public class DropStage : ECAActionStage
                 ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, 0f);
             if (typePick == HandSide.RightHand)
                 ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, 0f);
-
 
             Debug.Log("position obj postdrop: " + obj.transform.position);
             EndStage();

@@ -1,56 +1,39 @@
-/* File GrabbableObject C# implementation of class GrabbableObject */
-
-
-
-// global declaration start
-
-
+using RootMotion.FinalIK;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.AI;
-using RootMotion.Demos;
-using RootMotion.FinalIK;
 
-
-// global declaration end
-
-public class GrabbableObject : ECAInteractableObject
+public class PlaceObjectPosition : MonoBehaviour
 {
-
     protected InteractionObject interactionObj;
-    protected AnimationCurve curveOne;
-    protected AnimationCurve curveTwo;
-    protected AnimationCurve curveThree;
-    protected Rigidbody rb;
-
-    protected void Awake()
+    protected AnimationCurve positionWeight;
+    protected AnimationCurve reach;
+    protected AnimationCurve poserWeight;
+    private void Awake()
     {
-        occupied = false;
         interactionObj = this.gameObject.GetComponent<InteractionObject>();
 
         if (interactionObj == null)
         {
             interactionObj = this.gameObject.AddComponent<InteractionObject>();
-            curveOne = SetGaussianCurve(0, 1f);
-            curveTwo = SetGaussianCurve(0, .23f);
-            curveThree = SetPoserWeightCurve();
+            positionWeight = SetSigmoid(1);
+            reach = SetSigmoid(0.3f);
+            poserWeight = SetSigmoid(1);
 
             //creating the weight curves
             interactionObj.weightCurves = new InteractionObject.WeightCurve[3];
 
             interactionObj.weightCurves[0] = new InteractionObject.WeightCurve();
             interactionObj.weightCurves[0].type = InteractionObject.WeightCurve.Type.PositionWeight;
-            interactionObj.weightCurves[0].curve = curveOne;
+            interactionObj.weightCurves[0].curve = positionWeight;
 
             interactionObj.weightCurves[1] = new InteractionObject.WeightCurve();
             interactionObj.weightCurves[1].type = InteractionObject.WeightCurve.Type.Reach;
-            interactionObj.weightCurves[1].curve = curveTwo;
+            interactionObj.weightCurves[1].curve = reach;
 
             interactionObj.weightCurves[2] = new InteractionObject.WeightCurve();
             interactionObj.weightCurves[2].type = InteractionObject.WeightCurve.Type.PoserWeight;
-            interactionObj.weightCurves[2].curve = curveThree;
+            interactionObj.weightCurves[2].curve = poserWeight;
 
             //creating multipliers
             interactionObj.multipliers = new InteractionObject.Multiplier[2];
@@ -75,15 +58,7 @@ public class GrabbableObject : ECAInteractableObject
             interactionObj.events[0].unityEvent = new UnityEngine.Events.UnityEvent();
             interactionObj.events[0].animations = new InteractionObject.AnimatorEvent[0];
             interactionObj.events[0].messages = new InteractionObject.Message[0];
-            interactionObj.events[0].time = .5f;
-            interactionObj.events[0].pickUp = true;
-        }
-
-        if(GetComponent<Rigidbody>() == null)
-        {
-            rb = this.gameObject.AddComponent<Rigidbody>();
-            rb.useGravity = false;
-            rb.isKinematic = true;
+            interactionObj.events[0].time = Mathf.Infinity; //2008
         }
     }
 
@@ -102,37 +77,20 @@ public class GrabbableObject : ECAInteractableObject
         return curve;
     }
 
-    private AnimationCurve SetPoserWeightCurve()
+    private AnimationCurve SetSigmoid(float maxValue)
     {
         AnimationCurve curve;
 
         Keyframe[] kS = new Keyframe[3];
 
         kS[0] = new Keyframe(0, 0, 0, 0);
-        kS[1] = new Keyframe(0.5f, 1, 0, 0);
-        kS[2] = new Keyframe(1, 1, 0, 0);
+        kS[1] = new Keyframe(0.5f, maxValue, 0, 0);
+        kS[2] = new Keyframe(1, maxValue, 0, 0);
 
         curve = new AnimationCurve(kS);
 
         return curve;
     }
-
-    public void SetPick(bool pick)
-    {
-        if (interactionObj != null)
-            interactionObj.events[0].pickUp = pick;
-        else
-            Debug.LogError("There isn't an interaction object attached");
-    }
-
-    public void SetPause(bool pause)
-    {
-        if (interactionObj != null)
-            interactionObj.events[0].pause = pause;
-        else
-            Debug.LogError("There isn't an interaction object attached");
-    }
-
 
 
 

@@ -34,7 +34,7 @@ public class DefibrillatorManager : ECA
 
     private void HandleShock()
     {
-        shock = new Shock(this, defibrillatorTable.GetDefibrillator(), patient.GetDefLeftPosition());
+        shock = new Shock(this, defibrillatorTable.GetDefibrillator(), patient);
         shock.StartAction();
     }
 }

@@ -6,34 +6,66 @@ public class Shock : ECACompositeAction
 {
     private Defibrillator defibrillator;
     private DefibrillatorManager defManager;
-    private Transform defibrillatorTarget;
+    private Transform defLeftPosition;
+    private Transform defRightPosition;
 
+    private List<PickStage> pickStages;
+    private List<PlaceObjectStage> placePaddles;
     private ECAAction takePaddles;
     private ECAAction usePaddles;
 
-    public Shock(DefibrillatorManager eca, Defibrillator defibrillator, Transform defibrillatorTarget) : base(eca)
+    public Shock(DefibrillatorManager eca, Defibrillator defibrillator, Patient patient) : base(eca)
     {
         defManager = eca;
         this.defibrillator = defibrillator;
-        this.defibrillatorTarget = defibrillatorTarget;
-        PickPaddles();
+        defLeftPosition = patient.GetDefLeftPosition();
+        defRightPosition = patient.GetDefRightPosition();
+        CreateActionList();
     }
 
     private void PickPaddles()
     {
-        List<ECAActionStage> pickStages = new List<ECAActionStage>()
+        pickStages = new List<PickStage>()
         {
             new PickStage(defibrillator.GetLeftPaddle().transform, 1, false, HandSide.LeftHand),
             new PickStage(defibrillator.GetRightPaddle().transform, 1, false, HandSide.RightHand)
         };
 
         ECAParallelActionStage pick = new ECAParallelActionStage(pickStages.ToArray());
+        TurnStage turnToPatient = new TurnStage(defLeftPosition);
 
         List<ECAActionStage> list = new List<ECAActionStage>();
         list.Add(pick);
+        list.Add(turnToPatient);
 
         takePaddles = new ECAAction(defManager, list);
         actions.Add(takePaddles);
+    }
+
+    private void UseShock()
+    {
+        placePaddles = new List<PlaceObjectStage>()
+        {
+            new PlaceObjectStage(pickStages[0], defLeftPosition),
+            new PlaceObjectStage(pickStages[1], defRightPosition)
+        };
+        ECAParallelActionStage place = new ECAParallelActionStage(placePaddles.ToArray());
+        WaitStage waitForShock = new WaitStage(2f);
+        //shock
+
+        List<ECAActionStage> list = new List<ECAActionStage>();
+        list.Add(place);
+        list.Add(waitForShock);
+
+        ECAAction action = new ECAAction(defManager, list);
+        actions.Add(action);
+    }
+
+    protected override void CreateActionList()
+    {
+        PickPaddles();
+        UseShock();
+        base.CreateActionList();
     }
 
 }
