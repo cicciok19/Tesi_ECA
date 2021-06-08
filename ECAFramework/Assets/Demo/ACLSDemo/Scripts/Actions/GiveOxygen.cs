@@ -15,7 +15,7 @@ public class GiveOxygen : ECACompositeAction
         pumpPosition = patient.GetPumpPosition();
     }
 
-    public void SetupPickMask()
+    private void SetupPickMask()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
         TurnStage turnToMask = new TurnStage(oxygen.GetOxygenMask());

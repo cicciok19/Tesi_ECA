@@ -71,7 +71,7 @@ public class DropStage : ECAActionStage
 
     public override void Update()
     {
-        if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight > .98f)
+        if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight > .89f)
         {
             obj.GetComponent<InteractionObject>().enabled = false;
             obj.transform.SetParent(dropTransform);

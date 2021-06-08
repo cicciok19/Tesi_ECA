@@ -7,12 +7,11 @@ public class AirwayManager : ECA
     public string[] intentNames = { "GiveOxygen", "StopOxygen", "AdvancedAirwayCapnography" };
 
     private GiveOxygen giveOxygen;
-    private Transform giveOxygenPosition;
-    private Patient patient;
     private Capnography capnography;
-    private Transform capnographyPosition;
+    private Patient patient;
     private MedicalRoom medicalRoom;
     private AirwayTable airwayTable;
+    private Transform turnObj;
 
     protected override void Start()
     {
@@ -22,7 +21,9 @@ public class AirwayManager : ECA
         airwayTable = medicalRoom.GetAirwayTable();
 
         //just for debug
-        HandleGiveOxygen(airwayTable.GetOxygen(), patient);
+        //HandleGiveOxygen(airwayTable.GetOxygen(), patient);
+
+        HandleCapnography(airwayTable.GetCapnographyTube(), patient);
     }
     protected override ECAAnimator AddECAAnimator()
     {
@@ -38,5 +39,11 @@ public class AirwayManager : ECA
     {
         giveOxygen = new GiveOxygen(this, oxygen, patient);
         giveOxygen.StartAction();
+    }
+
+    private void HandleCapnography(Transform capnographyTube, Patient patient)
+    {
+        capnography = new Capnography(this, capnographyTube, patient);
+        capnography.StartAction();
     }
 }
