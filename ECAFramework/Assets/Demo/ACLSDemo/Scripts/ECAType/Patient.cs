@@ -14,6 +14,8 @@ public class Patient : ECA
     private DefLeftPosition defLeftPosition;
     private DefRightPosition defRightPosition;
     private HitReaction hitReaction;
+    private Collider spineCollider;
+    private Stomach stomach;
 
     private void Awake()
     {
@@ -24,6 +26,8 @@ public class Patient : ECA
         defLeftPosition = GetComponentInChildren<DefLeftPosition>();
         defRightPosition = GetComponentInChildren<DefRightPosition>();
         hitReaction = GetComponent<HitReaction>();
+        spineCollider = GetComponentInChildren<SpineCollider>().GetComponent<Collider>();
+        stomach = GetComponentInChildren<Stomach>();
     }
 
     //medical status managemente
@@ -31,8 +35,8 @@ public class Patient : ECA
     public void OnShockReceived()
     {
         Debug.Log("Sono shockato");
-        hitReaction.Hit(this.GetComponent<MeshCollider>(), Vector3.down * 1f, defLeftPosition.transform.position);
-        hitReaction.Hit(this.GetComponent<MeshCollider>(), Vector3.down * 1f, defRightPosition.transform.position);
+        hitReaction.Hit(spineCollider, Vector3.up * .5f, stomach.transform.position);
+        //hitReaction.Hit(spineCollider, Vector3.up * .5f, stomach.transform.position);
     }
     private void OnCPREnded(object sender, EventArgs e)
     {

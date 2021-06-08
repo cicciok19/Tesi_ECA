@@ -13,6 +13,8 @@ public class DefibrillatorManager : ECA
     private MedicalRoom room;
     private DefibrillatorTable defibrillatorTable;
     private Patient patient;
+
+
     protected override ECAAnimator AddECAAnimator()
     {
         return gameObject.AddComponent<ECAAnimatorMxM>();
@@ -34,7 +36,7 @@ public class DefibrillatorManager : ECA
 
     private void HandleShock()
     {
-        shock = new Shock(this, defibrillatorTable.GetDefibrillator(), patient);
+        shock = new Shock(this, defibrillatorTable, patient);
         shock.CompletedAction += OnShockCompleted;
         shock.StartAction();
     }

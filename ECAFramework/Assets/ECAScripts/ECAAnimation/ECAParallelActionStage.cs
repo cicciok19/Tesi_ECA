@@ -6,12 +6,12 @@ using UnityEngine;
 public class ECAParallelActionStage : ECAActionStage
 {
     public ECAActionStage[] parallelStages;
-    private bool doNotAdvance;
+    private int counter;
+    private readonly object counterLock = new object();
 
     public ECAParallelActionStage(ECAActionStage[] stages)
     {
         parallelStages = stages;
-        doNotAdvance = true;
     }
 
     public override void AbortStage()
@@ -38,6 +38,7 @@ public class ECAParallelActionStage : ECAActionStage
     public override void StartStage()
     {
         base.StartStage();
+        counter = 0;
         foreach (var s in parallelStages)
         {
             s.Animator = animator;
@@ -56,17 +57,12 @@ public class ECAParallelActionStage : ECAActionStage
 
     private void OnStageFinished(object sender, EventArgs e)
     {
-        doNotAdvance = false;
+        lock (counterLock)
+        {
+            counter++;
 
-        lock(parallelStages){
-            foreach (var s in parallelStages)
-            {
-                if (s.State != ActionState.Completed)
-                    doNotAdvance = true;
-            }
+            if ((counter == parallelStages.Length))
+                EndStage();
         }
-
-        if(!doNotAdvance)
-            EndStage();
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GiveOxygenPosition : MonoBehaviour
+public class GiveOxygenPosition : PlaceObjectPosition
 {
     // Start is called before the first frame update
     void Start()

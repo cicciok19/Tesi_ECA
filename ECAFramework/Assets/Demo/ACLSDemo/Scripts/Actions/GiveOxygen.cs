@@ -17,15 +17,15 @@ public class GiveOxygen : ECACompositeAction
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
         TurnStage turnToMask = new TurnStage(oxygen.GetOxygenMask());
-        List<ECAActionStage> pickOxygen = new List<ECAActionStage>()
+        List<PickStage> pickOxygen = new List<PickStage>()
         {
             new PickStage(oxygen.GetOxygenMask(), 1, false, HandSide.LeftHand),
             new PickStage(oxygen.GetOxygenPump(), 1, false, HandSide.RightHand)
         };
         ECAParallelActionStage pick = new ECAParallelActionStage(pickOxygen.ToArray());
         TurnStage turnToPatient = new TurnStage(giveOxygenPosition);
-        WaitStage wait = new WaitStage(2f);
-        DropStage putMaskToPatient = new DropStage((PickStage)pickOxygen[0], giveOxygenPosition);
+        WaitStage wait = new WaitStage(.2f);
+        PlaceObjectStage putMaskToPatient = new PlaceObjectStage(pickOxygen[0], giveOxygenPosition);
 
         stages.Add(turnToMask);
         stages.Add(pick);
