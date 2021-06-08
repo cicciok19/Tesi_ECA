@@ -8,24 +8,23 @@ public class AirwayManager : ECA
     public string[] intentNames = { "GiveOxygen", "Capnography" };
 
     private GiveOxygen giveOxygen;
-    private Transform giveOxygenPosition;
-    private Patient patient;
     private Capnography capnography;
-    private Transform capnographyPosition;
+    private Patient patient;
     private MedicalRoom medicalRoom;
     private AirwayTable airwayTable;
+    private Transform turnObj;
 
     protected override void Start()
     {
         base.Start();
         patient = FindObjectOfType<Patient>();
         medicalRoom = FindObjectOfType<MedicalRoom>();
-        capnographyPosition = patient.GetCapnographyPosition();
-        giveOxygenPosition = patient.GetGiveOxygenPosition();
         airwayTable = medicalRoom.GetAirwayTable();
 
         //just for debug
-        HandleGiveOxygen(airwayTable.GetOxygen(), giveOxygenPosition);
+        //HandleGiveOxygen(airwayTable.GetOxygen(), patient);
+
+        HandleCapnography(airwayTable.GetCapnographyTube(), patient);
     }
     protected override ECAAnimator AddECAAnimator()
     {
@@ -46,15 +45,16 @@ public class AirwayManager : ECA
         }
     }
 
-    private void HandleGiveOxygen(Oxygen oxygen, Transform giveOxygenPosition)
+    private void HandleGiveOxygen(Oxygen oxygen, Patient patient)
     {
-        giveOxygen = new GiveOxygen(this, oxygen, giveOxygenPosition);
+        giveOxygen = new GiveOxygen(this, oxygen, patient);
         giveOxygen.StartAction();
     }
 
-    private void HandleCapnography()
-    {
-
+    private void HandleCapnography(Transform capnographyTube, Patient patient)
+    {
+        capnography = new Capnography(this, capnographyTube, patient);
+        capnography.StartAction();
     }
     private void OnCapnographyCompleted(object sender, EventArgs e)
     {

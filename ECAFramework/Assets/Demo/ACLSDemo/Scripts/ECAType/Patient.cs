@@ -16,6 +16,7 @@ public class Patient : ECA
     private HitReaction hitReaction;
     private Collider spineCollider;
     private Stomach stomach;
+    private PumpPosition pumpPosition;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class Patient : ECA
         hitReaction = GetComponent<HitReaction>();
         spineCollider = GetComponentInChildren<SpineCollider>().GetComponent<Collider>();
         stomach = GetComponentInChildren<Stomach>();
+        pumpPosition = GetComponentInChildren<PumpPosition>();
     }
 
     //medical status managemente
@@ -82,4 +84,8 @@ public class Patient : ECA
         return defLeftPosition.transform;
     }
 
+    public Transform GetPumpPosition() 
+    {
+        return pumpPosition.transform;
+    }
 }
