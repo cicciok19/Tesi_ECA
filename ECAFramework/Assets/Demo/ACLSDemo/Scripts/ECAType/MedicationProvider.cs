@@ -34,6 +34,18 @@ public class MedicationProvider : ECA
     public override void Handle(Intent intent)
     {
         base.Handle(intent);
+        switch (intent.IntentName)
+        {
+            case "Amiodarone":
+                HandleUseMedicine(MedicineName.Amiodarone);
+                break;
+            case "Epinephrine":
+                HandleUseMedicine(MedicineName.Epinephrine);
+                break;
+            case "IVAcces":
+                HandleIVAccess();
+                break;
+        }
     }
 
     private void HandleUseMedicine(MedicineName medicineName)
@@ -44,6 +56,11 @@ public class MedicationProvider : ECA
         useMedicine = new UseMedicine(this, m);
         useMedicine.InjectionDone += OnInjectionDone;
         useMedicine.StartAction();
+    }
+
+    private void HandleIVAccess()
+    {
+
     }
 
     protected override ECAAnimator AddECAAnimator()

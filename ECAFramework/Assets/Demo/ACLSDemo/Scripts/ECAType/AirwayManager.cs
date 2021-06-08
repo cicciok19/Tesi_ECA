@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AirwayManager : ECA
 {
-    public string[] intentNames = { "GiveOxygen", "StopOxygen", "AdvancedAirwayCapnography" };
+    public string[] intentNames = { "GiveOxygen", "Capnography" };
 
     private GiveOxygen giveOxygen;
     private Transform giveOxygenPosition;
@@ -34,11 +35,33 @@ public class AirwayManager : ECA
     public override void Handle(Intent intent)
     {
         base.Handle(intent);
+        switch (intent.IntentName)
+        {
+            case "GiveOxygen":
+                HandleGiveOxygen(airwayTable.GetOxygen(), giveOxygenPosition);
+                break;
+            case "Capnography":
+                HandleCapnography();
+                break;
+        }
     }
 
     private void HandleGiveOxygen(Oxygen oxygen, Transform giveOxygenPosition)
     {
         giveOxygen = new GiveOxygen(this, oxygen, giveOxygenPosition);
         giveOxygen.StartAction();
+    }
+
+    private void HandleCapnography()
+    {
+
+    }
+    private void OnCapnographyCompleted(object sender, EventArgs e)
+    {
+        //send message
+    }
+    private void OnOxygenGiven(object sender, EventArgs e)
+    {
+        //send message
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Compressor : ECA
 {
@@ -33,12 +34,18 @@ public class Compressor : ECA
     public override void Handle(Intent intent)
     {
         base.Handle(intent);
+        switch (intent.IntentName)
+        {
+            case "StartCPR":
+                HandleStartCPR();
+                break;
+        }
     }
 
     private void HandleStartCPR()
     {
         //send message
-        StartCoroutine(CompressFor(10f));
+        //StartCoroutine(CompressFor(10f));
         //do action
         cpr = new CPRAction(this, cprPosition);
         cpr.StartAction();
@@ -47,5 +54,10 @@ public class Compressor : ECA
     private IEnumerator CompressFor(float time)
     {
         yield return new WaitForSeconds(time);
+    }
+
+    private void OnCPRCompleted(object sender, EventArgs e)
+    {
+        //send message
     }
 }

@@ -32,6 +32,16 @@ public class DefibrillatorManager : ECA
     public override void Handle(Intent intent)
     {
         base.Handle(intent);
+
+        switch (intent.IntentName)
+        {
+            case "AttachMonitor":
+                HandleAttachMonitor();
+                break;
+            case "Shock":
+                HandleShock();
+                break;
+        }
     }
 
     private void HandleShock()
@@ -41,8 +51,18 @@ public class DefibrillatorManager : ECA
         shock.StartAction();
     }
 
+    private void HandleAttachMonitor()
+    {
+
+    }
+
     private void OnShockCompleted(object sender, EventArgs e)
     {
         patient.OnShockReceived();
+    }
+
+    private void OnMonitorAttached(object sender, EventArgs e)
+    {
+        //send message
     }
 }
