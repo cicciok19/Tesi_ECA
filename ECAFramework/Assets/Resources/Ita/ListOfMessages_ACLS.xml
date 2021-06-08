@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<game>
+  <tts ecaID="Compressor">
+    <CPRStart> Comincio il massaggio cardiaco </CPRStart>
+    <CPRCompleted> Massaggio cardiaco completato </CPRCompleted>
+  </tts>
+  <tts ecaID="AirwayManager">
+    <giveOxygenStart> Comincio a dare ossigeno</giveOxygenStart>
+    <giveOxygenCompleted> Ho finito di pompare ossigeno </giveOxygenCompleted>
+    <capnographyStart> Comincio l'intubazione </capnographyStart>
+    <capnographyCompleted> Ho effettuato l'intubazione </capnographyCompleted>
+  </tts>
+  <tts ecaID="DefibrillatorManager">
+      <attachMonitorStart> Attacco i macchinari </attachMonitorStart>
+      <attachMonitorCompleted> Macchinari pronti all'uso </attachMonitorCompleted>
+      <shockStart> Preparo il defibrillatore, allontanatevi </shockStart>
+      <shock> Libera </shock>
+  </tts>
+  <tts ecaID="TimeRecorder">
+  </tts>
+  <tts ecaID="MedicationProvider">
+      <IVAccessStart> Ricerco un accesso periferico </IVAccessStart>
+      <IVAccessCompleted> Abbiamo un accesso periferico </IVAccessCompleted>
+      <useEpinephrineStart> Somministro adrenalina </useEpinephrineStart>
+      <useEpinephrineCompleted> Adrenalina somministrata </useEpinephrineCompleted>
+      <useAmiodaroneStart> Somministro amiodarone </useEpinephrineCompleted>
+      <useAmiodaroneCompleted> Amiodarone somministrato </useAmiodaroneCompleted>
+  </tts>
+
+  
+  <actions>
+    <!--
+	  <action name="Example">
+    <tts weight="High">
+      <Description>messaggio di descrizione dell'azione</Description>
+      <EndTask>Messaggio finale dell'azione</EndTask>
+      <Help>Messaggio di aiuto</Help>
+      <Criteria>
+        <Accuracy badTxt ="Passaggio a lable Bad per accuracy" badLimit="0.4"
+              normalTxt ="Passaggio a lable normal per accuracy" normalLimit ="0.8"
+              goodTxt = "passaggio a lable good per accuracy" goodLimit ="1">
+        </Accuracy>
+        <Staging badTxt ="Passaggio a lable bad per staging" badLimit ="0.5"
+                 normalTxt ="Passaggio a lable normal per staging" normalLimit ="0.2"
+                 goodTxt ="Passaggio a lable good per staging" goodLimit="0.0">
+        </Staging>
+      </Criteria>
+    </tts>
+    </action>
+    -->
+  </actions>
+</game>
