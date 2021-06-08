@@ -37,10 +37,10 @@ public class AirwayManager : ECA
         switch (intent.IntentName)
         {
             case "GiveOxygen":
-                HandleGiveOxygen(airwayTable.GetOxygen(), giveOxygenPosition);
+                HandleGiveOxygen(airwayTable.GetOxygen(), patient);
                 break;
             case "Capnography":
-                HandleCapnography();
+                HandleCapnography(airwayTable.GetCapnographyTube(), patient);
                 break;
         }
     }
@@ -51,10 +51,14 @@ public class AirwayManager : ECA
         giveOxygen.StartAction();
     }
 
-    private void HandleCapnography(Transform capnographyTube, Patient patient)
-    {
-        capnography = new Capnography(this, capnographyTube, patient);
-        capnography.StartAction();
+    private void HandleCapnography(Transform capnographyTube, Patient patient)
+
+    {
+
+        capnography = new Capnography(this, capnographyTube, patient);
+
+        capnography.StartAction();
+
     }
     private void OnCapnographyCompleted(object sender, EventArgs e)
     {
