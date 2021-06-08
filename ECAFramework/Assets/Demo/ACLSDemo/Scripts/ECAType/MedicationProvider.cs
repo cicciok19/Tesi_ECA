@@ -13,6 +13,7 @@ public class MedicationProvider : ECA
     private IVAccess ivAccess;
     private MedicationTable medicationTable;
     private DestinationMedicationProvider destination;
+    private Patient patient;
     private IVPole pole;
 
     protected override void Awake()
@@ -20,6 +21,7 @@ public class MedicationProvider : ECA
         base.Awake();
         medicalRoom = FindObjectOfType<MedicalRoom>();
         destination = FindObjectOfType<DestinationMedicationProvider>();
+        patient = FindObjectOfType<Patient>();
     }
 
     protected override void Start()
@@ -27,8 +29,10 @@ public class MedicationProvider : ECA
         base.Start();
         medicationTable = medicalRoom.GetMedicationTable();
         pole = medicalRoom.GetPole();
+
         //just for debug
-        HandleUseMedicine(MedicineName.Epinephrine);
+        //HandleUseMedicine(MedicineName.Epinephrine);
+        HandleIVAccess(medicationTable.GetVeinTube(), patient);
     }
 
     public override void Handle(Intent intent)
@@ -43,7 +47,7 @@ public class MedicationProvider : ECA
                 HandleUseMedicine(MedicineName.Epinephrine);
                 break;
             case "IVAcces":
-                HandleIVAccess();
+                HandleIVAccess(medicationTable.GetVeinTube(), patient);
                 break;
         }
     }
@@ -58,9 +62,10 @@ public class MedicationProvider : ECA
         useMedicine.StartAction();
     }
 
-    private void HandleIVAccess()
+    private void HandleIVAccess(VeinTube veinTube, Patient patient)
     {
-
+        ivAccess = new IVAccess(this, veinTube, patient);
+        ivAccess.StartAction();
     }
 
     protected override ECAAnimator AddECAAnimator()
