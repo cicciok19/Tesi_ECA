@@ -19,12 +19,10 @@ public class AirwayManager : ECA
         base.Start();
         patient = FindObjectOfType<Patient>();
         medicalRoom = FindObjectOfType<MedicalRoom>();
-        capnographyPosition = patient.GetCapnographyPosition();
-        giveOxygenPosition = patient.GetGiveOxygenPosition();
         airwayTable = medicalRoom.GetAirwayTable();
 
         //just for debug
-        HandleGiveOxygen(airwayTable.GetOxygen(), giveOxygenPosition);
+        HandleGiveOxygen(airwayTable.GetOxygen(), patient);
     }
     protected override ECAAnimator AddECAAnimator()
     {
@@ -36,9 +34,9 @@ public class AirwayManager : ECA
         base.Handle(intent);
     }
 
-    private void HandleGiveOxygen(Oxygen oxygen, Transform giveOxygenPosition)
+    private void HandleGiveOxygen(Oxygen oxygen, Patient patient)
     {
-        giveOxygen = new GiveOxygen(this, oxygen, giveOxygenPosition);
+        giveOxygen = new GiveOxygen(this, oxygen, patient);
         giveOxygen.StartAction();
     }
 }

@@ -18,7 +18,7 @@ public class PlaceObjectPosition : MonoBehaviour
             interactionObj = this.gameObject.AddComponent<InteractionObject>();
             positionWeight = SetSigmoid(1);
             reach = SetSigmoid(0f);
-            poserWeight = SetSigmoid(1);
+            poserWeight = SetPoserWeight();
 
             //creating the weight curves
             interactionObj.weightCurves = new InteractionObject.WeightCurve[3];
@@ -92,6 +92,9 @@ public class PlaceObjectPosition : MonoBehaviour
         return curve;
     }
 
-
+    protected virtual AnimationCurve SetPoserWeight()
+    {
+        return SetSigmoid(1);
+    }
 
 }
