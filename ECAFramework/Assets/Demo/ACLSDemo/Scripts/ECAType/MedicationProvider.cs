@@ -62,6 +62,18 @@ public class MedicationProvider : ECA
 
     private void HandleUseMedicine(MedicineName medicineName)
     {
+        if(patient.state == PatientState.Asystole)
+        {
+            if (medicineName == MedicineName.Amiodarone)
+                Debug.Log("You have to inject Epinephrine!");
+        }
+
+        if(patient.state == PatientState.VF)
+        {
+            //check dello start, va aggiunto il check dell'amiodarone
+            Debug.Log("You have to shock!");
+        }
+
         Medicine m = medicationTable.GetMedicine(medicineName);
         Assert.IsNotNull(m);
         //send message
@@ -73,6 +85,7 @@ public class MedicationProvider : ECA
     private void HandleIVAccess(IVTube ivTube, Patient patient)
     {
         ivAccess = new IVAccess(this, ivTube, patient);
+        ivAccess.CompletedAction += OnIvAccessCompleted;
         ivAccess.StartAction();
     }
 
@@ -92,6 +105,16 @@ public class MedicationProvider : ECA
         UseMedicineEventArgs args = (UseMedicineEventArgs)e;
         Medicine m = args.medicine;
         //send message of completed action
+
+        if (m.name == "Epinephrine")
+            patient.OnEpinephrineDone();
+        else
+            patient.OnAmiodaroneDone();
+    }
+
+    private void OnIvAccessCompleted(object sender, EventArgs e)
+    {
+        patient.OnIvAccessDone();
     }
 
 }

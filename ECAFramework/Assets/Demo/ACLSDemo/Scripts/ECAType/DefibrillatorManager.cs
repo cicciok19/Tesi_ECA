@@ -26,6 +26,7 @@ public class DefibrillatorManager : ECA
         room = FindObjectOfType<MedicalRoom>();
         patient = FindObjectOfType<Patient>();
         defibrillatorTable = room.GetDefibrillatorTable();
+        patient.CheckRythm += OnRythm;
         //HandleShock();
     }
 
@@ -53,6 +54,9 @@ public class DefibrillatorManager : ECA
 
     private void HandleShock()
     {
+        if (patient.state == PatientState.Asystole)
+            Debug.Log("You have to inject Epinephrine, NOT Shock!");
+
         shock = new Shock(this, defibrillatorTable, patient);
         shock.CompletedAction += OnShockCompleted;
         shock.StartAction();
@@ -71,5 +75,15 @@ public class DefibrillatorManager : ECA
     private void OnMonitorAttached(object sender, EventArgs e)
     {
         //send message
+    }
+
+    private void OnRythm(object sender, EventArgs e)
+    {
+        if (patient.state == PatientState.VF)
+            Debug.Log("VF");
+        else if (patient.state == PatientState.Asystole)
+            Debug.Log("Asystole");
+        else
+            Debug.LogError("Patient State is not setted");
     }
 }

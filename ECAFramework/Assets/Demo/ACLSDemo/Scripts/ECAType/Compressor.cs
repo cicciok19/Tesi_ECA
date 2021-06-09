@@ -54,6 +54,7 @@ public class Compressor : ECA
         //StartCoroutine(CompressFor(10f));
         //do action
         cpr = new CPRAction(this, cprPosition);
+        cpr.CompletedAction += OnCPRCompleted;
         cpr.StartAction();
     }
 
@@ -64,6 +65,6 @@ public class Compressor : ECA
 
     private void OnCPRCompleted(object sender, EventArgs e)
     {
-        //send message
+        patient.OnCPREnded();
     }
 }

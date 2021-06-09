@@ -56,24 +56,25 @@ public class AirwayManager : ECA
     private void HandleGiveOxygen(Oxygen oxygen, Patient patient)
     {
         giveOxygen = new GiveOxygen(this, oxygen, patient);
+        giveOxygen.CompletedAction += OnOxygenGiven;
         giveOxygen.StartAction();
     }
 
     private void HandleCapnography(Transform capnographyTube, Patient patient)
-
     {
-
         capnography = new Capnography(this, capnographyTube, patient);
-
+        capnography.CompletedAction += OnCapnographyCompleted;
         capnography.StartAction();
 
     }
     private void OnCapnographyCompleted(object sender, EventArgs e)
     {
-        //send message
+        capnography.CompletedAction -= OnCapnographyCompleted;
+        patient.OnCapnographyDone();
     }
     private void OnOxygenGiven(object sender, EventArgs e)
     {
-        //send message
+        giveOxygen.CompletedAction -= OnOxygenGiven;
+        patient.OnOxygenGiven();
     }
 }
