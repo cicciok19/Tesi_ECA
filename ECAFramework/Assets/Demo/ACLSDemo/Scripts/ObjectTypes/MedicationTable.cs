@@ -6,12 +6,12 @@ using UnityEngine.Assertions;
 public class MedicationTable : MonoBehaviour
 {
     private Medicine[] medicines;
-    private VeinTube veinTube;
+    private IVTube ivTube;
 
     void Start()
     {
         medicines = GetComponentsInChildren<Medicine>();
-        veinTube = GetComponentInChildren<VeinTube>();
+        ivTube = GetComponentInChildren<IVTube>();
     }
 
     public Medicine GetMedicine(MedicineName name)
@@ -25,8 +25,8 @@ public class MedicationTable : MonoBehaviour
         return null;
     }
 
-    public VeinTube GetVeinTube()
+    public IVTube GetVeinTube()
     {
-        return veinTube;
+        return ivTube;
     }
 }

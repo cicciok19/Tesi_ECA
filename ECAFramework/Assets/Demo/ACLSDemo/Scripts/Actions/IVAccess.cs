@@ -1,22 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class IVAccess : ECACompositeAction
+public class IVAccess : ECAAction
 {
-    private VeinTube veinTube;
+    private IVTube ivTube;
     private Transform injectionPosition;
+    private Vector3 destination;
+    private MedicationProvider medicationProvider;
 
-    public IVAccess(ECA eca, VeinTube veinTube, Patient patient) : base(eca)
+    public IVAccess(ECA eca, IVTube ivTube, Patient patient) : base(eca)
     {
-        this.veinTube = veinTube;
+        medicationProvider = (MedicationProvider)eca;
+        this.ivTube = ivTube;
         injectionPosition = patient.GetInjectionPosition();
+        destination = medicationProvider.GetDestinationNearTable();
     }
 
     public override void SetupAction()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
-        GoToStage goToTable = new GoToStage(veinTube.GetDestination());
-        PickStage pickTube = new PickStage(veinTube.transform, 1f, false, HandSide.RightHand);
+        GoToStage goToTable = new GoToStage(ivTube.GetDestination());
+        PickStage pickTube = new PickStage(ivTube.GetVeinTube(), 1f, false, HandSide.RightHand);
+        GoToStage goToMainPosition = new GoToStage(destination);
+        LookStableStage lookVein = new LookStableStage(injectionPosition);
+        DropStage findVein = new DropStage(pickTube, injectionPosition);
+
+        stages.Add(goToTable);
+        stages.Add(pickTube);
+        stages.Add(goToMainPosition);
+        stages.Add(lookVein);
+        stages.Add(findVein);
+
+        SetStages(stages);
+    }
+
+    public override void StartAction()
+    {
+        SetupAction();
+        base.StartAction();
     }
 }

@@ -24,7 +24,7 @@ public class AirwayManager : ECA
         //just for debug
         //HandleGiveOxygen(airwayTable.GetOxygen(), patient);
 
-        HandleCapnography(airwayTable.GetCapnographyTube(), patient);
+        //HandleCapnography(airwayTable.GetCapnographyTube(), patient);
     }
     protected override ECAAnimator AddECAAnimator()
     {
@@ -43,6 +43,14 @@ public class AirwayManager : ECA
                 HandleCapnography(airwayTable.GetCapnographyTube(), patient);
                 break;
         }
+    }
+
+    public override void SubscribeHandlerToIntentManager()
+    {
+        IntentName = new List<string> { "GiveOxygen", "Capnography" };
+        IntentManager.Instance.AddIntentHandler(IntentName[0], this);
+        IntentManager.Instance.AddIntentHandler(IntentName[1], this);
+
     }
 
     private void HandleGiveOxygen(Oxygen oxygen, Patient patient)

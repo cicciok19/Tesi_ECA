@@ -26,7 +26,7 @@ public class DefibrillatorManager : ECA
         room = FindObjectOfType<MedicalRoom>();
         patient = FindObjectOfType<Patient>();
         defibrillatorTable = room.GetDefibrillatorTable();
-        HandleShock();
+        //HandleShock();
     }
 
     public override void Handle(Intent intent)
@@ -42,6 +42,13 @@ public class DefibrillatorManager : ECA
                 HandleShock();
                 break;
         }
+    }
+
+    public override void SubscribeHandlerToIntentManager()
+    {
+        IntentName = new List<string> { "AttachMonitor", "Shock"};
+        IntentManager.Instance.AddIntentHandler(IntentName[0], this);
+        IntentManager.Instance.AddIntentHandler(IntentName[1], this);
     }
 
     private void HandleShock()

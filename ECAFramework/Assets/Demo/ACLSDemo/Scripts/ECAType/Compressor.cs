@@ -22,7 +22,7 @@ public class Compressor : ECA
         //ikManager.ChangeFadeInTime(5f);
 
         //just for debug
-        HandleStartCPR();
+        //HandleStartCPR();
         
     }
 
@@ -40,6 +40,12 @@ public class Compressor : ECA
                 HandleStartCPR();
                 break;
         }
+    }
+
+    public override void SubscribeHandlerToIntentManager()
+    {
+        IntentName = new List<string> { "StartCPR" };
+        IntentManager.Instance.AddIntentHandler(IntentName[0], this);
     }
 
     private void HandleStartCPR()

@@ -32,7 +32,7 @@ public class MedicationProvider : ECA
 
         //just for debug
         //HandleUseMedicine(MedicineName.Epinephrine);
-        HandleIVAccess(medicationTable.GetVeinTube(), patient);
+        //HandleIVAccess(medicationTable.GetVeinTube(), patient);
     }
 
     public override void Handle(Intent intent)
@@ -52,6 +52,14 @@ public class MedicationProvider : ECA
         }
     }
 
+    public override void SubscribeHandlerToIntentManager()
+    {
+        IntentName = new List<string> { "Amiodarone", "Epinephrine", "IVAcces" };
+        IntentManager.Instance.AddIntentHandler(IntentName[0], this);
+        IntentManager.Instance.AddIntentHandler(IntentName[1], this);
+        IntentManager.Instance.AddIntentHandler(IntentName[2], this);
+    }
+
     private void HandleUseMedicine(MedicineName medicineName)
     {
         Medicine m = medicationTable.GetMedicine(medicineName);
@@ -62,9 +70,9 @@ public class MedicationProvider : ECA
         useMedicine.StartAction();
     }
 
-    private void HandleIVAccess(VeinTube veinTube, Patient patient)
+    private void HandleIVAccess(IVTube ivTube, Patient patient)
     {
-        ivAccess = new IVAccess(this, veinTube, patient);
+        ivAccess = new IVAccess(this, ivTube, patient);
         ivAccess.StartAction();
     }
 
@@ -85,4 +93,5 @@ public class MedicationProvider : ECA
         Medicine m = args.medicine;
         //send message of completed action
     }
+
 }
