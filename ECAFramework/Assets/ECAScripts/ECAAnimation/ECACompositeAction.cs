@@ -21,6 +21,13 @@ public class ECACompositeAction : ECAAction
     protected int actualActionIdx = 0;
 
 
+    public ECACompositeAction(ECA eca,List<ECAAction> actions)
+    :base(eca)
+    {
+      this.actions = actions;
+    }
+
+
     public ECACompositeAction(ECA eca)
     :base(eca)
     {
@@ -53,7 +60,6 @@ public class ECACompositeAction : ECAAction
         {
             //iscrivo l'azione all'evento che segnala la fine dello stage
             Attach(ActualAction);
-            ActualAction.SetupAction();
             ActualAction.StartAction();
         }
         else
@@ -68,24 +74,30 @@ public class ECACompositeAction : ECAAction
         NextAction();
     }
 
+
+    protected virtual void CreateActionList()
+    {
+    }
+
+
+
+
     public override void StartAction()
     {
         if (actions.Count != 0)
         {
             if(ActualAction != null)
             {
-    		    if(ecaAnimator.actualAction != null && 
-    		        (ecaAnimator.actualAction.State == ActionState.Running || ecaAnimator.actualAction.State == ActionState.Paused))
-                {
-                    ecaAnimator.actualAction.Abort();
-                }
-    			        
-    		    Attach(ActualAction);	
-    		    ecaAnimator.actualAction = ActualAction;
+    		if(ecaAnimator.actualAction != null && 
+    		(ecaAnimator.actualAction.State == ActionState.Running || ecaAnimator.actualAction.State == ActionState.Paused))
+    			  ecaAnimator.actualAction.Abort();
     
-    		    State = ActionState.Running;
-                ActualAction.SetupAction();
-    		    ActualAction.StartAction();
+    		Attach(ActualAction);	
+    		ecaAnimator.actualAction = ActualAction;
+    
+    		
+    		State = ActionState.Running;
+    		ActualAction.StartAction();
             }
         }
     }
@@ -100,11 +112,6 @@ public class ECACompositeAction : ECAAction
     
             return null;
         }
-    }
-
-    protected virtual void CreateActionList()
-    {
-
     }
 
 

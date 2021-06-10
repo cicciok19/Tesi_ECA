@@ -18,15 +18,13 @@ public class BuyTicket : ECACompositeAction
 {
     public event EventHandler TicketBought;
 
+    protected VendingMachine vendingMachine;
+    protected bool queuedECA =   false;
+    protected GoToStage goingToMachine =   null;
     protected Passenger passenger;
     protected Station station;
-    protected VendingMachine vendingMachine;
     protected GrabbableObject ticket;
-
-    protected bool queuedECA =  false;
-
-    protected GoToStage goingToMachine =  null;
-    protected GoToStage goingToLastPosition = null;
+    protected GoToStage goingToLastPosition =  null;
     protected SelectTicket selectTicket;
     protected ManageQueue manageQueue;
 
@@ -34,11 +32,14 @@ public class BuyTicket : ECACompositeAction
     public BuyTicket(Passenger eca)
     :base(eca)
     {
-        this.passenger = eca;
-        station = eca.station;
-        vendingMachine = this.passenger.station.GetVendingMachine(eca);
-        ticket = vendingMachine.GetComponentInChildren<GrabbableObject>();
+            this.passenger = eca;
+            station = eca.station;
+            vendingMachine = this.passenger.station.GetVendingMachine(eca);
+            ticket = vendingMachine.GetComponentInChildren<GrabbableObject>();
     }
+
+
+
 
     private void SelectTicket()
     {
@@ -51,9 +52,9 @@ public class BuyTicket : ECACompositeAction
     private void TicketTaken(object sender, EventArgs e)
     {
         vendingMachine.EcasQueue--;     //questo chiama il GoAhead
-
+    
         passenger.ticketTaken = true;
-
+    
         if (TicketBought != null)
             TicketBought(this, EventArgs.Empty);
     }
@@ -63,9 +64,9 @@ public class BuyTicket : ECACompositeAction
     {
         if(queuedECA)
     	    return;
-
+    
         VendingMachine = station.GetVendingMachine();
-
+    
         Utility.Log(passenger.name + " going in queue");
         if(goingToLastPosition.State == ActionState.Running)
         {
@@ -83,19 +84,20 @@ public class BuyTicket : ECACompositeAction
     {
         goingToLastPosition = new GoToStage(vendingMachine.GetLastPosition());
         goingToMachine = new GoToStage(vendingMachine.GetNextPassengerPosition(passenger));
-
+    
         List<ECAActionStage> stages = new List<ECAActionStage>();
-
+    
         stages.Add(goingToLastPosition);
         stages.Add(goingToMachine);
     
         ECAAction goToVendingMachine = new ECAAction(passenger, stages);
         actions.Add(goToVendingMachine);
-
+    
         goToVendingMachine.CompletedAction += OnVendingMachineReached;
-
+    
         vendingMachine.QueueUpdated += GetNewDestination;
     }
+
 
     protected override void CreateActionList()
     {
@@ -119,18 +121,22 @@ public class BuyTicket : ECACompositeAction
         ECAAction goToVendingMachine = (ECAAction)sender;
         goToVendingMachine.CompletedAction -= OnVendingMachineReached;
         vendingMachine.QueueUpdated -= GetNewDestination;
-
+    
         passenger.ecaTurn = vendingMachine.EcasQueue;
         vendingMachine.EcasQueue++;
-
+    
         queuedECA = true;
     }
+
+
+
 
     public override void StartAction()
     {
         CreateActionList();
         base.StartAction();
     }
+
 
     public VendingMachine VendingMachine
     {
@@ -140,7 +146,7 @@ public class BuyTicket : ECACompositeAction
             vendingMachine.QueueUpdated -= GetNewDestination;
             vendingMachine = value;
             vendingMachine.QueueUpdated += GetNewDestination;
-
+    
             selectTicket.ChangeVendingMachine(vendingMachine);
             manageQueue.ChangeQueueableObject(vendingMachine);
         }

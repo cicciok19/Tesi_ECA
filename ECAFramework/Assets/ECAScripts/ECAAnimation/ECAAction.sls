@@ -1,4 +1,4 @@
-:ArrayOb.273{6:Dictionary.4369{64 32:SLSPublicMember.286331409{:String.17{9 10 "131393440"}
+:ArrayOb.273{6:Dictionary.4369{64 30:SLSPublicMember.286331409{:String.17{9 10 "131393440"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{11 12 "ecaAnimator"}
@@ -62,6 +62,20 @@
 #4{20 21 "ECAActionStage stage"}
 #4{0 1 ""}
  0}
+#6{#4{9 10 "140382688"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{11 12 "SetupAction"}
+ 1.3 0.88 4.4 1  11 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{3 5 "\[\n
+\]"}
+#4{11 12 "SetupAction"}
+#4{12 13 "virtual void"}
+#4{0 1 ""}
+#4{0 1 ""}
+}
 #7{#4{9 10 "129305360"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -82,21 +96,6 @@
 #4{9 10 "NextStage"}
 #4{12 13 "virtual void"}
 #4{0 1 ""}
-#4{0 1 ""}
- 0}
-#7{#4{9 10 "127721464"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{12 13 "GetIkManager"}
- 1.3 0.88 4.8 10  7 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{49 50 "\[\n
-    ikManager = eca.GetComponent<IKSetter>();\n
-\]"}
-#4{12 13 "GetIkManager"}
-#4{12 13 "virtual void"}
-#4{7 8 "ECA eca"}
 #4{0 1 ""}
  0}
 #7{#4{9 10 "131033008"}
@@ -260,53 +259,6 @@
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#3{#4{9 10 "118544504"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{9 10 "ikManager"}
- 1.3 1.88 3.6 1  40 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{9 10 "ikManager"}
-#4{8 9 "IKSetter"}
-#4{0 1 ""}
-#5{16 0}
-#5{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{0 1 ""}
-}
-#7{#4{9 10 "129307714"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{13 14 "OnStagePaused"}
- 1.3 0.879999 5.2 16  20 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{65 95 "\[\n
-    Utility.Log(\"Stage \" + sender.GetType() + \" has paused\");\n
-\]"}
-#4{13 16 "OnStagePaused"}
-#4{12 13 "virtual void"}
-#4{26 27 "object sender, EventArgs e"}
-#4{0 1 ""}
- 0}
-#6{#4{9 10 "130422944"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{5 6 "Abort"}
- 0.3 0.88 2 1  7 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{71 72 "\[\n
-    Utility.Log(\"Action aborted\");\n
-    State = ActionState.Aborted;\n
-\]"}
-#4{5 6 "Abort"}
-#4{4 5 "void"}
-#4{0 1 ""}
-#4{0 1 ""}
-}
 #9{#4{9 10 "131228112"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -338,6 +290,37 @@
 #4{0 1 ""}
 #4{0 1 ""}
 }
+#6{#4{9 10 "130422944"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{5 6 "Abort"}
+ 0.3 0.88 2 1  7 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{71 72 "\[\n
+    Utility.Log(\"Action aborted\");\n
+    State = ActionState.Aborted;\n
+\]"}
+#4{5 6 "Abort"}
+#4{4 5 "void"}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#7{#4{9 10 "129307714"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{13 14 "OnStagePaused"}
+ 1.3 0.879999 5.2 16  20 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{65 95 "\[\n
+    Utility.Log(\"Stage \" + sender.GetType() + \" has paused\");\n
+\]"}
+#4{13 16 "OnStagePaused"}
+#4{12 13 "virtual void"}
+#4{26 27 "object sender, EventArgs e"}
+#4{0 1 ""}
+ 0}
 :JLSExternObject.286331409{#4{9 10 "131321384"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -429,7 +412,7 @@
 @0  52 45 0.4 0 0 #4{16 17 "public ECAAction"}
  20.0743 2.2 10.24 4  0 #4{0 1 ""}
 #4{0 1 ""}
-@0  6.06986 4.34043 0
+@0  4.98318 4.24178 0
  0  0 #4{16 26 "public ECAAction"}
 #4{0 7 ""}
 #4{0 13 ""}
@@ -470,6 +453,20 @@
 #4{7 8 "ECA eca"}
 #4{0 1 ""}
 }
+:JLSGlobalDeclare.286331408{#4{8 9 "98375288"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{18 19 "Global Declaration"}
+ 0.299999 0.88 7.2 33  3 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 0  0 #4{112 190 "using System.Collections;\n
+using System.Collections.Generic;\n
+using UnityEngine;\n
+using System;\n
+using System.Linq;\n
+"}
+}
 #7{#4{9 10 "129307712"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -487,44 +484,6 @@
 #4{26 27 "object sender, EventArgs e"}
 #4{0 1 ""}
  0}
-#11{#4{9 10 "119130208"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{16 17 "ECAAnimator ecaA"}
- 0.299999 0.88 6.4 47  6 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{264 265 "\[\n
-    this.ecaAnimator = ecaAnimator;\n
-    this.eca = ecaAnimator.Eca;\n
-    foreach (var stage in stages)\n
-    \[\n
-        stage.Animator = ecaAnimator;\n
-        //stage.StageFinished += OnStageFinished;\n
-    \]\n
-\n
-    AllStages = stages.ToArray();\n
-    actualStageIdx = 0;\n
-\]"}
-#4{9 12 "ECAAction"}
-#4{0 1 ""}
-#4{52 53 "ECAAnimator ecaAnimator, List<ECAActionStage> stages"}
-#4{0 1 ""}
-}
-:JLSGlobalDeclare.286331408{#4{8 9 "98375288"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{18 19 "Global Declaration"}
- 0.299999 0.88 7.2 33  3 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 0  0 #4{112 190 "using System.Collections;\n
-using System.Collections.Generic;\n
-using UnityEngine;\n
-using System;\n
-using System.Linq;\n
-"}
-}
 #6{#4{9 10 "129303400"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -532,19 +491,19 @@ using System.Linq;\n
  1.3 0.88 4.4 1  14 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{409 418 "\[\n
+ 1  1 #4{437 438 "\[\n
     if (AllStages != null)\n
     \[\n
         if(ActualStage != null)\n
         \[\n
-\t\tif(ecaAnimator.actualAction != null && \n
-\t\t(ecaAnimator.actualAction.State == ActionState.Running || ecaAnimator.actualAction.State == ActionState.Paused))\n
-\t\t\t  ecaAnimator.actualAction.Abort();\n
+\t\t    if(ecaAnimator.actualAction != null && \n
+\t\t    (ecaAnimator.actualAction.State == ActionState.Running || ecaAnimator.actualAction.State == ActionState.Paused))\n
+\t\t\t      ecaAnimator.actualAction.Abort();\n
 \n
-\t\tState = ActionState.Running;\n
-\t\tAttach(ActualStage);\t\n
-\t\tActualStage.StartStage();\n
-\t\tecaAnimator.actualAction = this;\n
+\t\t    State = ActionState.Running;\n
+\t\t    Attach(ActualStage);\t\n
+\t\t    ActualStage.StartStage();\n
+\t\t    ecaAnimator.actualAction = this;\n
         \]\n
     \]\n
 \]"}
@@ -570,18 +529,18 @@ using System.Linq;\n
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @302 @365 @105 @0 #5{16 0}
-#5{16 2@385 @275 }
+:CLSCSSem.1118481{ 56  51 @287 @326 @105 @0 #5{16 0}
+#5{16 2@358 @260 }
 #5{16 0}
-#5{16 10@69 @341 @150 @201 @45 @93 @162 @126 @57 @81 }
+#5{16 9@334 @150 @211 @45 @93 @162 @126 @69 @81 }
 #5{16 0}
 #5{16 0}
 #5{16 0}
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#5{16 1@238 }
-#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @3 @0 @0 @0 @30 @0 @0 @0 @0 @0 @186 @0 @0 @0 }
-#1{30@138 @213 @174 @317 @18 @0 @0 @0 @373 @0 @0 @290 @0 @0 @0 @0 @0 @0 @113 @0 @225 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
-#1{16@263 @353 @251 @329 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#5{16 1@223 }
+#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @3 @0 @0 @0 @30 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{30@138 @199 @174 @302 @18 @57 @0 @0 @346 @0 @0 @275 @0 @0 @0 @0 @0 @0 @113 @0 @186 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#1{16@248 @0 @236 @314 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #5{16 0}
  0}

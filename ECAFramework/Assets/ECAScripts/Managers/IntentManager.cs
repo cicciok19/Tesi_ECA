@@ -79,7 +79,7 @@ private static IntentManager instance = null;
 
 
 
-    private async void StartContinuousIntentRecognition()
+    public async void StartContinuousIntentRecognition()
     {
         if (LUISAppId.Length == 0 || LUISAppKey.Length == 0 || LUISRegion.Length == 0)
         {
@@ -211,7 +211,7 @@ private static IntentManager instance = null;
                 var result = json.FromJson<IntentResult>();
                 if (result != null)
                 {
-                    intent = result;
+                        intent = result;
                     string recognizedIntentName = intent.topScoringIntent.intent;
 
                     s += " WITH score = " + intent.topScoringIntent.score;

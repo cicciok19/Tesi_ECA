@@ -4,7 +4,7 @@
 @0  52 45 0.4 0 0 #4{20 21 "public IntentManager"}
  19.3429 2.2 12.8 4  0 #4{0 1 ""}
 #4{0 1 ""}
-@0  6.06986 4.14313 0
+@0  11.0686 4.53772 0
  0  0 #4{20 21 "public IntentManager"}
 #4{0 7 ""}
 #4{0 13 ""}
@@ -14,38 +14,7 @@
 #4{1 2 "S"}
 @0 #4{0 1 ""}
 }
-:SLSPrivateMember.286331409{#4{8 9 "86018104"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{10 11 "intentreco"}
- 2 1.88 4 19  26 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{10 11 "intentreco"}
-#4{16 17 "IntentRecognizer"}
-#4{0 1 ""}
-#5{16 0}
-#5{16 0}
-#4{0 2 ""}
-@0 #4{0 1 ""}
-#4{0 1 ""}
-}
-:SLSPrivateMethod.286331408{#4{9 10 "104299864"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{9 10 "OnDisable"}
- 1.3 0.88 3.6 19  11 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{32 33 "\[\n
-    StopIntentRecognition();\n
-\]"}
-#4{9 10 "OnDisable"}
-#4{4 5 "void"}
-#4{0 1 ""}
-#4{0 1 ""}
-}
-#7{#4{8 9 "86279088"}
+:SLSPrivateMethod.286331408{#4{8 9 "86279088"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{22 23 "CreateIntentRecognizer"}
@@ -115,6 +84,37 @@
 #4{0 1 ""}
 #4{0 1 ""}
 }
+#6{#4{9 10 "104299864"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{9 10 "OnDisable"}
+ 1.3 0.88 3.6 19  11 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{32 33 "\[\n
+    StopIntentRecognition();\n
+\]"}
+#4{9 10 "OnDisable"}
+#4{4 5 "void"}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+:SLSPrivateMember.286331409{#4{8 9 "86018104"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{10 11 "intentreco"}
+ 2 1.88 4 19  26 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{10 11 "intentreco"}
+#4{16 17 "IntentRecognizer"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{0 1 ""}
+#4{0 1 ""}
+}
 :SLSProperty.286331392{#4{9 10 "104292416"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -127,6 +127,22 @@
 #4{40 41 "Dictionary<string, List<IIntentHandler>>"}
 #4{0 1 ""}
 #4{0 1 ""}
+#4{0 1 ""}
+}
+:SLSPublicMember.286331409{#4{8 9 "86017224"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{9 10 "LUISAppId"}
+ 1.3 1.88 3.6 1  38 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{9 10 "LUISAppId"}
+#4{6 7 "string"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{14 15 "  string.Empty"}
 #4{0 1 ""}
 }
 :JLSGlobalDeclare.286331408{#4{8 9 "86365704"}
@@ -186,22 +202,6 @@ using System.Threading;\n
     */\n
 "}
 }
-:SLSPublicMember.286331409{#4{8 9 "86017224"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{9 10 "LUISAppId"}
- 1.3 1.88 3.6 1  38 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{9 10 "LUISAppId"}
-#4{6 7 "string"}
-#4{0 1 ""}
-#5{16 0}
-#5{16 0}
-#4{0 2 ""}
-@0 #4{14 15 "  string.Empty"}
-#4{0 1 ""}
-}
 #8{#4{9 10 "104297512"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -249,22 +249,6 @@ using System.Threading;\n
 @0  0 0 1
  0  0 #4{45 46 "private static IntentManager instance = null;"}
 }
-#10{#4{8 9 "86019864"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 2 0.4 0 0 #4{10 11 "LUISAppKey"}
- 1.3 1.88 4 1  36 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{10 11 "LUISAppKey"}
-#4{6 7 "string"}
-#4{0 1 ""}
-#5{16 0}
-#5{16 0}
-#4{0 2 ""}
-@0 #4{14 15 "  string.Empty"}
-#4{0 1 ""}
-}
 #8{#4{8 9 "86281832"}
 #1{2@0 @0 }
 #1{2@0 @0 }
@@ -286,7 +270,58 @@ using System.Threading;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#7{#4{9 10 "104296336"}
+#9{#4{8 9 "86019864"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 2 0.4 0 0 #4{10 11 "LUISAppKey"}
+ 1.3 1.88 4 1  36 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{10 11 "LUISAppKey"}
+#4{6 7 "string"}
+#4{0 1 ""}
+#5{16 0}
+#5{16 0}
+#4{0 2 ""}
+@0 #4{14 15 "  string.Empty"}
+#4{0 1 ""}
+}
+#11{#4{9 10 "109957696"}
+#1{2@0 @0 }
+#1{2@0 @0 }
+@0  8 1 0.4 0 0 #4{32 33 "StartContinuousIntentRecognition"}
+ 0.3 0.88 12.8 1  8 #4{0 1 ""}
+#4{0 1 ""}
+@0  0 0 1
+ 1  1 #4{1055 1056 "\[\n
+    if (LUISAppId.Length == 0 || LUISAppKey.Length == 0 || LUISRegion.Length == 0)\n
+    \[\n
+        Debug.LogError(\"One or more LUIS subscription parameters are missing. Check your values and try again.\");\n
+        return;\n
+    \]\n
+    CreateIntentRecognizer();\n
+\n
+    if (intentreco != null)\n
+    \[\n
+        /*\n
+        Alternavely: RecognizeOnceAsync() -> Returns the recognized intent, if any, after one utterance!!\n
+        Starts intent recognition, and returns after a single utterance is recognized. The end of a\n
+        single utterance is determined by listening for silence at the end or until a maximum of 15\n
+        seconds of audio is processed.  The task returns the recognition text as result. \n
+        Note: Since RecognizeOnceAsync() returns only a single utterance, it is suitable only for single\n
+        shot recognition like command or query. \n
+        For long-running multi-utterance recognition, use StartContinuousRecognitionAsync() instead.\n
+        */\n
+\n
+        await intentreco.StartContinuousRecognitionAsync().ConfigureAwait(false);\n
+    \]\n
+\]"}
+#4{32 33 "StartContinuousIntentRecognition"}
+#4{10 11 "async void"}
+#4{0 1 ""}
+#4{0 1 ""}
+}
+#6{#4{9 10 "104296336"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{27 28 "OnCanceledIntentRecognition"}
@@ -368,37 +403,23 @@ using System.Threading;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#7{#4{8 9 "96089400"}
+#6{#4{9 10 "104293200"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{7 8 "OnError"}
- 1.3 0.88 2.8 28  11 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{13 14 "OnSessionStop"}
+ 1.3 0.88 5.2 37  7 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{54 55 "\[\n
-    OnDisable();\n
-    Thread.CurrentThread.Abort();\n
+ 1  1 #4{121 122 "\[\n
+    Debug.Log(\"Session event. Event: \" + e.ToString());\n
+    Debug.Log(\"Session Stop detected. Stop the recognition\");\n
 \]"}
-#4{7 8 "OnError"}
+#4{13 14 "OnSessionStop"}
 #4{4 5 "void"}
-#4{0 1 ""}
-#4{0 1 ""}
-}
-:SLSPrivateConstructor.286331648{#4{8 9 "86019424"}
-#1{2@0 @0 }
-#1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{7 8 "creator"}
- 0.299999 0.88 2.8 47  15 #4{0 1 ""}
-#4{0 1 ""}
-@0  0 0 1
- 1  1 #4{3 5 "\[\n
-\]"}
-#4{13 14 "IntentManager"}
-#4{0 1 ""}
-#4{0 1 ""}
+#4{33 34 "object sender, SessionEventArgs e"}
 #4{0 1 ""}
 }
-#7{#4{9 10 "104297904"}
+#6{#4{9 10 "104297904"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{19 20 "OnRecognizingIntent"}
@@ -414,42 +435,22 @@ using System.Threading;\n
 #4{43 44 "object sender, IntentRecognitionEventArgs e"}
 #4{0 1 ""}
 }
-#7{#4{8 9 "86278696"}
+#6{#4{9 10 "104295552"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{32 33 "StartContinuousIntentRecognition"}
- 1.3 0.88 12.8 10  7 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{13 14 "OnSpeechStart"}
+ 1.3 0.88 5.2 10  9 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{1055 1056 "\[\n
-    if (LUISAppId.Length == 0 || LUISAppKey.Length == 0 || LUISRegion.Length == 0)\n
-    \[\n
-        Debug.LogError(\"One or more LUIS subscription parameters are missing. Check your values and try again.\");\n
-        return;\n
-    \]\n
-    CreateIntentRecognizer();\n
-\n
-    if (intentreco != null)\n
-    \[\n
-        /*\n
-        Alternavely: RecognizeOnceAsync() -> Returns the recognized intent, if any, after one utterance!!\n
-        Starts intent recognition, and returns after a single utterance is recognized. The end of a\n
-        single utterance is determined by listening for silence at the end or until a maximum of 15\n
-        seconds of audio is processed.  The task returns the recognition text as result. \n
-        Note: Since RecognizeOnceAsync() returns only a single utterance, it is suitable only for single\n
-        shot recognition like command or query. \n
-        For long-running multi-utterance recognition, use StartContinuousRecognitionAsync() instead.\n
-        */\n
-\n
-        await intentreco.StartContinuousRecognitionAsync().ConfigureAwait(false);\n
-    \]\n
+ 1  1 #4{71 72 "\[\n
+    Debug.Log(\"SpeechStartDetected received: offset: \" + e.Offset);\n
 \]"}
-#4{32 33 "StartContinuousIntentRecognition"}
-#4{10 11 "async void"}
-#4{0 1 ""}
+#4{13 14 "OnSpeechStart"}
+#4{4 5 "void"}
+#4{37 38 "object sender, RecognitionEventArgs e"}
 #4{0 1 ""}
 }
-#10{#4{8 9 "86016784"}
+#9{#4{8 9 "86016784"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{16 17 "RecognizedIntent"}
@@ -465,23 +466,23 @@ using System.Threading;\n
 @0 #4{0 1 ""}
 #4{0 1 ""}
 }
-#7{#4{9 10 "104299080"}
+#6{#4{8 9 "96089400"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{11 12 "OnSpeechEnd"}
- 1.3 0.88 4.4 19  9 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{7 8 "OnError"}
+ 1.3 0.88 2.8 28  11 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{108 109 "\[\n
-    Debug.Log(\"SpeechEndDetected received: offset: \" + e.Offset);\n
-    Debug.Log(\"Speech end detected.\");\n
+ 1  1 #4{54 55 "\[\n
+    OnDisable();\n
+    Thread.CurrentThread.Abort();\n
 \]"}
-#4{11 12 "OnSpeechEnd"}
+#4{7 8 "OnError"}
 #4{4 5 "void"}
-#4{37 38 "object sender, RecognitionEventArgs e"}
+#4{0 1 ""}
 #4{0 1 ""}
 }
-#6{#4{8 9 "86018544"}
+#7{#4{8 9 "86018544"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{6 7 "intent"}
@@ -522,7 +523,7 @@ using System.Threading;\n
 #4{0 1 ""}
 #4{0 1 ""}
 }
-#7{#4{9 10 "104298296"}
+#6{#4{9 10 "104298296"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{18 19 "OnRecognizedIntent"}
@@ -591,22 +592,23 @@ using System.Threading;\n
 #4{43 44 "object sender, IntentRecognitionEventArgs e"}
 #4{0 1 ""}
 }
-#7{#4{9 10 "104295552"}
+#6{#4{9 10 "104299080"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{13 14 "OnSpeechStart"}
- 1.3 0.88 5.2 10  9 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{11 12 "OnSpeechEnd"}
+ 1.3 0.88 4.4 19  9 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{71 72 "\[\n
-    Debug.Log(\"SpeechStartDetected received: offset: \" + e.Offset);\n
+ 1  1 #4{108 109 "\[\n
+    Debug.Log(\"SpeechEndDetected received: offset: \" + e.Offset);\n
+    Debug.Log(\"Speech end detected.\");\n
 \]"}
-#4{13 14 "OnSpeechStart"}
+#4{11 12 "OnSpeechEnd"}
 #4{4 5 "void"}
 #4{37 38 "object sender, RecognitionEventArgs e"}
 #4{0 1 ""}
 }
-#6{#4{8 9 "86016344"}
+#7{#4{8 9 "86016344"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{12 13 "threadLocker"}
@@ -622,23 +624,21 @@ using System.Threading;\n
 @0 #4{21 22 "  new System.Object()"}
 #4{0 1 ""}
 }
-#7{#4{9 10 "104293200"}
+:SLSPrivateConstructor.286331648{#4{8 9 "86019424"}
 #1{2@0 @0 }
 #1{2@0 @0 }
-@0  8 1 0.4 0 0 #4{13 14 "OnSessionStop"}
- 1.3 0.88 5.2 37  7 #4{0 1 ""}
+@0  8 1 0.4 0 0 #4{7 8 "creator"}
+ 0.299999 0.88 2.8 47  15 #4{0 1 ""}
 #4{0 1 ""}
 @0  0 0 1
- 1  1 #4{121 122 "\[\n
-    Debug.Log(\"Session event. Event: \" + e.ToString());\n
-    Debug.Log(\"Session Stop detected. Stop the recognition\");\n
+ 1  1 #4{3 5 "\[\n
 \]"}
-#4{13 14 "OnSessionStop"}
-#4{4 5 "void"}
-#4{33 34 "object sender, SessionEventArgs e"}
+#4{13 14 "IntentManager"}
+#4{0 1 ""}
+#4{0 1 ""}
 #4{0 1 ""}
 }
-#10{#4{8 9 "86018984"}
+#9{#4{8 9 "86018984"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 2 0.4 0 0 #4{10 11 "LUISRegion"}
@@ -654,7 +654,7 @@ using System.Threading;\n
 @0 #4{14 15 "  string.Empty"}
 #4{0 1 ""}
 }
-#7{#4{9 10 "104295160"}
+#6{#4{9 10 "104295160"}
 #1{2@0 @0 }
 #1{2@0 @0 }
 @0  8 1 0.4 0 0 #4{14 15 "OnSessionStart"}
@@ -670,17 +670,17 @@ using System.Threading;\n
 #4{0 1 ""}
 }
 }
-:CLSCSSem.1118481{ 56  51 @3 @70 @118 @0 #5{16 3@316 @18 @265 }
+:CLSCSSem.1118481{ 56  51 @3 @85 @118 @0 #5{16 3@316 @42 @265 }
 #5{16 0}
-#5{16 11@226 @45 @358 @331 @304 @253 @214 @292 @154 @33 @190 }
-#5{16 0}
-#5{16 0}
+#5{16 10@18 @358 @202 @226 @304 @214 @292 @166 @30 @253 }
 #5{16 0}
 #5{16 0}
-#1{16@202 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #5{16 0}
-#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @343 @0 @126 @0 @78 @0 @238 @0 @0 @0 }
-#1{30@280 @178 @0 @106 @57 @93 @0 @0 @0 @0 @0 @166 @0 @0 @0 @0 @0 @0 @0 @0 @141 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#5{16 0}
+#1{16@331 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
+#5{16 0}
+#1{38@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @343 @0 @139 @0 @70 @0 @238 @0 @0 @0 }
+#1{30@280 @190 @154 @106 @57 @93 @0 @0 @0 @0 @0 @178 @0 @0 @0 @0 @0 @0 @0 @0 @126 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #1{16@0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 @0 }
 #4{0 1 ""}
 #5{16 0}

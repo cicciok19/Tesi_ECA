@@ -37,6 +37,7 @@ public class IntentRecognitionBehaviour : MonoBehaviour
                     StartCoroutine(IconAnimation());
                 ShowRecognizedText("...");
                 IntentManager.Instance.StartSingleSentenceRecognition();
+                //IntentManager.Instance.StartContinuousIntentRecognition();
             }
             else
                 AudioManager.Instance.OnError();
