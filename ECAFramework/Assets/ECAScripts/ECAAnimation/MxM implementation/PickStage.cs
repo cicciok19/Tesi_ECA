@@ -51,10 +51,9 @@ public class PickStage : ECAActionStage
         //does the start of the interactionSystem, mandatory
         SetupInteractionSystem();
 
-		WaitFor(.2f);
-
 		//choose type pick and starts the interaction
-		//SetTypePick();
+		//SetTypePick(); done in OnWaitComplete
+		WaitFor(.2f);
 
 	}
 
@@ -114,11 +113,21 @@ public class PickStage : ECAActionStage
 			if (Vector3.Distance(holdPoint.position, obj.transform.position) <= .22f && !grab)
 				EndStage();
 		}
-		else
+		else if(obj.GetComponentInParent<ECA>())
         {
 			//Debug.Log(Vector3.Distance(holdPoint.position, obj.transform.position));
-			if (Vector3.Distance(holdPoint.position, obj.transform.position) <= .3f && !grab)
-				EndStage();
+			//if (Vector3.Distance(holdPoint.position, obj.transform.position) <= .3f && !grab)
+			if(typePick == HandSide.RightHand)
+            {
+				if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight <= 0.02f)
+					EndStage();
+			}
+			else if( typePick == HandSide.LeftHand || typePick == HandSide.BothHands)
+            {
+				if (ikManager.fullBodyBipedIK.solver.leftHandEffector.positionWeight <= 0.02f)
+					EndStage();
+			}
+			
 		}
 
 	}

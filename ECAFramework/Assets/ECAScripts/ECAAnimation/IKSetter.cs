@@ -106,6 +106,7 @@ public class IKSetter : MonoBehaviour
     protected LookAtIK SetLookAtIK()
     {
         LookAtIK lookIK = this.gameObject.AddComponent<LookAtIK>();
+        lookIK.solver.IKPositionWeight = 0f;
         lookIK.solver.bodyWeight = .2f;
         lookIK.solver.headWeight = .4f;
         Transform[] spineChain = {spine, chest, upperChest, neckBone };

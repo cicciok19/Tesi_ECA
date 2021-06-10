@@ -44,6 +44,7 @@ public class ManageQueue : ECAAction
 
     protected void OnArrivedToMachine(object sender, EventArgs e)
     {
+        Utility.Log(eca.name + " completed queue");
         OnCompletedAction();
     }
 
