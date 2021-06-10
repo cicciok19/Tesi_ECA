@@ -26,6 +26,7 @@ public class Train : MonoBehaviour
     public int passengers;
     private bool doorsOpened;
     private bool arrived;
+    public bool trainStopped;
 
     protected void Start()
     {

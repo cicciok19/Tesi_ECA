@@ -27,7 +27,7 @@ public class DropStage : ECAActionStage
     public DropStage(PickStage pickStage) : base()
     {
         this.pickStage = pickStage;
-        this.obj = pickStage.obj;
+        this.typePick = pickStage.typePick;
     }
 
     public override void StartStage()
@@ -75,8 +75,6 @@ public class DropStage : ECAActionStage
         {
             obj.GetComponent<InteractionObject>().enabled = false;
             obj.transform.SetParent(dropTransform);
-
-            Debug.Log("position obj postdrop: " + obj.transform.position);
 
             if (typePick == HandSide.LeftHand)
                 ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, 0f);

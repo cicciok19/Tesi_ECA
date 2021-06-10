@@ -37,7 +37,8 @@ public class TrainDoors : MonoBehaviour {
 		}
 		doorsMoving = true;
 		StartCoroutine (SnapDoorsOpen ());
-		FindObjectOfType<Train1> ().trainStopped = true;
+		//FindObjectOfType<Train1> ().trainStopped = true;
+		GetComponent<Train>().trainStopped = true;
 	}
 
 	public void CloseDoors() {

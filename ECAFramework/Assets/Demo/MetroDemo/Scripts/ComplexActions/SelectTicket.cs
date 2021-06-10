@@ -5,10 +5,13 @@ using UnityEngine;
 public class SelectTicket : ECAAction
 {
     private VendingMachine vendingMachine;
+    private Transform dropPosition;
 
     public SelectTicket(ECA eca, VendingMachine machine) : base(eca)
     {
         vendingMachine = machine;
+        Passenger passenger = (Passenger)eca;
+        dropPosition = passenger.GetComponentInChildren<DropPosition>().transform;
     }
 
     public override void SetupAction()
@@ -19,7 +22,7 @@ public class SelectTicket : ECAAction
         PressStage useScreen = new PressStage(vendingMachine.GetScreen(), HandSide.RightHand);
         PressStage pressButton = new PressStage(vendingMachine.GetButton(), HandSide.RightHand);
         PickStage takeTicket = new PickStage(vendingMachine.GetGrabbableGameObject(), 10, false, HandSide.RightHand);
-        DropStage dropTicket = new DropStage(takeTicket);
+        DropStage dropTicket = new DropStage(takeTicket, dropPosition);
         stages.Add(useScreen);
         stages.Add(pressButton);
         stages.Add(takeTicket);
@@ -32,5 +35,10 @@ public class SelectTicket : ECAAction
     public void ChangeVendingMachine(VendingMachine v)
     {
         vendingMachine = v;
+    }
+    public override void StartAction()
+    {
+        SetupAction();
+        base.StartAction();
     }
 }
