@@ -24,8 +24,6 @@ using Random = UnityEngine.Random;
 
 public class Patient : ECA
 {
-
-    private bool rythimShockable;
     private InjectionPosition injectionPosition;
     private CPRPosition cprPosition;
     private AdvancedCapnographyPosition capnographyPosition;
@@ -36,12 +34,12 @@ public class Patient : ECA
     private Collider spineCollider;
     private Stomach stomach;
     private PumpPosition pumpPosition;
-    private SystemManager systemManager;
+    private DestinationDef destinationDef;
     private const float RHYTM_SHOCKABLE =  .4f;
-    private int counterCPR;
-    private readonly object start =  new object();
 
     protected bool ivAccessInserted = false;
+    protected bool isOxygened = false;
+    protected bool hasCapnography = false;
 
     public EventHandler CheckRythm;
     public PatientState state;
@@ -59,10 +57,7 @@ public class Patient : ECA
         spineCollider = GetComponentInChildren<SpineCollider>().GetComponent<Collider>();
         stomach = GetComponentInChildren<Stomach>();
         pumpPosition = GetComponentInChildren<PumpPosition>();
-    
-        systemManager = FindObjectOfType<SystemManager>();
-    
-        counterCPR = 0;
+        destinationDef = GetComponentInChildren<DestinationDef>();
     }
 
 
@@ -109,12 +104,13 @@ public class Patient : ECA
 
     public void OnIvAccessDone()
     {
-      ivAccessInserted = true;
+        ivAccessInserted = true;
     }
 
 
     public void OnOxygenGiven()
     {
+        isOxygened = true;
     }
 
 
@@ -122,6 +118,10 @@ public class Patient : ECA
     {
     }
 
+    public Transform GetDestinationDef()
+    {
+        return destinationDef.transform;
+    }
 
     public CPRPosition GetCPRPosition()
     {
@@ -164,12 +164,19 @@ public class Patient : ECA
         return pumpPosition.transform;
     }
 
+    public bool HasCapnography
+    {
+        get => hasCapnography;
+    }
+
+    public bool IsOxygened
+    {
+        get => isOxygened;
+    }
 
     public bool HasIVAccess
     {
-      get {
-    	return ivAccessInserted;
-      }
+        get => ivAccessInserted;
     }
 
 

@@ -5,14 +5,14 @@ using System;
 
 public class AirwayManager : ECA
 {
-    public string[] intentNames = { "GiveOxygen", "Capnography" };
-
     private GiveOxygen giveOxygen;
     private Capnography capnography;
     private Patient patient;
     private MedicalRoom medicalRoom;
     private AirwayTable airwayTable;
-    private Transform turnObj;
+
+    private const string GIVE_OXYGEN = "GiveOxygen";
+    private const string CAPNOGRAPHY = "Capnography";
 
     protected override void Start()
     {
@@ -36,33 +36,34 @@ public class AirwayManager : ECA
         base.Handle(intent);
         switch (intent.IntentName)
         {
-            case "GiveOxygen":
-                HandleGiveOxygen(airwayTable.GetOxygen(), patient);
+            case GIVE_OXYGEN:
+                HandleGiveOxygen();
                 break;
-            case "Capnography":
-                HandleCapnography(airwayTable.GetCapnographyTube(), patient);
+            case CAPNOGRAPHY:
+                HandleCapnography();
                 break;
         }
     }
 
     public override void SubscribeHandlerToIntentManager()
     {
-        IntentName = new List<string> { "GiveOxygen", "Capnography" };
-        IntentManager.Instance.AddIntentHandler(IntentName[0], this);
-        IntentManager.Instance.AddIntentHandler(IntentName[1], this);
+        List<string> intentNames = new List<string> {GIVE_OXYGEN, CAPNOGRAPHY};
+
+        foreach(string intent in intentNames)
+            IntentManager.Instance.AddIntentHandler(intent, this);
 
     }
 
-    private void HandleGiveOxygen(Oxygen oxygen, Patient patient)
+    private void HandleGiveOxygen()
     {
-        giveOxygen = new GiveOxygen(this, oxygen, patient);
+        giveOxygen = new GiveOxygen(this, airwayTable.GetOxygen(), patient);
         giveOxygen.CompletedAction += OnOxygenGiven;
         giveOxygen.StartAction();
     }
 
-    private void HandleCapnography(Transform capnographyTube, Patient patient)
+    private void HandleCapnography()
     {
-        capnography = new Capnography(this, capnographyTube, patient);
+        capnography = new Capnography(this, airwayTable.GetCapnographyTube(), patient);
         capnography.CompletedAction += OnCapnographyCompleted;
         capnography.StartAction();
 

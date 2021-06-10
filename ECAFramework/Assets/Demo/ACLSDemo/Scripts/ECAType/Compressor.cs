@@ -5,7 +5,7 @@ using System;
 
 public class Compressor : ECA
 {
-    public string[] intentNames = { "StartCPR" };
+    private const string START_CPR = "StartCPR";
 
     private CPRAction cpr;
     private Patient patient;
@@ -18,8 +18,6 @@ public class Compressor : ECA
         patient = FindObjectOfType<Patient>();
         timeRecorder = FindObjectOfType<TimeRecorder>();
         cprPosition = patient.GetCPRPosition();
-
-        //ikManager.ChangeFadeInTime(5f);
 
         //just for debug
         //HandleStartCPR();
@@ -36,7 +34,7 @@ public class Compressor : ECA
         base.Handle(intent);
         switch (intent.IntentName)
         {
-            case "StartCPR":
+            case START_CPR:
                 HandleStartCPR();
                 break;
         }
@@ -44,8 +42,9 @@ public class Compressor : ECA
 
     public override void SubscribeHandlerToIntentManager()
     {
-        IntentName = new List<string> { "StartCPR" };
-        IntentManager.Instance.AddIntentHandler(IntentName[0], this);
+        List<string> intentName = new List<string> { START_CPR };
+        foreach(string intent in intentName)
+            IntentManager.Instance.AddIntentHandler(intent, this);
     }
 
     private void HandleStartCPR()

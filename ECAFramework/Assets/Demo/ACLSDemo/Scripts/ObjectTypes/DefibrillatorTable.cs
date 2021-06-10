@@ -7,12 +7,14 @@ public class DefibrillatorTable : MonoBehaviour
     private Defibrillator defibrillator;
     private Transform leftFootPosition;
     private Transform bodyTarget;
+    private Destination destination;
 
     private void Start()
     {
         defibrillator = GetComponentInChildren<Defibrillator>();
         leftFootPosition = GetComponentInChildren<LeftFootPosition>().transform;
         bodyTarget = GetComponentInChildren<BodyTarget>().transform;
+        destination = GetComponentInChildren<Destination>();
     }
 
     public Defibrillator GetDefibrillator()
@@ -28,5 +30,10 @@ public class DefibrillatorTable : MonoBehaviour
     public Transform GetBodyTarget()
     {
         return bodyTarget;
+    }
+
+    public Transform GetDestination()
+    {
+        return destination.transform;
     }
 }

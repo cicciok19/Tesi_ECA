@@ -7,17 +7,15 @@ public class Defibrillator : MonoBehaviour
 {
     private GrabbableObject leftPaddle;
     private GrabbableObject rightPaddle;
+    private DefibrillatorScreen screen;
+    private ECAButton button;
 
     private void Awake()
     {
-        InteractionTarget[] targets = GetComponentsInChildren<InteractionTarget>();
-        foreach (var t in targets)
-        {
-            if (t.effectorType == FullBodyBipedEffector.RightHand)
-                rightPaddle = t.GetComponentInParent<GrabbableObject>();
-            else
-                leftPaddle = t.GetComponentInParent<GrabbableObject>();
-        }
+        rightPaddle = GetComponentInChildren<PaddleRight>();
+        leftPaddle = GetComponentInChildren<PaddleLeft>();
+        screen = GetComponentInChildren<DefibrillatorScreen>();
+        button = GetComponentInChildren<ECAButton>();
     }
 
     public GrabbableObject GetRightPaddle()
@@ -28,5 +26,15 @@ public class Defibrillator : MonoBehaviour
     public GrabbableObject GetLeftPaddle()
     {
         return leftPaddle;
+    }
+
+    public DefibrillatorScreen GetScreen()
+    {
+        return screen;
+    }
+
+    public ECAButton GetButton()
+    {
+        return button;
     }
 }

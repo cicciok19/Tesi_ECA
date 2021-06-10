@@ -11,6 +11,8 @@ public class Shock : ECACompositeAction
     private Transform turnAtPosition;
     private Transform leftFootPosition;
     private Transform bodyTarget;
+    private Transform destination;
+    private Transform destinationPatient;
 
     private List<PickStage> pickStages;
     private List<PlaceObjectStage> placePaddles;
@@ -26,12 +28,16 @@ public class Shock : ECACompositeAction
         turnAtPosition = patient.GetDefLeftPosition();
         leftFootPosition = defibrillatorTable.GetLeftFootPosition();
         bodyTarget = defibrillatorTable.GetBodyTarget();
+        destination = defibrillatorTable.GetDestination();
+        destinationPatient = patient.GetDestinationDef();
 
         CreateActionList();
     }
 
     private void PickPaddles()
     {
+        GoToStage goToDef = new GoToStage(destination);
+
         pickStages = new List<PickStage>()
         {
             new PickStage(defibrillator.GetLeftPaddle().transform, 1, false, HandSide.LeftHand),
@@ -39,10 +45,13 @@ public class Shock : ECACompositeAction
         };
 
         ECAParallelActionStage pick = new ECAParallelActionStage(pickStages.ToArray());
+        GoToStage goToPatient = new GoToStage(destinationPatient);
         TurnStage turnToPatient = new TurnStage(turnAtPosition, false, leftFootPosition, bodyTarget);
 
         List<ECAActionStage> list = new List<ECAActionStage>();
+        list.Add(goToDef);
         list.Add(pick);
+        list.Add(goToPatient);
         list.Add(turnToPatient);
 
         takePaddles = new ECAAction(defManager, list);

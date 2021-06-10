@@ -5,15 +5,15 @@ using System;
 
 public class DefibrillatorManager : ECA
 {
-    public string[] intentNames = { "AttachMonitor", "Shock" };
     public event EventHandler ShockCompleted;
 
-    private Shock shock;
-    private AttachMonitor attachMonitor;
     private MedicalRoom room;
     private DefibrillatorTable defibrillatorTable;
     private Patient patient;
+    private DefibrillatorScreen screen;
 
+    protected const string ATTACH_MONITOR = "Attach monitor";
+    protected const string SHOCK = "Shock";
 
     protected override ECAAnimator AddECAAnimator()
     {
@@ -26,8 +26,11 @@ public class DefibrillatorManager : ECA
         room = FindObjectOfType<MedicalRoom>();
         patient = FindObjectOfType<Patient>();
         defibrillatorTable = room.GetDefibrillatorTable();
+        screen = defibrillatorTable.GetDefibrillator().GetScreen();
+
         patient.CheckRythm += OnRythm;
         //HandleShock();
+        //HandleAttachMonitor();
     }
 
     public override void Handle(Intent intent)
@@ -36,10 +39,10 @@ public class DefibrillatorManager : ECA
 
         switch (intent.IntentName)
         {
-            case "AttachMonitor":
+            case ATTACH_MONITOR:
                 HandleAttachMonitor();
                 break;
-            case "Shock":
+            case SHOCK:
                 HandleShock();
                 break;
         }
@@ -47,9 +50,10 @@ public class DefibrillatorManager : ECA
 
     public override void SubscribeHandlerToIntentManager()
     {
-        IntentName = new List<string> { "AttachMonitor", "Shock"};
-        IntentManager.Instance.AddIntentHandler(IntentName[0], this);
-        IntentManager.Instance.AddIntentHandler(IntentName[1], this);
+        List<string> IntentName = new List<string> {ATTACH_MONITOR, SHOCK};
+
+        foreach (string intent in IntentName)
+            IntentManager.Instance.AddIntentHandler(intent, this);
     }
 
     private void HandleShock()
@@ -57,24 +61,34 @@ public class DefibrillatorManager : ECA
         if (patient.state == PatientState.Asystole)
             Debug.Log("You have to inject Epinephrine, NOT Shock!");
 
-        shock = new Shock(this, defibrillatorTable, patient);
+        Shock shock = new Shock(this, defibrillatorTable, patient);
         shock.CompletedAction += OnShockCompleted;
         shock.StartAction();
     }
 
     private void HandleAttachMonitor()
     {
+        if (screen.IsOn)
+        {
+            SendDirectMessage("Lo schermo è già accesso!");
+            return;
+        }
 
+        AttachMonitor attachMonitor = new AttachMonitor(this, defibrillatorTable, patient);
+        attachMonitor.CompletedAction += OnMonitorAttached;
+        attachMonitor.StartAction();
     }
 
     private void OnShockCompleted(object sender, EventArgs e)
     {
+        Shock shock = (Shock)sender;
+        shock.CompletedAction -= OnShockCompleted;
         patient.OnShockReceived();
     }
 
     private void OnMonitorAttached(object sender, EventArgs e)
     {
-        //send message
+        screen.IsOn = true;
     }
 
     private void OnRythm(object sender, EventArgs e)
