@@ -12,8 +12,12 @@ public class DefibrillatorManager : ECA
     private Patient patient;
     private DefibrillatorScreen screen;
 
+    private HoldPointLeft holdPointLeft;
+    private HoldPointRight holdPointRight;
+
     protected const string ATTACH_MONITOR = "Attach monitor";
     protected const string SHOCK = "Shock";
+    protected const string CHECK_MONITOR = "CheckMonitor";
 
     protected override ECAAnimator AddECAAnimator()
     {
@@ -28,9 +32,12 @@ public class DefibrillatorManager : ECA
         defibrillatorTable = room.GetDefibrillatorTable();
         screen = defibrillatorTable.GetDefibrillator().GetScreen();
 
-        patient.CheckRythm += OnRythm;
-        //HandleShock();
+        holdPointLeft = GetComponentInChildren<HoldPointLeft>();
+        holdPointRight = GetComponentInChildren<HoldPointRight>();
+
+        HandleShock();
         //HandleAttachMonitor();
+        //HandleCheckScreen();
     }
 
     public override void Handle(Intent intent)
@@ -44,6 +51,9 @@ public class DefibrillatorManager : ECA
                 break;
             case SHOCK:
                 HandleShock();
+                break;
+            case CHECK_MONITOR:
+                HandleCheckScreen();
                 break;
         }
     }
@@ -61,8 +71,8 @@ public class DefibrillatorManager : ECA
         if (patient.state == PatientState.Asystole)
             Debug.Log("You have to inject Epinephrine, NOT Shock!");
 
-        Shock shock = new Shock(this, defibrillatorTable, patient);
-        shock.CompletedAction += OnShockCompleted;
+        Shock shock = new Shock(this, defibrillatorTable, patient, 2);
+        //shock.CompletedAction += OnShockReady;
         shock.StartAction();
     }
 
@@ -79,25 +89,67 @@ public class DefibrillatorManager : ECA
         attachMonitor.StartAction();
     }
 
-    private void OnShockCompleted(object sender, EventArgs e)
+  /*  private void OnShockReady(object sender, EventArgs e)
     {
         Shock shock = (Shock)sender;
-        shock.CompletedAction -= OnShockCompleted;
+        SendDirectMessage("Scarica!");
+        shock.CompletedAction -= OnShockReady;
+        patient.Shocked += OnShockCompleted;
         patient.OnShockReceived();
+    }
+  */
+    private void OnShockCompleted(object sender, EventArgs e)
+    {
+        //ci dovrebbe essere un check su quanti shock si debbano fare perché per ora è solo uno
+
+
+        
     }
 
     private void OnMonitorAttached(object sender, EventArgs e)
     {
+        AttachMonitor attachMonitor = (AttachMonitor)sender;
+        attachMonitor.CompletedAction -= OnMonitorAttached;
         screen.IsOn = true;
     }
 
-    private void OnRythm(object sender, EventArgs e)
+    private void HandleCheckScreen()
     {
-        if (patient.state == PatientState.VF)
-            Debug.Log("VF");
-        else if (patient.state == PatientState.Asystole)
-            Debug.Log("Asystole");
+        if (!screen.IsOn)
+        {
+            SendDirectMessage("Il monitor non è attaccato, devo prima attaccato per sapere lo stato del paziente!");
+            Utility.LogWarning("Asked to check screen but the monitor is not attached.");
+
+            List<ECAAction> actions = new List<ECAAction>();
+
+            AttachMonitor attachMonitor = new AttachMonitor(this, defibrillatorTable, patient);
+            attachMonitor.CompletedAction += OnMonitorAttached;
+
+            CheckScreenStage checkScreenStage = new CheckScreenStage(this, patient.state);
+            ECAAction checkScreen = new ECAAction(this, checkScreenStage);
+
+            actions.Add(attachMonitor);
+            actions.Add(checkScreen);
+
+            ECACompositeAction composite = new ECACompositeAction(this, actions);
+            composite.StartAction();
+        }
         else
-            Debug.LogError("Patient State is not setted");
+        {
+            CheckScreenStage checkScreenStage = new CheckScreenStage(this, patient.state);
+            ECAAction checkScreen = new ECAAction(this, checkScreenStage);
+
+            checkScreen.StartAction();
+        }
+    }
+
+    public Transform GetHoldPointLeft()
+    {
+        return holdPointLeft.transform;
+    }
+
+    public Transform GetHoldPointRight()
+    {
+        return holdPointRight.transform;
     }
 }

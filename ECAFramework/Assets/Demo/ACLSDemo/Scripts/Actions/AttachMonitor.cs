@@ -8,8 +8,6 @@ public class AttachMonitor : ECAAction
     private Defibrillator defibrillator;
     private ECAButton button;
     private Transform destinationDef;
-    private Transform leftFootPosition;
-    private Transform bodyTarget;
     private Transform patient;
     private Transform destinationPatient;
 
@@ -19,8 +17,6 @@ public class AttachMonitor : ECAAction
         defibrillator = defibrillatorTable.GetDefibrillator();
         destinationDef = defibrillatorTable.GetDestination();
         button = defibrillator.GetButton();
-        leftFootPosition = defibrillatorTable.GetLeftFootPosition();
-        bodyTarget = defibrillatorTable.GetBodyTarget();
         this.patient = patient.transform;
         destinationPatient = patient.GetDestinationDef();
     }
@@ -32,7 +28,7 @@ public class AttachMonitor : ECAAction
         TurnStage turnToDefibrillator = new TurnStage(defibrillatorTable);
         PressStage pressButton = new PressStage(button, HandSide.RightHand);
         GoToStage goToPatient = new GoToStage(destinationPatient);
-        TurnStage turnToPatient = new TurnStage(patient, false, leftFootPosition, bodyTarget);
+        TurnStage turnToPatient = new TurnStage(patient);
 
         stages.Add(goToDef);
         stages.Add(turnToDefibrillator);

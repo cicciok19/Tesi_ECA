@@ -74,11 +74,11 @@ public class TurnStage : ECAActionStage
             if (ikManager.fullBodyBipedIK.solver.leftFootEffector.positionWeight == 0) 
             {
                 ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, null, null, leftFootPosition);
-                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftFootEffector, 1);
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftFootEffector, 1, .5f);
             }
             else
             {
-                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftFootEffector, 0);
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftFootEffector, 0, .5f);
             }
         }
     }
@@ -94,7 +94,7 @@ public class TurnStage : ECAActionStage
             }
             else
             {
-                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.bodyEffector, 0);
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.bodyEffector, 0, .4f);
             }
         }
     }

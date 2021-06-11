@@ -17,4 +17,10 @@ public class DefibrillatorScreen : MonoBehaviour
         get => isOn;
         set => isOn = value;
     }
+
+    public PatientState GetPatientState(Patient patient)
+    {
+        return patient.state;
+    }
+
 }

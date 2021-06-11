@@ -14,9 +14,9 @@ using Random = UnityEngine.Random;
 
 	public enum PatientState
 {
+    None,
     VF,
-    Asystole,
-    Shocked
+    Asystole
 }
 
 
@@ -35,17 +35,16 @@ public class Patient : ECA
     private Stomach stomach;
     private PumpPosition pumpPosition;
     private DestinationDef destinationDef;
-    private const float RHYTM_SHOCKABLE =  .4f;
 
     protected bool ivAccessInserted = false;
     protected bool isOxygened = false;
     protected bool hasCapnography = false;
 
-    public EventHandler CheckRythm;
+    public EventHandler Shocked;
     public PatientState state;
 
 
-    private void Awake()
+    protected override void Awake()
     {
         injectionPosition = GetComponentInChildren<InjectionPosition>();
         cprPosition = GetComponentInChildren<CPRPosition>();
@@ -58,37 +57,24 @@ public class Patient : ECA
         stomach = GetComponentInChildren<Stomach>();
         pumpPosition = GetComponentInChildren<PumpPosition>();
         destinationDef = GetComponentInChildren<DestinationDef>();
+
+        state = PatientState.None;
     }
-
-
-    private void CheckPatientState()
-    {
-        float rythmShock = Random.Range(0, 1);
-    
-        if (rythmShock < RHYTM_SHOCKABLE)
-            state = PatientState.Asystole;
-        else
-            state = PatientState.VF;
-    
-        if (CheckRythm != null)
-            CheckRythm(this, EventArgs.Empty);
-    }
-
-
-
 
     public void OnShockReceived()
     {
         Debug.Log("Sono shockato");
         hitReaction.Hit(spineCollider, Vector3.up * .5f, stomach.transform.position);
         //hitReaction.Hit(spineCollider, Vector3.up * .5f, stomach.transform.position);
-        state = PatientState.Shocked;
+        if (Shocked != null)
+            Shocked(this, EventArgs.Empty);
+
     }
 
 
     public void OnCPREnded()
     {      
-        CheckPatientState();
+        
     }
 
 

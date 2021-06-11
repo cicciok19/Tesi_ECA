@@ -16,6 +16,7 @@ public class DropStage : ECAActionStage
 
     private Transform dropTransform;
     private bool dropping;
+    private bool dropped;
 
     public DropStage(PickStage pickStage, Transform dropTransform) : base()
     {
@@ -39,6 +40,9 @@ public class DropStage : ECAActionStage
         this.obj = pickStage.obj;
 
         dropping = true;
+        dropped = false;
+
+        ikManager.interactionSystem.speed = .2f;
 
         ikManager.interactionSystem.StopInteraction(pickStage.effector);
         ikManager.interactionSystem.ResumeAll();
@@ -71,18 +75,26 @@ public class DropStage : ECAActionStage
 
     public override void Update()
     {
-        if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight > .89f)
+        if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight > .89f || ikManager.fullBodyBipedIK.solver.leftHandEffector.positionWeight > .89f)
         {
             obj.GetComponent<InteractionObject>().enabled = false;
             obj.transform.SetParent(dropTransform);
 
             if (typePick == HandSide.LeftHand)
-                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, 0f);
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, 0f, .5f);
             if (typePick == HandSide.RightHand)
-                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, 0f);
+                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, 0f, .5f);
 
             Debug.Log("position obj postdrop: " + obj.transform.position);
-            EndStage();
+            dropped = true;
         }
+
+        if (dropped)
+        {
+            if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight < .02f || ikManager.fullBodyBipedIK.solver.leftHandEffector.positionWeight < .02f)
+                EndStage();
+        }
+
+
     }
 }

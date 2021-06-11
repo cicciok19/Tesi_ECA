@@ -55,4 +55,9 @@ public class PlaceObjectStage : ECAActionStage
         if (Vector3.Distance(destinationObject.transform.position, obj.position) <= .15f)
             EndStage();
     }
+
+    public override void EndStage()
+    {
+        base.EndStage();
+    }
 }
