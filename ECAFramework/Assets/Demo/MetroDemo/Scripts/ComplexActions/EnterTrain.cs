@@ -125,7 +125,7 @@ public class EnterTrain : ECACompositeAction
     }
 
 
-    protected void SetupAction()
+    public void SetActions()
     {
         if(train.DoorsOpened)
             Enter();
@@ -141,8 +141,8 @@ public class EnterTrain : ECACompositeAction
 
     public override void StartAction()
     {
-      train.DoorsOpen += OnDoorsOpen;
-      SetupAction();
+      //train.DoorsOpen += OnDoorsOpen;
+      SetActions();
       base.StartAction();
     }
 

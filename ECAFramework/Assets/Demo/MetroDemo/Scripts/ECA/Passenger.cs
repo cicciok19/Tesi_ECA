@@ -23,8 +23,9 @@ public class Passenger : ECA
     private BuyBottle buyBottle;
     public float maxDistanceReacheable = 5f;
 
-    protected const float TAKE_TICKET_CHANCE = .5f;
-    protected const float TAKE_DRINK_CHANCE = .5f;
+    [SerializeField] protected const float TAKE_TICKET_CHANCE = .5f;
+    [SerializeField] protected const float TAKE_DRINK_CHANCE = .5f;
+    [SerializeField] protected const float TAKE_TRAIN_CHANCE = 1f;
 
     protected EnterTrain enterTrain;
     protected ReachPlatform reachPlatform;
@@ -37,14 +38,6 @@ public class Passenger : ECA
     public bool bottleTaken;
 
 
-
-    private void OnActionCompleted(object sender, EventArgs e)
-    {
-      actionIdx++;
-      if(actionIdx < actionList.Count)
-    	actionList[actionIdx].StartAction();
-    }
-
     protected override void CreateAnimator()
     {
         ecaAnimator = GetComponent<ECAAnimatorMxM>();
@@ -55,13 +48,11 @@ public class Passenger : ECA
         ecaAnimator.Init();
     }
 
-
     protected override void Start()
     {
         base.Start();
     
         ecaTurn = -1;       //non è in coda
-        
     
         station = GameObject.FindObjectOfType<Station>();
     
@@ -69,10 +60,12 @@ public class Passenger : ECA
         ticketTaken = false;
         bottleTaken = false;
 
-        train.Arriving += OnTrainArriving;
+        //train.Arriving += OnTrainArriving;
+        train.DoorsOpen += OnTrainArriving;
 
         float chanceTicket = UnityEngine.Random.Range(0f, 1f);
         float chanceBottle = UnityEngine.Random.Range(0f, 1f);
+        float chanceTakeTrain = UnityEngine.Random.Range(0f, 1f);
 
         //evaluate probability of taking the ticket
         if (chanceTicket < TAKE_TICKET_CHANCE)
@@ -96,11 +89,11 @@ public class Passenger : ECA
         }
     	
         //a prescindere l'obiettivo finale è andare a prendere il treno
-        GoToTakeTrain();
+        if(chanceTakeTrain < TAKE_TRAIN_CHANCE)
+            GoToTakeTrain();
         
         actionList[0].StartAction();
     }
-
 
     protected void GoToTakeTrain()
     {
@@ -122,7 +115,15 @@ public class Passenger : ECA
             Debug.Log(currentAction.ToString());
             actionList = null;
             enterTrain.StartAction();
+            train.DoorsOpen -= OnTrainArriving;
         }
+    }
+
+    private void OnActionCompleted(object sender, EventArgs e)
+    {
+        actionIdx++;
+        if (actionIdx < actionList.Count)
+            actionList[actionIdx].StartAction();
     }
 
 
