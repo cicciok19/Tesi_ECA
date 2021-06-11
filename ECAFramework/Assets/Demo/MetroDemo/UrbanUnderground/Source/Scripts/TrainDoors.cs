@@ -8,6 +8,7 @@ public class TrainDoors : MonoBehaviour {
 
 	private RightDoor[] rightDoors;
 	private LeftDoor[] leftDoors;
+	private Train trainComponent;
 
 	[HideInInspector]
 	public bool doorsMoving = false;

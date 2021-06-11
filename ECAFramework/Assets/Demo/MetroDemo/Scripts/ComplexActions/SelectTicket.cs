@@ -36,9 +36,4 @@ public class SelectTicket : ECAAction
     {
         vendingMachine = v;
     }
-    public override void StartAction()
-    {
-        SetupAction();
-        base.StartAction();
-    }
 }

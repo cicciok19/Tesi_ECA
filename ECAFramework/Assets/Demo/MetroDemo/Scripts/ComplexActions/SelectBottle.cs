@@ -26,7 +26,7 @@ public class SelectBottle : ECAAction
         stages.Add(enterMoney);*/
         stages.Add(pressButton);
         stages.Add(pickBottle);
-        stages.Add(dropBottle);
+        //stages.Add(dropBottle);
         stages.Add(exitQueue);
 
         SetStages(stages);

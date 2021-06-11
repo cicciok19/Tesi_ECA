@@ -164,6 +164,8 @@ public class ECAAction
 
     public virtual void StartAction()
     {
+        SetupAction();  //just a try
+
         if (AllStages != null)
         {
             if(ActualStage != null)
@@ -173,7 +175,7 @@ public class ECAAction
     			      ecaAnimator.actualAction.Abort();
     
     		    State = ActionState.Running;
-    		    Attach(ActualStage);	
+    		    Attach(ActualStage);
     		    ActualStage.StartStage();
     		    ecaAnimator.actualAction = this;
             }

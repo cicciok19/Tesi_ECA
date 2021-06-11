@@ -81,7 +81,7 @@ public class Station : MonoBehaviour
     }
 
     //get nearest distributor
-    public Distributor GetDistributor(ECA eca)
+    public Distributor GetNearestDistributor(ECA eca)
     {
         Distributor distributor = null;
         float min = Mathf.Infinity;
@@ -101,19 +101,26 @@ public class Station : MonoBehaviour
     }
 
     //get vending machine with less queue
-    public Distributor GetDistributor()
+    public Distributor GetDistributor(Passenger passenger)
     {
         Distributor distributor = null;
         int min = 1000000;
 
         foreach (Distributor d in distributors)
         {
-            if (d.EcasQueue <= min)
+            float distance = Vector3.Distance(d.transform.position, passenger.transform.position);
+            if(distance <= passenger.maxDistanceReacheable)
             {
-                distributor = d;
-                min = d.EcasQueue;
+                if (d.EcasQueue <= min)
+                {
+                    distributor = d;
+                    min = d.EcasQueue;
+                }
             }
         }
+
+        if (min == 1000000)
+            return GetNearestDistributor(passenger);
 
         Assert.IsNotNull(distributor);
         return distributor;
