@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PumpPosition : PlaceObjectPosition
 {
+
+    protected override AnimationCurve SetPositionWeight()
+    {
+        return SetGaussianCurve(0, 1, 4);
+    }
+
     protected override AnimationCurve SetPoserWeight()
     {
         AnimationCurve curve;

@@ -14,6 +14,7 @@ public class DropStage : ECAActionStage
 
     private ECAAnimatorMxM animatorMxM;
 
+    private IKEffector effector;
     private Transform dropTransform;
     private bool dropping;
     private bool dropped;
@@ -52,13 +53,23 @@ public class DropStage : ECAActionStage
         base.OnWaitCompleted();
         if (typePick == HandSide.LeftHand)
         {
+            effector = ikManager.fullBodyBipedIK.solver.rightHandEffector;
             ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, dropTransform);
             ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, .9f, .5f);
         }
-        if (typePick == HandSide.RightHand)
+        else if (typePick == HandSide.RightHand)
         {
+            effector = ikManager.fullBodyBipedIK.solver.leftHandEffector;
             ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, null, dropTransform);
             ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, .9f, .5f);
+        }
+        else if(typePick == HandSide.BothHands)
+        {
+            effector = ikManager.fullBodyBipedIK.solver.rightHandEffector;
+            ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, null, dropTransform);
+            ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, .9f, .5f);
+            ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, dropTransform);
+            ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, .9f, .5f);
         }
         dropping = false;
     }
@@ -67,18 +78,21 @@ public class DropStage : ECAActionStage
     {
         base.Update();
 
-        if ((ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight > .89f || ikManager.fullBodyBipedIK.solver.leftHandEffector.positionWeight > .89f) && !dropping && !dropped)
+        if (effector != null)
         {
-            obj.GetComponent<InteractionObject>().enabled = false;
-            obj.transform.SetParent(dropTransform);
+            if (effector.positionWeight > .89f && !dropping && !dropped)
+            {
+                obj.GetComponent<InteractionObject>().enabled = false;
+                obj.transform.SetParent(dropTransform);
 
-            if (typePick == HandSide.LeftHand)
-                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, 0f, .5f);
-            if (typePick == HandSide.RightHand)
-                ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, 0f, .5f);
+                if (typePick == HandSide.LeftHand)
+                    ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, 0f, .5f);
+                if (typePick == HandSide.RightHand)
+                    ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, 0f, .5f);
 
-            Debug.Log("position obj postdrop: " + obj.transform.position);
-            dropped = true;
+                Debug.Log("position obj postdrop: " + obj.transform.position);
+                dropped = true;
+            }
         }
 
         if (dropped)

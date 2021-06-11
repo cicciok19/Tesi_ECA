@@ -35,7 +35,7 @@ public class DefibrillatorManager : ECA
         holdPointLeft = GetComponentInChildren<HoldPointLeft>();
         holdPointRight = GetComponentInChildren<HoldPointRight>();
 
-        HandleShock();
+        //HandleShock();
         //HandleAttachMonitor();
         //HandleCheckScreen();
     }
