@@ -33,7 +33,7 @@ public class Train : MonoBehaviour
         doors = GetComponentsInChildren<TrainDoor>();
         places = GetComponentsInChildren<ECAInteractableObject>();
         trainAnimator = GetComponent<Animator>();
-        //StartCoroutine(WaitArriving());
+        StartCoroutine(WaitArriving());
         //StartCoroutine(WaitDoorsOpen());
 
         doorsOpened = false;
@@ -42,7 +42,7 @@ public class Train : MonoBehaviour
 
     private IEnumerator WaitArriving()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
 
         trainAnimator.SetTrigger("LaunchTrain");
         
@@ -50,6 +50,12 @@ public class Train : MonoBehaviour
         if (Arriving != null)
             Arriving(this, EventArgs.Empty);
         
+    }
+
+    public void NotifyDoorsOpen()
+    {
+        if (DoorsOpen != null)
+            DoorsOpen(this, EventArgs.Empty);
     }
 
 

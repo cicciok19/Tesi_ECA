@@ -269,8 +269,6 @@ public class ECA : MonoBehaviour, IIntentHandler
 
         SubscribeHandlerToIntentManager();
 
-
-
         Utility.Log("ECA setted");
     }
 

@@ -23,8 +23,8 @@ public class Passenger : ECA
     private BuyBottle buyBottle;
     public float maxDistanceReacheable = 5f;
 
-    protected const float TAKE_TICKET_CHANCE = 0f;
-    protected const float TAKE_DRINK_CHANCE = 1f;
+    protected const float TAKE_TICKET_CHANCE = .5f;
+    protected const float TAKE_DRINK_CHANCE = .5f;
 
     protected EnterTrain enterTrain;
     protected ReachPlatform reachPlatform;
