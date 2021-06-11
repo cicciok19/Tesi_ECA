@@ -767,7 +767,11 @@ MonoBehaviour:
   m_Name: AnimUprisingRig|01_IdleLoop_FINAL_MIRROR
   m_EditorClassIdentifier: 
   PrimaryClip: {fileID: 7400028, guid: d9b2ee02710f70746b6aa2acbe11a1f7, type: 3}
-  SecondaryClips: []
+  SecondaryClips:
+  - {fileID: -5526175838718249762, guid: cc039061c90ae764f930ee958e67385e, type: 3}
+  - {fileID: -203655887218126122, guid: d8d031195840d3742934e633a2757062, type: 3}
+  - {fileID: -203655887218126122, guid: dd7546b33a86c184da6847a1c7ccd239, type: 3}
+  - {fileID: -203655887218126122, guid: a8b95a156e8205c4291f8daf5983c10a, type: 3}
   TransitionClips: []
   Tags: 0
   FavourTags: 0
@@ -3453,7 +3457,11 @@ MonoBehaviour:
   m_Name: AnimUprisingRig|01_IdleLoop_Final
   m_EditorClassIdentifier: 
   PrimaryClip: {fileID: 7400002, guid: d9b2ee02710f70746b6aa2acbe11a1f7, type: 3}
-  SecondaryClips: []
+  SecondaryClips:
+  - {fileID: -203655887218126122, guid: a8b95a156e8205c4291f8daf5983c10a, type: 3}
+  - {fileID: -203655887218126122, guid: dd7546b33a86c184da6847a1c7ccd239, type: 3}
+  - {fileID: -5526175838718249762, guid: cc039061c90ae764f930ee958e67385e, type: 3}
+  - {fileID: -203655887218126122, guid: d8d031195840d3742934e633a2757062, type: 3}
   TransitionClips: []
   Tags: 0
   FavourTags: 0
