@@ -52,12 +52,16 @@ public class PlaceObjectStage : ECAActionStage
     {
         base.Update();
 
+        /*
         if (Vector3.Distance(destinationObject.transform.position, obj.position) <= .15f)
             EndStage();
-    }
+        */
 
-    public override void EndStage()
-    {
-        base.EndStage();
+        if (ikManager.fullBodyBipedIK.solver.leftHandEffector.positionWeight >= .99f)
+        {
+            ikManager.interactionSystem.PauseInteraction(FullBodyBipedEffector.LeftHand);
+            ikManager.interactionSystem.PauseInteraction(FullBodyBipedEffector.RightHand);
+            EndStage();
+        }
     }
 }

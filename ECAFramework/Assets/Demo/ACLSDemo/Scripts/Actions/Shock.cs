@@ -99,10 +99,10 @@ public class Shock : ECACompositeAction
         List<ECAActionStage> list = new List<ECAActionStage>();
 
         TurnStage turnToTable = new TurnStage(patient.transform, false, leftFootPosition, bodyTarget);
-        WaitStage wait = new WaitStage(1f);
+        WaitStage wait = new WaitStage(.5f);
 
         List<FullBodyBipedEffector> effectors = new List<FullBodyBipedEffector>() { FullBodyBipedEffector.LeftHand, FullBodyBipedEffector.RightHand };
-        StopInteractionStage posePaddles = new StopInteractionStage(effectors);
+        ResumeInteractionStage posePaddles = new ResumeInteractionStage(effectors);
 
         GoToStage goToTable = new GoToStage(destination);
 
@@ -120,6 +120,7 @@ public class Shock : ECACompositeAction
         list.Add(wait);
         list.Add(posePaddles);
         list.Add(goToTable);
+        //list.Add(wait);
         list.Add(parallelDrop);
         list.Add(goToPatient);
 

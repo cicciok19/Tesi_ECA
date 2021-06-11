@@ -16,7 +16,7 @@ public class PlaceObjectPosition : MonoBehaviour
         if (interactionObj == null)
         {
             interactionObj = this.gameObject.AddComponent<InteractionObject>();
-            positionWeight = SetSigmoid(1);
+            positionWeight = SetGaussianCurve(0,1);
             reach = SetSigmoid(0f);
             poserWeight = SetPoserWeight();
 

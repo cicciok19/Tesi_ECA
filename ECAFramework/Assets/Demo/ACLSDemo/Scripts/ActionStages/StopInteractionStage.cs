@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using RootMotion.FinalIK;
 
-public class StopInteractionStage : ECAActionStage
+public class ResumeInteractionStage : ECAActionStage
 {
     List<FullBodyBipedEffector> effectors;
 
-    public StopInteractionStage(List<FullBodyBipedEffector> effectors) : base()
+    public ResumeInteractionStage(List<FullBodyBipedEffector> effectors) : base()
     {
         this.effectors = effectors;
     }
@@ -16,10 +16,8 @@ public class StopInteractionStage : ECAActionStage
     {
         base.StartStage();
 
-        ikManager.interactionSystem.speed = .05f;
-
-        foreach (FullBodyBipedEffector effector in effectors)
-            ikManager.interactionSystem.StopInteraction(effector);
+        foreach(FullBodyBipedEffector effector in effectors)
+            ikManager.interactionSystem.ResumeInteraction(effector);
 
         EndStage();
     }
