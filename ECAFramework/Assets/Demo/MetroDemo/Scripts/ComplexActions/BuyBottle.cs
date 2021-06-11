@@ -71,7 +71,7 @@ public class BuyBottle : ECACompositeAction
         if (queuedECA)
             return;
 
-        Distributor = station.GetDistributor();
+        Distributor = station.GetDistributor(passenger);
 
         Utility.Log(passenger.name + " going in queue");
         if (goingToLastPosition.State == ActionState.Running)

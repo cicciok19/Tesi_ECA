@@ -28,13 +28,6 @@ public class Distributor : QueueableObject
         return buttons[randomIndex];
     }
 
-    public Transform GetProduct()
-    {
-        GameObject bottle = (GameObject)GameObject.Instantiate(Resources.Load("Prefab/DrinkBottle"), retireProduct.transform);
-        bottle.transform.localPosition = new Vector3(0, 0, 0);
-        return bottle.transform;
-    }
-
     public override Transform GetGrabbableGameObject()
     {
         GameObject bottle = (GameObject)GameObject.Instantiate(Resources.Load("Prefab/DrinkBottle"), retireProduct.transform);
