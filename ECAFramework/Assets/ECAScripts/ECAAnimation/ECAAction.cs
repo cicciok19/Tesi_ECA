@@ -20,19 +20,21 @@ public class ECAAction
 
     protected int actualStageIdx;
     protected ECA eca;
+    protected bool canAbort;
 
     public ECAAnimator ecaAnimator;
     public ECAActionStage[] AllStages;
 
 
-    public ECAAction(ECA eca, List<ECAActionStage> stages)
+    public ECAAction(ECA eca, List<ECAActionStage> stages, bool canAbort = true)
     {
         this.eca = eca;
         ecaAnimator = eca.ecaAnimator;
         SetStages(stages);
+        this.canAbort = canAbort;
     }
 
-    public ECAAction(ECA eca, ECAActionStage stage)
+    public ECAAction(ECA eca, ECAActionStage stage, bool canAbort = true)
     {
         this.eca = eca;
         ecaAnimator = eca.ecaAnimator;
@@ -40,13 +42,15 @@ public class ECAAction
         AllStages[0] = stage;
         stage.Animator = eca.ecaAnimator;
         actualStageIdx = 0;
+        this.canAbort = canAbort;
     }
 
 
-    public ECAAction(ECA eca)
+    public ECAAction(ECA eca, bool canAbort = true)
     {
         this.eca = eca;
         ecaAnimator = eca.ecaAnimator;
+        this.canAbort = canAbort;
     }
 
 
@@ -112,12 +116,12 @@ public class ECAAction
 
     protected void SetStages(List<ECAActionStage> stages)
     {
-        foreach(var stage in stages)
+        foreach (var stage in stages)
         {
-    	    stage.Animator = eca.ecaAnimator;
+            stage.Animator = eca.ecaAnimator;
             //stage.StageFinished += OnStageFinished;
         }
-    
+
         AllStages = stages.ToArray();
         actualStageIdx = 0;
     }
@@ -141,7 +145,7 @@ public class ECAAction
 
     public void Resume()
     {
-        if(State == ActionState.Paused)
+        if (State == ActionState.Paused)
         {
             Utility.Log("Action resumed");
             State = ActionState.Running;
@@ -168,16 +172,16 @@ public class ECAAction
 
         if (AllStages != null)
         {
-            if(ActualStage != null)
+            if (ActualStage != null)
             {
-    		    if(ecaAnimator.actualAction != null && 
-    		    (ecaAnimator.actualAction.State == ActionState.Running || ecaAnimator.actualAction.State == ActionState.Paused))
-    			      ecaAnimator.actualAction.Abort();
-    
-    		    State = ActionState.Running;
-    		    Attach(ActualStage);
-    		    ActualStage.StartStage();
-    		    ecaAnimator.actualAction = this;
+                if (ecaAnimator.actualAction != null &&
+                (ecaAnimator.actualAction.State == ActionState.Running || ecaAnimator.actualAction.State == ActionState.Paused))
+                    ecaAnimator.actualAction.Abort();
+
+                State = ActionState.Running;
+                Attach(ActualStage);
+                ActualStage.StartStage();
+                ecaAnimator.actualAction = this;
             }
         }
     }
@@ -186,7 +190,7 @@ public class ECAAction
     public virtual void OnCompletedAction()
     {
         State = ActionState.Completed;
-    
+
         if (CompletedAction != null)
             CompletedAction(this, EventArgs.Empty);
     }
@@ -195,23 +199,23 @@ public class ECAAction
     public ActionState State
     {
         set {
-    	if(ActualStage == null)
-    		return;
-    
+            if (ActualStage == null)
+                return;
+
             if (value == ActionState.Paused)
-    		    ActualStage.PauseStage();
-    	    else
-    	    if(value == ActionState.Aborted)
-    		    ActualStage.AbortStage();
-    	    else
+                ActualStage.PauseStage();
+            else
+            if (value == ActionState.Aborted)
+                ActualStage.AbortStage();
+            else
                 ActualStage.State = value;
         }
-      get {
-    	if(ActualStage != null)
-    		return ActualStage.State;
-    	else
-    		return ActionState.Inactive;
-      }
+        get {
+            if (ActualStage != null)
+                return ActualStage.State;
+            else
+                return ActionState.Inactive;
+        }
     }
 
 
@@ -223,14 +227,14 @@ public class ECAAction
             {
                 if (AllStages != null && actualStageIdx >= 0 && actualStageIdx < AllStages.Length)
                     return AllStages[actualStageIdx];
-    
+
             }
             catch (Exception e)
             {
                 Utility.LogError("Generated exception :: " + e.Message);
             }
-    
-    
+
+
             return null;
         }
     }
@@ -240,5 +244,10 @@ public class ECAAction
 
     }
 
+    public virtual bool CanAbort
+    {
+        get => canAbort;
+        protected set => canAbort = value;
+    }
 
 }

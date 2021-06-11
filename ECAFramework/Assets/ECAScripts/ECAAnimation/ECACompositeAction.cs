@@ -88,16 +88,15 @@ public class ECACompositeAction : ECAAction
         {
             if(ActualAction != null)
             {
-    		if(ecaAnimator.actualAction != null && 
-    		(ecaAnimator.actualAction.State == ActionState.Running || ecaAnimator.actualAction.State == ActionState.Paused))
-    			  ecaAnimator.actualAction.Abort();
+    		    if(ecaAnimator.actualAction != null && 
+    		    (ecaAnimator.actualAction.State == ActionState.Running || ecaAnimator.actualAction.State == ActionState.Paused))
+    			    ecaAnimator.actualAction.Abort();
     
-    		Attach(ActualAction);	
-    		ecaAnimator.actualAction = ActualAction;
-    
+    		    Attach(ActualAction);	
+    		    ecaAnimator.actualAction = ActualAction;
     		
-    		State = ActionState.Running;
-    		ActualAction.StartAction();
+    		    State = ActionState.Running;
+    		    ActualAction.StartAction();
             }
         }
     }
@@ -113,6 +112,4 @@ public class ECACompositeAction : ECAAction
             return null;
         }
     }
-
-
 }

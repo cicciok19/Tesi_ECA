@@ -39,7 +39,10 @@ public class TrainDoors : MonoBehaviour {
 		doorsMoving = true;
 		StartCoroutine (SnapDoorsOpen ());
 		//FindObjectOfType<Train1> ().trainStopped = true;
-		GetComponent<Train>().trainStopped = true;
+		trainComponent = GetComponent<Train>();
+		trainComponent.trainStopped = true;
+		trainComponent.NotifyDoorsOpen();
+
 	}
 
 	public void CloseDoors() {

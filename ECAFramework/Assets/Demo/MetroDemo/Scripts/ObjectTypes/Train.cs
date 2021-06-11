@@ -54,6 +54,7 @@ public class Train : MonoBehaviour
 
     public void NotifyDoorsOpen()
     {
+        DoorsOpened = true;
         if (DoorsOpen != null)
             DoorsOpen(this, EventArgs.Empty);
     }
