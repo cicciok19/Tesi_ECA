@@ -33,8 +33,8 @@ public class Train : MonoBehaviour
         doors = GetComponentsInChildren<TrainDoor>();
         places = GetComponentsInChildren<ECAInteractableObject>();
         trainAnimator = GetComponent<Animator>();
-        StartCoroutine(WaitArriving());
-        StartCoroutine(WaitDoorsOpen());
+        //StartCoroutine(WaitArriving());
+        //StartCoroutine(WaitDoorsOpen());
 
         doorsOpened = false;
         arrived = false;
