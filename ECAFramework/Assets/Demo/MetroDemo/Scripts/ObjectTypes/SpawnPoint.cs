@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnPoint : MonoBehaviour
 {
     private float creationInterval;
-    private const int PASSENGER_NUMBER = 15;
+    [SerializeField] private int PASSENGER_NUMBER = 4;
     private int actualNumber;
 
     void Start()

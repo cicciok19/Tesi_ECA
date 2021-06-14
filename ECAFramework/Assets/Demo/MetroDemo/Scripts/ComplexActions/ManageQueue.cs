@@ -20,11 +20,12 @@ public class ManageQueue : ECAAction
     protected Passenger eca;
     protected bool inQueue;
 
-    public ManageQueue(Passenger eca,QueueableObject qo)
+    public ManageQueue(Passenger eca,QueueableObject qo, bool canAbort = true)
     :base(eca)
     {
         this.queueableObject = qo;
         this.eca = eca;
+        this.canAbort = canAbort;
     }
 
     protected void OnGoAhead(object sender, EventArgs e)

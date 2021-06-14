@@ -6,11 +6,11 @@ using UnityEngine;
 public class ECAActionList 
 {
     List<ECAAction> actions = new List<ECAAction>();
+    private ECAAction currentAction;
 
     public void Enqueue(ECAAction action)
     {
         actions.Add(action);
-        action.CompletedAction += GoAhead;
     }
 
     public void Dequeue(ECAAction action)
@@ -18,9 +18,36 @@ public class ECAActionList
         actions.Remove(action);
     }
 
+    public void AbortAll()
+    {
+        var size = actions.Count;
+
+        for (int i = size - 1; i >= 0; i--)
+        {
+            if (actions[i].CanAbort)
+            {
+                if (actions[i] == currentAction && currentAction.CanAbort)
+                {
+                    currentAction.Abort();
+                    currentAction.CompletedAction -= GoAhead;
+                    currentAction = null;
+                }
+                actions[i].Abort();
+                Dequeue(actions[i]);
+            }
+        }
+
+        //StartActions();
+    }
+
     public void StartActions()
     {
-        actions[0].StartAction();
+        if (currentAction == null)
+        {
+            FirstAction.StartAction();
+            FirstAction.CompletedAction += GoAhead;
+            currentAction = FirstAction;
+        }
     }
 
     public void Push(ECAAction action)
@@ -32,12 +59,25 @@ public class ECAActionList
     {
         ECAAction action = (ECAAction)sender;
 
-        action.CompletedAction -= GoAhead;
         Dequeue(action);
+        action.CompletedAction -= GoAhead;
+        currentAction = null;
 
         if(actions.Count != 0)
         {
-            actions[0].StartAction();
+            FirstAction.StartAction();
+            FirstAction.CompletedAction += GoAhead;
+            currentAction = FirstAction;
         }
+    }
+
+    private ECAAction FirstAction
+    {
+        get => actions[0];
+    }
+
+    public ECAAction CurrentAction
+    {
+        get => currentAction;
     }
 }

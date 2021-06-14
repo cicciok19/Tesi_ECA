@@ -31,6 +31,7 @@ public class EnterTrain : ECACompositeAction
         this.eca = eca;
     	train = eca.station.train;
 
+        canAbort = false;
         //train.DoorsOpen += OnDoorsOpen;
     }
 

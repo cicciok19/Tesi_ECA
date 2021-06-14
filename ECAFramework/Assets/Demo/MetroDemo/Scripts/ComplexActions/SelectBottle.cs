@@ -8,6 +8,7 @@ public class SelectBottle : ECAAction
     public SelectBottle(ECA eca, Distributor distributor) : base(eca)
     {
         this.distributor = distributor;
+        canAbort = false;
     }
 
     public override void SetupAction()

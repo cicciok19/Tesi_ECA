@@ -29,8 +29,6 @@ public class Passenger : ECA
 
     protected EnterTrain enterTrain;
     protected ReachPlatform reachPlatform;
-    protected List<ECAAction> actionList =  new List<ECAAction>();
-    protected int actionIdx =  0;
 
     public Station station;
     public int ecaTurn;
@@ -69,63 +67,52 @@ public class Passenger : ECA
 
         //evaluate probability of taking the ticket
         if (chanceTicket < TAKE_TICKET_CHANCE)
-        {
-            Utility.Log(name + " is taking ticket");
-            buyTicket = new BuyTicket(this);
-
-            buyTicket.CompletedAction += OnActionCompleted;
-            actionList.Add(buyTicket);
-        }
+            TakeTIcket();
         else
             ticketTaken = true;
 
         if(chanceBottle < TAKE_DRINK_CHANCE)
-        {
-            Utility.Log(name + " is taking drink");
-            buyBottle = new BuyBottle(this);
-
-            buyBottle.CompletedAction += OnActionCompleted;
-            actionList.Add(buyBottle);
-        }
+            TakeBottle();
     	
         //a prescindere l'obiettivo finale è andare a prendere il treno
         if(chanceTakeTrain < TAKE_TRAIN_CHANCE)
             GoToTakeTrain();
-        
-        actionList[0].StartAction();
+
+        actionsList.StartActions();
+    }
+
+    private void TakeTIcket()
+    {
+        Utility.Log(name + " is taking ticket");
+        buyTicket = new BuyTicket(this);
+        actionsList.Enqueue(buyTicket);
+    }
+
+    private void TakeBottle()
+    {
+        Utility.Log(name + " is taking drink");
+        buyBottle = new BuyBottle(this);
+        actionsList.Enqueue(buyBottle);
     }
 
     protected void GoToTakeTrain()
     {
-       reachPlatform = new ReachPlatform(this);
-       reachPlatform.CompletedAction += OnActionCompleted;
-       actionList.Add(reachPlatform);
-    
-       enterTrain = new EnterTrain(this);
-       actionList.Add(enterTrain);
-       enterTrain.CompletedAction += OnActionCompleted;
+        reachPlatform = new ReachPlatform(this);
+        actionsList.Enqueue(reachPlatform);
+        enterTrain = new EnterTrain(this);
+        actionsList.Enqueue(enterTrain);
     }
 
     private void OnTrainArriving(object sender, EventArgs e)
     {
-        ECAAction currentAction = actionList[actionIdx];
-        if (currentAction != enterTrain && ticketTaken)
+        if (ticketTaken)
         {
-            currentAction.Abort();
-            Debug.Log(currentAction.ToString());
-            actionList = null;
-            enterTrain.StartAction();
+            if(actionsList.CurrentAction != null)
+                actionsList.AbortAll();
+
+
+            actionsList.StartActions();
             train.DoorsOpen -= OnTrainArriving;
         }
     }
-
-    private void OnActionCompleted(object sender, EventArgs e)
-    {
-        actionIdx++;
-        if (actionIdx < actionList.Count)
-            actionList[actionIdx].StartAction();
-    }
-
-
-
 }

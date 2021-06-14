@@ -60,6 +60,7 @@ public class ECACompositeAction : ECAAction
         {
             //iscrivo l'azione all'evento che segnala la fine dello stage
             Attach(ActualAction);
+            canAbort = ActualAction.CanAbort;
             ActualAction.StartAction();
         }
         else

@@ -32,10 +32,11 @@ public class BuyTicket : ECACompositeAction
     public BuyTicket(Passenger eca)
     :base(eca)
     {
-            this.passenger = eca;
-            station = eca.station;
-            vendingMachine = this.passenger.station.GetVendingMachine(eca);
-            ticket = vendingMachine.GetComponentInChildren<GrabbableObject>();
+        this.passenger = eca;
+        station = eca.station;
+        vendingMachine = this.passenger.station.GetVendingMachine(eca);
+        ticket = vendingMachine.GetComponentInChildren<GrabbableObject>();
+        canAbort = false;
     }
 
 
@@ -90,7 +91,7 @@ public class BuyTicket : ECACompositeAction
         stages.Add(goingToLastPosition);
         stages.Add(goingToMachine);
     
-        ECAAction goToVendingMachine = new ECAAction(passenger, stages);
+        ECAAction goToVendingMachine = new ECAAction(passenger, stages, false);
         actions.Add(goToVendingMachine);
     
         goToVendingMachine.CompletedAction += OnVendingMachineReached;
@@ -109,7 +110,7 @@ public class BuyTicket : ECACompositeAction
 
     protected void CompleteQueueing()
     {
-        manageQueue = new ManageQueue(passenger, vendingMachine);
+        manageQueue = new ManageQueue(passenger, vendingMachine, false);
         actions.Add(manageQueue);
     }
 

@@ -12,6 +12,7 @@ public class SelectTicket : ECAAction
         vendingMachine = machine;
         Passenger passenger = (Passenger)eca;
         dropPosition = passenger.GetComponentInChildren<DropPosition>().transform;
+        canAbort = false;
     }
 
     public override void SetupAction()
@@ -26,7 +27,7 @@ public class SelectTicket : ECAAction
         stages.Add(useScreen);
         stages.Add(pressButton);
         stages.Add(takeTicket);
-        stages.Add(dropTicket);
+        //stages.Add(dropTicket);
         stages.Add(new GoToStage(vendingMachine.GetExitPoint()));
 
         SetStages(stages);

@@ -18,12 +18,14 @@ public class DropStage : ECAActionStage
     private Transform dropTransform;
     private bool dropping;
     private bool dropped;
+    private float duration;
 
-    public DropStage(PickStage pickStage, Transform dropTransform) : base()
+    public DropStage(PickStage pickStage, Transform dropTransform, float duration = .5f) : base()
     {
         this.pickStage = pickStage;
         this.typePick = pickStage.typePick;
         this.dropTransform = dropTransform;
+        this.duration = duration;
     }
 
     public DropStage(PickStage pickStage) : base()
@@ -55,21 +57,21 @@ public class DropStage : ECAActionStage
         {
             effector = ikManager.fullBodyBipedIK.solver.leftHandEffector;
             ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, dropTransform);
-            ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, .9f, .5f);
+            ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, .9f, duration);
         }
         else if (typePick == HandSide.RightHand)
         {
             effector = ikManager.fullBodyBipedIK.solver.rightHandEffector;
             ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, null, dropTransform);
-            ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, .9f, .5f);
+            ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, .9f, duration);
         }
         else if(typePick == HandSide.BothHands)
         {
             effector = ikManager.fullBodyBipedIK.solver.rightHandEffector;
             ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, null, dropTransform);
-            ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, .9f, .5f);
+            ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, .9f, duration);
             ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, dropTransform);
-            ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, .9f, .5f);
+            ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, .9f, duration);
         }
         dropping = false;
     }
