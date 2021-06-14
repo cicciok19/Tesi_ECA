@@ -34,14 +34,16 @@ public class UseMedicine : ECAAction
     private IVPole pole;
     private Medicine medicine;
     private MedicationProvider medicationProvider;
+    private Patient patient;
 
 
-    public UseMedicine(ECA eca, Medicine m)
+    public UseMedicine(ECA eca, Medicine m, Patient patient)
     : base(eca)
     {
-            medicine = m;
-            medicationProvider = (MedicationProvider)eca;
-            pole = medicationProvider.medicalRoom.GetPole();
+        medicine = m;
+        medicationProvider = (MedicationProvider)eca;
+        pole = medicationProvider.medicalRoom.GetPole();
+        this.patient = patient;
     }
 
 
@@ -75,17 +77,16 @@ public class UseMedicine : ECAAction
     
         PickStage pickMedicine = new PickStage(medicine.GetSyringe(), 1, false, HandSide.RightHand);
         pickMedicine.StageFinished += OnMedicinePicked;
-    
-        GoToStage goToPole = new GoToStage(pole.GetDestination());
-        DropStage startInjection = new DropStage(pickMedicine, pole.GetInjectionPosition());
+
+        GoToStage goToTable = new GoToStage(medicationProvider.GetDestinationNearTable());
+        DropStage startInjection = new DropStage(pickMedicine, patient.GetInjectionPosition());
         startInjection.StageFinished += OnMedicineReleased;
     
-        GoToStage returnNearTable = new GoToStage(medicationProvider.GetDestinationNearTable());
+
         stages.Add(goToMedicine);
         stages.Add(pickMedicine);
-        stages.Add(goToPole);
+        stages.Add(goToTable);
         stages.Add(startInjection);
-        stages.Add(returnNearTable);
     
         SetStages(stages);
     }

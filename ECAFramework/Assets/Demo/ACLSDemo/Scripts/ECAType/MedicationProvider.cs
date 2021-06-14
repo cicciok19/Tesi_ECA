@@ -17,16 +17,18 @@ using System;
 public class MedicationProvider : ECA
 {
 // class declaration start
-protected const string AMIODARONE = "Amiodarone";
-protected const string EPINEPHRINE = "Epinephrine";
-protected const string IVACCESS = "IVAccess";
+    protected const string AMIODARONE = "Amiodarone";
+    protected const string EPINEPHRINE = "Epinephrine";
+    protected const string IVACCESS = "IVAccess";
 
-protected enum MedicationProviderState {
-    None,
-	Idle,
-	InstallingIVAccess,
-	TakingMedicine,
-	InjectingMedicine,
+    private TimeRecorder timeRecorder;
+
+    protected enum MedicationProviderState {
+        None,
+	    Idle,
+	    InstallingIVAccess,
+	    TakingMedicine,
+	    InjectingMedicine,
         MedicineTaken
     };
 // class declaration end
@@ -39,29 +41,56 @@ protected enum MedicationProviderState {
 
     public MedicalRoom medicalRoom;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        medicalRoom = FindObjectOfType<MedicalRoom>();
+        destination = FindObjectOfType<DestinationMedicationProvider>();
+        patient = FindObjectOfType<Patient>();
+        timeRecorder = FindObjectOfType<TimeRecorder>();
+    }
+
+
+    protected override void Start()
+    {
+        base.Start();
+        medicationTable = medicalRoom.GetMedicationTable();
+        pole = medicalRoom.GetPole();
+
+        //just for debug
+        HandleUseMedicine(MedicineName.Epinephrine);
+        //HandleIVAccess(medicationTable.GetVeinTube(), patient);
+    }
+
+
 
     private void HandleUseMedicine(MedicineName medicineName)
     {
         // check if iv access ahas been inserted
-    
+
         if(!patient.HasIVAccess)
         {
             SendDirectMessage("Ti sei dimenticato di dirmi di inserire l'accesso venoso, faccio da solo va...");
             Utility.LogWarning("Asked to inject " + medicineName + " but iv access is missing");
     
-            List<ECAAction> actions = new List<ECAAction>();
+            //List<ECAAction> actions = new List<ECAAction>();
     
             IVAccess ivAccess = new IVAccess(this, medicationTable.GetVeinTube(), patient);
             ivAccess.CompletedAction += OnIvAccessCompleted;
     
             UseMedicine useMedicine = CreateGetMedicineAction(medicineName);
             useMedicine.InjectionDone += OnInjectionDone;
+
+            actionsList.Enqueue(ivAccess);
+            actionsList.Enqueue(useMedicine);
+
+            actionsList.StartActions();
     
-            actions.Add(ivAccess);
-            actions.Add(useMedicine);
+            //actions.Add(ivAccess);
+            //actions.Add(useMedicine);
     
-            ECACompositeAction composite = new ECACompositeAction(this, actions);
-            composite.StartAction();
+            //ECACompositeAction composite = new ECACompositeAction(this, actions);
+            //composite.StartAction();
     
             return;
         }
@@ -110,13 +139,30 @@ protected enum MedicationProviderState {
         UseMedicineEventArgs args = (UseMedicineEventArgs)e;
         Medicine m = args.medicine;
         //send message of completed action
-    
-        if (m.name == "Epinephrine")
+
+
+        if (m.medicineName == MedicineName.Epinephrine)
+        {
+            timeRecorder.TimeExpired += OnTimeExpired;
+            timeRecorder.CheckTime(this, .1f);
+        }
+
+        if (m.medicineName == MedicineName.Epinephrine)
             patient.OnEpinephrineDone();
         else
             patient.OnAmiodaroneDone();
     }
 
+    private void OnTimeExpired(object sender, EventArgs e)
+    {
+        TImeRecorderEventArgs ecaArg = (TImeRecorderEventArgs)e;
+
+        if(ecaArg.eca == this)
+        {
+            //mettere in coda se sta facendo qualcosa
+            HandleUseMedicine(MedicineName.Epinephrine);
+        }
+    }
 
     private void OnIvAccessCompleted(object sender, EventArgs e)
     {
@@ -124,30 +170,6 @@ protected enum MedicationProviderState {
     
         patient.OnIvAccessDone();
     }
-
-
-
-
-    protected override void Awake()
-    {
-        base.Awake();
-        medicalRoom = FindObjectOfType<MedicalRoom>();
-        destination = FindObjectOfType<DestinationMedicationProvider>();
-        patient = FindObjectOfType<Patient>();
-    }
-
-
-    protected override void Start()
-    {
-        base.Start();
-        medicationTable = medicalRoom.GetMedicationTable();
-        pole = medicalRoom.GetPole();
-    
-        //just for debug
-        //HandleUseMedicine(MedicineName.Epinephrine);
-        //HandleIVAccess(medicationTable.GetVeinTube(), patient);
-    }
-
 
     protected override ECAAnimator AddECAAnimator()
     {
@@ -160,7 +182,7 @@ protected enum MedicationProviderState {
         Medicine m = medicationTable.GetMedicine(medicineName);
         Assert.IsNotNull(m);
         //send message
-        UseMedicine useMedicine = new UseMedicine(this, m);
+        UseMedicine useMedicine = new UseMedicine(this, m, patient);
     
         return useMedicine;
     }

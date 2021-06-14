@@ -53,13 +53,13 @@ public class DropStage : ECAActionStage
         base.OnWaitCompleted();
         if (typePick == HandSide.LeftHand)
         {
-            effector = ikManager.fullBodyBipedIK.solver.rightHandEffector;
+            effector = ikManager.fullBodyBipedIK.solver.leftHandEffector;
             ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, dropTransform);
             ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, .9f, .5f);
         }
         else if (typePick == HandSide.RightHand)
         {
-            effector = ikManager.fullBodyBipedIK.solver.leftHandEffector;
+            effector = ikManager.fullBodyBipedIK.solver.rightHandEffector;
             ikManager.SetTargetFullBodyIK(ikManager.fullBodyBipedIK, null, null, dropTransform);
             ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, .9f, .5f);
         }

@@ -81,6 +81,8 @@ public class ECA : MonoBehaviour, IIntentHandler
 
     public HandSide typePick;
 
+    protected ECAActionList actionsList;
+
     public int ecaInTrigger = 0;
 
     private bool CheckIfMsgIsActive(string msgType)
@@ -116,6 +118,8 @@ public class ECA : MonoBehaviour, IIntentHandler
         CreateIKManager();
         if (GetComponent<Rigidbody>() == null)
             gameObject.AddComponent<Rigidbody>().useGravity = false;
+
+        actionsList = new ECAActionList();
     }
 
 
@@ -182,9 +186,6 @@ public class ECA : MonoBehaviour, IIntentHandler
     
         return manager;
     }
-
-
-
 
     public virtual void SetEcaId()
     {

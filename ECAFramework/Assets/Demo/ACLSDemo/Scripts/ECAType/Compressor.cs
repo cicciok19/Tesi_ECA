@@ -52,6 +52,9 @@ public class Compressor : ECA
         //send message
         //StartCoroutine(CompressFor(10f));
         //do action
+
+        timeRecorder.TimeExpired += OnTimeExpired;
+        timeRecorder.CheckTime(this, 2);
         cpr = new CPRAction(this, cprPosition);
         cpr.CompletedAction += OnCPRCompleted;
         cpr.StartAction();
@@ -65,5 +68,17 @@ public class Compressor : ECA
     private void OnCPRCompleted(object sender, EventArgs e)
     {
         patient.OnCPREnded();
+    }
+
+    private void OnTimeExpired(object sender, EventArgs e)
+    {
+
+        TImeRecorderEventArgs ecaArg = (TImeRecorderEventArgs)e;
+
+        if(ecaArg.eca == this)
+        {
+            timeRecorder.TimeExpired -= OnTimeExpired;
+            //dovremmo far finire il CPR
+        }
     }
 }
