@@ -16,7 +16,7 @@ public class PlaceObjectPosition : MonoBehaviour
         if (interactionObj == null)
         {
             interactionObj = this.gameObject.AddComponent<InteractionObject>();
-            positionWeight = SetGaussianCurve(0,1);
+            positionWeight = SetPositionWeight();
             reach = SetSigmoid(0f);
             poserWeight = SetPoserWeight();
 
@@ -62,22 +62,34 @@ public class PlaceObjectPosition : MonoBehaviour
         }
     }
 
-    private AnimationCurve SetGaussianCurve(float minValue, float maxValue)
+    protected AnimationCurve SetGaussianCurve(float minValue, float maxValue, float time = 1)
     {
         AnimationCurve curve;
+        Keyframe[] kS;
 
-        Keyframe[] kS = new Keyframe[3];
+        if (time == 1)
+        {
+            kS = new Keyframe[3];
 
-        kS[0] = new Keyframe(0, minValue, 0, 0);
-        kS[1] = new Keyframe(.5f, maxValue, 0, 0);
-        kS[2] = new Keyframe(1, minValue, 0, 0);
+            kS[0] = new Keyframe(0, minValue, 0, 0);
+            kS[1] = new Keyframe(.5f, maxValue, 0, 0);
+            kS[2] = new Keyframe(time, minValue, 0, 0);
+        }
+        else
+        {
+            kS = new Keyframe[4];
+            kS[0] = new Keyframe(0, minValue, 0, 0);
+            kS[1] = new Keyframe(.5f, maxValue, 0, 0);
+            kS[2] = new Keyframe(time - .5f, maxValue, 0, 0);
+            kS[3] = new Keyframe(time, minValue, 0, 0);
+        }
 
         curve = new AnimationCurve(kS);
 
         return curve;
     }
 
-    private AnimationCurve SetSigmoid(float maxValue)
+    protected AnimationCurve SetSigmoid(float maxValue)
     {
         AnimationCurve curve;
 
@@ -97,4 +109,8 @@ public class PlaceObjectPosition : MonoBehaviour
         return SetSigmoid(1);
     }
 
+    protected virtual AnimationCurve SetPositionWeight()
+    {
+        return SetGaussianCurve(0, 1);
+    }
 }

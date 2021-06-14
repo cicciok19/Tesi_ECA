@@ -26,12 +26,14 @@ public class IVAccess : ECAAction
         GoToStage goToMainPosition = new GoToStage(destination);
         LookStableStage lookVein = new LookStableStage(injectionPosition);
         DropStage findVein = new DropStage(pickTube, injectionPosition);
+        LookStableStage noLook = new LookStableStage(injectionPosition, 0);
 
         stages.Add(goToTable);
         stages.Add(pickTube);
         stages.Add(goToMainPosition);
         stages.Add(lookVein);
         stages.Add(findVein);
+        stages.Add(noLook);
 
         SetStages(stages);
     }

@@ -10,13 +10,16 @@ public class PlaceObjectStage : ECAActionStage
     private Transform obj;
     private HandSide handSide;
     private PickStage pickStage;
+    private bool pauseTheEffector;
+    private bool ended;
 
-    public PlaceObjectStage(PickStage pickStage, Transform destinationTransform) : base()
+    public PlaceObjectStage(PickStage pickStage, Transform destinationTransform, bool pauseTheEffector) : base()
     {
         destinationObject = destinationTransform.GetComponent<InteractionObject>();
         Assert.IsNotNull(destinationObject);
         handSide = pickStage.typePick;
         this.pickStage = pickStage;
+        this.pauseTheEffector = pauseTheEffector;
     }
 
     public override void StartStage()
@@ -31,9 +34,13 @@ public class PlaceObjectStage : ECAActionStage
         ikManager.interactionSystem.speed = .2f;
 
         if (handSide == HandSide.RightHand)
+        {
             ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, destinationObject, false);
-        else if(handSide == HandSide.LeftHand)
+        }
+        else if (handSide == HandSide.LeftHand)
+        {
             ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, destinationObject, false);
+        }
         else
         {
             ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, destinationObject, false);
@@ -46,6 +53,7 @@ public class PlaceObjectStage : ECAActionStage
 
         destinationObject.otherLookAtTarget = destinationObject.transform;
 
+        ended = false;
     }
 
     public override void Update()
@@ -57,11 +65,42 @@ public class PlaceObjectStage : ECAActionStage
             EndStage();
         */
 
-        if (ikManager.fullBodyBipedIK.solver.leftHandEffector.positionWeight >= .99f)
+        if (pauseTheEffector && !ended)
         {
-            ikManager.interactionSystem.PauseInteraction(FullBodyBipedEffector.LeftHand);
-            ikManager.interactionSystem.PauseInteraction(FullBodyBipedEffector.RightHand);
-            EndStage();
+            if (handSide == HandSide.RightHand)
+            {
+                if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight >= .95f)
+                {
+                    ikManager.interactionSystem.PauseInteraction(FullBodyBipedEffector.RightHand);
+                    EndStage();
+                }
+            }
+            if (handSide == HandSide.LeftHand)
+            {
+                if (ikManager.fullBodyBipedIK.solver.leftHandEffector.positionWeight >= .95f)
+                {
+                    ikManager.interactionSystem.PauseInteraction(FullBodyBipedEffector.LeftHand);
+                    EndStage();
+                }
+            }
+            else if (handSide == HandSide.BothHands)
+            {
+                if (ikManager.fullBodyBipedIK.solver.leftHandEffector.positionWeight >= .95f)
+                {
+                    ikManager.interactionSystem.PauseInteraction(FullBodyBipedEffector.RightHand);
+                    ikManager.interactionSystem.PauseInteraction(FullBodyBipedEffector.LeftHand);
+                    EndStage();
+                }
+            }
+        }
+        else
+        {
+            if (Vector3.Distance(destinationObject.transform.position, obj.position) <= .1f && !ended)
+            {
+                Debug.Log("SONO QUI");
+                EndStage();
+            }
+
         }
     }
 }

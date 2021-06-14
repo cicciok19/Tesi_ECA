@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public class TImeRecorderEventArgs : EventArgs
+{
+    public ECA eca;
+
+    public TImeRecorderEventArgs(ECA eca)
+    {
+        this.eca = eca;
+    }
+}
+
 public class TimeRecorder : ECA
 {
     public string[] intentNames = { "StartRecord", "StopRecord" };
@@ -27,6 +37,11 @@ public class TimeRecorder : ECA
         base.Handle(intent);
     }
 
+    public void CheckTime(ECA eca, float timeInMinutes)
+    {
+        StartCoroutine(SetTimer(eca, timeInMinutes * 60));
+    }
+
     private void HandleStartRecord(float time)
     {
         //send message
@@ -41,7 +56,16 @@ public class TimeRecorder : ECA
         recordAction.CompletedAction -= OnTimeExpired;
         //send message
         Debug.Log("FINE ATTESA");
-        if (TimeExpired != null)
+        /*if (TimeExpired != null)
             TimeExpired(this, EventArgs.Empty);
+        */
+    }
+
+    IEnumerator SetTimer(ECA eca, float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        if (TimeExpired != null)
+            TimeExpired(this, new TImeRecorderEventArgs(eca));
     }
 }

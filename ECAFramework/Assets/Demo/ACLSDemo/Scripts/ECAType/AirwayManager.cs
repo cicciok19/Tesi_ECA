@@ -22,9 +22,9 @@ public class AirwayManager : ECA
         airwayTable = medicalRoom.GetAirwayTable();
 
         //just for debug
-        //HandleGiveOxygen(airwayTable.GetOxygen(), patient);
+        HandleGiveOxygen();
 
-        //HandleCapnography(airwayTable.GetCapnographyTube(), patient);
+        //HandleCapnography();
     }
     protected override ECAAnimator AddECAAnimator()
     {
@@ -56,7 +56,7 @@ public class AirwayManager : ECA
 
     private void HandleGiveOxygen()
     {
-        giveOxygen = new GiveOxygen(this, airwayTable.GetOxygen(), patient);
+        giveOxygen = new GiveOxygen(this, airwayTable.GetOxygen(), patient, airwayTable);
         giveOxygen.CompletedAction += OnOxygenGiven;
         giveOxygen.StartAction();
     }

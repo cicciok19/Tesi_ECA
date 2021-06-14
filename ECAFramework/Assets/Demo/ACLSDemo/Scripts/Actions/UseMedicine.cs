@@ -34,15 +34,17 @@ public class UseMedicine : ECAAction
     private IVPole pole;
     private Medicine medicine;
     private MedicationProvider medicationProvider;
+    private Patient patient;
     private Drawer drawer = null;
 
 
-    public UseMedicine(ECA eca, Medicine m)
+    public UseMedicine(ECA eca, Medicine m, Patient patient)
     : base(eca)
     {
-            medicine = m;
-            medicationProvider = (MedicationProvider)eca;
-            pole = medicationProvider.medicalRoom.GetPole();
+        medicine = m;
+        medicationProvider = (MedicationProvider)eca;
+        pole = medicationProvider.medicalRoom.GetPole();
+        this.patient = patient;
     }
 
     public UseMedicine(ECA eca, Drawer d) : base(eca)
