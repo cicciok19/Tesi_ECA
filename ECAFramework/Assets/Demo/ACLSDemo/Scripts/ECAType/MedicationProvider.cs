@@ -184,7 +184,7 @@ public class MedicationProvider : ECA
         if (m != null)
         {
             //send message
-             useMedicine = new UseMedicine(this, m);
+             useMedicine = new UseMedicine(this, m, patient);
         }
         else
         {
@@ -192,12 +192,8 @@ public class MedicationProvider : ECA
             Assert.IsNotNull(d);    //just for debug, in real cases could be null
             
             if(d != null)
-                useMedicine = new UseMedicine(this, d);
+                useMedicine = new UseMedicine(this, d, patient);
         }
-
-        Assert.IsNotNull(m);
-        //send message
-        UseMedicine useMedicine = new UseMedicine(this, m, patient);
     
         return useMedicine;
     }

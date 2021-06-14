@@ -47,7 +47,7 @@ public class UseMedicine : ECAAction
         this.patient = patient;
     }
 
-    public UseMedicine(ECA eca, Drawer d) : base(eca)
+    public UseMedicine(ECA eca, Drawer d, Patient patient) : base(eca)
     {
         drawer = d;
         medicationProvider = (MedicationProvider)eca;
@@ -87,16 +87,14 @@ public class UseMedicine : ECAAction
             PickStage pickMedicine = new PickStage(medicine.GetSyringe(), 1, false, HandSide.RightHand);
             pickMedicine.StageFinished += OnMedicinePicked;
 
-            GoToStage goToPole = new GoToStage(pole.GetDestination());
-            DropStage startInjection = new DropStage(pickMedicine, pole.GetInjectionPosition());
+            GoToStage goToPatient = new GoToStage(medicationProvider.GetDestinationNearTable());
+            DropStage startInjection = new DropStage(pickMedicine, patient.GetInjectionPosition());
             startInjection.StageFinished += OnMedicineReleased;
 
-            GoToStage returnNearTable = new GoToStage(medicationProvider.GetDestinationNearTable());
             stages.Add(goToMedicine);
             stages.Add(pickMedicine);
-            stages.Add(goToPole);
+            stages.Add(goToPatient);
             stages.Add(startInjection);
-            stages.Add(returnNearTable);   
         }
         else
         {
