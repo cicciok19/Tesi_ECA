@@ -16,13 +16,17 @@ public class MedicationTable : MonoBehaviour
 
     public Medicine GetMedicine(MedicineName name)
     {
+        Medicine medicine = null;
         foreach(var m in medicines)
         {
             if (m.medicineName == name && !m.Taken)
-                return m;
+            {
+                medicine = m;
+                break;
+            }
         }
 
-        return null;
+        return medicine;
     }
 
     public IVTube GetVeinTube()

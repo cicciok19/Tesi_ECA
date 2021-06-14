@@ -27,7 +27,7 @@ protected enum MedicationProviderState {
 	InstallingIVAccess,
 	TakingMedicine,
 	InjectingMedicine,
-        MedicineTaken
+    MedicineTaken
     };
 // class declaration end
 
@@ -36,8 +36,29 @@ protected enum MedicationProviderState {
     private DestinationMedicationProvider destination;
     private Patient patient;
     private IVPole pole;
+    private Locker locker;
 
     public MedicalRoom medicalRoom;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        medicalRoom = FindObjectOfType<MedicalRoom>();
+        destination = FindObjectOfType<DestinationMedicationProvider>();
+        patient = FindObjectOfType<Patient>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        medicationTable = medicalRoom.GetMedicationTable();
+        pole = medicalRoom.GetPole();
+        locker = medicalRoom.GetLocker();
+
+        //just for debug
+        HandleUseMedicine(MedicineName.Amiodarone);
+        //HandleIVAccess(medicationTable.GetVeinTube(), patient);
+    }
 
 
     private void HandleUseMedicine(MedicineName medicineName)
@@ -90,9 +111,9 @@ protected enum MedicationProviderState {
     
         if(patient.HasIVAccess)
         {
-    	SendDirectMessage("Guarda che l'accesso alle vie venose è già stato inserito, che cavolo chiedi?");
-    	Utility.LogWarning("Requested IVAccess when it was already in place");
-    	return;
+    	    SendDirectMessage("Guarda che l'accesso alle vie venose è già stato inserito, che cavolo chiedi?");
+    	    Utility.LogWarning("Requested IVAccess when it was already in place");
+    	    return;
         }
     
         // else, execute action
@@ -125,30 +146,6 @@ protected enum MedicationProviderState {
         patient.OnIvAccessDone();
     }
 
-
-
-
-    protected override void Awake()
-    {
-        base.Awake();
-        medicalRoom = FindObjectOfType<MedicalRoom>();
-        destination = FindObjectOfType<DestinationMedicationProvider>();
-        patient = FindObjectOfType<Patient>();
-    }
-
-
-    protected override void Start()
-    {
-        base.Start();
-        medicationTable = medicalRoom.GetMedicationTable();
-        pole = medicalRoom.GetPole();
-    
-        //just for debug
-        //HandleUseMedicine(MedicineName.Epinephrine);
-        //HandleIVAccess(medicationTable.GetVeinTube(), patient);
-    }
-
-
     protected override ECAAnimator AddECAAnimator()
     {
         return gameObject.AddComponent<ECAAnimatorMxM>();
@@ -157,11 +154,22 @@ protected enum MedicationProviderState {
 
     protected UseMedicine CreateGetMedicineAction(MedicineName medicineName)
     {
+        UseMedicine useMedicine = null;
         Medicine m = medicationTable.GetMedicine(medicineName);
-        Assert.IsNotNull(m);
-        //send message
-        UseMedicine useMedicine = new UseMedicine(this, m);
-    
+        if (m != null)
+        {
+            //send message
+             useMedicine = new UseMedicine(this, m);
+        }
+        else
+        {
+            Drawer d = locker.GetMedicineDrawer(medicineName);
+            Assert.IsNotNull(d);    //just for debug, in real cases could be null
+            
+            if(d != null)
+                useMedicine = new UseMedicine(this, d);
+        }
+
         return useMedicine;
     }
 
@@ -188,8 +196,6 @@ protected enum MedicationProviderState {
             return MedicationProviderState.None;
       }
     }
-
-
 
 
     public override void Handle(Intent intent)

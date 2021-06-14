@@ -8,6 +8,7 @@ public class MedicalRoom : MonoBehaviour
     private MedicationTable medicationTable;
     private DefibrillatorTable defibrillatorTable;
     private AirwayTable airwayTable;
+    private Locker locker;
 
     private void Awake()
     {
@@ -15,7 +16,7 @@ public class MedicalRoom : MonoBehaviour
         medicationTable = GetComponentInChildren<MedicationTable>();
         defibrillatorTable = GetComponentInChildren<DefibrillatorTable>();
         airwayTable = GetComponentInChildren<AirwayTable>();
-
+        locker = GetComponentInChildren<Locker>();
     }
 
     public MedicationTable GetMedicationTable()
@@ -36,5 +37,10 @@ public class MedicalRoom : MonoBehaviour
     public AirwayTable GetAirwayTable()
     {
         return airwayTable;
+    }
+
+    public Locker GetLocker()
+    {
+        return locker;
     }
 }

@@ -34,6 +34,7 @@ public class UseMedicine : ECAAction
     private IVPole pole;
     private Medicine medicine;
     private MedicationProvider medicationProvider;
+    private Drawer drawer = null;
 
 
     public UseMedicine(ECA eca, Medicine m)
@@ -44,12 +45,18 @@ public class UseMedicine : ECAAction
             pole = medicationProvider.medicalRoom.GetPole();
     }
 
-
-
+    public UseMedicine(ECA eca, Drawer d) : base(eca)
+    {
+        drawer = d;
+        medicationProvider = (MedicationProvider)eca;
+        pole = medicationProvider.medicalRoom.GetPole();
+    }
 
     protected void OnMedicinePicked(object sender, EventArgs args)
     {
       hasMedicine = true;
+        if (drawer != null)
+            drawer.StartClosing();
     }
 
 
@@ -71,23 +78,54 @@ public class UseMedicine : ECAAction
     public override void SetupAction()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
-        GoToStage goToMedicine = new GoToStage(medicine.GetDestination());
-    
-        PickStage pickMedicine = new PickStage(medicine.GetSyringe(), 1, false, HandSide.RightHand);
-        pickMedicine.StageFinished += OnMedicinePicked;
-    
-        GoToStage goToPole = new GoToStage(pole.GetDestination());
-        DropStage startInjection = new DropStage(pickMedicine, pole.GetInjectionPosition());
-        startInjection.StageFinished += OnMedicineReleased;
-    
-        GoToStage returnNearTable = new GoToStage(medicationProvider.GetDestinationNearTable());
-        stages.Add(goToMedicine);
-        stages.Add(pickMedicine);
-        stages.Add(goToPole);
-        stages.Add(startInjection);
-        stages.Add(returnNearTable);
-    
+        if (drawer == null)
+        {
+            GoToStage goToMedicine = new GoToStage(medicine.GetDestination());
+
+            PickStage pickMedicine = new PickStage(medicine.GetSyringe(), 1, false, HandSide.RightHand);
+            pickMedicine.StageFinished += OnMedicinePicked;
+
+            GoToStage goToPole = new GoToStage(pole.GetDestination());
+            DropStage startInjection = new DropStage(pickMedicine, pole.GetInjectionPosition());
+            startInjection.StageFinished += OnMedicineReleased;
+
+            GoToStage returnNearTable = new GoToStage(medicationProvider.GetDestinationNearTable());
+            stages.Add(goToMedicine);
+            stages.Add(pickMedicine);
+            stages.Add(goToPole);
+            stages.Add(startInjection);
+            stages.Add(returnNearTable);   
+        }
+        else
+        {
+            GoToStage goToDrawer = new GoToStage(drawer.GetDestination());
+
+            PickStage grabHandle = new PickStage(drawer.GetHandle().transform, 1, true, HandSide.LeftHand);
+            grabHandle.StageFinished += OnGrabHandle;
+
+            //dovrei aspettare, vediamo che succede
+            PickStage pickMedicine = new PickStage(drawer.GetMedicine().GetSyringe(), 1, false, HandSide.RightHand);
+            pickMedicine.StageFinished += OnMedicinePicked;
+
+            DropStage releaseHandle = new DropStage(grabHandle);
+
+            GoToStage goToPole = new GoToStage(pole.GetDestination());
+            DropStage startInjection = new DropStage(pickMedicine, pole.GetInjectionPosition());
+            startInjection.StageFinished += OnMedicineReleased;
+
+            GoToStage returnNearTable = new GoToStage(medicationProvider.GetDestinationNearTable());
+
+            stages.Add(goToDrawer);
+            stages.Add(grabHandle);
+            stages.Add(pickMedicine);
+            stages.Add(releaseHandle);
+            stages.Add(goToPole);
+            stages.Add(startInjection);
+            stages.Add(returnNearTable);
+        }
+
         SetStages(stages);
+
     }
 
 
@@ -96,6 +134,11 @@ public class UseMedicine : ECAAction
         base.OnCompletedAction();
         if (InjectionDone != null)
             InjectionDone(this, new UseMedicineEventArgs(medicine));
+    }
+
+    private void OnGrabHandle(object sender, EventArgs e)
+    {
+        drawer.StartOpening();
     }
 
 
