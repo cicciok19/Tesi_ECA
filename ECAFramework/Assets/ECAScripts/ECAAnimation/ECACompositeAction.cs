@@ -85,6 +85,9 @@ public class ECACompositeAction : ECAAction
 
     public override void StartAction()
     {
+        //pare funzionare, cancella quando sei sicuro
+        CreateActionList();
+
         if (actions.Count != 0)
         {
             if(ActualAction != null)
