@@ -30,6 +30,9 @@ public enum ActionName
 
 public class SystemManager: MonoBehaviour
 {
+    private static SystemManager _instance;
+
+    public static SystemManager Instance { get { return _instance; } }
 
     Dictionary<NodeName, Node> nodes = new Dictionary<NodeName, Node>();
     List<Node> nodesSequence = new List<Node>();
@@ -40,6 +43,15 @@ public class SystemManager: MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+
         patient = FindObjectOfType<Patient>();
         SetNodes();
         SetGraph();
@@ -56,6 +68,7 @@ public class SystemManager: MonoBehaviour
             if (graphManager.CheckWrongAdvance(actionDone, actualNode.NodeName, nodesSequence))
             {
                 actualNode.Finished = true;
+                Debug.Log("Ti sei dimenticato di fare delle azioni nel nodo precedente");
             }
         }
 

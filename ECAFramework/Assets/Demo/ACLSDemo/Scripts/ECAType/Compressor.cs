@@ -7,10 +7,10 @@ public class Compressor : ECA
 {
     private const string START_CPR = "StartCPR";
 
-    private CPRAction cpr;
     private Patient patient;
     private TimeRecorder timeRecorder;
     private CPRPosition cprPosition;
+    private SystemManager systemManager;
 
     protected override void Start()
     {
@@ -18,7 +18,7 @@ public class Compressor : ECA
         patient = FindObjectOfType<Patient>();
         timeRecorder = FindObjectOfType<TimeRecorder>();
         cprPosition = patient.GetCPRPosition();
-
+        systemManager = FindObjectOfType<SystemManager>();
         //just for debug
         //HandleStartCPR();
         
@@ -55,7 +55,7 @@ public class Compressor : ECA
 
         timeRecorder.TimeExpired += OnTimeExpired;
         timeRecorder.CheckTime(this, 2);
-        cpr = new CPRAction(this, cprPosition);
+        CPRAction cpr = new CPRAction(this, cprPosition);
         cpr.CompletedAction += OnCPRCompleted;
         actionsList.Enqueue(cpr);
     }
@@ -67,6 +67,9 @@ public class Compressor : ECA
 
     private void OnCPRCompleted(object sender, EventArgs e)
     {
+        CPRAction cpr = (CPRAction)sender;
+        cpr.CompletedAction -= OnCPRCompleted;
+        systemManager.CheckAction(cpr.ActionName);
         patient.OnCPREnded();
     }
 

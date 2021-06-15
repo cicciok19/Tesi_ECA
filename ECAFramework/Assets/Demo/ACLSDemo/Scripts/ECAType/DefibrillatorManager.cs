@@ -15,6 +15,8 @@ public class DefibrillatorManager : ECA
     private HoldPointLeft holdPointLeft;
     private HoldPointRight holdPointRight;
 
+    private SystemManager systemManager;
+
     protected const string ATTACH_MONITOR = "Attach monitor";
     protected const string SHOCK = "Shock";
     protected const string CHECK_MONITOR = "CheckMonitor";
@@ -34,6 +36,8 @@ public class DefibrillatorManager : ECA
 
         holdPointLeft = GetComponentInChildren<HoldPointLeft>();
         holdPointRight = GetComponentInChildren<HoldPointRight>();
+
+        systemManager = FindObjectOfType<SystemManager>();
 
         //HandleShock();
         //HandleAttachMonitor();
@@ -72,7 +76,7 @@ public class DefibrillatorManager : ECA
             Debug.Log("You have to inject Epinephrine, NOT Shock!");
 
         Shock shock = new Shock(this, defibrillatorTable, patient, 2);
-        //shock.CompletedAction += OnShockReady;
+        shock.CompletedAction += OnShockCompleted;
         actionsList.Enqueue(shock);
     }
 
@@ -101,8 +105,9 @@ public class DefibrillatorManager : ECA
     private void OnShockCompleted(object sender, EventArgs e)
     {
         //ci dovrebbe essere un check su quanti shock si debbano fare perché per ora è solo uno
-
-
+        Shock shock = (Shock)sender;
+        shock.CompletedAction -= OnShockCompleted;
+        systemManager.CheckAction(shock.ActionName);
         
     }
 
@@ -110,6 +115,7 @@ public class DefibrillatorManager : ECA
     {
         AttachMonitor attachMonitor = (AttachMonitor)sender;
         attachMonitor.CompletedAction -= OnMonitorAttached;
+        systemManager.CheckAction(attachMonitor.ActionName);
         screen.IsOn = true;
     }
 
@@ -124,7 +130,8 @@ public class DefibrillatorManager : ECA
             attachMonitor.CompletedAction += OnMonitorAttached;
 
             CheckScreenStage checkScreenStage = new CheckScreenStage(this, patient.state);
-            ECAAction checkScreen = new ECAAction(this, checkScreenStage);
+            CheckScreen checkScreen = new CheckScreen(this, defibrillatorTable);
+            checkScreen.CompletedAction += OnScreenChecked;
 
             actionsList.Enqueue(attachMonitor);
             actionsList.Enqueue(checkScreen);
@@ -132,10 +139,18 @@ public class DefibrillatorManager : ECA
         else
         {
             CheckScreenStage checkScreenStage = new CheckScreenStage(this, patient.state);
-            CheckScreen checkScreen = new CheckScreen(this, checkScreenStage);
+            CheckScreen checkScreen = new CheckScreen(this, defibrillatorTable);
+            checkScreen.CompletedAction += OnScreenChecked;
 
             actionsList.Enqueue(checkScreen);
         }
+    }
+
+    private void OnScreenChecked(object sender, EventArgs e)
+    {
+        CheckScreen checkScreen = (CheckScreen)sender;
+        checkScreen.CompletedAction -= OnScreenChecked;
+        systemManager.CheckAction(checkScreen.ActionName);
     }
 
     public Transform GetHoldPointLeft()

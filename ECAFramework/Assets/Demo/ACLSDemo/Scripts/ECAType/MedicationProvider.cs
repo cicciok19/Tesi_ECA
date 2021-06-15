@@ -39,6 +39,7 @@ public class MedicationProvider : ECA
     private Patient patient;
     private IVPole pole;
     private Locker locker;
+    private SystemManager systemManager;
 
     public MedicalRoom medicalRoom;
 
@@ -49,6 +50,7 @@ public class MedicationProvider : ECA
         destination = FindObjectOfType<DestinationMedicationProvider>();
         patient = FindObjectOfType<Patient>();
         timeRecorder = FindObjectOfType<TimeRecorder>();
+        systemManager = FindObjectOfType<SystemManager>();
     }
 
     protected override void Start()
@@ -140,9 +142,15 @@ public class MedicationProvider : ECA
         }
 
         if (m.medicineName == MedicineName.Epinephrine)
+        {
+            systemManager.CheckAction(useMedicine.ActionName);
             patient.OnEpinephrineDone();
+        }
         else
+        {
+            systemManager.CheckAction(useMedicine.ActionName);
             patient.OnAmiodaroneDone();
+        }
     }
 
     private void OnTimeExpired(object sender, EventArgs e)
@@ -160,7 +168,9 @@ public class MedicationProvider : ECA
     private void OnIvAccessCompleted(object sender, EventArgs e)
     {
         // changing patient state
-    
+        IVAccess iVAccess = (IVAccess)sender;
+        iVAccess.CompletedAction -= OnIvAccessCompleted;
+        systemManager.CheckAction(iVAccess.ActionName);
         patient.OnIvAccessDone();
     }
 

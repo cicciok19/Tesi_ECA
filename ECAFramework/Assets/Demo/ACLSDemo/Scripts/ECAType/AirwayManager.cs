@@ -5,11 +5,11 @@ using System;
 
 public class AirwayManager : ECA
 {
-    private GiveOxygen giveOxygen;
-    private Capnography capnography;
     private Patient patient;
     private MedicalRoom medicalRoom;
     private AirwayTable airwayTable;
+
+    private SystemManager systemManager;
 
     private const string GIVE_OXYGEN = "GiveOxygen";
     private const string CAPNOGRAPHY = "Capnography";
@@ -20,6 +20,8 @@ public class AirwayManager : ECA
         patient = FindObjectOfType<Patient>();
         medicalRoom = FindObjectOfType<MedicalRoom>();
         airwayTable = medicalRoom.GetAirwayTable();
+
+        systemManager = FindObjectOfType<SystemManager>();
 
         //just for debug
         //HandleGiveOxygen();
@@ -56,26 +58,30 @@ public class AirwayManager : ECA
 
     private void HandleGiveOxygen()
     {
-        giveOxygen = new GiveOxygen(this, airwayTable.GetOxygen(), patient, airwayTable);
+        GiveOxygen giveOxygen = new GiveOxygen(this, airwayTable.GetOxygen(), patient, airwayTable);
         giveOxygen.CompletedAction += OnOxygenGiven;
         actionsList.Enqueue(giveOxygen);
     }
 
     private void HandleCapnography()
     {
-        capnography = new Capnography(this, airwayTable.GetCapnographyTube(), patient);
+        Capnography capnography = new Capnography(this, airwayTable.GetCapnographyTube(), patient);
         capnography.CompletedAction += OnCapnographyCompleted;
         actionsList.Enqueue(capnography);
 
     }
     private void OnCapnographyCompleted(object sender, EventArgs e)
     {
+        Capnography capnography = (Capnography)sender;
         capnography.CompletedAction -= OnCapnographyCompleted;
+        systemManager.CheckAction(capnography.ActionName);
         patient.OnCapnographyDone();
     }
     private void OnOxygenGiven(object sender, EventArgs e)
     {
+        GiveOxygen giveOxygen = (GiveOxygen)sender;
         giveOxygen.CompletedAction -= OnOxygenGiven;
+        systemManager.CheckAction(giveOxygen.ActionName);
         patient.OnOxygenGiven();
     }
 }

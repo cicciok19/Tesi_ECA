@@ -251,7 +251,7 @@ public class ECAAction
         protected set => canAbort = value;
     }
 
-    public virtual ActionName GetActionName
+    public virtual ActionName ActionName
     {
         get => actionName;
     }
