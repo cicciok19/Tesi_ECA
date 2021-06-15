@@ -15,6 +15,7 @@ public class CheckScreenStage : ECAActionStage
 
     public override void StartStage()
     {
+        base.StartStage();
         eca.SendDirectMessage("Lo stato del paziente è di: " + patientState);
         EndStage();
     }

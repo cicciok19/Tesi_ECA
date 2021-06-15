@@ -11,11 +11,31 @@ public class ECAActionList
     public void Enqueue(ECAAction action)
     {
         actions.Add(action);
+        StartActions();
     }
 
     public void Dequeue(ECAAction action)
     {
         actions.Remove(action);
+    }
+
+    public void Abort(ECAAction action)
+    {
+        if (action.CanAbort)
+        {
+            if (action == currentAction)
+            {
+                currentAction.Abort();
+                currentAction.CompletedAction -= GoAhead;
+                currentAction = null;
+            }
+            action.Abort();
+            Dequeue(action);
+        }
+        else
+            Debug.LogError("You cannot abort action: " + action);
+
+        StartActions();
     }
 
     public void AbortAll()
@@ -26,7 +46,7 @@ public class ECAActionList
         {
             if (actions[i].CanAbort)
             {
-                if (actions[i] == currentAction && currentAction.CanAbort)
+                if (actions[i] == currentAction)
                 {
                     currentAction.Abort();
                     currentAction.CompletedAction -= GoAhead;
@@ -37,7 +57,7 @@ public class ECAActionList
             }
         }
 
-        //StartActions();
+        StartActions();
     }
 
     public void StartActions()

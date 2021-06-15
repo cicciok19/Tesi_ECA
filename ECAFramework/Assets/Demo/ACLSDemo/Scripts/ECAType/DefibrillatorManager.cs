@@ -37,7 +37,7 @@ public class DefibrillatorManager : ECA
 
         //HandleShock();
         //HandleAttachMonitor();
-        //HandleCheckScreen();
+        HandleCheckScreen();
     }
 
     public override void Handle(Intent intent)
@@ -73,7 +73,7 @@ public class DefibrillatorManager : ECA
 
         Shock shock = new Shock(this, defibrillatorTable, patient, 2);
         //shock.CompletedAction += OnShockReady;
-        shock.StartAction();
+        actionsList.Enqueue(shock);
     }
 
     private void HandleAttachMonitor()
@@ -86,7 +86,7 @@ public class DefibrillatorManager : ECA
 
         AttachMonitor attachMonitor = new AttachMonitor(this, defibrillatorTable, patient);
         attachMonitor.CompletedAction += OnMonitorAttached;
-        attachMonitor.StartAction();
+        actionsList.Enqueue(attachMonitor);
     }
 
   /*  private void OnShockReady(object sender, EventArgs e)
@@ -120,26 +120,21 @@ public class DefibrillatorManager : ECA
             SendDirectMessage("Il monitor non è attaccato, devo prima attaccato per sapere lo stato del paziente!");
             Utility.LogWarning("Asked to check screen but the monitor is not attached.");
 
-            List<ECAAction> actions = new List<ECAAction>();
-
             AttachMonitor attachMonitor = new AttachMonitor(this, defibrillatorTable, patient);
             attachMonitor.CompletedAction += OnMonitorAttached;
 
             CheckScreenStage checkScreenStage = new CheckScreenStage(this, patient.state);
             ECAAction checkScreen = new ECAAction(this, checkScreenStage);
 
-            actions.Add(attachMonitor);
-            actions.Add(checkScreen);
-
-            ECACompositeAction composite = new ECACompositeAction(this, actions);
-            composite.StartAction();
+            actionsList.Enqueue(attachMonitor);
+            actionsList.Enqueue(checkScreen);
         }
         else
         {
             CheckScreenStage checkScreenStage = new CheckScreenStage(this, patient.state);
             ECAAction checkScreen = new ECAAction(this, checkScreenStage);
 
-            checkScreen.StartAction();
+            actionsList.Enqueue(checkScreen);
         }
     }
 

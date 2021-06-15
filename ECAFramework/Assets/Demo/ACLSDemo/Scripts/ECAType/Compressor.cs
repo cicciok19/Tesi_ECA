@@ -57,7 +57,7 @@ public class Compressor : ECA
         timeRecorder.CheckTime(this, 2);
         cpr = new CPRAction(this, cprPosition);
         cpr.CompletedAction += OnCPRCompleted;
-        cpr.StartAction();
+        actionsList.Enqueue(cpr);
     }
 
     private IEnumerator CompressFor(float time)
@@ -77,6 +77,7 @@ public class Compressor : ECA
 
         if(ecaArg.eca == this)
         {
+            timeRecorder.SendDirectMessage("Sono passati 15 secondi, puoi smettere di fare il massaggio cardiaco");
             timeRecorder.TimeExpired -= OnTimeExpired;
             //dovremmo far finire il CPR
         }

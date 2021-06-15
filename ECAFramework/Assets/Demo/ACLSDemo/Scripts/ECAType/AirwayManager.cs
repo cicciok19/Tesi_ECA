@@ -22,7 +22,7 @@ public class AirwayManager : ECA
         airwayTable = medicalRoom.GetAirwayTable();
 
         //just for debug
-        HandleGiveOxygen();
+        //HandleGiveOxygen();
 
         //HandleCapnography();
     }
@@ -58,14 +58,14 @@ public class AirwayManager : ECA
     {
         giveOxygen = new GiveOxygen(this, airwayTable.GetOxygen(), patient, airwayTable);
         giveOxygen.CompletedAction += OnOxygenGiven;
-        giveOxygen.StartAction();
+        actionsList.Enqueue(giveOxygen);
     }
 
     private void HandleCapnography()
     {
         capnography = new Capnography(this, airwayTable.GetCapnographyTube(), patient);
         capnography.CompletedAction += OnCapnographyCompleted;
-        capnography.StartAction();
+        actionsList.Enqueue(capnography);
 
     }
     private void OnCapnographyCompleted(object sender, EventArgs e)

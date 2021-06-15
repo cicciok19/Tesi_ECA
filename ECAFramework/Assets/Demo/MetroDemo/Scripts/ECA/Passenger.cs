@@ -77,8 +77,6 @@ public class Passenger : ECA
         //a prescindere l'obiettivo finale è andare a prendere il treno
         if(chanceTakeTrain < TAKE_TRAIN_CHANCE)
             GoToTakeTrain();
-
-        actionsList.StartActions();
     }
 
     private void TakeTIcket()
@@ -110,8 +108,6 @@ public class Passenger : ECA
             if(actionsList.CurrentAction != null)
                 actionsList.AbortAll();
 
-
-            actionsList.StartActions();
             train.DoorsOpen -= OnTrainArriving;
         }
     }

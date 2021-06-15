@@ -59,7 +59,7 @@ public class MedicationProvider : ECA
         locker = medicalRoom.GetLocker();
 
         //just for debug
-        HandleUseMedicine(MedicineName.Amiodarone);
+        //HandleUseMedicine(MedicineName.Amiodarone);
         //HandleIVAccess(medicationTable.GetVeinTube(), patient);
     }
 
@@ -83,14 +83,6 @@ public class MedicationProvider : ECA
 
             actionsList.Enqueue(ivAccess);
             actionsList.Enqueue(useMedicine);
-
-            actionsList.StartActions();
-    
-            //actions.Add(ivAccess);
-            //actions.Add(useMedicine);
-    
-            //ECACompositeAction composite = new ECACompositeAction(this, actions);
-            //composite.StartAction();
     
             return;
         }
@@ -109,7 +101,7 @@ public class MedicationProvider : ECA
     
         UseMedicine useOnlyMedicine = CreateGetMedicineAction(medicineName);
         useOnlyMedicine.InjectionDone += OnInjectionDone;
-        useOnlyMedicine.StartAction();
+        actionsList.Enqueue(useOnlyMedicine);
     }
 
 
@@ -128,7 +120,7 @@ public class MedicationProvider : ECA
     
         IVAccess ivAccess = new IVAccess(this, medicationTable.GetVeinTube(), patient);
         ivAccess.CompletedAction += OnIvAccessCompleted;
-        ivAccess.StartAction();
+        actionsList.Enqueue(ivAccess);
     }
 
 
@@ -159,6 +151,7 @@ public class MedicationProvider : ECA
 
         if(ecaArg.eca == this)
         {
+            SendDirectMessage("Sono passati 2 minuti, devi fare un'altra iniezione di epinefrina!");
             //mettere in coda se sta facendo qualcosa
             HandleUseMedicine(MedicineName.Epinephrine);
         }

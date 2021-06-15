@@ -6534,7 +6534,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0.000001638392, z: 4.5905e-41, w: 0}
+  m_BoundingSphereOverride: {x: 9.1858e-41, y: 4.959117e-39, z: 1.5078841e-19, w: 9.1858e-41}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -13355,9 +13355,6 @@ MonoBehaviour:
   stopped: 0
   typePick: 0
   ecaInTrigger: 0
-  intentNames:
-  - StartRecord
-  - StopRecord
 --- !u!1 &1581315635
 GameObject:
   m_ObjectHideFlags: 0
@@ -15949,7 +15946,7 @@ PrefabInstance:
     - target: {fileID: 8041284041975843596, guid: 4a94c89d9b148bd4b9ae99f2de7be792,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a94c89d9b148bd4b9ae99f2de7be792, type: 3}
