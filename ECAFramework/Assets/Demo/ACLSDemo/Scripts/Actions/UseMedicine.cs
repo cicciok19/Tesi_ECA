@@ -37,6 +37,7 @@ public class UseMedicine : ECAAction
     private Patient patient;
     private Drawer drawer = null;
 
+    protected new ActionName actionName;
 
     public UseMedicine(ECA eca, Medicine m, Patient patient)
     : base(eca)
@@ -45,6 +46,11 @@ public class UseMedicine : ECAAction
         medicationProvider = (MedicationProvider)eca;
         pole = medicationProvider.medicalRoom.GetPole();
         this.patient = patient;
+
+        if (m.medicineName == MedicineName.Amiodarone)
+            actionName = ActionName.UseAmiodarone;
+        else if (m.medicineName == MedicineName.Epinephrine)
+            actionName = ActionName.UseEpinephrine;
     }
 
     public UseMedicine(ECA eca, Drawer d, Patient patient) : base(eca)
@@ -140,6 +146,5 @@ public class UseMedicine : ECAAction
     {
         drawer.StartOpening();
     }
-
 
 }

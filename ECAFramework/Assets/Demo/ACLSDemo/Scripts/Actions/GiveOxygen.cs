@@ -11,6 +11,7 @@ public class GiveOxygen : ECACompositeAction
     Transform destinationMask;
     Transform destinationPump;
     List<PickStage> pickOxygen;
+    protected new ActionName actionName = ActionName.GiveOxygen;
 
     public GiveOxygen(ECA eca, Oxygen oxygen, Patient patient, AirwayTable airwayTable) : base(eca)
     {

@@ -132,7 +132,7 @@ public class DefibrillatorManager : ECA
         else
         {
             CheckScreenStage checkScreenStage = new CheckScreenStage(this, patient.state);
-            ECAAction checkScreen = new ECAAction(this, checkScreenStage);
+            CheckScreen checkScreen = new CheckScreen(this, checkScreenStage);
 
             actionsList.Enqueue(checkScreen);
         }

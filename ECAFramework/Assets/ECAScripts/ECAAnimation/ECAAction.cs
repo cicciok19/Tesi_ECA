@@ -21,6 +21,7 @@ public class ECAAction
     protected int actualStageIdx;
     protected ECA eca;
     protected bool canAbort;
+    protected ActionName actionName;
 
     public ECAAnimator ecaAnimator;
     public ECAActionStage[] AllStages;
@@ -248,6 +249,11 @@ public class ECAAction
     {
         get => canAbort;
         protected set => canAbort = value;
+    }
+
+    public virtual ActionName GetActionName
+    {
+        get => actionName;
     }
 
 }

@@ -6,6 +6,8 @@ public class Capnography : ECAAction
 {
     private Transform capnographyPosition;
     private Transform capnographyTube;
+    protected new ActionName actionName = ActionName.Capnography;
+
     public Capnography(ECA eca, Transform capnographyTube, Patient patient) : base(eca)
     {
         capnographyPosition = patient.GetCapnographyPosition();
