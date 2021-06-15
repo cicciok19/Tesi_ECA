@@ -21,7 +21,7 @@ public class VendingMachine : QueueableObject
     private RetireProduct ticketReady;
 
 
-    protected const float PROXIMITY_DISTANCE =  0.2f;
+    protected new const float PROXIMITY_DISTANCE =  0.2f;
 
 
     protected override void Awake()

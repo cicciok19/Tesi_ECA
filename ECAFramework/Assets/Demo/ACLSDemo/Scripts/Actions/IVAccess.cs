@@ -9,6 +9,7 @@ public class IVAccess : ECAAction
     private Transform injectionPosition;
     private Vector3 destination;
     private MedicationProvider medicationProvider;
+    protected new ActionName actionName = ActionName.IvAccess;
 
     public IVAccess(ECA eca, IVTube ivTube, Patient patient) : base(eca)
     {
