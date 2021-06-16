@@ -19,6 +19,7 @@ public class Compressor : ECA
         timeRecorder = FindObjectOfType<TimeRecorder>();
         cprPosition = patient.GetCPRPosition();
         systemManager = FindObjectOfType<SystemManager>();
+
         //just for debug
         //HandleStartCPR();
         
@@ -54,7 +55,7 @@ public class Compressor : ECA
         //do action
 
         timeRecorder.TimeExpired += OnTimeExpired;
-        timeRecorder.CheckTime(this, 2);
+        timeRecorder.CheckTime(this, .1f);
         CPRAction cpr = new CPRAction(this, cprPosition);
         cpr.CompletedAction += OnCPRCompleted;
         actionsList.Enqueue(cpr);

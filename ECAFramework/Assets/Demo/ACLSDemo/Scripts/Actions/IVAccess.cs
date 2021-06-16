@@ -9,7 +9,6 @@ public class IVAccess : ECAAction
     private Transform injectionPosition;
     private Vector3 destination;
     private MedicationProvider medicationProvider;
-    protected new ActionName actionName = ActionName.IvAccess;
 
     public IVAccess(ECA eca, IVTube ivTube, Patient patient) : base(eca)
     {
@@ -17,6 +16,7 @@ public class IVAccess : ECAAction
         this.ivTube = ivTube;
         injectionPosition = patient.GetInjectionPosition();
         destination = medicationProvider.GetDestinationNearTable();
+        actionName = ActionName.IvAccess;
     }
 
     public override void SetupAction()

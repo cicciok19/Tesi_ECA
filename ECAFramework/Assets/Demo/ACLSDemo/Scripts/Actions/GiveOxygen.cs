@@ -11,7 +11,6 @@ public class GiveOxygen : ECACompositeAction
     Transform destinationMask;
     Transform destinationPump;
     List<PickStage> pickOxygen;
-    protected new ActionName actionName = ActionName.GiveOxygen;
 
     public GiveOxygen(ECA eca, Oxygen oxygen, Patient patient, AirwayTable airwayTable) : base(eca)
     {
@@ -20,6 +19,7 @@ public class GiveOxygen : ECACompositeAction
         pumpPosition = patient.GetPumpPosition();
         destinationMask = airwayTable.GetDestinationMask();
         destinationPump = airwayTable.GetDestinationPump();
+        actionName = ActionName.GiveOxygen;
     }
 
     private void SetupPickMask()
@@ -41,15 +41,14 @@ public class GiveOxygen : ECACompositeAction
             new PlaceObjectStage(pickOxygen[1], pumpPosition, false)
         };
         ECAParallelActionStage put = new ECAParallelActionStage(putOxygen.ToArray());
-
         WaitStage waitPost = new WaitStage(4f);
 
 
         stages.Add(turnToMask);
         stages.Add(pick);
         stages.Add(turnToPatient);
-        stages.Add(wait);
         stages.Add(lookPatient);
+        stages.Add(wait);
         stages.Add(put);
         stages.Add(waitPost);
 
@@ -61,7 +60,7 @@ public class GiveOxygen : ECACompositeAction
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
 
-        LookStableStage lookNull = new LookStableStage(giveOxygenPosition, 0.0001f);
+        LookStableStage lookNull = new LookStableStage(giveOxygenPosition, 0f);
 
         List<FullBodyBipedEffector> effectors = new List<FullBodyBipedEffector>() {FullBodyBipedEffector.LeftHand};
         ResumeInteractionStage poseMask = new ResumeInteractionStage(effectors);
@@ -81,7 +80,7 @@ public class GiveOxygen : ECACompositeAction
 
         stages.Add(lookNull);
         stages.Add(poseMask);
-        //stages.Add(turnToTable);
+        stages.Add(turnToTable);
         stages.Add(wait);
         stages.Add(dropOxygen);
         stages.Add(turnToPatient);

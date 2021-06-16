@@ -17,9 +17,9 @@ public class DefibrillatorManager : ECA
 
     private SystemManager systemManager;
 
-    protected const string ATTACH_MONITOR = "Attach monitor";
+    protected const string ATTACH_MONITOR = "AttachMonitor";
     protected const string SHOCK = "Shock";
-    protected const string CHECK_MONITOR = "CheckMonitor";
+    protected const string CHECK_MONITOR = "AskForRhythm";
 
     protected override ECAAnimator AddECAAnimator()
     {
@@ -129,8 +129,7 @@ public class DefibrillatorManager : ECA
             AttachMonitor attachMonitor = new AttachMonitor(this, defibrillatorTable, patient);
             attachMonitor.CompletedAction += OnMonitorAttached;
 
-            CheckScreenStage checkScreenStage = new CheckScreenStage(this, patient.state);
-            CheckScreen checkScreen = new CheckScreen(this, defibrillatorTable);
+            CheckScreen checkScreen = new CheckScreen(this, defibrillatorTable, patient);
             checkScreen.CompletedAction += OnScreenChecked;
 
             actionsList.Enqueue(attachMonitor);
@@ -138,8 +137,7 @@ public class DefibrillatorManager : ECA
         }
         else
         {
-            CheckScreenStage checkScreenStage = new CheckScreenStage(this, patient.state);
-            CheckScreen checkScreen = new CheckScreen(this, defibrillatorTable);
+            CheckScreen checkScreen = new CheckScreen(this, defibrillatorTable, patient);
             checkScreen.CompletedAction += OnScreenChecked;
 
             actionsList.Enqueue(checkScreen);

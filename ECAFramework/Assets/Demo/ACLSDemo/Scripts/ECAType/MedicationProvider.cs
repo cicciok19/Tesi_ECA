@@ -17,7 +17,7 @@ using System;
 public class MedicationProvider : ECA
 {
 // class declaration start
-    protected const string AMIODARONE = "Amiodarone";
+    protected const string AMIODARONE = "AmiodaroneFirsDose";
     protected const string EPINEPHRINE = "Epinephrine";
     protected const string IVACCESS = "IVAccess";
 

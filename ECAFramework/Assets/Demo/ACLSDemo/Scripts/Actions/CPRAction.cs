@@ -5,11 +5,11 @@ using UnityEngine;
 public class CPRAction : ECAAction
 {
     private CPRPosition cprPosition;
-    protected new ActionName actionName = ActionName.Cpr;
 
     public CPRAction(ECA eca, CPRPosition cprPosition) : base(eca)
     {
         this.cprPosition = cprPosition;
+        actionName = ActionName.Cpr;
     }
 
     public override void StartAction()

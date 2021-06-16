@@ -1,16 +1,26 @@
 Using pre-set license
+<<<<<<< HEAD
 Built from '2020.3/staging' branch; Version is '2020.3.8f1 (507919d4fff5) revision 5273881'; Using compiler version '192528614'; Build Type 'Release'
 OS: 'Windows 10 Home; OS build 19042.1052; Version 2009; 64bit' Language: 'it' Physical Memory: 16222 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
 
  COMMAND LINE ARGUMENTS:
 C:\Program Files\Unity\2020.3.8f1\Editor\Unity.exe
+=======
+Built from '2020.3/staging' branch; Version is '2020.3.6f1 (338bb68529b2) revision 3378102'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home; OS build 19041.1052; Version 2004; 64bit' Language: 'it' Physical Memory: 16282 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Unity.exe
+>>>>>>> ACLSimplementation
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker0
 -projectPath
+<<<<<<< HEAD
 C:/Users/franc/Documents/GitHub/Tesi_ECA/ECAFramework
 -logFile
 Logs/AssetImportWorker0.log
@@ -55,10 +65,57 @@ Refreshing native plugins compatible for Editor in 125.50 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
 - Completed reload, in  2.152 seconds
+=======
+D:/Università/Tesi/ECAFramework/Tesi_ECA/ECAFramework
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+57804
+Successfully changed project path to: D:/Università/Tesi/ECAFramework/Tesi_ECA/ECAFramework
+D:/Università/Tesi/ECAFramework/Tesi_ECA/ECAFramework
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 281.34 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.6f1 (338bb68529b2)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Università/Tesi/ECAFramework/Tesi_ECA/ECAFramework/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 960M (ID=0x139b)
+    Vendor:   
+    VRAM:     4055 MB
+    Driver:   27.21.14.6192
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56756
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.004960 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 349.45 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  7.267 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.028226 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 536.15 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  9.747 seconds
+>>>>>>> ACLSimplementation
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+<<<<<<< HEAD
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
 Refreshing native plugins compatible for Editor in 1.96 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
@@ -75,10 +132,43 @@ Received Import Request.
   artifactKey: Guid(51c3f92f21cf7094d87a130cf114c29d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Demo/ACLSDemo/Scripts/ObjectTypes/Medicine.cs using Guid(51c3f92f21cf7094d87a130cf114c29d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '41b64f9c3455b87877db2e5154325665') in 0.037341 seconds
   Import took 0.048219 seconds .
+=======
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.37 seconds
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 3.35 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5238 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 233.7 MB.
+System memory in use after: 233.8 MB.
+
+Unloading 112 unused Assets to reduce memory usage. Loaded Objects now: 5619.
+Total: 9.388100 ms (FindLiveObjects: 0.639100 ms CreateObjectMapping: 0.904100 ms MarkObjects: 7.385900 ms  DeleteObjects: 0.457200 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/Capnography.cs
+  artifactKey: Guid(80fb8dfaec6f26a4eb8fb3bacd7a9b83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/Capnography.cs using Guid(80fb8dfaec6f26a4eb8fb3bacd7a9b83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d963e84f333fa0a2afda1e69550c3cc') in 0.064059 seconds
+  Import took 0.105450 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 37.290367 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/Capnography.cs
+  artifactKey: Guid(80fb8dfaec6f26a4eb8fb3bacd7a9b83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/Capnography.cs using Guid(80fb8dfaec6f26a4eb8fb3bacd7a9b83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a36218bbd2c5860bf5af7fdad1e1cbd3') in 0.007474 seconds
+  Import took 0.046855 seconds .
+>>>>>>> ACLSimplementation
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
+<<<<<<< HEAD
 Registered in 0.012455 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
@@ -128,10 +218,87 @@ Received Import Request.
   artifactKey: Guid(892691c2688ec72449634fcef8cf8fab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Demo/ACLSDemo/Scripts/ObjectTypes/Medicin.cs using Guid(892691c2688ec72449634fcef8cf8fab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fc15a5cdd388188ca9f20e011fb32201') in 0.003464 seconds
   Import took 0.010944 seconds .
+=======
+Registered in 0.021288 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.93 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.160 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.11 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5023 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 216.5 MB.
+System memory in use after: 216.6 MB.
+
+Unloading 103 unused Assets to reduce memory usage. Loaded Objects now: 5624.
+Total: 9.690700 ms (FindLiveObjects: 0.905800 ms CreateObjectMapping: 0.626200 ms MarkObjects: 7.699800 ms  DeleteObjects: 0.457300 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.144562 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/CPRAction.cs
+  artifactKey: Guid(08e825515d48f66408d8f99ec080f257) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/CPRAction.cs using Guid(08e825515d48f66408d8f99ec080f257) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '153189c24122a293d0d6ebac7b85339e') in 0.015940 seconds
+  Import took 0.050002 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
+Registered in 0.022414 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 5.01 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.207 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 1.89 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5023 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 216.6 MB.
+System memory in use after: 216.7 MB.
+
+Unloading 103 unused Assets to reduce memory usage. Loaded Objects now: 5629.
+Total: 9.694600 ms (FindLiveObjects: 0.674200 ms CreateObjectMapping: 0.870700 ms MarkObjects: 7.716400 ms  DeleteObjects: 0.431700 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 30.500768 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/CPRAction.cs
+  artifactKey: Guid(08e825515d48f66408d8f99ec080f257) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/CPRAction.cs using Guid(08e825515d48f66408d8f99ec080f257) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '75f1c113a89a02c3e2afa4827d0f04ed') in 0.012782 seconds
+  Import took 0.044936 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000482 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/GiveOxygen.cs
+  artifactKey: Guid(d28000d9d5d2b364a8ae40a329a23379) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/GiveOxygen.cs using Guid(d28000d9d5d2b364a8ae40a329a23379) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7494f5766f171438b782bbd7ce363bcd') in 0.009421 seconds
+  Import took 0.027989 seconds .
+>>>>>>> ACLSimplementation
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+<<<<<<< HEAD
 Registered in 0.011777 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
@@ -241,10 +408,111 @@ System memory in use after: 225.4 MB.
 
 Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5904.
 Total: 6.250000 ms (FindLiveObjects: 0.530700 ms CreateObjectMapping: 0.340300 ms MarkObjects: 5.021900 ms  DeleteObjects: 0.356200 ms)
+=======
+Registered in 0.021281 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.06 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.105 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 1.86 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5023 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 216.6 MB.
+System memory in use after: 216.7 MB.
+
+Unloading 103 unused Assets to reduce memory usage. Loaded Objects now: 5634.
+Total: 11.865800 ms (FindLiveObjects: 1.009700 ms CreateObjectMapping: 1.050500 ms MarkObjects: 9.303200 ms  DeleteObjects: 0.500600 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 31.718789 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/GiveOxygen.cs
+  artifactKey: Guid(d28000d9d5d2b364a8ae40a329a23379) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/GiveOxygen.cs using Guid(d28000d9d5d2b364a8ae40a329a23379) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8bf4074f67f1adc6e86e4361cb50db43') in 0.015159 seconds
+  Import took 0.039956 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000594 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/GiveOxygen.sls
+  artifactKey: Guid(1792ff61141db0e45b4368512bed774e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/GiveOxygen.sls using Guid(1792ff61141db0e45b4368512bed774e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '399d147149769e1fc7f135778d49b96a') in 0.029045 seconds
+  Import took 0.065864 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000555 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/IVAccess.cs
+  artifactKey: Guid(f07b0134004b4de4fa23fcc8df8af670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/IVAccess.cs using Guid(f07b0134004b4de4fa23fcc8df8af670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c776b5e5cac7a5dafa484e382017910e') in 0.013287 seconds
+  Import took 0.039901 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
+Registered in 0.030760 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.52 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.075 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.26 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5023 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 216.7 MB.
+System memory in use after: 216.8 MB.
+
+Unloading 103 unused Assets to reduce memory usage. Loaded Objects now: 5639.
+Total: 11.611500 ms (FindLiveObjects: 0.717600 ms CreateObjectMapping: 0.524600 ms MarkObjects: 9.895600 ms  DeleteObjects: 0.471100 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 63.076487 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/IVAccess.cs
+  artifactKey: Guid(f07b0134004b4de4fa23fcc8df8af670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/IVAccess.cs using Guid(f07b0134004b4de4fa23fcc8df8af670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83e160f6c1d0fa63c20cc16e8c14f3aa') in 0.015209 seconds
+  Import took 0.049010 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 12.983748 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/Shock.cs
+  artifactKey: Guid(d8933c4880e31e041af2cb972c20a819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/Shock.cs using Guid(d8933c4880e31e041af2cb972c20a819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '394a9e4b163dfb2da359e479fc43f137') in 0.011565 seconds
+  Import took 0.038783 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.004073 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/Shock.cs
+  artifactKey: Guid(d8933c4880e31e041af2cb972c20a819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/Shock.cs using Guid(d8933c4880e31e041af2cb972c20a819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '394a9e4b163dfb2da359e479fc43f137') in 0.008341 seconds
+  Import took 0.038974 seconds .
+>>>>>>> ACLSimplementation
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+<<<<<<< HEAD
 Registered in 0.011603 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
@@ -283,16 +551,78 @@ System memory in use after: 225.5 MB.
 
 Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5914.
 Total: 8.753200 ms (FindLiveObjects: 0.702800 ms CreateObjectMapping: 0.414000 ms MarkObjects: 7.225800 ms  DeleteObjects: 0.409000 ms)
+=======
+Registered in 0.028303 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.19 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.115 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.69 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5023 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 216.5 MB.
+System memory in use after: 216.6 MB.
+
+Unloading 103 unused Assets to reduce memory usage. Loaded Objects now: 5644.
+Total: 9.435700 ms (FindLiveObjects: 0.694200 ms CreateObjectMapping: 0.434500 ms MarkObjects: 7.277000 ms  DeleteObjects: 1.028000 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.967557 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/Shock.cs
+  artifactKey: Guid(d8933c4880e31e041af2cb972c20a819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/Shock.cs using Guid(d8933c4880e31e041af2cb972c20a819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ca3c20d9a62af99d8583849721f0c81') in 0.016268 seconds
+  Import took 0.051294 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000440 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/TakeOtherMedicine.cs
+  artifactKey: Guid(666d211743e880241af8727f154c3482) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/TakeOtherMedicine.cs using Guid(666d211743e880241af8727f154c3482) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c07723db838611ea099c8567ce188f67') in 0.012364 seconds
+  Import took 0.035922 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 45.391901 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/UseMedicine.cs
+  artifactKey: Guid(48e3b82123327254f821c75160a2cd42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/UseMedicine.cs using Guid(48e3b82123327254f821c75160a2cd42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f168183dd71455f7a6054050b6417c7') in 0.010555 seconds
+  Import took 0.039406 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001071 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/UseMedicine.cs
+  artifactKey: Guid(48e3b82123327254f821c75160a2cd42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/UseMedicine.cs using Guid(48e3b82123327254f821c75160a2cd42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2f168183dd71455f7a6054050b6417c7') in 0.006976 seconds
+  Import took 0.021874 seconds .
+>>>>>>> ACLSimplementation
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
+<<<<<<< HEAD
 Registered in 0.012969 seconds.
+=======
+Registered in 0.023875 seconds.
+>>>>>>> ACLSimplementation
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.27 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 2.66 ms, found 5 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
+<<<<<<< HEAD
 - Completed reload, in  1.420 seconds
 Platform modules already initialized, skipping
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
@@ -304,5 +634,24 @@ System memory in use after: 225.5 MB.
 
 Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5919.
 Total: 6.704200 ms (FindLiveObjects: 0.911900 ms CreateObjectMapping: 0.371200 ms MarkObjects: 4.951600 ms  DeleteObjects: 0.468200 ms)
+=======
+- Completed reload, in  2.024 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.19 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5023 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 216.7 MB.
+System memory in use after: 216.8 MB.
+
+Unloading 103 unused Assets to reduce memory usage. Loaded Objects now: 5649.
+Total: 10.262500 ms (FindLiveObjects: 0.730300 ms CreateObjectMapping: 0.386800 ms MarkObjects: 8.471400 ms  DeleteObjects: 0.671900 ms)
+>>>>>>> ACLSimplementation
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file

@@ -26,8 +26,6 @@ public class Shock : ECACompositeAction
     private ECAAction takePaddles;
     private ECAAction usePaddles;
 
-    protected new ActionName actionName = ActionName.Shock;
-
     public Shock(DefibrillatorManager eca, DefibrillatorTable defibrillatorTable, Patient patient, int nShock) : base(eca)
     {
         defManager = eca;
@@ -44,6 +42,8 @@ public class Shock : ECACompositeAction
         destinationPaddleRight = defibrillatorTable.GetPaddleRightPosition();
 
         this.nShock = nShock;
+
+        actionName = ActionName.Shock;
 
         CreateActionList();
     }
