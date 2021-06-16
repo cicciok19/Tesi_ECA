@@ -39,9 +39,9 @@ public class DefibrillatorManager : ECA
 
         systemManager = FindObjectOfType<SystemManager>();
 
-        //HandleShock();
+        HandleShock();
         //HandleAttachMonitor();
-        HandleCheckScreen();
+        //HandleCheckScreen();
     }
 
     public override void Handle(Intent intent)
@@ -77,7 +77,8 @@ public class DefibrillatorManager : ECA
 
         Shock shock = new Shock(this, defibrillatorTable, patient, 2);
         shock.CompletedAction += OnShockCompleted;
-        actionsList.Enqueue(shock);
+        //actionsList.Enqueue(shock);
+        shock.StartAction();
     }
 
     private void HandleAttachMonitor()
