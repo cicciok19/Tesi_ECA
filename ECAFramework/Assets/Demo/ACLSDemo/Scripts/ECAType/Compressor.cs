@@ -19,6 +19,7 @@ public class Compressor : ECA
         timeRecorder = FindObjectOfType<TimeRecorder>();
         cprPosition = patient.GetCPRPosition();
         systemManager = FindObjectOfType<SystemManager>();
+
         //just for debug
         //HandleStartCPR();
         

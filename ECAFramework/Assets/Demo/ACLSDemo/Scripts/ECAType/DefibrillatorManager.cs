@@ -17,9 +17,9 @@ public class DefibrillatorManager : ECA
 
     private SystemManager systemManager;
 
-    protected const string ATTACH_MONITOR = "Attach monitor";
+    protected const string ATTACH_MONITOR = "AttachMonitor";
     protected const string SHOCK = "Shock";
-    protected const string CHECK_MONITOR = "CheckMonitor";
+    protected const string CHECK_MONITOR = "AskForRhythm";
 
     protected override ECAAnimator AddECAAnimator()
     {
@@ -41,7 +41,7 @@ public class DefibrillatorManager : ECA
 
         //HandleShock();
         //HandleAttachMonitor();
-        HandleCheckScreen();
+        //HandleCheckScreen();
     }
 
     public override void Handle(Intent intent)
