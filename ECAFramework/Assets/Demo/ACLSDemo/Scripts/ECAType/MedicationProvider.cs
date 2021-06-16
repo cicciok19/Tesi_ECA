@@ -61,7 +61,7 @@ public class MedicationProvider : ECA
         locker = medicalRoom.GetLocker();
 
         //just for debug
-        //HandleUseMedicine(MedicineName.Amiodarone);
+        HandleUseMedicine(MedicineName.Amiodarone);
         //HandleIVAccess(medicationTable.GetVeinTube(), patient);
     }
 
@@ -94,7 +94,7 @@ public class MedicationProvider : ECA
         if(State == MedicationProviderState.TakingMedicine || State == MedicationProviderState.MedicineTaken)
         {
             Utility.LogWarning("");
-            currentAction.Abort();
+            actionsList.AbortAll();
             if (State == MedicationProviderState.MedicineTaken)
             { 
                 // drop medicine, and enqueue taking medicine
@@ -131,17 +131,17 @@ public class MedicationProvider : ECA
         UseMedicine useMedicine = (UseMedicine)sender; 
         useMedicine.InjectionDone -= OnInjectionDone;
         UseMedicineEventArgs args = (UseMedicineEventArgs)e;
-        Medicine m = args.medicine;
+        MedicineName name = args.medicineName;
         //send message of completed action
 
 
-        if (m.medicineName == MedicineName.Epinephrine)
+        if (name == MedicineName.Epinephrine)
         {
             timeRecorder.TimeExpired += OnTimeExpired;
             timeRecorder.CheckTime(this, .1f);
         }
 
-        if (m.medicineName == MedicineName.Epinephrine)
+        if (name == MedicineName.Epinephrine)
         {
             systemManager.CheckAction(useMedicine.ActionName);
             patient.OnEpinephrineDone();
@@ -183,7 +183,7 @@ public class MedicationProvider : ECA
     protected UseMedicine CreateGetMedicineAction(MedicineName medicineName)
     {
         UseMedicine useMedicine = null;
-        Medicine m = medicationTable.GetMedicine(medicineName);
+        MedicineSpot m = medicationTable.GetMedicineSpot(medicineName);
         if (m != null)
         {
             //send message

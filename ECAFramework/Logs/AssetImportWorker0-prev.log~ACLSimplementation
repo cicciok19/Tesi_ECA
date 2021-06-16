@@ -1,0 +1,259 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.6f1 (338bb68529b2) revision 3378102'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 IoT Enterprise; OS build 18363.1556; Version 1909; 64bit' Language: 'it' Physical Memory: 32705 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\2020.3.6f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+D:/Users/PietroFrancesco/Tesi_ECA/ECAFramework
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+64072
+Successfully changed project path to: D:/Users/PietroFrancesco/Tesi_ECA/ECAFramework
+D:/Users/PietroFrancesco/Tesi_ECA/ECAFramework
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 109.92 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.6f1 (338bb68529b2)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/2020.3.6f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Users/PietroFrancesco/Tesi_ECA/ECAFramework/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 2070 SUPER (ID=0x1e84)
+    Vendor:   
+    VRAM:     8011 MB
+    Driver:   27.21.14.5751
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/2020.3.6f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/2020.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/2020.3.6f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56084
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/2020.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001329 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 102.13 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.888 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.004255 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 110.79 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.856 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 1.19 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5379 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 259.2 MB.
+System memory in use after: 259.3 MB.
+
+Unloading 81 unused Assets to reduce memory usage. Loaded Objects now: 5804.
+Total: 5.704500 ms (FindLiveObjects: 0.454300 ms CreateObjectMapping: 0.281900 ms MarkObjects: 4.705600 ms  DeleteObjects: 0.261700 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Demo/ACLSDemo/Scripts/Managers/GraphManager.cs
+  artifactKey: Guid(7392b0e589ae89a4ea29fc2c144dc69c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Managers/GraphManager.cs using Guid(7392b0e589ae89a4ea29fc2c144dc69c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9947cd24de65806e14f7edb22045fa5f') in 0.021343 seconds
+  Import took 0.027945 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004479 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.29 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.268 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.28 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4988 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 236.8 MB.
+System memory in use after: 237.0 MB.
+
+Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5809.
+Total: 5.990500 ms (FindLiveObjects: 0.494400 ms CreateObjectMapping: 0.325400 ms MarkObjects: 4.894900 ms  DeleteObjects: 0.274600 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 1489.395808 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/Shock.cs
+  artifactKey: Guid(d8933c4880e31e041af2cb972c20a819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/Shock.cs using Guid(d8933c4880e31e041af2cb972c20a819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a50208bfdf87bb4829dcbdcc364ac4f') in 0.010221 seconds
+  Import took 0.017673 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.016100 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/Actions/Shock.cs
+  artifactKey: Guid(d8933c4880e31e041af2cb972c20a819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/Actions/Shock.cs using Guid(d8933c4880e31e041af2cb972c20a819) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7a50208bfdf87bb4829dcbdcc364ac4f') in 0.001681 seconds
+  Import took 0.009197 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.443238 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/ECAType/DefibrillatorManager.cs
+  artifactKey: Guid(720e16289940f1249973211de6b0b8e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/ECAType/DefibrillatorManager.cs using Guid(720e16289940f1249973211de6b0b8e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9adcd5ca68f02eac311fafa50ba341e9') in 0.005789 seconds
+  Import took 0.014420 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000958 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/ECAType/DefibrillatorManager.cs
+  artifactKey: Guid(720e16289940f1249973211de6b0b8e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/ECAType/DefibrillatorManager.cs using Guid(720e16289940f1249973211de6b0b8e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9adcd5ca68f02eac311fafa50ba341e9') in 0.001646 seconds
+  Import took 0.009585 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004366 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.25 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.271 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.24 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4988 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 236.9 MB.
+System memory in use after: 237.1 MB.
+
+Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5814.
+Total: 5.942000 ms (FindLiveObjects: 0.487500 ms CreateObjectMapping: 0.343900 ms MarkObjects: 4.829400 ms  DeleteObjects: 0.279400 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 456.479426 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/ECAType/DefibrillatorManager.cs
+  artifactKey: Guid(720e16289940f1249973211de6b0b8e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/ECAType/DefibrillatorManager.cs using Guid(720e16289940f1249973211de6b0b8e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6c4ee90be438a1c2da59e8685f35db14') in 0.005564 seconds
+  Import took 0.012265 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.407140 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/ECAType/MedicationProvider.cs
+  artifactKey: Guid(1b63f94bde80f6040a5ee52368a61bb3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/ECAType/MedicationProvider.cs using Guid(1b63f94bde80f6040a5ee52368a61bb3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e75653a1f55da4a0235bc89499a7a12f') in 0.004335 seconds
+  Import took 0.010846 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 462.320285 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/ECAType/MedicationProvider.cs
+  artifactKey: Guid(1b63f94bde80f6040a5ee52368a61bb3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/ECAType/MedicationProvider.cs using Guid(1b63f94bde80f6040a5ee52368a61bb3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a5e54332c86a70255de4f7283a50f6a') in 0.001500 seconds
+  Import took 0.009491 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.397941 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/ActionStages/CheckScreenStage.cs
+  artifactKey: Guid(3f6ca514d3d23ea4daabd17722195861) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/ActionStages/CheckScreenStage.cs using Guid(3f6ca514d3d23ea4daabd17722195861) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2abc063c800b3edd22b655783ae791f2') in 0.005163 seconds
+  Import took 0.013177 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000825 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/ActionStages/CheckScreenStage.cs
+  artifactKey: Guid(3f6ca514d3d23ea4daabd17722195861) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/ActionStages/CheckScreenStage.cs using Guid(3f6ca514d3d23ea4daabd17722195861) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2abc063c800b3edd22b655783ae791f2') in 0.001484 seconds
+  Import took 0.009045 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.548036 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/ObjectTypes/DefibrillatorScreen.cs
+  artifactKey: Guid(c9196b2e862ef5341afdf00a1bfb9b8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/ObjectTypes/DefibrillatorScreen.cs using Guid(c9196b2e862ef5341afdf00a1bfb9b8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7bb266e270173e2fe4ae7aba0f6565c') in 0.005613 seconds
+  Import took 0.013008 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000833 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/ObjectTypes/DefibrillatorScreen.cs
+  artifactKey: Guid(c9196b2e862ef5341afdf00a1bfb9b8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/ObjectTypes/DefibrillatorScreen.cs using Guid(c9196b2e862ef5341afdf00a1bfb9b8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7bb266e270173e2fe4ae7aba0f6565c') in 0.001623 seconds
+  Import took 0.010500 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004394 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.26 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.263 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.24 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4988 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 237.0 MB.
+System memory in use after: 237.1 MB.
+
+Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5819.
+Total: 5.856600 ms (FindLiveObjects: 0.458500 ms CreateObjectMapping: 0.286100 ms MarkObjects: 4.813500 ms  DeleteObjects: 0.297400 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 346.884204 seconds.
+  path: Assets/Demo/ACLSDemo/Scripts/ObjectTypes/DefibrillatorScreen.cs
+  artifactKey: Guid(c9196b2e862ef5341afdf00a1bfb9b8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Scripts/ObjectTypes/DefibrillatorScreen.cs using Guid(c9196b2e862ef5341afdf00a1bfb9b8f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7415f9283ac4e2475687bf073332bc49') in 0.863789 seconds
+  Import took 0.871136 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004345 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.27 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.228 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.27 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4988 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 237.0 MB.
+System memory in use after: 237.2 MB.
+
+Unloading 72 unused Assets to reduce memory usage. Loaded Objects now: 5824.
+Total: 5.877700 ms (FindLiveObjects: 0.469600 ms CreateObjectMapping: 0.301300 ms MarkObjects: 4.805200 ms  DeleteObjects: 0.300800 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

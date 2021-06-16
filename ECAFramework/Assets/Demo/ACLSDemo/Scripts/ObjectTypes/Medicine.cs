@@ -5,36 +5,17 @@ using UnityEngine;
 public enum MedicineName
 {
     Amiodarone,
-    Epinephrine
+    Epinephrine,
+    None
 }
 
-public class Medicine : MonoBehaviour
+public class Medicine : GrabbableObject
 {
-    private Syringe syringe;
-    public MedicineName medicineName;
-    private Destination destination;
-    private bool taken;
+    public bool used;
+    public MedicineName medicineName { get; protected set; }
 
-    private void Awake()
+    void Start()
     {
-        syringe = GetComponentInChildren<Syringe>();
-        destination = GetComponentInChildren<Destination>();
-        taken = false;
-    }
-
-    public Transform GetSyringe()
-    {
-        return syringe.transform;
-    }
-
-    public Vector3 GetDestination()
-    {
-        return destination.transform.position;
-    }
-
-    public bool Taken
-    {
-        get => taken;
-        set => taken = value;
+        used = false;
     }
 }

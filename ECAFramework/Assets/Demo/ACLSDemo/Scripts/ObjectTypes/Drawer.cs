@@ -9,7 +9,7 @@ public class Drawer : MonoBehaviour
     [SerializeField] private float closingPosition = 0f;
     private float actualPosition;
 
-    private Medicine medicine;
+    private MedicineSpot medicineSpot;
     private GrabbableObject handle;
     private Vector3 destination;
 
@@ -19,7 +19,7 @@ public class Drawer : MonoBehaviour
 
     private void Start()
     {
-        medicine = GetComponentInChildren<Medicine>();
+        medicineSpot = GetComponentInChildren<MedicineSpot>();
         handle = GetComponentInChildren<GrabbableObject>();
         //just for debug
         //StartOpening();
@@ -62,9 +62,14 @@ public class Drawer : MonoBehaviour
             DrawerClosed(this, EventArgs.Empty);
     }
 
-    public Medicine GetMedicine()
+    public void OnGrabHandle(object sender, EventArgs e)
     {
-        return medicine;
+        StartOpening();    
+    }
+
+    public MedicineSpot GetMedicineSpot()
+    {
+        return medicineSpot;
     }
 
     public GrabbableObject GetHandle()

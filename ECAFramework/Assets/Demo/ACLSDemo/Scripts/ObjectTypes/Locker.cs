@@ -22,8 +22,8 @@ public class Locker : MonoBehaviour
     {
         foreach(var d in drawers)
         {
-            Medicine m = d.GetMedicine();
-            if(m.medicineName == medicineName && !m.Taken)
+            MedicineSpot spot = d.GetMedicineSpot();
+            if(spot.GetMedicineName() == medicineName && !spot.empty)
             {
                 d.SetDestination(destination);
                 return d;
