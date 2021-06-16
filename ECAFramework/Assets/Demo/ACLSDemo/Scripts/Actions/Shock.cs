@@ -45,7 +45,7 @@ public class Shock : ECACompositeAction
 
         actionName = ActionName.Shock;
 
-        CreateActionList();
+        //CreateActionList();
     }
 
     private void PickPaddles()
@@ -135,7 +135,7 @@ public class Shock : ECACompositeAction
         PickPaddles();
         UseShock();
         PosePaddles();
-        base.CreateActionList();
+        //base.CreateActionList();
     }
 
     private void SendShock(object sender, EventArgs e)
