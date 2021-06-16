@@ -5,28 +5,43 @@ using UnityEngine.Assertions;
 
 public class MedicationTable : MonoBehaviour
 {
-    private Medicine[] medicines;
+    private MedicineSpot[] medicineSpots;
     private IVTube ivTube;
 
     void Start()
     {
-        medicines = GetComponentsInChildren<Medicine>();
+        medicineSpots = GetComponentsInChildren<MedicineSpot>();
         ivTube = GetComponentInChildren<IVTube>();
     }
 
-    public Medicine GetMedicine(MedicineName name)
+    public MedicineSpot GetMedicineSpot(MedicineName name)
     {
-        Medicine medicine = null;
-        foreach(var m in medicines)
+        MedicineSpot medicineSpot = null;
+        foreach(var spot in medicineSpots)
         {
-            if (m.medicineName == name && !m.Taken)
+            if (!spot.empty && spot.GetComponentInChildren<Medicine>().medicineName == name)
             {
-                medicine = m;
+                medicineSpot = spot;
                 break;
             }
         }
 
-        return medicine;
+        return medicineSpot;
+    }
+
+    public MedicineSpot GetEmptySpot()
+    {
+        MedicineSpot medicineSpot = null;
+        foreach (var spot in medicineSpots)
+        {
+            if (spot.empty)
+            {
+                medicineSpot = spot;
+                break;
+            }
+        }
+
+        return medicineSpot;
     }
 
     public IVTube GetVeinTube()

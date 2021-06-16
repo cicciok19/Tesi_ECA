@@ -65,10 +65,8 @@ public class Patient : ECA
     {
         Debug.Log("Sono shockato");
         hitReaction.Hit(spineCollider, Vector3.up * .5f, stomach.transform.position);
-        //hitReaction.Hit(spineCollider, Vector3.up * .5f, stomach.transform.position);
         if (Shocked != null)
             Shocked(this, EventArgs.Empty);
-
     }
 
 

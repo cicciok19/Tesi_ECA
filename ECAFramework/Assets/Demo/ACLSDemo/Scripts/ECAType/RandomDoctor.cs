@@ -11,6 +11,7 @@ public class RandomDoctor : ECA
     public bool inside;
 
     private OtherRoom otherRoom;
+    private MedicalRoom medicalRoom;
     public Vector3 initialPosition { get; protected set; }
     public Vector3 outsideDestination { get; protected set; }
 
@@ -18,13 +19,15 @@ public class RandomDoctor : ECA
     {
         base.Start();
         otherRoom = FindObjectOfType<OtherRoom>();
+        medicalRoom = FindObjectOfType<MedicalRoom>();
         initialPosition = this.transform.position;
         outsideDestination = otherRoom.GetDestination();
 
         inside = true;
 
         //just for debug
-        HandleTalkToRelative();
+        //HandleTalkToRelative();
+        HandleTakeOtherMedicine(MedicineName.Amiodarone);
     }
 
     protected override ECAAnimator AddECAAnimator()
@@ -55,7 +58,9 @@ public class RandomDoctor : ECA
 
     private void HandleTakeOtherMedicine(MedicineName medicineName)
     {
-        
+        TakeOtherMedicine takeOtherMedicine = new TakeOtherMedicine(this, MedicineName.Amiodarone, otherRoom, medicalRoom);
+        //iscrizione alla fine dell'azione per dare il messaggio
+        actionsList.Enqueue(takeOtherMedicine);
     }
 
     private void OnTalkFinished(object sender, EventArgs e)

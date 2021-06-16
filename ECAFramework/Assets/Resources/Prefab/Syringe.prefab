@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 6603380552145723183}
   - component: {fileID: 7785650862043517066}
   - component: {fileID: 5469841085301892160}
-  - component: {fileID: 981404102977581515}
+  - component: {fileID: -5206157390588163560}
   m_Layer: 0
   m_Name: Syringe
   m_TagString: Untagged
@@ -476,7 +476,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &981404102977581515
+--- !u!114 &-5206157390588163560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -485,10 +485,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5829974643140593045}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 892691c2688ec72449634fcef8cf8fab, type: 3}
+  m_Script: {fileID: 11500000, guid: 51c3f92f21cf7094d87a130cf114c29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  used: 0
+  medicineName: 0
 --- !u!1 &6242484017679299479
 GameObject:
   m_ObjectHideFlags: 0

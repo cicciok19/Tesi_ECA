@@ -10,13 +10,13 @@ public class OtherRoom : MonoBehaviour
     private void Awake()
     {
         destination = GetComponentInChildren<Destination>();
-        emptyPosition = GetComponentInChildren<EmptyPosition>().transform;
+        emptyPosition = GetComponentInChildren<MedicineSpot>().transform;
     }
 
-    public Syringe GetNewMedicine(MedicineName medicineName)
+    public Medicine GetNewMedicine(MedicineName medicineName)
     {
         GameObject s = (GameObject)Instantiate(Resources.Load("Prefab/Syringe"), emptyPosition);
-        Syringe syringe = s.GetComponent<Syringe>();
+        Medicine syringe = s.GetComponent<Medicine>();
         return syringe;
     }
 

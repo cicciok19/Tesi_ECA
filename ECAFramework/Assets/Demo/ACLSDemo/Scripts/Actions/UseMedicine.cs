@@ -10,14 +10,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-
-
 public class UseMedicineEventArgs : EventArgs
 {
-    public Medicine medicine;
-    public UseMedicineEventArgs(Medicine m)
+    public MedicineName medicineName;
+    public UseMedicineEventArgs(MedicineName name)
     {
-        medicine = m;
+        medicineName = name;
     }
     
 }
@@ -32,27 +30,39 @@ public class UseMedicine : ECAAction
     internal bool hasMedicine = false;
 
     private IVPole pole;
-    private Medicine medicine;
+    private MedicineSpot medicineSpot;
     private MedicationProvider medicationProvider;
     private Patient patient;
     private Drawer drawer = null;
 
     protected new ActionName actionName;
 
-    public UseMedicine(ECA eca, Medicine m, Patient patient)
+    /// <summary>
+    /// if there is a medicine on the table
+    /// </summary>
+    /// <param name="eca"></param>
+    /// <param name="m"></param>
+    /// <param name="patient"></param>
+    public UseMedicine(ECA eca, MedicineSpot spot, Patient patient)
     : base(eca)
     {
-        medicine = m;
+        medicineSpot = spot;
         medicationProvider = (MedicationProvider)eca;
         pole = medicationProvider.medicalRoom.GetPole();
         this.patient = patient;
 
-        if (m.medicineName == MedicineName.Amiodarone)
+        if (spot.GetMedicineName() == MedicineName.Amiodarone)
             actionName = ActionName.UseAmiodarone;
-        else if (m.medicineName == MedicineName.Epinephrine)
+        else if (spot.GetMedicineName() == MedicineName.Epinephrine)
             actionName = ActionName.UseEpinephrine;
     }
 
+    /// <summary>
+    /// if there isn't a medicine on the table take it from the locker
+    /// </summary>
+    /// <param name="eca"></param>
+    /// <param name="d"></param>
+    /// <param name="patient"></param>
     public UseMedicine(ECA eca, Drawer d, Patient patient) : base(eca)
     {
         drawer = d;
@@ -73,9 +83,6 @@ public class UseMedicine : ECAAction
       hasMedicine = false;
     }
 
-
-
-
     public override void StartAction()
     {
         SetupAction();
@@ -88,9 +95,9 @@ public class UseMedicine : ECAAction
         List<ECAActionStage> stages = new List<ECAActionStage>();
         if (drawer == null)
         {
-            GoToStage goToMedicine = new GoToStage(medicine.GetDestination());
+            GoToStage goToMedicine = new GoToStage(medicineSpot.GetDestination());
 
-            PickStage pickMedicine = new PickStage(medicine.GetSyringe(), 1, false, HandSide.RightHand);
+            PickStage pickMedicine = new PickStage(medicineSpot.GetSyringe(), 1, false, HandSide.RightHand);
             pickMedicine.StageFinished += OnMedicinePicked;
 
             GoToStage goToPatient = new GoToStage(medicationProvider.GetDestinationNearTable());
@@ -110,7 +117,7 @@ public class UseMedicine : ECAAction
             grabHandle.StageFinished += OnGrabHandle;
 
             //dovrei aspettare, vediamo che succede
-            PickStage pickMedicine = new PickStage(drawer.GetMedicine().GetSyringe(), 1, false, HandSide.RightHand);
+            PickStage pickMedicine = new PickStage(drawer.GetMedicineSpot().GetSyringe(), 1, false, HandSide.RightHand);
             pickMedicine.StageFinished += OnMedicinePicked;
 
             DropStage releaseHandle = new DropStage(grabHandle);
@@ -139,7 +146,7 @@ public class UseMedicine : ECAAction
     {
         base.OnCompletedAction();
         if (InjectionDone != null)
-            InjectionDone(this, new UseMedicineEventArgs(medicine));
+            InjectionDone(this, new UseMedicineEventArgs(medicineSpot.GetMedicineName()));
     }
 
     private void OnGrabHandle(object sender, EventArgs e)
