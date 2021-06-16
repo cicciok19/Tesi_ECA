@@ -10,6 +10,7 @@ public class TakeOtherMedicine : ECACompositeAction
     private MedicalRoom medicalRoom;
     private MedicineName medicineName;
     private Medicine syringe;
+    private MedicineSpot medicineSpot;
 
     private PickStage pickMedicine;
     private Drawer drawer = null;
@@ -39,7 +40,7 @@ public class TakeOtherMedicine : ECACompositeAction
 
     private void ReturnWithMedicine()
     {
-        MedicineSpot medicineSpot = medicalRoom.GetMedicationTable().GetEmptySpot();
+        medicineSpot = medicalRoom.GetMedicationTable().GetEmptySpot();
         List<ECAActionStage> stages = new List<ECAActionStage>();
 
         if (medicineSpot == null)
@@ -66,10 +67,15 @@ public class TakeOtherMedicine : ECACompositeAction
         else
         {
             GoToStage goToTable = new GoToStage(medicineSpot.GetDestination());
+
             DropStage dropMedicine = new DropStage(pickMedicine, medicineSpot.transform);
+            dropMedicine.StageFinished += OnMedicineDropped;
+
+            GoToStage goToInitialPosition = new GoToStage(randomDoctor.initialPosition);
 
             stages.Add(goToTable); 
             stages.Add(dropMedicine);
+            stages.Add(goToInitialPosition);
         }
 
         ECAAction action = new ECAAction(eca, stages);
@@ -91,6 +97,8 @@ public class TakeOtherMedicine : ECACompositeAction
     protected void OnMedicineDropped(object sender, EventArgs args)
     {
         //hasMedicine = true;
+        syringe.transform.SetParent(medicineSpot.transform);
+
         if (drawer != null)
             drawer.StartClosing();
     }

@@ -17,7 +17,7 @@ using System;
 public class MedicationProvider : ECA
 {
 // class declaration start
-    protected const string AMIODARONE = "AmiodaroneFirsDose";
+    protected const string AMIODARONE = "AmiodaroneFirstDose";
     protected const string EPINEPHRINE = "Epinephrine";
     protected const string IVACCESS = "IVAccess";
 
@@ -61,7 +61,7 @@ public class MedicationProvider : ECA
         locker = medicalRoom.GetLocker();
 
         //just for debug
-        HandleUseMedicine(MedicineName.Amiodarone);
+        //HandleUseMedicine(MedicineName.Amiodarone);
         //HandleIVAccess(medicationTable.GetVeinTube(), patient);
     }
 

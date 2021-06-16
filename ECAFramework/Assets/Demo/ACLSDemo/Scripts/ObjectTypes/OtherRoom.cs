@@ -16,6 +16,7 @@ public class OtherRoom : MonoBehaviour
     public Medicine GetNewMedicine(MedicineName medicineName)
     {
         GameObject s = (GameObject)Instantiate(Resources.Load("Prefab/Syringe"), emptyPosition);
+        s.transform.localPosition = Vector3.zero;
         Medicine syringe = s.GetComponent<Medicine>();
         return syringe;
     }
