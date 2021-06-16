@@ -34,8 +34,9 @@ public class UseMedicine : ECAAction
     private MedicationProvider medicationProvider;
     private Patient patient;
     private Drawer drawer = null;
+    public Transform medicine { get; protected set; }
 
-    protected new ActionName actionName;
+    public PickStage pickMedicine { get; protected set; }
 
     /// <summary>
     /// if there is a medicine on the table
@@ -93,11 +94,15 @@ public class UseMedicine : ECAAction
     public override void SetupAction()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
+        
+
         if (drawer == null)
         {
+            medicine = medicineSpot.GetSyringe();
+
             GoToStage goToMedicine = new GoToStage(medicineSpot.GetDestination());
 
-            PickStage pickMedicine = new PickStage(medicineSpot.GetSyringe(), 1, false, HandSide.RightHand);
+            pickMedicine = new PickStage(medicine, 1, false, HandSide.RightHand);
             pickMedicine.StageFinished += OnMedicinePicked;
 
             GoToStage goToPatient = new GoToStage(medicationProvider.GetDestinationNearTable());
@@ -111,13 +116,15 @@ public class UseMedicine : ECAAction
         }
         else
         {
+            medicine = drawer.GetMedicineSpot().GetSyringe();
+
             GoToStage goToDrawer = new GoToStage(drawer.GetDestination());
 
             PickStage grabHandle = new PickStage(drawer.GetHandle().transform, 1, true, HandSide.LeftHand);
             grabHandle.StageFinished += OnGrabHandle;
 
             //dovrei aspettare, vediamo che succede
-            PickStage pickMedicine = new PickStage(drawer.GetMedicineSpot().GetSyringe(), 1, false, HandSide.RightHand);
+            pickMedicine = new PickStage(medicine, 1, false, HandSide.RightHand);
             pickMedicine.StageFinished += OnMedicinePicked;
 
             DropStage releaseHandle = new DropStage(grabHandle);

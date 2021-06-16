@@ -17,7 +17,7 @@ using System;
 public class MedicationProvider : ECA
 {
 // class declaration start
-    protected const string AMIODARONE = "AmiodaroneFirsDose";
+    protected const string AMIODARONE = "AmiodaroneFirstDose";
     protected const string EPINEPHRINE = "Epinephrine";
     protected const string IVACCESS = "IVAccess";
 
@@ -40,6 +40,7 @@ public class MedicationProvider : ECA
     private IVPole pole;
     private Locker locker;
     private SystemManager systemManager;
+    private UseMedicine useMedicine;
 
     public MedicalRoom medicalRoom;
 
@@ -67,43 +68,37 @@ public class MedicationProvider : ECA
 
 
     private void HandleUseMedicine(MedicineName medicineName)
-    {
+    {        
+
         // check if iv access ahas been inserted
 
-        if(!patient.HasIVAccess)
+        if (!patient.HasIVAccess)
         {
             SendDirectMessage("Ti sei dimenticato di dirmi di inserire l'accesso venoso, faccio da solo va...");
+
             Utility.LogWarning("Asked to inject " + medicineName + " but iv access is missing");
-    
-            //List<ECAAction> actions = new List<ECAAction>();
     
             IVAccess ivAccess = new IVAccess(this, medicationTable.GetVeinTube(), patient);
             ivAccess.CompletedAction += OnIvAccessCompleted;
-    
-            UseMedicine useMedicine = CreateGetMedicineAction(medicineName);
-            useMedicine.InjectionDone += OnInjectionDone;
 
             actionsList.Enqueue(ivAccess);
-            actionsList.Enqueue(useMedicine);
-    
-            return;
         }
-    
-        // else, inject
 
         if(State == MedicationProviderState.TakingMedicine || State == MedicationProviderState.MedicineTaken)
         {
-            Utility.LogWarning("");
             actionsList.AbortAll();
+
             if (State == MedicationProviderState.MedicineTaken)
-            { 
-                // drop medicine, and enqueue taking medicine
+            {
+                MedicineSpot medicineSpot = medicationTable.GetEmptySpot();
+                DropMedicine dropMedicine = new DropMedicine(this, useMedicine, medicineSpot);
+                actionsList.Enqueue(dropMedicine);
             }
         }
-    
-        UseMedicine useOnlyMedicine = CreateGetMedicineAction(medicineName);
-        useOnlyMedicine.InjectionDone += OnInjectionDone;
-        actionsList.Enqueue(useOnlyMedicine);
+
+        useMedicine = CreateGetMedicineAction(medicineName);
+        useMedicine.InjectionDone += OnInjectionDone;
+        actionsList.Enqueue(useMedicine);
     }
 
 
@@ -134,15 +129,10 @@ public class MedicationProvider : ECA
         MedicineName name = args.medicineName;
         //send message of completed action
 
-
         if (name == MedicineName.Epinephrine)
         {
             timeRecorder.TimeExpired += OnTimeExpired;
-            timeRecorder.CheckTime(this, .1f);
-        }
-
-        if (name == MedicineName.Epinephrine)
-        {
+            timeRecorder.CheckTime(this, .5f);
             systemManager.CheckAction(useMedicine.ActionName);
             patient.OnEpinephrineDone();
         }

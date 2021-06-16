@@ -6,29 +6,32 @@ public class MedicineSpot : MonoBehaviour
 {
     private Medicine syringe;
     private Destination destination;
-    public bool empty { get; protected set; }
+    public bool empty { 
+        get 
+        {
+            if (GetComponentInChildren<Medicine>() == null)
+                return true;
+            else
+                return false;
+        }
+    }
 
     private void Awake()
     {
         syringe = GetComponentInChildren<Medicine>();
         destination = GetComponentInChildren<Destination>();
-        empty = false;
     }
 
     public virtual Transform GetSyringe()
     {
+        if (syringe == null)
+            return GetComponentInChildren<Medicine>().transform;
         return syringe.transform;
     }
 
     public Vector3 GetDestination()
     {
         return destination.transform.position;
-    }
-
-    public bool Taken
-    {
-        get => empty;
-        set => empty = value;
     }
 
     public MedicineName GetMedicineName()

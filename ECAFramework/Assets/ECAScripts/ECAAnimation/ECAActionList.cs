@@ -57,7 +57,8 @@ public class ECAActionList
             }
         }
 
-        StartActions();
+        if(actions.Count != 0)
+            StartActions();
     }
 
     public void StartActions()
