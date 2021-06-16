@@ -201,6 +201,7 @@ private static IntentManager instance = null;
 
     private void OnRecognizedIntent(object sender, IntentRecognitionEventArgs e)
     {
+        Debug.Log(e.Result);
         if (e.Result.Reason == ResultReason.RecognizedIntent)
         {
             string s = "RECOGNIZED: Intent= " + e.Result.IntentId + " Text= " + e.Result.Text;

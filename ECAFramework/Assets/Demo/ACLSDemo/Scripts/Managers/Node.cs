@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Node
@@ -26,6 +27,7 @@ public class Node
             if (!actions[actionName])
             {
                 counter++;
+                actions[actionName] = true;
                 if (counter == actions.Count)
                     Finished = true;
                 return true;
@@ -46,8 +48,7 @@ public class Node
             if(finished == true)
             {
                 //risettiamo i bool a false perché il nodo potrebbe essere richiamato
-                foreach (var action in actions.Keys)
-                    actions[action] = false;
+                actions = actions.ToDictionary(p => p.Key, p => false);               
             }
         }
     }

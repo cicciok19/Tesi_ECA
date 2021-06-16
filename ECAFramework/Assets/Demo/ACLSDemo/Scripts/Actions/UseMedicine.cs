@@ -37,8 +37,6 @@ public class UseMedicine : ECAAction
     private Patient patient;
     private Drawer drawer = null;
 
-    protected new ActionName actionName;
-
     public UseMedicine(ECA eca, Medicine m, Patient patient)
     : base(eca)
     {

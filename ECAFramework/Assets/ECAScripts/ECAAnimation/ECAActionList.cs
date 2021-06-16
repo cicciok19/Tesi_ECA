@@ -87,7 +87,7 @@ public class ECAActionList
         {
             FirstAction.StartAction();
             FirstAction.CompletedAction += GoAhead;
-            currentAction = FirstAction;
+            //currentAction = FirstAction;
         }
     }
 

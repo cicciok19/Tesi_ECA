@@ -10,7 +10,6 @@ public class AttachMonitor : ECAAction
     private Transform destinationDef;
     private Transform patient;
     private Transform destinationPatient;
-    protected new ActionName actionName = ActionName.AttachMonitor;
 
     public AttachMonitor(ECA eca, DefibrillatorTable defibrillatorTable, Patient patient) : base(eca)
     {
@@ -20,6 +19,7 @@ public class AttachMonitor : ECAAction
         button = defibrillator.GetButton();
         this.patient = patient.transform;
         destinationPatient = patient.GetDestinationDef();
+        actionName = ActionName.AttachMonitor;
     }
 
     public override void SetupAction()

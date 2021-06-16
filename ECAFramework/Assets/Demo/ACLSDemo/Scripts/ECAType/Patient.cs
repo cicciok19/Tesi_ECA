@@ -58,7 +58,7 @@ public class Patient : ECA
         pumpPosition = GetComponentInChildren<PumpPosition>();
         destinationDef = GetComponentInChildren<DestinationDef>();
 
-        state = PatientState.None;
+        state = PatientState.VF;
     }
 
     public void OnShockReceived()

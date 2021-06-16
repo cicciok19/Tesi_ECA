@@ -41,7 +41,7 @@ public class DefibrillatorManager : ECA
 
         //HandleShock();
         //HandleAttachMonitor();
-        //HandleCheckScreen();
+        HandleCheckScreen();
     }
 
     public override void Handle(Intent intent)
@@ -129,8 +129,7 @@ public class DefibrillatorManager : ECA
             AttachMonitor attachMonitor = new AttachMonitor(this, defibrillatorTable, patient);
             attachMonitor.CompletedAction += OnMonitorAttached;
 
-            CheckScreenStage checkScreenStage = new CheckScreenStage(this, patient.state);
-            CheckScreen checkScreen = new CheckScreen(this, defibrillatorTable);
+            CheckScreen checkScreen = new CheckScreen(this, defibrillatorTable, patient);
             checkScreen.CompletedAction += OnScreenChecked;
 
             actionsList.Enqueue(attachMonitor);
@@ -138,8 +137,7 @@ public class DefibrillatorManager : ECA
         }
         else
         {
-            CheckScreenStage checkScreenStage = new CheckScreenStage(this, patient.state);
-            CheckScreen checkScreen = new CheckScreen(this, defibrillatorTable);
+            CheckScreen checkScreen = new CheckScreen(this, defibrillatorTable, patient);
             checkScreen.CompletedAction += OnScreenChecked;
 
             actionsList.Enqueue(checkScreen);
