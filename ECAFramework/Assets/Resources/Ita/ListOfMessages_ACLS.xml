@@ -2,7 +2,7 @@
 <game>
   <tts ecaID="Compressor">
     <CPRStart> Comincio il massaggio cardiaco </CPRStart>
-    <CPRCompleted> Massaggio cardiaco completato </CPRCompleted>
+    <CPRCompleted action="MoveTo@DefibrillatorTable"> Massaggio cardiaco completato </CPRCompleted>
   </tts>
   <tts ecaID="AirwayManager">
     <giveOxygenStart> Comincio a dare ossigeno</giveOxygenStart>
@@ -23,7 +23,7 @@
       <IVAccessCompleted> Abbiamo un accesso periferico </IVAccessCompleted>
       <useEpinephrineStart> Somministro adrenalina </useEpinephrineStart>
       <useEpinephrineCompleted> Adrenalina somministrata </useEpinephrineCompleted>
-      <useAmiodaroneStart> Somministro amiodarone </useEpinephrineCompleted>
+      <useAmiodaroneStart> Somministro amiodarone </useAmiodaroneStart>
       <useAmiodaroneCompleted> Amiodarone somministrato </useAmiodaroneCompleted>
   </tts>
 
