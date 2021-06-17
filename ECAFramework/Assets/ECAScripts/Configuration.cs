@@ -95,7 +95,7 @@ public class Configuration
 
     private void InitDocumentsNames()
     {
-        XmlDocumentNames = new XmlDocumentNames("ListOfMessages.xml", "Configuration.xml", "ECAs.xml", "ActiveMessagesPerScenario.xml");
+        XmlDocumentNames = new XmlDocumentNames("ListOfMessages_ACLS.xml", "Configuration.xml", "ECAs.xml", "ActiveMessagesPerScenario.xml");
     }
 
 

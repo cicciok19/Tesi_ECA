@@ -23,8 +23,8 @@ public class Compressor : ECA
         systemManager = FindObjectOfType<SystemManager>();
 
         //just for debug
-        //HandleStartCPR();
-        EmotionManager.InitActualEmotion(AvailableEmotions.Trust, 0f);
+        HandleStartCPR();
+        //EmotionManager.InitActualEmotion(AvailableEmotions.Trust, 0f);
     }
 
     protected override ECAAnimator AddECAAnimator()
@@ -73,7 +73,8 @@ public class Compressor : ECA
             return EmotionalMessage.zero;
         }
 
-        AvailableEmotions actualEmotion = ActualEmotion.EmotionType;
+
+        AvailableEmotions actualEmotion = AvailableEmotions.Trust;
 
         List<EmotionalMessage> listForEmotion = new List<EmotionalMessage>();
         for (int i = 0; i < list.Count; i++)
@@ -100,6 +101,7 @@ public class Compressor : ECA
         cpr.CompletedAction -= OnCPRCompleted;
         EmotionalMessage message = GetMessageForIntentKey(END_KEY);
         SendDirectMessage(message.message);
+        HandleMessageAction(message);
         
         systemManager.CheckAction(cpr.ActionName);
         patient.OnCPREnded();
@@ -120,8 +122,26 @@ public class Compressor : ECA
             if (action.IsMoveTo())
             {
                 Utility.Log("Going to " + action.parameter);
-                //Type objName = (Type)action.parameter;
-                //var obj = FindObjectOfType<>();
+                GameObject obj = GameObject.FindGameObjectWithTag(action.parameter); 
+                if (obj == null)
+                {
+                    Debug.LogError("The obj specified in the MoveTo action doesn't exist in this context.");
+                    return;
+                }
+                else
+                {
+                    if (obj.GetComponentInChildren<Destination>())
+                    {
+                        GoToStage goToStage = new GoToStage(obj.GetComponentInChildren<Destination>().transform);
+                        ECAAction EcaAction = new ECAAction(this, goToStage);
+                        actionsList.Enqueue(EcaAction);
+                    }
+                    else
+                    {
+                        Debug.LogError("The obj specified in the MoveTo action doesn't have a destination.");
+                    }
+                    
+                }
             }
         }
 
