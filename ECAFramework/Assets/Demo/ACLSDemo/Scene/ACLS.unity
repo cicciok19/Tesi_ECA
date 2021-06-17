@@ -2306,6 +2306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 279229110}
   - component: {fileID: 279229111}
+  - component: {fileID: 279229112}
   m_Layer: 0
   m_Name: SystemManager
   m_TagString: Untagged
@@ -2339,6 +2340,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e179b2d066c6844d8808af469455ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &279229112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279229109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f10f66d0708d334ab8264dcbff2c375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logName: ProvaLog
+  path: C:/Users/franc/Documents/GitHub/Tesi_ECA/ECAFramework/Assets/Demo/ACLSDemo/Logs
 --- !u!1 &286654238
 GameObject:
   m_ObjectHideFlags: 0

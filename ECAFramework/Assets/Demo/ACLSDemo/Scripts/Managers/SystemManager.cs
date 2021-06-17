@@ -40,7 +40,8 @@ public class SystemManager: MonoBehaviour
     GraphManager graphManager;
     Patient patient;
 
-    // Start is called before the first frame update
+    LogWriter logWriter;
+
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -57,12 +58,16 @@ public class SystemManager: MonoBehaviour
         SetGraph();
         actualNode = nodes[NodeName.Start];
         nodesSequence.Add(actualNode);
+
+        logWriter = GetComponent<LogWriter>();
     }
 
     public void CheckAction(ActionName actionDone)
     {
         if (actualNode.IsCorrectAction(actionDone))
+        {
             Debug.Log("Correct Action!");
+        }
         else
         {
 
@@ -191,6 +196,14 @@ public class SystemManager: MonoBehaviour
         {
             NodeName.CheckRythm
         });
+    }
+
+    public string actualNodeName
+    {
+        get
+        {
+            return actualNode.NodeName.ToString();
+        }
     }
     
 }
