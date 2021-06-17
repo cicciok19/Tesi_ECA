@@ -51,7 +51,6 @@ public class ECAParallelActionStage : ECAActionStage
     {
         State = ActionState.Completed;
         animator.currentStage = null;
-        Debug.Log("HO FINITO CAZZO");
         LaunchStageFinished();
     }
 

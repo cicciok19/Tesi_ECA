@@ -124,7 +124,7 @@ public class DefibrillatorManager : ECA
     {
         if (!screen.IsOn)
         {
-            SendDirectMessage("Il monitor non è attaccato, devo prima attaccato per sapere lo stato del paziente!");
+            SendDirectMessage("Il monitor non è attaccato, devo prima attaccarlo per sapere lo stato del paziente!");
             Utility.LogWarning("Asked to check screen but the monitor is not attached.");
 
             AttachMonitor attachMonitor = new AttachMonitor(this, defibrillatorTable, patient);

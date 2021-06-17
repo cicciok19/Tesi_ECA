@@ -35,6 +35,7 @@ public class Patient : ECA
     private Stomach stomach;
     private PumpPosition pumpPosition;
     private DestinationDef destinationDef;
+    private DestinationAir destinationAir;
 
     protected bool ivAccessInserted = false;
     protected bool isOxygened = false;
@@ -57,6 +58,7 @@ public class Patient : ECA
         stomach = GetComponentInChildren<Stomach>();
         pumpPosition = GetComponentInChildren<PumpPosition>();
         destinationDef = GetComponentInChildren<DestinationDef>();
+        destinationAir = GetComponentInChildren<DestinationAir>();
 
         state = PatientState.VF;
     }
@@ -130,6 +132,10 @@ public class Patient : ECA
         return giveOxygenPosition.transform;
     }
 
+    public Transform GetDestinationAir()
+    {
+        return destinationAir.transform;
+    }
 
     public Transform GetDefRightPosition()
     {

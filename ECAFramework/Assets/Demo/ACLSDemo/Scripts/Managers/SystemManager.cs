@@ -65,9 +65,16 @@ public class SystemManager: MonoBehaviour
             Debug.Log("Correct Action!");
         else
         {
-            if (graphManager.CheckWrongAdvance(actionDone, actualNode.NodeName, nodesSequence))
+
+
+            Node successive = graphManager.CheckWrongAdvance(actionDone, actualNode.NodeName, nodesSequence);
+            if (successive != null)
             {
                 actualNode.Finished = true;
+                actualNode = successive;
+                nodesSequence.Add(actualNode);
+                actualNode.IsCorrectAction(actionDone);
+
                 Debug.Log("Ti sei dimenticato di fare delle azioni nel nodo precedente");
             }
         }

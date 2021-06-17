@@ -8,6 +8,7 @@ public class AirwayTable : MonoBehaviour
     CapnographyTube capnographyTube;
     DestinationMask destinationMask;
     DestinationPump destinationPump;
+    Destination destination;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class AirwayTable : MonoBehaviour
         capnographyTube = GetComponentInChildren<CapnographyTube>();
         destinationMask = GetComponentInChildren<DestinationMask>();
         destinationPump = GetComponentInChildren<DestinationPump>();
+        destination = GetComponentInChildren<Destination>();
     }
 
     public Oxygen GetOxygen()
@@ -36,5 +38,10 @@ public class AirwayTable : MonoBehaviour
     public Transform GetDestinationPump()
     {
         return destinationPump.transform;
+    }
+
+    public Transform GetDestination()
+    {
+        return destination.transform;
     }
 }

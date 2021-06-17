@@ -29,7 +29,7 @@ public class Node
                 counter++;
                 actions[actionName] = true;
                 if (counter == actions.Count)
-                    Finished = true;
+                    finished = true;
                 return true;
             }
             else
@@ -51,6 +51,11 @@ public class Node
                 actions = actions.ToDictionary(p => p.Key, p => false);               
             }
         }
+    }
+
+    public int GetActionsNumber
+    {
+        get => actions.Count;
     }
 
     public NodeName NodeName

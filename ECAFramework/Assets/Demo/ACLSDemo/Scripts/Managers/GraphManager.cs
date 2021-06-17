@@ -19,12 +19,14 @@ public class GraphManager : MonoBehaviour
         parentNodes.Add(node, successiveNodes);
     }
 
+    public List<NodeName> GetSuccessiveNodes(Node node)
+    {
+        return parentNodes[node];
+    }
+
     private NodeName GetSuccessiveRythmNode(List<Node> precedentNodes)
     {
-        if (precedentNodes[precedentNodes.Count - 1].NodeName == NodeName.CheckRythm)
-            precedentNodes.RemoveAt(precedentNodes.Count - 1);
-
-        if(precedentNodes.Count == 1)
+        if(precedentNodes.Count -1 == 1)
         {
             if (patient.state == PatientState.Asystole)
                 return NodeName.CprIvEpi;
@@ -46,14 +48,11 @@ public class GraphManager : MonoBehaviour
 
     private NodeName GetSuccessiveShock(List<Node> precedentNodes)
     {
-        if (precedentNodes[precedentNodes.Count - 1].NodeName == NodeName.Shock)
-            precedentNodes.RemoveAt(precedentNodes.Count - 1);
-
-        if (precedentNodes.Count == 2)
+        if (precedentNodes.Count - 1 == 2)
             return NodeName.CprIv;
         else
         {
-            if (precedentNodes[precedentNodes.Count - 2].NodeName == NodeName.CprEpi)
+            if (precedentNodes[precedentNodes.Count - 3].NodeName == NodeName.CprEpi)
                 return NodeName.CprAmi;
             else
                 return NodeName.CprEpi;
@@ -72,7 +71,7 @@ public class GraphManager : MonoBehaviour
             return NodeName.None;
     }
 
-    public bool CheckWrongAdvance(ActionName actionDone, NodeName actualNode, List<Node> precedentNodes)
+    public Node CheckWrongAdvance(ActionName actionDone, NodeName actualNode, List<Node> precedentNodes)
     {
         if (actualNode == NodeName.Start || actualNode == NodeName.CprIv || actualNode == NodeName.CprAmi ||
             actualNode == NodeName.CprEpi || actualNode == NodeName.CprIvEpi || actualNode == NodeName.Cpr)
@@ -81,9 +80,9 @@ public class GraphManager : MonoBehaviour
             Node node = nodes[successive];
 
             if (node.IsCorrectAction(actionDone))
-                return true;
+                return node;
             else
-                return false;
+                return null;
         }
         else if (actualNode == NodeName.CheckRythm)
         {
@@ -91,9 +90,9 @@ public class GraphManager : MonoBehaviour
             Node node = nodes[successive];
 
             if (node.IsCorrectAction(actionDone))
-                return true;
+                return node;
             else
-                return false;
+                return null;
         }
         else if (actualNode == NodeName.Shock)
         {
@@ -101,14 +100,14 @@ public class GraphManager : MonoBehaviour
             Node node = nodes[successive];
 
             if (node.IsCorrectAction(actionDone))
-                return true;
+                return node;
             else
-                return false;
+                return null;
         }
         else
         {
             Debug.LogError("The node doesn't exist");
-            return false;
+            return null;
         }
 
     }

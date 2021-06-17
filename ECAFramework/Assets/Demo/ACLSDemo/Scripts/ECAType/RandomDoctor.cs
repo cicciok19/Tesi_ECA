@@ -27,7 +27,7 @@ public class RandomDoctor : ECA
 
         //just for debug
         //HandleTalkToRelative();
-        HandleTakeOtherMedicine(MedicineName.Amiodarone);
+        //HandleTakeOtherMedicine(MedicineName.Amiodarone);
     }
 
     protected override ECAAnimator AddECAAnimator()

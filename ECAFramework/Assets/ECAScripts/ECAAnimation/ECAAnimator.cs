@@ -207,7 +207,7 @@ public class ECAAnimator : MonoBehaviour
                 audioSource.Play();
                 yield return new WaitWhile(() => audioSource.isPlaying);
             }
-            Debug.Log("Audio ended!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            //Debug.Log("Audio ended!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             HideText();
         }
         else
