@@ -57,4 +57,19 @@ public class Node
     {
         get => nodeName;
     }
+
+    public List<string> incompleteActions
+    {
+        get
+        {
+            List<string> actionNames = new List<string>();
+            foreach (KeyValuePair<ActionName, bool> entry in actions)
+            {
+                if (!entry.Value)
+                    actionNames.Add(entry.Key.ToString());
+            }
+
+            return actionNames;
+        }
+    }
 }

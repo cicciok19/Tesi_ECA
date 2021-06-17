@@ -7,8 +7,9 @@ public class GraphManager : MonoBehaviour
     Dictionary<Node, List<NodeName>> parentNodes = new Dictionary<Node, List<NodeName>>();
     Dictionary<NodeName, Node> nodes = new Dictionary<NodeName, Node>();
     Patient patient;
+    LogWriter logWriter;
 
-    public GraphManager(Dictionary<NodeName, Node> nodes, Patient patient)
+    public GraphManager(Dictionary<NodeName, Node> nodes, Patient patient, LogWriter logWriter = null)
     {
         this.nodes = nodes;
         this.patient = patient;
