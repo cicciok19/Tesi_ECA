@@ -260,6 +260,7 @@ public class ECA : MonoBehaviour, IIntentHandler
     
         myParameters = XmlParser.GetEcaParameters(ID, Configuration.Instance.XmlDocumentNames.EcaList); //GET parameters of this eca from XML!! BUT, set the ID first (required to select ECA in XML file)
         GeneralMessagesCltn = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);
+        EmotionalMessages = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);
 
         //CREA PROBLEMI, NON SO PERCHE'
         //EmotionManager = new ECAEmotionManager(myParameters.EmotionModel);

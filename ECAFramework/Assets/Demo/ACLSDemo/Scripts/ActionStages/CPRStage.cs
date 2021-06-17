@@ -40,7 +40,7 @@ public class CPRStage : ECAActionStage
         ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, interactionObj, true);
         ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.RightHand, interactionObj, true);
 
-        WaitFor(.5f);
+        WaitFor(5f);
     }
 
     public override void Update()
@@ -50,7 +50,7 @@ public class CPRStage : ECAActionStage
 
         if (startEvaluate)
         {
-            if (interactionObj.GetValue(InteractionObject.WeightCurve.Type.PoserWeight, interactionTarget_L, timer) < 0.01f)
+            if (ikManager.fullBodyBipedIK.solver.leftHandEffector.positionWeight < 0.01f)
                 EndStage();
         }
     }
