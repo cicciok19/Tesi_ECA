@@ -36,6 +36,7 @@ using MxM;
 public class ECAAnimator : MonoBehaviour
 {
     public event EventHandler AudioEnded;
+    public event EventHandler AudioStart;
     public event EventHandler EventContact;
     public event EventHandler TriggeredAnimationComplete;
     public event EventHandler TriggeredAnimationContact;
@@ -186,6 +187,10 @@ public class ECAAnimator : MonoBehaviour
             var audioClip = AudioClip.Create("SynthesizedAudio", audioData.Length, 1, 16000, false);
             audioClip.SetData(audioData, 0);
             Utility.Log("Playing the Audio!!!");
+
+            if (AudioStart != null)
+                AudioStart(this, EventArgs.Empty);
+
             ShowText(messageContent);
             if (salsa != null)
             {

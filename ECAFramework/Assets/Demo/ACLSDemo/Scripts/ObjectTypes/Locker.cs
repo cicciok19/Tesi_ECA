@@ -7,7 +7,7 @@ public class Locker : MonoBehaviour
     private Transform destination;
     private Drawer[] drawers;
 
-    void Start()
+    void Awake()
     {
         destination = GetComponentInChildren<Destination>().transform;
         drawers = GetComponentsInChildren<Drawer>();

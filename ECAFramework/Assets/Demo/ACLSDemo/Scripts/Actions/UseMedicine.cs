@@ -69,6 +69,7 @@ public class UseMedicine : ECAAction
         drawer = d;
         medicationProvider = (MedicationProvider)eca;
         pole = medicationProvider.medicalRoom.GetPole();
+        this.patient = patient;
     }
 
     protected void OnMedicinePicked(object sender, EventArgs args)
@@ -129,8 +130,8 @@ public class UseMedicine : ECAAction
 
             DropStage releaseHandle = new DropStage(grabHandle);
 
-            GoToStage goToPole = new GoToStage(pole.GetDestination());
-            DropStage startInjection = new DropStage(pickMedicine, pole.GetInjectionPosition());
+            GoToStage goToPatient = new GoToStage(medicationProvider.GetDestinationNearTable());
+            DropStage startInjection = new DropStage(pickMedicine, patient.GetInjectionPosition());
             startInjection.StageFinished += OnMedicineReleased;
 
             GoToStage returnNearTable = new GoToStage(medicationProvider.GetDestinationNearTable());
@@ -139,7 +140,7 @@ public class UseMedicine : ECAAction
             stages.Add(grabHandle);
             stages.Add(pickMedicine);
             stages.Add(releaseHandle);
-            stages.Add(goToPole);
+            stages.Add(goToPatient);
             stages.Add(startInjection);
             stages.Add(returnNearTable);
         }

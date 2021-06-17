@@ -96,7 +96,7 @@ public class Shock : ECACompositeAction
         actions.Add(action);
     }
 
-    private void PosePaddles()
+    private void PlacePaddles()
     {
         List<ECAActionStage> list = new List<ECAActionStage>();
 
@@ -134,7 +134,7 @@ public class Shock : ECACompositeAction
     {
         PickPaddles();
         UseShock();
-        PosePaddles();
+        PlacePaddles();
         //base.CreateActionList();
     }
 
@@ -143,6 +143,11 @@ public class Shock : ECACompositeAction
         WaitStage wait = (WaitStage)sender;
         wait.StageFinished -= SendShock;
         defManager.SendDirectMessage("Scarica!");
+        ecaAnimator.AudioEnded += OnCommunicationEnded;
+    }
+
+    private void OnCommunicationEnded(object sender, EventArgs e)
+    {
         patient.OnShockReceived();
     }
 }
