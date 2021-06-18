@@ -6,7 +6,7 @@ using System.IO;
 public class LogWriter : MonoBehaviour
 {
     [SerializeField] string logName;
-    [SerializeField] private string path = "C:/Users/franc/Documents/GitHub/Tesi_ECA/ECAFramework/Assets/Demo/ACLSDemo/Logs/";
+    [SerializeField] private string path = "Assets/Demo/ACLSDemo/Logs";
     private System.DateTime date;
     StreamWriter writer;
 

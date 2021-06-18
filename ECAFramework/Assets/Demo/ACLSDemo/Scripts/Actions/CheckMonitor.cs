@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckScreen : ECAAction
+public class CheckMonitor : ECAAction
 {
     
     DefibrillatorTable defibrillatorTable;
     DefibrillatorScreen screen;
     Patient patient;
 
-    public CheckScreen(ECA eca, DefibrillatorTable defibrillatorTable, Patient patient, bool canAbort = true) : base(eca, canAbort)
+    public CheckMonitor(ECA eca, DefibrillatorTable defibrillatorTable, Patient patient, bool canAbort = true) : base(eca, canAbort)
     {
         this.defibrillatorTable = defibrillatorTable;
         screen = defibrillatorTable.GetDefibrillator().GetScreen();

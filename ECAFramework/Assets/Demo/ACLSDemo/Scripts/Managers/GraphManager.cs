@@ -42,6 +42,8 @@ public class GraphManager : MonoBehaviour
                 return NodeName.Cpr;
             else if (patient.state == PatientState.VF)
                 return NodeName.Shock;
+            else if (patient.state == PatientState.Ok)
+                return NodeName.End;
             else
                 return NodeName.None;
         }

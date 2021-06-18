@@ -20,6 +20,9 @@ public class RandomDoctor : ECA
         base.Start();
         otherRoom = FindObjectOfType<OtherRoom>();
         medicalRoom = FindObjectOfType<MedicalRoom>();
+
+        medicalRoom.MedicineFinished += OnMedicineFinished;
+
         initialPosition = this.transform.position;
         outsideDestination = otherRoom.GetDestination();
 
@@ -72,6 +75,12 @@ public class RandomDoctor : ECA
             SendDirectMessage("Il paziente ha già avuto un problema simile");
         else
             SendDirectMessage("Il paziente non ha mai avuto problemi simili");
+    }
+
+    private void OnMedicineFinished(object sender, EventArgs e)
+    {
+        MedicineEventArgs args = e as MedicineEventArgs;
+        HandleTakeOtherMedicine(args.medicineName);
     }
 
 }

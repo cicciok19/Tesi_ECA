@@ -41,6 +41,7 @@ public class MedicationProvider : ECA
     private Locker locker;
     private SystemManager systemManager;
     private UseMedicine useMedicine;
+    private RubbishTable rubbishTable;
 
     public MedicalRoom medicalRoom;
 
@@ -58,11 +59,12 @@ public class MedicationProvider : ECA
     {
         base.Start();
         medicationTable = medicalRoom.GetMedicationTable();
+        rubbishTable = medicalRoom.GetRubbishTable();
         pole = medicalRoom.GetPole();
         locker = medicalRoom.GetLocker();
 
         //just for debug
-        //HandleUseMedicine(MedicineName.Amiodarone);
+        //HandleUseMedicine(MedicineName.Epinephrine);
         //HandleIVAccess(medicationTable.GetVeinTube(), patient);
     }
 
@@ -125,14 +127,14 @@ public class MedicationProvider : ECA
     {
         UseMedicine useMedicine = (UseMedicine)sender; 
         useMedicine.InjectionDone -= OnInjectionDone;
-        UseMedicineEventArgs args = (UseMedicineEventArgs)e;
+        MedicineEventArgs args = (MedicineEventArgs)e;
         MedicineName name = args.medicineName;
         //send message of completed action
 
         if (name == MedicineName.Epinephrine)
         {
             timeRecorder.TimeExpired += OnTimeExpired;
-            timeRecorder.CheckTime(this, .5f);
+            timeRecorder.CheckTime(this, 2f);
             systemManager.CheckAction(useMedicine.ActionName);
             patient.OnEpinephrineDone();
         }
@@ -141,6 +143,8 @@ public class MedicationProvider : ECA
             systemManager.CheckAction(useMedicine.ActionName);
             patient.OnAmiodaroneDone();
         }
+
+        medicalRoom.CheckAllSpot();
     }
 
     private void OnTimeExpired(object sender, EventArgs e)
@@ -149,7 +153,7 @@ public class MedicationProvider : ECA
 
         if(ecaArg.eca == this)
         {
-            SendDirectMessage("Sono passati 2 minuti, devi fare un'altra iniezione di epinefrina!");
+            timeRecorder.SendDirectMessage("Sono passati 2 minuti, devi fare un'altra iniezione di epinefrina!");
             //mettere in coda se sta facendo qualcosa
             HandleUseMedicine(MedicineName.Epinephrine);
         }
@@ -177,7 +181,7 @@ public class MedicationProvider : ECA
         if (m != null)
         {
             //send message
-             useMedicine = new UseMedicine(this, m, patient);
+             useMedicine = new UseMedicine(this, m, patient, rubbishTable);
         }
         else
         {
@@ -185,7 +189,7 @@ public class MedicationProvider : ECA
             Assert.IsNotNull(d);    //just for debug, in real cases could be null
             
             if(d != null)
-                useMedicine = new UseMedicine(this, d, patient);
+                useMedicine = new UseMedicine(this, d, patient, rubbishTable);
         }
     
         return useMedicine;

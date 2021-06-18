@@ -64,7 +64,7 @@ public class DefibrillatorManager : ECA
 
     public override void SubscribeHandlerToIntentManager()
     {
-        List<string> IntentName = new List<string> {ATTACH_MONITOR, SHOCK};
+        List<string> IntentName = new List<string> {ATTACH_MONITOR, SHOCK, CHECK_MONITOR};
 
         foreach (string intent in IntentName)
             IntentManager.Instance.AddIntentHandler(intent, this);
@@ -130,7 +130,7 @@ public class DefibrillatorManager : ECA
             AttachMonitor attachMonitor = new AttachMonitor(this, defibrillatorTable, patient);
             attachMonitor.CompletedAction += OnMonitorAttached;
 
-            CheckScreen checkScreen = new CheckScreen(this, defibrillatorTable, patient);
+            CheckMonitor checkScreen = new CheckMonitor(this, defibrillatorTable, patient);
             checkScreen.CompletedAction += OnScreenChecked;
 
             actionsList.Enqueue(attachMonitor);
@@ -138,7 +138,7 @@ public class DefibrillatorManager : ECA
         }
         else
         {
-            CheckScreen checkScreen = new CheckScreen(this, defibrillatorTable, patient);
+            CheckMonitor checkScreen = new CheckMonitor(this, defibrillatorTable, patient);
             checkScreen.CompletedAction += OnScreenChecked;
 
             actionsList.Enqueue(checkScreen);
@@ -147,7 +147,7 @@ public class DefibrillatorManager : ECA
 
     private void OnScreenChecked(object sender, EventArgs e)
     {
-        CheckScreen checkScreen = (CheckScreen)sender;
+        CheckMonitor checkScreen = (CheckMonitor)sender;
         checkScreen.CompletedAction -= OnScreenChecked;
         systemManager.CheckAction(checkScreen.ActionName);
     }

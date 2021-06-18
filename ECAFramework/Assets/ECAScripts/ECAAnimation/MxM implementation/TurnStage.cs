@@ -47,7 +47,7 @@ public class TurnStage : ECAActionStage
         //WarpBody();
 
         //TODO: change this, it's just for debug
-        //WaitFor(.5f);
+        WaitFor(.5f);
     }
 
     public override void EndStage()
@@ -61,10 +61,10 @@ public class TurnStage : ECAActionStage
     {
         base.Update();
         //Debug.Log(Vector3.Dot(dir, animatorMxM.Eca.transform.forward));
-        if (Vector3.Dot(dir, animatorMxM.Eca.transform.forward) > 0.9f)
+        /*if (Vector3.Dot(dir, animatorMxM.Eca.transform.forward) > 0.9f)
             EndStage();
         else
-            animatorMxM.m_trajectory.StrafeDirection = dir;
+            animatorMxM.m_trajectory.StrafeDirection = dir;*/
     }
 
     private void WarpFoot()
@@ -97,5 +97,11 @@ public class TurnStage : ECAActionStage
                 ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.bodyEffector, 0, .4f);
             }
         }
+    }
+
+    protected override void OnWaitCompleted()
+    {
+        base.OnWaitCompleted();
+        EndStage();
     }
 }

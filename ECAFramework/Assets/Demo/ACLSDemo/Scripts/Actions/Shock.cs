@@ -54,8 +54,8 @@ public class Shock : ECACompositeAction
 
         pickStages = new List<PickStage>()
         {
-            new PickStage(defibrillator.GetLeftPaddle().transform, 1, false, HandSide.LeftHand),
-            new PickStage(defibrillator.GetRightPaddle().transform, 1, false, HandSide.RightHand)
+            new PickStage(defibrillator.GetLeftPaddle().transform, .5f, false, HandSide.LeftHand),
+            new PickStage(defibrillator.GetRightPaddle().transform, .5f, false, HandSide.RightHand)
         };
 
         ECAParallelActionStage pick = new ECAParallelActionStage(pickStages.ToArray());
@@ -100,6 +100,7 @@ public class Shock : ECACompositeAction
     {
         List<ECAActionStage> list = new List<ECAActionStage>();
 
+        WaitStage firstWait = new WaitStage(2f);
         TurnStage turnToTable = new TurnStage(patient.transform, false, leftFootPosition, bodyTarget);
         WaitStage wait = new WaitStage(.5f);
 
@@ -118,6 +119,7 @@ public class Shock : ECACompositeAction
 
         GoToStage goToPatient = new GoToStage(destinationPatient);
 
+        list.Add(firstWait);
         list.Add(turnToTable);
         list.Add(wait);
         list.Add(posePaddles);
@@ -148,6 +150,7 @@ public class Shock : ECACompositeAction
 
     private void OnCommunicationEnded(object sender, EventArgs e)
     {
+        ecaAnimator.AudioEnded -= OnCommunicationEnded;
         patient.OnShockReceived();
     }
 }

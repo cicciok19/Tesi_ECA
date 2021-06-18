@@ -14,7 +14,7 @@ public class IVAccess : ECAAction
     {
         medicationProvider = (MedicationProvider)eca;
         this.ivTube = ivTube;
-        injectionPosition = patient.GetInjectionPosition();
+        injectionPosition = patient.GetIVPosition();
         destination = medicationProvider.GetDestinationNearTable();
         actionName = ActionName.IvAccess;
     }

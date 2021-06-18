@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class IVPole : MonoBehaviour
 {
-    private InjectionPosition injectionPosition;
+    private IVPosition injectionPosition;
     private Destination destination;
     void Awake()
     {
-        injectionPosition = GetComponentInChildren<InjectionPosition>();
+        injectionPosition = GetComponentInChildren<IVPosition>();
         destination = GetComponentInChildren<Destination>();
     }
     

@@ -16,7 +16,8 @@ using Random = UnityEngine.Random;
 {
     None,
     VF,
-    Asystole
+    Asystole,
+    Ok
 }
 
 
@@ -24,7 +25,9 @@ using Random = UnityEngine.Random;
 
 public class Patient : ECA
 {
-    private InjectionPosition injectionPosition;
+    private float stateThreshold = 0.8f;
+
+    private IVPosition ivPosition;
     private CPRPosition cprPosition;
     private AdvancedCapnographyPosition capnographyPosition;
     private GiveOxygenPosition giveOxygenPosition;
@@ -36,18 +39,51 @@ public class Patient : ECA
     private PumpPosition pumpPosition;
     private DestinationDef destinationDef;
     private DestinationAir destinationAir;
+    private InjectionPosition injectionPosition;
 
     protected bool ivAccessInserted = false;
     protected bool isOxygened = false;
     protected bool hasCapnography = false;
 
-    public EventHandler Shocked;
+    public event EventHandler Shocked;
     public PatientState state;
+    private PatientState initialState;
+    private float stateLevel;
 
+    public float StateLevel
+    {
+        get { return stateLevel; }
+        set
+        {
+            stateLevel = value;
+            if (stateLevel > stateThreshold)
+            {
+                if(stateLevel > 1)
+                    stateLevel = 1;
+                state = PatientState.Ok;
+            }
+            else
+            {
+                if (stateLevel < 0)
+                    stateLevel = 0;
+                if (stateLevel >= .2f)
+                    state = initialState;
+                if (stateLevel < .1f)
+                {
+                    state = PatientState.VF;
+                    initialState = state;
+                }
+                
+            }
+
+            Debug.Log("ACTUAL PATIENT STATE LEVEL: " + stateLevel);
+
+        }
+    }
 
     protected override void Awake()
     {
-        injectionPosition = GetComponentInChildren<InjectionPosition>();
+        ivPosition = GetComponentInChildren<IVPosition>();
         cprPosition = GetComponentInChildren<CPRPosition>();
         capnographyPosition = GetComponentInChildren<AdvancedCapnographyPosition>();
         giveOxygenPosition = GetComponentInChildren<GiveOxygenPosition>();
@@ -59,8 +95,21 @@ public class Patient : ECA
         pumpPosition = GetComponentInChildren<PumpPosition>();
         destinationDef = GetComponentInChildren<DestinationDef>();
         destinationAir = GetComponentInChildren<DestinationAir>();
+        injectionPosition = GetComponentInChildren<InjectionPosition>();
 
-        state = PatientState.VF;
+        float random = Random.Range(0, 1);
+        if(random > 0.5f)
+        {
+            state = PatientState.VF;
+            stateLevel = .2f;
+        }
+        else
+        {
+            state = PatientState.Asystole;
+            stateLevel = .4f;
+        }
+
+        initialState = state;
     }
 
     public void OnShockReceived()
@@ -121,9 +170,9 @@ public class Patient : ECA
     }
 
 
-    public Transform GetInjectionPosition()
+    public Transform GetIVPosition()
     {
-        return injectionPosition.transform;
+        return ivPosition.transform;
     }
 
 
@@ -154,6 +203,10 @@ public class Patient : ECA
         return pumpPosition.transform;
     }
 
+    public Transform GetInjectionPosition()
+    {
+        return injectionPosition.transform;
+    }
     public bool HasCapnography
     {
         get => hasCapnography;

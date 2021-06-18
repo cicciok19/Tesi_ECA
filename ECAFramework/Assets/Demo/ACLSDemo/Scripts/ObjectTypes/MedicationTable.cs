@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using System;
 
 public class MedicationTable : MonoBehaviour
 {
     private MedicineSpot[] medicineSpots;
     private IVTube ivTube;
+
+    public event EventHandler MedicineFinished;
 
     void Start()
     {
@@ -26,6 +29,11 @@ public class MedicationTable : MonoBehaviour
             }
         }
 
+        if (medicineSpot == null)
+        {
+            //do something
+        }
+
         return medicineSpot;
     }
 
@@ -41,11 +49,24 @@ public class MedicationTable : MonoBehaviour
             }
         }
 
+        if(medicineSpot == null)
+        {
+            //do something
+        }
+
         return medicineSpot;
     }
 
     public IVTube GetVeinTube()
     {
         return ivTube;
+    }
+
+    public List<MedicineSpot> GetMedicineSpots()
+    {
+        List<MedicineSpot> list = new List<MedicineSpot>();
+        foreach (var m in medicineSpots)
+            list.Add(m);
+        return list;
     }
 }

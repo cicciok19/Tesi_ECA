@@ -12,7 +12,8 @@ public enum NodeName
     CprIv,
     CprEpi,
     CprAmi,
-    CprIvEpi
+    CprIvEpi,
+    End
 }
 
 public enum ActionName
@@ -25,7 +26,8 @@ public enum ActionName
     Shock,
     CheckRythm,
     UseEpinephrine,
-    UseAmiodarone
+    UseAmiodarone,
+    None
 }
 
 public class SystemManager: MonoBehaviour
@@ -66,15 +68,17 @@ public class SystemManager: MonoBehaviour
     {
         if (actualNode.IsCorrectAction(actionDone))
         {
+            if(actionDone != ActionName.CheckRythm || actionDone != ActionName.AttachMonitor || actionDone != ActionName.IvAccess)
+                patient.StateLevel += 0.1f;
             Debug.Log("Correct Action!");
         }
         else
         {
-
-
             Node successive = graphManager.CheckWrongAdvance(actionDone, actualNode.NodeName, nodesSequence);
+
             if (successive != null)
             {
+                patient.StateLevel -= (float)actualNode.incompleteActions.Count * 0.05f;
                 actualNode.Finished = true;
                 actualNode = successive;
                 nodesSequence.Add(actualNode);
@@ -82,6 +86,9 @@ public class SystemManager: MonoBehaviour
 
                 Debug.Log("Ti sei dimenticato di fare delle azioni nel nodo precedente");
             }
+            else
+                patient.StateLevel -= .5f;
+
         }
 
         if (actualNode.Finished)
@@ -151,6 +158,12 @@ public class SystemManager: MonoBehaviour
             ActionName.Cpr
         });
         nodes.Add(NodeName.Cpr, cpr);
+
+        Node end = new Node(NodeName.End, new List<ActionName> 
+        {
+            ActionName.None
+        });
+        nodes.Add(NodeName.End, end);
     }
 
     

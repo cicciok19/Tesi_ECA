@@ -12,6 +12,12 @@ public class ResumeInteractionStage : ECAActionStage
         this.effectors = effectors;
     }
 
+    public ResumeInteractionStage(FullBodyBipedEffector effector) : base()
+    {
+        effectors = new List<FullBodyBipedEffector>();
+        effectors.Add(effector);
+    }
+
     public override void StartStage()
     {
         base.StartStage();

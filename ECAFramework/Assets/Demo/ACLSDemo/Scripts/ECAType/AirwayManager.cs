@@ -65,7 +65,7 @@ public class AirwayManager : ECA
 
     private void HandleCapnography()
     {
-        Capnography capnography = new Capnography(this, airwayTable.GetCapnographyTube(), patient);
+        Capnography capnography = new Capnography(this, airwayTable, patient);
         capnography.CompletedAction += OnCapnographyCompleted;
         actionsList.Enqueue(capnography);
 

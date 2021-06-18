@@ -6,11 +6,19 @@ public class Locker : MonoBehaviour
 {
     private Transform destination;
     private Drawer[] drawers;
+    public MedicineSpot[] medicineSpots
+    {
+        get
+        {
+            return GetComponentsInChildren<MedicineSpot>();
+        }
+    }
 
     void Awake()
     {
         destination = GetComponentInChildren<Destination>().transform;
         drawers = GetComponentsInChildren<Drawer>();
+        
     }
 
     public Transform GetDestination()
