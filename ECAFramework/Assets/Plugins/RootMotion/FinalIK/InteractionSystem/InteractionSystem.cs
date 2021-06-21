@@ -616,7 +616,7 @@ namespace RootMotion.FinalIK {
 				return;
 			}
 
-			// Add to the FBBIK OnPostUpdate delegate to get a call when it has finished updating
+            // Add to the FBBIK OnPostUpdate delegate to get a call when it has finished updating
 			fullBody.solver.OnPreUpdate += OnPreFBBIK;
 			fullBody.solver.OnPostUpdate += OnPostFBBIK;
 			fullBody.solver.OnFixTransforms += OnFixTransforms;

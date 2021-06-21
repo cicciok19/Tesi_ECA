@@ -5,9 +5,6 @@ using UnityEngine.Assertions;
 using RootMotion.FinalIK;
 using RootMotion;
 
-
-
-
 /// <summary>
 /// Picking up a box shaped object with both hands.
 /// </summary>
@@ -43,7 +40,7 @@ public class PickStage : ECAActionStage
 		base.StartStage();
 			
 		animatorMxM = (ECAAnimatorMxM)animator;
-		ikManager.interactionSystem.Start();
+		//ikManager.interactionSystem.Start();
 
 		//set components needed to start the interaction
 		SetupComponents();
@@ -87,9 +84,6 @@ public class PickStage : ECAActionStage
 	{
 		if (effectorType != effector) return;
 		if (interactionObject != obj) return;
-
-		// Rotate the pivot of the hand targets
-		//RotatePivot();
 
 		// Rotate the hold point so it matches the current rotation of the object
 		if(!grab)
@@ -141,24 +135,6 @@ public class PickStage : ECAActionStage
 		}
 	}
 
-	// Rotate the pivot of the hand targets by 90 degrees so we could grab the object from any direction
-	private void RotatePivot()
-	{
-		// Get the flat direction towards the character
-		Vector3 characterDirection = (pivot.position - ikManager.interactionSystem.transform.position).normalized;
-		characterDirection.y = 0f;
-
-		// Convert the direction to local space of the object
-		Vector3 characterDirectionLocal = obj.transform.InverseTransformDirection(characterDirection);
-
-		// QuaTools.GetAxis returns a 90 degree ortographic axis for any direction
-		Vector3 axis = QuaTools.GetAxis(characterDirectionLocal);
-		Vector3 upAxis = QuaTools.GetAxis(obj.transform.InverseTransformDirection(ikManager.interactionSystem.transform.up));
-
-		// Rotate towards axis and upAxis
-		pivot.localRotation = Quaternion.LookRotation(axis, upAxis);
-	}
-
     public override void EndStage()
     {
         base.EndStage();
@@ -169,13 +145,12 @@ public class PickStage : ECAActionStage
 
     private void SetupInteractionSystem()
     {
-        ikManager.interactionSystem.Start();
-
+		//ikManager.interactionSystem.Start();
         ikManager.interactionSystem.OnInteractionStart += OnStart;
         ikManager.interactionSystem.OnInteractionPause += OnPause;
 
-        ikManager.interactionSystem.speed = .2f;
-    }
+        ikManager.interactionSystem.speed = .5f;
+	}
 
 	private void SetupComponents()
     {

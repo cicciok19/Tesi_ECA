@@ -31,7 +31,7 @@ public class PlaceObjectStage : ECAActionStage
         if (destinationObject.GetComponentInChildren<PivotObject>() == null)
             Debug.LogError("The target does not have a pivot object.");
 
-        ikManager.interactionSystem.speed = .2f;
+        ikManager.interactionSystem.speed = .5f;
 
         if (handSide == HandSide.RightHand)
         {

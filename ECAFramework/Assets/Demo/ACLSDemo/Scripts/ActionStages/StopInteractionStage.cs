@@ -22,6 +22,8 @@ public class ResumeInteractionStage : ECAActionStage
     {
         base.StartStage();
 
+        ikManager.interactionSystem.speed = 1f;
+
         foreach(FullBodyBipedEffector effector in effectors)
             ikManager.interactionSystem.ResumeInteraction(effector);
 

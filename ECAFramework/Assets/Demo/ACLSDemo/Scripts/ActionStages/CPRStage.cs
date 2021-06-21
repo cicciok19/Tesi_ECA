@@ -57,8 +57,8 @@ public class CPRStage : ECAActionStage
 
     private void SetupInteractionSystem()
     {
-        ikManager.interactionSystem.Start();
-        ikManager.interactionSystem.speed = 0.1f;
+        //ikManager.interactionSystem.Start();
+        ikManager.interactionSystem.speed = 0.2f;
         speed = ikManager.interactionSystem.speed;
     }
 

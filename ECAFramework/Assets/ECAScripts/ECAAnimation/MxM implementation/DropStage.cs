@@ -44,10 +44,11 @@ public class DropStage : ECAActionStage
 
         dropping = true;
         dropped = false;
+        //ikManager.interactionSystem.speed = 0.2f;
 
         ikManager.interactionSystem.StopInteraction(pickStage.effector);
 
-        WaitFor(.8f);
+        WaitFor(1f);
     }
 
     protected override void OnWaitCompleted()
@@ -99,7 +100,9 @@ public class DropStage : ECAActionStage
 
         if (dropped)
         {
-            if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight < .02f || ikManager.fullBodyBipedIK.solver.leftHandEffector.positionWeight < .02f)
+            Debug.Log(effector.positionWeight);
+
+            if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight < .02f || effector.positionWeight < .02f)
                 EndStage();
         }
 

@@ -123,8 +123,9 @@ public class Shock : ECACompositeAction
         list.Add(turnToTable);
         list.Add(wait);
         list.Add(posePaddles);
+        list.Add(wait);     //just a try
         list.Add(goToTable);
-        //list.Add(wait);
+        list.Add(wait);
         list.Add(parallelDrop);
         list.Add(goToPatient);
 

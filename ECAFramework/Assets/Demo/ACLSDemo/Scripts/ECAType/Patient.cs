@@ -41,7 +41,7 @@ public class Patient : ECA
     private DestinationAir destinationAir;
     private InjectionPosition injectionPosition;
 
-    protected bool ivAccessInserted = false;
+    protected bool ivAccessInserted = true;
     protected bool isOxygened = false;
     protected bool hasCapnography = false;
 

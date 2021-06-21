@@ -68,6 +68,11 @@ public class UseMedicine : ECACompositeAction
         pole = medicationProvider.medicalRoom.GetPole();
         this.patient = patient;
         this.rubbishTable = rubbishTable;
+
+        if (medicineSpot.GetMedicineName() == MedicineName.Amiodarone)
+            actionName = ActionName.UseAmiodarone;
+        else if (medicineSpot.GetMedicineName() == MedicineName.Epinephrine)
+            actionName = ActionName.UseEpinephrine;
     }
 
     protected void OnMedicinePicked(object sender, EventArgs args)
@@ -88,69 +93,6 @@ public class UseMedicine : ECACompositeAction
         SetupAction();
         base.StartAction();
     }
-
-
-   /* public override void SetupAction()
-    {
-        List<ECAActionStage> stages = new List<ECAActionStage>();
-        
-        if (drawer == null)
-        {
-            medicine = medicineSpot.GetSyringe();
-
-            GoToStage goToMedicine = new GoToStage(medicineSpot.GetDestination());
-
-            pickMedicine = new PickStage(medicine, 1, false, HandSide.RightHand);
-            pickMedicine.StageFinished += OnMedicinePicked;
-
-            GoToStage goToPatient = new GoToStage(medicationProvider.GetDestinationNearTable());
-            PlaceObjectStage startInjection = new PlaceObjectStage(pickMedicine, patient.GetInjectionPosition(), true); 
-            //DropStage startInjection = new DropStage(pickMedicine, patient.GetInjectionPosition());
-            startInjection.StageFinished += OnMedicineReleased;
-            WaitStage waitFor = new WaitStage(2f);
-            ResumeInteractionStage removeSyringe = new ResumeInteractionStage(RootMotion.FinalIK.FullBodyBipedEffector.RightHand);
-
-            stages.Add(goToMedicine);
-            stages.Add(pickMedicine);
-            stages.Add(goToPatient);
-            stages.Add(startInjection);
-            stages.Add(waitFor);
-            stages.Add(removeSyringe);
-        }
-        else
-        {
-            medicine = drawer.GetMedicineSpot().GetSyringe();
-
-            GoToStage goToDrawer = new GoToStage(drawer.GetDestination());
-
-            PickStage grabHandle = new PickStage(drawer.GetHandle().transform, 1, true, HandSide.LeftHand);
-            grabHandle.StageFinished += OnGrabHandle;
-
-            //dovrei aspettare, vediamo che succede
-            pickMedicine = new PickStage(medicine, 1, false, HandSide.RightHand);
-            pickMedicine.StageFinished += OnMedicinePicked;
-
-            DropStage releaseHandle = new DropStage(grabHandle);
-
-            GoToStage goToPatient = new GoToStage(medicationProvider.GetDestinationNearTable());
-            DropStage startInjection = new DropStage(pickMedicine, patient.GetIVPosition());
-            startInjection.StageFinished += OnMedicineReleased;
-
-            GoToStage returnNearTable = new GoToStage(medicationProvider.GetDestinationNearTable());
-
-            stages.Add(goToDrawer);
-            stages.Add(grabHandle);
-            stages.Add(pickMedicine);
-            stages.Add(releaseHandle);
-            stages.Add(goToPatient);
-            stages.Add(startInjection);
-            stages.Add(returnNearTable);
-        }
-
-        SetStages(stages);
-
-    }*/
-
 
     public override void OnCompletedAction()
     {
@@ -197,13 +139,15 @@ public class UseMedicine : ECACompositeAction
             pickMedicine.StageFinished += OnMedicinePicked;
 
             DropStage releaseHandle = new DropStage(grabHandle);
+            ResumeInteractionStage resume = new ResumeInteractionStage(RootMotion.FinalIK.FullBodyBipedEffector.LeftHand);
 
             GoToStage goToPatient = new GoToStage(medicationProvider.GetDestinationNearTable());
 
             stages.Add(goToDrawer);
             stages.Add(grabHandle);
             stages.Add(pickMedicine);
-            stages.Add(releaseHandle);
+            //stages.Add(releaseHandle);
+            stages.Add(resume);
             stages.Add(goToPatient);
         }
 
