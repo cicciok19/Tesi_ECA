@@ -10,7 +10,10 @@ public class MedicineSpot : MonoBehaviour
         get 
         {
             if (GetComponentInChildren<Medicine>() == null)
+            {
+                syringe = null;
                 return true;
+            }
             else
                 return false;
         }

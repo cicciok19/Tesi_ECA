@@ -64,9 +64,9 @@ public class MedicationProvider : ECA
         locker = medicalRoom.GetLocker();
 
         //just for debug
-        HandleUseMedicine(MedicineName.Amiodarone);
-        
-        //HandleIVAccess(medicationTable.GetVeinTube(), patient);
+        //HandleUseMedicine(MedicineName.Epinephrine);
+        //HandleUseMedicine(MedicineName.Epinephrine);
+        //HandleIVAccess();
     }
 
 
