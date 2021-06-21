@@ -29,7 +29,7 @@ public class Node
                 counter++;
                 actions[actionName] = true;
                 if (counter == actions.Count)
-                    finished = true;
+                    Finished = true;
                 return true;
             }
             else
@@ -48,7 +48,8 @@ public class Node
             if(finished == true)
             {
                 //risettiamo i bool a false perché il nodo potrebbe essere richiamato
-                actions = actions.ToDictionary(p => p.Key, p => false);               
+                actions = actions.ToDictionary(p => p.Key, p => false);
+                counter = 0;
             }
         }
     }

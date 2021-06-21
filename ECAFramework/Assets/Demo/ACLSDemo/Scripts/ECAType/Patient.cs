@@ -101,12 +101,12 @@ public class Patient : ECA
         if(random > 0.5f)
         {
             state = PatientState.VF;
-            stateLevel = .2f;
+            stateLevel = .1f;
         }
         else
         {
             state = PatientState.Asystole;
-            stateLevel = .4f;
+            stateLevel = .2f;
         }
 
         initialState = state;

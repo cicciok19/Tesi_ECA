@@ -1,0 +1,39 @@
+LogLab | 21/06/2021 12:51:21
+Start setted 
+  | WRONG | : IvAccess
+  | CORRECT | : AttachMonitor
+  | CORRECT | : Cpr
+  | CORRECT | : GiveOxygen
+Start node completed 
+
+CheckRythm setted 
+  | WRONG | : Capnography
+  | CORRECT | : CheckRythm
+CheckRythm node completed 
+
+Shock setted 
+  | CORRECT | : Shock
+Shock node completed 
+
+CprIv setted 
+  | CORRECT | : Cpr
+  /WRONG ADVANCE/ 
+  You forgot to do/trigger these actions: 
+    - IvAccess
+  | CORRECT | : CheckRythm
+CheckRythm node completed 
+
+Shock setted 
+  | CORRECT | : Shock
+Shock node completed 
+
+CprEpi setted 
+  /WRONG ADVANCE/ 
+  You forgot to do/trigger these actions: 
+    - Cpr
+    - UseEpinephrine
+    - Capnography
+  | CORRECT | : CheckRythm
+CheckRythm node completed 
+
+Shock setted 

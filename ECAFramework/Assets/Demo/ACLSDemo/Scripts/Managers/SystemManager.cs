@@ -59,15 +59,18 @@ public class SystemManager: MonoBehaviour
         SetNodes();
         SetGraph();
         actualNode = nodes[NodeName.Start];
-        nodesSequence.Add(actualNode);
+        nodesSequence.Add(actualNode);  
 
         logWriter = GetComponent<LogWriter>();
+
+        logWriter.AddNewNodeLog(actualNode.NodeName.ToString());
     }
 
     public void CheckAction(ActionName actionDone)
     {
         if (actualNode.IsCorrectAction(actionDone))
         {
+            logWriter.AddCorrectActionLog(actionDone.ToString());
             if(actionDone != ActionName.CheckRythm || actionDone != ActionName.AttachMonitor || actionDone != ActionName.IvAccess)
                 patient.StateLevel += 0.1f;
             Debug.Log("Correct Action!");
@@ -78,24 +81,43 @@ public class SystemManager: MonoBehaviour
 
             if (successive != null)
             {
+                logWriter.AddForgottenActionsLog(actualNode);
+
                 patient.StateLevel -= (float)actualNode.incompleteActions.Count * 0.05f;
                 actualNode.Finished = true;
                 actualNode = successive;
                 nodesSequence.Add(actualNode);
-                actualNode.IsCorrectAction(actionDone);
+                //actualNode.IsCorrectAction(actionDone);
+
+                logWriter.AddNewNodeLog(actualNode.NodeName.ToString());
+                logWriter.AddCorrectActionLog(actionDone.ToString());
 
                 Debug.Log("Ti sei dimenticato di fare delle azioni nel nodo precedente");
             }
             else
+            {
+                logWriter.AddWrongActionLog(actionDone.ToString());
                 patient.StateLevel -= .5f;
+            }
+                
 
         }
 
         if (actualNode.Finished)
         {
             NodeName newNode = graphManager.GetNewNode(actualNode.NodeName, nodesSequence);
-            actualNode = nodes[newNode];
-            nodesSequence.Add(actualNode);
+
+            if (newNode == NodeName.None)
+                EndApplication();
+            else
+            {
+                logWriter.AddCompleteNodeLog(actualNode.NodeName.ToString());
+                actualNode.Finished = false;
+                actualNode = nodes[newNode];
+                nodesSequence.Add(actualNode);
+
+                logWriter.AddNewNodeLog(actualNode.NodeName.ToString());
+            }
         }
 
     }
@@ -209,6 +231,12 @@ public class SystemManager: MonoBehaviour
         {
             NodeName.CheckRythm
         });
+    }
+
+    private void EndApplication()
+    {
+        logWriter.AddEndApplicationLog();
+        Application.Quit();
     }
 
     public string actualNodeName

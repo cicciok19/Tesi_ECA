@@ -8,55 +8,65 @@ public class LogWriter : MonoBehaviour
     [SerializeField] string logName;
     [SerializeField] private string path = "Assets/Demo/ACLSDemo/Logs";
     private System.DateTime date;
-    StreamWriter writer;
+    private float startTime;
 
     private void Start()
     {
         date = System.DateTime.Now;
-        CreateDocument();
+        startTime = Time.time;
+        //CreateDocument();
     }
 
     private void CreateDocument()
     {
+        date = System.DateTime.Now;
         path = path + "/" + logName + ".txt";
-        File.Create(path).Dispose();
-        writer = new StreamWriter(path);
-
-        writer.WriteLine(logName + " | " + date.ToString());
+        string content = logName + " | " + date.ToString() + "\n";
+        File.WriteAllText(path, content );
     }
 
     public void AddCorrectActionLog(string action)
     {
-        string correct = "  | CORRECT | : " + action;
-        writer.WriteLine(correct);
+        string correct = "  | CORRECT | : " + action + "\n";
+        File.AppendAllText(path, correct);
     }
 
     public void AddWrongActionLog(string action)
     {
-        string wrong = "  | WRONG | : " + action;
-        writer.WriteLine(wrong);
+        string wrong = "  | WRONG | : " + action + "\n";
+        File.AppendAllText(path, wrong);
     }
 
     public void AddForgottenActionsLog(Node node)
     {
-        string text = "You forgot to do/trigger these actions: \n";
+        string text = "  /WRONG ADVANCE/ \n";
+        text += "  You forgot to do/trigger these actions: \n";
 
         foreach(string s in node.incompleteActions)
-        {
-            text += "  " + s + "\n";
-        }
+            text += "    - " + s + "\n";
 
-        writer.Write(text);
+        text += node.NodeName.ToString() + " aborted \n";
+        File.AppendAllText(path, text);
     }
 
-    public void AddCompleteNodeLog(string newNode)
-    {
-        writer.WriteLine("NODE COMPLETED");
-        AddNewNodeLog(newNode);
+    public void AddCompleteNodeLog(string node)
+    {;
+        File.AppendAllText(path, node + " node completed \n\n");
+        //AddNewNodeLog(newNode);
     }
 
     public void AddNewNodeLog(string nodeName)
     {
-        writer.WriteLine(nodeName.ToUpper() + " SETTED");
+        if (!File.Exists(path))
+            CreateDocument();
+        File.AppendAllText(path, nodeName + " setted \n");
+    }
+
+    public void AddEndApplicationLog()
+    {
+        var actualTime = Time.time;
+        //int minutes = (actualTime - startTime) % 60;
+        string end = "APPLICATION CLOSED";
+        File.AppendAllText(path, end);
     }
 }
