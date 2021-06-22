@@ -39,9 +39,6 @@ public class BuyTicket : ECACompositeAction
         canAbort = false;
     }
 
-
-
-
     private void SelectTicket()
     {
         selectTicket = new SelectTicket(passenger, vendingMachine);
@@ -128,16 +125,6 @@ public class BuyTicket : ECACompositeAction
     
         queuedECA = true;
     }
-
-
-
-
-    public override void StartAction()
-    {
-        CreateActionList();
-        base.StartAction();
-    }
-
 
     public VendingMachine VendingMachine
     {

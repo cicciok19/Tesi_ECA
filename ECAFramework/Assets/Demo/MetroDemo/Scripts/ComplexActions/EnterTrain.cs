@@ -18,7 +18,7 @@ using System.Linq;
 public class EnterTrain : ECACompositeAction
 {
 
-    private TrainDoor doorSelected =      null;
+    private TrainDoor doorSelected = null;
 
     protected Passenger eca;
     protected Train train;
@@ -104,7 +104,6 @@ public class EnterTrain : ECACompositeAction
         }
     }
 
-
     private void OnDoorsOpen(object sender, EventArgs e)
     {
         if (ActualAction != null)
@@ -116,19 +115,15 @@ public class EnterTrain : ECACompositeAction
         }
     }
 
-
-
-
     protected override void OnActualActionCompleted(object sender, EventArgs e)
     {
         if(train.DoorsOpened)
     	    CompleteAndAdvance();
     }
 
-
-    public void SetActions()
+    protected override void CreateActionList()
     {
-        if(train.DoorsOpened)
+        if (train.DoorsOpened)
             Enter();
         else
         {
@@ -136,16 +131,4 @@ public class EnterTrain : ECACompositeAction
             Enter();
         }
     }
-
-
-
-
-    public override void StartAction()
-    {
-      //train.DoorsOpen += OnDoorsOpen;
-      SetActions();
-      base.StartAction();
-    }
-
-
 }

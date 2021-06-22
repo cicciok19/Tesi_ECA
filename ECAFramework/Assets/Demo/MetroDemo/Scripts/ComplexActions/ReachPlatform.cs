@@ -26,7 +26,7 @@ public class ReachPlatform : ECAAction
     	station = eca.station;
     }
 
-    private void SetupAction()
+    public override void SetupAction()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
     
@@ -38,15 +38,4 @@ public class ReachPlatform : ECAAction
     
         SetStages(stages);
     }
-
-
-
-
-    public override void StartAction()
-    {
-      SetupAction();
-      base.StartAction();
-    }
-
-
 }
