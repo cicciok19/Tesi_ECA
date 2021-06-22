@@ -23,8 +23,8 @@ public class Passenger : ECA
     private BuyBottle buyBottle;
     public float maxDistanceReacheable = 5f;
 
-    [SerializeField] protected const float TAKE_TICKET_CHANCE = .7f;
-    [SerializeField] protected const float TAKE_DRINK_CHANCE = .5f;
+    [SerializeField] protected const float TAKE_TICKET_CHANCE = .4f;
+    [SerializeField] protected const float TAKE_DRINK_CHANCE = .4f;
     [SerializeField] protected const float TAKE_TRAIN_CHANCE = 1f;
 
     protected EnterTrain enterTrain;
