@@ -105,12 +105,6 @@ public class BuyBottle : ECACompositeAction
         SelectDrink();
     }
 
-    public override void StartAction()
-    {
-        CreateActionList();
-        base.StartAction();
-    }
-
     public Distributor Distributor
     {
         get => distributor;

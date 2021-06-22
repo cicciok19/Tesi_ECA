@@ -22,7 +22,7 @@ public class SelectTicket : ECAAction
         List<ECAActionStage> stages = new List<ECAActionStage>();
         PressStage useScreen = new PressStage(vendingMachine.GetScreen(), HandSide.RightHand);
         PressStage pressButton = new PressStage(vendingMachine.GetButton(), HandSide.RightHand);
-        PickStage takeTicket = new PickStage(vendingMachine.GetGrabbableGameObject(), 10, false, HandSide.RightHand);
+        PickStage takeTicket = new PickStage(vendingMachine.GetGrabbableGameObject(), 5, false, HandSide.RightHand);
         DropStage dropTicket = new DropStage(takeTicket, dropPosition);
         stages.Add(useScreen);
         stages.Add(pressButton);
