@@ -1,103 +1,648 @@
 Using pre-set license
 Built from '2020.3/staging' branch; Version is '2020.3.6f1 (338bb68529b2) revision 3378102'; Using compiler version '192528614'; Build Type 'Release'
-OS: 'Windows 10 IoT Enterprise; OS build 18363.1556; Version 1909; 64bit' Language: 'it' Physical Memory: 32705 MB
+OS: 'Windows 10 Home; OS build 19041.1052; Version 2004; 64bit' Language: 'it' Physical Memory: 16282 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
 
  COMMAND LINE ARGUMENTS:
-C:\Program Files\Unity\2020.3.6f1\Editor\Unity.exe
+C:\Program Files\Unity\Hub\Editor\2020.3.6f1\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker0
 -projectPath
-D:/Users/PietroFrancesco/Tesi_ECA/ECAFramework
+D:/Università/Tesi/ECAFramework/Tesi_ECA/ECAFramework
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-57044
-Successfully changed project path to: D:/Users/PietroFrancesco/Tesi_ECA/ECAFramework
-D:/Users/PietroFrancesco/Tesi_ECA/ECAFramework
+63506
+Successfully changed project path to: D:/Università/Tesi/ECAFramework/Tesi_ECA/ECAFramework
+D:/Università/Tesi/ECAFramework/Tesi_ECA/ECAFramework
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 119.65 ms, found 5 plugins.
+Refreshing native plugins compatible for Editor in 255.30 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.6f1 (338bb68529b2)
-[Subsystems] Discovering subsystems at path C:/Program Files/Unity/2020.3.6f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path D:/Users/PietroFrancesco/Tesi_ECA/ECAFramework/Assets
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Università/Tesi/ECAFramework/Tesi_ECA/ECAFramework/Assets
 GfxDevice: creating device client; threaded=0
 Direct3D:
-    Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce RTX 2070 SUPER (ID=0x1e84)
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 960M (ID=0x139b)
     Vendor:   
-    VRAM:     8011 MB
-    Driver:   27.21.14.5751
+    VRAM:     4055 MB
+    Driver:   27.21.14.6192
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
 Initialize mono
-Mono path[0] = 'C:/Program Files/Unity/2020.3.6f1/Editor/Data/Managed'
-Mono path[1] = 'C:/Program Files/Unity/2020.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
-Mono config path = 'C:/Program Files/Unity/2020.3.6f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56532
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56840
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: C:/Program Files/Unity/2020.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001499 seconds.
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.004490 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 112.38 ms, found 5 plugins.
+Refreshing native plugins compatible for Editor in 167.01 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.035 seconds
+- Completed reload, in  3.454 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.004611 seconds.
+Registered in 0.023476 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 119.54 ms, found 5 plugins.
+Refreshing native plugins compatible for Editor in 183.77 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.811 seconds
+- Completed reload, in  3.321 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
-Refreshing native plugins compatible for Editor in 1.24 ms, found 5 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.09 seconds
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.06 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5346 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 239.0 MB.
-System memory in use after: 239.1 MB.
+Unloading 5376 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 238.6 MB.
+System memory in use after: 238.7 MB.
 
-Unloading 88 unused Assets to reduce memory usage. Loaded Objects now: 5757.
-Total: 5.535600 ms (FindLiveObjects: 0.434700 ms CreateObjectMapping: 0.265600 ms MarkObjects: 4.587000 ms  DeleteObjects: 0.247600 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/ECAScripts/Configuration.cs
-  artifactKey: Guid(8347e620076704a479e7f0019b2758af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ECAScripts/Configuration.cs using Guid(8347e620076704a479e7f0019b2758af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65897537ce13d0276b2abe18c6d36a4b') in 0.018500 seconds
-  Import took 0.024641 seconds .
+Unloading 119 unused Assets to reduce memory usage. Loaded Objects now: 5756.
+Total: 8.920100 ms (FindLiveObjects: 0.599400 ms CreateObjectMapping: 0.568000 ms MarkObjects: 7.237000 ms  DeleteObjects: 0.513900 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 50.029411 seconds.
-  path: Assets/Resources/Ita
-  artifactKey: Guid(6e918d4d5b3144c45899d80450f7aa1a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Ita using Guid(6e918d4d5b3144c45899d80450f7aa1a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a62abcaeffc43811ad7927d9fc8a61a3') in 0.005454 seconds
-  Import took 0.012346 seconds .
+  path: Assets/Plugins/RootMotion/FinalIK/Gizmos/TrigonometricIK Icon.png
+  artifactKey: Guid(ff34b0ecb22e7466fbd0a856b7a00621) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/RootMotion/FinalIK/Gizmos/TrigonometricIK Icon.png using Guid(ff34b0ecb22e7466fbd0a856b7a00621) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f3dfe94d80424956a1528b09d9f98e8a') in 0.177613 seconds
+  Import took 0.192081 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 7.278998 seconds.
-  path: Assets/Resources/XMLs
-  artifactKey: Guid(6e918d4d5b3144c45899d80450f7aa1a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/XMLs using Guid(6e918d4d5b3144c45899d80450f7aa1a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a2c8bbb47ac83c52cbc58bc747f3dbbc') in 0.004646 seconds
-  Import took 0.011259 seconds .
+  Time since last request: 0.000373 seconds.
+  path: Assets/Demo/MetroDemo/UrbanUnderground/Source/Textures/UI/urbanmetroline.ttf
+  artifactKey: Guid(2943a0785980b1745bac6ca89fe4e537) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/MetroDemo/UrbanUnderground/Source/Textures/UI/urbanmetroline.ttf using Guid(2943a0785980b1745bac6ca89fe4e537) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff24b631e9ca3826204e92b1509275fd') in 0.451772 seconds
+  Import took 0.465025 seconds .
+
+========================================================================
+Received Prepare
+Switching render pipeline cfadb57e093efd743967e63ed31be870 -> c18f56511ff214646b64468822c171c0
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 41.85 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 283 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 151.2 MB.
+System memory in use after: 151.4 MB.
+
+Unloading 107 unused Assets to reduce memory usage. Loaded Objects now: 6140.
+Total: 12.103100 ms (FindLiveObjects: 0.904100 ms CreateObjectMapping: 0.849700 ms MarkObjects: 9.908100 ms  DeleteObjects: 0.439200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:srp/default-shader: 0d000000000000000000000000000000 -> 0000e00a000e0de00000e000e0000000
+========================================================================
+Received Import Request.
+  Time since last request: 118.288281 seconds.
+  path: Assets/Demo/MetroDemo/UrbanUnderground/Source/Textures/UI/urbanmetroline.ttf
+  artifactKey: Guid(2943a0785980b1745bac6ca89fe4e537) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/MetroDemo/UrbanUnderground/Source/Textures/UI/urbanmetroline.ttf using Guid(2943a0785980b1745bac6ca89fe4e537) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26d4f2a9c0aaab3237ee0ccefc01aee7') in 0.060730 seconds
+  Import took 0.080503 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 72.837465 seconds.
+  Time since last request: 5.776668 seconds.
+  path: Assets/Demo/MetroDemo/UrbanUnderground/Demo/Demo.unity
+  artifactKey: Guid(7b9800b98f0e72a4da8ab8757607cc77) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/MetroDemo/UrbanUnderground/Demo/Demo.unity using Guid(7b9800b98f0e72a4da8ab8757607cc77) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be6be72477ff990a6fc89cf26f277df0') in 0.008704 seconds
+  Import took 0.062570 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.046395 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 3.19 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.170 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 1.97 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 248.8 MB.
+System memory in use after: 248.9 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6118.
+Total: 13.854700 ms (FindLiveObjects: 0.858600 ms CreateObjectMapping: 0.886800 ms MarkObjects: 11.631600 ms  DeleteObjects: 0.475600 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 382.150814 seconds.
   path: Assets/Resources/En/ListOfMessages.xml
   artifactKey: Guid(876df523e14a29d49b426306330ea8ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/En/ListOfMessages.xml using Guid(876df523e14a29d49b426306330ea8ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '27265f179894db50608340684f8afd5c') in 0.018376 seconds
-  Import took 0.026166 seconds .
+Start importing Assets/Resources/En/ListOfMessages.xml using Guid(876df523e14a29d49b426306330ea8ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2378ec234a853fa239daa7aee2ebe354') in 0.056982 seconds
+  Import took 0.069317 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 137.494109 seconds.
+  path: Assets/Resources/En/ListOfMessages_PatienEn.xml
+  artifactKey: Guid(876df523e14a29d49b426306330ea8ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/En/ListOfMessages_PatienEn.xml using Guid(876df523e14a29d49b426306330ea8ce) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a44fcb07621031335fc53e362262280d') in 0.009810 seconds
+  Import took 0.039187 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.496859 seconds.
+  path: Assets/Resources/En
+  artifactKey: Guid(6c99554b403ec33499d21057c9f44fec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/En using Guid(6c99554b403ec33499d21057c9f44fec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1daae0add9f1c576abd98d7626f9c850') in 0.009629 seconds
+  Import took 0.033215 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.012590 seconds.
+  path: Assets/Resources/En
+  artifactKey: Guid(6c99554b403ec33499d21057c9f44fec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/En using Guid(6c99554b403ec33499d21057c9f44fec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1daae0add9f1c576abd98d7626f9c850') in 0.007577 seconds
+  Import took 0.032093 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.022889 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.23 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.132 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 1.99 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.0 MB.
+System memory in use after: 249.0 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6123.
+Total: 11.012700 ms (FindLiveObjects: 0.844900 ms CreateObjectMapping: 0.459400 ms MarkObjects: 9.127000 ms  DeleteObjects: 0.579900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.022594 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.23 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.146 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.07 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 248.9 MB.
+System memory in use after: 249.0 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6128.
+Total: 10.721100 ms (FindLiveObjects: 0.799600 ms CreateObjectMapping: 0.552400 ms MarkObjects: 8.860200 ms  DeleteObjects: 0.507100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.037072 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 10.27 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.484 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 4.14 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.0 MB.
+System memory in use after: 249.1 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6133.
+Total: 11.172000 ms (FindLiveObjects: 0.826500 ms CreateObjectMapping: 0.671700 ms MarkObjects: 8.932100 ms  DeleteObjects: 0.738900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.023619 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.51 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.210 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.22 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 248.9 MB.
+System memory in use after: 248.9 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6138.
+Total: 10.073200 ms (FindLiveObjects: 0.816200 ms CreateObjectMapping: 0.473400 ms MarkObjects: 8.086700 ms  DeleteObjects: 0.694500 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.025778 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.43 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.330 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.40 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.1 MB.
+System memory in use after: 249.1 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6143.
+Total: 10.121600 ms (FindLiveObjects: 1.026300 ms CreateObjectMapping: 0.513700 ms MarkObjects: 8.076000 ms  DeleteObjects: 0.503700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.021786 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.97 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.199 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.01 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.1 MB.
+System memory in use after: 249.1 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6148.
+Total: 10.051300 ms (FindLiveObjects: 0.717800 ms CreateObjectMapping: 0.365900 ms MarkObjects: 8.432600 ms  DeleteObjects: 0.533300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.024740 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.77 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.470 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.08 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.1 MB.
+System memory in use after: 249.1 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6153.
+Total: 11.035500 ms (FindLiveObjects: 0.845100 ms CreateObjectMapping: 0.351700 ms MarkObjects: 9.308300 ms  DeleteObjects: 0.526100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.024000 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.04 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.372 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 3.08 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.1 MB.
+System memory in use after: 249.1 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6158.
+Total: 11.706000 ms (FindLiveObjects: 1.012900 ms CreateObjectMapping: 0.587800 ms MarkObjects: 9.560700 ms  DeleteObjects: 0.542400 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.022830 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.94 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.478 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.61 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 248.9 MB.
+System memory in use after: 249.0 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6163.
+Total: 11.971700 ms (FindLiveObjects: 1.195100 ms CreateObjectMapping: 0.750700 ms MarkObjects: 9.392300 ms  DeleteObjects: 0.631700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.023932 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.95 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.273 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.12 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.1 MB.
+System memory in use after: 249.2 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6168.
+Total: 15.251400 ms (FindLiveObjects: 1.088000 ms CreateObjectMapping: 0.828400 ms MarkObjects: 12.834800 ms  DeleteObjects: 0.497700 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.036621 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.03 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.784 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.03 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.1 MB.
+System memory in use after: 249.2 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6173.
+Total: 9.367300 ms (FindLiveObjects: 0.659200 ms CreateObjectMapping: 0.448500 ms MarkObjects: 7.737300 ms  DeleteObjects: 0.520300 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.029394 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.16 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.497 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.67 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.1 MB.
+System memory in use after: 249.2 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6178.
+Total: 10.246100 ms (FindLiveObjects: 1.150100 ms CreateObjectMapping: 0.624900 ms MarkObjects: 7.960100 ms  DeleteObjects: 0.509100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.030308 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.34 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.367 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.00 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.2 MB.
+System memory in use after: 249.2 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6183.
+Total: 9.093900 ms (FindLiveObjects: 0.665900 ms CreateObjectMapping: 0.434400 ms MarkObjects: 7.487600 ms  DeleteObjects: 0.504100 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.030078 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.05 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.310 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.13 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.0 MB.
+System memory in use after: 249.0 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6188.
+Total: 10.656000 ms (FindLiveObjects: 1.182500 ms CreateObjectMapping: 0.549000 ms MarkObjects: 8.397400 ms  DeleteObjects: 0.525000 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.024269 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.96 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.438 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.02 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.2 MB.
+System memory in use after: 249.2 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6193.
+Total: 10.183800 ms (FindLiveObjects: 0.717800 ms CreateObjectMapping: 0.424300 ms MarkObjects: 8.509400 ms  DeleteObjects: 0.530900 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.027329 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.19 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.452 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 2.13 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.2 MB.
+System memory in use after: 249.2 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6198.
+Total: 8.836600 ms (FindLiveObjects: 0.650500 ms CreateObjectMapping: 0.409700 ms MarkObjects: 7.227100 ms  DeleteObjects: 0.547600 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.022365 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.98 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.169 seconds
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for vertex shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+D3D shader create error for domain shader [0x80070057]
+Refreshing native plugins compatible for Editor in 1.96 ms, found 8 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5155 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 249.2 MB.
+System memory in use after: 249.2 MB.
+
+Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 6203.
+Total: 9.672000 ms (FindLiveObjects: 0.937600 ms CreateObjectMapping: 0.556700 ms MarkObjects: 7.508800 ms  DeleteObjects: 0.666700 ms)
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file

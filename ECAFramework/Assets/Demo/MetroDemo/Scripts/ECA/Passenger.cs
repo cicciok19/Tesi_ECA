@@ -23,8 +23,8 @@ public class Passenger : ECA
     private BuyBottle buyBottle;
     public float maxDistanceReacheable = 5f;
 
-    [SerializeField] protected const float TAKE_TICKET_CHANCE = .4f;
-    [SerializeField] protected const float TAKE_DRINK_CHANCE = .4f;
+    [SerializeField] protected const float TAKE_TICKET_CHANCE = .2f;
+    [SerializeField] protected const float TAKE_DRINK_CHANCE = .2f;
     [SerializeField] protected const float TAKE_TRAIN_CHANCE = 1f;
 
     protected EnterTrain enterTrain;
@@ -97,12 +97,13 @@ public class Passenger : ECA
     {
         reachPlatform = new ReachPlatform(this);
         actionsList.Enqueue(reachPlatform);
-        enterTrain = new EnterTrain(this);
-        actionsList.Enqueue(enterTrain);
     }
 
     private void OnTrainArriving(object sender, EventArgs e)
     {
+        enterTrain = new EnterTrain(this);
+        actionsList.Enqueue(enterTrain);
+
         if (ticketTaken)
         {
             if(actionsList.CurrentAction != null)
