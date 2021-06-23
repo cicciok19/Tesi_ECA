@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<game>
+  <tts ecaID="HospitalPatient">
+    <!--Prove di messaggi da far riprodurre-->
+
+    <presentation emotion="Joy">Good morning, my name is Sophie </presentation>
+    <presentation emotion="Trust">Good morning doctor, I need help and I know you can give it.</presentation>
+    <presentation emotion="Anger">Good morning a fuck, I don't want to talk with you! I want my doctor. </presentation>
+    <presentation emotion="Disgust">I don't like your face.</presentation>
+    <presentation emotion="Fear">Good morning, I'm anxiety for the analysis.</presentation>
+    <presentation emotion="Sadness">It is not a good day, I feel some bad vibration.</presentation>
+
+    <children emotion="Joy">Oh they are okay! I love playing with them every day!</children>
+    <children emotion="Trust">Really good! They are very good at school.</children>
+    <children emotion="Anger">None of your business</children>
+    <children emotion="Sadness">Not really good, my daughter has the fever.</children>
+    <children>They are really good!</children>
+
+    <cure emotion="Joy">Oh I'm very glad to try this cure.</cure>
+    <cure emotion="Trust">I'm in trust with you doc. Let's proceed.</cure>
+    <cure emotion="Anger">What the fuck? I destroy my last months with the chemotherapy and now I have to do another cure?</cure>
+    <cure emotion="Fear">I'm not really convinced doc. I'm scared about experimental cure.</cure>
+    <cure emotion="Sadness">If there is not another option we can proceed...</cure>
+    <cure>If I have to do this, let's procees.</cure>
+
+    <badnew emotion="Trust">I hope it is not so serious.</badnew>
+    <badnew emotion="Anger">Another doctor say to me that all will be ok! All you are liers!</badnew>
+    <badnew emotion="Sadness">Oh, another bad new. Today is not a good day.</badnew>
+    <badnew emotion="Fear">I'm sure that I will die in the next month.</badnew>
+    <badnew emotion="Disgust">This sucks. What problems I have?</badnew>
+    <badnew>Oh. Could you explain the problem?</badnew>
+
+    <explaindisease emotion="Trust">I'm sure that you have a cure for this.</explaindisease>
+    <explaindisease emotion="Anger">Fuck! All I have done was for nothing!</explaindisease>
+    <explaindisease emotion="Sadness">I'm so sad doc, there is a way to exit from this situation?</explaindisease>
+    <explaindisease emotion="Fear">Oh my God doc. I'm going to faint.</explaindisease>
+    <explaindisease emotion="Disgust"></explaindisease>
+
+	<salutation emotion="Joy" action="LookAt@MainCamera">Buongiorno dottore, felice di vederla</salutation>
+	<salutation emotion="Trust" action="LookAt@MainCamera">Salve dottore, spero mi possa aiutare</salutation>
+	<salutation emotion="Trust" action="LookAt@MainCamera">Finalmente è arrivato, avevo proprio bisogno di vederla</salutation>
+	<salutation emotion="Disgust" action="LookAt@MainCamera">mi scusi ma è l'ultima persona che vorrei vedere adesso</salutation>
+	<salutation emotion="Disgust" action="LookAt@MainCamera">Non ho proprio voglia di parlare con lei</salutation>
+	<salutation emotion="Anger" action="LookAt@MainCamera">Sono molto arrabiato con lei dottore</salutation>
+	<salutation emotion="Anger" action="LookAt@MainCamera">Se ne vada subito, non ho voglia di parlare con lei</salutation>
+	<salutation emotion="Sadness" action="LookAt@MainCamera">Non è proprio un buon giorno oggi dottore</salutation>
+	<salutation emotion="Sadness" action="LookAt@MainCamera">Salve, oggi è stata una giornata orrenda</salutation>
+	<salutation emotion="Fear" action="LookAt@MainCamera">Salve dottore, l'aspettavo con ansia</salutation>
+	<salutation emotion="Fear" action="LookAt@MainCamera">Buongiorno dottore, spero mi porti buone notizie</salutation>
+	<salutation action="LookAt@MainCamera">Buongiorno dottore, felice di vederla</salutation>
+	<salutation action="LookAt@MainCamera">Salve dottore, che piacere verderla</salutation>	
+	
+	<blablaweather emotion="Joy" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Stavo giusto guardando il tempo fuori dalla finestra</blablaweather>
+	<blablaweather emotion="Joy" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Si finalmente, è una bella giornata</blablaweather>
+	<blablaweather emotion="Sadness" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Ero troppo debole e non ho guardato fuori dalla finestra</blablaweather>
+	<blablaweather emotion="Sadness" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Sono troppo triste per preoccuparmi del tempo, dottore</blablaweather>
+	<blablaweather emotion="Anger" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Dottore, non mi sembra il caso di parlare del tempo proprio adesso</blablaweather>
+	<blablaweather action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Ah, non ci avevo fatto caso ora guardo</blablaweather>
+	
+	<blablasport emotion="Joy" action="LookAt@MainCamera;PointAt@LeftDown">Si l'ho vista. Una bellissima partita</blablasport>
+	<blablasport emotion="Joy" action="LookAt@MainCamera;PointAt@LeftDown">certamente è stata fantastica</blablasport>
+	<blablasport emotion="Sadness" action="LookAt@MainCamera;PointAt@LeftDown">Mi interessa poco dello sport, sinceramente</blablasport>
+	<blablasport emotion="Sadness" action="LookAt@MainCamera;PointAt@LeftDown">Sono troppo triste per preoccuparmi dello sport, dottore</blablasport>
+	<blablasport emotion="Anger" action="LookAt@MainCamera;PointAt@LeftDown">Dottore, non mi sembra il caso di parlare di sport proprio adesso</blablasport>
+	<blablasport emotion="Anger" action="LookAt@MainCamera;PointAt@LeftDown">Mi scusi ma non ho nessuna voglia di parlare di sport al momento</blablasport>
+	<blablasport action="LookAt@MainCamera;PointAt@LeftDown">certamente è stata fantastica</blablasport>	
+	
+	<generalhealth emotion="Joy">Oggi abbastanza bene grazie</generalhealth>
+	<generalhealth emotion="Joy">Grazie per l'interessamento, forse un po meglio ripetto a ieri</generalhealth>
+	<generalhealth emotion="Joy">Oggi mi sento proprio bene</generalhealth>
+	<generalhealth emotion="Sadness">Non noto nessun miglioramento</generalhealth>
+	<generalhealth emotion="Sadness">Non so dirle, mi sembra non ci siano miglioramenti</generalhealth>
+	<generalhealth emotion="Anger">Non sto affatto bene dottore. Non vede?</generalhealth>
+	<generalhealth>Non ci sono stati molti cambiamenti rispetto a ieri</generalhealth>
+	<generalhealth>Non noto grandi differenze rispetto a ieri</generalhealth>
+
+  <badnew emotion="Joy" action ="LookAt@Floor">Ah mi dica, spero non sia troppo grave</badnew>
+  <badnew emotion="Sadness" action ="LookAt@Floor">Come delle brutte notizie? avanti mi dica</badnew>
+  <badnew emotion="Anger" action ="LookAt@Floor">Ma come? lei mi aveva assicurato sarebbe andato tutto bene</badnew>
+  <badnew action ="LookAt@Floor">Ma come? avanti mi dica</badnew>
+
+
+  <none>scusi, non ho capito</none>
+	<none>non credo di aver capito, potrebbe ripetere per favore?</none>
+	
+  
+  </tts>
+  
+</game>
