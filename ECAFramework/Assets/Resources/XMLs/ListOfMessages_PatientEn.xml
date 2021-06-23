@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<game>
+  <tts ecaID="HospitalPatient">
+    <!--Prove di messaggi da far riprodurre-->
+
+    <Presentation emotion="Joy">Good morning, my name is Sophie </Presentation>
+    <Presentation emotion="Trust">Good morning doctor, I need help and I know you can give it.</Presentation>
+    <Presentation emotion="Anger">Good morning a fuck, I don't want to talk with you! I want my doctor. </Presentation>
+    <Presentation emotion="Disgust">I don't like your face.</Presentation>
+    <Presentation emotion="Fear">Good morning, I'm anxiety for the analysis.</Presentation>
+    <Presentation emotion="Sadness">It is not a good day, I feel some bad vibration.</Presentation>
+
+    <Children emotion="Joy">Oh they are okay! I love playing with them every day!</Children>
+    <Children emotion="Trust" action="PickUp@Bottle@Rubbish">Really good! They are very good at school.</Children>
+    <Children emotion="Anger">None of your business</Children>
+    <Children emotion="Sadness">Not really good, my daughter has the fever.</Children>
+    <Children>They are really good!</Children>
+
+    <Cure emotion="Joy">Oh I'm very glad to try this cure.</Cure>
+    <Cure emotion="Trust">I'm in trust with you doc. Let's proceed.</Cure>
+    <Cure emotion="Anger">What the fuck? I destroy my last months with the chemotherapy and now I have to do another cure?</Cure>
+    <Cure emotion="Fear">I'm not really convinced doc. I'm scared about experimental cure.</Cure>
+    <Cure emotion="Sadness">If there is not another option we can proceed...</Cure>
+    <Cure>If I have to do this, let's procees.</Cure>
+
+    <BadNew emotion="Trust">I hope it is not so serious.</BadNew>
+    <BadNew emotion="Anger">Another doctor say to me that all will be ok! All of you are liers!</BadNew>
+    <BadNew emotion="Sadness">Oh, another bad new. Today is not a good day.</BadNew>
+    <BadNew emotion="Fear">I'm sure that I will die in the next month.</BadNew>
+    <BadNew emotion="Disgust">This sucks. How many problems I have?</BadNew>
+    <BadNew>Oh. Could you explain the problem?</BadNew>
+
+    <ExplainDisease emotion="Trust">I'm sure that you have a cure for this.</ExplainDisease>
+    <ExplainDisease emotion="Anger">Fuck! All I have done was for nothing!</ExplainDisease>
+    <ExplainDisease emotion="Sadness">I'm so sad doc, there is a way to exit from this situation?</ExplainDisease>
+    <ExplainDisease emotion="Fear">Oh my God doc. I'm going to faint.</ExplainDisease>
+    <ExplainDisease emotion="Disgust">I'm not in trust with you doctors.</ExplainDisease>
+    <ExplainDisease>There is something that I can do to solve this problem?</ExplainDisease>
+
+    <GeneralHealth emotion="Joy">I'm feeling really good doc!</GeneralHealth>
+    <GeneralHealth emotion="Trust">I'm in a good period doc!</GeneralHealth>
+    <GeneralHealth emotion="Anger">Not good doc! I'm doing many cures and I don't see the results!</GeneralHealth>
+    <GeneralHealth emotion="Disgust">I don't want to speak to you.</GeneralHealth>
+    <GeneralHealth emotion="Fear">Not good doc. This tumor is eating my psyche.</GeneralHealth>
+    <GeneralHealth emotion="Sadness">Bad. My life is falling apart.</GeneralHealth>
+
+    <Weather emotion="Joy">Oh I love this weather!</Weather>
+    <Weather emotion="Anger">It is not time to talk about weather doc!</Weather>
+    <Weather emotion="Disgust">I hate the sun and I hate you too.</Weather>
+    <Weather emotion="Fear">I don't see the light in the tunnel.</Weather>
+    <Weather emotion="Sadness">I prefer the rainy days.</Weather>
+    <Weather>I love the sun too!</Weather>
+
+    <None>I don't understand, can you repeat please?</None>
+    <None>Can you repeat?</None>
+	
+  
+  </tts>
+  
+</game>

@@ -14,11 +14,14 @@ using UnityEngine;
 public enum Ecas
 {
     Default,
-    Sophie_G,
-    Sophie_R,
-    Sophie_B,
-    Turi,
-    Sophie
+    Compressor,
+    MedicationProvider,
+    DefibrillatorManager,
+    AirwayManager,
+    TimeRecorder,
+    RandomDoctor,
+    Sophie,
+    HospitalPatient
 }
 
 /// <summary>

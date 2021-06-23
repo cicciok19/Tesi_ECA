@@ -127,6 +127,30 @@ public class ECA : MonoBehaviour, IIntentHandler
     {
     }
 
+    public virtual void Init()
+    {
+        SetEcaId();
+
+        CreateAnimator();
+
+        IntentName = new List<string>();
+
+        myParameters = XmlParser.GetEcaParameters(ID, Configuration.Instance.XmlDocumentNames.EcaList); //GET parameters of this eca from XML!! BUT, set the ID first (required to select ECA in XML file)
+        GeneralMessagesCltn = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);
+        EmotionalMessages = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);
+
+        //CREA PROBLEMI, NON SO PERCHE'
+        EmotionManager = new ECAEmotionManager(myParameters.EmotionModel);
+        EmotionManager.ActualEmotionChanged += OnEmotionChanged;
+        EmotionManager.ActualEmotionUpdated += OnEmotionUpdated;
+
+        //ECAManager.Instance.AvailableEcas.Add(ID, this);
+
+        SubscribeHandlerToIntentManager();
+
+        Utility.Log("ECA setted");
+    }
+
 
     protected void AddIntentHandler(string intentName)
     {
@@ -238,7 +262,10 @@ public class ECA : MonoBehaviour, IIntentHandler
             Debug.LogError("This message does not exist");
             return;
         }
-        SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, GeneralMessagesCltn[msgType][0].message, functionToBeExecuted, anytime, CheckIfMsgIsActive(msgType));
+        EmotionalMessage emotionalMessage = GetMessageForIntentKey(msgType);
+        //SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, GeneralMessagesCltn[msgType][0].message, functionToBeExecuted, anytime, CheckIfMsgIsActive(msgType));
+        SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, emotionalMessage.message, functionToBeExecuted, anytime, CheckIfMsgIsActive(msgType));
+        HandleMessageAction(emotionalMessage);
         TtsManager.Instance.Speech(speechInfo);
     }
 
@@ -249,30 +276,38 @@ public class ECA : MonoBehaviour, IIntentHandler
         TtsManager.Instance.Speech(speechInfo);
     }
 
-
-    public virtual void Init()
+    protected virtual void HandleMessageAction(EmotionalMessage message)
     {
-        SetEcaId();
 
-        CreateAnimator();
-
-        IntentName = new List<string>();
-    
-        myParameters = XmlParser.GetEcaParameters(ID, Configuration.Instance.XmlDocumentNames.EcaList); //GET parameters of this eca from XML!! BUT, set the ID first (required to select ECA in XML file)
-        GeneralMessagesCltn = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);
-        EmotionalMessages = XmlParser.GetGeneralMessagesCltn(Configuration.Instance.XmlDocumentNames.ListOfMessages, this.ID);
-
-        //CREA PROBLEMI, NON SO PERCHE'
-        //EmotionManager = new ECAEmotionManager(myParameters.EmotionModel);
-        /*EmotionManager.ActualEmotionChanged += OnEmotionChanged;
-        EmotionManager.ActualEmotionUpdated += OnEmotionUpdated;*/
-
-        //ECAManager.Instance.AvailableEcas.Add(ID, this);
-
-        SubscribeHandlerToIntentManager();
-
-        Utility.Log("ECA setted");
     }
+
+    protected virtual EmotionalMessage GetMessageForIntentKey(string key)
+    {
+        List<EmotionalMessage> list = GetGeneralMessagesFor(key);
+
+        if (list == null)
+        {
+            Utility.LogWarning("No messages for key " + key);
+            return EmotionalMessage.zero;
+        }
+
+        //just for debug, should take the actual emotion of the ECA
+        //AvailableEmotions actualEmotion = AvailableEmotions.Trust;
+
+        List<EmotionalMessage> listForEmotion = new List<EmotionalMessage>();
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i].emotion == EmotionManager.ActualEmotion.EmotionType || list[i].emotion == AvailableEmotions.None)
+                listForEmotion.Add(list[i]);
+        }
+
+
+        int idx = (int)UnityEngine.Random.Range(0, listForEmotion.Count);
+        EmotionalMessage message = listForEmotion[idx];
+
+        return message;
+    }
+
 
     protected virtual void OnEmotionChanged(object sender, EventArgs e)
     {
@@ -384,7 +419,7 @@ public class ECA : MonoBehaviour, IIntentHandler
                 currentAction.Resume();
             }
         }
-    }*/
+    }
 
     protected virtual void PlaceReached(object sender, EventArgs e)
     {
@@ -400,7 +435,7 @@ public class ECA : MonoBehaviour, IIntentHandler
         //mi devo disiscrivere dall'evento dell'altro eca Stationary
         //sender.Stationary -= OtherEcaIsStationary;
         currentAction.Resume();
-    }
+    }*/
 
     public void DisactivateNavMeshAgent()
     {
@@ -411,5 +446,7 @@ public class ECA : MonoBehaviour, IIntentHandler
     {
         GetComponent<NavMeshAgent>().enabled = true;
     }
+
+
 
 }

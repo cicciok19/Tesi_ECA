@@ -6,6 +6,15 @@ using UnityEngine.Assertions;
 
 public class ConversationalPatient : ECA
 {
+    private const string BAD_NEW = "BadNew";
+    private const string CHILDREN = "Children";
+    private const string CURE = "Cure";
+    private const string EXPLAIN_DISEASE = "ExplainDisease";
+    private const string GENERAL_HEALTH = "GeneralHealth";
+    private const string PRESENTATION = "Presentation";
+    private const string WEATHER = "Weather";
+    private const string NONE = "None";
+
     private SittableObject chair;
     private ECAAction sitAction;
 
@@ -16,6 +25,21 @@ public class ConversationalPatient : ECA
         //send message greetings (and trigger animation, if you want to
         chair = FindObjectOfType<SittableObject>();
         Sit();
+
+        SendMessage(PRESENTATION);
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+            SendMessage(CHILDREN);
+
+
+    }
+    public override void SetEcaId()
+    {
+        base.SetEcaId();
+        ID = Ecas.HospitalPatient;
     }
     protected override ECAAnimator AddECAAnimator()
     {
@@ -25,18 +49,42 @@ public class ConversationalPatient : ECA
     public override void Handle(Intent intent)
     {
         base.Handle(intent);
+
+        switch (intent.IntentName)
+        {
+            //change emotion based on the intent
+            case BAD_NEW:
+                break;
+            case CHILDREN:
+                break;
+            case EXPLAIN_DISEASE:
+                break;
+            case PRESENTATION:
+                break;
+            case CURE:
+                break;
+            case GENERAL_HEALTH:
+                break;
+            case NONE:
+                break;
+        }
+
+        //then send message
+        SendMessage(PRESENTATION);
+
+
     }
 
     public override void SubscribeHandlerToIntentManager()
     {
-        List<string> intentName = new List<string> { };     //fill list
+        List<string> intentName = new List<string> { BAD_NEW, CHILDREN, CURE, EXPLAIN_DISEASE, GENERAL_HEALTH, PRESENTATION, WEATHER, NONE};     //fill list
 
         foreach (var intent in intentName)
             IntentManager.Instance.AddIntentHandler(intent, this);
 
     }
 
-    protected void HandleMessageAction(EmotionalMessage message)
+    protected override void HandleMessageAction(EmotionalMessage message)
     {
         if (message.action == "")
             return;
