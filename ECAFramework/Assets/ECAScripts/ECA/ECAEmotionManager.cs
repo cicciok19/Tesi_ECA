@@ -99,8 +99,9 @@ public class ECAEmotionManager
             {Anger.EmotionType, Anger },
             {Anticipation.EmotionType, Anticipation }
         };
-    
-        ActualEmotion = Joy;
+
+        actualEmotion = Joy;
+        actualEmotion.SwitchedLevel += OnSwitchedLevel;
 
         if (xmlDocumentForModel != "")
             Rules = XmlParser.GetEmotionModel(xmlDocumentForModel);
@@ -160,7 +161,6 @@ public class ECAEmotionManager
             actualEmotion.SwitchedLevel -= OnSwitchedLevel;
             actualEmotion = value;
             actualEmotion.SwitchedLevel += OnSwitchedLevel;
-
         } 
     }
 
