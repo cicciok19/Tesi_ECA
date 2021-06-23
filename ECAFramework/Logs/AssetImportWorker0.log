@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Using pre-set license
 Built from '2020.3/staging' branch; Version is '2020.3.6f1 (338bb68529b2) revision 3378102'; Using compiler version '192528614'; Build Type 'Release'
 OS: 'Windows 10 Home; OS build 19041.1052; Version 2004; 64bit' Language: 'it' Physical Memory: 16282 MB
@@ -700,3 +701,180 @@ Start importing Assets/ExternalAssets using Guid(0b5a23b22eb02fd4ca94979372ea02b
   Import took 0.063154 seconds .
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
+=======
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.6f1 (338bb68529b2) revision 3378102'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 IoT Enterprise; OS build 18363.1556; Version 1909; 64bit' Language: 'it' Physical Memory: 32705 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\2020.3.6f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+D:/Users/PietroFrancesco/Tesi_ECA/ECAFramework
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+61026
+Successfully changed project path to: D:/Users/PietroFrancesco/Tesi_ECA/ECAFramework
+D:/Users/PietroFrancesco/Tesi_ECA/ECAFramework
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 112.36 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.6f1 (338bb68529b2)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/2020.3.6f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Users/PietroFrancesco/Tesi_ECA/ECAFramework/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 2070 SUPER (ID=0x1e84)
+    Vendor:   
+    VRAM:     8011 MB
+    Driver:   27.21.14.5751
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/2020.3.6f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/2020.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/2020.3.6f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56516
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/2020.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.001340 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 105.24 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.905 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.004703 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 111.45 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.861 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 1.26 ms, found 5 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5519 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 264.1 MB.
+System memory in use after: 264.2 MB.
+
+Unloading 88 unused Assets to reduce memory usage. Loaded Objects now: 5943.
+Total: 5.481700 ms (FindLiveObjects: 0.439800 ms CreateObjectMapping: 0.275500 ms MarkObjects: 4.508600 ms  DeleteObjects: 0.257000 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Demo/ACLSDemo/Objects/OxygenMask.fbx
+  artifactKey: Guid(464bc6032d989a64db85563768323f49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Objects/OxygenMask.fbx using Guid(464bc6032d989a64db85563768323f49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d6b70b0171c1b8bcc025638f8e4085d') in 0.272661 seconds
+  Import took 0.280582 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.237792 seconds.
+  path: Assets/Demo/ACLSDemo/Objects/Defibrillator.fbx
+  artifactKey: Guid(32b664599f3ce924680d8028a0c38e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Objects/Defibrillator.fbx using Guid(32b664599f3ce924680d8028a0c38e25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb8b0dd0b5bc092fedb0db28b0acf912') in 0.056213 seconds
+  Import took 0.064139 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.590109 seconds.
+  path: Assets/Demo/ACLSDemo/Objects/OxygenMask.prefab
+  artifactKey: Guid(82bdd0c506ea77f44a1c10adbcd9d1b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Objects/OxygenMask.prefab using Guid(82bdd0c506ea77f44a1c10adbcd9d1b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36838c157555f27d3a993d07f12451f2') in 0.023695 seconds
+  Import took 0.031570 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001613 seconds.
+  path: Assets/Demo/ACLSDemo/Objects/OxygenMask.prefab
+  artifactKey: Guid(82bdd0c506ea77f44a1c10adbcd9d1b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Objects/OxygenMask.prefab using Guid(82bdd0c506ea77f44a1c10adbcd9d1b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36838c157555f27d3a993d07f12451f2') in 0.020739 seconds
+  Import took 0.028653 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 87.915166 seconds.
+  path: Assets/Demo/ACLSDemo/Objects/OxygenMask_DoNotUse.fbx
+  artifactKey: Guid(464bc6032d989a64db85563768323f49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/ACLSDemo/Objects/OxygenMask_DoNotUse.fbx using Guid(464bc6032d989a64db85563768323f49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aa6928991020b74bec55458e832eaedf') in 0.060424 seconds
+  Import took 0.068733 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 35.016465 seconds.
+  path: Assets/Demo/MetroDemo/Prefab/torus.fbx
+  artifactKey: Guid(85325f35e4d00c14baaad979ccca6edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/MetroDemo/Prefab/torus.fbx using Guid(85325f35e4d00c14baaad979ccca6edb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8106841bece57e9f315ae825e6c57e0a') in 0.026567 seconds
+  Import took 0.035427 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000196 seconds.
+  path: Assets/Demo/MetroDemo/Prefab/torus.prefab
+  artifactKey: Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/MetroDemo/Prefab/torus.prefab using Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32a011a36cbbfb22660573a4d1ae117d') in 0.023305 seconds
+  Import took 0.032445 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000284 seconds.
+  path: Assets/Demo/MetroDemo/Torus.mat
+  artifactKey: Guid(fed9fbe6d9f368a42b17ccce57289670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/MetroDemo/Torus.mat using Guid(fed9fbe6d9f368a42b17ccce57289670) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '98295aa79adc94e1fd1230b38a88331b') in 0.011874 seconds
+  Import took 0.136911 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000498 seconds.
+  path: Assets/Demo/MetroDemo/Prefab/torus.prefab
+  artifactKey: Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Demo/MetroDemo/Prefab/torus.prefab using Guid(9651f6ec2e44de0468b5cd3dd41bd774) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32a011a36cbbfb22660573a4d1ae117d') in 0.011349 seconds
+  Import took 0.023880 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 286.957355 seconds.
+  path: Assets/Resources/Prefab/DrinkBottle.prefab
+  artifactKey: Guid(721f5aeb748d48d4ab6602f0514c7e04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Prefab/DrinkBottle.prefab using Guid(721f5aeb748d48d4ab6602f0514c7e04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6eeaf213d613338226e10cd9c8a85006') in 0.015325 seconds
+  Import took 0.026151 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000343 seconds.
+  path: Assets/Resources/Prefab/DrinkBottle_DoNotUse.FBX
+  artifactKey: Guid(5e773f291f5dc764583e378d3b90c528) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Prefab/DrinkBottle_DoNotUse.FBX using Guid(5e773f291f5dc764583e378d3b90c528) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '947e6072189565de9be3a6dcaaaec4db') in 0.049991 seconds
+  Import took 0.057720 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.827525 seconds.
+  path: Assets/Resources/Prefab/DrinkBottle.prefab
+  artifactKey: Guid(721f5aeb748d48d4ab6602f0514c7e04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Prefab/DrinkBottle.prefab using Guid(721f5aeb748d48d4ab6602f0514c7e04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7a439b79e6ba8b0e73580c915b82c7f') in 0.006834 seconds
+  Import took 0.014231 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.011637 seconds.
+  path: Assets/Resources/Prefab/DrinkBottle.prefab
+  artifactKey: Guid(721f5aeb748d48d4ab6602f0514c7e04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Prefab/DrinkBottle.prefab using Guid(721f5aeb748d48d4ab6602f0514c7e04) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7a439b79e6ba8b0e73580c915b82c7f') in 0.006789 seconds
+  Import took 0.013978 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
+>>>>>>> ACLSimplementation

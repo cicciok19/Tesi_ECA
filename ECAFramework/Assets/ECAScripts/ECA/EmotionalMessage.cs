@@ -10,12 +10,15 @@ using System.Collections.Generic;
 
 public struct MessageAction {
 	public string actionType;
-	public string parameter;
-	public static MessageAction zero = new MessageAction("","");
+	public string firstParameter;
+    public string secondParameter;
 
-	public MessageAction(string actionType,string parameter) {
+    public static MessageAction zero = new MessageAction("","","");
+
+	public MessageAction(string actionType,string firstParameter, string secondParameter) {
 		this.actionType = actionType;
-		this.parameter = parameter;
+		this.firstParameter = firstParameter;
+        this.secondParameter = secondParameter;
      	}
 
 	public bool IsLookAt() {
@@ -33,6 +36,11 @@ public struct MessageAction {
 	public bool IsMakeGesture() {
 		return actionType == "MakeGesture";
 	}
+
+    public bool IsPickUp()
+    {
+        return actionType == "PickUp";
+    }
 }
 
 // global declaration end
@@ -110,7 +118,11 @@ public static EmotionalMessage zero = new EmotionalMessage("@@@@@@###ppopopoggvh
         MessageAction ma = new MessageAction();
 
         ma.actionType = parts[0];
-        ma.parameter = parts[1];
+        ma.firstParameter = parts[1];
+        if (parts.Length == 3)
+            ma.secondParameter = parts[2];
+        else
+            ma.secondParameter = "";
 
         return ma;
     }
