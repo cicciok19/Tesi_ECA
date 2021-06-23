@@ -28,61 +28,32 @@
     <badnew emotion="Anger">Another doctor say to me that all will be ok! All you are liers!</badnew>
     <badnew emotion="Sadness">Oh, another bad new. Today is not a good day.</badnew>
     <badnew emotion="Fear">I'm sure that I will die in the next month.</badnew>
-    <badnew emotion="Disgust">This sucks. What problems I have?</badnew>
+    <badnew emotion="Disgust">This sucks. How many problems I have?</badnew>
     <badnew>Oh. Could you explain the problem?</badnew>
 
     <explaindisease emotion="Trust">I'm sure that you have a cure for this.</explaindisease>
     <explaindisease emotion="Anger">Fuck! All I have done was for nothing!</explaindisease>
     <explaindisease emotion="Sadness">I'm so sad doc, there is a way to exit from this situation?</explaindisease>
     <explaindisease emotion="Fear">Oh my God doc. I'm going to faint.</explaindisease>
-    <explaindisease emotion="Disgust"></explaindisease>
+    <explaindisease emotion="Disgust">I'm not in trust with you doctors.</explaindisease>
+    <explaindisease>There is something that I can do to solve this problem?</explaindisease>
 
-	<salutation emotion="Joy" action="LookAt@MainCamera">Buongiorno dottore, felice di vederla</salutation>
-	<salutation emotion="Trust" action="LookAt@MainCamera">Salve dottore, spero mi possa aiutare</salutation>
-	<salutation emotion="Trust" action="LookAt@MainCamera">Finalmente è arrivato, avevo proprio bisogno di vederla</salutation>
-	<salutation emotion="Disgust" action="LookAt@MainCamera">mi scusi ma è l'ultima persona che vorrei vedere adesso</salutation>
-	<salutation emotion="Disgust" action="LookAt@MainCamera">Non ho proprio voglia di parlare con lei</salutation>
-	<salutation emotion="Anger" action="LookAt@MainCamera">Sono molto arrabiato con lei dottore</salutation>
-	<salutation emotion="Anger" action="LookAt@MainCamera">Se ne vada subito, non ho voglia di parlare con lei</salutation>
-	<salutation emotion="Sadness" action="LookAt@MainCamera">Non è proprio un buon giorno oggi dottore</salutation>
-	<salutation emotion="Sadness" action="LookAt@MainCamera">Salve, oggi è stata una giornata orrenda</salutation>
-	<salutation emotion="Fear" action="LookAt@MainCamera">Salve dottore, l'aspettavo con ansia</salutation>
-	<salutation emotion="Fear" action="LookAt@MainCamera">Buongiorno dottore, spero mi porti buone notizie</salutation>
-	<salutation action="LookAt@MainCamera">Buongiorno dottore, felice di vederla</salutation>
-	<salutation action="LookAt@MainCamera">Salve dottore, che piacere verderla</salutation>	
-	
-	<blablaweather emotion="Joy" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Stavo giusto guardando il tempo fuori dalla finestra</blablaweather>
-	<blablaweather emotion="Joy" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Si finalmente, è una bella giornata</blablaweather>
-	<blablaweather emotion="Sadness" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Ero troppo debole e non ho guardato fuori dalla finestra</blablaweather>
-	<blablaweather emotion="Sadness" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Sono troppo triste per preoccuparmi del tempo, dottore</blablaweather>
-	<blablaweather emotion="Anger" action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Dottore, non mi sembra il caso di parlare del tempo proprio adesso</blablaweather>
-	<blablaweather action="PointAt@Window;LookAt@Window;MoveTo@WindowPosition">Ah, non ci avevo fatto caso ora guardo</blablaweather>
-	
-	<blablasport emotion="Joy" action="LookAt@MainCamera;PointAt@LeftDown">Si l'ho vista. Una bellissima partita</blablasport>
-	<blablasport emotion="Joy" action="LookAt@MainCamera;PointAt@LeftDown">certamente è stata fantastica</blablasport>
-	<blablasport emotion="Sadness" action="LookAt@MainCamera;PointAt@LeftDown">Mi interessa poco dello sport, sinceramente</blablasport>
-	<blablasport emotion="Sadness" action="LookAt@MainCamera;PointAt@LeftDown">Sono troppo triste per preoccuparmi dello sport, dottore</blablasport>
-	<blablasport emotion="Anger" action="LookAt@MainCamera;PointAt@LeftDown">Dottore, non mi sembra il caso di parlare di sport proprio adesso</blablasport>
-	<blablasport emotion="Anger" action="LookAt@MainCamera;PointAt@LeftDown">Mi scusi ma non ho nessuna voglia di parlare di sport al momento</blablasport>
-	<blablasport action="LookAt@MainCamera;PointAt@LeftDown">certamente è stata fantastica</blablasport>	
-	
-	<generalhealth emotion="Joy">Oggi abbastanza bene grazie</generalhealth>
-	<generalhealth emotion="Joy">Grazie per l'interessamento, forse un po meglio ripetto a ieri</generalhealth>
-	<generalhealth emotion="Joy">Oggi mi sento proprio bene</generalhealth>
-	<generalhealth emotion="Sadness">Non noto nessun miglioramento</generalhealth>
-	<generalhealth emotion="Sadness">Non so dirle, mi sembra non ci siano miglioramenti</generalhealth>
-	<generalhealth emotion="Anger">Non sto affatto bene dottore. Non vede?</generalhealth>
-	<generalhealth>Non ci sono stati molti cambiamenti rispetto a ieri</generalhealth>
-	<generalhealth>Non noto grandi differenze rispetto a ieri</generalhealth>
+    <generalhealth emotion="Joy">I'm feeling really good doc!</generalhealth>
+    <generalhealth emotion="Trust">I'm in a good period doc!</generalhealth>
+    <generalhealth emotion="Anger">Not good doc! I'm doing many cures and I don't see the results!</generalhealth>
+    <generalhealth emotion="Disgust">I don't want to speak to you.</generalhealth>
+    <generalhealth emotion="Fear">Not good doc. This tumor is eating my psyche.</generalhealth>
+    <generalhealth emotion="Sadness">Bad. My life is falling apart.</generalhealth>
 
-  <badnew emotion="Joy" action ="LookAt@Floor">Ah mi dica, spero non sia troppo grave</badnew>
-  <badnew emotion="Sadness" action ="LookAt@Floor">Come delle brutte notizie? avanti mi dica</badnew>
-  <badnew emotion="Anger" action ="LookAt@Floor">Ma come? lei mi aveva assicurato sarebbe andato tutto bene</badnew>
-  <badnew action ="LookAt@Floor">Ma come? avanti mi dica</badnew>
+    <weather emotion="Joy">Oh I love this weather!</weather>
+    <weather emotion="Anger">It is not time to talk about weather doc!</weather>
+    <weather emotion="Disgust">I hate the sun and I hate you too.</weather>
+    <weather emotion="Fear">I don't see the light in the tunnel.</weather>
+    <weather emotion="Sadness">I prefer the rainy days.</weather>
+    <weather>I love the sun too!</weather>
 
-
-  <none>scusi, non ho capito</none>
-	<none>non credo di aver capito, potrebbe ripetere per favore?</none>
+    <none>I don't understand, can you repeat please?</none>
+	  <none>Can you repeat?</none>
 	
   
   </tts>
