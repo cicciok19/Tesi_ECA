@@ -37,6 +37,7 @@ using UnityEngine.Assertions;
     PickUp,
     PickDown
 }
+
 /// <summary>
 /// Class used to define the name of the xml files that contain the necessary configurations
 /// </summary>
@@ -70,11 +71,14 @@ public class Configuration
 {
 
     private static Configuration instance = null;
+    private string listOfMessagesFilename;
 
 
-    public void Init()
+    public void Init(string messagesFilename = null)
     {
-        SetLanguage();
+        //SetLanguage();        no need to set language, was used only to set the right folder
+        listOfMessagesFilename = messagesFilename;
+        XmlParser.InfoPath = "XMLs";
         InitDocumentsNames();
         if (XmlDocumentNames == null)
         {
@@ -95,7 +99,12 @@ public class Configuration
 
     private void InitDocumentsNames()
     {
-        XmlDocumentNames = new XmlDocumentNames("ListOfMessages_ACLS.xml", "Configuration.xml", "ECAs.xml", "ActiveMessagesPerScenario.xml");
+        if (listOfMessagesFilename == null)
+            listOfMessagesFilename = "ListOfMessages.xml";
+        else
+            listOfMessagesFilename += ".xml";
+
+        XmlDocumentNames = new XmlDocumentNames(listOfMessagesFilename, "Configuration.xml", "ECAs.xml", "ActiveMessagesPerScenario.xml");
     }
 
 
