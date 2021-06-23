@@ -182,7 +182,7 @@ public class ECAAnimator : MonoBehaviour
     
         else if (audioSource != null)
         {
-            Salsa3D salsa = this.GetComponent<Salsa3D>();
+            //Salsa3D salsa = this.GetComponent<Salsa3D>();
     
             var audioClip = AudioClip.Create("SynthesizedAudio", audioData.Length, 1, 16000, false);
             audioClip.SetData(audioData, 0);
@@ -192,6 +192,7 @@ public class ECAAnimator : MonoBehaviour
                 AudioStart(this, EventArgs.Empty);
 
             ShowText(messageContent);
+            /*
             if (salsa != null)
             {
                 //use SALSA -> pipsync
@@ -199,14 +200,12 @@ public class ECAAnimator : MonoBehaviour
                 salsa.Play();
                 yield return new WaitWhile(() => salsa.audioSrc.isPlaying);
             }
-            else
-            {
+            */
                 //use Unity audioSource
-                AudioSource audioSource = GetComponent<AudioSource>();
-                audioSource.clip = audioClip;
-                audioSource.Play();
-                yield return new WaitWhile(() => audioSource.isPlaying);
-            }
+            AudioSource audioSource = GetComponent<AudioSource>();
+            audioSource.clip = audioClip;
+            audioSource.Play();
+            yield return new WaitWhile(() => audioSource.isPlaying);
             //Debug.Log("Audio ended!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             HideText();
         }
