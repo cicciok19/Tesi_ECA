@@ -6,6 +6,17 @@ using UnityEngine.Assertions;
 
 public class ConversationalPatient : ECA
 {
+    private SittableObject chair;
+    private ECAAction sitAction;
+
+    protected override void Start()
+    {
+        base.Start();
+
+        //send message greetings (and trigger animation, if you want to
+        chair = FindObjectOfType<SittableObject>();
+        Sit();
+    }
     protected override ECAAnimator AddECAAnimator()
     {
         return gameObject.AddComponent<ECAAnimatorMxM>();
@@ -43,14 +54,12 @@ public class ConversationalPatient : ECA
             {
                 Utility.Log("Going to " + action.firstParameter);
                 ecaAction = CreateGoToAction(action);
-                actionsList.Enqueue(ecaAction);
             }
 
             if (action.IsPickUp())
             {
                 Utility.Log("Picking up " + action.firstParameter);
                 ecaAction = CreatePickUpAction(action);
-                actionsList.Enqueue(ecaAction);
             }
 
             if(action.IsPointAt())
@@ -95,8 +104,10 @@ public class ConversationalPatient : ECA
             stages.Add(goToDrop);
             stages.Add(drop);
         }
-        
-        return new ECAAction(this, stages);
+
+        ECAAction pickAction = new ECAAction(this, stages);
+
+        return new ECACompositeAction(this, new List<ECAAction>() { pickAction, sitAction });
     }
 
     private ECAAction CreateGoToAction(MessageAction action)
@@ -107,8 +118,11 @@ public class ConversationalPatient : ECA
         Destination destination = obj.GetComponentInChildren<Destination>();
         Assert.IsNotNull(destination, "Object parameter hasn't a destination point attached");
 
-        return new ECAAction(this, new GoToStage(destination.transform));
+        ECAAction goToAction = new ECAAction(this, new GoToStage(destination.transform));
+
+        return new ECACompositeAction(this, new List<ECAAction>() { goToAction, sitAction });
     }
+
 
     private ECAAction CreatePointAtAction(MessageAction action)
     {
@@ -117,12 +131,7 @@ public class ConversationalPatient : ECA
 
         List<ECAActionStage> stages = new List<ECAActionStage>();
 
-        if (obj.GetComponentInChildren<Destination>() != null)
-        {
-            Destination destination = obj.GetComponentInChildren<Destination>();
-            stages.Add(new GoToStage(destination.transform));
-        }
-
+        //setup ointAtStage
         int time = 0;
         PointAtStage pointAt;
         if (action.secondParameter != "")
@@ -133,8 +142,38 @@ public class ConversationalPatient : ECA
         else
             pointAt = new PointAtStage(obj.transform, 2);
 
-        stages.Add(pointAt);
 
-        return new ECAAction(this, stages);
+        //setup optional GoToStage
+        if (obj.GetComponentInChildren<Destination>() != null)
+        {
+            Destination destination = obj.GetComponentInChildren<Destination>();
+            stages.Add(new GoToStage(destination.transform));
+            stages.Add(pointAt);
+
+            ECAAction goAndPoint = new ECAAction(this, stages);
+            ECACompositeAction ecaAction = new ECACompositeAction(this, new List<ECAAction>() { goAndPoint, sitAction });
+            return ecaAction;
+        }
+        else    //if there's no destination only pointAt
+        {
+            stages.Add(pointAt);
+            ECAAction ecaAction = new ECAAction(this, stages);
+            return ecaAction;
+        }
+    }
+
+    private void Sit()
+    {
+        List<ECAActionStage> stages = new List<ECAActionStage>();
+        GoToStage reachChair = new GoToStage(chair.GetDestination());
+        TurnStage turn = new TurnStage(chair.GetSitPoint(), true);
+        SitStage sit = new SitStage(chair);
+        stages.Add(reachChair);
+        stages.Add(turn);
+        stages.Add(sit);
+
+        sitAction = new ECAAction(this, stages);
+
+        actionsList.Enqueue(sitAction);
     }
 }
