@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Assertions;
 
 public class Compressor : ECA
 {
@@ -23,7 +24,7 @@ public class Compressor : ECA
         systemManager = FindObjectOfType<SystemManager>();
 
         //just for debug
-        //HandleStartCPR();
+        HandleStartCPR();
         //EmotionManager.InitActualEmotion(AvailableEmotions.Trust, 0f);
     }
 
@@ -121,27 +122,51 @@ public class Compressor : ECA
             MessageAction action = actions[i];
             if (action.IsMoveTo())
             {
-                Utility.Log("Going to " + action.parameter);
-                GameObject obj = GameObject.FindGameObjectWithTag(action.parameter); 
-                if (obj == null)
+                Utility.Log("Going to " + action.firstParameter);
+                GameObject obj = GameObject.FindGameObjectWithTag(action.firstParameter);
+                Assert.IsNotNull(obj, "Object parameter for GoTo is null");
+
+                Destination destination = obj.GetComponentInChildren<Destination>();
+                Assert.IsNotNull(destination, "Object parameter hasn't a destination point attached");
+
+                ECAAction ecaAction = new ECAAction(this, new GoToStage(destination.transform));
+                actionsList.Enqueue(ecaAction);
+            }
+
+            if (action.IsPickUp())
+            {
+                Utility.Log("Going to " + action.firstParameter);
+                GameObject obj = GameObject.FindGameObjectWithTag(action.firstParameter);
+                Assert.IsNotNull(obj, "Object parameter for pickUp is null");
+
+                GrabbableObject grabbableObject = obj.GetComponentInChildren<GrabbableObject>();
+                Assert.IsNotNull(grabbableObject, "Object parameter hasn't a grabbable object attached");
+
+                Destination pickDestination = obj.GetComponentInChildren<Destination>();
+                Assert.IsNotNull(pickDestination, "Object parameter hasn't a destination point attached");
+
+                List<ECAActionStage> stages = new List<ECAActionStage>();
+                GoToStage goToDestination = new GoToStage(pickDestination.transform);
+                PickStage pickUp = new PickStage(grabbableObject.transform, 1, false, HandSide.RightHand);
+                stages.Add(goToDestination);
+                stages.Add(pickUp);
+
+                if(action.secondParameter != "")
                 {
-                    Debug.LogError("The obj specified in the MoveTo action doesn't exist in this context.");
-                    return;
+                    GameObject dropPosition = GameObject.FindGameObjectWithTag(action.secondParameter);
+                    Assert.IsNotNull(dropPosition, "Drop position for pickUp is null");
+
+                    Destination dropDestination = dropPosition.GetComponentInChildren<Destination>();
+                    Assert.IsNotNull(pickDestination, "Drop position hasn't a destination point attached");
+
+                    GoToStage goToDrop = new GoToStage(dropDestination.transform);
+                    DropStage drop = new DropStage(pickUp, dropPosition.transform);
+                    stages.Add(goToDrop);
+                    stages.Add(drop);
                 }
-                else
-                {
-                    if (obj.GetComponentInChildren<Destination>())
-                    {
-                        GoToStage goToStage = new GoToStage(obj.GetComponentInChildren<Destination>().transform);
-                        ECAAction EcaAction = new ECAAction(this, goToStage);
-                        actionsList.Enqueue(EcaAction);
-                    }
-                    else
-                    {
-                        Debug.LogError("The obj specified in the MoveTo action doesn't have a destination.");
-                    }
-                    
-                }
+
+                ECAAction ecaAction = new ECAAction(this, stages);
+                actionsList.Enqueue(ecaAction);
             }
         }
 

@@ -2,7 +2,7 @@
 <game>
   <tts ecaID="Default">
     <CPRStart> Comincio il massaggio cardiaco </CPRStart>
-    <CPRCompleted> Massaggio cardiaco completato </CPRCompleted>
+    <CPRCompleted action="PickUp@Medicine@RubbishTable"> Massaggio cardiaco completato </CPRCompleted>
   </tts>
   <tts ecaID="AirwayManager">
     <giveOxygenStart> Comincio a dare ossigeno</giveOxygenStart>
