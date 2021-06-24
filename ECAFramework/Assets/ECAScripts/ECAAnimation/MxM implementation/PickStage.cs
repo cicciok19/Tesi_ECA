@@ -90,6 +90,7 @@ public class PickStage : ECAActionStage
 			holdPoint.rotation = new Quaternion(obj.transform.rotation.x, obj.transform.rotation.y, obj.transform.rotation.z, obj.transform.rotation.w);
 	}
 
+
     public override void LateUpdate()
 	{
 		if (holding)
@@ -207,6 +208,8 @@ public class PickStage : ECAActionStage
 			else
 				typePick = HandSide.LeftHand;
 		}
+
+		ikManager.interactionSystem.speed = pickSpeed;
 
 		//start the interaction with the correct hand
 		if (typePick == HandSide.LeftHand)
