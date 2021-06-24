@@ -55,7 +55,9 @@ class StandUpStage : ECAActionStage
 
     public override void EndStage()
     {
+        animator.TriggeredAnimationComplete -= OnEventComplete;
         sittableObject.Occupied = false;
+        animator.Eca.ActivateNavMeshAgent();
 
         animator.ClearAnimationGroup();
 
