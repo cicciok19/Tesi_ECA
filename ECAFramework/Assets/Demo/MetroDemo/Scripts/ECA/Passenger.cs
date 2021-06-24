@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Assertions;
+using MxM;
 
 
 // global declaration end
@@ -23,12 +24,14 @@ public class Passenger : ECA
     private BuyBottle buyBottle;
     public float maxDistanceReacheable = 5f;
 
-    [SerializeField] protected const float TAKE_TICKET_CHANCE = .4f;
-    [SerializeField] protected const float TAKE_DRINK_CHANCE = .4f;
+    [SerializeField] protected const float TAKE_TICKET_CHANCE = .2f;
+    [SerializeField] protected const float TAKE_DRINK_CHANCE = .2f;
     [SerializeField] protected const float TAKE_TRAIN_CHANCE = 1f;
 
     protected EnterTrain enterTrain;
     protected ReachPlatform reachPlatform;
+
+    public ECAAnimatorMxM MxMecaAnimator;
 
     public Station station;
     public int ecaTurn;
@@ -53,7 +56,8 @@ public class Passenger : ECA
         ecaTurn = -1;       //non è in coda
     
         station = GameObject.FindObjectOfType<Station>();
-    
+        MxMecaAnimator = GetComponent<ECAAnimatorMxM>();
+
         train = station.train;
         ticketTaken = false;
         bottleTaken = false;
@@ -97,12 +101,14 @@ public class Passenger : ECA
     {
         reachPlatform = new ReachPlatform(this);
         actionsList.Enqueue(reachPlatform);
-        enterTrain = new EnterTrain(this);
-        actionsList.Enqueue(enterTrain);
     }
 
     private void OnTrainArriving(object sender, EventArgs e)
     {
+        MxMecaAnimator.m_animator.RemoveRequiredTag("Idle");
+        enterTrain = new EnterTrain(this);
+        actionsList.Enqueue(enterTrain);
+
         if (ticketTaken)
         {
             if(actionsList.CurrentAction != null)

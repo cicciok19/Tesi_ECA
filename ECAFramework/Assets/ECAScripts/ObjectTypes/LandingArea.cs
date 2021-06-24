@@ -16,7 +16,7 @@ using UnityEngine.Assertions;
 public class LandingArea : MonoBehaviour
 {
     protected int ecaIn;
-    public int maxOccupancy;
+    public int maxOccupancy = 3;
     public bool full;
 
     public event EventHandler SpaceCompleted;
@@ -25,7 +25,6 @@ public class LandingArea : MonoBehaviour
     {
         ecaIn = 0;
         full = false;
-        maxOccupancy = 3;
       // computing object bounds
     }
 

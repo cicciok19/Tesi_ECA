@@ -18,6 +18,7 @@ public class ReachPlatform : ECAAction
 {
     protected Passenger eca;
     protected Station station;
+    protected const float CHANGE_IDLE_CHANCE = .6f;
 
     public ReachPlatform(Passenger eca)
     :base(eca)
@@ -32,10 +33,19 @@ public class ReachPlatform : ECAAction
     
         Vector3 platformPosition = Randomize.GetRandomPosition(station.GetPlatform());
         GoToStage reachPlatform = new GoToStage(platformPosition);
+        reachPlatform.StageFinished += OnReachPlatformFinished;
         TurnStage turnToTrain = new TurnStage(station.train.transform);
         stages.Add(reachPlatform);
         //stages.Add(turnToTrain);
     
         SetStages(stages);
+    }
+
+    private void OnReachPlatformFinished(object sender, EventArgs e)
+    {
+        float chanceChangeIdle = UnityEngine.Random.Range(0f, 1f);
+
+        if(chanceChangeIdle < CHANGE_IDLE_CHANCE)
+            eca.MxMecaAnimator.m_animator.SetRequiredTag("Idle");
     }
 }
