@@ -7,7 +7,7 @@ public class RubbishTable : MonoBehaviour
     private Destination destination;
     private TablePlane plane;
 
-    void Start()
+    void Awake()
     {
         destination = GetComponentInChildren<Destination>();
         plane = GetComponentInChildren<TablePlane>();

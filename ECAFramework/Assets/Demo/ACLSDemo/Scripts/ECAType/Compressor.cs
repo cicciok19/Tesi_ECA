@@ -24,7 +24,7 @@ public class Compressor : ECA
         systemManager = FindObjectOfType<SystemManager>();
 
         //just for debug
-        HandleStartCPR();
+        //HandleStartCPR();
         //EmotionManager.InitActualEmotion(AvailableEmotions.Trust, 0f);
     }
 

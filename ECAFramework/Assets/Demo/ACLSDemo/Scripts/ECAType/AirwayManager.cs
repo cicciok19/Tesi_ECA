@@ -24,7 +24,7 @@ public class AirwayManager : ECA
         systemManager = FindObjectOfType<SystemManager>();
 
         //just for debug
-        HandleGiveOxygen();
+        //HandleGiveOxygen();
 
         //HandleCapnography();
     }

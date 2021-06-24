@@ -11,7 +11,7 @@ public class MedicationTable : MonoBehaviour
 
     public event EventHandler MedicineFinished;
 
-    void Start()
+    void Awake()
     {
         medicineSpots = GetComponentsInChildren<MedicineSpot>();
         ivTube = GetComponentInChildren<IVTube>();

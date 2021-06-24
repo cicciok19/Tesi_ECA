@@ -39,7 +39,7 @@ public class DefibrillatorManager : ECA
 
         systemManager = FindObjectOfType<SystemManager>();
 
-        HandleShock();
+        //HandleShock();
         //HandleAttachMonitor();
         //HandleCheckScreen();
     }
