@@ -74,6 +74,8 @@ class SitStage : ECAActionStage
 
     public override void EndStage()
     {
+        animator.TriggeredAnimationComplete -= OnEventComplete;
+
         animator.SetAnimationGroup("Sitting");
         base.EndStage();
     }

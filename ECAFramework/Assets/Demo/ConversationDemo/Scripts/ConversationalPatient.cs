@@ -24,17 +24,18 @@ public class ConversationalPatient : ECA
 
         //send message greetings (and trigger animation, if you want to
         chair = FindObjectOfType<SittableObject>();
-        Sit();
+        sitAction = Sit();
+        actionsList.Enqueue(sitAction);
 
         SendMessage(PRESENTATION);
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if(Input.GetKeyDown(KeyCode.C))
             SendMessage(CHILDREN);
-
-
+        if (Input.GetKeyDown(KeyCode.E))
+            SendMessage(EXPLAIN_DISEASE);
     }
     public override void SetEcaId()
     {
@@ -102,22 +103,26 @@ public class ConversationalPatient : ECA
             {
                 Utility.Log("Going to " + action.firstParameter);
                 ecaAction = CreateGoToAction(action);
+                actionsList.Enqueue(ecaAction);
             }
 
             if (action.IsPickUp())
             {
                 Utility.Log("Picking up " + action.firstParameter);
                 ecaAction = CreatePickUpAction(action);
+                actionsList.Enqueue(ecaAction);
             }
 
             if(action.IsPointAt())
             {
                 Utility.Log("Pointing at " + action.firstParameter);
                 ecaAction = CreatePointAtAction(action);
+                actionsList.Enqueue(ecaAction);
             }
 
             Assert.IsNotNull(ecaAction, "MessageAction is not referred to a valid action");
-            actionsList.Enqueue(ecaAction);
+            actionsList.Enqueue(Sit());
+
         }
 
     }
@@ -134,8 +139,10 @@ public class ConversationalPatient : ECA
         Assert.IsNotNull(pickDestination, "Object parameter hasn't a destination point attached");
 
         List<ECAActionStage> stages = new List<ECAActionStage>();
+        StandUpStage standUp = new StandUpStage(chair);
         GoToStage goToDestination = new GoToStage(pickDestination.transform);
         PickStage pickUp = new PickStage(grabbableObject.transform, 1, false, HandSide.RightHand);
+        stages.Add(standUp);
         stages.Add(goToDestination);
         stages.Add(pickUp);
 
@@ -155,7 +162,8 @@ public class ConversationalPatient : ECA
 
         ECAAction pickAction = new ECAAction(this, stages);
 
-        return new ECACompositeAction(this, new List<ECAAction>() { pickAction, sitAction });
+        //return new ECACompositeAction(this, new List<ECAAction>() { pickAction, sitAction });
+        return pickAction;
     }
 
     private ECAAction CreateGoToAction(MessageAction action)
@@ -166,9 +174,14 @@ public class ConversationalPatient : ECA
         Destination destination = obj.GetComponentInChildren<Destination>();
         Assert.IsNotNull(destination, "Object parameter hasn't a destination point attached");
 
-        ECAAction goToAction = new ECAAction(this, new GoToStage(destination.transform));
+        StandUpStage standUp = new StandUpStage(chair);
+        GoToStage goTo = new GoToStage(destination.transform);
+        List<ECAActionStage> stages = new List<ECAActionStage>() { standUp, goTo };
 
-        return new ECACompositeAction(this, new List<ECAAction>() { goToAction, sitAction });
+        ECAAction goToAction = new ECAAction(this, stages);
+
+        //return new ECACompositeAction(this, new List<ECAAction>() { goToAction, sitAction });
+        return goToAction;
     }
 
 
@@ -179,6 +192,8 @@ public class ConversationalPatient : ECA
 
         List<ECAActionStage> stages = new List<ECAActionStage>();
 
+        StandUpStage standUp = new StandUpStage(chair);
+        stages.Add(standUp);
         //setup ointAtStage
         int time = 0;
         PointAtStage pointAt;
@@ -210,7 +225,7 @@ public class ConversationalPatient : ECA
         }
     }
 
-    private void Sit()
+    private ECAAction Sit()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
         GoToStage reachChair = new GoToStage(chair.GetDestination());
@@ -220,8 +235,8 @@ public class ConversationalPatient : ECA
         stages.Add(turn);
         stages.Add(sit);
 
-        sitAction = new ECAAction(this, stages);
+        ECAAction action = new ECAAction(this, stages);
+        return action;
 
-        actionsList.Enqueue(sitAction);
     }
 }
