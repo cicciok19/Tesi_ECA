@@ -101,8 +101,8 @@ public class Compressor : ECA
         CPRAction cpr = (CPRAction)sender;
         cpr.CompletedAction -= OnCPRCompleted;
         EmotionalMessage message = GetMessageForIntentKey(END_KEY);
-        SendDirectMessage(message.message);
-        HandleMessageAction(message);
+        //SendDirectMessage(message.message);
+        //HandleMessageAction(message);
         
         systemManager.CheckAction(cpr.ActionName);
         patient.OnCPREnded();

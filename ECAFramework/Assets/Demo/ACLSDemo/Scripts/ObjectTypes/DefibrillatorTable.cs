@@ -11,7 +11,7 @@ public class DefibrillatorTable : MonoBehaviour
     private Transform paddleRightPosition;
     private Transform paddleLeftPosition;
 
-    private void Start()
+    private void Awake()
     {
         defibrillator = GetComponentInChildren<Defibrillator>();
         leftFootPosition = GetComponentInChildren<LeftFootPosition>().transform;

@@ -191,7 +191,7 @@ public class ECAAction
     public virtual void OnCompletedAction()
     {
         State = ActionState.Completed;
-        actualStageIdx = 0;
+        //actualStageIdx = 0;
 
         if (CompletedAction != null)
             CompletedAction(this, EventArgs.Empty);

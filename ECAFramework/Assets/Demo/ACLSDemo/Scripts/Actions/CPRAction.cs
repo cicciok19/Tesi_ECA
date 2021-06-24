@@ -14,14 +14,15 @@ public class CPRAction : ECAAction
 
     public override void StartAction()
     {
-        SetupAction();
         base.StartAction();
     }
 
     public override void SetupAction()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
+        WaitStage wait = new WaitStage(1f);
         CPRStage stage = new CPRStage(cprPosition);
+        stages.Add(wait);
         stages.Add(stage);
         SetStages(stages);
     }

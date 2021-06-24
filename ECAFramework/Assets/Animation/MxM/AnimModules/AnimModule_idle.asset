@@ -724,7 +724,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PrimaryClip: {fileID: -203655887218126122, guid: d8d031195840d3742934e633a2757062,
     type: 3}
-  BeforeClips: []
+  BeforeClips:
+  - {fileID: -5526175838718249762, guid: cc039061c90ae764f930ee958e67385e, type: 3}
   AfterClips: []
   Looping: 0
   IgnoreEdges: 0
@@ -859,7 +860,8 @@ MonoBehaviour:
   PrimaryClip: {fileID: -5526175838718249762, guid: cc039061c90ae764f930ee958e67385e,
     type: 3}
   BeforeClips: []
-  AfterClips: []
+  AfterClips:
+  - {fileID: -203655887218126122, guid: d8d031195840d3742934e633a2757062, type: 3}
   Looping: 0
   IgnoreEdges: 0
   ExtrapolateTrajectory: 1
