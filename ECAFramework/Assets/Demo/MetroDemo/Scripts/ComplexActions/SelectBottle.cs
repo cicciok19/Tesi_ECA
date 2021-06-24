@@ -19,7 +19,7 @@ public class SelectBottle : ECAAction
         /*PickStage pickMoney = new PickStage(distributor, 10, false, HandSide.RightHand);
         DropStage enterMoney = new DropStage(pickMoney, distributor.GetEnterMoney());*/
         PressStage pressButton = new PressStage(distributor.GetRandomButton(), HandSide.RightHand);
-        PickStage pickBottle = new PickStage(distributor.GetGrabbableGameObject(), 10, false, HandSide.RightHand);
+        PickStage pickBottle = new PickStage(distributor.GetGrabbableGameObject(), .5f, false, HandSide.RightHand);
         DropStage dropBottle = new DropStage(pickBottle);
         GoToStage exitQueue = new GoToStage(distributor.GetExitPoint());
 
