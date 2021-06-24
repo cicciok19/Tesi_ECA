@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Assertions;
+using MxM;
 
 
 // global declaration end
@@ -29,6 +30,8 @@ public class Passenger : ECA
 
     protected EnterTrain enterTrain;
     protected ReachPlatform reachPlatform;
+
+    public ECAAnimatorMxM MxMecaAnimator;
 
     public Station station;
     public int ecaTurn;
@@ -53,7 +56,8 @@ public class Passenger : ECA
         ecaTurn = -1;       //non è in coda
     
         station = GameObject.FindObjectOfType<Station>();
-    
+        MxMecaAnimator = GetComponent<ECAAnimatorMxM>();
+
         train = station.train;
         ticketTaken = false;
         bottleTaken = false;
@@ -101,6 +105,7 @@ public class Passenger : ECA
 
     private void OnTrainArriving(object sender, EventArgs e)
     {
+        MxMecaAnimator.m_animator.RemoveRequiredTag("Idle");
         enterTrain = new EnterTrain(this);
         actionsList.Enqueue(enterTrain);
 
