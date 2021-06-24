@@ -18,16 +18,20 @@ public class ConversationalPatient : ECA
     private SittableObject chair;
     private ECAAction sitAction;
 
+    private TTSClient client;
+
     protected override void Start()
     {
         base.Start();
+
+        client = new TTSClient();
 
         //send message greetings (and trigger animation, if you want to
         chair = FindObjectOfType<SittableObject>();
         sitAction = Sit();
         actionsList.Enqueue(sitAction);
 
-        SendMessage(PRESENTATION);
+        //SendMessage(PRESENTATION);
     }
 
     private void Update()
@@ -36,6 +40,8 @@ public class ConversationalPatient : ECA
             SendMessage(CHILDREN);
         if (Input.GetKeyDown(KeyCode.E))
             SendMessage(EXPLAIN_DISEASE);
+        if (Input.GetKeyDown(KeyCode.Space))
+            client.SendMessage("Ciao, sono ciccio");
     }
     public override void SetEcaId()
     {

@@ -11,7 +11,7 @@ public class AirwayTable : MonoBehaviour
     Destination destination;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         oxygen = GetComponentInChildren<Oxygen>();
         capnographyTube = GetComponentInChildren<CapnographyTube>();

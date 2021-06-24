@@ -12,12 +12,6 @@ public class CPRAction : ECAAction
         actionName = ActionName.Cpr;
     }
 
-    public override void StartAction()
-    {
-        SetupAction();
-        base.StartAction();
-    }
-
     public override void SetupAction()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
