@@ -10,6 +10,7 @@ public class CPRStage : ECAActionStage
     internal InteractionObject interactionObj;
     internal InteractionTarget interactionTarget_L;
     internal InteractionTarget interactionTarget_R;
+    private Patient patient;
     float timer, speed;
 
     private bool startEvaluate = false;
@@ -17,11 +18,6 @@ public class CPRStage : ECAActionStage
     public CPRStage(CPRPosition target) : base()
     {
         this.target = target;   
-    }
-
-    public override void EndStage()
-    {
-        base.EndStage();
     }
 
     public override void StartStage()
@@ -35,6 +31,8 @@ public class CPRStage : ECAActionStage
         Assert.IsNotNull(interactionTarget_L);
         Assert.IsNotNull(interactionTarget_R);
 
+        patient = GameObject.FindObjectOfType<Patient>();
+
         SetupInteractionSystem();
 
         ikManager.interactionSystem.StartInteraction(FullBodyBipedEffector.LeftHand, interactionObj, true);
@@ -47,6 +45,12 @@ public class CPRStage : ECAActionStage
     {
         base.Update();
         timer += Time.deltaTime * speed * (interactionTarget_L != null ? interactionTarget_L.interactionSpeedMlp : 1f);
+
+        Debug.Log(interactionObj.GetValue(InteractionObject.WeightCurve.Type.PositionOffsetY, interactionTarget_L,timer));
+        if (interactionObj.GetValue(InteractionObject.WeightCurve.Type.PositionOffsetY, interactionTarget_L, timer) < 0f)
+        {
+            patient.OnCprReceived();
+        }
 
         if (startEvaluate)
         {

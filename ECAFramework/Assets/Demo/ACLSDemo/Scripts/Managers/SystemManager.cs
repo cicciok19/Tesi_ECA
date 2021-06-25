@@ -92,12 +92,12 @@ public class SystemManager: MonoBehaviour
                 logWriter.AddNewNodeLog(actualNode.NodeName.ToString());
                 logWriter.AddCorrectActionLog(actionDone.ToString());
 
-                Debug.Log("Ti sei dimenticato di fare delle azioni nel nodo precedente");
+                //Debug.Log("Ti sei dimenticato di fare delle azioni nel nodo precedente");
             }
             else
             {
                 logWriter.AddWrongActionLog(actionDone.ToString());
-                patient.StateLevel -= .5f;
+                patient.StateLevel -= .05f;
             }
                 
 

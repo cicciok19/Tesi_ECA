@@ -35,13 +35,14 @@ public class Patient : ECA
     private DefRightPosition defRightPosition;
     private HitReaction hitReaction;
     private Collider spineCollider;
+    private Collider secondSpineCollider;
     private Stomach stomach;
     private PumpPosition pumpPosition;
     private DestinationDef destinationDef;
     private DestinationAir destinationAir;
     private InjectionPosition injectionPosition;
 
-    protected bool ivAccessInserted = true;
+    protected bool ivAccessInserted = false;
     protected bool isOxygened = false;
     protected bool hasCapnography = false;
 
@@ -91,6 +92,7 @@ public class Patient : ECA
         defRightPosition = GetComponentInChildren<DefRightPosition>();
         hitReaction = GetComponent<HitReaction>();
         spineCollider = GetComponentInChildren<SpineCollider>().GetComponent<Collider>();
+        secondSpineCollider = GetComponentInChildren<SecondSpineCollider>().GetComponent<Collider>();
         stomach = GetComponentInChildren<Stomach>();
         pumpPosition = GetComponentInChildren<PumpPosition>();
         destinationDef = GetComponentInChildren<DestinationDef>();
@@ -118,6 +120,11 @@ public class Patient : ECA
         hitReaction.Hit(spineCollider, Vector3.up * .5f, stomach.transform.position);
         if (Shocked != null)
             Shocked(this, EventArgs.Empty);
+    }
+
+    public void OnCprReceived()
+    {
+        hitReaction.Hit(secondSpineCollider, Vector3.down * .2f, stomach.transform.position);
     }
 
 
