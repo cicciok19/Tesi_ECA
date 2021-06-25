@@ -363,7 +363,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 4011760ea17136245ab9c5cd1f2c6611,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.506
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4011760ea17136245ab9c5cd1f2c6611,
         type: 3}
@@ -1153,7 +1153,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.09e-43, y: 7.1e-44, z: 0, w: -0.00000030725664}
+  m_BoundingSphereOverride: {x: 5.714e-42, y: 1.02e-43, z: 3.0880801e+29, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -1492,6 +1492,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7939177121264789443, guid: d3793cc28dd764844a695994f9d2cb1c,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9d3c0382ed9477e43b113ac051c2dc72, type: 3}
     - target: {fileID: 7939177121264789471, guid: d3793cc28dd764844a695994f9d2cb1c,
         type: 3}
       propertyPath: m_maxSpeed
@@ -1521,6 +1526,7 @@ MonoBehaviour:
   stopped: 0
   typePick: 0
   ecaInTrigger: 0
+  chair: {fileID: 0}
 --- !u!1 &906849168
 GameObject:
   m_ObjectHideFlags: 0

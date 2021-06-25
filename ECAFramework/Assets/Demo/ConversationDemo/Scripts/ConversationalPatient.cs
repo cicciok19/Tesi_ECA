@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using CrazyMinnow.SALSA;
 
 public class ConversationalPatient : ECA
 {
@@ -15,16 +16,21 @@ public class ConversationalPatient : ECA
     private const string WEATHER = "Weather";
     private const string NONE = "None";
 
-    private SittableObject chair;
+    public SittableObject chair;
     private ECAAction sitAction;
+    private Salsa salsa;
+    private string ecaName;
 
     private TTSClient client;
 
     protected override void Start()
     {
         base.Start();
+        
+        ecaName = this.name;
+        salsa = GetComponent<Salsa>();
 
-        client = new TTSClient();
+        client = new TTSClient(this);
 
         //send message greetings (and trigger animation, if you want to
         chair = FindObjectOfType<SittableObject>();
@@ -36,18 +42,23 @@ public class ConversationalPatient : ECA
 
     private void Update()
     {
+
+        //just for debug
         if(Input.GetKeyDown(KeyCode.C))
             SendMessage(CHILDREN);
         if (Input.GetKeyDown(KeyCode.E))
             SendMessage(EXPLAIN_DISEASE);
+        //try with TTS client
         if (Input.GetKeyDown(KeyCode.Space))
-            client.SendMessage("Ciao, sono ciccio");
+            SendMessageRequest("Hi, my name is Sophie and I'm happy to meet you");
     }
+
     public override void SetEcaId()
     {
         base.SetEcaId();
         ID = Ecas.HospitalPatient;
     }
+
     protected override ECAAnimator AddECAAnimator()
     {
         return gameObject.AddComponent<ECAAnimatorMxM>();
@@ -61,14 +72,19 @@ public class ConversationalPatient : ECA
         {
             //change emotion based on the intent
             case BAD_NEW:
+                EmotionManager.UpdateEmotion(AppraisalVariables.UnexpectedNegative);
                 break;
             case CHILDREN:
+                EmotionManager.UpdateEmotion(AppraisalVariables.Nice);
                 break;
             case EXPLAIN_DISEASE:
+                EmotionManager.UpdateEmotion(AppraisalVariables.Good, .2f);
                 break;
             case PRESENTATION:
+                EmotionManager.UpdateEmotion(AppraisalVariables.Nice, .3f);
                 break;
             case CURE:
+                EmotionManager.UpdateEmotion(AppraisalVariables.Good, .5f);
                 break;
             case GENERAL_HEALTH:
                 break;
@@ -77,7 +93,7 @@ public class ConversationalPatient : ECA
         }
 
         //then send message
-        SendMessage(PRESENTATION);
+        SendMessage(intent.IntentName);
 
 
     }
@@ -108,126 +124,27 @@ public class ConversationalPatient : ECA
             if (action.IsMoveTo())
             {
                 Utility.Log("Going to " + action.firstParameter);
-                ecaAction = CreateGoToAction(action);
+                ecaAction = new GoToAction(this, action);
                 actionsList.Enqueue(ecaAction);
             }
 
             if (action.IsPickUp())
             {
                 Utility.Log("Picking up " + action.firstParameter);
-                ecaAction = CreatePickUpAction(action);
+                ecaAction = new PickUpAction(this, action);
                 actionsList.Enqueue(ecaAction);
             }
 
             if(action.IsPointAt())
             {
                 Utility.Log("Pointing at " + action.firstParameter);
-                ecaAction = CreatePointAtAction(action);
+                ecaAction = new GoToAction(this, action);
                 actionsList.Enqueue(ecaAction);
             }
 
             Assert.IsNotNull(ecaAction, "MessageAction is not referred to a valid action");
             actionsList.Enqueue(Sit());
 
-        }
-
-    }
-
-    private ECAAction CreatePickUpAction(MessageAction action)
-    {
-        GameObject obj = GameObject.FindGameObjectWithTag(action.firstParameter);
-        Assert.IsNotNull(obj, "Object parameter for pickUp is null");
-
-        GrabbableObject grabbableObject = obj.GetComponentInChildren<GrabbableObject>();
-        Assert.IsNotNull(grabbableObject, "Object parameter hasn't a grabbable object attached");
-
-        Destination pickDestination = obj.GetComponentInChildren<Destination>();
-        Assert.IsNotNull(pickDestination, "Object parameter hasn't a destination point attached");
-
-        List<ECAActionStage> stages = new List<ECAActionStage>();
-        StandUpStage standUp = new StandUpStage(chair);
-        GoToStage goToDestination = new GoToStage(pickDestination.transform);
-        PickStage pickUp = new PickStage(grabbableObject.transform, 1, false, HandSide.RightHand);
-        stages.Add(standUp);
-        stages.Add(goToDestination);
-        stages.Add(pickUp);
-
-        if (action.secondParameter != "")
-        {
-            GameObject dropPosition = GameObject.FindGameObjectWithTag(action.secondParameter);
-            Assert.IsNotNull(dropPosition, "Drop position for pickUp is null");
-
-            Destination dropDestination = dropPosition.GetComponentInChildren<Destination>();
-            Assert.IsNotNull(pickDestination, "Drop position hasn't a destination point attached");
-
-            GoToStage goToDrop = new GoToStage(dropDestination.transform);
-            DropStage drop = new DropStage(pickUp, dropPosition.transform);
-            stages.Add(goToDrop);
-            stages.Add(drop);
-        }
-
-        ECAAction pickAction = new ECAAction(this, stages);
-
-        //return new ECACompositeAction(this, new List<ECAAction>() { pickAction, sitAction });
-        return pickAction;
-    }
-
-    private ECAAction CreateGoToAction(MessageAction action)
-    {
-        GameObject obj = GameObject.FindGameObjectWithTag(action.firstParameter);
-        Assert.IsNotNull(obj, "Object parameter for GoTo is null");
-
-        Destination destination = obj.GetComponentInChildren<Destination>();
-        Assert.IsNotNull(destination, "Object parameter hasn't a destination point attached");
-
-        StandUpStage standUp = new StandUpStage(chair);
-        GoToStage goTo = new GoToStage(destination.transform);
-        List<ECAActionStage> stages = new List<ECAActionStage>() { standUp, goTo };
-
-        ECAAction goToAction = new ECAAction(this, stages);
-
-        //return new ECACompositeAction(this, new List<ECAAction>() { goToAction, sitAction });
-        return goToAction;
-    }
-
-
-    private ECAAction CreatePointAtAction(MessageAction action)
-    {
-        GameObject obj = GameObject.FindGameObjectWithTag(action.firstParameter);
-        Assert.IsNotNull(obj, "Object parameter for GoTo is null");
-
-        List<ECAActionStage> stages = new List<ECAActionStage>();
-
-        StandUpStage standUp = new StandUpStage(chair);
-        stages.Add(standUp);
-        //setup ointAtStage
-        int time = 0;
-        PointAtStage pointAt;
-        if (action.secondParameter != "")
-            time = Int32.Parse(action.secondParameter);
-
-        if (time != 0)
-            pointAt = new PointAtStage(obj.transform, time);
-        else
-            pointAt = new PointAtStage(obj.transform, 2);
-
-
-        //setup optional GoToStage
-        if (obj.GetComponentInChildren<Destination>() != null)
-        {
-            Destination destination = obj.GetComponentInChildren<Destination>();
-            stages.Add(new GoToStage(destination.transform));
-            stages.Add(pointAt);
-
-            ECAAction goAndPoint = new ECAAction(this, stages);
-            ECACompositeAction ecaAction = new ECACompositeAction(this, new List<ECAAction>() { goAndPoint, sitAction });
-            return ecaAction;
-        }
-        else    //if there's no destination only pointAt
-        {
-            stages.Add(pointAt);
-            ECAAction ecaAction = new ECAAction(this, stages);
-            return ecaAction;
         }
     }
 
@@ -243,6 +160,18 @@ public class ConversationalPatient : ECA
 
         ECAAction action = new ECAAction(this, stages);
         return action;
+    }
 
+    private void SendMessageRequest(string message)
+    {
+        client.SendMessage(message, ecaName);
+        client.AudioGenerated += OnAudioGenerated;
+    }
+
+    private void OnAudioGenerated(object sender, EventArgs e)
+    {
+        client.AudioGenerated -= OnAudioGenerated;
+        ecaAnimator.audioSource.clip = (AudioClip)Resources.Load("Audio/" + ecaName + ".wav");
+        salsa.audioSrc.Play();
     }
 }

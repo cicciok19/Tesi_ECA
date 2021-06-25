@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using UnityEngine;
+using System.IO;
+using System.Linq;
 
 public class TTSServer : MonoBehaviour
 {
@@ -34,15 +37,6 @@ public class TTSServer : MonoBehaviour
 		tcpListenerThread.Start();
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.M))
-		{
-			SendMessage();
-		}
-	}
-
 	/// <summary> 	
 	/// Runs in background TcpServerThread; Handles incomming TcpClient requests 	
 	/// </summary> 	
@@ -53,7 +47,7 @@ public class TTSServer : MonoBehaviour
 			// Create listener on localhost port 8052. 			
 			tcpListener = new TcpListener(IPAddress.Parse("127.0.0.1"), 8052);
 			tcpListener.Start();
-			Debug.Log("Server is listening");
+            UnityEngine.Debug.Log("Server is listening");
 			Byte[] bytes = new Byte[1024];
 			while (true)
 			{
@@ -70,7 +64,7 @@ public class TTSServer : MonoBehaviour
 							Array.Copy(bytes, 0, incommingData, 0, length);
 							// Convert byte array to string message. 							
 							string clientMessage = Encoding.ASCII.GetString(incommingData);
-							Debug.Log("client message received as: " + clientMessage);
+							UnityEngine.Debug.Log("client message received as: " + clientMessage);
 
 							//call function to generate audio
 							GenerateRequestedAudio(clientMessage);
@@ -81,13 +75,13 @@ public class TTSServer : MonoBehaviour
 		}
 		catch (SocketException socketException)
 		{
-			Debug.Log("SocketException " + socketException.ToString());
+            UnityEngine.Debug.Log("SocketException " + socketException.ToString());
 		}
 	}
 	/// <summary> 	
 	/// Send message to client using socket connection. 	
 	/// </summary> 	
-	private void SendMessage()
+	private void SendMessageToClient(string clientName)
 	{
 		if (connectedTcpClient == null)
 		{
@@ -100,30 +94,56 @@ public class TTSServer : MonoBehaviour
 			NetworkStream stream = connectedTcpClient.GetStream();
 			if (stream.CanWrite)
 			{
-				string serverMessage = "This is a message from your server.";
+				string serverMessage = "Audio generated for: " + clientName;
 				// Convert string message to byte array.                 
 				byte[] serverMessageAsByteArray = Encoding.ASCII.GetBytes(serverMessage);
 				// Write byte array to socketConnection stream.               
 				stream.Write(serverMessageAsByteArray, 0, serverMessageAsByteArray.Length);
-				Debug.Log("Server sent his message - should be received by client");
+                UnityEngine.Debug.Log("Server sent his message - should be received by client");
 			}
 		}
 		catch (SocketException socketException)
 		{
-			Debug.Log("Socket exception: " + socketException);
+            UnityEngine.Debug.Log("Socket exception: " + socketException);
 		}
 	}
 
 	private void GenerateRequestedAudio(string clientMessage)
     {
-		Console.WriteLine("D:\\tts\\Scripts\\activate.bat");        // path to env
-		Console.ReadLine();
-		Console.WriteLine("set PYTHONIOENCODING=UTF-8");
-		Console.WriteLine("set PYTHONLEGACYWINDOWSSTDIO=UTF-8");
-		Console.WriteLine("set PYTHONUTF8=1");
+		string filename = "Assets\\Resources\\set_python.bat";
+		
+		//parse the string
+		string[] requestArgs = clientMessage.Split('|');
 
-		string line = "tts --text \" " + clientMessage + "\" --model_name tts_models/en/ljspeech/tacotron2-DDC --out_path D:\\Users\\PietroFrancesco\\TTS-dev\\output\\prova.wav";
-		Console.WriteLine(line);
+		string line = "tts --text \"" + requestArgs[0] + "\" --model_name tts_models/en/ljspeech/tacotron2-DDC " +
+						"--out_path Assets\\Resources\\Audio\\" + requestArgs[1] + ".wav";
+		
+		//replace string in file
+		string[] fileLines = File.ReadAllLines(filename);
 
+		using (StreamWriter writer = new StreamWriter(filename))
+		{
+			for (int currentLine = 0; currentLine < fileLines.Length; currentLine++)
+			{
+				if (currentLine == fileLines.Length-1)
+					writer.WriteLine(line);
+				else
+					writer.WriteLine(fileLines[currentLine]);
+			}
+		}
+
+		Process process = new Process();
+		process.StartInfo.CreateNoWindow = true;
+		process.StartInfo.FileName = "Assets\\Resources\\set_python.bat";
+		process.Start();
+		process.WaitForExit();
+		
+		//notify to the client that the audio is ready
+		SendMessageToClient(requestArgs[1]);
 	}
+
+    private void OnApplicationQuit()
+    {
+		tcpListener.Stop();
+    }
 }

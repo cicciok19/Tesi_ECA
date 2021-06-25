@@ -9,6 +9,6 @@ using UnityEngine;
 
 // global declaration end
 
-class ChairSitPoint : MonoBehaviour
+public class ChairSitPoint : MonoBehaviour
 {
 }

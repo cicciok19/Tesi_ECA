@@ -13,13 +13,12 @@ using UnityEngine;
 
 // global declaration end
 
-class SittableObject : ECAInteractableObject
+public class SittableObject : ECAInteractableObject
 {
     public EventHandler SittableBusy;
     public EventHandler SittableFree;
 
     protected ChairSitPoint sitPoint;
-    protected ChairRightFoot rightFootPosition;
     protected Destination destination;
     protected ChairLeftFoot leftFootTransform;
     protected ChairRightFoot rightFootTransform;
