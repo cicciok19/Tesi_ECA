@@ -11,11 +11,15 @@ public class TTSClient
 	#region private members 	
 	private TcpClient socketConnection;
 	private Thread clientReceiveThread;
+	private ConversationalPatient eca;
 	#endregion
+
+	public event EventHandler AudioGenerated;
 	// Use this for initialization 	
 
-	public TTSClient()
+	public TTSClient(ConversationalPatient eca)
     {
+		this.eca = eca;
 		ConnectToTcpServer();
     }
 
@@ -58,6 +62,10 @@ public class TTSClient
 						// Convert byte array to string message. 						
 						string serverMessage = Encoding.ASCII.GetString(incommingData);
 						Debug.Log("server message received as: " + serverMessage);
+
+						/*if (AudioGenerated != null)
+							AudioGenerated(this, EventArgs.Empty);*/
+						eca.PlayAudio();
 					}
 				}
 			}
@@ -70,7 +78,7 @@ public class TTSClient
 	/// <summary> 	
 	/// Send message to server using socket connection. 	
 	/// </summary> 	
-	public void SendMessage(string clientMessage)
+	public void SendMessage(string clientMessage, string clientName)
 	{
 		if (socketConnection == null)
 		{
@@ -82,8 +90,9 @@ public class TTSClient
 			NetworkStream stream = socketConnection.GetStream();
 			if (stream.CanWrite)
 			{
+				string entireMessage = clientMessage + "|" + clientName;
 				// Convert string message to byte array.                 
-				byte[] clientMessageAsByteArray = Encoding.ASCII.GetBytes(clientMessage);
+				byte[] clientMessageAsByteArray = Encoding.ASCII.GetBytes(entireMessage);
 				// Write byte array to socketConnection stream.                 
 				stream.Write(clientMessageAsByteArray, 0, clientMessageAsByteArray.Length);
 				Debug.Log("Client sent his message - should be received by server");
