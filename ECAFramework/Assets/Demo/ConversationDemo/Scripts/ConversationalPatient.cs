@@ -18,19 +18,11 @@ public class ConversationalPatient : ECA
 
     public SittableObject chair;
     private ECAAction sitAction;
-    private Salsa salsa;
-    private string ecaName;
 
-    private TTSClient client;
 
     protected override void Start()
     {
         base.Start();
-        
-        ecaName = this.name;
-        salsa = GetComponent<Salsa>();
-
-        client = new TTSClient(this);
 
         //send message greetings (and trigger animation, if you want to
         chair = FindObjectOfType<SittableObject>();
@@ -50,7 +42,7 @@ public class ConversationalPatient : ECA
             SendMessage(EXPLAIN_DISEASE);
         //try with TTS client
         if (Input.GetKeyDown(KeyCode.Space))
-            SendMessageRequest("Hi, my name is Sophie and I'm happy to meet you");
+            SendDirectMessageRequest("Hi, my name is Jack and i'm a trans");
     }
 
     public override void SetEcaId()
@@ -160,18 +152,5 @@ public class ConversationalPatient : ECA
 
         ECAAction action = new ECAAction(this, stages);
         return action;
-    }
-
-    private void SendMessageRequest(string message)
-    {
-        client.SendMessage(message, ecaName);
-        client.AudioGenerated += OnAudioGenerated;
-    }
-
-    private void OnAudioGenerated(object sender, EventArgs e)
-    {
-        client.AudioGenerated -= OnAudioGenerated;
-        ecaAnimator.audioSource.clip = (AudioClip)Resources.Load("Audio/" + ecaName + ".wav");
-        salsa.audioSrc.Play();
     }
 }

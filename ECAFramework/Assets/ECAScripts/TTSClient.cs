@@ -11,13 +11,13 @@ public class TTSClient
 	#region private members 	
 	private TcpClient socketConnection;
 	private Thread clientReceiveThread;
-	private ConversationalPatient eca;
+	private ECA eca;
 	#endregion
 
 	public event EventHandler AudioGenerated;
 	// Use this for initialization 	
 
-	public TTSClient(ConversationalPatient eca)
+	public TTSClient(ECA eca)
     {
 		this.eca = eca;
 		ConnectToTcpServer();
@@ -77,7 +77,7 @@ public class TTSClient
 	/// <summary> 	
 	/// Send message to server using socket connection. 	
 	/// </summary> 	
-	public void SendMessage(string clientMessage, string clientName)
+	public void SendMessageToServer(string clientMessage, string clientName)
 	{
 		if (socketConnection == null)
 		{

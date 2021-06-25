@@ -5,7 +5,6 @@ using UnityEngine;
 public class Initializer : MonoBehaviour
 {
     [SerializeField] private string listOfMessagesFilename;
-    private TTSServer server;
 
     private void Awake()
     {
