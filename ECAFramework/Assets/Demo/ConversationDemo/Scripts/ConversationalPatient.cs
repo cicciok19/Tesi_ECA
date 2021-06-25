@@ -49,13 +49,15 @@ public class ConversationalPatient : ECA
             SendMessage(EXPLAIN_DISEASE);
         //try with TTS client
         if (Input.GetKeyDown(KeyCode.Space))
-            SendMessageRequest("Hi, son of a bitch");
+            SendMessageRequest("Hi, my name is Sophie and I'm happy to meet you");
     }
+
     public override void SetEcaId()
     {
         base.SetEcaId();
         ID = Ecas.HospitalPatient;
     }
+
     protected override ECAAnimator AddECAAnimator()
     {
         return gameObject.AddComponent<ECAAnimatorMxM>();
@@ -69,14 +71,19 @@ public class ConversationalPatient : ECA
         {
             //change emotion based on the intent
             case BAD_NEW:
+                EmotionManager.UpdateEmotion(AppraisalVariables.UnexpectedNegative);
                 break;
             case CHILDREN:
+                EmotionManager.UpdateEmotion(AppraisalVariables.Nice);
                 break;
             case EXPLAIN_DISEASE:
+                EmotionManager.UpdateEmotion(AppraisalVariables.Good, .2f);
                 break;
             case PRESENTATION:
+                EmotionManager.UpdateEmotion(AppraisalVariables.Nice, .3f);
                 break;
             case CURE:
+                EmotionManager.UpdateEmotion(AppraisalVariables.Good, .5f);
                 break;
             case GENERAL_HEALTH:
                 break;
@@ -85,7 +92,7 @@ public class ConversationalPatient : ECA
         }
 
         //then send message
-        SendMessage(PRESENTATION);
+        SendMessage(intent.IntentName);
 
 
     }
@@ -262,12 +269,7 @@ public class ConversationalPatient : ECA
     private void OnAudioGenerated(object sender, EventArgs e)
     {
         client.AudioGenerated -= OnAudioGenerated;
-        PlayAudio();
-    }
-
-    public void PlayAudio()
-    {
-        //ecaAnimator.audioSource.clip = (AudioClip)Resources.Load("Audio/" + ecaName + ".wav");
+        ecaAnimator.audioSource.clip = (AudioClip)Resources.Load("Audio/" + ecaName + ".wav");
         salsa.audioSrc.Play();
     }
 }

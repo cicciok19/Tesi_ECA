@@ -63,9 +63,8 @@ public class TTSClient
 						string serverMessage = Encoding.ASCII.GetString(incommingData);
 						Debug.Log("server message received as: " + serverMessage);
 
-						/*if (AudioGenerated != null)
-							AudioGenerated(this, EventArgs.Empty);*/
-						eca.PlayAudio();
+						if (AudioGenerated != null)
+							UnityMainThreadDispatcher.Instance().Enqueue(() => AudioGenerated(this, EventArgs.Empty));
 					}
 				}
 			}

@@ -132,11 +132,14 @@ public class TTSServer : MonoBehaviour
 			}
 		}
 
-		Process p = Process.Start("Assets\\Resources\\set_python.bat");
-		p.WaitForExit();
-
+		Process process = new Process();
+		process.StartInfo.CreateNoWindow = true;
+		process.StartInfo.FileName = "Assets\\Resources\\set_python.bat";
+		process.Start();
+		process.WaitForExit();
+		
+		//notify to the client that the audio is ready
 		SendMessage(requestArgs[1]);
-
 	}
 
     private void OnApplicationQuit()
