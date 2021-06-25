@@ -9,6 +9,6 @@ using UnityEngine;
 
 // global declaration end
 
-class ChairRightFoot : MonoBehaviour
+public class ChairRightFoot : MonoBehaviour
 {
 }

@@ -16,11 +16,10 @@ public class ConversationalPatient : ECA
     private const string WEATHER = "Weather";
     private const string NONE = "None";
 
-    private SittableObject chair;
+    public SittableObject chair;
     private ECAAction sitAction;
     private Salsa salsa;
     private string ecaName;
-
 
     private TTSClient client;
 
@@ -43,6 +42,8 @@ public class ConversationalPatient : ECA
 
     private void Update()
     {
+
+        //just for debug
         if(Input.GetKeyDown(KeyCode.C))
             SendMessage(CHILDREN);
         if (Input.GetKeyDown(KeyCode.E))
@@ -123,126 +124,27 @@ public class ConversationalPatient : ECA
             if (action.IsMoveTo())
             {
                 Utility.Log("Going to " + action.firstParameter);
-                ecaAction = CreateGoToAction(action);
+                ecaAction = new GoToAction(this, action);
                 actionsList.Enqueue(ecaAction);
             }
 
             if (action.IsPickUp())
             {
                 Utility.Log("Picking up " + action.firstParameter);
-                ecaAction = CreatePickUpAction(action);
+                ecaAction = new PickUpAction(this, action);
                 actionsList.Enqueue(ecaAction);
             }
 
             if(action.IsPointAt())
             {
                 Utility.Log("Pointing at " + action.firstParameter);
-                ecaAction = CreatePointAtAction(action);
+                ecaAction = new GoToAction(this, action);
                 actionsList.Enqueue(ecaAction);
             }
 
             Assert.IsNotNull(ecaAction, "MessageAction is not referred to a valid action");
             actionsList.Enqueue(Sit());
 
-        }
-
-    }
-
-    private ECAAction CreatePickUpAction(MessageAction action)
-    {
-        GameObject obj = GameObject.FindGameObjectWithTag(action.firstParameter);
-        Assert.IsNotNull(obj, "Object parameter for pickUp is null");
-
-        GrabbableObject grabbableObject = obj.GetComponentInChildren<GrabbableObject>();
-        Assert.IsNotNull(grabbableObject, "Object parameter hasn't a grabbable object attached");
-
-        Destination pickDestination = obj.GetComponentInChildren<Destination>();
-        Assert.IsNotNull(pickDestination, "Object parameter hasn't a destination point attached");
-
-        List<ECAActionStage> stages = new List<ECAActionStage>();
-        StandUpStage standUp = new StandUpStage(chair);
-        GoToStage goToDestination = new GoToStage(pickDestination.transform);
-        PickStage pickUp = new PickStage(grabbableObject.transform, 1, false, HandSide.RightHand);
-        stages.Add(standUp);
-        stages.Add(goToDestination);
-        stages.Add(pickUp);
-
-        if (action.secondParameter != "")
-        {
-            GameObject dropPosition = GameObject.FindGameObjectWithTag(action.secondParameter);
-            Assert.IsNotNull(dropPosition, "Drop position for pickUp is null");
-
-            Destination dropDestination = dropPosition.GetComponentInChildren<Destination>();
-            Assert.IsNotNull(pickDestination, "Drop position hasn't a destination point attached");
-
-            GoToStage goToDrop = new GoToStage(dropDestination.transform);
-            DropStage drop = new DropStage(pickUp, dropPosition.transform);
-            stages.Add(goToDrop);
-            stages.Add(drop);
-        }
-
-        ECAAction pickAction = new ECAAction(this, stages);
-
-        //return new ECACompositeAction(this, new List<ECAAction>() { pickAction, sitAction });
-        return pickAction;
-    }
-
-    private ECAAction CreateGoToAction(MessageAction action)
-    {
-        GameObject obj = GameObject.FindGameObjectWithTag(action.firstParameter);
-        Assert.IsNotNull(obj, "Object parameter for GoTo is null");
-
-        Destination destination = obj.GetComponentInChildren<Destination>();
-        Assert.IsNotNull(destination, "Object parameter hasn't a destination point attached");
-
-        StandUpStage standUp = new StandUpStage(chair);
-        GoToStage goTo = new GoToStage(destination.transform);
-        List<ECAActionStage> stages = new List<ECAActionStage>() { standUp, goTo };
-
-        ECAAction goToAction = new ECAAction(this, stages);
-
-        //return new ECACompositeAction(this, new List<ECAAction>() { goToAction, sitAction });
-        return goToAction;
-    }
-
-
-    private ECAAction CreatePointAtAction(MessageAction action)
-    {
-        GameObject obj = GameObject.FindGameObjectWithTag(action.firstParameter);
-        Assert.IsNotNull(obj, "Object parameter for GoTo is null");
-
-        List<ECAActionStage> stages = new List<ECAActionStage>();
-
-        StandUpStage standUp = new StandUpStage(chair);
-        stages.Add(standUp);
-        //setup ointAtStage
-        int time = 0;
-        PointAtStage pointAt;
-        if (action.secondParameter != "")
-            time = Int32.Parse(action.secondParameter);
-
-        if (time != 0)
-            pointAt = new PointAtStage(obj.transform, time);
-        else
-            pointAt = new PointAtStage(obj.transform, 2);
-
-
-        //setup optional GoToStage
-        if (obj.GetComponentInChildren<Destination>() != null)
-        {
-            Destination destination = obj.GetComponentInChildren<Destination>();
-            stages.Add(new GoToStage(destination.transform));
-            stages.Add(pointAt);
-
-            ECAAction goAndPoint = new ECAAction(this, stages);
-            ECACompositeAction ecaAction = new ECACompositeAction(this, new List<ECAAction>() { goAndPoint, sitAction });
-            return ecaAction;
-        }
-        else    //if there's no destination only pointAt
-        {
-            stages.Add(pointAt);
-            ECAAction ecaAction = new ECAAction(this, stages);
-            return ecaAction;
         }
     }
 

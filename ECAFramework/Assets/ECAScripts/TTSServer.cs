@@ -81,7 +81,7 @@ public class TTSServer : MonoBehaviour
 	/// <summary> 	
 	/// Send message to client using socket connection. 	
 	/// </summary> 	
-	private void SendMessage(string clientName)
+	private void SendMessageToClient(string clientName)
 	{
 		if (connectedTcpClient == null)
 		{
@@ -139,7 +139,7 @@ public class TTSServer : MonoBehaviour
 		process.WaitForExit();
 		
 		//notify to the client that the audio is ready
-		SendMessage(requestArgs[1]);
+		SendMessageToClient(requestArgs[1]);
 	}
 
     private void OnApplicationQuit()
