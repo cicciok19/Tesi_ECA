@@ -41,6 +41,7 @@ public class Patient : ECA
     private DestinationDef destinationDef;
     private DestinationAir destinationAir;
     private InjectionPosition injectionPosition;
+    private Sternum sternum;
 
     protected bool ivAccessInserted = false;
     protected bool isOxygened = false;
@@ -98,6 +99,7 @@ public class Patient : ECA
         destinationDef = GetComponentInChildren<DestinationDef>();
         destinationAir = GetComponentInChildren<DestinationAir>();
         injectionPosition = GetComponentInChildren<InjectionPosition>();
+        sternum = GetComponentInChildren<Sternum>();
 
         float random = Random.Range(0, 1);
         if(random > 0.5f)
@@ -124,7 +126,9 @@ public class Patient : ECA
 
     public void OnCprReceived()
     {
-        hitReaction.Hit(secondSpineCollider, Vector3.down * .2f, stomach.transform.position);
+        Debug.Log("Sono hittato");
+        hitReaction.Hit(secondSpineCollider, Vector3.down * .05f, sternum.transform.position);
+        //hitReaction.Hit(spineCollider, Vector3.up * .2f, stomach.transform.position);
     }
 
 
