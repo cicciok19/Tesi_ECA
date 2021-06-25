@@ -441,6 +441,8 @@ public class IKSetter : MonoBehaviour
         {
             coroutineSpeed = (duration * .01f) / weightOperation;
 
+
+            Math.Round(coroutineSpeed, 3);
             if (effector != null)
                 StartCoroutine(SetWeightFullIK(effector, weight, coroutineSpeed));
             else

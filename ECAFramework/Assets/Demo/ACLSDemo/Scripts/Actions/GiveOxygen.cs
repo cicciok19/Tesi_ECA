@@ -45,7 +45,7 @@ public class GiveOxygen : ECACompositeAction
             new PlaceObjectStage(pickOxygen[1], pumpPosition, false)
         };
         ECAParallelActionStage put = new ECAParallelActionStage(putOxygen.ToArray());
-        WaitStage waitPost = new WaitStage(4f);
+        WaitStage waitPost = new WaitStage(7f);
 
 
         stages.Add(goToMask);

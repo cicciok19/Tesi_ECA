@@ -100,7 +100,7 @@ public class DropStage : ECAActionStage
 
         if (dropped)
         {
-            Debug.Log(effector.positionWeight);
+            //Debug.Log(effector.positionWeight);
 
             if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight < .02f || effector.positionWeight < .02f)
                 EndStage();

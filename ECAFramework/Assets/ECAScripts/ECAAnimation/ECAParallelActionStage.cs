@@ -51,6 +51,7 @@ public class ECAParallelActionStage : ECAActionStage
     {
         State = ActionState.Completed;
         animator.currentStage = null;
+        Debug.Log("Finish Parallel Stage");
         LaunchStageFinished();
     }
 

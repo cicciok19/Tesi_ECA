@@ -11,11 +11,6 @@ public class WaitStage : ECAActionStage
         this.time = time;
     }
 
-    public override void EndStage()
-    {
-        base.EndStage();
-    }
-
     public override void StartStage()
     {
         base.StartStage();
@@ -24,13 +19,9 @@ public class WaitStage : ECAActionStage
 
     protected override void OnWaitCompleted()
     {
+        Debug.Log("End Wait");
         base.OnWaitCompleted();
         EndStage();
-    }
-
-    public override void Update()
-    {
-        base.Update();
     }
 
 }

@@ -71,14 +71,16 @@ public class PlaceObjectStage : ECAActionStage
             {
                 if (ikManager.fullBodyBipedIK.solver.rightHandEffector.positionWeight >= .95f)
                 {
+                    ended = true;
                     ikManager.interactionSystem.PauseInteraction(FullBodyBipedEffector.RightHand);
                     EndStage();
                 }
             }
-            if (handSide == HandSide.LeftHand)
+            else if (handSide == HandSide.LeftHand)
             {
                 if (ikManager.fullBodyBipedIK.solver.leftHandEffector.positionWeight >= .95f)
                 {
+                    ended = true;
                     ikManager.interactionSystem.PauseInteraction(FullBodyBipedEffector.LeftHand);
                     EndStage();
                 }
@@ -87,6 +89,7 @@ public class PlaceObjectStage : ECAActionStage
             {
                 if (ikManager.fullBodyBipedIK.solver.leftHandEffector.positionWeight >= .95f)
                 {
+                    ended = true;
                     ikManager.interactionSystem.PauseInteraction(FullBodyBipedEffector.RightHand);
                     ikManager.interactionSystem.PauseInteraction(FullBodyBipedEffector.LeftHand);
                     EndStage();
@@ -95,8 +98,9 @@ public class PlaceObjectStage : ECAActionStage
         }
         else
         {
-            if (Vector3.Distance(destinationObject.transform.position, obj.position) <= .1f && !ended)
+            if (Vector3.Distance(destinationObject.transform.position, obj.position) <= .15f && ended)
             {
+                ended = true;
                 Debug.Log("SONO QUI");
                 EndStage();
             }

@@ -35,13 +35,15 @@ public class Patient : ECA
     private DefRightPosition defRightPosition;
     private HitReaction hitReaction;
     private Collider spineCollider;
+    private Collider secondSpineCollider;
     private Stomach stomach;
     private PumpPosition pumpPosition;
     private DestinationDef destinationDef;
     private DestinationAir destinationAir;
     private InjectionPosition injectionPosition;
+    private Sternum sternum;
 
-    protected bool ivAccessInserted = true;
+    protected bool ivAccessInserted = false;
     protected bool isOxygened = false;
     protected bool hasCapnography = false;
 
@@ -91,11 +93,13 @@ public class Patient : ECA
         defRightPosition = GetComponentInChildren<DefRightPosition>();
         hitReaction = GetComponent<HitReaction>();
         spineCollider = GetComponentInChildren<SpineCollider>().GetComponent<Collider>();
+        secondSpineCollider = GetComponentInChildren<SecondSpineCollider>().GetComponent<Collider>();
         stomach = GetComponentInChildren<Stomach>();
         pumpPosition = GetComponentInChildren<PumpPosition>();
         destinationDef = GetComponentInChildren<DestinationDef>();
         destinationAir = GetComponentInChildren<DestinationAir>();
         injectionPosition = GetComponentInChildren<InjectionPosition>();
+        sternum = GetComponentInChildren<Sternum>();
 
         float random = Random.Range(0, 1);
         if(random > 0.5f)
@@ -118,6 +122,13 @@ public class Patient : ECA
         hitReaction.Hit(spineCollider, Vector3.up * .5f, stomach.transform.position);
         if (Shocked != null)
             Shocked(this, EventArgs.Empty);
+    }
+
+    public void OnCprReceived()
+    {
+        Debug.Log("Sono hittato");
+        hitReaction.Hit(secondSpineCollider, Vector3.down * .05f, sternum.transform.position);
+        //hitReaction.Hit(spineCollider, Vector3.up * .2f, stomach.transform.position);
     }
 
 
