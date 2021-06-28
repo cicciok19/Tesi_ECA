@@ -25,9 +25,13 @@ public class GoToStage : ECAActionStage
 
     private Vector3 destination;
     private Transform objToFace;
+
     private bool warping =  false;
+    private bool useWarping = true;
     private bool changeOrientationWhileWalking = false;
+
     private Vector3 warpDirection =  new Vector3();
+
     private float startWarpSpeed =  0;
     private float finalWarpSpeed =  0.3f;
     private float actualWarpSpeed =  0;
@@ -38,24 +42,24 @@ public class GoToStage : ECAActionStage
     private ECAAnimatorMxM animatorMxM;
 
 
-    public GoToStage(Transform destination, Transform objToFace = null)
+    public GoToStage(Transform destination, Transform objToFace = null, bool useWarping = true)
     : base()
     {
+        this.useWarping = useWarping;
         this.destination = destination.position;
         if (objToFace != null)
             this.objToFace = objToFace;
     }
 
 
-    public GoToStage(Vector3 destination, Transform objToFace = null)
+    public GoToStage(Vector3 destination, Transform objToFace = null, bool useWarping = true)
     : base()
     {
+        this.useWarping = useWarping;
         this.destination = destination;
         if(objToFace!= null)
             this.objToFace = objToFace;
     }
-
-
 
 
     private void OnArrivedECA(object sender, EventArgs e)
@@ -138,10 +142,10 @@ public class GoToStage : ECAActionStage
             
             warping = true;
         }
-    
-        if (warping)
+
+        if (warping && useWarping)
         {
-            if(distance >= 0.35f)
+            if (distance >= 0.35f)
             {
                 actualWarpSpeed = Mathf.SmoothDamp(actualWarpSpeed, 1f, ref startWarpSpeed, 3);
                 animator.Eca.transform.position = Vector3.Lerp(animator.Eca.transform.position, destination, actualWarpSpeed);
@@ -149,6 +153,8 @@ public class GoToStage : ECAActionStage
             else
                 EndStage();
         }
+        else if (warping && !useWarping)
+            EndStage();
     }
 
 

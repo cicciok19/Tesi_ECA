@@ -47,7 +47,7 @@ public class TurnStage : ECAActionStage
         //WarpBody();
 
         //TODO: change this, it's just for debug
-        WaitFor(.5f);
+        WaitFor(1f);
     }
 
     public override void EndStage()

@@ -25,7 +25,7 @@ public class PointAtAction : ECAAction
         List<ECAActionStage> stages = new List<ECAActionStage>();
 
         StandUpStage standUp = new StandUpStage(patient.chair);
-        stages.Add(standUp);
+        if (patient.Sitted) stages.Add(standUp);
         //setup ointAtStage
         int time = 0;
         PointAtStage pointAt;

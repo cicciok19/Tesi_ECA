@@ -21,11 +21,13 @@ public class GoToAction : ECAAction
 
         Destination destination = obj.GetComponentInChildren<Destination>();
         Assert.IsNotNull(destination, "Object parameter hasn't a destination point attached");
-
         StandUpStage standUp = new StandUpStage(patient.chair);
         GoToStage goTo = new GoToStage(destination.transform);
-        List<ECAActionStage> stages = new List<ECAActionStage>() { standUp, goTo };
+        
+        List<ECAActionStage> stages = new List<ECAActionStage>();
 
+        if (patient.Sitted) stages.Add(standUp);
+        stages.Add(goTo);
         SetStages(stages);
     }
 }

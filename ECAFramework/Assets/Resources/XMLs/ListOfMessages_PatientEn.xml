@@ -11,11 +11,11 @@
     <Presentation emotion="Fear">Good morning, I'm anxiety for the analysis.</Presentation>
     <Presentation emotion="Sadness">It is not a good day, I feel some bad vibration.</Presentation>
 
-    <Children emotion="Joy" action="PickUp@Bottle@Rubbish">Oh they are okay! I love playing with them every day!</Children>
+    <Children emotion="Joy" action="PointAt@Sun">Oh they are okay! I love playing with them every day!</Children>
     <Children emotion="Trust">Really good! They are very good at school.</Children>
     <Children emotion="Anger">None of your business</Children>
     <Children emotion="Sadness">Not really good, my daughter has the fever.</Children>
-    <Children action="PickUp@Bottle@Rubbish">They are really good!</Children>
+    <Children action="PointAt@Sun">They are really good!</Children>
 
     <Cure emotion="Joy">Oh I'm very glad to try this cure.</Cure>
     <Cure emotion="Trust">I'm in trust with you doc. Let's proceed.</Cure>
@@ -36,7 +36,7 @@
     <ExplainDisease emotion="Sadness">I'm so sad doc, there is a way to exit from this situation?</ExplainDisease>
     <ExplainDisease emotion="Fear">Oh my God doc. I'm going to faint.</ExplainDisease>
     <ExplainDisease emotion="Disgust">I'm not in trust with you doctors.</ExplainDisease>
-    <ExplainDisease>There is something that I can do to solve this problem?</ExplainDisease>
+    <ExplainDisease action="Sit@">There is something that I can do to solve this problem?</ExplainDisease>
 
     <GeneralHealth emotion="Joy">I'm feeling really good doc!</GeneralHealth>
     <GeneralHealth emotion="Trust">I'm in a good period doc!</GeneralHealth>

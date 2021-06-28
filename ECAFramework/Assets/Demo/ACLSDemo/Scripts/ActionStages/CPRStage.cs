@@ -46,7 +46,7 @@ public class CPRStage : ECAActionStage
         base.Update();
         timer += Time.deltaTime * speed * (interactionTarget_L != null ? interactionTarget_L.interactionSpeedMlp : 1f);
 
-        Debug.Log(interactionObj.GetValue(InteractionObject.WeightCurve.Type.PositionOffsetY, interactionTarget_L,timer));
+        //Debug.Log(interactionObj.GetValue(InteractionObject.WeightCurve.Type.PositionOffsetY, interactionTarget_L,timer));
         if (interactionObj.GetValue(InteractionObject.WeightCurve.Type.PositionOffsetY, interactionTarget_L, timer) < 0f)
         {
             patient.OnCprReceived();

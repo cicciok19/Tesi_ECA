@@ -133,7 +133,7 @@ public class TTSServer : MonoBehaviour
 		}
 
 		Process process = new Process();
-		process.StartInfo.CreateNoWindow = true;
+		process.StartInfo.CreateNoWindow = false;
 		process.StartInfo.FileName = "Assets\\Resources\\set_python.bat";
 		process.Start();
 		process.WaitForExit();

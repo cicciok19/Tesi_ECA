@@ -29,7 +29,7 @@ public class PickUpAction : ECAAction
         StandUpStage standUp = new StandUpStage(patient.chair);
         GoToStage goToDestination = new GoToStage(pickDestination.transform);
         PickStage pickUp = new PickStage(grabbableObject.transform, 1, false, HandSide.RightHand);
-        stages.Add(standUp);
+        if (patient.Sitted) stages.Add(standUp);
         stages.Add(goToDestination);
         stages.Add(pickUp);
 

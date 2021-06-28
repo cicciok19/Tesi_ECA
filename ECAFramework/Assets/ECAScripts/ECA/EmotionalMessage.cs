@@ -41,6 +41,11 @@ public struct MessageAction {
     {
         return actionType == "PickUp";
     }
+
+    public bool IsSit()
+    {
+        return actionType == "Sit";
+    }
 }
 
 // global declaration end
