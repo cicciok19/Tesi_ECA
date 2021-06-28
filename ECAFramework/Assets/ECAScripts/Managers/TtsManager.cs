@@ -63,11 +63,13 @@ public class TtsManager
     private Thread speechThread;
     public static volatile bool IsSpeaking = false;
 
+    protected TTSModel model;
+
     //Singleton management
     private static TtsManager instance = null;
     private TtsManager()
     {
-
+        CreateModel();
     }
     public static TtsManager Instance
     {
@@ -77,6 +79,11 @@ public class TtsManager
                 instance = new TtsManager();
             return instance;
         }
+    }
+
+    protected virtual void CreateModel()
+    {
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -118,7 +125,12 @@ public class TtsManager
     private void ThrowSpeechThread()
     {
         IsSpeaking = true;
+
+        //ATTENZIONE: ANCORA NON FUNZIONA!!!
         speechThread = new Thread(SpeechThread);
+        //speech = new Thread(model.GetSpeechThread());
+
+
         currentInfo = (SpeechInfo)msgQueue.Dequeue();
         currentInfo.EcaAnimator.AudioEnded += OnAudioEnd;
         speechThread.Start();
@@ -138,7 +150,7 @@ public class TtsManager
         else
             TtsManager.IsSpeaking = false;
     }
-    private void SpeechThread()
+    protected virtual void SpeechThread()
     {
         //String text = (String)text_obj;
 
