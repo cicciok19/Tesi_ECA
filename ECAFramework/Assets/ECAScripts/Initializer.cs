@@ -20,6 +20,10 @@ public class Initializer : MonoBehaviour
         for (int i = 0; i < allEca.Length; i++)
             allEca[i].Init();
 
+        //Init TTSServer (if not already loaded
+        if (GetComponent<TTSServer>() == null)
+            gameObject.AddComponent<TTSServer>();
+
         //Init logger
         // CSVManager.Instance.Init();
 
