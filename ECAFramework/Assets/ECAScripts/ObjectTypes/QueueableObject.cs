@@ -42,16 +42,19 @@ public class QueueableObject : MonoBehaviour
     public Vector3 GetNextPassengerPosition(Passenger eca)
     {
         //it's not queued
-        if (eca.ecaTurn == -1)
+        if (eca.ecaTurn == -1 && !Full)
         {
             Utility.Log(eca.name + " TO " + destinations[ecasQueue].name);
 
             return destinations[ecasQueue].transform.position;
         }
-        else
+        else if (!Full)
         {
             return destinations[eca.ecaTurn].transform.position;
         }
+        else
+            return new Vector3(0,0,0);
+
     }
 
     public Vector3 GetLastPosition()

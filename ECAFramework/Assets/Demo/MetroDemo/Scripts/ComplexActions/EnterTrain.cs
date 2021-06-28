@@ -70,10 +70,14 @@ public class EnterTrain : ECACompositeAction
             }
         }
 
-        Assert.IsNotNull(placeSelected);
+        if (placeSelected == null)
+            return;
+        //Assert.IsNotNull(placeSelected);
         List<ECAActionStage> stages = new List<ECAActionStage>();
-    
-    
+
+        float time = UnityEngine.Random.Range(0f, 3f);
+        WaitStage wait = new WaitStage(time);
+
         switch (placeSelected.GetType().ToString())
         {
             case "SittableObject":
@@ -81,6 +85,7 @@ public class EnterTrain : ECACompositeAction
                 GoToStage reachChair = new GoToStage(chair.GetDestination());
                 TurnStage turn = new TurnStage(chair.GetSitPoint(), true);
                 SitStage sit = new SitStage(chair);
+                stages.Add(wait);
                 stages.Add(reachChair);
                 stages.Add(turn);
                 stages.Add(sit);
@@ -91,6 +96,7 @@ public class EnterTrain : ECACompositeAction
                 GoToStage reachHandle = new GoToStage(new Vector3(handle.transform.position.x, eca.transform.position.y, handle.transform.position.z));
                 TurnStage turnToHandle = new TurnStage(handle.transform);
                 PickStage grab = new PickStage(handle.transform, 10f, true);
+                stages.Add(wait);
                 stages.Add(reachHandle);
                 //stages.Add(turnToHandle);
                 stages.Add(grab);
