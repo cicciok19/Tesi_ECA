@@ -17,10 +17,10 @@ public class LookStableStage : ECAActionStage
     public override void StartStage()
     {
         base.StartStage();
-        if (weight != 0)
+        if (weight != 0 && ikManager.headIK.solver.target != objToLook)
             ikManager.SetTargetAimIK(ikManager.headIK, objToLook, weight, 1.2f);
         else
-            ikManager.SetWeightTargetAimIK(ikManager.headIK, 0);
+            ikManager.SetWeightTargetAimIK(ikManager.headIK, weight);
 
         WaitFor(.1f);
         //EndStage();

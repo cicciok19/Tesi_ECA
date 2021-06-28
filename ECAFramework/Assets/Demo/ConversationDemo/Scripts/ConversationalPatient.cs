@@ -17,6 +17,7 @@ public class ConversationalPatient : ECA
     private const string NONE = "None";
 
     public SittableObject chair;
+    public bool Sitted { get; protected set; } = false;
     private ECAAction sitAction;
 
 
@@ -26,10 +27,10 @@ public class ConversationalPatient : ECA
 
         //send message greetings (and trigger animation, if you want to
         chair = FindObjectOfType<SittableObject>();
-        sitAction = Sit();
-        actionsList.Enqueue(sitAction);
-        actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.player.transform, 1)));
-        //SendMessage(PRESENTATION);
+       /* sitAction = Sit();
+        actionsList.Enqueue(sitAction);*/
+        actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.camera.transform, 1)));
+        SendMessageRequest(PRESENTATION);
     }
 
     private void Update()
@@ -41,7 +42,7 @@ public class ConversationalPatient : ECA
             SendMessageRequest(EXPLAIN_DISEASE);
         //try with TTS client
         if (Input.GetKeyDown(KeyCode.Space))
-            SendDirectMessageRequest("Hi, my name is Jack and i'm a bitch");
+            SendDirectMessageRequest("Hello doctor, my name is Sophie");
     }
 
     public override void SetEcaId()
@@ -106,7 +107,7 @@ public class ConversationalPatient : ECA
         // serving action
         //MessageAction action = message.parsedAction;
         List<MessageAction> actions = message.parsedActions;
-        actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.player.transform, 0)));
+        actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.camera.transform, 0)));
 
         for (int i = 0; i < actions.Count; i++)
         {
@@ -134,10 +135,21 @@ public class ConversationalPatient : ECA
                 actionsList.Enqueue(ecaAction);
             }
 
-            Assert.IsNotNull(ecaAction, "MessageAction is not referred to a valid action");
-            actionsList.Enqueue(Sit());
-            //actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.player.transform, 1)));
+            if (action.IsSit())
+            {
+                Utility.Log("Sit down");
+                ecaAction = Sit();
+                Sitted = true;
+            }
 
+
+
+            Assert.IsNotNull(ecaAction, "MessageAction is not referred to a valid action");
+            if (Sitted)
+                actionsList.Enqueue(Sit());
+            else
+                actionsList.Enqueue(new ECAAction(this, new TurnStage(ecaAnimator.camera.transform)));
+            actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.camera.transform, 1)));
         }
     }
 

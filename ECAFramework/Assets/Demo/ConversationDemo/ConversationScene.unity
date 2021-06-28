@@ -540,8 +540,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 0, z: 1}
   defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
-  limit: 90
-  twistLimit: 180
+  limit: 70
+  twistLimit: 10
 --- !u!1 &511791391
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,6 +687,7 @@ MonoBehaviour:
   currentStageName: 
   actualActionName: 
   player: {fileID: 0}
+  camera: {fileID: 0}
   mecanimAnimator: {fileID: 0}
   ECAText: {fileID: 1267864217}
   TextPanel: {fileID: 1308921056}
