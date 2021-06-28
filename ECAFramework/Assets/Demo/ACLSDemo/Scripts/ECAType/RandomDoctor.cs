@@ -47,14 +47,14 @@ public class RandomDoctor : ECA
                 HandleTalkToRelative();
                 break;
             case TAKE_OTHER_MEDICINE:
-                HandleTakeOtherMedicine(MedicineName.Epinephrine);
+                HandleTakeOtherMedicine(MedicineName.Epinephrine);      //should take the finished medicine, not only epinephrine
                 break;
         }
     }
 
     private void HandleTalkToRelative()
     {
-        TalkToRelative talkToRelative = new TalkToRelative(this, outsideDestination);
+        TalkToRelative talkToRelative = new TalkToRelative(this, outsideDestination, medicalRoom.GetPatient());
         talkToRelative.TalkFinished += OnTalkFinished;
         actionsList.Enqueue(talkToRelative);
     }
@@ -83,5 +83,4 @@ public class RandomDoctor : ECA
         MedicineEventArgs args = e as MedicineEventArgs;
         HandleTakeOtherMedicine(args.medicineName);
     }
-
 }

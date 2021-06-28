@@ -22,12 +22,14 @@ public class TalkToRelative : ECACompositeAction
 {
     private Vector3 destination;
     private InfoObtained infoType;
+    private Patient patient;
 
     public event EventHandler TalkFinished;
 
-    public TalkToRelative(ECA eca, Vector3 destination) : base(eca)
+    public TalkToRelative(ECA eca, Vector3 destination, Patient patient) : base(eca)
     {
         this.destination = destination;
+        this.patient = patient;
         infoType = InfoObtained.HasAlreadyHappened;     //just for debug
     }
 
@@ -55,7 +57,10 @@ public class TalkToRelative : ECACompositeAction
     private void GoBackIn()
     {
         RandomDoctor rd = (RandomDoctor)eca;
-        ECAAction action = new ECAAction(eca, new GoToStage(rd.initialPosition));
+        GoToStage goBack = new GoToStage(rd.initialPosition);
+        TurnStage turn = new TurnStage(patient.transform);
+        List<ECAActionStage> stages = new List<ECAActionStage>() { goBack, turn };
+        ECAAction action = new ECAAction(eca, stages);
         actions.Add(action);
     }
 
