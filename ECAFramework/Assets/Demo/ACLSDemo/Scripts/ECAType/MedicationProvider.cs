@@ -115,9 +115,9 @@ public class MedicationProvider : ECA
     	    Utility.LogWarning("Requested IVAccess when it was already in place");
     	    return;
         }
-    
+
         // else, execute action
-    
+        SendDirectMessage("Ok, vado a fare l'accesso.");
         IVAccess ivAccess = new IVAccess(this, medicationTable.GetVeinTube(), patient);
         ivAccess.CompletedAction += OnIvAccessCompleted;
         actionsList.Enqueue(ivAccess);
@@ -137,11 +137,13 @@ public class MedicationProvider : ECA
             timeRecorder.TimeExpired += OnTimeExpired;
             timeRecorder.CheckTime(this, 2f);
             systemManager.CheckAction(useMedicine.ActionName);
+            SendDirectMessage("Ho finito l'iniezione di epinefrina.");
             patient.OnEpinephrineDone();
         }
         else
         {
             systemManager.CheckAction(useMedicine.ActionName);
+            SendDirectMessage("Ho finito l'iniezione di amiodarone.");
             patient.OnAmiodaroneDone();
         }
 
@@ -166,6 +168,7 @@ public class MedicationProvider : ECA
         IVAccess iVAccess = (IVAccess)sender;
         iVAccess.CompletedAction -= OnIvAccessCompleted;
         systemManager.CheckAction(iVAccess.ActionName);
+        SendDirectMessage("Ho completato l'accesso alle vie venose.");
         patient.OnIvAccessDone();
     }
 

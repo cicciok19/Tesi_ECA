@@ -11,6 +11,8 @@ public class AirwayManager : ECA
 
     private SystemManager systemManager;
 
+    private bool capnographyDone;
+
     private const string GIVE_OXYGEN = "GiveOxygen";
     private const string CAPNOGRAPHY = "Capnography";
 
@@ -22,6 +24,8 @@ public class AirwayManager : ECA
         airwayTable = medicalRoom.GetAirwayTable();
 
         systemManager = FindObjectOfType<SystemManager>();
+
+        capnographyDone = false;
 
         //just for debug
         //HandleGiveOxygen();
@@ -60,20 +64,28 @@ public class AirwayManager : ECA
     {
         GiveOxygen giveOxygen = new GiveOxygen(this, airwayTable.GetOxygen(), patient, airwayTable);
         giveOxygen.CompletedAction += OnOxygenGiven;
+        SendDirectMessage("Ora do l'ossigeno.");
         actionsList.Enqueue(giveOxygen);
     }
 
     private void HandleCapnography()
     {
-        Capnography capnography = new Capnography(this, airwayTable, patient);
-        capnography.CompletedAction += OnCapnographyCompleted;
-        actionsList.Enqueue(capnography);
-
+        if (!capnographyDone)
+        {
+            Capnography capnography = new Capnography(this, airwayTable, patient);
+            capnography.CompletedAction += OnCapnographyCompleted;
+            SendDirectMessage("Va bene, allora inizio l'intubazione.");
+            actionsList.Enqueue(capnography);
+        }
+        else
+            SendDirectMessage("Ho già fatto l'intubazione, l'hai dimenticato?");
     }
     private void OnCapnographyCompleted(object sender, EventArgs e)
     {
         Capnography capnography = (Capnography)sender;
+        capnographyDone = true;
         capnography.CompletedAction -= OnCapnographyCompleted;
+        SendDirectMessage("Ho completato l'intubazione");
         systemManager.CheckAction(capnography.ActionName);
         patient.OnCapnographyDone();
     }
@@ -81,6 +93,7 @@ public class AirwayManager : ECA
     {
         GiveOxygen giveOxygen = (GiveOxygen)sender;
         giveOxygen.CompletedAction -= OnOxygenGiven;
+        SendDirectMessage("Ho finito di dare l'ossigeno.");
         systemManager.CheckAction(giveOxygen.ActionName);
         patient.OnOxygenGiven();
     }

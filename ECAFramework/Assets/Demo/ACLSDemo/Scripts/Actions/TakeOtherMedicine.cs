@@ -48,6 +48,7 @@ public class TakeOtherMedicine : ECACompositeAction
             drawer = medicalRoom.GetLocker().GetMedicineDrawer(medicineName);
             GoToStage goToDrawer = new GoToStage(drawer.GetDestination());
 
+            TurnStage turnToDrawer = new TurnStage(drawer.transform);
             PickStage grabHandle = new PickStage(drawer.GetHandle().transform, 1, true, HandSide.LeftHand);
             grabHandle.StageFinished += OnGrabHandle;
 
@@ -56,27 +57,31 @@ public class TakeOtherMedicine : ECACompositeAction
 
             DropStage releaseHandle = new DropStage(grabHandle);
 
-            GoToStage goToInitialPosition = new GoToStage(randomDoctor.initialPosition);
-
             stages.Add(goToDrawer);
+            stages.Add(turnToDrawer);
             stages.Add(grabHandle);
             stages.Add(dropMedicine);
             stages.Add(releaseHandle);
-            stages.Add(goToInitialPosition);
         }
         else
         {
             GoToStage goToTable = new GoToStage(medicineSpot.GetDestination());
+            TurnStage turn = new TurnStage(medicineSpot.transform);
 
             DropStage dropMedicine = new DropStage(pickMedicine, medicineSpot.transform);
             dropMedicine.StageFinished += OnMedicineDropped;
 
-            GoToStage goToInitialPosition = new GoToStage(randomDoctor.initialPosition);
-
-            stages.Add(goToTable); 
+            stages.Add(goToTable);
+            stages.Add(turn);
             stages.Add(dropMedicine);
-            stages.Add(goToInitialPosition);
         }
+
+        GoToStage goToInitialPosition = new GoToStage(randomDoctor.initialPosition);
+        TurnStage turnToPatient = new TurnStage(medicalRoom.GetPatient().transform);
+
+        stages.Add(goToInitialPosition);
+        stages.Add(turnToPatient);
+
 
         ECAAction action = new ECAAction(eca, stages);
         actions.Add(action);

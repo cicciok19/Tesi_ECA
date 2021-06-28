@@ -15,8 +15,8 @@ using Random = UnityEngine.Random;
 	public enum PatientState
 {
     None,
-    VF,
-    Asystole,
+    FibrillazioneVentricolare,
+    Asistole,
     Ok
 }
 
@@ -42,6 +42,10 @@ public class Patient : ECA
     private DestinationAir destinationAir;
     private InjectionPosition injectionPosition;
     private Sternum sternum;
+    private LeftFootCompressor leftFootCompressor;
+    private RightFootCompressor rightFootCompressor;
+    private HipsCompressor hipsCompressor;
+
 
     protected bool ivAccessInserted = false;
     protected bool isOxygened = false;
@@ -72,7 +76,7 @@ public class Patient : ECA
                     state = initialState;
                 if (stateLevel < .1f)
                 {
-                    state = PatientState.VF;
+                    state = PatientState.FibrillazioneVentricolare;
                     initialState = state;
                 }
                 
@@ -100,16 +104,21 @@ public class Patient : ECA
         destinationAir = GetComponentInChildren<DestinationAir>();
         injectionPosition = GetComponentInChildren<InjectionPosition>();
         sternum = GetComponentInChildren<Sternum>();
+        leftFootCompressor = GetComponentInChildren<LeftFootCompressor>();
+        rightFootCompressor = GetComponentInChildren<RightFootCompressor>();
+        hipsCompressor = GetComponentInChildren<HipsCompressor>();
+
+
 
         float random = Random.Range(0, 1);
         if(random > 0.5f)
         {
-            state = PatientState.VF;
+            state = PatientState.FibrillazioneVentricolare;
             stateLevel = .1f;
         }
         else
         {
-            state = PatientState.Asystole;
+            state = PatientState.Asistole;
             stateLevel = .2f;
         }
 
@@ -218,6 +227,21 @@ public class Patient : ECA
     {
         return injectionPosition.transform;
     }
+    public Transform GetLeftFootCompressor()
+    {
+        return leftFootCompressor.transform;
+    }
+
+    public Transform GetRightFootCompressor()
+    {
+        return rightFootCompressor.transform;
+    }
+
+    public Transform GetHipsCompressor()
+    {
+        return hipsCompressor.transform;
+    }
+
     public bool HasCapnography
     {
         get => hasCapnography;

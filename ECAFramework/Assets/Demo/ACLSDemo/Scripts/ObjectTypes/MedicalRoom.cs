@@ -11,11 +11,13 @@ public class MedicalRoom : MonoBehaviour
     private AirwayTable airwayTable;
     private Locker locker;
     private RubbishTable rubbishTable;
+    private Patient patient;
 
     public event EventHandler MedicineFinished;
 
     private void Awake()
     {
+        patient = FindObjectOfType<Patient>();
         pole = GetComponentInChildren<IVPole>();
         medicationTable = GetComponentInChildren<MedicationTable>();
         defibrillatorTable = GetComponentInChildren<DefibrillatorTable>();
@@ -52,6 +54,11 @@ public class MedicalRoom : MonoBehaviour
     public RubbishTable GetRubbishTable()
     {
         return rubbishTable;
+    }
+
+    public Patient GetPatient()
+    {
+        return patient;
     }
 
     public void CheckAllSpot()
