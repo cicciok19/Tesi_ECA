@@ -29,18 +29,18 @@ public class GraphManager : MonoBehaviour
     {
         if(precedentNodes.Count -1 == 1)
         {
-            if (patient.state == PatientState.Asystole)
+            if (patient.state == PatientState.Asistole)
                 return NodeName.CprIvEpi;
-            else if (patient.state == PatientState.VF)
+            else if (patient.state == PatientState.FibrillazioneVentricolare)
                 return NodeName.Shock;
             else
                 return NodeName.None;
         }
         else
         {
-            if (patient.state == PatientState.Asystole)
+            if (patient.state == PatientState.Asistole)
                 return NodeName.Cpr;
-            else if (patient.state == PatientState.VF)
+            else if (patient.state == PatientState.FibrillazioneVentricolare)
                 return NodeName.Shock;
             else if (patient.state == PatientState.Ok)
                 return NodeName.End;

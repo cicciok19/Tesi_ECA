@@ -72,9 +72,6 @@ public class DefibrillatorManager : ECA
 
     private void HandleShock()
     {
-        if (patient.state == PatientState.Asystole)
-            Debug.Log("You have to inject Epinephrine, NOT Shock!");
-
         Shock shock = new Shock(this, defibrillatorTable, patient, 2);
         shock.CompletedAction += OnShockCompleted;
         //actionsList.Enqueue(shock);
@@ -89,6 +86,7 @@ public class DefibrillatorManager : ECA
             return;
         }
 
+        SendDirectMessage("Ok, attacco il monitor subito.");
         AttachMonitor attachMonitor = new AttachMonitor(this, defibrillatorTable, patient);
         attachMonitor.CompletedAction += OnMonitorAttached;
         actionsList.Enqueue(attachMonitor);
@@ -107,6 +105,7 @@ public class DefibrillatorManager : ECA
     {
         //ci dovrebbe essere un check su quanti shock si debbano fare perché per ora è solo uno
         Shock shock = (Shock)sender;
+        SendDirectMessage("Ho finito con il defibrillatore, possiamo andare avanti.");
         shock.CompletedAction -= OnShockCompleted;
         systemManager.CheckAction(shock.ActionName);
         
