@@ -520,6 +520,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 268161170}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &369038243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 709234637837729421, guid: d3793cc28dd764844a695994f9d2cb1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 848274069}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &369038244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369038243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45281828b4c9247558c7c695124d6877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axis: {x: 0, y: 0, z: 1}
+  defaultLocalRotation: {x: 0, y: 0, z: 0, w: 0}
+  limit: 90
+  twistLimit: 180
 --- !u!1 &511791391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,7 +1175,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.718e-41, y: 6e-44, z: 0, w: 1e-44}
+  m_BoundingSphereOverride: {x: 0, y: 0.3161621, z: 4.5905e-41, w: -0.0000000064690333}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -1675,7 +1697,7 @@ GameObject:
   - component: {fileID: 1162520383}
   m_Layer: 0
   m_Name: OutsidePoint
-  m_TagString: Untagged
+  m_TagString: Sun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

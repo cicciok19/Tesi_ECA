@@ -28,21 +28,20 @@ public class ConversationalPatient : ECA
         chair = FindObjectOfType<SittableObject>();
         sitAction = Sit();
         actionsList.Enqueue(sitAction);
-
+        actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.player.transform, 1)));
         //SendMessage(PRESENTATION);
     }
 
     private void Update()
     {
-
         //just for debug
         if(Input.GetKeyDown(KeyCode.C))
-            SendMessage(CHILDREN);
+            SendMessageRequest(CHILDREN);
         if (Input.GetKeyDown(KeyCode.E))
-            SendMessage(EXPLAIN_DISEASE);
+            SendMessageRequest(EXPLAIN_DISEASE);
         //try with TTS client
         if (Input.GetKeyDown(KeyCode.Space))
-            SendDirectMessageRequest("Hi, my name is Jack and i'm a trans");
+            SendDirectMessageRequest("Hi, my name is Jack and i'm a bitch");
     }
 
     public override void SetEcaId()
@@ -85,7 +84,7 @@ public class ConversationalPatient : ECA
         }
 
         //then send message
-        SendMessage(intent.IntentName);
+        SendMessageRequest(intent.IntentName);
 
 
     }
@@ -107,6 +106,7 @@ public class ConversationalPatient : ECA
         // serving action
         //MessageAction action = message.parsedAction;
         List<MessageAction> actions = message.parsedActions;
+        actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.player.transform, 0)));
 
         for (int i = 0; i < actions.Count; i++)
         {
@@ -130,12 +130,13 @@ public class ConversationalPatient : ECA
             if(action.IsPointAt())
             {
                 Utility.Log("Pointing at " + action.firstParameter);
-                ecaAction = new GoToAction(this, action);
+                ecaAction = new PointAtAction(this, action);
                 actionsList.Enqueue(ecaAction);
             }
 
             Assert.IsNotNull(ecaAction, "MessageAction is not referred to a valid action");
             actionsList.Enqueue(Sit());
+            //actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.player.transform, 1)));
 
         }
     }
@@ -143,14 +144,17 @@ public class ConversationalPatient : ECA
     private ECAAction Sit()
     {
         List<ECAActionStage> stages = new List<ECAActionStage>();
-        GoToStage reachChair = new GoToStage(chair.GetDestination());
+        GoToStage reachChair = new GoToStage(chair.GetDestination(), null, false);
         TurnStage turn = new TurnStage(chair.GetSitPoint(), true);
+        WaitStage wait = new WaitStage(.6f);
         SitStage sit = new SitStage(chair);
         stages.Add(reachChair);
+        stages.Add(wait);
         stages.Add(turn);
         stages.Add(sit);
 
         ECAAction action = new ECAAction(this, stages);
         return action;
     }
+
 }

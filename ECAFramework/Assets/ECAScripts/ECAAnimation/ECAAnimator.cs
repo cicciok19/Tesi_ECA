@@ -48,6 +48,7 @@ public class ECAAnimator : MonoBehaviour
     public string actualActionName;
 
     public GameObject player;
+    public Camera camera;
     public Animator mecanimAnimator;
     public Text ECAText;
     public GameObject TextPanel;
@@ -164,6 +165,7 @@ public class ECAAnimator : MonoBehaviour
     public virtual void Init()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        camera = player.GetComponentInChildren<Camera>();
         Eca = GetComponent<ECA>();
         CreateAudioSource();
         ConfigureAudioSource();

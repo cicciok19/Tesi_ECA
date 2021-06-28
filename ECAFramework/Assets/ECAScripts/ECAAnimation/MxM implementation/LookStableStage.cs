@@ -22,6 +22,13 @@ public class LookStableStage : ECAActionStage
         else
             ikManager.SetWeightTargetAimIK(ikManager.headIK, 0);
 
+        WaitFor(.1f);
+        //EndStage();
+    }
+
+    protected override void OnWaitCompleted()
+    {
+        base.OnWaitCompleted();
         EndStage();
     }
 }

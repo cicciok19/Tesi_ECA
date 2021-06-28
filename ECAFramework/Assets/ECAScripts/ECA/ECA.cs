@@ -289,13 +289,15 @@ public class ECA : MonoBehaviour, IIntentHandler
     {
         EmotionalMessage emotionalMessage = GetMessageForIntentKey(messageType);
         client.SendMessageToServer(emotionalMessage.message, Name);
+        HandleMessageAction(emotionalMessage);
         client.AudioGenerated += OnAudioGenerated;
     }
+
 
     private void OnAudioGenerated(object sender, EventArgs e)
     {
         client.AudioGenerated -= OnAudioGenerated;
-        ecaAnimator.audioSource.clip = (AudioClip)Resources.Load("Audio/" + Name + ".wav");
+        //ecaAnimator.audioSource.clip = (AudioClip)Resources.Load("/Audio/" + Name + ".wav");
         salsa.audioSrc.Play();
     }
 
