@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TTSModel : MonoBehaviour
+public abstract class TTSModel
 {
-    public virtual void GetSpeechThread()
-    {
-
-    }
-
+    public AvailableTTS ttsType;
+    public virtual void GenerateSpeechThread() { }
+    public virtual void GenerateSpeechThread(SpeechInfo currentInfo) { }
 }
+

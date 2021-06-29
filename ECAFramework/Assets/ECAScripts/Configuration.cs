@@ -11,33 +11,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-
-
-	public enum ScenarioType
-{
-    Training,
-    Rehearsal,
-    Examination
-}
-
-	public enum SmartActions
-{
-    firstPaintProximityAction,
-    secondPaintProximityAction,
-    thirdPaintProximityAction,
-
-    firstPaintInteraction,
-    secondPaintInteraction,
-    thirdPaintInteraction
-}
-    public enum EventDefinitions
-{
-    SitDown,
-    StandUp,
-    PickUp,
-    PickDown
-}
-
 /// <summary>
 /// Class used to define the name of the xml files that contain the necessary configurations
 /// </summary>

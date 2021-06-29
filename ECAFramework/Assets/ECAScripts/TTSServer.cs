@@ -10,7 +10,7 @@ using UnityEngine;
 using System.IO;
 using System.Linq;
 
-public class TTSServer : MonoBehaviour
+public class TTSServer
 {
 	#region private members 	
 	/// <summary> 	
@@ -26,10 +26,22 @@ public class TTSServer : MonoBehaviour
 	/// Create handle to connected tcp client. 	
 	/// </summary> 	
 	private TcpClient connectedTcpClient;
+
+	private static TTSServer _instance;
+
+	public static TTSServer Instance
+    {
+        get
+        {
+			if (_instance == null)
+				_instance = new TTSServer();
+			return _instance;
+        }
+    }
 	#endregion
 
 	// Use this for initialization
-	void Start()
+	public void InitiateServer()
 	{
 		// Start TcpServer background thread 		
 		tcpListenerThread = new Thread(new ThreadStart(ListenForIncommingRequests));

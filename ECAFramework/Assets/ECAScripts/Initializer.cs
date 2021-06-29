@@ -5,6 +5,7 @@ using UnityEngine;
 public class Initializer : MonoBehaviour
 {
     [SerializeField] private string listOfMessagesFilename;
+    [SerializeField] private AvailableTTS ttsType;
 
     private void Awake()
     {
@@ -21,8 +22,10 @@ public class Initializer : MonoBehaviour
             allEca[i].Init();
 
         //Init TTSServer (if not already loaded
-        if (GetComponent<TTSServer>() == null)
-            gameObject.AddComponent<TTSServer>();
+        /*if (GetComponent<TTSServer>() == null)
+            gameObject.AddComponent<TTSServer>();*/
+
+        TtsManager.Instance.CreateModel(ttsType);
 
         //Init logger
         // CSVManager.Instance.Init();

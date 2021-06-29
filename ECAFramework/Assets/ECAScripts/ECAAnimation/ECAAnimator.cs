@@ -218,6 +218,33 @@ public class ECAAnimator : MonoBehaviour
             AudioEnded(this, EventArgs.Empty);
     }
 
+    public IEnumerator Play(string audioName, string messageContent, Func<bool> condition = null)
+    {
+        if (AudioStart != null)
+            AudioStart(this, EventArgs.Empty);
+
+        ShowText(messageContent);
+        /*
+        if (salsa != null)
+        {
+            //use SALSA -> pipsync
+            salsa.SetAudioClip(audioClip);
+            salsa.Play();
+            yield return new WaitWhile(() => salsa.audioSrc.isPlaying);
+        }
+        */
+        //use Unity audioSource
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+        //audioSource.clip = audioClip;
+        audioSource.Play();
+        yield return new WaitWhile(() => audioSource.isPlaying);
+        //Debug.Log("Audio ended!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        HideText();
+        if (AudioEnded != null)
+            AudioEnded(this, EventArgs.Empty);
+}
+
 
     public virtual bool IsWatchingSomewhere(Camera camera, Collider Traget)
     {

@@ -17,9 +17,8 @@ public class TTSClient
 	public event EventHandler AudioGenerated;
 	// Use this for initialization 	
 
-	public TTSClient(ECA eca)
+	public TTSClient()
     {
-		this.eca = eca;
 		ConnectToTcpServer();
     }
 

@@ -79,7 +79,6 @@ public class ECA : MonoBehaviour, IIntentHandler
     public ECAAnimator ecaAnimator;
     public bool stopped = false;
     public event EventHandler Stationary;
-    protected TTSClient client;
     protected Salsa salsa;
 
     public HandSide typePick;
@@ -121,7 +120,6 @@ public class ECA : MonoBehaviour, IIntentHandler
 
         actionsList = new ECAActionList();
 
-        client = new TTSClient(this);
         salsa = GetComponent<Salsa>();
     }
 
@@ -277,28 +275,6 @@ public class ECA : MonoBehaviour, IIntentHandler
     {
         SpeechInfo speechInfo = new SpeechInfo(ecaAnimator, Language, VoiceName, message, functionToBeExecuted, anytime, true);
         TtsManager.Instance.Speech(speechInfo);
-    }
-
-    protected void SendDirectMessageRequest(string message)
-    {
-        client.SendMessageToServer(message, Name);
-        client.AudioGenerated += OnAudioGenerated;
-    }
-
-    protected void SendMessageRequest(string messageType)
-    {
-        EmotionalMessage emotionalMessage = GetMessageForIntentKey(messageType);
-        client.SendMessageToServer(emotionalMessage.message, Name);
-        HandleMessageAction(emotionalMessage);
-        client.AudioGenerated += OnAudioGenerated;
-    }
-
-
-    private void OnAudioGenerated(object sender, EventArgs e)
-    {
-        client.AudioGenerated -= OnAudioGenerated;
-        //ecaAnimator.audioSource.clip = (AudioClip)Resources.Load("/Audio/" + Name + ".wav");
-        salsa.audioSrc.Play();
     }
 
     protected virtual void HandleMessageAction(EmotionalMessage message)

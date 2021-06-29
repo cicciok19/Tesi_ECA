@@ -30,19 +30,19 @@ public class ConversationalPatient : ECA
        /* sitAction = Sit();
         actionsList.Enqueue(sitAction);*/
         actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.camera.transform, 1)));
-        SendMessageRequest(PRESENTATION);
+        //SendMessage(PRESENTATION);
     }
 
     private void Update()
     {
         //just for debug
         if(Input.GetKeyDown(KeyCode.C))
-            SendMessageRequest(CHILDREN);
+            SendMessage(CHILDREN);
         if (Input.GetKeyDown(KeyCode.E))
-            SendMessageRequest(EXPLAIN_DISEASE);
+            SendMessage(EXPLAIN_DISEASE);
         //try with TTS client
         if (Input.GetKeyDown(KeyCode.Space))
-            SendDirectMessageRequest("Hello doctor, my name is Sophie");
+            SendDirectMessage("Hello doctor, my name is Sophie");
     }
 
     public override void SetEcaId()
@@ -85,7 +85,7 @@ public class ConversationalPatient : ECA
         }
 
         //then send message
-        SendMessageRequest(intent.IntentName);
+        SendMessage(intent.IntentName);
 
 
     }
