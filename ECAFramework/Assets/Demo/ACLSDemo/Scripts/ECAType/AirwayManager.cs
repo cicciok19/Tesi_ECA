@@ -93,7 +93,6 @@ public class AirwayManager : ECA
     {
         GiveOxygen giveOxygen = (GiveOxygen)sender;
         giveOxygen.CompletedAction -= OnOxygenGiven;
-        SendDirectMessage("Ho finito di dare l'ossigeno.");
         systemManager.CheckAction(giveOxygen.ActionName);
         patient.OnOxygenGiven();
     }

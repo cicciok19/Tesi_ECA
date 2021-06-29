@@ -69,7 +69,6 @@ public class TtsManager
     private static TtsManager instance = null;
     private TtsManager()
     {
-        CreateModel();
     }
     public static TtsManager Instance
     {
@@ -79,11 +78,6 @@ public class TtsManager
                 instance = new TtsManager();
             return instance;
         }
-    }
-
-    protected virtual void CreateModel()
-    {
-        throw new NotImplementedException();
     }
 
     /// <summary>

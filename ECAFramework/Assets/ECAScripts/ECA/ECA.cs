@@ -413,55 +413,6 @@ public class ECA : MonoBehaviour, IIntentHandler
     {
     }
 
-  /*  protected virtual void OnTriggerEnter(Collider other)
-    {
-        Passenger otherEca;
-
-        if (other.TryGetComponent<Passenger>(out otherEca))
-        {
-            if (!otherEca.stopped || otherEca.inQueue)
-            {
-                stopped = true;
-                currentAction.Pause();
-                otherEca.Stationary += OtherEcaIsStationary;
-                ecaInTrigger++;
-            }
-        }
-    }
-
-    protected virtual void OnTriggerExit(Collider other)
-    {
-        Passenger otherEca;
-
-        if (other.TryGetComponent<Passenger>(out otherEca))
-        {
-            ecaInTrigger--;
-            if (ecaInTrigger <= 0)
-            {
-                ecaInTrigger = 0;
-                stopped = false;
-                otherEca.Stationary -= OtherEcaIsStationary;
-                currentAction.Resume();
-            }
-        }
-    }
-
-    protected virtual void PlaceReached(object sender, EventArgs e)
-    {
-        stopped = true;
-
-        if (Stationary != null)
-            Stationary(this, EventArgs.Empty);
-    }
-
-    protected virtual void OtherEcaIsStationary(object sender, EventArgs e)
-    {
-        stopped = false;
-        //mi devo disiscrivere dall'evento dell'altro eca Stationary
-        //sender.Stationary -= OtherEcaIsStationary;
-        currentAction.Resume();
-    }*/
-
     public void DisactivateNavMeshAgent()
     {
         GetComponent<NavMeshAgent>().enabled = false;

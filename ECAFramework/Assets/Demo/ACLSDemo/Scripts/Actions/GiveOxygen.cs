@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,6 +47,7 @@ public class GiveOxygen : ECACompositeAction
         };
         ECAParallelActionStage put = new ECAParallelActionStage(putOxygen.ToArray());
         WaitStage waitPost = new WaitStage(7f);
+        waitPost.StageFinished += OnOxygenGiven;
 
 
         stages.Add(goToMask);
@@ -91,6 +93,11 @@ public class GiveOxygen : ECACompositeAction
 
         ECAAction action = new ECAAction(eca, stages);
         actions.Add(action);
+    }
+
+    private void OnOxygenGiven(object sender, EventArgs e)
+    {
+        eca.SendDirectMessage("Ho finito di dare l'ossigeno.");
     }
 
     public override void StartAction()

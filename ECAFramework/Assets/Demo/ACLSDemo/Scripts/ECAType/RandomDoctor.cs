@@ -61,7 +61,7 @@ public class RandomDoctor : ECA
 
     private void HandleTakeOtherMedicine(MedicineName medicineName)
     {
-        SendDirectMessage("Sto andando a prendere le medicine che sono finite.");
+        SendDirectMessage("Ok vado!");
         TakeOtherMedicine takeOtherMedicine = new TakeOtherMedicine(this, medicineName, otherRoom, medicalRoom);
         //iscrizione alla fine dell'azione per dare il messaggio
         actionsList.Enqueue(takeOtherMedicine);
