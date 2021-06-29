@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using CrazyMinnow.SALSA;
+using DG.Tweening;
 
 public class ConversationalPatient : ECA
 {
@@ -20,6 +21,24 @@ public class ConversationalPatient : ECA
     public bool Sitted { get; protected set; } = false;
     private ECAAction sitAction;
 
+    public Transform Target;
+    protected GameObject emotionWheel;
+    protected GameObject pin;
+    protected Transform indicator;
+    protected float indicatorInitialScale = 0f;
+
+    Color[] emotionToColor = new Color[] {
+    Color.yellow,
+    new Color( 172/255.0f, 211/255f, 106/255f),
+    new Color( 47/255.0f, 183/255f, 116/255f),
+    new Color( 44/255.0f, 175/255f, 217/255f),
+    new Color( 116/255.0f, 168/255f, 219/255f),
+    new Color( 164/255.0f, 145/255f, 197/255f),
+    new Color( 242/255.0f, 114/255f, 109/255f),
+    new Color( 250/255.0f, 174/255f, 101/255f),
+    new Color( 0/255.0f, 0/255f, 0/255f)
+};
+
 
     protected override void Start()
     {
@@ -30,11 +49,28 @@ public class ConversationalPatient : ECA
        /* sitAction = Sit();
         actionsList.Enqueue(sitAction);*/
         actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.camera.transform, 1)));
-        //SendMessage(PRESENTATION);
+        SendMessageRequest(PRESENTATION);
+
+        emotionWheel = FindObjectOfType<Wheel>().gameObject;
+        if (emotionWheel == null)
+            Utility.LogError("Emotion Wheel NOT FOUND");
+
+        pin = FindObjectOfType<Pin>().gameObject;
+        if (pin == null)
+            Utility.LogError("pin NOT FOUND");
+
+
+        indicator = pin.transform.GetChild(0).transform;
+        indicatorInitialScale = indicator.localScale.y;
+
+        EmotionManager.ActualEmotionChanged += ECAEmotionChanged;
+        EmotionManager.ActualEmotionUpdated += ECAEmotionChanged;
+        InitPatientEmotion();
     }
 
     private void Update()
     {
+        pin.transform.LookAt(Target);
         //just for debug
         if(Input.GetKeyDown(KeyCode.C))
             SendMessage(CHILDREN);
@@ -43,6 +79,20 @@ public class ConversationalPatient : ECA
         //try with TTS client
         if (Input.GetKeyDown(KeyCode.Space))
             SendDirectMessage("Hello doctor, my name is Sophie");
+    }
+
+
+    protected void InitPatientEmotion()
+    {
+        /*
+        AvailableEmotions actualEmotion = (AvailableEmotions)(UnityEngine.Random.Range(
+          0, (int)AvailableEmotions.None));
+
+        float strength = UnityEngine.Random.Range(ECAEmotion.MinValue, ECAEmotion.MaxValue);
+        */
+        EmotionManager.InitActualEmotion(EmotionManager.ActualEmotion.EmotionType, EmotionManager.ActualEmotion.Value);
+        ShowEmotion();
+        //SetAvatarColor();
     }
 
     public override void SetEcaId()
@@ -88,6 +138,15 @@ public class ConversationalPatient : ECA
         SendMessage(intent.IntentName);
 
 
+    }
+
+    protected void ECAEmotionChanged(object sender, EventArgs args)
+    {
+        AvailableEmotions actualEmotion = EmotionManager.ActualEmotion.EmotionType;
+        float strength = EmotionManager.ActualEmotion.NormalizedValue;
+
+        //SetAvatarColor();
+        ShowEmotion();
     }
 
     public override void SubscribeHandlerToIntentManager()
@@ -167,6 +226,21 @@ public class ConversationalPatient : ECA
 
         ECAAction action = new ECAAction(this, stages);
         return action;
+    }
+
+    protected void ShowEmotion()
+    {
+        Utility.Log("Setting " + name + " emotion to " + EmotionManager.ActualEmotion.EmotionType + " with " + EmotionManager.ActualEmotion.NormalizedValue);
+        //transform.localScale = initialScale * EmotionManager.ActualEmotion.NormalizedValue;
+
+        Utility.Log("Targets = " + emotionWheel.transform.GetChild(0).name + " Emotion target = " + emotionWheel.transform.GetChild(0).GetChild((int)EmotionManager.ActualEmotion.EmotionType).gameObject.name);
+
+        Transform target = emotionWheel.transform.GetChild(0).GetChild((int)EmotionManager.ActualEmotion.EmotionType).gameObject.transform;
+        //pin.transform.LookAt(target);
+        //indicator.localScale = new Vector3(indicator.localScale.x, indicatorInitialScale*(1 + EmotionManager.ActualEmotion.NormalizedValue), indicator.localScale.z);
+
+        indicator.DOScaleY(indicatorInitialScale * (1 + 1.5f * EmotionManager.ActualEmotion.NormalizedValue), 2f);
+        Target.DOMove(target.position, 2f);
     }
 
 }

@@ -12,6 +12,7 @@ public class MedicalRoom : MonoBehaviour
     private Locker locker;
     private RubbishTable rubbishTable;
     private Patient patient;
+    private MedicationProvider medicationProvider;
 
     public event EventHandler MedicineFinished;
 
@@ -24,6 +25,7 @@ public class MedicalRoom : MonoBehaviour
         airwayTable = GetComponentInChildren<AirwayTable>();
         locker = GetComponentInChildren<Locker>();
         rubbishTable = GetComponentInChildren<RubbishTable>();
+        medicationProvider = FindObjectOfType<MedicationProvider>();
     }
 
     public MedicationTable GetMedicationTable()
@@ -86,13 +88,27 @@ public class MedicalRoom : MonoBehaviour
 
         if (!availEpinephrine)
         {
-            if (MedicineFinished != null)
-                MedicineFinished(this, new MedicineEventArgs(MedicineName.Epinephrine));
+            medicationProvider.SendDirectMessage("E' finita l'epinefrina, vai a prenderne altra!");
+            medicationProvider.ecaAnimator.AudioEnded += FinishedEpinephrine;
         }
         else if (!availAmiodarone)
         {
-            if (MedicineFinished != null)
-                MedicineFinished(this, new MedicineEventArgs(MedicineName.Amiodarone));
+            medicationProvider.SendDirectMessage("E' finito l'amiodarone, vai a prenderne altro!");
+            medicationProvider.ecaAnimator.AudioEnded += FinishedAmiodarone;
         }
+    }
+
+    private void FinishedEpinephrine(object sender, EventArgs e)
+    {
+        medicationProvider.ecaAnimator.AudioEnded -= FinishedEpinephrine;
+        if (MedicineFinished != null)
+            MedicineFinished(this, new MedicineEventArgs(MedicineName.Epinephrine));
+    }
+
+    private void FinishedAmiodarone(object sender, EventArgs e)
+    {
+        medicationProvider.ecaAnimator.AudioEnded -= FinishedAmiodarone;
+        if (MedicineFinished != null)
+            MedicineFinished(this, new MedicineEventArgs(MedicineName.Amiodarone));
     }
 }

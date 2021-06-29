@@ -42,8 +42,7 @@ public class UseMedicine : ECACompositeAction
     /// <summary>
     /// if there is a medicine on the table
     /// </summary>
-    public UseMedicine(ECA eca, MedicineSpot spot, Patient patient, RubbishTable rubbishTable)
-    : base(eca)
+    public UseMedicine(ECA eca, MedicineSpot spot, Patient patient, RubbishTable rubbishTable) : base(eca)
     {
         medicineSpot = spot;
         medicationProvider = (MedicationProvider)eca;
@@ -77,7 +76,9 @@ public class UseMedicine : ECACompositeAction
 
     protected void OnMedicinePicked(object sender, EventArgs args)
     {
-      hasMedicine = true;
+        pickMedicine.StageFinished -= OnMedicinePicked;
+        hasMedicine = true;
+        medicationProvider.medicalRoom.CheckAllSpot();
         if (drawer != null)
             drawer.StartClosing();
     }
@@ -96,9 +97,15 @@ public class UseMedicine : ECACompositeAction
 
     public override void OnCompletedAction()
     {
+        MedicineName name;
         base.OnCompletedAction();
+        if (actionName == ActionName.UseAmiodarone)
+            name = MedicineName.Amiodarone;
+        else
+            name = MedicineName.Epinephrine;
+
         if (InjectionDone != null)
-            InjectionDone(this, new MedicineEventArgs(medicineSpot.GetMedicineName()));
+            InjectionDone(this, new MedicineEventArgs(name));
     }
 
     private void OnGrabHandle(object sender, EventArgs e)

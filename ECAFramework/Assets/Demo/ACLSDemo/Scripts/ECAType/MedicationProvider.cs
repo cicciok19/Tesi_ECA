@@ -64,8 +64,7 @@ public class MedicationProvider : ECA
         locker = medicalRoom.GetLocker();
 
         //just for debug
-        //HandleUseMedicine(MedicineName.Epinephrine);
-        //HandleUseMedicine(MedicineName.Epinephrine);
+        HandleUseMedicine(MedicineName.Epinephrine);
         //HandleIVAccess();
     }
 
@@ -146,8 +145,6 @@ public class MedicationProvider : ECA
             SendDirectMessage("Ho finito l'iniezione di amiodarone.");
             patient.OnAmiodaroneDone();
         }
-
-        medicalRoom.CheckAllSpot();
     }
 
     private void OnTimeExpired(object sender, EventArgs e)
