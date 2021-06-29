@@ -101,12 +101,12 @@ public class ECAEmotionManager
         };
 
         //initialize random emotion
-/*        int random = UnityEngine.Random.Range(0, Emotions.Count - 2);
+        int random = UnityEngine.Random.Range(0, Emotions.Count - 2);
         AvailableEmotions[] emotion = (AvailableEmotions[])Enum.GetValues(typeof(AvailableEmotions));
-        actualEmotion = Emotions[emotion[random]];*/
+        actualEmotion = Emotions[emotion[random]];
 
         //just for debug
-        actualEmotion = Joy;
+        //actualEmotion = Joy;
         actualEmotion.SwitchedLevel += OnSwitchedLevel;
 
         if (xmlDocumentForModel != "")
