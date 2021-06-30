@@ -122,6 +122,8 @@ public class Patient : ECA
             stateLevel = .2f;
         }
 
+        ivAccessInserted = true;
+
         initialState = state;
     }
 

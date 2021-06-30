@@ -19,13 +19,15 @@ public class DropStage : ECAActionStage
     private bool dropping;
     private bool dropped;
     private float duration;
+    private bool activeRigidBody;
 
-    public DropStage(PickStage pickStage, Transform dropTransform, float duration = .5f) : base()
+    public DropStage(PickStage pickStage, Transform dropTransform, float duration = .5f, bool activeRigidBody = false) : base()
     {
         this.pickStage = pickStage;
         this.typePick = pickStage.typePick;
         this.dropTransform = dropTransform;
         this.duration = duration;
+        this.activeRigidBody = activeRigidBody;
     }
 
     public DropStage(PickStage pickStage) : base()
@@ -86,15 +88,29 @@ public class DropStage : ECAActionStage
             if (effector.positionWeight > .89f && !dropping && !dropped)
             {
                 obj.GetComponent<InteractionObject>().enabled = false;
-                obj.transform.SetParent(dropTransform);
+
+                if (!activeRigidBody)
+                    obj.transform.SetParent(dropTransform);
+                else
+                    obj.transform.SetParent(dropTransform);
 
                 if (typePick == HandSide.LeftHand)
-                    ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, 0f, .5f);
+                    ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.leftHandEffector, 0f, 2.5f);
                 if (typePick == HandSide.RightHand)
-                    ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, 0f, .5f);
+                    ikManager.SetWeightsFullBodyIK(ikManager.fullBodyBipedIK.solver.rightHandEffector, 0f, 2.5f);
 
                 Debug.Log("position obj postdrop: " + obj.transform.position);
                 dropped = true;
+
+                if (activeRigidBody)
+                {
+                    if (obj.GetComponent<Rigidbody>() == null)
+                        obj.gameObject.AddComponent<Rigidbody>();
+
+                    obj.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                    obj.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                }
+
             }
         }
 

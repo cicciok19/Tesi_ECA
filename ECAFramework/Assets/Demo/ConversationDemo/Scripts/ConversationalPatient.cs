@@ -49,7 +49,7 @@ public class ConversationalPatient : ECA
        /* sitAction = Sit();
         actionsList.Enqueue(sitAction);*/
         actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.camera.transform, 1)));
-        SendMessageRequest(PRESENTATION);
+        //SendMessageRequest(PRESENTATION);
 
         emotionWheel = FindObjectOfType<Wheel>().gameObject;
         if (emotionWheel == null)

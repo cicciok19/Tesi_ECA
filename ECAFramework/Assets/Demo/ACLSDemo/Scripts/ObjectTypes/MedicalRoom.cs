@@ -10,7 +10,7 @@ public class MedicalRoom : MonoBehaviour
     private DefibrillatorTable defibrillatorTable;
     private AirwayTable airwayTable;
     private Locker locker;
-    private RubbishTable rubbishTable;
+    private Rubbish rubbishTable;
     private Patient patient;
     private MedicationProvider medicationProvider;
 
@@ -24,7 +24,7 @@ public class MedicalRoom : MonoBehaviour
         defibrillatorTable = GetComponentInChildren<DefibrillatorTable>();
         airwayTable = GetComponentInChildren<AirwayTable>();
         locker = GetComponentInChildren<Locker>();
-        rubbishTable = GetComponentInChildren<RubbishTable>();
+        rubbishTable = GetComponentInChildren<Rubbish>();
         medicationProvider = FindObjectOfType<MedicationProvider>();
     }
 
@@ -53,7 +53,7 @@ public class MedicalRoom : MonoBehaviour
         return locker;
     }
 
-    public RubbishTable GetRubbishTable()
+    public Rubbish GetRubbishTable()
     {
         return rubbishTable;
     }

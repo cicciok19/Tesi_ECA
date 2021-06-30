@@ -111,8 +111,8 @@ public class Shock : ECACompositeAction
 
         List<DropStage> dropPaddles = new List<DropStage>()
         {
-            new DropStage(pickStages[0], destinationPaddleLeft),
-            new DropStage(pickStages[1], destinationPaddleRight)
+            new DropStage(pickStages[0], destinationPaddleLeft, 1f),
+            new DropStage(pickStages[1], destinationPaddleRight, 1f)
         };
 
         ECAParallelActionStage parallelDrop = new ECAParallelActionStage(dropPaddles.ToArray());

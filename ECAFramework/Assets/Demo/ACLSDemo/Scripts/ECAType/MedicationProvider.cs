@@ -41,7 +41,7 @@ public class MedicationProvider : ECA
     private Locker locker;
     private SystemManager systemManager;
     private UseMedicine useMedicine;
-    private RubbishTable rubbishTable;
+    private Rubbish rubbishTable;
 
     public MedicalRoom medicalRoom;
 
@@ -64,7 +64,7 @@ public class MedicationProvider : ECA
         locker = medicalRoom.GetLocker();
 
         //just for debug
-        HandleUseMedicine(MedicineName.Epinephrine);
+        //HandleUseMedicine(MedicineName.Epinephrine);
         //HandleIVAccess();
     }
 
@@ -165,7 +165,7 @@ public class MedicationProvider : ECA
         IVAccess iVAccess = (IVAccess)sender;
         iVAccess.CompletedAction -= OnIvAccessCompleted;
         systemManager.CheckAction(iVAccess.ActionName);
-        SendDirectMessage("Ho completato l'accesso alle vie venose.");
+        SendDirectMessage("Accesso venoso completato.");
         patient.OnIvAccessDone();
     }
 
