@@ -139,10 +139,10 @@ public class TtsManager
     {
         IsSpeaking = true;
 
-        //speech = new Thread(model.GenerateSpeechThread());
-        speechThread = new Thread(SpeechThread);
-        currentInfo = (SpeechInfo)msgQueue.Dequeue();
-        currentInfo.EcaAnimator.AudioEnded += OnAudioEnd;
+        //speech = new Thread(model.GenerateSpeechThread());
+        speechThread = new Thread(SpeechThread);
+        currentInfo = (SpeechInfo)msgQueue.Dequeue();
+        currentInfo.EcaAnimator.AudioEnded += OnAudioEnd;
         speechThread.Start();
 
     }
@@ -168,11 +168,11 @@ public class TtsManager
             AzureTTSModel azure = model as AzureTTSModel;
             azure.GenerateSpeechThread(currentInfo);
         }
-        else if (model.ttsType == AvailableTTS.Tacotron_2)
-        {
-            NeuralTTSModel tacotron = model as NeuralTTSModel;
-            tacotron.GenerateSpeechThread(currentInfo);
-            //UnityMainThreadDispatcher.Instance().Enqueue(currentInfo.EcaAnimator.Play(currentInfo.EcaAnimator.Eca.Name, currentInfo.TextToSpeech));
+        else if (model.ttsType == AvailableTTS.Tacotron_2)
+        {
+            NeuralTTSModel tacotron = model as NeuralTTSModel;
+            tacotron.GenerateSpeechThread(currentInfo);
+            //UnityMainThreadDispatcher.Instance().Enqueue(currentInfo.EcaAnimator.Play(currentInfo.EcaAnimator.Eca.Name, currentInfo.TextToSpeech));
             //currentInfo.EcaAnimator.Play(currentInfo.EcaAnimator.Eca.Name, currentInfo.TextToSpeech);
         }
     }

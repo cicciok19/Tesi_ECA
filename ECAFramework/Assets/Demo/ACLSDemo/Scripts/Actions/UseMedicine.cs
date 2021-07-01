@@ -34,7 +34,7 @@ public class UseMedicine : ECACompositeAction
     private MedicationProvider medicationProvider;
     private Patient patient;
     private Drawer drawer = null;
-    private RubbishTable rubbishTable;
+    private Rubbish rubbish;
     public Transform medicine { get; protected set; }
 
     public PickStage pickMedicine { get; protected set; }
@@ -42,13 +42,13 @@ public class UseMedicine : ECACompositeAction
     /// <summary>
     /// if there is a medicine on the table
     /// </summary>
-    public UseMedicine(ECA eca, MedicineSpot spot, Patient patient, RubbishTable rubbishTable) : base(eca)
+    public UseMedicine(ECA eca, MedicineSpot spot, Patient patient, Rubbish rubbishTable) : base(eca)
     {
         medicineSpot = spot;
         medicationProvider = (MedicationProvider)eca;
         pole = medicationProvider.medicalRoom.GetPole();
         this.patient = patient;
-        this.rubbishTable = rubbishTable;
+        this.rubbish = rubbishTable;
 
         if (spot.GetMedicineName() == MedicineName.Amiodarone)
             actionName = ActionName.UseAmiodarone;
@@ -59,14 +59,14 @@ public class UseMedicine : ECACompositeAction
     /// <summary>
     /// if there isn't a medicine on the table take it from the locker
     /// </summary>
-    public UseMedicine(ECA eca, Drawer d, Patient patient, RubbishTable rubbishTable) : base(eca)
+    public UseMedicine(ECA eca, Drawer d, Patient patient, Rubbish rubbish) : base(eca)
     {
         drawer = d;
         medicineSpot = drawer.GetMedicineSpot();
         medicationProvider = (MedicationProvider)eca;
         pole = medicationProvider.medicalRoom.GetPole();
         this.patient = patient;
-        this.rubbishTable = rubbishTable;
+        this.rubbish = rubbish;
 
         if (medicineSpot.GetMedicineName() == MedicineName.Amiodarone)
             actionName = ActionName.UseAmiodarone;
@@ -182,8 +182,8 @@ public class UseMedicine : ECACompositeAction
         List<ECAActionStage> stages = new List<ECAActionStage>();
 
         ResumeInteractionStage removeSyringe = new ResumeInteractionStage(RootMotion.FinalIK.FullBodyBipedEffector.RightHand);
-        GoToStage goToRubbishTable = new GoToStage(rubbishTable.GetDestination());
-        DropStage dropMedicine = new DropStage(pickMedicine, rubbishTable.GetDropPosition());
+        GoToStage goToRubbishTable = new GoToStage(rubbish.GetDestination());
+        DropStage dropMedicine = new DropStage(pickMedicine, rubbish.GetDropPosition(), .01f, true);
         GoToStage returnToTable = new GoToStage(medicationProvider.GetDestinationNearTable(), patient.transform);
 
         stages.Add(removeSyringe);

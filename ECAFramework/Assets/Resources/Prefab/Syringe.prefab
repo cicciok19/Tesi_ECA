@@ -526,6 +526,7 @@ GameObject:
   - component: {fileID: 7785650862043517066}
   - component: {fileID: 5469841085301892160}
   - component: {fileID: 2213693954243252289}
+  - component: {fileID: 4300187508989028270}
   m_Layer: 0
   m_Name: Syringe
   m_TagString: Untagged
@@ -613,6 +614,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   used: 0
+--- !u!64 &4300187508989028270
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5829974643140593045}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6193453781546041086, guid: 0f7ea44e0f1238e4db6c84cf332b5a31, type: 3}
 --- !u!1 &6242484017679299479
 GameObject:
   m_ObjectHideFlags: 0

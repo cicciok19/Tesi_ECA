@@ -163,30 +163,50 @@ public class ConversationalPatient : ECA
 
             if (action.IsMoveTo())
             {
-                Utility.Log("Going to " + action.firstParameter);
-                ecaAction = new GoToAction(this, action);
-                actionsList.Enqueue(ecaAction);
+                float random = UnityEngine.Random.Range(0f, 1f);
+
+                if (action.probability >= random)
+                {
+                    Utility.Log("Going to " + action.firstParameter);
+                    ecaAction = new GoToAction(this, action);
+                    actionsList.Enqueue(ecaAction);
+                }
             }
 
             if (action.IsPickUp())
             {
-                Utility.Log("Picking up " + action.firstParameter);
-                ecaAction = new PickUpAction(this, action);
-                actionsList.Enqueue(ecaAction);
+                float random = UnityEngine.Random.Range(0f, 1f);
+
+                if (action.probability >= random)
+                {
+                    Utility.Log("Picking up " + action.firstParameter);
+                    ecaAction = new PickUpAction(this, action);
+                    actionsList.Enqueue(ecaAction);
+                }
             }
 
             if(action.IsPointAt())
             {
-                Utility.Log("Pointing at " + action.firstParameter);
-                ecaAction = new PointAtAction(this, action);
-                actionsList.Enqueue(ecaAction);
+                float random = UnityEngine.Random.Range(0f, 1f);
+
+                if (action.probability >= random)
+                {
+                    Utility.Log("Pointing at " + action.firstParameter);
+                    ecaAction = new PointAtAction(this, action);
+                    actionsList.Enqueue(ecaAction);
+                }
             }
 
             if (action.IsSit())
             {
-                Utility.Log("Sit down");
-                ecaAction = Sit();
-                Sitted = true;
+                float random = UnityEngine.Random.Range(0f, 1f);
+
+                if (action.probability >= random)
+                {
+                    Utility.Log("Sit down");
+                    ecaAction = Sit();
+                    Sitted = true;
+                }
             }
 
 

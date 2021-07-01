@@ -12,13 +12,16 @@ public struct MessageAction {
 	public string actionType;
 	public string firstParameter;
     public string secondParameter;
+    public float probability;
+
 
     public static MessageAction zero = new MessageAction("","","");
 
-	public MessageAction(string actionType,string firstParameter, string secondParameter) {
+	public MessageAction(string actionType,string firstParameter, string secondParameter, string probability = "1") {
 		this.actionType = actionType;
 		this.firstParameter = firstParameter;
         this.secondParameter = secondParameter;
+        this.probability = (float) Convert.ToDouble(probability);
      	}
 
 	public bool IsLookAt() {
@@ -116,6 +119,7 @@ public static EmotionalMessage zero = new EmotionalMessage("@@@@@@###ppopopoggvh
     public MessageAction parsedSingleAction(string singleAction)
     {
         string[] parts = singleAction.Split(new Char[] { '@' });
+        string probability = singleAction.Split(new Char[] { '#' })[1];
 
         if (parts.Length < 2)
             return MessageAction.zero;
@@ -128,6 +132,9 @@ public static EmotionalMessage zero = new EmotionalMessage("@@@@@@###ppopopoggvh
             ma.secondParameter = parts[2];
         else
             ma.secondParameter = "";
+
+        if (probability != null)
+            ma.probability = (float) Convert.ToDouble(probability);
 
         return ma;
     }

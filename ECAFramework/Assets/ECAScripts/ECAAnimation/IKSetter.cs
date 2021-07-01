@@ -170,7 +170,7 @@ public class IKSetter : MonoBehaviour
         {
             while (var < weight)
             {
-                var += .01f;
+                var += .03f;
                 effector.positionWeight = var;
                 yield return new WaitForSeconds(speed);
             }
@@ -179,7 +179,7 @@ public class IKSetter : MonoBehaviour
         {
             while (var > weight)
             {
-                var -= .01f;
+                var -= .03f;
                 effector.positionWeight = var;
                 yield return new WaitForSeconds(speed);
             }
@@ -439,10 +439,8 @@ public class IKSetter : MonoBehaviour
             weightOperation -= weight;
         if (weightOperation != 0)
         {
-            coroutineSpeed = (duration * .01f) / weightOperation;
+            coroutineSpeed = (float)Math.Round((duration * .01f) / weightOperation, 3);
 
-
-            Math.Round(coroutineSpeed, 3);
             if (effector != null)
                 StartCoroutine(SetWeightFullIK(effector, weight, coroutineSpeed));
             else
