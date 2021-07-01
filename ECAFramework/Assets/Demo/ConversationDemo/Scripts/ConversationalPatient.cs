@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using CrazyMinnow.SALSA;
 using DG.Tweening;
+using System.Linq;
 
 public class ConversationalPatient : ECA
 {
@@ -148,13 +149,17 @@ public class ConversationalPatient : ECA
 
     protected override void HandleMessageAction(EmotionalMessage message)
     {
-        if (message.action == "")
-            return;
-
         // serving action
         //MessageAction action = message.parsedAction;
         List<MessageAction> actions = message.parsedActions;
+
+        actions = actions.Where(val => val.actionType != "").ToList();
+
+        if (actions.Count == 0)
+            return;
+
         actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.camera.transform, 0)));
+
 
         for (int i = 0; i < actions.Count; i++)
         {
@@ -163,50 +168,29 @@ public class ConversationalPatient : ECA
 
             if (action.IsMoveTo())
             {
-                float random = UnityEngine.Random.Range(0f, 1f);
-
-                if (action.probability >= random)
-                {
-                    Utility.Log("Going to " + action.firstParameter);
-                    ecaAction = new GoToAction(this, action);
-                    actionsList.Enqueue(ecaAction);
-                }
+                Utility.Log("Going to " + action.firstParameter);
+                ecaAction = new GoToAction(this, action);
             }
 
             if (action.IsPickUp())
             {
-                float random = UnityEngine.Random.Range(0f, 1f);
-
-                if (action.probability >= random)
-                {
-                    Utility.Log("Picking up " + action.firstParameter);
-                    ecaAction = new PickUpAction(this, action);
-                    actionsList.Enqueue(ecaAction);
-                }
+                Utility.Log("Picking up " + action.firstParameter);
+                ecaAction = new PickUpAction(this, action);
+                actionsList.Enqueue(ecaAction);
             }
 
             if(action.IsPointAt())
             {
-                float random = UnityEngine.Random.Range(0f, 1f);
-
-                if (action.probability >= random)
-                {
-                    Utility.Log("Pointing at " + action.firstParameter);
-                    ecaAction = new PointAtAction(this, action);
-                    actionsList.Enqueue(ecaAction);
-                }
+                Utility.Log("Pointing at " + action.firstParameter);
+                ecaAction = new PointAtAction(this, action);
+                actionsList.Enqueue(ecaAction);
             }
 
             if (action.IsSit())
             {
-                float random = UnityEngine.Random.Range(0f, 1f);
-
-                if (action.probability >= random)
-                {
-                    Utility.Log("Sit down");
-                    ecaAction = Sit();
-                    Sitted = true;
-                }
+                Utility.Log("Sit down");
+                ecaAction = Sit();
+                Sitted = true;
             }
 
 
