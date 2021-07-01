@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 public struct MessageAction {
 	public string actionType;
@@ -56,7 +57,7 @@ public struct MessageAction {
 public struct EmotionalMessage
 {
 // class declaration start
-public static EmotionalMessage zero = new EmotionalMessage("@@@@@@###ppopopoggvhgkhgt6rù§§§§§",AvailableEmotions.None,"@@@@@@###ppopopoggvhgkhgt6rù§§§§§");
+public static EmotionalMessage zero = new EmotionalMessage("",AvailableEmotions.None,"");
 // class declaration end
 
 
@@ -103,10 +104,7 @@ public static EmotionalMessage zero = new EmotionalMessage("@@@@@@###ppopopoggvh
             if (action.Contains(";"))
             {
                 string[] parts = action.Split(new Char[] { ';' });
-                for (int i = 0; i < parts.Length; i++)
-                {
-                    messageActions.Add(parsedSingleAction(parts[i]));
-                }
+                messageActions = parsedMoreActions(parts);
             }
             else
                 messageActions.Add(parsedSingleAction(action));
@@ -116,27 +114,132 @@ public static EmotionalMessage zero = new EmotionalMessage("@@@@@@###ppopopoggvh
         }
     }
 
+    private List<MessageAction> parsedMoreActions(string[] actions)
+    {
+        List<MessageAction> messageActions = new List<MessageAction>();
+        bool actionTaken = false;
+
+        foreach(string action in actions)
+        {
+            string[] parts = action.Split(new Char[] { '@' });
+
+
+            if (parts.Length < 2)
+                messageActions.Add(MessageAction.zero);
+            else
+            {
+                MessageAction ma = new MessageAction();
+                string[] probability;
+
+                if (parts.Length == 2)
+                {
+                    probability = parts[1].Split(new Char[] { '#' });
+                    parts[1] = probability[0];
+                }
+                else
+                {
+                    probability = parts[2].Split(new Char[] { '#' });
+                    parts[2] = probability[0];
+                }
+
+
+                if (probability.Length == 2)
+                {
+                    if (actionTaken != false)
+                    {
+                        ma.probability = (float)Convert.ToDouble(probability[1]);
+                        float random = UnityEngine.Random.Range(0f, 1f);
+
+                        if (ma.probability > random)
+                        {
+                            actionTaken = true;
+                            ma.actionType = parts[0];
+                            ma.firstParameter = parts[1];
+                            if (parts.Length == 3)
+                                ma.secondParameter = parts[2];
+                            else
+                                ma.secondParameter = "";
+
+                            messageActions.Add(ma);
+                        }
+                        else
+                            messageActions.Add(MessageAction.zero);
+                    }
+                }
+                else
+                {
+                    actionTaken = false;
+                    ma.actionType = parts[0];
+                    ma.firstParameter = parts[1];
+                    if (parts.Length == 3)
+                        ma.secondParameter = parts[2];
+                    else
+                        ma.secondParameter = "";
+
+                    messageActions.Add(ma);
+                }
+            }
+
+        }
+
+        return messageActions;
+    }
+
     public MessageAction parsedSingleAction(string singleAction)
     {
         string[] parts = singleAction.Split(new Char[] { '@' });
-        string probability = singleAction.Split(new Char[] { '#' })[1];
 
         if (parts.Length < 2)
             return MessageAction.zero;
 
+
+        string[] probability;
+
+
         MessageAction ma = new MessageAction();
 
-        ma.actionType = parts[0];
-        ma.firstParameter = parts[1];
-        if (parts.Length == 3)
-            ma.secondParameter = parts[2];
+        if (parts.Length == 2)
+        {
+            probability = parts[1].Split(new Char[] { '#' });
+            parts[1] = probability[0];
+        }
         else
-            ma.secondParameter = "";
+        {
+            probability = parts[2].Split(new Char[] { '#' });
+            parts[2] = probability[0];
+        }
 
-        if (probability != null)
-            ma.probability = (float) Convert.ToDouble(probability);
+        if (probability.Length == 2)
+        {
+            ma.probability = float.Parse(probability[1], CultureInfo.InvariantCulture.NumberFormat);
+            //ma.probability = (float)Convert.ToDouble(probability[1]);
+            float random = UnityEngine.Random.Range(0f, 1f);
 
-        return ma;
+            if (ma.probability > random)
+            {
+                ma.actionType = parts[0];
+                ma.firstParameter = parts[1];
+                if (parts.Length == 3)
+                    ma.secondParameter = parts[2];
+                else
+                    ma.secondParameter = "";
+
+                return ma;
+            }
+            else
+                return MessageAction.zero;
+        }
+        else
+        {
+            ma.actionType = parts[0];
+            ma.firstParameter = parts[1];
+            if (parts.Length == 3)
+                ma.secondParameter = parts[2];
+            else
+                ma.secondParameter = "";
+
+            return ma;
+        }
     }
 
     public static bool operator !=(EmotionalMessage a,EmotionalMessage b)
