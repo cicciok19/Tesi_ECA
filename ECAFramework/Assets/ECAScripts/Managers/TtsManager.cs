@@ -139,13 +139,11 @@ public class TtsManager
     {
         IsSpeaking = true;
 
-        //ATTENZIONE: ANCORA NON FUNZIONA!!!
-
         //speech = new Thread(model.GenerateSpeechThread());
-            speechThread = new Thread(SpeechThread);
-            currentInfo = (SpeechInfo)msgQueue.Dequeue();
-            currentInfo.EcaAnimator.AudioEnded += OnAudioEnd;
-            speechThread.Start();
+        speechThread = new Thread(SpeechThread);
+        currentInfo = (SpeechInfo)msgQueue.Dequeue();
+        currentInfo.EcaAnimator.AudioEnded += OnAudioEnd;
+        speechThread.Start();
 
     }
     public void OnAudioEnd(object sender, EventArgs e)
@@ -173,9 +171,9 @@ public class TtsManager
         else if (model.ttsType == AvailableTTS.Tacotron_2)
         {
             NeuralTTSModel tacotron = model as NeuralTTSModel;
-            UnityMainThreadDispatcher.Instance().Enqueue(() => tacotron.GenerateSpeechThread(currentInfo));
+            tacotron.GenerateSpeechThread(currentInfo);
             //UnityMainThreadDispatcher.Instance().Enqueue(currentInfo.EcaAnimator.Play(currentInfo.EcaAnimator.Eca.Name, currentInfo.TextToSpeech));
-            currentInfo.EcaAnimator.Play(currentInfo.EcaAnimator.Eca.Name, currentInfo.TextToSpeech);
+            //currentInfo.EcaAnimator.Play(currentInfo.EcaAnimator.Eca.Name, currentInfo.TextToSpeech);
         }
     }
 

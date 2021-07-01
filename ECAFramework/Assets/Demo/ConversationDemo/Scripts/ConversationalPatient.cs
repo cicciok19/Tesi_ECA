@@ -27,18 +27,6 @@ public class ConversationalPatient : ECA
     protected Transform indicator;
     protected float indicatorInitialScale = 0f;
 
-    Color[] emotionToColor = new Color[] {
-    Color.yellow,
-    new Color( 172/255.0f, 211/255f, 106/255f),
-    new Color( 47/255.0f, 183/255f, 116/255f),
-    new Color( 44/255.0f, 175/255f, 217/255f),
-    new Color( 116/255.0f, 168/255f, 219/255f),
-    new Color( 164/255.0f, 145/255f, 197/255f),
-    new Color( 242/255.0f, 114/255f, 109/255f),
-    new Color( 250/255.0f, 174/255f, 101/255f),
-    new Color( 0/255.0f, 0/255f, 0/255f)
-};
-
 
     protected override void Start()
     {
@@ -49,7 +37,7 @@ public class ConversationalPatient : ECA
        /* sitAction = Sit();
         actionsList.Enqueue(sitAction);*/
         actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.camera.transform, 1)));
-        SendMessageRequest(PRESENTATION);
+        //SendMessage(PRESENTATION);
 
         emotionWheel = FindObjectOfType<Wheel>().gameObject;
         if (emotionWheel == null)

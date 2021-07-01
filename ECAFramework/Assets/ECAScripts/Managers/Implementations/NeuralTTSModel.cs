@@ -46,6 +46,6 @@ public class NeuralTTSModel : TTSModel
 		process.Start();
 		process.WaitForExit();
 
-		UnityMainThreadDispatcher.Instance().Enqueue(() => currentInfo.EcaAnimator.Play(currentInfo.EcaAnimator.name, currentInfo.TextToSpeech));
+		UnityMainThreadDispatcher.Instance().Enqueue(currentInfo.EcaAnimator.Play(currentInfo.EcaAnimator.Eca.Name, currentInfo.TextToSpeech));
 	}
 }
