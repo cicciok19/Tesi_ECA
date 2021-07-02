@@ -61,10 +61,13 @@ public class ConversationalPatient : ECA
     {
         pin.transform.LookAt(Target);
         //just for debug
-        if(Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C))
             SendMessage(CHILDREN);
         if (Input.GetKeyDown(KeyCode.E))
             SendMessage(EXPLAIN_DISEASE);
+        if (Input.GetKeyDown(KeyCode.T))
+            SendMessage(WEATHER);
+
         //try with TTS client
         if (Input.GetKeyDown(KeyCode.Space))
             SendDirectMessage("Hello doctor, my name is Sophie");
@@ -109,7 +112,7 @@ public class ConversationalPatient : ECA
                 EmotionManager.UpdateEmotion(AppraisalVariables.Nice);
                 break;
             case EXPLAIN_DISEASE:
-                EmotionManager.UpdateEmotion(AppraisalVariables.Good, .2f);
+                EmotionManager.UpdateEmotion(AppraisalVariables.Bad);
                 break;
             case PRESENTATION:
                 EmotionManager.UpdateEmotion(AppraisalVariables.Nice, .3f);
@@ -193,6 +196,13 @@ public class ConversationalPatient : ECA
                 Sitted = true;
             }
 
+            if (action.IsLookAt())
+            {
+                Utility.Log("Looking at " + action.firstParameter);
+                ecaAction = new LookAtAction(this, action);
+                actionsList.Enqueue(ecaAction);
+            }
+
 
 
             Assert.IsNotNull(ecaAction, "MessageAction is not referred to a valid action");
@@ -228,10 +238,10 @@ public class ConversationalPatient : ECA
         Utility.Log("Targets = " + emotionWheel.transform.GetChild(0).name + " Emotion target = " + emotionWheel.transform.GetChild(0).GetChild((int)EmotionManager.ActualEmotion.EmotionType).gameObject.name);
 
         Transform target = emotionWheel.transform.GetChild(0).GetChild((int)EmotionManager.ActualEmotion.EmotionType).gameObject.transform;
-        //pin.transform.LookAt(target);
-        //indicator.localScale = new Vector3(indicator.localScale.x, indicatorInitialScale*(1 + EmotionManager.ActualEmotion.NormalizedValue), indicator.localScale.z);
+        pin.transform.LookAt(target);
+        indicator.localScale = new Vector3(indicator.localScale.x, indicatorInitialScale*(1 + EmotionManager.ActualEmotion.NormalizedValue), indicator.localScale.z);
 
-        indicator.DOScaleY(indicatorInitialScale * (1 + 1.5f * EmotionManager.ActualEmotion.NormalizedValue), 2f);
+        indicator.DOScaleY(indicatorInitialScale * (1 + 1.2f * EmotionManager.ActualEmotion.NormalizedValue), 2f);
         Target.DOMove(target.position, 2f);
     }
 

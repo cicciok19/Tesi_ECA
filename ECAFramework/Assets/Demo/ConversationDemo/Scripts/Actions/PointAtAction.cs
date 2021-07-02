@@ -43,6 +43,7 @@ public class PointAtAction : ECAAction
         {
             Destination destination = obj.GetComponentInChildren<Destination>();
             stages.Add(new GoToStage(destination.transform));
+            stages.Add(new LookStableStage(obj.transform, 1));
             stages.Add(pointAt);
         }
         else    //if there's no destination only pointAt

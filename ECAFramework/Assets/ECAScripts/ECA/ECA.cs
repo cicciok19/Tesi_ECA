@@ -285,6 +285,7 @@ public class ECA : MonoBehaviour, IIntentHandler
     protected virtual EmotionalMessage GetMessageForIntentKey(string key)
     {
         List<EmotionalMessage> list = GetGeneralMessagesFor(key);
+        EmotionalMessage generalMessage = new EmotionalMessage();
 
         if (list == null)
         {
@@ -298,12 +299,16 @@ public class ECA : MonoBehaviour, IIntentHandler
         List<EmotionalMessage> listForEmotion = new List<EmotionalMessage>();
         for (int i = 0; i < list.Count; i++)
         {
-            if (list[i].emotion == EmotionManager.ActualEmotion.EmotionType || list[i].emotion == AvailableEmotions.None)
+            if (list[i].emotion == EmotionManager.ActualEmotion.EmotionType)
                 listForEmotion.Add(list[i]);
+            if (list[i].emotion == AvailableEmotions.None)
+                generalMessage = list[i];
         }
 
+        if (listForEmotion.Count == 0)
+            return generalMessage;
 
-        int idx = (int)UnityEngine.Random.Range(0, listForEmotion.Count);
+        int idx = (int)UnityEngine.Random.Range(0, listForEmotion.Count-1);
         EmotionalMessage message = listForEmotion[idx];
 
         return message;

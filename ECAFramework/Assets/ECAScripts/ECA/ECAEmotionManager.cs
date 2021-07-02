@@ -106,7 +106,7 @@ public class ECAEmotionManager
         actualEmotion = Emotions[emotion[random]];
 
         //just for debug
-        //actualEmotion = Joy;
+        //actualEmotion = Anger;
         actualEmotion.SwitchedLevel += OnSwitchedLevel;
 
         if (xmlDocumentForModel != "")

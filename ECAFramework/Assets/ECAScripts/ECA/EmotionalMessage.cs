@@ -101,9 +101,9 @@ public static EmotionalMessage zero = new EmotionalMessage("",AvailableEmotions.
     	    return ma;
             */
             List<MessageAction> messageActions = new List<MessageAction>();
-            if (action.Contains(";"))
+            if (action.Contains(","))
             {
-                string[] parts = action.Split(new Char[] { ';' });
+                string[] parts = action.Split(new Char[] { ',' });
                 messageActions = parsedMoreActions(parts);
             }
             else
@@ -145,9 +145,9 @@ public static EmotionalMessage zero = new EmotionalMessage("",AvailableEmotions.
 
                 if (probability.Length == 2)
                 {
-                    if (actionTaken != false)
+                    if (actionTaken == false)
                     {
-                        ma.probability = (float)Convert.ToDouble(probability[1]);
+                        ma.probability = float.Parse(probability[1], CultureInfo.InvariantCulture.NumberFormat);
                         float random = UnityEngine.Random.Range(0f, 1f);
 
                         if (ma.probability > random)

@@ -100,13 +100,15 @@ public class ECAAnimator : MonoBehaviour
 
 
     public virtual void OnEmotionChanged(ECAEmotion emotion)
-    {
-        actualAction.OnEmotionChanged(emotion);
+    { 
+        if(actualAction != null)
+            actualAction.OnEmotionChanged(emotion);
     }
 
     public virtual void OnEmotionUpdated(ECAEmotion emotion)
     {
-        actualAction.OnEmotionUpdated(emotion);
+        if (actualAction != null)
+            actualAction.OnEmotionUpdated(emotion);
     }
 
 
@@ -235,16 +237,18 @@ public class ECAAnimator : MonoBehaviour
         */
         //use Unity audioSource
 
+
         AudioSource audioSource = GetComponent<AudioSource>();
-        //audioSource.clip = audioClip;
+        AudioClip clip = Resources.Load<AudioClip>("Audio\\" + Eca.Name);
+        audioSource.clip = clip;
+
         audioSource.Play();
+
         yield return new WaitWhile(() => audioSource.isPlaying);
-        //Debug.Log("Audio ended!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         HideText();
         if (AudioEnded != null)
             AudioEnded(this, EventArgs.Empty);
-}
-
+    }
 
     public virtual bool IsWatchingSomewhere(Camera camera, Collider Traget)
     {

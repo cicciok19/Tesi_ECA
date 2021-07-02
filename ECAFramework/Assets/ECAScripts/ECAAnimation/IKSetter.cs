@@ -299,8 +299,6 @@ public class IKSetter : MonoBehaviour
                 sameTarget = true;
             }
         }
-        if (!sameTarget)
-            Destroy(targetOld);
 
         if (aimIK == aimDictionary[HumanBodyBones.Head])
         {

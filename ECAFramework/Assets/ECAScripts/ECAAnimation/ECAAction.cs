@@ -157,13 +157,15 @@ public class ECAAction
 
     public virtual void OnEmotionChanged(ECAEmotion emotion)
     {
-        ActualStage.ReactToEmotionChanged(emotion);
+        if(ActualStage != null)
+            ActualStage.ReactToEmotionChanged(emotion);
     }
 
 
     public virtual void OnEmotionUpdated(ECAEmotion emotion)
     {
-        ActualStage.ReactToEmotionUpdated(emotion);
+        if(ActualStage != null)
+            ActualStage.ReactToEmotionUpdated(emotion);
     }
 
 

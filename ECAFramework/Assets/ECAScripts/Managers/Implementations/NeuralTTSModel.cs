@@ -39,9 +39,8 @@ public class NeuralTTSModel : TTSModel
 			}
 		}
 
-
 		Process process = new Process();
-		process.StartInfo.CreateNoWindow = false;
+		process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 		process.StartInfo.FileName = "Assets\\Resources\\set_python.bat";
 		process.Start();
 		process.WaitForExit();

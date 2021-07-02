@@ -35,14 +35,15 @@ public class PickUpAction : ECAAction
 
         if (action.secondParameter != "")
         {
-            GameObject dropPosition = GameObject.FindGameObjectWithTag(action.secondParameter);
+            Rubbish rubbish = GameObject.FindGameObjectWithTag(action.secondParameter).GetComponent<Rubbish>();
+            Transform dropPosition = rubbish.GetDropPosition();
             Assert.IsNotNull(dropPosition, "Drop position for pickUp is null");
 
-            Destination dropDestination = dropPosition.GetComponentInChildren<Destination>();
+            Transform dropDestination = rubbish.GetDestination();
             Assert.IsNotNull(pickDestination, "Drop position hasn't a destination point attached");
 
             GoToStage goToDrop = new GoToStage(dropDestination.transform);
-            DropStage drop = new DropStage(pickUp, dropPosition.transform);
+            DropStage drop = new DropStage(pickUp, dropPosition.transform, .01f, true);
             stages.Add(goToDrop);
             stages.Add(drop);
         }
