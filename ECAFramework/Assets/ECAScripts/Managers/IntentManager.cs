@@ -218,6 +218,8 @@ private static IntentManager instance = null;
                     s += " WITH score = " + intent.topScoringIntent.score;
                     Utility.Log(s);
 
+                    IntentLogger.Instance.IntentRecognized(e.Result.IntentId, e.Result.Text, intent.topScoringIntent.score);
+
                     //Insert result inside Intent and KeyWord class that could be extendend when LUIS will be sobstituted
                     KeyWord[] keyWords = new KeyWord[intent.entities.Count];
                     for (int i = 0; i < intent.entities.Count; i++)
@@ -251,11 +253,13 @@ private static IntentManager instance = null;
         if (e.Result.Reason == ResultReason.RecognizedSpeech)
         {
             Debug.Log("RECOGNIZED: Text= " + e.Result.Text);
+            IntentLogger.Instance.IntentNotRecognized(e.Result.Text);
             UnityMainThreadDispatcher.Instance().Enqueue(() => IntentRecognitionBehaviour.Instance.ShowRecognizedText(e.Result.Text));
         }
         else if (e.Result.Reason == ResultReason.NoMatch)
         {
             Debug.Log("NOMATCH: Speech could not be recognized.");
+            IntentLogger.Instance.SpeechNotRecognized();
         }
     }
 

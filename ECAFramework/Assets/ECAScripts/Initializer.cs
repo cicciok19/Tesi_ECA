@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Initializer : MonoBehaviour
 {
+    [SerializeField] private string testerCode;
     [SerializeField] private string listOfMessagesFilename;
     [SerializeField] private AvailableTTS ttsType;
 
     private void Awake()
     {
         //Init configuration (scenario type, language, smartAction messages, xml files name ecc)
-        Configuration.Instance.Init(listOfMessagesFilename);
+        Configuration.Instance.Init(listOfMessagesFilename, testerCode);
 
         //Set the scenario (SmartActions, Nodes)
         /*if (Configuration.Instance.ActualScenario.Equals(ScenarioType.Training))

@@ -45,12 +45,17 @@ public class Configuration
 
     private static Configuration instance = null;
     private string listOfMessagesFilename;
+    private string testerCode;
 
-
-    public void Init(string messagesFilename = null)
+    public void Init(string messagesFilename = null, string testerCode = null)
     {
         //SetLanguage();        no need to set language, was used only to set the right folder
         listOfMessagesFilename = messagesFilename;
+
+        //Init intent logger
+        this.testerCode = testerCode;
+        IntentLogger.Instance.Init(testerCode);
+
         XmlParser.InfoPath = "XMLs";
         InitDocumentsNames();
         if (XmlDocumentNames == null)
