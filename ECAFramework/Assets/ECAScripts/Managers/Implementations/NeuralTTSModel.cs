@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System;
 using UnityEngine;
 
 public class NeuralTTSModel : TTSModel
 {
-    private TTSClient client;       //forse non serve a niente
+	private SpeechInfo currentInfo;
 
     public NeuralTTSModel()
     {
@@ -17,6 +18,7 @@ public class NeuralTTSModel : TTSModel
     public override void GenerateSpeechThread(SpeechInfo currentInfo)
     {
         base.GenerateSpeechThread();
+		this.currentInfo = currentInfo;
 		string filename = "Assets\\Resources\\set_python.bat";
 		string text = currentInfo.TextToSpeech.Trim('"');
 		string ecaName = currentInfo.EcaAnimator.Eca.Name;
@@ -42,9 +44,15 @@ public class NeuralTTSModel : TTSModel
 		Process process = new Process();
 		process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 		process.StartInfo.FileName = "Assets\\Resources\\set_python.bat";
+		process.EnableRaisingEvents = true;
 		process.Start();
 		process.WaitForExit();
+		UnityMainThreadDispatcher.Instance().Enqueue(currentInfo.EcaAnimator.Play(currentInfo.EcaAnimator.Eca.Name, currentInfo.TextToSpeech));
+	}
 
+	private void OnExitProcess(object sender, EventArgs e)
+    {
+		
 		UnityMainThreadDispatcher.Instance().Enqueue(currentInfo.EcaAnimator.Play(currentInfo.EcaAnimator.Eca.Name, currentInfo.TextToSpeech));
 	}
 }

@@ -71,8 +71,10 @@ public class SystemManager: MonoBehaviour
         if (actualNode.IsCorrectAction(actionDone))
         {
             logWriter.AddCorrectActionLog(actionDone.ToString());
-            if(actionDone != ActionName.CheckRythm || actionDone != ActionName.AttachMonitor || actionDone != ActionName.IvAccess)
+
+            if (actionDone != ActionName.CheckRythm && actionDone != ActionName.AttachMonitor && actionDone != ActionName.IvAccess)
                 patient.StateLevel += 0.1f;
+
             Debug.Log("Correct Action!");
         }
         else

@@ -39,6 +39,7 @@ public class MedicineSpot : MonoBehaviour
 
     public MedicineName GetMedicineName()
     {
+        syringe = GetComponentInChildren<Medicine>();
         if (syringe != null)
             return syringe.medicineName;
         else

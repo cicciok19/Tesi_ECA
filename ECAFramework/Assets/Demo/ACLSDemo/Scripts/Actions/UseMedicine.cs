@@ -89,12 +89,6 @@ public class UseMedicine : ECACompositeAction
       hasMedicine = false;
     }
 
-    public override void StartAction()
-    {
-        SetupAction();
-        base.StartAction();
-    }
-
     public override void OnCompletedAction()
     {
         MedicineName name;
@@ -137,6 +131,7 @@ public class UseMedicine : ECACompositeAction
             medicine = drawer.GetMedicineSpot().GetSyringe();
 
             GoToStage goToDrawer = new GoToStage(drawer.GetDestination());
+            TurnStage turn = new TurnStage(drawer.transform);
 
             PickStage grabHandle = new PickStage(drawer.GetHandle().transform, 1, true, HandSide.LeftHand);
             grabHandle.StageFinished += OnGrabHandle;
@@ -151,6 +146,7 @@ public class UseMedicine : ECACompositeAction
             GoToStage goToPatient = new GoToStage(medicationProvider.GetDestinationNearTable());
 
             stages.Add(goToDrawer);
+            stages.Add(turn);
             stages.Add(grabHandle);
             stages.Add(pickMedicine);
             //stages.Add(releaseHandle);

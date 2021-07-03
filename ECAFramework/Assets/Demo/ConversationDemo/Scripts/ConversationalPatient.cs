@@ -17,6 +17,7 @@ public class ConversationalPatient : ECA
     private const string PRESENTATION = "Presentation";
     private const string WEATHER = "Weather";
     private const string NONE = "None";
+    private const string SIT = "Sit";
 
     public SittableObject chair;
     public bool Sitted { get; protected set; } = false;
@@ -29,9 +30,9 @@ public class ConversationalPatient : ECA
     protected float indicatorInitialScale = 0f;
 
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         //send message greetings (and trigger animation, if you want to
         chair = FindObjectOfType<SittableObject>();
@@ -51,7 +52,11 @@ public class ConversationalPatient : ECA
 
         indicator = pin.transform.GetChild(0).transform;
         indicatorInitialScale = indicator.localScale.y;
+    }
 
+    public override void Init()
+    {
+        base.Init();
         EmotionManager.ActualEmotionChanged += ECAEmotionChanged;
         EmotionManager.ActualEmotionUpdated += ECAEmotionChanged;
         InitPatientEmotion();
@@ -61,7 +66,7 @@ public class ConversationalPatient : ECA
     {
         pin.transform.LookAt(Target);
         //just for debug
-        if (Input.GetKeyDown(KeyCode.C))
+/*        if (Input.GetKeyDown(KeyCode.C))
             SendMessage(CHILDREN);
         if (Input.GetKeyDown(KeyCode.E))
             SendMessage(EXPLAIN_DISEASE);
@@ -70,7 +75,7 @@ public class ConversationalPatient : ECA
 
         //try with TTS client
         if (Input.GetKeyDown(KeyCode.Space))
-            SendDirectMessage("Hello doctor, my name is Sophie");
+            SendDirectMessage("Hello doctor, my name is Sophie");*/
     }
 
 
@@ -121,6 +126,9 @@ public class ConversationalPatient : ECA
                 EmotionManager.UpdateEmotion(AppraisalVariables.Good, .5f);
                 break;
             case GENERAL_HEALTH:
+                break;
+            case SIT:
+                HandleSit();
                 break;
             case NONE:
                 break;
@@ -212,6 +220,17 @@ public class ConversationalPatient : ECA
                 actionsList.Enqueue(new ECAAction(this, new TurnStage(ecaAnimator.camera.transform)));
             actionsList.Enqueue(new ECAAction(this, new LookStableStage(ecaAnimator.camera.transform, 1)));
         }
+    }
+
+    private void HandleSit()
+    {
+        if (!Sitted)
+        {
+            Sitted = true;
+            actionsList.Enqueue(Sit());
+        }
+        else
+            SendDirectMessage("I'm sitted doc, what do you say?");
     }
 
     private ECAAction Sit()

@@ -1,4 +1,39 @@
-LogLab | 30/06/2021 11:13:48
+LogLab | 03/07/2021 11:50:55
 Start setted 
-  | WRONG | : UseEpinephrine
-  | WRONG | : Shock
+  | CORRECT | : AttachMonitor
+  | CORRECT | : GiveOxygen
+  | CORRECT | : Cpr
+Start node completed 
+
+CheckRythm setted 
+  | CORRECT | : CheckRythm
+CheckRythm node completed 
+
+Shock setted 
+  | CORRECT | : Shock
+Shock node completed 
+
+CprIv setted 
+  | CORRECT | : Cpr
+  | CORRECT | : IvAccess
+CprIv node completed 
+
+CheckRythm setted 
+  | CORRECT | : CheckRythm
+CheckRythm node completed 
+
+Shock setted 
+  | CORRECT | : Shock
+Shock node completed 
+
+CprEpi setted 
+  | CORRECT | : Cpr
+  | CORRECT | : UseEpinephrine
+  | CORRECT | : Capnography
+CprEpi node completed 
+
+CheckRythm setted 
+  | CORRECT | : CheckRythm
+CheckRythm node completed 
+
+End setted 

@@ -114,6 +114,7 @@ public class ECA : MonoBehaviour, IIntentHandler
     protected virtual void Awake()
     {
         Utility.Log("ECA " + name + " awaken");
+        CreateAnimator();
         CreateIKManager();
         if (GetComponent<Rigidbody>() == null)
             gameObject.AddComponent<Rigidbody>().useGravity = false;
@@ -132,7 +133,7 @@ public class ECA : MonoBehaviour, IIntentHandler
     {
         SetEcaId();
 
-        CreateAnimator();
+        //CreateAnimator();
 
         IntentName = new List<string>();
 

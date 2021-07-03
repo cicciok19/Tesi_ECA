@@ -239,15 +239,21 @@ public class ECAAnimator : MonoBehaviour
 
 
         AudioSource audioSource = GetComponent<AudioSource>();
+
+        UnityEditor.AssetDatabase.Refresh();
+
         AudioClip clip = Resources.Load<AudioClip>("Audio\\" + Eca.Name);
         audioSource.clip = clip;
 
         audioSource.Play();
 
         yield return new WaitWhile(() => audioSource.isPlaying);
+
         HideText();
         if (AudioEnded != null)
             AudioEnded(this, EventArgs.Empty);
+
+
     }
 
     public virtual bool IsWatchingSomewhere(Camera camera, Collider Traget)

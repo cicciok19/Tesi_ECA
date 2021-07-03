@@ -109,20 +109,21 @@ public class Patient : ECA
         hipsCompressor = GetComponentInChildren<HipsCompressor>();
 
 
+        /*
+                float random = Random.Range(0, 1);
+                if(random > 0.5f)
+                {
+                    state = PatientState.FibrillazioneVentricolare;
+                    stateLevel = .1f;
+                }
+                else
+                {
+                    state = PatientState.Asistole;
+                    stateLevel = .2f;
+                }*/
 
-        float random = Random.Range(0, 1);
-        if(random > 0.5f)
-        {
-            state = PatientState.FibrillazioneVentricolare;
-            stateLevel = .1f;
-        }
-        else
-        {
-            state = PatientState.Asistole;
-            stateLevel = .2f;
-        }
-
-        ivAccessInserted = true;
+        state = PatientState.FibrillazioneVentricolare;
+        stateLevel = 0f;
 
         initialState = state;
     }
