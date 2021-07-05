@@ -120,10 +120,10 @@ public class ConversationalPatient : ECA
                 EmotionManager.UpdateEmotion(AppraisalVariables.Bad);
                 break;
             case PRESENTATION:
-                EmotionManager.UpdateEmotion(AppraisalVariables.Nice, .3f);
+                EmotionManager.UpdateEmotion(AppraisalVariables.Nice);
                 break;
             case CURE:
-                EmotionManager.UpdateEmotion(AppraisalVariables.Good, .5f);
+                EmotionManager.UpdateEmotion(AppraisalVariables.Good);
                 break;
             case GENERAL_HEALTH:
                 break;

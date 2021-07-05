@@ -15,11 +15,11 @@ D:/Università/Tesi/ECAFramework/Tesi_ECA/ECAFramework
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-57255
+56454
 Successfully changed project path to: D:/Università/Tesi/ECAFramework/Tesi_ECA/ECAFramework
 D:/Università/Tesi/ECAFramework/Tesi_ECA/ECAFramework
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 250.95 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 240.94 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.6f1 (338bb68529b2)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Resources/UnitySubsystems
@@ -36,213 +36,30 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56388
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56328
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.6f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.004405 seconds.
+Registered in 0.005010 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 187.16 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 179.35 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  3.664 seconds
+- Completed reload, in  3.546 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.026344 seconds.
+Registered in 0.024254 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 295.82 ms, found 8 plugins.
+Refreshing native plugins compatible for Editor in 195.50 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  3.893 seconds
+- Completed reload, in  3.324 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.13 seconds
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-Refreshing native plugins compatible for Editor in 2.84 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5394 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 261.1 MB.
-System memory in use after: 261.2 MB.
-
-Unloading 119 unused Assets to reduce memory usage. Loaded Objects now: 5790.
-Total: 12.127500 ms (FindLiveObjects: 1.142000 ms CreateObjectMapping: 0.788100 ms MarkObjects: 9.620100 ms  DeleteObjects: 0.575900 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/Resources/XMLs/Configuration.xml
-  artifactKey: Guid(93ef44223b2c0db4fa88d60769173f55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/XMLs/Configuration.xml using Guid(93ef44223b2c0db4fa88d60769173f55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ad2c14ee2ff8aed743f51f638820fda') in 0.106062 seconds
-  Import took 0.147684 seconds .
-
-========================================================================
-Received Prepare
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-Refreshing native plugins compatible for Editor in 52.92 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 107 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 142.9 MB.
-System memory in use after: 143.0 MB.
-
-Unloading 107 unused Assets to reduce memory usage. Loaded Objects now: 5790.
-Total: 11.856000 ms (FindLiveObjects: 0.955800 ms CreateObjectMapping: 0.473100 ms MarkObjects: 9.679200 ms  DeleteObjects: 0.746000 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.023674 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.14 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.944 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-Refreshing native plugins compatible for Editor in 1.96 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5173 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 243.4 MB.
-System memory in use after: 243.4 MB.
-
-Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 5795.
-Total: 11.140400 ms (FindLiveObjects: 0.977100 ms CreateObjectMapping: 0.871200 ms MarkObjects: 8.691900 ms  DeleteObjects: 0.598500 ms)
-
-========================================================================
-Received Import Request.
-  Time since last request: 328.659083 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/ConiferBark_Normal.tga
-  artifactKey: Guid(2b46b029d8dc37049aebb484e79998ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/ConiferBark_Normal.tga using Guid(2b46b029d8dc37049aebb484e79998ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60a327accfcd4e648207abb21f1eca7c') in 0.163183 seconds
-  Import took 0.205410 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000593 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Desktop_Atlas.tga
-  artifactKey: Guid(ea9799c461d3f6e4eb0be2264829282d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Desktop_Atlas.tga using Guid(ea9799c461d3f6e4eb0be2264829282d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5db449af091d711bff4e40862c3599dd') in 0.059712 seconds
-  Import took 0.096007 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000554 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/ConiferBark.tga
-  artifactKey: Guid(9654cfdd87d7daf429b8931c28d7a93c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/ConiferBark.tga using Guid(9654cfdd87d7daf429b8931c28d7a93c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ac240c577a127ef7d19259e73d7665ac') in 0.059293 seconds
-  Import took 0.081692 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000482 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Desktop_Atlas_Billboards.tga
-  artifactKey: Guid(612b65e0cd1576e4bbba0516d756a99d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Desktop_Atlas_Billboards.tga using Guid(612b65e0cd1576e4bbba0516d756a99d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af453af1d8c00829f6a52f4606d037ff') in 0.076041 seconds
-  Import took 0.101403 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000531 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Thumb_Conifer_Desktop.jpg
-  artifactKey: Guid(1fbc4e410d66d804aaf31b4c25b16ffc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Thumb_Conifer_Desktop.jpg using Guid(1fbc4e410d66d804aaf31b4c25b16ffc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c86a96d2ebce32ec9fa1b10eed659b00') in 0.134153 seconds
-  Import took 0.166168 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000435 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Desktop_Atlas_Normal.tga
-  artifactKey: Guid(855926cb3532dc14c87b1e6d589334b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Desktop_Atlas_Normal.tga using Guid(855926cb3532dc14c87b1e6d589334b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '023fdcbdee94a37e6e16e6e3d18e2025') in 0.047464 seconds
-  Import took 0.059743 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000549 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Needles_Dekstop_Spec.tga
-  artifactKey: Guid(897461e3c2fa9d84d8bd48bf1b00a950) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Needles_Dekstop_Spec.tga using Guid(897461e3c2fa9d84d8bd48bf1b00a950) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17a9c4aac2fdcee95544de3a2cfeb112') in 0.050936 seconds
-  Import took 0.083878 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000606 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Needles_Desktop_Normal.tga
-  artifactKey: Guid(ab89d7e9dbd9462458ecef029ee60f6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Needles_Desktop_Normal.tga using Guid(ab89d7e9dbd9462458ecef029ee60f6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06bda6473388cffede665faf532dd2f2') in 0.062822 seconds
-  Import took 0.089047 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000549 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Desktop_Atlas_Specular.tga
-  artifactKey: Guid(41232aac50fb25a40b390906295f9aa6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Desktop_Atlas_Specular.tga using Guid(41232aac50fb25a40b390906295f9aa6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c80644c8e9ae39ca784888004175191') in 0.078722 seconds
-  Import took 0.101589 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000609 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Desktop_Atlas_Billboards_Normal.tga
-  artifactKey: Guid(6c2afc8a038f69f4aa35c25dcd94fd55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Desktop_Atlas_Billboards_Normal.tga using Guid(6c2afc8a038f69f4aa35c25dcd94fd55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e5eb3cc1c56c8d5cb9cd9b63635119cb') in 0.047747 seconds
-  Import took 0.074536 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000526 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Desktop.spm
-  artifactKey: Guid(469edab27ab6d004d84af2c4a851bd7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Desktop.spm using Guid(469edab27ab6d004d84af2c4a851bd7f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad5e0ce69c22d3da89629fadf511f84c') in 1.140365 seconds
-  Import took 1.177104 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000668 seconds.
-  path: Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Needles_Desktop.tga
-  artifactKey: Guid(34d2758af9e0a2b4690fbcfcad0285d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ExternalAssets/Standard Assets/Environment/SpeedTree/Conifer/Conifer_Needles_Desktop.tga using Guid(34d2758af9e0a2b4690fbcfcad0285d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c91f20147f751d7dd3bda434f4e94b30') in 0.072108 seconds
-  Import took 0.100850 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.831814 seconds.
-  path: Assets/Resources/XMLs/Configuration.xml
-  artifactKey: Guid(93ef44223b2c0db4fa88d60769173f55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/XMLs/Configuration.xml using Guid(93ef44223b2c0db4fa88d60769173f55) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e6da70105f9a0b08ecf3eb4e3d725a0') in 0.009347 seconds
-  Import took 0.031459 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.025064 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.71 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  3.214 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.11 seconds
 D3D shader create error for vertex shader [0x80070057]
 D3D shader create error for vertex shader [0x80070057]
 D3D shader create error for vertex shader [0x80070057]
@@ -251,162 +68,90 @@ D3D shader create error for domain shader [0x80070057]
 D3D shader create error for domain shader [0x80070057]
 Refreshing native plugins compatible for Editor in 2.05 ms, found 8 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5179 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 257.0 MB.
-System memory in use after: 257.1 MB.
+Unloading 5394 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 261.4 MB.
+System memory in use after: 261.4 MB.
 
-Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 5945.
-Total: 11.073400 ms (FindLiveObjects: 0.955500 ms CreateObjectMapping: 0.636400 ms MarkObjects: 8.937600 ms  DeleteObjects: 0.542000 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.021839 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.24 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.090 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-Refreshing native plugins compatible for Editor in 3.76 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5173 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 256.6 MB.
-System memory in use after: 256.8 MB.
-
-Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 5950.
-Total: 15.098500 ms (FindLiveObjects: 1.216400 ms CreateObjectMapping: 0.820500 ms MarkObjects: 12.486600 ms  DeleteObjects: 0.572400 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.022444 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.13 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.182 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-Refreshing native plugins compatible for Editor in 2.71 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5173 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 256.7 MB.
-System memory in use after: 256.8 MB.
-
-Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 5955.
-Total: 12.178500 ms (FindLiveObjects: 1.079100 ms CreateObjectMapping: 0.622800 ms MarkObjects: 9.910000 ms  DeleteObjects: 0.565100 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.025000 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.13 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.517 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-Refreshing native plugins compatible for Editor in 1.97 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5173 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 256.5 MB.
-System memory in use after: 256.6 MB.
-
-Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 5960.
-Total: 10.853100 ms (FindLiveObjects: 0.832800 ms CreateObjectMapping: 0.612700 ms MarkObjects: 8.843700 ms  DeleteObjects: 0.562100 ms)
+Unloading 119 unused Assets to reduce memory usage. Loaded Objects now: 5790.
+Total: 8.714000 ms (FindLiveObjects: 0.661700 ms CreateObjectMapping: 0.570000 ms MarkObjects: 7.000200 ms  DeleteObjects: 0.480900 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 274.212568 seconds.
-  path: Assets/Utilizzare_la_libreria.pdf
-  artifactKey: Guid(1b8ae5087b4757a4f939e4a5b2edadd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Utilizzare_la_libreria.pdf using Guid(1b8ae5087b4757a4f939e4a5b2edadd7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b398a3978506393fa30a7ac3cc84e072') in 0.032926 seconds
-  Import took 0.076383 seconds .
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.021686 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.45 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.203 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-Refreshing native plugins compatible for Editor in 3.50 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5173 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 256.7 MB.
-System memory in use after: 256.8 MB.
-
-Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 5965.
-Total: 13.283900 ms (FindLiveObjects: 0.839400 ms CreateObjectMapping: 0.711300 ms MarkObjects: 10.970500 ms  DeleteObjects: 0.759700 ms)
-
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.022848 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.29 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.097 seconds
-Platform modules already initialized, skipping
-Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for vertex shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-D3D shader create error for domain shader [0x80070057]
-Refreshing native plugins compatible for Editor in 2.42 ms, found 8 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5173 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 256.7 MB.
-System memory in use after: 256.8 MB.
-
-Unloading 110 unused Assets to reduce memory usage. Loaded Objects now: 5970.
-Total: 11.184500 ms (FindLiveObjects: 0.895000 ms CreateObjectMapping: 0.436700 ms MarkObjects: 9.269500 ms  DeleteObjects: 0.581700 ms)
+  path: Assets/Animation/MxM/PreProcess_modules/MxMPreProcessData.asset
+  artifactKey: Guid(a4e413e53073f734299832b04bbdf261) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/MxM/PreProcess_modules/MxMPreProcessData.asset using Guid(a4e413e53073f734299832b04bbdf261) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8108ab0868f54edf58c8398469ba8b41') in 0.939578 seconds
+  Import took 0.993375 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 702.377850 seconds.
-  path: Assets/Demo/ACLSDemo/Scene/ACLS.unity
-  artifactKey: Guid(133e7c21bf0f64940aad60fecf9b1209) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Demo/ACLSDemo/Scene/ACLS.unity using Guid(133e7c21bf0f64940aad60fecf9b1209) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '393c6c5a72d0ee8f028b4616cc55d844') in 0.030897 seconds
-  Import took 0.098045 seconds .
+  Time since last request: 1277.977083 seconds.
+  path: Assets/Animation/MxM/AnimModules/AnimModule_run.asset
+  artifactKey: Guid(1863e0b1a9c5df84b8c6362ec580627c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/MxM/AnimModules/AnimModule_run.asset using Guid(1863e0b1a9c5df84b8c6362ec580627c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a138dbebf6163297574faf585f0fc8be') in 0.274614 seconds
+  Import took 0.318143 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 389.918191 seconds.
+  path: Assets/Animation/MxM/AnimModules/AnimModule_idle.asset
+  artifactKey: Guid(be243e7185838b44dbe82000b96427a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/MxM/AnimModules/AnimModule_idle.asset using Guid(be243e7185838b44dbe82000b96427a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3769825ed69b32ae15829de61681d2b9') in 0.030637 seconds
+  Import took 0.087698 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.636829 seconds.
+  path: Assets/Animation/Animations/talkingCellPhone.fbx
+  artifactKey: Guid(cc039061c90ae764f930ee958e67385e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/Animations/talkingCellPhone.fbx using Guid(cc039061c90ae764f930ee958e67385e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b72ac983e53967de2e1ce49c3d83231a') in 0.120119 seconds
+  Import took 0.156679 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000417 seconds.
+  path: Assets/Animation/Animations/texting.fbx
+  artifactKey: Guid(d8d031195840d3742934e633a2757062) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/Animations/texting.fbx using Guid(d8d031195840d3742934e633a2757062) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '584a182153603f7e24a0a91f283a8886') in 0.016563 seconds
+  Import took 0.040741 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 174.738829 seconds.
+  path: Assets/Animation/MxM/AnimModules/AnimModule_walk.asset
+  artifactKey: Guid(2d7ec47c96ebe094ebc4e349c614688d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/MxM/AnimModules/AnimModule_walk.asset using Guid(2d7ec47c96ebe094ebc4e349c614688d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '598e00653d5dd27c7e60ea99f278b229') in 0.398127 seconds
+  Import took 0.436276 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.780591 seconds.
+  path: Assets/Animation/Animations/lookingBehind.fbx
+  artifactKey: Guid(a8b95a156e8205c4291f8daf5983c10a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/Animations/lookingBehind.fbx using Guid(a8b95a156e8205c4291f8daf5983c10a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ac61a2296bab95f2cb2d687f97c69a21') in 0.013584 seconds
+  Import took 0.037860 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000569 seconds.
+  path: Assets/Animation/Animations/lookingDown.fbx
+  artifactKey: Guid(dd7546b33a86c184da6847a1c7ccd239) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/Animations/lookingDown.fbx using Guid(dd7546b33a86c184da6847a1c7ccd239) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f874c71a4ed96b1fc82efbd672b3495d') in 0.014069 seconds
+  Import took 0.043238 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 249.836153 seconds.
+  path: Assets/Animation/MxM/AnimModules/AnimModule_strafe.asset
+  artifactKey: Guid(108bce035535eb348a2fbe4d80fd1ed2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/MxM/AnimModules/AnimModule_strafe.asset using Guid(108bce035535eb348a2fbe4d80fd1ed2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd72c224d2c81f0506370cc4fbffde1d0') in 0.207907 seconds
+  Import took 0.274365 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 558.859470 seconds.
+  path: Assets/Animation/MxM/AnimModules/AnimModule_events.asset
+  artifactKey: Guid(5d34a6d7232fbf94e8d400b99fbc4303) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Animation/MxM/AnimModules/AnimModule_events.asset using Guid(5d34a6d7232fbf94e8d400b99fbc4303) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '48f976023b187a871b1f0ca2397f86f1') in 0.029961 seconds
+  Import took 0.101111 seconds .
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
